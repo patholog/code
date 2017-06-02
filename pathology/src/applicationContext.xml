@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="com.microsoft.sqlserver.jdbc.SQLServerDriver">
+		</property>
+		<property name="url"
+			value="jdbc:sqlserver://localhost:1433;databaseName=test">
+		</property>
+		<property name="username" value="sa"></property>
+		<property name="password" value="xaeduask"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.SQLServerDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/flp/hib/Leaf.hbm.xml</value>
+				<value>com/flp/hib/Users.hbm.xml</value></list>
+		</property>
+	</bean>
+	<bean id="ht" class="org.springframework.orm.hibernate3.HibernateTemplate">
+	 <property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="pt" abstract="true">
+	 <property name="hibernateTemplate" ref="ht"></property>
+	</bean>
+	<bean id="udao" class="com.flp.dao.UserDaoImpl" parent="pt" />
+	<bean id="ldao" class="com.flp.dao.LeafDaoImpl" parent="pt" />
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	 <property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="serv" class="com.flp.serv.LeafServImpl">
+	 <property name="udao" ref="udao"></property>
+	 <property name="ldao" ref="ldao"></property>
+	</bean>
+	<bean id="leafAction" class="com.flp.actions.LeafAction" scope="prototype">
+	 <property name="serv" ref="serv"></property>
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</beans>
