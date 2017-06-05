@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="ssh"
+  name="pathology"
   id="myeclipse.1288763934562"
-  context-root="/ssh"
+  context-root="/pathology"
   j2ee-spec="5.0"
-  archive="ssh.war">
+  archive="pathology.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>
