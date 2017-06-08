@@ -25,5 +25,8 @@
   <action name="*">
    <result>/{1}.jsp</result>
   </action>
+  		<action name="daizhenduan">
+			<result>/daizhenduan.html</result>
+		</action>
  </package>
 </struts>
