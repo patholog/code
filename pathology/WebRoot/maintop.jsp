@@ -5,7 +5,7 @@
    <ul class="navRight">
     <li class="M noLeft"><a href="JavaScript:void(0);">您好，admin</a>
      <div class="drop mUser">
-      <a href="http://www.w3school.com.cn">账号设置</a>
+      <a href="settings.html">账号设置</a>
       <a href="http://www.w3school.com.cn">状态设置</a>
       <a href="http://www.w3school.com.cn">签名设置</a>
       <a href="http://www.w3school.com.cn">问题反馈</a>

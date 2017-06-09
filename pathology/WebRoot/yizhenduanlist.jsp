@@ -56,6 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <td align="center">全科</td>
           <td align="center">齐德龙大集团</td>
           <td align="center">2016-02-25 23:29:08</td>
+          <td align="center">2016-02-25 23:29:08</td>
           <td align="center"><a href="daizhenduan" target="_blank">查看</a>|<a href="daizhenduan">收藏</a></td>
         </tr>
      </table>

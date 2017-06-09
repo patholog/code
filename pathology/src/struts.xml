@@ -28,5 +28,8 @@
   		<action name="daizhenduan">
 			<result>/daizhenduan.html</result>
 		</action>
+		 <action name="login">
+			<result>/index.jsp</result>
+		</action>
  </package>
 </struts>
