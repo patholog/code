@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>待诊断</title>
+    <title>收藏病例</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -40,22 +40,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <tr>
           <th width="10%">病理号</th>
           <th width="10%">病人姓名</th>
-          <th width="15%">材料部位</th>
+          <th width="10%">材料部位</th>
           <th width="10%">病例状态</th>
           <th width="10%">系统分类</th>
-          <th width="20%">送检单位</th>
+          <th width="15%">送检单位</th>
           <th width="15%">申请时间</th>
-          <th width="10%">操作</th>
+          <th width="15%">诊断时间</th>
+          <th width="20%">操作</th>
          </tr>
          <tr>
           <td align="center">127001</td>
-          <td align="center">齐德龙</td>
+          <td align="center">离龙</td>
           <td align="center">膝盖</td>
           <td align="center">普通</td>
           <td align="center">全科</td>
           <td align="center">齐德龙大集团</td>
           <td align="center">2016-02-25 23:29:08</td>
-          <td align="center"><a href="daizhenduan" target="_blank">诊断</a></td>
+          <td align="center"><a>取消收藏</a></td>
         </tr>
      </table>
     

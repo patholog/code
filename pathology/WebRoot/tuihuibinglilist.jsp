@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>待诊断</title>
+    <title>退回病例</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -44,8 +44,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <th width="10%">病例状态</th>
           <th width="10%">系统分类</th>
           <th width="20%">送检单位</th>
-          <th width="15%">申请时间</th>
-          <th width="10%">操作</th>
+          <th width="15%">退回原因</th>
+          <th width="10%">退回时间</th>
          </tr>
          <tr>
           <td align="center">127001</td>
@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <td align="center">全科</td>
           <td align="center">齐德龙大集团</td>
           <td align="center">2016-02-25 23:29:08</td>
-          <td align="center"><a href="daizhenduan" target="_blank">诊断</a></td>
+          <td align="center">2016-02-25 23:29:08</td>
         </tr>
      </table>
     

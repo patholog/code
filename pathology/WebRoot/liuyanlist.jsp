@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>待诊断</title>
+    <title>留言列表</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -38,24 +38,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <div id="index" class="mainBox" style="padding-top:18px;height:auto!important;height:550px;min-height:550px;">
     <table width="100%" border="0" cellspacing="0" cellpadding="7" class="tableBasic">
          <tr>
+         <th width="10%">序号</th>
           <th width="10%">病理号</th>
           <th width="10%">病人姓名</th>
-          <th width="15%">材料部位</th>
-          <th width="10%">病例状态</th>
-          <th width="10%">系统分类</th>
+          <th width="10%">留言人</th>
           <th width="20%">送检单位</th>
-          <th width="15%">申请时间</th>
+          <th width="10%">留言状态</th>
+          <th width="15%">柳岩时间</th>
           <th width="10%">操作</th>
          </tr>
          <tr>
-          <td align="center">127001</td>
-          <td align="center">齐德龙</td>
-          <td align="center">膝盖</td>
-          <td align="center">普通</td>
-          <td align="center">全科</td>
-          <td align="center">齐德龙大集团</td>
+          <td align="center">1</td>
+          <td align="center">132142</td>
+          <td align="center">齐离</td>
+          <td align="center">袁主任</td>
+          <td align="center">普通你赶紧转诊吧</td>
+          <td align="center">已读</td>
           <td align="center">2016-02-25 23:29:08</td>
-          <td align="center"><a href="daizhenduan" target="_blank">诊断</a></td>
+          <td align="center"><a>查看</a></td>
         </tr>
      </table>
     
