@@ -1,0 +1,55 @@
+body {
+	text-align: center;/*background-repeat: repeat-x; 
+background-position: 0px 0px ; 
+background-size： */
+}
+.table {
+	border: 1px solid #90BFFF;
+	width: 1200px;
+	border-collapse:collapse;
+}
+tr {
+	font-family: 微软雅黑;
+	font-weight: 500;
+	color: #000;
+}
+input {
+	border: 1px solid #CCC;
+	color: #CCC;
+	font-weight: bold;
+	font-family: "微软雅黑";
+	height: 25px;
+	line-height: 30px;
+	border-radius: 1px;
+}
+.submit {
+	width: 100px;
+	height: 30px;
+	cursor : hand;
+	font-size: 20px;
+	color: #ffffff;
+	background-color: #448EF3;
+	border: 0px;
+	border-radius: 5px;
+}
+.thead {
+	height: 40px;
+	background : #90BFFF;
+	font-family: "微软雅黑";
+	font-size: 30px;
+	font-weight: 700;
+	color: #ffffff;
+	background: #90BFFF;
+}
+.tabletitle{
+	text-align:left;
+	margin-left:20px;
+}
+.trtitle{
+	text-align:left;
+	margin-left:30px;
+	font-size:18px;
+}
+#3 {
+	margin-bottom: 100px;
+} /* CSS Document */
