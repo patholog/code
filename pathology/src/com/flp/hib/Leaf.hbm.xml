@@ -8,7 +8,7 @@
     <class name="com.flp.hib.Leaf" table="leaf" catalog="pathology">
         <id name="lid" type="java.lang.String">
             <column name="lid" length="32" />
-            <generator class="sequence"></generator>
+            <generator class="native"></generator>
         </id>
         <property name="uid" type="java.lang.Integer">
             <column name="uid" />

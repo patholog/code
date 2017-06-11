@@ -9,10 +9,10 @@
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName"
-			value="com.microsoft.sqlserver.jdbc.SQLServerDriver">
+			value="com.mysql.jdbc.Driver">
 		</property>
 		<property name="url"
-			value="jdbc:sqlserver://localhost:3306;databaseName=pathology">
+			value="jdbc:mysql://localhost:3306/pathology">
 		</property>
 		<property name="username" value="root"></property>
 		<property name="password" value=""></property>
@@ -53,7 +53,6 @@
 	<bean id="serv" class="com.flp.serv.LeafServImpl">
 	 <property name="udao" ref="udao"></property>
 	 <property name="ldao" ref="ldao"></property>
-	 <property name="hdao" ref="hdao"></property>
 	</bean>
 	<bean id="userserv" class="com.flp.serv.UsersServImpl">
 	 <property name="udao" ref="udao"></property>
@@ -64,10 +63,10 @@
 	<bean id="leafAction" class="com.flp.actions.LeafAction" scope="prototype">
 	 <property name="serv" ref="serv"></property>
 	</bean>
-	<bean id="UsersAction" class="com.flp.actions.UsersAction" scope="prototype">
+	<bean id="usersAction" class="com.flp.actions.UsersAction" scope="prototype">
 	 <property name="userserv" ref="userserv"></property>
 	</bean>
-	<bean id="HospitalAction" class="com.flp.actions.HospitalAction" scope="prototype">
+	<bean id="hospitalAction" class="com.flp.actions.HospitalAction" scope="prototype">
 	 <property name="hosserv" ref="hosserv"></property>
 	</bean>
 	

@@ -8,7 +8,7 @@
     <class name="com.flp.hib.UserAccount" table="useraccount" catalog="pathology">
         <id name="idAccount" type="java.lang.String">
             <column name="id_account" length="32" />
-            <generator class="sequence"></generator>
+            <generator class="native"></generator>
         </id>
         <property name="idUser" type="java.lang.String">
             <column name="id_user" length="32" not-null="true" />

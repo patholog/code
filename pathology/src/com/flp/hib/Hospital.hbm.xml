@@ -8,7 +8,7 @@
     <class name="com.flp.hib.Hospital" table="hospital" catalog="pathology">
         <id name="idHospital" type="java.lang.String">
             <column name="id_hospital" length="32" />
-            <generator class="sequence"></generator>
+            <generator class="native"></generator>
         </id>
         <property name="name" type="java.lang.String">
             <column name="name" length="50" not-null="true" />
