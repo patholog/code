@@ -1,82 +1,184 @@
 package com.flp.hib;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import java.sql.Timestamp;
 
 /**
  * Users entity. @author MyEclipse Persistence Tools
  */
 
-public class Users  implements java.io.Serializable {
+public class Users implements java.io.Serializable {
 
+	// Fields
 
-    // Fields    
+	private String idUsers;
+	private String username;
+	private String realname;
+	private String sex;
+	private Timestamp birthday;
+	private String email;
+	private String password;
+	private String belongHospital;
+	private String signature;
+	private String stateld;
+	private String specialty;
+	private String mobile;
+	private String tel;
+	private String isdeleted;
+	private String deletor;
 
-     private Integer uid;
-     private String username;
-     private String password;
-     private String repassword;
-     private Set leafs = new HashSet(0);
+	// Constructors
 
-
-    // Constructors
-
-    /** default constructor */
-    public Users() {
-    }
-
-    
-    /** full constructor */
-    public Users(String username, String password, Set leafs) {
-        this.username = username;
-        this.password = password;
-        this.leafs = leafs;
-    }
-
-   
-    // Property accessors
-
-    public Integer getUid() {
-        return this.uid;
-    }
-    
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
-    public String getUsername() {
-        return this.username;
-    }
-    
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-    
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set getLeafs() {
-        return this.leafs;
-    }
-    
-    public void setLeafs(Set leafs) {
-        this.leafs = leafs;
-    }
-
-
-	public String getRepassword() {
-		return repassword;
+	/** default constructor */
+	public Users() {
 	}
 
+	/** minimal constructor */
+	public Users(String username) {
+		this.username = username;
+	}
 
-	public void setRepassword(String repassword) {
-		this.repassword = repassword;
+	/** full constructor */
+	public Users(String username, String realname, String sex,
+			Timestamp birthday, String email, String password,
+			String belongHospital, String signature, String stateld,
+			String specialty, String mobile, String tel, String isdeleted,
+			String deletor) {
+		this.username = username;
+		this.realname = realname;
+		this.sex = sex;
+		this.birthday = birthday;
+		this.email = email;
+		this.password = password;
+		this.belongHospital = belongHospital;
+		this.signature = signature;
+		this.stateld = stateld;
+		this.specialty = specialty;
+		this.mobile = mobile;
+		this.tel = tel;
+		this.isdeleted = isdeleted;
+		this.deletor = deletor;
+	}
+
+	// Property accessors
+
+	public String getIdUsers() {
+		return this.idUsers;
+	}
+
+	public void setIdUsers(String idUsers) {
+		this.idUsers = idUsers;
+	}
+
+	public String getUsername() {
+		return this.username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getRealname() {
+		return this.realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
+
+	public String getSex() {
+		return this.sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public Timestamp getBirthday() {
+		return this.birthday;
+	}
+
+	public void setBirthday(Timestamp birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getBelongHospital() {
+		return this.belongHospital;
+	}
+
+	public void setBelongHospital(String belongHospital) {
+		this.belongHospital = belongHospital;
+	}
+
+	public String getSignature() {
+		return this.signature;
+	}
+
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
+
+	public String getStateld() {
+		return this.stateld;
+	}
+
+	public void setStateld(String stateld) {
+		this.stateld = stateld;
+	}
+
+	public String getSpecialty() {
+		return this.specialty;
+	}
+
+	public void setSpecialty(String specialty) {
+		this.specialty = specialty;
+	}
+
+	public String getMobile() {
+		return this.mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getTel() {
+		return this.tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getIsdeleted() {
+		return this.isdeleted;
+	}
+
+	public void setIsdeleted(String isdeleted) {
+		this.isdeleted = isdeleted;
+	}
+
+	public String getDeletor() {
+		return this.deletor;
+	}
+
+	public void setDeletor(String deletor) {
+		this.deletor = deletor;
 	}
 
 }
