@@ -24,7 +24,7 @@ public class UsersAction extends ActionSupport{
 		usernamelist = serv.getAllUsername();
 		for(int i=0;i<usernamelist.size();i++){
 			if(u.getUsername().equals(usernamelist.get(i))){
-				this.addActionError("ÓÃ»§ÃûÒÑ´æÔÚ£¬ÇëÖØÐÂÌîÐ´£¡");
+				this.addActionError("ç”¨æˆ·åå·²å­˜åœ¨ï¼Œè¯·é‡æ–°å¡«å†™ï¼");
 				return "regFal";
 			}
 		}
@@ -34,7 +34,7 @@ public class UsersAction extends ActionSupport{
 		   return "regSuc";
 		 }
 		else{
-			this.addActionError("×¢²áÊ§°Ü,ÇëÖØÐÂÌîÐ´£¡");
+			this.addActionError("×¢æ³¨å†Œå¤±è´¥,è¯·é‡æ–°å¡«å†™ï¼");
 			return "regFal";
 		}
 	}
