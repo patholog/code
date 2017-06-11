@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
     <div id="head">
-  <div class="logo"><a href="index.jsp"><img src="images/bllogo.jpg" alt="logo"></a></div>
+  <div class="logo"><img src="../images/bllogo.jpg" alt="logo"></a></div>
   <div class="nav">
    <ul class="navRight">
     <li class="M noLeft"><a href="JavaScript:void(0);">您好，admin</a>
