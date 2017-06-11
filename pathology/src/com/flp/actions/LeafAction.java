@@ -19,7 +19,7 @@ private List<Leaf> list = new ArrayList<Leaf>();
 private List<String> usernamelist = new ArrayList<String>();
 public String login() throws Exception {
 	u = serv.check(u);
-	if(u.getUid()!=null){
+	if(u.getIdUsers()!=null){
 		ActionContext.getContext().getSession().put("user",u);
 	    return this.SUCCESS;
 	}
@@ -29,7 +29,7 @@ public String login() throws Exception {
 	}
 }
 public String reg() throws Exception {
-	if(!u.getPassword().equals(u.getRepassword())){
+	if(!u.getPassword().equals(u.getPassword())){
 		this.addActionError("两次密码不一致！");
 		return "reginput";
 	}
@@ -41,7 +41,7 @@ public String reg() throws Exception {
 		}
 	}
 	u = serv.save(u);
-	if(u.getUid()!=null){
+	if(u.getIdUsers()!=null){
 	   ActionContext.getContext().getSession().put("user",u);
 	   return this.SUCCESS;
 	 }
@@ -65,7 +65,7 @@ public String addleaf() throws Exception{
 		this.addActionError("请您先登录！");
 		return "loginput";
 	}
-	l.setUsers(u);
+	//l.setUsers(u);
 	if("".equals(l.getContent()))
 		l.setContent("所有人");
 	l = serv.save(l);
