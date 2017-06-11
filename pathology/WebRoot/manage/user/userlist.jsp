@@ -38,25 +38,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <div id="index" class="mainBox" style="padding-top:18px;height:auto!important;height:550px;min-height:550px;">
     <table width="100%" border="0" cellspacing="0" cellpadding="7" class="tableBasic">
          <tr>
-          <th width="10%">病理号</th>
-          <th width="10%">病人姓名</th>
-          <th width="15%">材料部位</th>
-          <th width="10%">病例状态</th>
-          <th width="10%">系统分类</th>
-          <th width="20%">送检单位</th>
-          <th width="15%">申请时间</th>
+          <th width="10%">用户名称</th>
+          <th width="10%">性别</th>
+          <th width="15%">邮箱</th>
+          <th width="20%">所属医院</th>
+          <th width="10%">特长</th>
+          <th width="15%">手机</th>
+          <th width="10%">电话</th>
           <th width="10%">操作</th>
          </tr>
-         <tr>
-          <td align="center">127001</td>
-          <td align="center">齐德龙</td>
-          <td align="center">膝盖</td>
-          <td align="center">普通</td>
-          <td align="center">全科</td>
-          <td align="center">齐德龙大集团</td>
-          <td align="center">2016-02-25 23:29:08</td>
-          <td align="center"><a href="daizhenduan" target="_blank">诊断</a></td>
-        </tr>
+              <c:forEach var="user" items="${userList}">
+                <tr align="center">
+                
+                <td >${user.username}</td>
+                <td >${user.sex}</td>
+                <td >${user.email }</td>
+                <td >${user.belonghospital }</td>
+                <td >${user.specialty }</td>
+                <td >${user.mobile }</td>
+                <td >${user.tel }</td>
+                <td ><a href="http://localhost:8080/pathology/admin_delUser?userId=${user.idUsers }"><input type="button" value="删除" /></a></td>
+                
+                 
+                </tr>
+               </c:forEach>
      </table>
     
   </div>
