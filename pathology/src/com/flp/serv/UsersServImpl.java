@@ -51,4 +51,13 @@ public class UsersServImpl implements IUsersServ {
 		return udao.getAll("select u.username from Users u");
 	}
 
+	public IUserDao<Users, Integer> getUdao() {
+		return udao;
+	}
+
+	public void setUdao(IUserDao<Users, Integer> udao) {
+		this.udao = udao;
+	}
+
+	
 }

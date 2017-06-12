@@ -15,20 +15,20 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class UsersAction extends ActionSupport{
 	private Users u = new Users();
-	private IUsersServ serv;
+	private IUsersServ userserv;
 	private List<String> usernamelist = new ArrayList<String>();
 	private String idUsers;
 	private HttpServletRequest request;
 	
 	public String regist() throws Exception {
-		usernamelist = serv.getAllUsername();
+		usernamelist = userserv.getAllUsername();
 		for(int i=0;i<usernamelist.size();i++){
 			if(u.getUsername().equals(usernamelist.get(i))){
 				this.addActionError("用户名已存在，请重新填写！");
 				return "regFal";
 			}
 		}
-		u = serv.save(u);
+		u = userserv.save(u);
 		if(u.getIdUsers()!=null){
 		   ActionContext.getContext().getSession().put("user",u);
 		   return "regSuc";
@@ -41,7 +41,7 @@ public class UsersAction extends ActionSupport{
 	
 	public String findAllUser(){
 		HttpSession session = ServletActionContext.getRequest().getSession();
-		List<Users> list=this.serv.findAll();
+		List<Users> list=this.userserv.findAll();
 		if(list!=null){
 			session.setAttribute("userList", list);
 			return "userList";
@@ -50,8 +50,8 @@ public class UsersAction extends ActionSupport{
 		}
 	}
 	public String delUser(){
-		Users user=this.serv.findById(idUsers);
-		Users deluser=this.serv.del(user);
+		Users user=this.userserv.findById(idUsers);
+		Users deluser=this.userserv.del(user);
 		if(deluser!=null){
 			return "userList";
 		}else{
@@ -61,7 +61,7 @@ public class UsersAction extends ActionSupport{
 	
 	public String upUser(){
 		if(this.u!=null){
-			serv.update(u);
+			userserv.update(u);
 			return "userList";
 		}else{
 			return "failure";
@@ -70,7 +70,7 @@ public class UsersAction extends ActionSupport{
 	
 	public String findById(){
 		HttpSession session = ServletActionContext.getRequest().getSession();
-		Users user=this.serv.findById(idUsers);
+		Users user=this.userserv.findById(idUsers);
 		if(user!=null){
 			session.setAttribute("onlyuser", user);
 			return "onlyuser";
@@ -106,6 +106,14 @@ public class UsersAction extends ActionSupport{
 
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
+	}
+
+	public IUsersServ getUserserv() {
+		return userserv;
+	}
+
+	public void setUserserv(IUsersServ userserv) {
+		this.userserv = userserv;
 	}
 	
 	

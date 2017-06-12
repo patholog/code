@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.flp.dao.IHospitalDao;
 import com.flp.hib.Hospital;
 import com.flp.serv.IHospitalServ;
 import com.opensymphony.xwork2.ActionContext;
@@ -16,12 +15,12 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class HospitalAction extends ActionSupport{
 	private Hospital hos = new Hospital();
-	private IHospitalServ serv;
+	private IHospitalServ hosserv;
 	private String idHos;
 	private HttpServletRequest request;
 	
 	public String addHospital() throws Exception {
-		hos = serv.save(hos);
+		hos = hosserv.save(hos);
 		if(hos.getIdHospital()!=null){
 		   ActionContext.getContext().getSession().put("hospital",hos);
 		   return "addHsptSuc";
@@ -33,7 +32,7 @@ public class HospitalAction extends ActionSupport{
 	
 	public String findAllHospital(){
 		HttpSession session = ServletActionContext.getRequest().getSession();
-		List<Hospital> list=this.serv.findAll();
+		List<Hospital> list=this.hosserv.findAll();
 		if(list!=null){
 			session.setAttribute("hospitalList", list);
 			return "hospitalList";
@@ -42,8 +41,8 @@ public class HospitalAction extends ActionSupport{
 		}
 	}
 	public String delUser(){
-		Hospital user=this.serv.findById(idHos);
-		Hospital deluser=this.serv.del(user);
+		Hospital user=this.hosserv.findById(idHos);
+		Hospital deluser=this.hosserv.del(user);
 		if(deluser!=null){
 			return "hospitalList";
 		}else{
@@ -53,7 +52,7 @@ public class HospitalAction extends ActionSupport{
 	
 	public String upUser(){
 		if(this.hos!=null){
-			serv.update(hos);
+			hosserv.update(hos);
 			return "hospitalList";
 		}else{
 			return "failure";
@@ -62,7 +61,7 @@ public class HospitalAction extends ActionSupport{
 	
 	public String findById(){
 		HttpSession session = ServletActionContext.getRequest().getSession();
-		Hospital hospital=this.serv.findById(idHos);
+		Hospital hospital=this.hosserv.findById(idHos);
 		if(hospital!=null){
 			session.setAttribute("oneHspt", hospital);
 			return "oneHspt";
@@ -93,6 +92,14 @@ public class HospitalAction extends ActionSupport{
 
 	public void setIdHos(String idHos) {
 		this.idHos = idHos;
+	}
+
+	public IHospitalServ getHosserv() {
+		return hosserv;
+	}
+
+	public void setHosserv(IHospitalServ hosserv) {
+		this.hosserv = hosserv;
 	}
 	
 	

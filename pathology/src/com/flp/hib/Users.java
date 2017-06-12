@@ -19,7 +19,7 @@ public class Users implements java.io.Serializable {
 	private String password;
 	private String belongHospital;
 	private String signature;
-	private String stateld;
+	private String stateid;
 	private String specialty;
 	private String mobile;
 	private String tel;
@@ -40,7 +40,7 @@ public class Users implements java.io.Serializable {
 	/** full constructor */
 	public Users(String username, String realname, String sex,
 			Timestamp birthday, String email, String password,
-			String belongHospital, String signature, String stateld,
+			String belongHospital, String signature, String stateid,
 			String specialty, String mobile, String tel, String isdeleted,
 			String deletor) {
 		this.username = username;
@@ -51,7 +51,7 @@ public class Users implements java.io.Serializable {
 		this.password = password;
 		this.belongHospital = belongHospital;
 		this.signature = signature;
-		this.stateld = stateld;
+		this.stateid = stateid;
 		this.specialty = specialty;
 		this.mobile = mobile;
 		this.tel = tel;
@@ -133,12 +133,12 @@ public class Users implements java.io.Serializable {
 		this.signature = signature;
 	}
 
-	public String getStateld() {
-		return this.stateld;
+	public String getStateid() {
+		return this.stateid;
 	}
 
-	public void setStateld(String stateld) {
-		this.stateld = stateld;
+	public void setStateid(String stateid) {
+		this.stateid = stateid;
 	}
 
 	public String getSpecialty() {

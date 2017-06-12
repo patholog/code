@@ -47,4 +47,14 @@ public class HospitalServImpl implements IHospitalServ {
 		return hdao.getAll("select * from hospital where '"+wherestrs+"'");
 	}
 
+	public IHospitalDao<Hospital, Integer> getHdao() {
+		return hdao;
+	}
+
+	public void setHdao(IHospitalDao<Hospital, Integer> hdao) {
+		this.hdao = hdao;
+	}
+	
+	
+
 }

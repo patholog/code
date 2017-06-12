@@ -1,38 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-<!DOCTYPE struts SYSTEM "ddd.dtd" >
--->
+<!-- <!DOCTYPE struts SYSTEM "ddd.dtd" > -->
 <!DOCTYPE struts PUBLIC
 	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
 	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
- <constant name="struts.devMode" value="true"></constant>
- <constant name="struts.custom.i18n.resources" value="messages"></constant>
- <constant name="struts.objectFactory" value="spring"></constant>
- <package name="actions" extends="struts-default">
-  <global-results>
-   <result name="loginput" >/loginput.jsp</result>
-  </global-results>
-  <action name="leaf" class="leafAction">
-    <result type="redirect">/show.action</result>
-    <result name="reginput">/reginput.jsp</result>
-    <result name="addinput">/addleaf.jsp</result>
-  </action>
-  <action name="show" class="leafAction" method="show">
-    <param name="p.rowsPage">5</param>
-    <result>/main.jsp</result>
-  </action>
-  <action name="*">
-   <result>/{1}.jsp</result>
-  </action>
-  		<action name="daizhenduan">
+	<constant name="struts.devMode" value="true"></constant>
+	<constant name="struts.custom.i18n.resources" value="messages"></constant>
+	<constant name="struts.objectFactory" value="spring"></constant>
+	<package name="actions" extends="struts-default">
+		<global-results>
+			<result name="loginput">/loginput.jsp</result>
+		</global-results>
+		<action name="leaf" class="leafAction">
+			<result type="redirect">/show.action</result>
+			<result name="reginput">/reginput.jsp</result>
+			<result name="addinput">/addleaf.jsp</result>
+		</action>
+		<action name="show" class="leafAction" method="show">
+			<param name="p.rowsPage">5</param>
+			<result>/main.jsp</result>
+		</action>
+		<action name="*">
+			<result>/{1}.jsp</result>
+		</action>
+		<action name="daizhenduan">
 			<result>/daizhenduan.html</result>
 		</action>
-		 <action name="login">
+		<action name="login">
 			<result>/index.jsp</result>
 		</action>
-		
-		<!-- 后台管理部分  -->
+
+		<!-- 后台管理部分 -->
 		<action name="admin_*" method="{1}" class="com.flp.actions.UsersAction">
 			<result name="loginSuc">/admin/AdminIndex.jsp</result>
 			<result name="loginFal">/admin/AdminLogin.jsp</result>
@@ -44,8 +42,8 @@
 			<result name="allCat">/admin/TypeList.jsp</result>
 			<result name="catList" type="redirectAction">admin_catList</result>
 		</action>
-		 <action name="hospitalaction">
+		<action name="hospitalaction">
 			<result>/index.jsp</result>
 		</action>
- </package>
+	</package>
 </struts>
