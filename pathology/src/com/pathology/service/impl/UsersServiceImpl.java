@@ -26,7 +26,6 @@ public class UsersServiceImpl implements IUsersService {
 	}
 
 	public List<Users> getAllUser(Class clazz, String hql) {
-		// TODO Auto-generated method stub
 		return this.obj2Empl(userdao.getAllUser(clazz, hql));
 	}
 
@@ -36,8 +35,7 @@ public class UsersServiceImpl implements IUsersService {
 
 	}
 
-	public Users getUser(Class clazz, int id) {
-		// TODO Auto-generated method stub
+	public Users getUser(Class clazz, String id) {
 		return userdao.getUser(clazz, id);
 	}
 

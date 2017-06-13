@@ -7,10 +7,10 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
-		<property name="url" value="jdbc:mysql://localhost:3306/pathology">
+		<property name="url" value="jdbc:mysql://localhost:3306/patholog">
 		</property>
 		<property name="username" value="root"></property>
-		<property name="password" value="root"></property>
+		<property name="password" value="1"></property>
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
@@ -41,23 +41,16 @@
 		<property name="hibernateTemplate" ref="ht"></property>
 	</bean>
 	<bean id="userdao" class="com.pathology.dao.impl.UserDaoImpl" parent="pt" />
-	<bean id="ldao" class="com.pathology.dao.impl.LeafDaoImpl" parent="pt" />
 	<bean id="hdao" class="com.pathology.dao.impl.HospitalDaoImpl" parent="pt" />
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	<bean id="serv" class="com.pathology.service.impl.LeafServImpl">
-		<property name="ldao" ref="ldao"></property>
 	</bean>
 	<bean id="userservice" class="com.pathology.service.impl.UsersServiceImpl">
 		<property name="userdao" ref="userdao"></property>
 	</bean>
 	<bean id="hosserv" class="com.pathology.service.impl.HospitalServImpl">
 		<property name="hdao" ref="hdao"></property>
-	</bean>
-	<bean id="leafAction" class="com.pathology.action.LeafAction" scope="prototype">
-		<property name="serv" ref="serv"></property>
 	</bean>
 	<bean id="usersAction" class="com.pathology.action.UsersAction" scope="prototype">
 		<property name="userservice" ref="userservice"></property>

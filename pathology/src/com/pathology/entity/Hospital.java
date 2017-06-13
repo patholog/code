@@ -12,10 +12,12 @@ public class Hospital implements java.io.Serializable {
 
 	private String idHospital;
 	private String name;
+	private String code;
+	private String hospitalcode;
 	private String address;
 	private String tel;
 	private String memo;
-	private String transferedHospital;
+	private String transferedhospital;
 	private String delete;
 	private Timestamp createTime;
 	private String creator;
@@ -32,14 +34,16 @@ public class Hospital implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Hospital(String name, String address, String tel, String memo,
-			String transferedHospital, String delete, Timestamp createTime,
-			String creator) {
+	public Hospital(String name, String code, String hospitalcode,
+			String address, String tel, String memo, String transferedhospital,
+			String delete, Timestamp createTime, String creator) {
 		this.name = name;
+		this.code = code;
+		this.hospitalcode = hospitalcode;
 		this.address = address;
 		this.tel = tel;
 		this.memo = memo;
-		this.transferedHospital = transferedHospital;
+		this.transferedhospital = transferedhospital;
 		this.delete = delete;
 		this.createTime = createTime;
 		this.creator = creator;
@@ -61,6 +65,22 @@ public class Hospital implements java.io.Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getCode() {
+		return this.code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getHospitalcode() {
+		return this.hospitalcode;
+	}
+
+	public void setHospitalcode(String hospitalcode) {
+		this.hospitalcode = hospitalcode;
 	}
 
 	public String getAddress() {
@@ -87,12 +107,12 @@ public class Hospital implements java.io.Serializable {
 		this.memo = memo;
 	}
 
-	public String getTransferedHospital() {
-		return this.transferedHospital;
+	public String getTransferedhospital() {
+		return this.transferedhospital;
 	}
 
-	public void setTransferedHospital(String transferedHospital) {
-		this.transferedHospital = transferedHospital;
+	public void setTransferedhospital(String transferedhospital) {
+		this.transferedhospital = transferedhospital;
 	}
 
 	public String getDelete() {

@@ -23,7 +23,7 @@
 	
 	
 		function showDialogForEdit(id){
-			window.showModalDialog('EmployerAction!updateEmployerDialog?employer.idusers='+id,'','dialogWidth=450px;dialogHeight=350px;');
+			window.showModalDialog('UserAction!updateUsersDialog?user.idUsers='+id,'','dialogWidth=450px;dialogHeight=350px;');
 	}
 	
 	</script>

@@ -25,6 +25,7 @@ public class Users implements java.io.Serializable {
 	private String tel;
 	private String isdeleted;
 	private String deletor;
+	private String userstatus;
 
 	// Constructors
 
@@ -40,16 +41,16 @@ public class Users implements java.io.Serializable {
 	/** full constructor */
 	public Users(String username, String realname, String sex,
 			Timestamp birthday, String email, String password,
-			String belongHospital, String signature, String stateid,
+			String belonghospital, String signature, String stateid,
 			String specialty, String mobile, String tel, String isdeleted,
-			String deletor) {
+			String deletor, String userstatus) {
 		this.username = username;
 		this.realname = realname;
 		this.sex = sex;
 		this.birthday = birthday;
 		this.email = email;
 		this.password = password;
-		this.belonghospital = belongHospital;
+		this.belonghospital = belonghospital;
 		this.signature = signature;
 		this.stateid = stateid;
 		this.specialty = specialty;
@@ -57,6 +58,7 @@ public class Users implements java.io.Serializable {
 		this.tel = tel;
 		this.isdeleted = isdeleted;
 		this.deletor = deletor;
+		this.userstatus = userstatus;
 	}
 
 	// Property accessors
@@ -117,10 +119,8 @@ public class Users implements java.io.Serializable {
 		this.password = password;
 	}
 
-
-
 	public String getBelonghospital() {
-		return belonghospital;
+		return this.belonghospital;
 	}
 
 	public void setBelonghospital(String belonghospital) {
@@ -181,6 +181,14 @@ public class Users implements java.io.Serializable {
 
 	public void setDeletor(String deletor) {
 		this.deletor = deletor;
+	}
+
+	public String getUserstatus() {
+		return this.userstatus;
+	}
+
+	public void setUserstatus(String userstatus) {
+		this.userstatus = userstatus;
 	}
 
 }

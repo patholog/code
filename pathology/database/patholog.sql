@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.0.27-community-nt)
-# Date: 2017-06-12 15:50:52
+# Date: 2017-06-13 15:46:13
 # Generator: MySQL-Front 5.3  (Build 2.42)
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -78,6 +78,8 @@ DROP TABLE IF EXISTS `hospital`;
 CREATE TABLE `hospital` (
   `id_hospital` varchar(32) NOT NULL default '',
   `name` varchar(50) NOT NULL default '',
+  `code` varchar(50) default NULL,
+  `hospitalcode` varchar(50) default NULL,
   `address` varchar(128) default NULL,
   `tel` varchar(50) default NULL,
   `memo` varchar(128) default NULL,
@@ -90,25 +92,6 @@ CREATE TABLE `hospital` (
 
 #
 # Data for table "hospital"
-#
-
-
-#
-# Source for table "leaf"
-#
-
-DROP TABLE IF EXISTS `leaf`;
-CREATE TABLE `leaf` (
-  `lid` char(32) NOT NULL,
-  `uid` int(11) default NULL,
-  `sendfor` varchar(20) default NULL,
-  `pdate` datetime default NULL,
-  `content` varchar(400) default NULL,
-  PRIMARY KEY  (`lid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-#
-# Data for table "leaf"
 #
 
 
@@ -155,6 +138,7 @@ CREATE TABLE `users` (
   `tel` varchar(16) default NULL,
   `isdeleted` varchar(10) default NULL,
   `deletor` varchar(32) default NULL,
+  `userstatus` varchar(1) default NULL,
   PRIMARY KEY  (`id_users`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -162,6 +146,7 @@ CREATE TABLE `users` (
 # Data for table "users"
 #
 
+INSERT INTO `users` VALUES ('1','user1','ddddd','男',NULL,NULL,'1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('2','user2','ddddddddd',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
