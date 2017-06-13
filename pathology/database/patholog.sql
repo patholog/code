@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.0.27-community-nt)
-# Date: 2017-06-07 11:48:33
+# Date: 2017-06-12 15:50:52
 # Generator: MySQL-Front 5.3  (Build 2.42)
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -71,6 +71,48 @@ CREATE TABLE `cons` (
 
 
 #
+# Source for table "hospital"
+#
+
+DROP TABLE IF EXISTS `hospital`;
+CREATE TABLE `hospital` (
+  `id_hospital` varchar(32) NOT NULL default '',
+  `name` varchar(50) NOT NULL default '',
+  `address` varchar(128) default NULL,
+  `tel` varchar(50) default NULL,
+  `memo` varchar(128) default NULL,
+  `transferedHospital` varchar(32) default NULL,
+  `delete` varchar(10) default NULL,
+  `createTime` datetime default NULL,
+  `creator` varchar(32) default NULL,
+  PRIMARY KEY  (`id_hospital`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#
+# Data for table "hospital"
+#
+
+
+#
+# Source for table "leaf"
+#
+
+DROP TABLE IF EXISTS `leaf`;
+CREATE TABLE `leaf` (
+  `lid` char(32) NOT NULL,
+  `uid` int(11) default NULL,
+  `sendfor` varchar(20) default NULL,
+  `pdate` datetime default NULL,
+  `content` varchar(400) default NULL,
+  PRIMARY KEY  (`lid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#
+# Data for table "leaf"
+#
+
+
+#
 # Source for table "notice"
 #
 
@@ -98,35 +140,26 @@ CREATE TABLE `notice` (
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-  `uid` int(11) NOT NULL,
-  `username` varchar(20) default NULL,
-  `password` varchar(20) default NULL,
-  PRIMARY KEY  (`uid`)
+  `id_users` varchar(32) NOT NULL default '',
+  `username` varchar(100) NOT NULL default '',
+  `realname` varchar(32) default NULL,
+  `sex` varchar(8) default NULL,
+  `birthday` datetime default NULL,
+  `email` varchar(255) default NULL,
+  `password` varchar(255) default NULL,
+  `belongHospital` varchar(32) default NULL,
+  `signature` varchar(255) default NULL,
+  `stateid` varchar(32) default NULL,
+  `specialty` varchar(521) default NULL,
+  `mobile` varchar(16) default NULL,
+  `tel` varchar(16) default NULL,
+  `isdeleted` varchar(10) default NULL,
+  `deletor` varchar(32) default NULL,
+  PRIMARY KEY  (`id_users`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # Data for table "users"
-#
-
-
-#
-# Source for table "leaf"
-#
-
-DROP TABLE IF EXISTS `leaf`;
-CREATE TABLE `leaf` (
-  `lid` char(32) NOT NULL,
-  `uid` int(11) default NULL,
-  `sendfor` varchar(20) default NULL,
-  `pdate` datetime default NULL,
-  `content` varchar(400) default NULL,
-  PRIMARY KEY  (`lid`),
-  KEY `Relationship_1_FK` (`uid`),
-  CONSTRAINT `FK_LEAF_RELATIONS_USERS` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-#
-# Data for table "leaf"
 #
 
 
