@@ -1,5 +1,6 @@
 package com.pathology.action;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,74 +12,71 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.pathology.entity.Users;
-import com.pathology.service.IUsersServ;
+import com.pathology.service.IUsersService;
 
 public class UsersAction extends ActionSupport{
 	private Users u = new Users();
-	private IUsersServ userserv;
+	public IUsersService userservice;
+//	private IUsersService users;
+
 	private List<String> usernamelist = new ArrayList<String>();
 	private String idUsers;
 	private HttpServletRequest request;
+
+	private Users user;
+	private List<Users> list;
+	private int index;
 	
-	public String regist() throws Exception {
-		usernamelist = userserv.getAllUsername();
-		for(int i=0;i<usernamelist.size();i++){
-			if(u.getUsername().equals(usernamelist.get(i))){
-				this.addActionError("用户名已存在，请重新填写！");
-				return "regFal";
-			}
-		}
-		u = userserv.save(u);
-		if(u.getIdUsers()!=null){
-		   ActionContext.getContext().getSession().put("user",u);
-		   return "regSuc";
-		 }
-		else{
-			this.addActionError("ע注册失败,请重新填写！");
-			return "regFal";
-		}
-	}
-	
-	public String findAllUser(){
-		HttpSession session = ServletActionContext.getRequest().getSession();
-		List<Users> list=this.userserv.findAll();
-		if(list!=null){
-			session.setAttribute("userList", list);
-			return "userList";
-		}else{
-			return "failure";
-		}
-	}
-	public String delUser(){
-		Users user=this.userserv.findById(idUsers);
-		Users deluser=this.userserv.del(user);
-		if(deluser!=null){
-			return "userList";
-		}else{
-			return "failure";
-		}
-	}
-	
-	public String upUser(){
-		if(this.u!=null){
-			userserv.update(u);
-			return "userList";
-		}else{
-			return "failure";
-		}
-	}
-	
-	public String findById(){
-		HttpSession session = ServletActionContext.getRequest().getSession();
-		Users user=this.userserv.findById(idUsers);
+	public String userList(){
+		
+		String hql="";
 		if(user!=null){
-			session.setAttribute("onlyuser", user);
-			return "onlyuser";
-		}else{
-			return "failure";
+			String username = null;
+			String adress=null;
+			try {
+				username = new String((user.getUsername().getBytes("ISO8859-1")),"UTF-8");
+				adress= new String((user.getTel().getBytes("ISO8859-1")),"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		if(username!=null&&!("".equals(username)))
+			hql+=" and s.username like '%"+username+"%'";
+		if(user.getTel()!=null&&!("".equals(user.getTel())))
+			hql+=" and s.tel = "+user.getTel();
+		
+		//System.out.println(hql+"000000000000000000000000000000000"+user.getUsername());
 		}
+		
+		List<Users> list = index != 0 ? userservice.getByPage(index, Users.class,hql)
+				:userservice.getByPage(1, Users.class,hql);
+		
+		HttpSession session=ServletActionContext.getRequest().getSession();
+		session.setAttribute("list",list);
+		session.setAttribute("thisindex",index==0?1:index);
+		
+		session.setAttribute("count",userservice.getAllUser(Users.class,hql).size());
+		System.out.println("0000"+list.size());
+		return SUCCESS;
 	}
 	
+
+
+	public IUsersService getUserservice() {
+		return userservice;
+	}
+
+	public void setUserservice(IUsersService userservice) {
+		this.userservice = userservice;
+	}
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
 	public Users getU() {
 		return u;
 	}
@@ -108,13 +106,13 @@ public class UsersAction extends ActionSupport{
 		this.request = request;
 	}
 
-	public IUsersServ getUserserv() {
-		return userserv;
-	}
-
-	public void setUserserv(IUsersServ userserv) {
-		this.userserv = userserv;
-	}
+//	public IUsersService getUserserv() {
+//		return userserv;
+//	}
+//
+//	public void setUserserv(IUsersService userserv) {
+//		this.userserv = userserv;
+//	}
 	
 	
 }

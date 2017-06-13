@@ -17,7 +17,7 @@ public class Users implements java.io.Serializable {
 	private Timestamp birthday;
 	private String email;
 	private String password;
-	private String belongHospital;
+	private String belonghospital;
 	private String signature;
 	private String stateid;
 	private String specialty;
@@ -49,7 +49,7 @@ public class Users implements java.io.Serializable {
 		this.birthday = birthday;
 		this.email = email;
 		this.password = password;
-		this.belongHospital = belongHospital;
+		this.belonghospital = belongHospital;
 		this.signature = signature;
 		this.stateid = stateid;
 		this.specialty = specialty;
@@ -117,12 +117,14 @@ public class Users implements java.io.Serializable {
 		this.password = password;
 	}
 
-	public String getBelongHospital() {
-		return this.belongHospital;
+
+
+	public String getBelonghospital() {
+		return belonghospital;
 	}
 
-	public void setBelongHospital(String belongHospital) {
-		this.belongHospital = belongHospital;
+	public void setBelonghospital(String belonghospital) {
+		this.belonghospital = belonghospital;
 	}
 
 	public String getSignature() {

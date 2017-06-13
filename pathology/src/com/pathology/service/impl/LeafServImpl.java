@@ -16,13 +16,14 @@ import com.pathology.entity.Users;
 import com.pathology.service.ILeafServ;
 @Transactional(readOnly=true)
 public class LeafServImpl implements ILeafServ {
-	private IUserDao<Users,Integer> udao;
+	private IUserDao udao;
 	private ILeafDao<Leaf,String> ldao;
 	public Users check(Users u) {
-		List<Users> list = udao.getByExample(u);
-		if(list!=null && list.size()>0)
-			u = list.get(0);
-		return u;
+		//List<Users> list = udao.getByExample(u);
+//		if(list!=null && list.size()>0)
+//			u = list.get(0);
+//		return u;
+		return null;
 	}
 	public List<Leaf> getByPage(String username, PageBean p) {
 		List<Leaf> list = null;
@@ -47,11 +48,13 @@ public class LeafServImpl implements ILeafServ {
 		return list;
 	}
 	public List<String> getAllUsername() {
-		return udao.getAll("select u.username from Users u");
+		//return udao.getAll("select u.username from Users u");
+		return null;
 	}
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED)
 	public Users save(Users u) {
-		return udao.save(u);
+		//return udao.save(u);
+		return null;
 	}
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED)
 	public Leaf save(Leaf l) {

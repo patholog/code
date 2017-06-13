@@ -29,7 +29,7 @@
 			<result>/index.jsp</result>
 		</action>
 
-		<!-- 后台管理部分 -->
+		<!-- 后台管理部分 
 		<action name="admin_*" method="{1}" class="com.flp.actions.UsersAction">
 			<result name="loginSuc">/admin/AdminIndex.jsp</result>
 			<result name="loginFal">/admin/AdminLogin.jsp</result>
@@ -40,6 +40,16 @@
 			<result name="findAllUser" type="redirectAction">admin_findAllUser</result>
 			<result name="allCat">/admin/TypeList.jsp</result>
 			<result name="catList" type="redirectAction">admin_catList</result>
+		</action>-->
+		<action name="UserAction" class="com.pathology.action.UsersAction">
+
+			<result name="success"> /manage/user/userslist.jsp</result>
+
+			<result name="deletesuccess" type="redirectAction">UserAction!userList
+			</result>
+			<result name="dilog"> /manage/user/uupdate_user.jsp</result>
+
+
 		</action>
 		<action name="hospitalaction">
 			<result>/index.jsp</result>
