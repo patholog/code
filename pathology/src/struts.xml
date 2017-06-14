@@ -36,9 +36,9 @@
 
 			<result name="success"> /manage/user/userslist.jsp</result>
 
-			<result name="deletesuccess" type="redirectAction">UserAction!userList
-			</result>
-			<result name="dilog"> /manage/user/uupdate_user.jsp</result>
+			<result name="deletesuccess" type="redirectAction">UserAction!userList</result>
+			<result name="updatesuccess" type="redirectAction">UserAction!userList</result>
+			<result name="dilog"> /manage/user/update_user.jsp</result>
 
 
 		</action>

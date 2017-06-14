@@ -32,18 +32,19 @@ public class UsersAction extends ActionSupport{
 		if(user!=null){
 			String username = null;
 			String adress=null;
+			String realname=null;
 			try {
 				username = new String((user.getUsername().getBytes("ISO8859-1")),"UTF-8");
-				adress= new String((user.getTel().getBytes("ISO8859-1")),"UTF-8");
+//				realname=new String((user.getRealname().getBytes("ISO8859-1")),"UTF-8");
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 			if(username!=null&&!("".equals(username)))
-				hql+=" and s.username like '%"+username+"%'";
+				hql+=" and username like '%"+username+"%'";
 			if(user.getTel()!=null&&!("".equals(user.getTel())))
-				hql+=" and s.tel = "+user.getTel();
+				hql+=" and tel = "+user.getTel();
 
 			//System.out.println(hql+"000000000000000000000000000000000"+user.getUsername());
 		}
@@ -70,22 +71,31 @@ public class UsersAction extends ActionSupport{
 		return "dilog";
 	}
 	public String updateUser() throws IOException{
-
+		user.setBelonghospital(new String(user.getBelonghospital().getBytes("ISO8859-1"),"UTF-8"));
+		user.setSex(new String(user.getSex().getBytes("ISO8859-1"),"UTF-8"));
+		user.setRealname(new String(user.getRealname().getBytes("ISO8859-1"),"UTF-8"));
 		user.setUsername(new String(user.getUsername().getBytes("ISO8859-1"),"UTF-8"));
 		user.setEmail(new String(user.getEmail().getBytes("ISO8859-1"),"UTF-8"));
-		user.setEmail(new String(user.getEmail().getBytes("ISO8859-1"),"UTF-8"));
+		user.setMobile(new String(user.getMobile().getBytes("ISO8859-1"),"UTF-8"));
 		user.setTel(new String(user.getTel().getBytes("ISO8859-1"),"UTF-8"));
 		user.setSpecialty(new String(user.getSpecialty().getBytes("ISO8859-1"),"UTF-8"));
 		userservice.updateUser(user);
 
-		return "success";
+		return "updatesuccess";
 	}
 	public String deleteUser(){
 		Users userT = userservice.getUser(Users.class, user.getIdUsers());
 		userservice.deleteUser(userT);
 		return "deletesuccess";
 	}
-
+	public String addUser() throws IOException{
+		
+		user.setUsername(new String(user.getUsername().getBytes("ISO8859-1"),"UTF-8"));
+		
+		userservice.addUser(user);
+		
+		return "operasuccess";
+	}
 	public IUsersService getUserservice() {
 		return userservice;
 	}
