@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.0.27-community-nt)
-# Date: 2017-06-13 15:46:13
+# Date: 2017-06-14 11:57:09
 # Generator: MySQL-Front 5.3  (Build 2.42)
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -83,7 +83,7 @@ CREATE TABLE `hospital` (
   `address` varchar(128) default NULL,
   `tel` varchar(50) default NULL,
   `memo` varchar(128) default NULL,
-  `transferedHospital` varchar(32) default NULL,
+  `transferedhospital` varchar(32) default NULL,
   `delete` varchar(10) default NULL,
   `createTime` datetime default NULL,
   `creator` varchar(32) default NULL,
@@ -130,7 +130,7 @@ CREATE TABLE `users` (
   `birthday` datetime default NULL,
   `email` varchar(255) default NULL,
   `password` varchar(255) default NULL,
-  `belongHospital` varchar(32) default NULL,
+  `belonghospital` varchar(32) default NULL,
   `signature` varchar(255) default NULL,
   `stateid` varchar(32) default NULL,
   `specialty` varchar(521) default NULL,
