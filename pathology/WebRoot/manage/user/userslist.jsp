@@ -62,7 +62,7 @@
 	                <td >${user.mobile }</td>
 	                <td >${user.tel }</td>
 	                <td><img src="${path }/images/edit2.png" alt="编辑" onclick="showDialogForEdit(${user.idUsers})"/></td>
-					<td><a style="border-width:0px" href="UserAction!deleteUser?user.idusers=${user.idUsers }"><img src="${path }/images/delete.png" alt="删除"/></a></td>
+					<td><a style="border-width:0px" href="UserAction!deleteUser?user.idUsers=${user.idUsers }"><img src="${path }/images/delete.png" alt="删除"/></a></td>
 				</tr>
 			</c:forEach>		
 		</table>

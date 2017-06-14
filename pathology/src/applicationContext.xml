@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
-	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+	http://www.springframework.org/schema/aop
+   	http://www.springframework.org/schema/aop/spring-aop-2.0.xsd  ">
+   	
+   	
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<aop:config> 
+ 		<aop:advisor pointcut="execution(* com.pathology.service.impl.*.*(..))" advice-ref="txAdvice" /> 
+ 	</aop:config> 
+<!-- 	<tx:annotation-driven transaction-manager="transactionManager" /> -->
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager"> 
+ 		<tx:attributes> 
+ 			<tx:method name="find*" read-only="true" /> 
+ 			<tx:method name="query*" read-only="true" /> 
+ 			<tx:method name="get*" read-only="true" /> 
+ 			<tx:method name="add*" propagation="REQUIRED" /> 
+ 			<tx:method name="del*" propagation="REQUIRED" /> 
+ 			<tx:method name="update*" propagation="REQUIRED" /> 
+ 			<tx:method name="do*" propagation="REQUIRED" /> 
+ 			<tx:method name="save*" propagation="REQUIRED" /> 
+ 			<tx:method name="insert*" propagation="REQUIRED" /> 
+ 			<tx:method name="*" propagation="SUPPORTS" /> 
+ 		</tx:attributes> 
+ 	</tx:advice> 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
@@ -42,10 +69,6 @@
 	</bean>
 	<bean id="userdao" class="com.pathology.dao.impl.UserDaoImpl" parent="pt" />
 	<bean id="hdao" class="com.pathology.dao.impl.HospitalDaoImpl" parent="pt" />
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
 	<bean id="userservice" class="com.pathology.service.impl.UsersServiceImpl">
 		<property name="userdao" ref="userdao"></property>
 	</bean>

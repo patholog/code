@@ -81,8 +81,8 @@ public class UsersAction extends ActionSupport{
 		return "success";
 	}
 	public String deleteUser(){
-
-		userservice.deleteUser(user);
+		Users userT = userservice.getUser(Users.class, user.getIdUsers());
+		userservice.deleteUser(userT);
 		return "deletesuccess";
 	}
 

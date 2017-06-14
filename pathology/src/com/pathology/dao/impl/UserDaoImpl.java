@@ -1,6 +1,8 @@
 package com.pathology.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.SessionFactory;
 
@@ -38,7 +40,9 @@ public class UserDaoImpl extends SuperDao implements IUserDao {
 	}
 	
 	public Users getUser(Class clazz,String id) {
-		return (Users) super.select(clazz, id);
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("idUsers",id);
+		return (Users) super.findUniqueByClz(Users.class, param);
 	}
 	
 	public void updateUser(Users em){

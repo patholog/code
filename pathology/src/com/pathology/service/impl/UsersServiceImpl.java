@@ -30,12 +30,14 @@ public class UsersServiceImpl implements IUsersService {
 	}
 
 	public void deleteUser(Users em) {
-
-		userdao.deleteUser(em);
+//		Users user = userdao.getUser(Users.class, em.getIdUsers());
+		if(em!=null)
+			userdao.deleteUser(em);
 
 	}
 
 	public Users getUser(Class clazz, String id) {
+		
 		return userdao.getUser(clazz, id);
 	}
 
