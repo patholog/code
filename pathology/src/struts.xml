@@ -10,15 +10,6 @@
 		<global-results>
 			<result name="loginput">/loginput.jsp</result>
 		</global-results>
-		<action name="leaf" class="leafAction">
-			<result type="redirect">/show.action</result>
-			<result name="reginput">/reginput.jsp</result>
-			<result name="addinput">/addleaf.jsp</result>
-		</action>
-		<action name="show" class="leafAction" method="show">
-			<param name="p.rowsPage">5</param>
-			<result>/main.jsp</result>
-		</action>
 		<action name="*">
 			<result>/{1}.jsp</result>
 		</action>
