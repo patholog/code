@@ -8,7 +8,7 @@
     <class name="com.pathology.entity.Cons" table="cons" catalog="pathology">
         <id name="idCons" type="java.lang.String">
             <column name="id_cons" length="32" />
-            <generator class="native"></generator>
+            <generator class="assigned"></generator>
         </id>
         <property name="fromhospitalid" type="java.lang.String">
             <column name="fromhospitalid" length="32" />

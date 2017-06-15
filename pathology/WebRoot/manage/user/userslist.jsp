@@ -15,7 +15,7 @@
 <script type="text/javascript">
 	$(function() {
 		$(".ta tr").each(function(i) {
-			this.style.backgroundColor = [ '#799AE1', '#D6DFF7' ][i % 2]
+			this.style.backgroundColor = [ '#ffffff', '#dde5f2' ][i % 2]
 		});
 
 		$(".ta tr").mouseover(function() {//如果鼠标移到class为stripe的表格的tr上时，执行函数

@@ -29,14 +29,17 @@ public class Hospital implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Hospital(String name) {
+	public Hospital(String idHospital, String name) {
+		this.idHospital = idHospital;
 		this.name = name;
 	}
 
 	/** full constructor */
-	public Hospital(String name, String code, String hospitalcode,
-			String address, String tel, String memo, String transferedhospital,
-			String delete, Timestamp createTime, String creator) {
+	public Hospital(String idHospital, String name, String code,
+			String hospitalcode, String address, String tel, String memo,
+			String transferedhospital, String delete, Timestamp createTime,
+			String creator) {
+		this.idHospital = idHospital;
 		this.name = name;
 		this.code = code;
 		this.hospitalcode = hospitalcode;

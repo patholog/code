@@ -10,11 +10,10 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.opensymphony.xwork2.ActionSupport;
 import com.pathology.entity.Users;
 import com.pathology.service.IUsersService;
 
-public class UsersAction extends ActionSupport{
+public class UsersAction extends BaseAction{
 	private Users u = new Users();
 	public IUsersService userservice;
 
@@ -65,8 +64,6 @@ public class UsersAction extends ActionSupport{
 	public String updateUsersDialog(){
 
 		Users users=userservice.getUser(Users.class, user.getIdUsers());
-		//		HttpSession session=ServletActionContext.getRequest().getSession();
-		//		session.setAttribute("emp",emp);
 		ServletActionContext.getRequest().setAttribute("user", users);
 		return "dilog";
 	}
@@ -91,10 +88,10 @@ public class UsersAction extends ActionSupport{
 	public String addUser() throws IOException{
 		
 		user.setUsername(new String(user.getUsername().getBytes("ISO8859-1"),"UTF-8"));
-		
+		user.setIdUsers(getEandomId(16));
 		userservice.addUser(user);
 		
-		return "operasuccess";
+		return "updatesuccess";
 	}
 	public IUsersService getUserservice() {
 		return userservice;

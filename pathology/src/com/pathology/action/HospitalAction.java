@@ -1,6 +1,7 @@
 package com.pathology.action;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,66 +9,72 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 import com.pathology.entity.Hospital;
-import com.pathology.service.IHospitalServ;
+import com.pathology.service.IHospitalService;
 
-public class HospitalAction extends ActionSupport{
+public class HospitalAction extends BaseAction{
 	private Hospital hos = new Hospital();
-	private IHospitalServ hosserv;
-	private String idHos;
+	private IHospitalService hospitalservice;
+	private String idHospital;
 	private HttpServletRequest request;
 	
+	private Hospital hospital;
+	private List<Hospital> hospitallist;
+	private int index;
+	
 	public String addHospital() throws Exception {
-		hos = hosserv.save(hos);
-		if(hos.getIdHospital()!=null){
-		   ActionContext.getContext().getSession().put("hospital",hos);
-		   return "addHsptSuc";
-		 }
-		else{
-			return "addHsptFal";
-		}
+		hospital.setName(new String(hospital.getName().getBytes("ISO8859-1"),"UTF-8"));
+		hospital.setIdHospital(getEandomId(16));
+		hospitalservice.addHospital(hospital);
+		
+		return "updatesuccess";
 	}
 	
-	public String findAllHospital(){
-		HttpSession session = ServletActionContext.getRequest().getSession();
-		List<Hospital> list=this.hosserv.findAll();
-		if(list!=null){
-			session.setAttribute("hospitalList", list);
-			return "hospitalList";
-		}else{
-			return "failure";
-		}
-	}
-	public String delUser(){
-		Hospital user=this.hosserv.findById(idHos);
-		Hospital deluser=this.hosserv.del(user);
-		if(deluser!=null){
-			return "hospitalList";
-		}else{
-			return "failure";
-		}
-	}
-	
-	public String upUser(){
-		if(this.hos!=null){
-			hosserv.update(hos);
-			return "hospitalList";
-		}else{
-			return "failure";
-		}
-	}
-	
-	public String findById(){
-		HttpSession session = ServletActionContext.getRequest().getSession();
-		Hospital hospital=this.hosserv.findById(idHos);
+	public String userList(){
+
+		String hql="";
 		if(hospital!=null){
-			session.setAttribute("oneHspt", hospital);
-			return "oneHspt";
-		}else{
-			return "failure";
+			String hospitalname = null;
+			String adress=null;
+			String realname=null;
+			try {
+				hospitalname = new String((hospital.getName().getBytes("ISO8859-1")),"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+
+			if(hospitalname!=null&&!("".equals(hospitalname)))
+				hql+=" and name like '%"+hospitalname+"%'";
+			if(hospital.getTel()!=null&&!("".equals(hospital.getTel())))
+				hql+=" and tel = "+hospital.getTel();
+
 		}
+
+		List<Hospital> list = index != 0 ? hospitalservice.getByPage(index, Hospital.class,hql)
+				:hospitalservice.getByPage(1, Hospital.class,hql);
+
+		HttpSession session=ServletActionContext.getRequest().getSession();
+		session.setAttribute("list",list);
+		session.setAttribute("thisindex",index==0?1:index);
+
+		session.setAttribute("count",hospitalservice.getAllHospital(Hospital.class,hql).size());
+		System.out.println("0000"+list.size());
+		return SUCCESS;
+	}
+	public String updateUsersDialog(){
+
+		Hospital hos=hospitalservice.getHospital(Hospital.class, hospital.getIdHospital());
+		ServletActionContext.getRequest().setAttribute("hospital", hos);
+		return "dilog";
+	}
+	public String updateUser() throws IOException{
+		hospitalservice.updateHospital(hospital);
+		return "updatesuccess";
+	}
+	public String deleteUser(){
+		Hospital hos=hospitalservice.getHospital(Hospital.class, hospital.getIdHospital());
+		hospitalservice.deleteHospital(hos);
+		return "deletesuccess";
 	}
 	
 	public HttpServletRequest getRequest() {
@@ -86,21 +93,46 @@ public class HospitalAction extends ActionSupport{
 		this.hos = hos;
 	}
 
-	public String getIdHos() {
-		return idHos;
+	public IHospitalService getHospitalservice() {
+		return hospitalservice;
 	}
 
-	public void setIdHos(String idHos) {
-		this.idHos = idHos;
+	public void setHospitalservice(IHospitalService hospitalservice) {
+		this.hospitalservice = hospitalservice;
 	}
 
-	public IHospitalServ getHosserv() {
-		return hosserv;
+	public String getIdHospital() {
+		return idHospital;
 	}
 
-	public void setHosserv(IHospitalServ hosserv) {
-		this.hosserv = hosserv;
+	public void setIdHospital(String idHospital) {
+		this.idHospital = idHospital;
 	}
+
+	public Hospital getHospital() {
+		return hospital;
+	}
+
+	public void setHospital(Hospital hospital) {
+		this.hospital = hospital;
+	}
+
+	public List<Hospital> getHospitallist() {
+		return hospitallist;
+	}
+
+	public void setHospitallist(List<Hospital> hospitallist) {
+		this.hospitallist = hospitallist;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
 	
 	
 }

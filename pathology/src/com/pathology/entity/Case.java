@@ -36,17 +36,20 @@ public class Case implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Case(String hospitalcode) {
+	public Case(String idCase, String hospitalcode) {
+		this.idCase = idCase;
 		this.hospitalcode = hospitalcode;
 	}
 
 	/** full constructor */
-	public Case(String hospitalcode, String patientname, String patientage,
-			String ageunit, String patientsex, Timestamp patientbirthday,
-			String patientoccupation, String pathologyno, String idcard,
-			String mobile, String specimenname, String specimentype,
-			Timestamp inspectiondate, String clinicdiagnose,
-			String historysummary, String isdeleted, String deletor) {
+	public Case(String idCase, String hospitalcode, String patientname,
+			String patientage, String ageunit, String patientsex,
+			Timestamp patientbirthday, String patientoccupation,
+			String pathologyno, String idcard, String mobile,
+			String specimenname, String specimentype, Timestamp inspectiondate,
+			String clinicdiagnose, String historysummary, String isdeleted,
+			String deletor) {
+		this.idCase = idCase;
 		this.hospitalcode = hospitalcode;
 		this.patientname = patientname;
 		this.patientage = patientage;

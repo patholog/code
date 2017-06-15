@@ -37,7 +37,7 @@
 		<property name="url" value="jdbc:mysql://localhost:3306/pathology">
 		</property>
 		<property name="username" value="root"></property>
-		<property name="password" value="root"></property>
+		<property name="password" value="1"></property>
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
@@ -68,18 +68,18 @@
 		<property name="hibernateTemplate" ref="ht"></property>
 	</bean>
 	<bean id="userdao" class="com.pathology.dao.impl.UserDaoImpl" parent="pt" />
-	<bean id="hdao" class="com.pathology.dao.impl.HospitalDaoImpl" parent="pt" />
+	<bean id="hospitaldao" class="com.pathology.dao.impl.HospitalDaoImpl" parent="pt" />
 	<bean id="userservice" class="com.pathology.service.impl.UsersServiceImpl">
 		<property name="userdao" ref="userdao"></property>
 	</bean>
-	<bean id="hosserv" class="com.pathology.service.impl.HospitalServImpl">
-		<property name="hdao" ref="hdao"></property>
+	<bean id="hospitalservice" class="com.pathology.service.impl.HospitalServiceImpl">
+		<property name="hospitaldao" ref="hospitaldao"></property>
 	</bean>
 	<bean id="usersAction" class="com.pathology.action.UsersAction" scope="prototype">
 		<property name="userservice" ref="userservice"></property>
 	</bean>
 	<bean id="hospitalAction" class="com.pathology.action.HospitalAction"
 		scope="prototype">
-		<property name="hosserv" ref="hosserv"></property>
+		<property name="hospitalservice" ref="hospitalservice"></property>
 	</bean>
 </beans>

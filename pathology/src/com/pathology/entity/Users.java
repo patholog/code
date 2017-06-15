@@ -34,16 +34,18 @@ public class Users implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Users(String username) {
+	public Users(String idUsers, String username) {
+		this.idUsers = idUsers;
 		this.username = username;
 	}
 
 	/** full constructor */
-	public Users(String username, String realname, String sex,
+	public Users(String idUsers, String username, String realname, String sex,
 			Timestamp birthday, String email, String password,
 			String belonghospital, String signature, String stateid,
 			String specialty, String mobile, String tel, String isdeleted,
 			String deletor, String userstatus) {
+		this.idUsers = idUsers;
 		this.username = username;
 		this.realname = realname;
 		this.sex = sex;

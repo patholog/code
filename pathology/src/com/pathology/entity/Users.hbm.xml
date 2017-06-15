@@ -8,7 +8,7 @@
     <class name="com.pathology.entity.Users" table="users" catalog="pathology">
         <id name="idUsers" type="java.lang.String">
             <column name="id_users" length="32" />
-            <generator class="native"></generator>
+            <generator class="assigned"></generator>
         </id>
         <property name="username" type="java.lang.String">
             <column name="username" length="100" not-null="true" />

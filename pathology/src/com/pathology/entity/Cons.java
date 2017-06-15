@@ -26,10 +26,16 @@ public class Cons implements java.io.Serializable {
 	public Cons() {
 	}
 
+	/** minimal constructor */
+	public Cons(String idCons) {
+		this.idCons = idCons;
+	}
+
 	/** full constructor */
-	public Cons(String fromhospitalid, String fromdoctorid,
+	public Cons(String idCons, String fromhospitalid, String fromdoctorid,
 			String tohospitalid, String todoctorid, Timestamp applydatetime,
 			String transferparentid, String isdeleted, String deletor) {
+		this.idCons = idCons;
 		this.fromhospitalid = fromhospitalid;
 		this.fromdoctorid = fromdoctorid;
 		this.tohospitalid = tohospitalid;

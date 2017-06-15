@@ -26,14 +26,16 @@ public class Notice implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Notice(String name) {
+	public Notice(String idNotice, String name) {
+		this.idNotice = idNotice;
 		this.name = name;
 	}
 
 	/** full constructor */
-	public Notice(String name, String content, String creator,
+	public Notice(String idNotice, String name, String content, String creator,
 			Timestamp createtime, String groupid, String isdeleted,
 			String deletor) {
+		this.idNotice = idNotice;
 		this.name = name;
 		this.content = content;
 		this.creator = creator;

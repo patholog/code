@@ -1,5 +1,5 @@
 body {
-	background-color: #E4E4F1;
+	/*background-color: #E4E4F1;*/
 }
 /*按钮*/
 .buStyle {
@@ -14,7 +14,7 @@ body {
 	cursor: pointer;
 }
 
-/*go��ť��ʽ*/
+
 #go {
 	width: 30px;
 	height: 20px;
@@ -26,11 +26,11 @@ body {
 	color: white;
 }
 
-/*��ѯ��*/
+/
 #selectDiv {
 	font-size: 14px;
 }
-/*�������ʽ*/
+
 .textStyle {
 	width: 100px;
 }
@@ -44,7 +44,7 @@ li {
 	text-align: center;
 	margin: 0 auto;
 }
-/*����򡢰�ť��ʽ*/
+
 .tebu {
 	width: 30px;
 	height: 20px;
@@ -56,7 +56,7 @@ li {
 	cursor:pointer;
 	margin-left:5px;
 	}
-/*��������ʽ*/
+
 a:link {
 	color: blue;
 	text-decoration: none;
@@ -66,26 +66,26 @@ a:hover {
 	color: red;
 	text-decoration: none;
 }
-/*��ʾ�б���ʽ*/
+
 .ta tr th {
-	background: #66f94c;
-	color: green;
+	background: #578de3;
+	color: black;
 	line-height: 30px;
 	text-align: center;
 	border-collapse: collapse;
-	border: 1px solid green;
+	border: 1px solid black;
 }
 
 .ta {
 	border-collapse: collapse;
-	border: 1px solid green;
+	border: 1px solid black;
 	text-align: center;
 	width: 80%;
 }
 
 .ta tr td {
 	border-collapse: collapse;
-	border: 1px solid green;
+	border: 1px solid black;
 	padding: 5 5 5 5;
 }
 
