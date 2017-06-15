@@ -30,9 +30,14 @@ public class SuperDao extends HibernateDaoSupport {
 	// 增加操作
 	public Serializable add(Object entity) {
 
-		Serializable id = this.getHibernateTemplate().save(entity);
-
-		return id;
+		Serializable id= new Serializable() {
+		};
+			try {
+				 id = this.getHibernateTemplate().save(entity);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return id;
 	}
 
 	// 删除操作
