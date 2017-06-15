@@ -2,6 +2,8 @@ package com.pathology.action;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,18 +27,17 @@ public class HospitalAction extends BaseAction{
 	public String addHospital() throws Exception {
 		hospital.setName(new String(hospital.getName().getBytes("ISO8859-1"),"UTF-8"));
 		hospital.setIdHospital(getEandomId(16));
+		hospital.setCreateTime(new Timestamp(new Date().getTime()));
 		hospitalservice.addHospital(hospital);
 		
 		return "updatesuccess";
 	}
 	
-	public String userList(){
+	public String hospitalList(){
 
 		String hql="";
 		if(hospital!=null){
 			String hospitalname = null;
-			String adress=null;
-			String realname=null;
 			try {
 				hospitalname = new String((hospital.getName().getBytes("ISO8859-1")),"UTF-8");
 			} catch (UnsupportedEncodingException e) {
@@ -45,8 +46,8 @@ public class HospitalAction extends BaseAction{
 
 			if(hospitalname!=null&&!("".equals(hospitalname)))
 				hql+=" and name like '%"+hospitalname+"%'";
-			if(hospital.getTel()!=null&&!("".equals(hospital.getTel())))
-				hql+=" and tel = "+hospital.getTel();
+			if(hospital.getCode()!=null&&!("".equals(hospital.getCode())))
+				hql+=" and code like '%"+hospital.getCode()+"%'";
 
 		}
 
@@ -54,24 +55,24 @@ public class HospitalAction extends BaseAction{
 				:hospitalservice.getByPage(1, Hospital.class,hql);
 
 		HttpSession session=ServletActionContext.getRequest().getSession();
-		session.setAttribute("list",list);
+		session.setAttribute("hoslist",list);
 		session.setAttribute("thisindex",index==0?1:index);
 
 		session.setAttribute("count",hospitalservice.getAllHospital(Hospital.class,hql).size());
 		System.out.println("0000"+list.size());
 		return SUCCESS;
 	}
-	public String updateUsersDialog(){
+	public String updateHospitalDialog(){
 
 		Hospital hos=hospitalservice.getHospital(Hospital.class, hospital.getIdHospital());
 		ServletActionContext.getRequest().setAttribute("hospital", hos);
 		return "dilog";
 	}
-	public String updateUser() throws IOException{
+	public String updateHospital() throws IOException{
 		hospitalservice.updateHospital(hospital);
 		return "updatesuccess";
 	}
-	public String deleteUser(){
+	public String deleteHospital(){
 		Hospital hos=hospitalservice.getHospital(Hospital.class, hospital.getIdHospital());
 		hospitalservice.deleteHospital(hos);
 		return "deletesuccess";

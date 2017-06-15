@@ -87,7 +87,7 @@
 			</s:form>
 		</div>
 		<table class="ta">
-			<tr bgcolor="#D6DFF7">
+			<tr bgcolor="#578de3">
 				<th width="10%">用户名称</th>
 				<th width="10%">性别</th>
 				<th width="15%">邮箱</th>

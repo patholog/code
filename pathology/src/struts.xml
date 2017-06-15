@@ -35,15 +35,16 @@
 		<action name="UserAction" class="com.pathology.action.UsersAction">
 
 			<result name="success"> /manage/user/userlist.jsp</result>
-
 			<result name="deletesuccess" type="redirectAction">UserAction!userList</result>
 			<result name="updatesuccess" type="redirectAction">UserAction!userList</result>
 			<result name="dilog"> /manage/user/update_user.jsp</result>
 
-
 		</action>
-		<action name="hospitalaction">
-			<result>/index.jsp</result>
+		<action name="HospitalAction" class="com.pathology.action.HospitalAction">
+			<result name="success"> /manage/hospital/hospitallist.jsp</result>
+			<result name="deletesuccess" type="redirectAction">HospitalAction!hospitalList</result>
+			<result name="updatesuccess" type="redirectAction">HospitalAction!hospitalList</result>
+			<result name="dilog"> /manage/user/update_user.jsp</result>
 		</action>
 	</package>
 </struts>
