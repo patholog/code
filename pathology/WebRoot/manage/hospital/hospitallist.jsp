@@ -34,8 +34,8 @@
 				+ id, '', 'dialogWidth=800px;dialogHeight=600px;');
 	}
 	function showBox(id) {
-		userList.forEach(function(hospital){
-			if(hospital.idUsers == id) {
+		hospitalList.forEach(function(hospital){
+			if(hospital.idHospital == id) {
 				for(var key in hospital){
 					$("#editForm").find("[name=hospital\\."+key+"]").val(hospital[key]);
 				}
@@ -54,7 +54,7 @@
 		del.style.display = "none";
 	}
 	
-	var userList=[
+	var hospitalList=[
 		<c:forEach items="${sessionScope.hoslist }" var="hospital"
 			varStatus="status">
 			{
