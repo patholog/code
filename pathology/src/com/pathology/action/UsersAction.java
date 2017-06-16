@@ -25,6 +25,9 @@ public class UsersAction extends BaseAction{
 	private List<Users> list;
 	private int index;
 
+	public String login(){
+		return "loginSuccess";
+	}
 	public String userList(){
 
 		String hql="";
