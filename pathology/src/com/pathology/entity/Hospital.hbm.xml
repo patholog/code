@@ -31,8 +31,8 @@
         <property name="transferedhospital" type="java.lang.String">
             <column name="transferedhospital" length="32" />
         </property>
-        <property name="delete" type="java.lang.String">
-            <column name="delete" length="10" />
+        <property name="deleted" type="java.lang.String">
+            <column name="deleted" length="10" />
         </property>
         <property name="createTime" type="java.sql.Timestamp">
             <column name="createTime" length="0" />

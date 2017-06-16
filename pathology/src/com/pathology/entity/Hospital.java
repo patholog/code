@@ -18,7 +18,7 @@ public class Hospital implements java.io.Serializable {
 	private String tel;
 	private String memo;
 	private String transferedhospital;
-	private String delete;
+	private String deleted;
 	private Timestamp createTime;
 	private String creator;
 
@@ -37,7 +37,7 @@ public class Hospital implements java.io.Serializable {
 	/** full constructor */
 	public Hospital(String idHospital, String name, String code,
 			String hospitalcode, String address, String tel, String memo,
-			String transferedhospital, String delete, Timestamp createTime,
+			String transferedhospital, String deleted, Timestamp createTime,
 			String creator) {
 		this.idHospital = idHospital;
 		this.name = name;
@@ -47,7 +47,7 @@ public class Hospital implements java.io.Serializable {
 		this.tel = tel;
 		this.memo = memo;
 		this.transferedhospital = transferedhospital;
-		this.delete = delete;
+		this.deleted = deleted;
 		this.createTime = createTime;
 		this.creator = creator;
 	}
@@ -118,12 +118,12 @@ public class Hospital implements java.io.Serializable {
 		this.transferedhospital = transferedhospital;
 	}
 
-	public String getDelete() {
-		return this.delete;
+	public String getDeleted() {
+		return this.deleted;
 	}
 
-	public void setDelete(String delete) {
-		this.delete = delete;
+	public void setDeleted(String deleted) {
+		this.deleted = deleted;
 	}
 
 	public Timestamp getCreateTime() {

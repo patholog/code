@@ -97,7 +97,9 @@
 						</fieldset>
 					</s:form>
 				</div>
+				
 				<table class="ta">
+					<tr><div id="left"><a href="${path}/manage/hospital/add_hospital.jsp" ><input type="button"  value="新增" class="buStyle" /></a></div></tr>
 					<tr bgcolor="#578de3">
 						<th width="20%">医院</th>
 						<th width="10%">编号</th>
@@ -121,7 +123,7 @@
 								style="border-width:0px"
 								href="HospitalAction!deleteHospital?hospital.idHospital=${hospital.idHospital }"><img
 									class="img" src="${path }/images/icon_no.png" alt="删除" /> </a></td>
-						</tr>s
+						</tr>
 			</c:forEach>
 				</table>
 				<br />

@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.0.27-community-nt)
-# Date: 2017-06-14 11:57:09
+# Date: 2017-06-16 10:21:57
 # Generator: MySQL-Front 5.3  (Build 2.42)
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -84,7 +84,7 @@ CREATE TABLE `hospital` (
   `tel` varchar(50) default NULL,
   `memo` varchar(128) default NULL,
   `transferedhospital` varchar(32) default NULL,
-  `delete` varchar(10) default NULL,
+  `deleted` varchar(10) default NULL,
   `createTime` datetime default NULL,
   `creator` varchar(32) default NULL,
   PRIMARY KEY  (`id_hospital`)
@@ -94,6 +94,7 @@ CREATE TABLE `hospital` (
 # Data for table "hospital"
 #
 
+INSERT INTO `hospital` VALUES ('1','111','1111111','11111111111','1111111111','111111111111','11111111111',NULL,NULL,NULL,NULL);
 
 #
 # Source for table "notice"
@@ -146,7 +147,7 @@ CREATE TABLE `users` (
 # Data for table "users"
 #
 
-INSERT INTO `users` VALUES ('1','user1','ddddd','男',NULL,NULL,'1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('2','user2','ddddddddd',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `users` VALUES ('1','1111','2222','2',NULL,'22222',NULL,NULL,NULL,NULL,'ddddddd',NULL,NULL,NULL,NULL,NULL),('e5KEcyBROKVdIYm6','dddddd','ddddddddddd','1',NULL,'ddddddd','ddddd','dddddd',NULL,NULL,'dddddd','ddddd','ddddddd',NULL,NULL,NULL),('F7OqVoCNI9nx2j3g','333','é¿éå¤«','3',NULL,'333','333','33',NULL,NULL,'33','33','33',NULL,NULL,NULL),('H7GF6gxDJkbILnLB','wwww','wwwww','www',NULL,'ww','1111','ww',NULL,NULL,'ww','ww','ww',NULL,NULL,NULL);
 
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

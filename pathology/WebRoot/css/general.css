@@ -33,6 +33,7 @@ body {
 
 .textStyle {
 	width: 100px;
+	border: 1px solid black;
 }
 
 li {
@@ -153,4 +154,12 @@ a:hover {
 .del:hover{
 	color: #000000;
 	cursor: pointer;
+}
+#left{
+	width: 70px;
+	height: 25px;
+	float: right;
+	margin-right: 20%;
+	margin-top:5px;
+	margin-bottom:5px;
 }

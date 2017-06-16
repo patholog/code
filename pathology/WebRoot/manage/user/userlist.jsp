@@ -102,6 +102,7 @@
 				</s:form>
 			</div>
 			<table class="ta">
+			<tr><div id="left"><a href="${path}/manage/user/add_user.jsp" ><input type="button"  value="新增" class="buStyle" /></a></div></tr>
 				<tr bgcolor="#D6DFF7">
 					<th width="10%">用户名称</th>
 					<th width="10%">性别</th>
