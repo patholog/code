@@ -146,8 +146,8 @@ CREATE TABLE `users` (
 #
 # Data for table "users"
 #
+INSERT INTO `users` (`id_users`,`username`,`realname`,`sex`,`birthday`,`email`,`password`,`belongHospital`,`signature`,`stateid`,`specialty`,`mobile`,`tel`,`isdeleted`,`deletor`,`userstatus`) VALUES ('1','admin','超级管理员','男',NULL,'zhqa@qq.com','admin','12121',NULL,NULL,'内科','7330670','13736365959',NULL,NULL,NULL),('gKBYhIWk0595zSaw','user12','','男',NULL,'zhqa@qq.com','123456','北大国际医院',NULL,NULL,'内科','73306701','13736365959',NULL,NULL,NULL),('M09y2P9UCXQACcCb','test1','','男',NULL,'zhqa@qq.com','123456','111',NULL,NULL,'11','7330670','13736365959',NULL,NULL,NULL);
 
-INSERT INTO `users` VALUES ('1','1111','2222','2',NULL,'22222',NULL,NULL,NULL,NULL,'ddddddd',NULL,NULL,NULL,NULL,NULL),('e5KEcyBROKVdIYm6','dddddd','ddddddddddd','1',NULL,'ddddddd','ddddd','dddddd',NULL,NULL,'dddddd','ddddd','ddddddd',NULL,NULL,NULL),('F7OqVoCNI9nx2j3g','333','é¿éå¤«','3',NULL,'333','333','33',NULL,NULL,'33','33','33',NULL,NULL,NULL),('H7GF6gxDJkbILnLB','wwww','wwwww','www',NULL,'ww','1111','ww',NULL,NULL,'ww','ww','ww',NULL,NULL,NULL);
 
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
