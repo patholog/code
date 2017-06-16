@@ -100,15 +100,36 @@ public class HospitalAction extends BaseAction{
 		return "dilog";
 	}
 	public String updateHospital() throws IOException{
-		hospital.setAddress(new String(hospital.getAddress().getBytes("ISO8859-1"),"UTF-8"));
-		hospital.setCode(new String(hospital.getCode().getBytes("ISO8859-1"),"UTF-8"));
-//		hospital.setCreator(new String(hospital.getCreator().getBytes("ISO8859-1"),"UTF-8"));
-//		hospital.setDelete(new String(hospital.getDelete().getBytes("ISO8859-1"),"UTF-8"));
-//		hospital.setHospitalcode(new String(hospital.getHospitalcode().getBytes("ISO8859-1"),"UTF-8"));
-		hospital.setTel(new String(hospital.getTel().getBytes("ISO8859-1"),"UTF-8"));
-		hospital.setMemo(new String(hospital.getMemo().getBytes("ISO8859-1"),"UTF-8"));
-		hospital.setName(new String(hospital.getName().getBytes("ISO8859-1"),"UTF-8"));
-//		hospital.setTransferedhospital(new String(hospital.getTransferedhospital().getBytes("ISO8859-1"),"UTF-8"));
+		if(hospital.getAddress()!=null){
+			hospital.setAddress(new String(hospital.getAddress().getBytes("ISO8859-1"),"UTF-8"));
+		}
+		if(hospital.getCode()!=null){
+			hospital.setCode(new String(hospital.getCode().getBytes("ISO8859-1"),"UTF-8"));
+		}
+		if(hospital.getCreator()!=null){
+	 		hospital.setCreator(new String(hospital.getCreator().getBytes("ISO8859-1"),"UTF-8"));
+		}
+		if(hospital.getDeleted()!=null){
+			hospital.setDeleted(new String(hospital.getDeleted().getBytes("ISO8859-1"),"UTF-8"));
+		}
+ 		if(hospital.getHospitalcode()!=null){
+ 	 		hospital.setHospitalcode(new String(hospital.getHospitalcode().getBytes("ISO8859-1"),"UTF-8"));
+ 		}
+ 		if(hospital.getName()!=null){
+ 			hospital.setName(new String(hospital.getName().getBytes("ISO8859-1"),"UTF-8"));
+ 		}
+ 		if(hospital.getTransferedhospital()!=null){
+ 	 		hospital.setTransferedhospital(new String(hospital.getTransferedhospital().getBytes("ISO8859-1"),"UTF-8"));
+ 		}
+ 		if(hospital.getTel()!=null){
+ 			hospital.setTel(new String(hospital.getTel().getBytes("ISO8859-1"),"UTF-8"));
+ 		}
+		if(hospital.getMemo()!=null){
+			hospital.setMemo(new String(hospital.getMemo().getBytes("ISO8859-1"),"UTF-8"));
+		}
+		if(hospital.getCreateTime()!=null){
+			hospital.setCreateTime(new Timestamp(new Date().getTime()));
+		}
 		hospitalservice.updateHospital(hospital);
 		return "updatesuccess";
 	}

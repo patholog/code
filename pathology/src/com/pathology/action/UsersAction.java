@@ -89,8 +89,14 @@ public class UsersAction extends BaseAction{
 		return "deletesuccess";
 	}
 	public String addUser() throws IOException{
-		
+		user.setBelonghospital(new String(user.getBelonghospital().getBytes("ISO8859-1"),"UTF-8"));
+		user.setSex(new String(user.getSex().getBytes("ISO8859-1"),"UTF-8"));
+		user.setRealname(new String(user.getRealname().getBytes("ISO8859-1"),"UTF-8"));
 		user.setUsername(new String(user.getUsername().getBytes("ISO8859-1"),"UTF-8"));
+		user.setEmail(new String(user.getEmail().getBytes("ISO8859-1"),"UTF-8"));
+		user.setMobile(new String(user.getMobile().getBytes("ISO8859-1"),"UTF-8"));
+		user.setTel(new String(user.getTel().getBytes("ISO8859-1"),"UTF-8"));
+		user.setSpecialty(new String(user.getSpecialty().getBytes("ISO8859-1"),"UTF-8"));
 		user.setIdUsers(getEandomId(16));
 		userservice.addUser(user);
 		
