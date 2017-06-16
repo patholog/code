@@ -168,41 +168,41 @@
 						<table>
 							<tr>
 								<td>用户名</td>
-								<td><input type="text" name="user.username" /></td>
+								<td><input class="textStyle" type="text" name="user.username" /></td>
 							</tr>
 							<tr>
 								<td>密码</td>
-								<td><input type="password" name="user.password" /> <input
+								<td><input class="textStyle" type="password" name="user.password" /> <input
 									type="hidden" name="user.idUsers" " />
 								</td>
 							</tr>
 							<tr>
 								<td>真实姓名</td>
-								<td><input type="text" name="user.realname " /></td>
+								<td><input class="textStyle" type="text" name="user.realname " /></td>
 							</tr>
 							<tr>
 								<td>性别</td>
-								<td><input type="text" name="user.sex" /></td>
+								<td><input class="textStyle" type="text" name="user.sex" /></td>
 							</tr>
 							<tr>
 								<td>邮箱</td>
-								<td><input type="text" name="user.email" /></td>
+								<td><input class="textStyle" type="text" name="user.email" /></td>
 							</tr>
 							<tr>
 								<td>电话</td>
-								<td><input type="text" name="user.mobile" /></td>
+								<td><input class="textStyle" type="text" name="user.mobile" /></td>
 							</tr>
 							<tr>
 								<td>手机</td>
-								<td><input type="text" name="user.tel" /></td>
+								<td><input class="textStyle" type="text" name="user.tel" /></td>
 							</tr>
 							<tr>
 								<td>所属医院</td>
-								<td><input type="text" name="user.belonghospital" /></td>
+								<td><input class="textStyle" type="text" name="user.belonghospital" /></td>
 							</tr>
 							<tr>
 								<td>特长</td>
-								<td><input type="text" name="user.specialty" /></td>
+								<td><input class="textStyle" type="text" name="user.specialty" /></td>
 							</tr>
 
 							<tr>

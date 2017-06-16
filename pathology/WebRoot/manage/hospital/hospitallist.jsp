@@ -164,27 +164,27 @@
 							<table>
 								<tr>
 									<td>医院名称</td>
-									<td><input type="text" name="hospital.name" />
+									<td><input class="textStyle" type="text" name="hospital.name" />
 									</td>
 								</tr>
 								<tr>
 									<td>编码</td>
-									<td><input type="text" name="hospital.code" /> <input
+									<td><input class="textStyle" type="text" name="hospital.code" /> <input
 										type="hidden" name="hospital.idHospital" " /></td>
 								</tr>
 								<tr>
 									<td>电话</td>
-									<td><input type="text" name="hospital.tel " />
+									<td><input class="textStyle" type="text" name="hospital.tel" />
 									</td>
 								</tr>
 								<tr>
 									<td>地址</td>
-									<td><input type="text" name="hospital.address" />
+									<td><input class="textStyle" type="text" name="hospital.address" />
 									</td>
 								</tr>
 								<tr>
 									<td>备注</td>
-									<td><input type="text" name="hospital.memo" />
+									<td><input class="textStyle" type="text" name="hospital.memo" />
 									</td>
 								</tr>
 
