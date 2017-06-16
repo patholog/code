@@ -1,3 +1,6 @@
 导入数据库文件；pathology.sql
 数据库 目前 默认密码 root,可在applicationContext.xml中修改
 后台管理主界面　http://localhost:8080/pathology/manage/login.jsp
+
+
+切记　　用户表　得有　ａｄｍｉｎ　和　ａｄｍｉｎ　的　超级用户　这里是写死的
