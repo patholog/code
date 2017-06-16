@@ -30,8 +30,7 @@ public class SuperDao extends HibernateDaoSupport {
 	// 增加操作
 	public Serializable add(Object entity) {
 
-		Serializable id= new Serializable() {
-		};
+		Serializable id= null;
 			try {
 				 id = this.getHibernateTemplate().save(entity);
 			} catch (Exception e) {
@@ -49,7 +48,12 @@ public class SuperDao extends HibernateDaoSupport {
 
 	// 更新操作
 	public void update(Object entity) {
-		this.getHibernateTemplate().update(entity);
+		try {
+			this.getHibernateTemplate().update(entity);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	// session查询操作
