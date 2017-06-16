@@ -14,8 +14,14 @@
 	function login() {
 		var name = document.getElementById("name").value;
 		var pswd = document.getElementById("pswd").value;
-		if(name=="admin" && pswd=="admin"){
-			
+		if(name=="" || pswd==""){
+			alert("账号密码为空！");
+		}else{
+			if(name=="admin" && pswd=="admin"){
+				window.location.href='manage.jsp';
+			}else{
+				alert("账号密码错误！");
+			}
 		}
 	}
 </script>
@@ -69,18 +75,17 @@ input[type="password"] {
 	margin-left:380px;
 	margin-top:230px;
 	z-index:1;">
-			<STRONG><s:fielderror />
-			</STRONG>
+			<STRONG><s:fielderror /> </STRONG>
 		</div>
 		<div id="Layer1">
-			<form action="AdminAction!login" style="height:250px;width:480px;">
+			<form  style="height:250px;width:480px;">
 				<table width="441" height="110" border="0" cellpadding="0"
 					cellspacing="0">
 
 					<tr height="55px">
 
-						<td align="left" valign="middle"><input id="name"
-							type="text" name="admin.username"
+						<td align="left" valign="middle"><input id="name" type="text"
+							name="admin.username"
 							style="border-color:#00CCFF;width:180px;height:30px;padding-top:3px;" />
 						</td>
 					</tr>
@@ -91,7 +96,7 @@ input[type="password"] {
 						</td>
 					</tr>
 					<tr>
-						<td height="50" colspan="2" align="left" valign="middle"><input
+						<td height="50" colspan="2" align="left" valign="middle"><input onClick="login()"
 							name="submit" type="submit" value="提  交"
 							style="height:30;width:80;background-image: ${path}/images/dl.jpg" />&nbsp;&nbsp;
 							<input name="reset" type="reset" value="重  置"
