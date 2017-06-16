@@ -35,8 +35,8 @@ public class HospitalAction extends BaseAction{
 		if(hospital.getCreator()!=null){
 	 		hospital.setCreator(new String(hospital.getCreator().getBytes("ISO8859-1"),"UTF-8"));
 		}
-		if(hospital.getDelete()!=null){
-			hospital.setDelete(new String(hospital.getDelete().getBytes("ISO8859-1"),"UTF-8"));
+		if(hospital.getDeleted()!=null){
+			hospital.setDeleted(new String(hospital.getDeleted().getBytes("ISO8859-1"),"UTF-8"));
 		}
  		if(hospital.getHospitalcode()!=null){
  	 		hospital.setHospitalcode(new String(hospital.getHospitalcode().getBytes("ISO8859-1"),"UTF-8"));
