@@ -94,7 +94,7 @@ CREATE TABLE `hospital` (
 # Data for table "hospital"
 #
 
-INSERT INTO `hospital` VALUES ('1','111','1111111','11111111111','1111111111','111111111111','11111111111',NULL,NULL,NULL,NULL);
+INSERT INTO `hospital` (`id_hospital`,`name`,`code`,`hospitalcode`,`address`,`tel`,`memo`,`transferedhospital`,`deleted`,`createTime`,`creator`) VALUES ('1','海淀医院','1111',NULL,'海淀区','33432233','1二甲',NULL,NULL,NULL,NULL),('zjuKxU9PGQrTKazQ','妇幼医院','12123',NULL,'昌平区2','323231','113311',NULL,NULL,NULL,NULL),('ZUQEiJMQB93apDTC','国际医院','12122',NULL,'昌平区','3333333','113311',NULL,NULL,NULL,NULL);
 
 #
 # Source for table "notice"
