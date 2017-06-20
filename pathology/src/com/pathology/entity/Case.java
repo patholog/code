@@ -28,6 +28,18 @@ public class Case implements java.io.Serializable {
 	private String historysummary;
 	private String isdeleted;
 	private String deletor;
+	private String memo;
+	private String sortNo;
+	private String spellNo;
+	private String wubiNo;
+	private Integer updCnt;
+	private Timestamp crtTime;
+	private String crtUserId;
+	private String crtDeptCd;
+	private Timestamp lastUpdTime;
+	private String lastUpdDeptCd;
+	private String lastUpdUserId;
+	private Integer delF;
 
 	// Constructors
 
@@ -48,7 +60,10 @@ public class Case implements java.io.Serializable {
 			String pathologyno, String idcard, String mobile,
 			String specimenname, String specimentype, Timestamp inspectiondate,
 			String clinicdiagnose, String historysummary, String isdeleted,
-			String deletor) {
+			String deletor, String memo, String sortNo, String spellNo,
+			String wubiNo, Integer updCnt, Timestamp crtTime, String crtUserId,
+			String crtDeptCd, Timestamp lastUpdTime, String lastUpdDeptCd,
+			String lastUpdUserId, Integer delF) {
 		this.idCase = idCase;
 		this.hospitalcode = hospitalcode;
 		this.patientname = patientname;
@@ -67,6 +82,18 @@ public class Case implements java.io.Serializable {
 		this.historysummary = historysummary;
 		this.isdeleted = isdeleted;
 		this.deletor = deletor;
+		this.memo = memo;
+		this.sortNo = sortNo;
+		this.spellNo = spellNo;
+		this.wubiNo = wubiNo;
+		this.updCnt = updCnt;
+		this.crtTime = crtTime;
+		this.crtUserId = crtUserId;
+		this.crtDeptCd = crtDeptCd;
+		this.lastUpdTime = lastUpdTime;
+		this.lastUpdDeptCd = lastUpdDeptCd;
+		this.lastUpdUserId = lastUpdUserId;
+		this.delF = delF;
 	}
 
 	// Property accessors
@@ -213,6 +240,102 @@ public class Case implements java.io.Serializable {
 
 	public void setDeletor(String deletor) {
 		this.deletor = deletor;
+	}
+
+	public String getMemo() {
+		return this.memo;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+
+	public String getSortNo() {
+		return this.sortNo;
+	}
+
+	public void setSortNo(String sortNo) {
+		this.sortNo = sortNo;
+	}
+
+	public String getSpellNo() {
+		return this.spellNo;
+	}
+
+	public void setSpellNo(String spellNo) {
+		this.spellNo = spellNo;
+	}
+
+	public String getWubiNo() {
+		return this.wubiNo;
+	}
+
+	public void setWubiNo(String wubiNo) {
+		this.wubiNo = wubiNo;
+	}
+
+	public Integer getUpdCnt() {
+		return this.updCnt;
+	}
+
+	public void setUpdCnt(Integer updCnt) {
+		this.updCnt = updCnt;
+	}
+
+	public Timestamp getCrtTime() {
+		return this.crtTime;
+	}
+
+	public void setCrtTime(Timestamp crtTime) {
+		this.crtTime = crtTime;
+	}
+
+	public String getCrtUserId() {
+		return this.crtUserId;
+	}
+
+	public void setCrtUserId(String crtUserId) {
+		this.crtUserId = crtUserId;
+	}
+
+	public String getCrtDeptCd() {
+		return this.crtDeptCd;
+	}
+
+	public void setCrtDeptCd(String crtDeptCd) {
+		this.crtDeptCd = crtDeptCd;
+	}
+
+	public Timestamp getLastUpdTime() {
+		return this.lastUpdTime;
+	}
+
+	public void setLastUpdTime(Timestamp lastUpdTime) {
+		this.lastUpdTime = lastUpdTime;
+	}
+
+	public String getLastUpdDeptCd() {
+		return this.lastUpdDeptCd;
+	}
+
+	public void setLastUpdDeptCd(String lastUpdDeptCd) {
+		this.lastUpdDeptCd = lastUpdDeptCd;
+	}
+
+	public String getLastUpdUserId() {
+		return this.lastUpdUserId;
+	}
+
+	public void setLastUpdUserId(String lastUpdUserId) {
+		this.lastUpdUserId = lastUpdUserId;
+	}
+
+	public Integer getDelF() {
+		return this.delF;
+	}
+
+	public void setDelF(Integer delF) {
+		this.delF = delF;
 	}
 
 }

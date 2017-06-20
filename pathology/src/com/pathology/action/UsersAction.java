@@ -1,13 +1,17 @@
 package com.pathology.action;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.pathology.entity.Users;
@@ -24,6 +28,10 @@ public class UsersAction extends BaseAction{
 	private Users user;
 	private List<Users> list;
 	private int index;
+	
+	private String photoFileName;
+	private String photoType;
+	private File photo;
 
 	public String login(){
 		return "loginSuccess";
@@ -102,6 +110,43 @@ public class UsersAction extends BaseAction{
 		
 		return "updatesuccess";
 	}
+	
+	public String registUser() throws IOException{
+		user.setUsername(new String(user.getUsername().getBytes("ISO8859-1"),"UTF-8"));
+		user.setDoctorctfsrc(upImg());
+		user.setIdUsers(getEandomId(16));
+		userservice.addUser(user);
+		
+		return "registsuccess";
+	}
+	
+	//图片上传
+		public String upImg(){
+			System.out.println("1111111");
+			String img=null;
+			if(photo!=null){
+				String path=ServletActionContext.getServletContext().getRealPath("upload/img/")+"\\";
+				System.out.println("11111"+path);
+				System.out.println(photoFileName);
+				String type=photoFileName.substring(photoFileName.lastIndexOf(".")+1,photoFileName.length());
+				System.out.println("222"+type);
+				String time=new SimpleDateFormat("yyMMddssSSS").format(new Date());
+				System.out.println(time);
+				String name=time+"."+type;
+				System.out.println(name);
+				File saveFile=new File(path,name);
+				if(saveFile.getParentFile().exists()){
+					saveFile.getParentFile().mkdirs();
+				}
+				try {
+					FileUtils.copyFile(photo, saveFile);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				img="upload/img/"+name;
+			}
+			return img;
+		}
 	public IUsersService getUserservice() {
 		return userservice;
 	}

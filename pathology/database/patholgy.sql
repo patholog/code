@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version 5.0.27-community-nt)
-# Date: 2017-06-19 20:17:46
+# Date: 2017-06-20 16:57:09
 # Generator: MySQL-Front 6.0  (Build 2.20)
 
 
@@ -544,10 +544,10 @@ CREATE TABLE `users` (
   `specialty` varchar(521) default NULL,
   `mobile` varchar(16) default NULL,
   `tel` varchar(16) default NULL,
+  `doctorctfsrc` blob,
   `isdeleted` varchar(10) default NULL,
   `deletor` varchar(32) default NULL,
   `userstatus` varchar(1) default NULL,
-  `uid` int(11) default NULL,
   `MEMO` varchar(2000) default NULL,
   `SORT_NO` varchar(32) default NULL,
   `SPELL_NO` varchar(64) default NULL,
