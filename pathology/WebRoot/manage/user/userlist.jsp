@@ -53,8 +53,7 @@
 								id="searchButton" onclick="" type="submit"
 								style="width:80px;background:url(css/img-blue/search.gif) 8px top no-repeat;"
 								value="  搜索" /></td>
-							<td width="14%" style="text-align:left;"><a
-								href="huiyuanguanli_add_modify.html">添加会员</a></td>
+				
 						</tr>
 					</table>
 				</s:form>

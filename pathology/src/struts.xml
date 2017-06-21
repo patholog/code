@@ -44,7 +44,7 @@
 			<result name="success"> /manage/hospital/hospitallist.jsp</result>
 			<result name="deletesuccess" type="redirectAction">HospitalAction!hospitalList</result>
 			<result name="updatesuccess" type="redirectAction">HospitalAction!hospitalList</result>
-			<result name="dilog"> /manage/user/update_user.jsp</result>
+			<result name="edit"> /manage/hospital/update_hospital.jsp</result>
 		</action>
 	</package>
 </struts>

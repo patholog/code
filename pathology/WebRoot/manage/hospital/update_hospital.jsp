@@ -47,27 +47,29 @@
 			</tr>
 		  </table>
 		  
-		  <form name="articles" id="articles" method="post" action="HospitalAction!addHospital">
+		  <form name="articles" id="articles" method="post" action="HospitalAction!saveHospital">
 		    <table class="maintable form_top_thin">
               <tr>
                 <th>医院名称</th>
-                <td><input type="text" name="hospital.name" id="title" value="" style="width:300px;" /> </td>
-              </tr>			  
+                <td><input type="text" name="hospital.name" id="title" value="${sessionScope.hospital.name}" style="width:300px;" /> 
+                	<input type="hidden" name="{hospital.idHospital" value="${sessionScope.{hospital.idHospital}" />
+                </td>
+              </tr>		  
               <tr>
                 <th>医院编码</th>
-                <td><input type="text" name="hospital.code" id="title" value="" style="width:300px;" /> </td>
+                <td><input type="text" name="hospital.code" id="title" value="${sessionScope.hospital.code}" style="width:300px;" /> </td>
               </tr>			  
               <tr>
                 <th>电话</th>
-                <td><input type="text" name="hospital.tel" id="title" value="" style="width:300px;" /> </td>
-              </tr>			  
+                <td><input type="text" name="hospital.tel" id="title" value="${sessionScope.hospital.tel}" style="width:300px;" /></td>
+              </tr>			    
               <tr>
                 <th>地址</th>
-                <td><input type="text" name="hospital.address" id="title" value="" style="width:300px;" /></td>
+                <td><input type="text" name="hospital.address" id="title" value="${sessionScope.hospital.address}" style="width:300px;" /> </td>
               </tr>	
               <tr>
                 <th>备注</th>
-                <td><input type="text" name="hospital.memo" id="title" value="" style="width:300px;" /></td>
+                <td><input type="text" name="hospital.memo" id="title" value="${sessionScope.hospital.memo}" style="width:300px;" /> </td>
               </tr>			  
               
             </table>

@@ -43,7 +43,7 @@
 	  
 		  <table id="pagehead" cellspacing="0" cellpadding="0" width="100%" border="0">
 			<tr>
-			  <td><h1>会员信息</h1></td>
+			  <td><h1>用户信息</h1></td>
 			</tr>
 		  </table>
 		  
