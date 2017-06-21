@@ -71,43 +71,23 @@ public class UsersAction extends BaseAction{
 		return SUCCESS;
 	}
 
-
-	public String updateUsersDialog(){
-
-		Users users=userservice.getUser(Users.class, user.getIdUsers());
-		ServletActionContext.getRequest().setAttribute("user", users);
-		return "dilog";
-	}
 	public String updateUser() throws IOException{
-		user.setBelonghospital(new String(user.getBelonghospital().getBytes("ISO8859-1"),"UTF-8"));
-		user.setSex(new String(user.getSex().getBytes("ISO8859-1"),"UTF-8"));
-		user.setRealname(new String(user.getRealname().getBytes("ISO8859-1"),"UTF-8"));
-		user.setUsername(new String(user.getUsername().getBytes("ISO8859-1"),"UTF-8"));
-		user.setEmail(new String(user.getEmail().getBytes("ISO8859-1"),"UTF-8"));
-		user.setMobile(new String(user.getMobile().getBytes("ISO8859-1"),"UTF-8"));
-		user.setTel(new String(user.getTel().getBytes("ISO8859-1"),"UTF-8"));
-		user.setSpecialty(new String(user.getSpecialty().getBytes("ISO8859-1"),"UTF-8"));
-		userservice.updateUser(user);
-
-		return "updatesuccess";
+		HttpSession session=ServletActionContext.getRequest().getSession();
+		Users userT = userservice.getUser(Users.class, user.getIdUsers());
+		session.setAttribute("user",userT);
+		return "edit";
 	}
 	public String deleteUser(){
 		Users userT = userservice.getUser(Users.class, user.getIdUsers());
 		userservice.deleteUser(userT);
 		return "deletesuccess";
 	}
+	public String saveUser() throws IOException{
+		userservice.updateUser(user);
+		return "updatesuccess";
+	}
 	public String addUser() throws IOException{
-		user.setBelonghospital(new String(user.getBelonghospital().getBytes("ISO8859-1"),"UTF-8"));
-		user.setSex(new String(user.getSex().getBytes("ISO8859-1"),"UTF-8"));
-		user.setRealname(new String(user.getRealname().getBytes("ISO8859-1"),"UTF-8"));
-		user.setUsername(new String(user.getUsername().getBytes("ISO8859-1"),"UTF-8"));
-		user.setEmail(new String(user.getEmail().getBytes("ISO8859-1"),"UTF-8"));
-		user.setMobile(new String(user.getMobile().getBytes("ISO8859-1"),"UTF-8"));
-		user.setTel(new String(user.getTel().getBytes("ISO8859-1"),"UTF-8"));
-		user.setSpecialty(new String(user.getSpecialty().getBytes("ISO8859-1"),"UTF-8"));
-		user.setIdUsers(getEandomId(16));
 		userservice.addUser(user);
-		
 		return "updatesuccess";
 	}
 	

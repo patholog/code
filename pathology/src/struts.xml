@@ -37,7 +37,7 @@
 			<result name="success"> /manage/user/userlist.jsp</result>
 			<result name="deletesuccess" type="redirectAction">UserAction!userList</result>
 			<result name="updatesuccess" type="redirectAction">UserAction!userList</result>
-			<result name="dilog"> /manage/user/update_user.jsp</result>
+			<result name="edit"> /manage/user/update_user.jsp</result>
 			<result name="registsuccess"> /login.jsp</result>
 		</action>
 		<action name="HospitalAction" class="com.pathology.action.HospitalAction">

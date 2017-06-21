@@ -47,24 +47,25 @@
 			</tr>
 		  </table>
 		  
-		  <form name="articles" id="articles" method="post" action="UserAction!addUser">
+		  <form name="articles" id="articles" method="post" action="UserAction!saveUser">
 		    <table class="maintable form_top_thin">
               <tr>
                 <th>用户名</th>
-                <td><input type="text" name="user.username" id="title" value="" style="width:300px;" /> 
+                <td><input type="text" name="user.username" id="title" value="${sessionScope.user.username}" style="width:300px;" /> 
+                	<input type="hidden" name="user.idUsers" value="${sessionScope.user.idUsers}" />
                 </td>
               </tr>			  
               <tr>
                 <th>密码</th>
-                <td><input type="password" name="user.password" id="title" value="" style="width:300px;" /> </td>
+                <td><input type="password" name="user.password" id="title" value="${sessionScope.user.password}" style="width:300px;" /> </td>
               </tr>			  
               <tr>
                 <th>电子邮箱</th>
-                <td><input type="text" name="user.email" id="title" value="" style="width:300px;" /> </td>
+                <td><input type="text" name="user.email" id="title" value="${sessionScope.user.email}" style="width:300px;" /> </td>
               </tr>			  
               <tr>
                 <th>真实姓名</th>
-                <td><input type="text" name="user.realname" id="title2" value="" style="width:300px;" /></td>
+                <td><input type="text" name="user.realname" id="title2" value="${sessionScope.user.realname}" style="width:300px;" /></td>
               </tr>			  
               <tr>
                 <th>性别</th>
@@ -75,7 +76,7 @@
               </tr>			  
               <tr>
                 <th>联系电话</th>
-                <td><input type="text" name="user.mobile" id="title" value="" style="width:300px;" /> </td>
+                <td><input type="text" name="user.mobile" id="title" value="${sessionScope.user.mobile}" style="width:300px;" /> </td>
               </tr>			  
               <tr>
                 <th>生日</th>
