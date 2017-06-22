@@ -23,7 +23,7 @@ a img { border:none; }
 
 /* wrappers */
 #header { background-color:#c3d9ff; height:65px; background:url(img-blue/headerbg.jpg) repeat-x bottom #C3D9FF; margin-bottom:1px; } 
-#header .top-thickline { background-color:#395e9f; } 
+#header .top-thickline { background-color:#395e9f; height:5px;} 
 #header .title { font-size:18px; font-weight:bold; color:#0d58a5; padding:7px 20px 0px 10px; }
 #header .quickbar { float:right; list-style:none; margin:0px; padding:4px 20px 8px 30px; background-color:#395e9f; width:550px; color:#ffffff; }
 #header .quickbar li { list-style:none; display: inline; margin-right:25px; }
