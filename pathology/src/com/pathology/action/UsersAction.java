@@ -14,8 +14,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.pathology.entity.Users;
 import com.pathology.service.IUsersService;
+import com.pathology.util.SessionAgentManager;
 
 public class UsersAction extends BaseAction{
 	private Users u = new Users();
@@ -37,11 +39,12 @@ public class UsersAction extends BaseAction{
 		
 		if(user!=null){
 			String username = null;
-			String adress=null;
-			String realname=null;
+			//String adress=null;
+			//String realname=null;
 		 //验证用户
 		}
-		//SessionAgentManager.setSessionAgentBean(RequestUtil.getRequest().getSession(), user,admin); 
+ 
+		SessionAgentManager.setSessionAgentBean( user,"admin"); 
 		return "loginSuccess";
 	}
 	

@@ -48,5 +48,10 @@
 			<result name="updatesuccess" type="redirectAction">HospitalAction!hospitalList</result>
 			<result name="edit"> /manage/hospital/update_hospital.jsp</result>
 		</action>
+		  <!-- 留言 -->
+			<action name="MessageAction" class="com.pathology.action.MessageAction">
+		 
+			<result name="messages"> /message/message_list.jsp</result>
+		</action>
 	</package>
 </struts>
