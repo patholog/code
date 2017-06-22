@@ -34,8 +34,17 @@ public class UsersAction extends BaseAction{
 	private File photo;
 
 	public String login(){
+		
+		if(user!=null){
+			String username = null;
+			String adress=null;
+			String realname=null;
+		 //验证用户
+		}
 		return "loginSuccess";
 	}
+	
+ 
 	public String userList(){
 
 		String hql="";

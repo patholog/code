@@ -32,13 +32,14 @@
 			<result name="allCat">/admin/TypeList.jsp</result>
 			<result name="catList" type="redirectAction">admin_catList</result>
 		</action>-->
-		<action name="UserAction" class="com.pathology.action.UsersAction">
+		<action name="UserAction" class="com.pathology.action.UsersAction" method="userList">
 
 			<result name="success"> /manage/user/userlist.jsp</result>
 			<result name="deletesuccess" type="redirectAction">UserAction!userList</result>
 			<result name="updatesuccess" type="redirectAction">UserAction!userList</result>
 			<result name="edit"> /manage/user/update_user.jsp</result>
 			<result name="registsuccess"> /login.jsp</result>
+			<result name="loginSuccess"> /manage/manageleft.jsp</result>
 		</action>
 		<action name="HospitalAction" class="com.pathology.action.HospitalAction">
 			<result name="success"> /manage/hospital/hospitallist.jsp</result>
