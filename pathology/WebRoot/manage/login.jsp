@@ -19,6 +19,7 @@
 		} else {
 			if (name == "admin" && pswd == "admin") {
 				//alert(window.location.href);
+			 
 				var f = window.location.href;
 				f = f.substr(0, f.lastIndexOf('/'));
 				window.open(f + "/manage.jsp",'_self');
@@ -81,26 +82,26 @@ input[type="password"] {
 			<STRONG><s:fielderror /> </STRONG>
 		</div>
 		<div id="Layer1">
-			<form style="height:250px;width:480px;">
+			<form style="height:250px;width:480px;" method="post" action="UserAction!login">
 				<table width="441" height="110" border="0" cellpadding="0"
 					cellspacing="0">
 
 					<tr height="55px">
 
 						<td align="left" valign="middle"><input id="name" type="text"
-							name="admin.username"
+							name="user.username"
 							style="border-color:#00CCFF;width:180px;height:30px;padding-top:3px;" />
 						</td>
 					</tr>
 					<tr>
 						<td align="left" valign="middle"><input id="pswd"
-							type="password" name="admin.password"
+							type="password" name="user.password"
 							style="border-color:#00CCFF;width:180px;height:30px;padding-top:3px;" />
 						</td>
 					</tr>
 					<tr>
 						<td height="50" colspan="2" align="left" valign="middle"><input
-							onClick="login()" name="submit" type="button" value="提  交"
+							  type="submit" name="Submit" id="Submit"  value="提  交"
 							style="height:30;width:80;background-image: ${path}/images/dl.jpg" />&nbsp;&nbsp;
 							<input name="reset" type="reset" value="重  置"
 							style="height:30;width:80" />&nbsp;&nbsp;</td>
