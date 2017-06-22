@@ -86,6 +86,12 @@ public class UsersAction extends BaseAction{
 		session.setAttribute("user",userT);
 		return "edit";
 	}
+	public String checkUser() throws IOException{
+		HttpSession session=ServletActionContext.getRequest().getSession();
+		Users userT = userservice.getUser(Users.class, user.getIdUsers());
+		session.setAttribute("user",userT);
+		return "check";
+	}
 	public String deleteUser(){
 		Users userT = userservice.getUser(Users.class, user.getIdUsers());
 		userservice.deleteUser(userT);
