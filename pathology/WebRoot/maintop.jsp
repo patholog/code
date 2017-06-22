@@ -1,20 +1,15 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-    <div id="head">
-  <div class="logo"><a href="index.jsp"><img src="images/bllogo.jpg" alt="logo"></a></div>
-  <div class="nav">
-   <ul class="navRight">
-    <li class="M noLeft"><a href="JavaScript:void(0);">您好，admin</a>
-     <div class="drop mUser">
-      <a href="topuserset/settings.html">账号设置</a>
-      <a >状态设置</a>
-      <a >签名设置</a>
-      <a >问题反馈</a>
-      <a >修改密码</a>
-      <a >使用帮助</a>
-      <a >退出登录</a>
-     </div>
-    </li>
-   </ul>
-  </div>
- </div>
+
+	<div class="top-thickline"><img src="${path}/css/img-blue/spacer.gif" width="5" height="5" /></div>
+	<ul class="quickbar">
+	<!--	<li style="float:right;">Logout </li>
+		<li style="float:right;">Welcome, Ray Lee </li> -->
+		<li style="margin-left:15px;" id="mytimer"></li>
+    <script>Time();</script>
+    </ul>
+	<div class="title">
+		<span style=" display:block; margin-top:6px">病理管理系统</span>
+	</div>
+	<div class="clear"></div>
+
 

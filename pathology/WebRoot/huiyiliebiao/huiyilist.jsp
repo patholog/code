@@ -1,46 +1,43 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ page language="java" contentType="text/html;charset=utf-8"
+	pageEncoding="utf8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>会议列表</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-<meta name="Copyright" content="Douco Design." />
-<link href="css/public.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/global.js"></script>
-  </head>
-  
-  <body>
-    <div id="dcHead">
-	<%@include file="/maintop.jsp"%>
+<head>
+<title>会议列表</title>
+<c:set var="path" value="${pageContext.request.contextPath }" />
+<link rel="stylesheet" type="text/css" href="${path }/css/style.css" />
+<script type="text/javascript"
+	src="${path }/CKEditor/ckeditor/ckeditor.js"></script>
+<script type="text/javascript"
+	src="${path }/CKFinder/ckfinder/ckfinder.js"></script>
+<script type="text/javascript" src="${path }/js/treeView.js"></script>
+<script type="text/javascript" src="${path }/js/common-cn.js"></script>
+<script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
+<script type="text/javascript">
+	function confirmDelete(id) {
+		if (confirm('你确定删除此产品？'))
+			window.location.href = '?action=delete&id=' + id;
+	}
+</script>
+</head>
+
+<body>
+	<div id="header">
+		<%@include file="/maintop.jsp"%>
 	</div>
-<!-- dcHead 结束 --> 
-
-<div id="dcLeft">
- <%@include file="/mainleft.jsp"%>
-</div>
- <div id="dcMain"> <!-- 当前位置 -->
-
- <div id="index" class="mainBox" style="padding-top:18px;height:auto!important;height:550px;min-height:550px;">
-这里是会议列表
-  </div>
- </div>
-
+	<table id="main" cellpadding="0" cellspacing="0" border="0">
+		<tr>
+			<td id="leftmenu"><%@include file="/mainleft.jsp"%>
+			</td>
+			<td id="contents">
+				 
+				会议列表
+			</td>
+		</tr>
+	</table>
 
 </body>
-  </body>
 </html>
