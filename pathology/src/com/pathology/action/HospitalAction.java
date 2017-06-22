@@ -97,7 +97,7 @@ public class HospitalAction extends BaseAction{
 	public String updateHospital() throws IOException{
 		HttpSession session=ServletActionContext.getRequest().getSession();
 		Hospital hospitalT = hospitalservice.getHospital(Hospital.class, hospital.getIdHospital());
-		session.setAttribute("user",hospitalT);
+		session.setAttribute("hospital",hospitalT);
 		return "edit";
 //		if(hospital.getAddress()!=null){
 //			hospital.setAddress(new String(hospital.getAddress().getBytes("ISO8859-1"),"UTF-8"));
