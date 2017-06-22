@@ -97,8 +97,12 @@
 		    <table width="60%" align="center" border="0">
 		  	<tr>
 				<td class="buttons">
-				<input type="submit" name="Submit" id="Submit"  value="审核通过" />
-				<input type="button" name="Reset" id="Reset" value="重置" onclick="resetForm()" />
+				<c:if test="${sessionScope.user.userstatus=='0'}">
+				<input type="submit" name="Submit" id="Submit" disabled="false"  value="审核通过" />				
+				</c:if>
+				<c:if test="${sessionScope.user.userstatus=='0'}">
+				<input type="submit" name="Submit" id="Submit" disabled="true"  value="审核通过" />				
+				</c:if>
 				</td>
 			</tr>
 		  </table>
