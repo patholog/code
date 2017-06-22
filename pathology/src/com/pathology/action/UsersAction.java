@@ -41,6 +41,7 @@ public class UsersAction extends BaseAction{
 			String realname=null;
 		 //验证用户
 		}
+		//SessionAgentManager.setSessionAgentBean(RequestUtil.getRequest().getSession(), user,admin); 
 		return "loginSuccess";
 	}
 	
