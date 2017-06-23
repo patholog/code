@@ -56,24 +56,23 @@
 				          <th width="10%">病理号</th>
 				          <th width="10%">病人姓名</th>
 				          <th width="10%">留言人</th>
-				          <th width="20%">送检单位</th>
+				          <th width="20%">留言内容</th>
 				          <th width="10%">留言状态</th>
-				          <th width="15%">柳岩时间</th>
+				          <th width="15%">留言时间</th>
 				          <th width="10%">操作</th>
 						</tr>
-						<c:forEach items="${sessionScope.hoslist }" var="hospital" varStatus="status">
-							<tr bgColor="${status.index%2==0?'#f9f9ff':'#ffffff' }">
-							<td>${hospital.name}</td>
-							<td>${hospital.code}</td>
-							<td>${hospital.tel }</td>
-							<td>${hospital.address }</td>
-							<td>${hospital.memo }</td>
-								<td class="action_collomn"><a
-									href="HospitalAction!updateHospital?hospital.idHospital=${hospital.idHospital }">修改</a> &nbsp; | &nbsp; <a
-									href="HospitalAction!deleteHospital?hospital.idHospital=${hospital.idHospital }">删除</a>
-							</tr>
-						</c:forEach>
-
+						         <s:iterator value="messages" id="message" status="11">
+						         <tr>
+						         <td><s:property value="#message.idMessage"/></td>
+						         <td> <s:property value="#message.fromDoctorId"/></td>
+						         <td><s:property value="#message.memo"/></td>
+						         <td><s:property value="#message.toDoctorId"/></td>
+						         <td> <s:property value="#message.content"/></td>
+						         <td> <s:property value="#message.isReaded"/></td>
+						          <td align="center">2016-02-25 23:29:08</td>
+						          <td align="center"><a href="daizhenduan" target="_blank">查看</a></td>
+						        </tr>
+						        </s:iterator>
 
 						<tr class="lightrow">
 							<td colspan="8"><div id="pageDir">

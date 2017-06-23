@@ -57,7 +57,7 @@
 				          <th width="15%">创建分享时间</th>
 				          <th width="10%">类型</th>
 				          <th width="10%">有效期</th>
-				          <th width="20%">送检单位</th>
+				          <th width="20%">分享链接</th>
 				          <th width="15%">密码</th>
 				          <th width="10%">操作</th>
 						</tr>
