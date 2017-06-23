@@ -1,6 +1,8 @@
 package com.pathology.action;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +30,12 @@ public class MessageAction {
 		//messages =  messageService.getAllMessage(Message.class, hql);
 		Message me = new Message();
 		me.setIdMessage("000");
+		me.setContent("留言");
+		//me.setCreateTime(new Timestamp(0));
+		me.setMessageOrder("留言内容");
+		me.setFromDoctorId("ssss");
+		me.setToDoctorId("sss");
+		me.setMemo("说明");
 		if(messages  == null){
 			messages = new ArrayList();
 			messages.add(me);
