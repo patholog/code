@@ -48,11 +48,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <s:iterator value="messages" id="message" status="11">
          <tr>
          <td><s:property value="#message.idMessage"/></td>
-          <td align="center">齐德龙</td>
-          <td align="center">膝盖</td>
-          <td align="center">普通</td>
-          <td align="center">全科</td>
-          <td align="center">齐德龙大集团</td>
+         <td> <s:property value="#message.fromDoctorId"/></td>
+         <td><s:property value="#message.memo"/></td>
+         <td><s:property value="#message.toDoctorId"/></td>
+         <td> <s:property value="#message.content"/></td>
+         <td> <s:property value="#message.isReaded"/></td>
+         <td> <s:property value="#message.isReaded"/></td>
           <td align="center">2016-02-25 23:29:08</td>
           <td align="center"><a href="daizhenduan" target="_blank">诊断</a></td>
         </tr>
