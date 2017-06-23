@@ -85,24 +85,21 @@
               <tr>
                 <th>状态</th>
                 <td>
-                <c:if test="${sessionScope.user.userstatus=='0'}">
-   					<input type="text" value="待审核" disabled="true"/>
+                <input type="text"  disabled="true" <c:if test="${sessionScope.user.userstatus=='0'}"> value="待审核"</c:if> />
+                
+                <!--<c:if test="${sessionScope.user.userstatus=='0'}">
+   					<input type="text" value="待审核" disabled="true" value='<c:if test="${sessionScope.user.userstatus=='0'">待审核</c:if>'/>
 				</c:if>
 				<c:if test="${sessionScope.user.userstatus=='1'}">
    					<input type="text" value="审核通过" disabled="true"/>
-				</c:if>
+				</c:if>-->
                 </td>
               </tr>
             </table>
 		    <table width="60%" align="center" border="0">
 		  	<tr>
 				<td class="buttons">
-				<c:if test="${sessionScope.user.userstatus=='0'}">
-				<input type="submit" name="Submit" id="Submit" disabled="false"  value="审核通过" />				
-				</c:if>
-				<c:if test="${sessionScope.user.userstatus=='0'}">
-				<input type="submit" name="Submit" id="Submit" disabled="true"  value="审核通过" />				
-				</c:if>
+				<input type="submit" name="Submit" id="Submit"  value="审核通过" />
 				</td>
 			</tr>
 		  </table>
