@@ -13,7 +13,7 @@
     	<h3><a href="${path}/shoucangbingli/shoucangbinglilist.jsp">收藏病例</a></h3>
     </div>
     <div name="leftmenu">
-    	<h3><a href="${path}/liuyanliebiao/liuyanlist.jsp">留言列表</a></h3>
+    	<h3><a href="MessageAction!getMessageList">留言列表</a></h3>
     </div>
     <div name="leftmenu">
     	<h3><a href="${path}/zhenduanbaobiao/zhenduanbaobiao.jsp">诊断报表</a></h3>

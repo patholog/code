@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          </tr>
          <s:iterator value="messages" id="message" status="11">
          <tr>
-         <td><s:property value="#message.id_message"/></td>
+         <td><s:property value="#message.idMessage"/></td>
           <td align="center">齐德龙</td>
           <td align="center">膝盖</td>
           <td align="center">普通</td>
