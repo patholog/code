@@ -2,7 +2,13 @@ package com.pathology.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import sun.misc.Request;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.pathology.entity.Message;
 import com.pathology.entity.Users;
 import com.pathology.service.IMessageService;
@@ -15,7 +21,7 @@ public class MessageAction {
 	private List<Message> messages;
 	
 	
-	public List<Message>  getMessageList(){
+	public String  getMessageList(){
 		try{
 			
 		String hql =" from message ";
@@ -26,11 +32,13 @@ public class MessageAction {
 			messages = new ArrayList();
 			messages.add(me);
 		}
-		return messages;
+		
+		Map  request = (Map) ActionContext.getContext().get("request");
+		return "messages";
 	  }catch(Exception e){
 		
 	   }
-		return messages;
+		return "messages";
 	}
 
 
@@ -41,6 +49,16 @@ public class MessageAction {
 
 	public void setMessageService(IMessageService messageService) {
 		this.messageService = messageService;
+	}
+
+
+	public List<Message> getMessages() {
+		return messages;
+	}
+
+
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
 	}
 	
 	
