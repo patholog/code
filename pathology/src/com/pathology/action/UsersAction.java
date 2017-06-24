@@ -106,6 +106,8 @@ public class UsersAction extends BaseAction{
 		return "updatesuccess";
 	}
 	public String addUser() throws IOException{
+		user.setIdUsers(getEandomId(16));
+		user.setUserstatus("0");
 		userservice.addUser(user);
 		return "updatesuccess";
 	}
@@ -114,6 +116,7 @@ public class UsersAction extends BaseAction{
 		user.setUsername(new String(user.getUsername().getBytes("ISO8859-1"),"UTF-8"));
 		user.setDoctorctfsrc(upImg());
 		user.setIdUsers(getEandomId(16));
+		user.setUserstatus("0");
 		userservice.addUser(user);
 
 		return "registsuccess";
