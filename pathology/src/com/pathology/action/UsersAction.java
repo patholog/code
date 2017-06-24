@@ -116,6 +116,7 @@ public class UsersAction extends BaseAction{
 		user.setUsername(new String(user.getUsername().getBytes("ISO8859-1"),"UTF-8"));
 		user.setDoctorctfsrc(upImg());
 		user.setIdUsers(getEandomId(16));
+		user.setDoctorctfsrc(upImg());
 		user.setUserstatus("0");
 		userservice.addUser(user);
 
@@ -124,7 +125,6 @@ public class UsersAction extends BaseAction{
 
 	//图片上传
 	public String upImg(){
-		System.out.println("1111111");
 		String img=null;
 		if(photo!=null){
 			String path=ServletActionContext.getServletContext().getRealPath("upload/img/")+"\\";
@@ -198,6 +198,36 @@ public class UsersAction extends BaseAction{
 
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
+	}
+
+
+	public String getPhotoFileName() {
+		return photoFileName;
+	}
+
+
+	public void setPhotoFileName(String photoFileName) {
+		this.photoFileName = photoFileName;
+	}
+
+
+	public String getPhotoType() {
+		return photoType;
+	}
+
+
+	public void setPhotoType(String photoType) {
+		this.photoType = photoType;
+	}
+
+
+	public File getPhoto() {
+		return photo;
+	}
+
+
+	public void setPhoto(File photo) {
+		this.photo = photo;
 	}
 
 	//	public IUsersService getUserserv() {
