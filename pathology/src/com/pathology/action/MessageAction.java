@@ -27,7 +27,7 @@ public class MessageAction {
 		try{
 			
 		String hql =" from message ";
-		//messages =  messageService.getAllMessage(Message.class, hql);
+		messages =  messageService.getListMessage("");
 		Message me = new Message();
 		me.setIdMessage("000");
 		me.setContent("留言");
@@ -36,10 +36,10 @@ public class MessageAction {
 		me.setFromDoctorId("ssss");
 		me.setToDoctorId("sss");
 		me.setMemo("说明");
-		if(messages  == null){
+		/*if(messages  == null){
 			messages = new ArrayList();
 			messages.add(me);
-		}
+		}*/
 		
 		Map  request = (Map) ActionContext.getContext().get("request");
 		return "messages";

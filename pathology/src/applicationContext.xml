@@ -34,10 +34,10 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
-		<property name="url" value="jdbc:mysql://localhost:3306/pathology?useUnicode=true&amp;characterEncoding=UTF-8">
+		<property name="url" value="jdbc:mysql://123.206.28.85:3306/pathology?useUnicode=true&amp;characterEncoding=UTF-8">
 		</property>
 		<property name="username" value="root"></property>
-		<property name="password" value="root"></property>
+		<property name="password" value="mysql"></property>
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
@@ -67,6 +67,18 @@
 	<bean id="pt" abstract="true">
 		<property name="hibernateTemplate" ref="ht"></property>
 	</bean>
+	
+	    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+    </bean>
+  
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+     	<property name="dataSource" ref="dataSource" />
+    </bean>
+	
+	
 	<bean id="userdao" class="com.pathology.dao.impl.UserDaoImpl" parent="pt" />
 	<bean id="hospitaldao" class="com.pathology.dao.impl.HospitalDaoImpl" parent="pt" />
 	<bean id="userservice" class="com.pathology.service.impl.UsersServiceImpl">
@@ -86,6 +98,7 @@
 	<bean id="messagedao" class="com.pathology.dao.impl.MessageDaoImpl" parent="pt" />
 	<bean id="messageService" class="com.pathology.service.impl.MessageServiceImpl">
 		<property name="messagedao" ref="messagedao"></property>
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
 		<bean id="messageAction" class="com.pathology.action.MessageAction"
 		scope="prototype">

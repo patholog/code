@@ -51,7 +51,7 @@
 		  <!-- 留言 -->
 			<action name="MessageAction" class="com.pathology.action.MessageAction">
 		 
-			<result name="messages"> /liuyanliebiao/liuyanlist.jsp</result>
+			<result name="messages"> /webdiagnosis/message/message_list.jsp</result>
 		</action>
 	</package>
 </struts>

@@ -3,13 +3,27 @@ package com.pathology.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+
 import com.pathology.dao.IMessageDao;
 import com.pathology.entity.Message;
+import com.pathology.mapping.MessageMapping;
 import com.pathology.service.IMessageService;
 
 public class MessageServiceImpl implements IMessageService {
 
 	private IMessageDao messagedao;
+	@Autowired
+	private JdbcTemplate  jdbcTemplate;
+
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
+
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
 
 	public IMessageDao getMessagedao() {
 		return messagedao;
@@ -34,6 +48,15 @@ public class MessageServiceImpl implements IMessageService {
 		if(em!=null)
 			messagedao.deleteMessage(em);
 
+	}
+	
+	
+	public List<Message>  getListMessage(String name){
+		String sql = " select  c.username,b.content,a.patientname from   pathology  a"
+						+" left join  message  b  on a.pathology_no = b.pathology_no"
+						+" left join  users  c on b.fromDoctorId = c.id_users";
+		return jdbcTemplate.query(sql, new MessageMapping());
+	 
 	}
 
 	public Message getMessage(Class clazz, String id) {
