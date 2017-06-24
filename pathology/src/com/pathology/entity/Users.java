@@ -40,6 +40,7 @@ public class Users implements java.io.Serializable {
 	private String lastUpdDeptCd;
 	private String lastUpdUserId;
 	private Integer delF;
+	private String userType;
 
 	// Constructors
 
@@ -62,7 +63,7 @@ public class Users implements java.io.Serializable {
 			String sortNo, String spellNo, String wubiNo, Integer updCnt,
 			Timestamp crtTime, String crtUserId, String crtDeptCd,
 			Date lastUpdTime, String lastUpdDeptCd, String lastUpdUserId,
-			Integer delF) {
+			Integer delF, String userType) {
 		this.idUsers = idUsers;
 		this.username = username;
 		this.realname = realname;
@@ -92,6 +93,7 @@ public class Users implements java.io.Serializable {
 		this.lastUpdDeptCd = lastUpdDeptCd;
 		this.lastUpdUserId = lastUpdUserId;
 		this.delF = delF;
+		this.userType = userType;
 	}
 
 	// Property accessors
@@ -326,6 +328,14 @@ public class Users implements java.io.Serializable {
 
 	public void setDelF(Integer delF) {
 		this.delF = delF;
+	}
+
+	public String getUserType() {
+		return this.userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 
 }

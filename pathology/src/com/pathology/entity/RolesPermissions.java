@@ -4,18 +4,17 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 /**
- * Image entity. @author MyEclipse Persistence Tools
+ * RolesPermissions entity. @author MyEclipse Persistence Tools
  */
 
-public class Image implements java.io.Serializable {
+public class RolesPermissions implements java.io.Serializable {
 
 	// Fields
 
-	private String idImage;
-	private String caseId;
-	private Integer rowImage;
-	private Integer colImage;
-	private String pathImage;
+	private String idRolesPermissions;
+	private String idRole;
+	private String permissionsId;
+	private String typeRoles;
 	private String memo;
 	private String sortNo;
 	private String spellNo;
@@ -28,31 +27,28 @@ public class Image implements java.io.Serializable {
 	private String lastUpdDeptCd;
 	private String lastUpdUserId;
 	private Integer delF;
-	private String pathologyNo;
 
 	// Constructors
 
 	/** default constructor */
-	public Image() {
+	public RolesPermissions() {
 	}
 
 	/** minimal constructor */
-	public Image(String idImage) {
-		this.idImage = idImage;
+	public RolesPermissions(String idRolesPermissions) {
+		this.idRolesPermissions = idRolesPermissions;
 	}
 
 	/** full constructor */
-	public Image(String idImage, String caseId, Integer rowImage,
-			Integer colImage, String pathImage, String memo, String sortNo,
+	public RolesPermissions(String idRolesPermissions, String idRole,
+			String permissionsId, String typeRoles, String memo, String sortNo,
 			String spellNo, String wubiNo, Integer updCnt, Timestamp crtTime,
 			String crtUserId, String crtDeptCd, Date lastUpdTime,
-			String lastUpdDeptCd, String lastUpdUserId, Integer delF,
-			String pathologyNo) {
-		this.idImage = idImage;
-		this.caseId = caseId;
-		this.rowImage = rowImage;
-		this.colImage = colImage;
-		this.pathImage = pathImage;
+			String lastUpdDeptCd, String lastUpdUserId, Integer delF) {
+		this.idRolesPermissions = idRolesPermissions;
+		this.idRole = idRole;
+		this.permissionsId = permissionsId;
+		this.typeRoles = typeRoles;
 		this.memo = memo;
 		this.sortNo = sortNo;
 		this.spellNo = spellNo;
@@ -65,49 +61,40 @@ public class Image implements java.io.Serializable {
 		this.lastUpdDeptCd = lastUpdDeptCd;
 		this.lastUpdUserId = lastUpdUserId;
 		this.delF = delF;
-		this.pathologyNo = pathologyNo;
 	}
 
 	// Property accessors
 
-	public String getIdImage() {
-		return this.idImage;
+	public String getIdRolesPermissions() {
+		return this.idRolesPermissions;
 	}
 
-	public void setIdImage(String idImage) {
-		this.idImage = idImage;
+	public void setIdRolesPermissions(String idRolesPermissions) {
+		this.idRolesPermissions = idRolesPermissions;
 	}
 
-	public String getCaseId() {
-		return this.caseId;
+	public String getIdRole() {
+		return this.idRole;
 	}
 
-	public void setCaseId(String caseId) {
-		this.caseId = caseId;
+	public void setIdRole(String idRole) {
+		this.idRole = idRole;
 	}
 
-	public Integer getRowImage() {
-		return this.rowImage;
+	public String getPermissionsId() {
+		return this.permissionsId;
 	}
 
-	public void setRowImage(Integer rowImage) {
-		this.rowImage = rowImage;
+	public void setPermissionsId(String permissionsId) {
+		this.permissionsId = permissionsId;
 	}
 
-	public Integer getColImage() {
-		return this.colImage;
+	public String getTypeRoles() {
+		return this.typeRoles;
 	}
 
-	public void setColImage(Integer colImage) {
-		this.colImage = colImage;
-	}
-
-	public String getPathImage() {
-		return this.pathImage;
-	}
-
-	public void setPathImage(String pathImage) {
-		this.pathImage = pathImage;
+	public void setTypeRoles(String typeRoles) {
+		this.typeRoles = typeRoles;
 	}
 
 	public String getMemo() {
@@ -204,14 +191,6 @@ public class Image implements java.io.Serializable {
 
 	public void setDelF(Integer delF) {
 		this.delF = delF;
-	}
-
-	public String getPathologyNo() {
-		return this.pathologyNo;
-	}
-
-	public void setPathologyNo(String pathologyNo) {
-		this.pathologyNo = pathologyNo;
 	}
 
 }

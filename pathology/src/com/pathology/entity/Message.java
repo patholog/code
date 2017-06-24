@@ -31,6 +31,7 @@ public class Message implements java.io.Serializable {
 	private String lastUpdDeptCd;
 	private String lastUpdUserId;
 	private Integer delF;
+	private String pathologyNo;
 
 	// Constructors
 
@@ -49,7 +50,8 @@ public class Message implements java.io.Serializable {
 			String isReaded, Timestamp createTime, String memo, String sortNo,
 			String spellNo, String wubiNo, Integer updCnt, Timestamp crtTime,
 			String crtUserId, String crtDeptCd, Date lastUpdTime,
-			String lastUpdDeptCd, String lastUpdUserId, Integer delF) {
+			String lastUpdDeptCd, String lastUpdUserId, Integer delF,
+			String pathologyNo) {
 		this.idMessage = idMessage;
 		this.fromDoctorId = fromDoctorId;
 		this.toDoctorId = toDoctorId;
@@ -70,6 +72,7 @@ public class Message implements java.io.Serializable {
 		this.lastUpdDeptCd = lastUpdDeptCd;
 		this.lastUpdUserId = lastUpdUserId;
 		this.delF = delF;
+		this.pathologyNo = pathologyNo;
 	}
 
 	// Property accessors
@@ -232,6 +235,14 @@ public class Message implements java.io.Serializable {
 
 	public void setDelF(Integer delF) {
 		this.delF = delF;
+	}
+
+	public String getPathologyNo() {
+		return this.pathologyNo;
+	}
+
+	public void setPathologyNo(String pathologyNo) {
+		this.pathologyNo = pathologyNo;
 	}
 
 }

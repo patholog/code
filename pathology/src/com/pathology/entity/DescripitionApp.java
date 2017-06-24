@@ -4,18 +4,20 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 /**
- * Image entity. @author MyEclipse Persistence Tools
+ * DescripitionApp entity. @author MyEclipse Persistence Tools
  */
 
-public class Image implements java.io.Serializable {
+public class DescripitionApp implements java.io.Serializable {
 
 	// Fields
 
-	private String idImage;
-	private String caseId;
-	private Integer rowImage;
-	private Integer colImage;
-	private String pathImage;
+	private String idDescriptionApp;
+	private String fromHospitalId;
+	private String fromDoctorId;
+	private String toHospitalId;
+	private String toDoctorId;
+	private Timestamp applyDateTime;
+	private String transferParentId;
 	private String memo;
 	private String sortNo;
 	private String spellNo;
@@ -28,31 +30,33 @@ public class Image implements java.io.Serializable {
 	private String lastUpdDeptCd;
 	private String lastUpdUserId;
 	private Integer delF;
-	private String pathologyNo;
 
 	// Constructors
 
 	/** default constructor */
-	public Image() {
+	public DescripitionApp() {
 	}
 
 	/** minimal constructor */
-	public Image(String idImage) {
-		this.idImage = idImage;
+	public DescripitionApp(String idDescriptionApp) {
+		this.idDescriptionApp = idDescriptionApp;
 	}
 
 	/** full constructor */
-	public Image(String idImage, String caseId, Integer rowImage,
-			Integer colImage, String pathImage, String memo, String sortNo,
-			String spellNo, String wubiNo, Integer updCnt, Timestamp crtTime,
-			String crtUserId, String crtDeptCd, Date lastUpdTime,
-			String lastUpdDeptCd, String lastUpdUserId, Integer delF,
-			String pathologyNo) {
-		this.idImage = idImage;
-		this.caseId = caseId;
-		this.rowImage = rowImage;
-		this.colImage = colImage;
-		this.pathImage = pathImage;
+	public DescripitionApp(String idDescriptionApp, String fromHospitalId,
+			String fromDoctorId, String toHospitalId, String toDoctorId,
+			Timestamp applyDateTime, String transferParentId, String memo,
+			String sortNo, String spellNo, String wubiNo, Integer updCnt,
+			Timestamp crtTime, String crtUserId, String crtDeptCd,
+			Date lastUpdTime, String lastUpdDeptCd, String lastUpdUserId,
+			Integer delF) {
+		this.idDescriptionApp = idDescriptionApp;
+		this.fromHospitalId = fromHospitalId;
+		this.fromDoctorId = fromDoctorId;
+		this.toHospitalId = toHospitalId;
+		this.toDoctorId = toDoctorId;
+		this.applyDateTime = applyDateTime;
+		this.transferParentId = transferParentId;
 		this.memo = memo;
 		this.sortNo = sortNo;
 		this.spellNo = spellNo;
@@ -65,49 +69,64 @@ public class Image implements java.io.Serializable {
 		this.lastUpdDeptCd = lastUpdDeptCd;
 		this.lastUpdUserId = lastUpdUserId;
 		this.delF = delF;
-		this.pathologyNo = pathologyNo;
 	}
 
 	// Property accessors
 
-	public String getIdImage() {
-		return this.idImage;
+	public String getIdDescriptionApp() {
+		return this.idDescriptionApp;
 	}
 
-	public void setIdImage(String idImage) {
-		this.idImage = idImage;
+	public void setIdDescriptionApp(String idDescriptionApp) {
+		this.idDescriptionApp = idDescriptionApp;
 	}
 
-	public String getCaseId() {
-		return this.caseId;
+	public String getFromHospitalId() {
+		return this.fromHospitalId;
 	}
 
-	public void setCaseId(String caseId) {
-		this.caseId = caseId;
+	public void setFromHospitalId(String fromHospitalId) {
+		this.fromHospitalId = fromHospitalId;
 	}
 
-	public Integer getRowImage() {
-		return this.rowImage;
+	public String getFromDoctorId() {
+		return this.fromDoctorId;
 	}
 
-	public void setRowImage(Integer rowImage) {
-		this.rowImage = rowImage;
+	public void setFromDoctorId(String fromDoctorId) {
+		this.fromDoctorId = fromDoctorId;
 	}
 
-	public Integer getColImage() {
-		return this.colImage;
+	public String getToHospitalId() {
+		return this.toHospitalId;
 	}
 
-	public void setColImage(Integer colImage) {
-		this.colImage = colImage;
+	public void setToHospitalId(String toHospitalId) {
+		this.toHospitalId = toHospitalId;
 	}
 
-	public String getPathImage() {
-		return this.pathImage;
+	public String getToDoctorId() {
+		return this.toDoctorId;
 	}
 
-	public void setPathImage(String pathImage) {
-		this.pathImage = pathImage;
+	public void setToDoctorId(String toDoctorId) {
+		this.toDoctorId = toDoctorId;
+	}
+
+	public Timestamp getApplyDateTime() {
+		return this.applyDateTime;
+	}
+
+	public void setApplyDateTime(Timestamp applyDateTime) {
+		this.applyDateTime = applyDateTime;
+	}
+
+	public String getTransferParentId() {
+		return this.transferParentId;
+	}
+
+	public void setTransferParentId(String transferParentId) {
+		this.transferParentId = transferParentId;
 	}
 
 	public String getMemo() {
@@ -204,14 +223,6 @@ public class Image implements java.io.Serializable {
 
 	public void setDelF(Integer delF) {
 		this.delF = delF;
-	}
-
-	public String getPathologyNo() {
-		return this.pathologyNo;
-	}
-
-	public void setPathologyNo(String pathologyNo) {
-		this.pathologyNo = pathologyNo;
 	}
 
 }

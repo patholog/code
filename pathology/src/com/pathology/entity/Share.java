@@ -28,6 +28,7 @@ public class Share implements java.io.Serializable {
 	private String lastUpdDeptCd;
 	private String lastUpdUserId;
 	private Integer delF;
+	private String pathologyNo;
 
 	// Constructors
 
@@ -45,7 +46,8 @@ public class Share implements java.io.Serializable {
 			Timestamp shareTime, String hospitalId, String memo, String sortNo,
 			String spellNo, String wubiNo, Integer updCnt, Timestamp crtTime,
 			String crtUserId, String crtDeptCd, Date lastUpdTime,
-			String lastUpdDeptCd, String lastUpdUserId, Integer delF) {
+			String lastUpdDeptCd, String lastUpdUserId, Integer delF,
+			String pathologyNo) {
 		this.idShare = idShare;
 		this.caseId = caseId;
 		this.doctorId = doctorId;
@@ -63,6 +65,7 @@ public class Share implements java.io.Serializable {
 		this.lastUpdDeptCd = lastUpdDeptCd;
 		this.lastUpdUserId = lastUpdUserId;
 		this.delF = delF;
+		this.pathologyNo = pathologyNo;
 	}
 
 	// Property accessors
@@ -201,6 +204,14 @@ public class Share implements java.io.Serializable {
 
 	public void setDelF(Integer delF) {
 		this.delF = delF;
+	}
+
+	public String getPathologyNo() {
+		return this.pathologyNo;
+	}
+
+	public void setPathologyNo(String pathologyNo) {
+		this.pathologyNo = pathologyNo;
 	}
 
 }

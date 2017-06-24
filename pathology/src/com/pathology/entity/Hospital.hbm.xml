@@ -11,22 +11,34 @@
             <generator class="assigned"></generator>
         </id>
         <property name="name" type="java.lang.String">
-            <column name="name" length="50" not-null="true" />
+            <column name="name" length="50" not-null="true">
+                <comment>å��ç§°</comment>
+            </column>
         </property>
         <property name="code" type="java.lang.String">
-            <column name="code" length="50" />
+            <column name="code" length="50">
+                <comment>ç¼-ç&#160;�</comment>
+            </column>
         </property>
         <property name="hospitalcode" type="java.lang.String">
-            <column name="hospitalcode" length="50" />
+            <column name="hospitalcode" length="50">
+                <comment>åŒ»é™¢ç¼-ç&#160;�</comment>
+            </column>
         </property>
         <property name="address" type="java.lang.String">
-            <column name="address" length="128" />
+            <column name="address" length="128">
+                <comment>åŒ»é™¢åœ°å�€</comment>
+            </column>
         </property>
         <property name="tel" type="java.lang.String">
-            <column name="tel" length="50" />
+            <column name="tel" length="50">
+                <comment>ç"µè¯�</comment>
+            </column>
         </property>
         <property name="memo" type="java.lang.String">
-            <column name="memo" length="128" />
+            <column name="memo" length="128">
+                <comment>å¤‡æ³¨</comment>
+            </column>
         </property>
         <property name="transferedhospital" type="java.lang.String">
             <column name="transferedhospital" length="32" />
