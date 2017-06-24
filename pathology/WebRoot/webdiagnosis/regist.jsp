@@ -39,7 +39,7 @@
 </head>
 <body>
 	<div id="3" style="position: relative; top: 100px; z-index: 3;">
-		<form id="f1" action="UserAction!registUser" method="post">
+		<form id="f1" action="UserAction!registUser" method="post" enctype="multipart/form-data">
 			<table align="center" cellspacing="0" class="registtb">
 				<tr class="thead">
 					<td align="center">用户注册</td>
@@ -72,7 +72,7 @@
 							<tr>
 								<td align="right">医师资格证：</td>
 								<td align="left"><input name="photo" class="file" type="file" id="f"
-									accept="image/jpeg" onchange="show()" />
+									accept="image/jpeg" onchange="show()"  />
 								</td>
 							<tr>
 								<td></td>

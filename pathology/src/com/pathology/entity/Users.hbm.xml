@@ -47,7 +47,7 @@
             <column name="tel" length="16" />
         </property>
         <property name="doctorctfsrc" type="java.lang.String">
-            <column name="doctorctfsrc" />
+            <column name="doctorctfsrc" length="5000"/>
         </property>
         <property name="isdeleted" type="java.lang.String">
             <column name="isdeleted" length="10" />
