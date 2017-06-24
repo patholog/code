@@ -16,12 +16,12 @@
 </head>
 <body>
 <div id="header">
-  <%@include file="maintop.jsp"%>
+  <%@include file="webdiagnosis/maintop.jsp"%>
   
 </div>
 <table id="main" cellpadding="0" cellspacing="0" border="0">
   <tr>
-    <td id="leftmenu"><%@include file="mainleft.jsp"%></td>
+    <td id="leftmenu"><%@include file="webdiagnosis/mainleft.jsp"%></td>
     <td id="contents"><h5>欢迎使用</h5></td>
   </tr>
 </table>
