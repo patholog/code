@@ -47,12 +47,12 @@
 			</tr>
 		  </table>
 		  
-		  <form name="articles" id="articles" method="post" action="UserAction!saveUser">
+		  <form name="articles" id="articles" method="post" action="UserAction!checkUserStatus">
 		    <table class="maintable form_top_thin">
               <tr>
                 <th>用户名</th>
                 <td><input type="text" name="user.username" id="title" value="${sessionScope.user.username}" disabled="true" style="width:300px;" /> 
-                	<input type="hidden" name="user.idUsers" value="${sessionScope.user.idUsers}" />
+                	<input type="text" name="user.idUsers" value="${sessionScope.user.idUsers}" />
                 </td>
               </tr>			  
               <tr>
@@ -85,7 +85,12 @@
               <tr>
                 <th>状态</th>
                 <td>
-                <input type="text"  disabled="true" <c:if test="${sessionScope.user.userstatus=='0'}"> value="待审核"</c:if> />
+                <input type="text"  disabled="true" 
+                <c:choose>
+                <c:when test="${sessionScope.user.userstatus=='0'}"> value="待审核"</c:when>
+                <c:when test="${sessionScope.user.userstatus=='1'}"> value="审核通过"</c:when>
+                <c:otherwise>value="未知"</c:otherwise></c:choose>
+                 />
                 
                 </td>
               </tr>

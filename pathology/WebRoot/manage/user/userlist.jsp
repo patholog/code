@@ -25,8 +25,7 @@
 			<td id="contents"><table id="pagehead" cellspacing="0"
 					cellpadding="0" width="100%" border="0">
 					<tr>
-						<td><h1>用户管理</h1>
-						</td>
+						<td><h1>用户管理</h1></td>
 					</tr>
 				</table> <s:form action="UserAction!userList" theme="simple"
 					target="mainFrame">
@@ -42,8 +41,7 @@
 								style="width:120px;" /> <input name="searchButton"
 								id="searchButton" onclick="" type="submit"
 								style="width:80px;background:url(css/img-blue/search.gif) 8px top no-repeat;"
-								value="  搜索" />
-							</td>
+								value="  搜索" /></td>
 						</tr>
 					</table>
 				</s:form>
@@ -70,43 +68,37 @@
 								<td>${user.specialty }</td>
 								<td>${user.mobile }</td>
 								<td>${user.tel }</td>
-								<td class="action_collomn">
-									<a href="UserAction!checkUser?user.idUsers=${user.idUsers}">审核</a>
-									&nbsp; | &nbsp;
-									<a href="UserAction!updateUser?user.idUsers=${user.idUsers}">修改</a>
-									&nbsp; | &nbsp; 
-									<a href="UserAction!deleteUser?user.idUsers=${user.idUsers}">删除</a>
+								<td class="action_collomn"><a
+									<c:choose>
+									<c:when test="${user.userstatus=='1'}"> class="enable" </c:when>
+									<c:otherwise>href="UserAction!checkUser?user.idUsers=${user.idUsers}"</c:otherwise>
+									</c:choose>>审核</a>
+									&nbsp; | &nbsp; <a
+									href="UserAction!updateUser?user.idUsers=${user.idUsers}">修改</a>
+									&nbsp; | &nbsp; <a
+									href="UserAction!deleteUser?user.idUsers=${user.idUsers}">删除</a>
 							</tr>
 						</c:forEach>
 						<tr class="lightrow">
-							<td colspan="8"><div id="pageDir">
-									<c:set var="pageCount" value="${(sessionScope.count-1)/10+1 }" />
-									<fmt:formatNumber var="lastIndex" value="${pageCount}"
-										pattern="#" />
-									第${sessionScope.thisindex }/${lastIndex }页 &nbsp; &nbsp; <a
-										href="UserAction!userList?index=1" target="mainFrame">首页</a>&nbsp;
-									<!-- 
+							<td colspan="8">
+							<table class="pagetable"><tr><td><c:set var="pageCount"
+									value="${(sessionScope.count-1)/10+1 }" /> <fmt:formatNumber
+									var="lastIndex" value="${pageCount}" pattern="#" />
+								第${sessionScope.thisindex }/${lastIndex }页 &nbsp; &nbsp; <a
+								href="UserAction!userList?index=1" target="mainFrame">首页</a>&nbsp;
+								<!-- 
 							<c:set var="pageCount" value="${fn:length(userList)%10==0?fn:length(userList)/10:fn:length(userList)/10+1 }"/>
-						-->
-									<c:forEach var="i" begin="1" step="1" end="${lastIndex }">
-										<a href="UserAction!userList?index=${i } " target="mainFrame">
-											<c:out value="${i }" /> </a>
-									</c:forEach>
-									&nbsp;<a href="UserAction?index=${lastIndex}"
-										target="mainFrame">尾页</a>
-									<s:form action="UserAction!userList" theme="simple"
-										target="mainFrame"> 第&nbsp;
-                  <s:textfield name="index"
-											cssStyle="width:25px;height:20px;" />
-                  &nbsp;页&nbsp; &nbsp;
+						--> <c:forEach var="i" begin="1" step="1" end="${lastIndex }">
+									<a href="UserAction!userList?index=${i } " target="mainFrame">
+										<c:out value="${i }" /> </a>
+								</c:forEach> &nbsp;<a href="UserAction?index=${lastIndex}" target="mainFrame">尾页</a></td>
+							<td><s:form action="UserAction!userList" theme="simple"	target="mainFrame"> 第&nbsp;
+                  <s:textfield name="index"	cssStyle="width:25px;height:20px;" /> &nbsp;页&nbsp; &nbsp;
                   <s:submit value="Go" id="go" />
-									</s:form>
-								</div>
-							</td>
+								</s:form></td></tr></table></td>
 						</tr>
 					</tbody>
-				</table>
-			</td>
+				</table></td>
 		</tr>
 	</table>
 </body>

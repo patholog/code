@@ -105,3 +105,8 @@ a img { border:none; }
 
 #note { list-style:none; margin:0px; padding:2px; font-size:12px; }
 #note li { list-style:none; padding:2px 20px; }
+.enable{color:#817f7f;text-decoration:none;}
+.enable:hover { color:#817f7f;text-decoration:none; }
+.pagetable {border:none; border-collapse:collapse; }
+.pagetable th { border:none; padding:8px; background-color:#f3f7ff; color:#444; font-weight:bold; text-align:left; vertical-align:middle; }
+.pagetable td { border:none; padding:8px; vertical-align:middle; }
