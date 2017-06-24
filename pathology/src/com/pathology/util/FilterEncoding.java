@@ -41,7 +41,7 @@ public class FilterEncoding implements Filter{
 	  /* 过滤过程
 	   * 
 	   */
-	  @Override
+	 // @Override
 	  public void doFilter(ServletRequest request, ServletResponse response,
 	      FilterChain filterChain) throws IOException, ServletException {
 	    if(use || encoding == null) {

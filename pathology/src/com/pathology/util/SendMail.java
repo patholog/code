@@ -1,7 +1,7 @@
 package com.pathology.util;
 
 public class SendMail {
-	/*private static final String mailUserName = Property.getProperty("mailUserName");
+	private static final String mailUserName = Property.getProperty("mailUserName");
 	private static final String mailPassWord = Property.getProperty("mailPassWord");
 	private static final String mailAdd = Property.getProperty("mailAdd");
 	private static final String mailServerHost = Property.getProperty("mailServerHost");
@@ -43,5 +43,5 @@ public class SendMail {
 		}else{
 			return "";
 		}
-	}*/
+	}
 }

@@ -20,6 +20,15 @@ import java.util.List;
  */
 public class DateUtil
 {
+	
+    public static String getDate(){
+    	
+    	String strCurrentDate="";
+    	Date currentDate = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
+        strCurrentDate= formatter.format(currentDate); 
+        return  strCurrentDate; 	
+    }  
 	/**
 	 * 将给出的日期加上相应的偏移量，并返回结果日期格式化后的字符串 
 	 * @param origin 要计算的原始日期字符 
