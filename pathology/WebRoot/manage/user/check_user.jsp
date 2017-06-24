@@ -87,12 +87,6 @@
                 <td>
                 <input type="text"  disabled="true" <c:if test="${sessionScope.user.userstatus=='0'}"> value="待审核"</c:if> />
                 
-                <!--<c:if test="${sessionScope.user.userstatus=='0'}">
-   					<input type="text" value="待审核" disabled="true" value='<c:if test="${sessionScope.user.userstatus=='0'">待审核</c:if>'/>
-				</c:if>
-				<c:if test="${sessionScope.user.userstatus=='1'}">
-   					<input type="text" value="审核通过" disabled="true"/>
-				</c:if>-->
                 </td>
               </tr>
             </table>
