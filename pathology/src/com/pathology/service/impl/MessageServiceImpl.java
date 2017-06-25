@@ -2,8 +2,6 @@ package com.pathology.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.pathology.dao.IMessageDao;
@@ -14,7 +12,7 @@ import com.pathology.service.IMessageService;
 public class MessageServiceImpl implements IMessageService {
 
 	private IMessageDao messagedao;
-	@Autowired
+	
 	private JdbcTemplate  jdbcTemplate;
 
 	public JdbcTemplate getJdbcTemplate() {
