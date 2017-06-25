@@ -52,7 +52,7 @@
               <tr>
                 <th>用户名</th>
                 <td><input type="text" name="user.username" id="title" value="${sessionScope.user.username}" disabled="true" style="width:300px;" /> 
-                	<input type="text" name="user.idUsers" value="${sessionScope.user.idUsers}" />
+                	<input type="hidden" name="user.idUsers" value="${sessionScope.user.idUsers}" />
                 </td>
               </tr>			  
               <tr>
@@ -89,16 +89,22 @@
                 <c:choose>
                 <c:when test="${sessionScope.user.userstatus=='0'}"> value="待审核"</c:when>
                 <c:when test="${sessionScope.user.userstatus=='1'}"> value="审核通过"</c:when>
+                <c:when test="${sessionScope.user.userstatus=='2'}"> value="审核拒绝"</c:when>
                 <c:otherwise>value="未知"</c:otherwise></c:choose>
                  />
                 
                 </td>
               </tr>
+              <tr>
+                <th>医师资格</th>
+                <td><img id="img" name="user.mobile" src="${sessionScope.user.doctorctfsrc}" width="400" height="400" /> </td>
+              </tr>	
             </table>
 		    <table width="60%" align="center" border="0">
 		  	<tr>
 				<td class="buttons">
-				<input type="submit" name="Submit" id="Submit"  value="审核通过" />
+				<input type="submit" name="Submit" id="Submit" <c:if test="${sessionScope.user.userstatus=='1'}">disabled="true"</c:if>  value="审核通过" />
+				<input id="Refuse" type="button" <c:if test="${sessionScope.user.userstatus=='2'}">disabled="true"</c:if> name="Refuse"  onClick="window.location.href='UserAction!refuseCheck?idUsers=${sessionScope.user.idUsers}'" value="审核拒绝" />
 				</td>
 			</tr>
 		  </table>

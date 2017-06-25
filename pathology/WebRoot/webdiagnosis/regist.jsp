@@ -52,22 +52,22 @@
 							<tr>
 								<td align="right">用户名：</td>
 								<td align="left"><input type="text" name="user.username"
-									placeholder="用户名" required /></td>
+									placeholder="用户名" required onblur="" /><span id="nametip"></span></td>
 							</tr>
 							<tr>
 								<td align="right">密 码：</td>
 								<td align="left"><input type="password" name="user.password"
 									id="password" placeholder="密码" required onkeyup="passwd()" /> 
-									<span id="tip"></span></td>
+									<span id="pwsdtip"></span></td>
 							</tr>
 							<tr>
 								<td align="right">密码确认：</td>
 								<td align="left"><input type="password" name="password2"
-									placeholder="确认密码" required /></td>
+									placeholder="确认密码" required /><span id="pwsd2tip"></span></td>
 							</tr>
 							<td align="right">邮 箱：</td>
 							<td align="left"><input type="email" name="user.email"
-								placeholder="邮箱" id="email" required /></td>
+								placeholder="邮箱" id="email" required /><span id="emailtip"></span></td>
 							</tr>
 							<tr>
 								<td align="right">医师资格证：</td>

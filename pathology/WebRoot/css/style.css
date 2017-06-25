@@ -70,6 +70,7 @@ a img { border:none; }
 
 .buttons { padding:15px 0px 15px 0px; text-align:left; }
 #Submit { width:100px; padding:3px; text-align:center; margin-right:30px;  }
+#Refuse { width:100px; padding:3px; text-align:center; margin-right:30px;  }
 #Reset { width:100px; padding:3px; text-align:center; margin-right:30px; }
 #term { padding:1px; width:150px; vertical-align:middle; margin:0px; }
 #searchButton { padding:1px; text-align:center; width:50px; vertical-align:middle; }

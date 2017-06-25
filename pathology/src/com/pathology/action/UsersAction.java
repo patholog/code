@@ -48,6 +48,12 @@ public class UsersAction extends BaseAction{
 		SessionAgentManager.setSessionAgentBean( user,"admin"); 
 		return "loginSuccess";
 	}
+	
+	public String checkEmail(){
+		String hql=" s.email='"+user.getEmail()+"'";
+		List<Users> userT = userservice.getAllUser(Users.class, hql);
+		return "";
+	}
 
 
 	public String userList(){
