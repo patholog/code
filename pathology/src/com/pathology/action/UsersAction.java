@@ -17,6 +17,7 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionContext;
 import com.pathology.entity.Users;
 import com.pathology.service.IUsersService;
+import com.pathology.util.DigestMD5;
 import com.pathology.util.SessionAgentManager;
 
 public class UsersAction extends BaseAction{
@@ -56,20 +57,10 @@ public class UsersAction extends BaseAction{
 			String username = null;
 			String adress=null;
 			String realname=null;
-			try {
-				username = new String((user.getUsername().getBytes("ISO8859-1")),"UTF-8");
-				//				realname=new String((user.getRealname().getBytes("ISO8859-1")),"UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
 			if(username!=null&&!("".equals(username)))
 				hql+=" and username like '%"+username+"%'";
 			if(user.getTel()!=null&&!("".equals(user.getTel())))
 				hql+=" and tel = "+user.getTel();
-
-			//System.out.println(hql+"000000000000000000000000000000000"+user.getUsername());
 		}
 
 		List<Users> list = index != 0 ? userservice.getByPage(index, Users.class,hql)
@@ -113,10 +104,9 @@ public class UsersAction extends BaseAction{
 	}
 
 	public String registUser() throws IOException{
-		user.setUsername(new String(user.getUsername().getBytes("ISO8859-1"),"UTF-8"));
+		user.setPassword(DigestMD5.getDigestPassWord(user.getPassword()));
 		user.setDoctorctfsrc(upImg());
 		user.setIdUsers(getEandomId(16));
-		user.setDoctorctfsrc(upImg());
 		user.setUserstatus("0");
 		userservice.addUser(user);
 
@@ -127,8 +117,8 @@ public class UsersAction extends BaseAction{
 	public String upImg(){
 		String img=null;
 		if(photo!=null){
-			String path=ServletActionContext.getServletContext().getRealPath("upload/img/")+"\\";
-			System.out.println("11111"+path);
+			String realpath=ServletActionContext.getServletContext().getRealPath("upload/img/")+"\\";
+			System.out.println("11111"+realpath);
 			System.out.println(photoFileName);
 			String type=photoFileName.substring(photoFileName.lastIndexOf(".")+1,photoFileName.length());
 			System.out.println("222"+type);
@@ -136,7 +126,7 @@ public class UsersAction extends BaseAction{
 			System.out.println(time);
 			String name=time+"."+type;
 			System.out.println(name);
-			File saveFile=new File(path,name);
+			File saveFile=new File(realpath,name);
 			if(saveFile.getParentFile().exists()){
 				saveFile.getParentFile().mkdirs();
 			}
@@ -145,7 +135,11 @@ public class UsersAction extends BaseAction{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			img="upload/img/"+name;
+			request=ServletActionContext.getRequest();
+			String path = request.getContextPath();  
+            String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
+            String picturePath = basePath +"upload/img"+"/"+name;  
+			img=picturePath;
 		}
 		return img;
 	}
@@ -153,6 +147,13 @@ public class UsersAction extends BaseAction{
 	public String checkUserStatus(){
 		Users userT = userservice.getUser(Users.class, user.getIdUsers());
 		userT.setUserstatus("1");
+		userservice.updateUser(userT);
+		return "updatesuccess";
+	}
+	
+	public String refuseCheck(){
+		Users userT = userservice.getUser(Users.class, this.idUsers);
+		userT.setUserstatus("2");
 		userservice.updateUser(userT);
 		return "updatesuccess";
 	}
