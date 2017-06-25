@@ -26,7 +26,7 @@ public class HospitalAction extends BaseAction{
 	
 	public String addHospital() throws Exception {
 
-		if(hospital.getAddress()!=null){
+		/*if(hospital.getAddress()!=null){
 			hospital.setAddress(new String(hospital.getAddress().getBytes("ISO8859-1"),"UTF-8"));
 		}
 		if(hospital.getCode()!=null){
@@ -55,7 +55,7 @@ public class HospitalAction extends BaseAction{
 		}
 		if(hospital.getCreateTime()!=null){
 			hospital.setCreateTime(new Timestamp(new Date().getTime()));
-		}
+		}*/
 		hospital.setIdHospital(getEandomId(16));
 		
 
