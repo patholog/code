@@ -6,21 +6,22 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.pathology.entity.Message;
+import com.pathology.dto.MessageDTO;
 
 
 
 public class MessageMapping  implements RowMapper {
 	private final Logger logger = Logger.getLogger(MessageMapping.class);
 	@Override
-	public Message mapRow(ResultSet rs, int arg1) {
+	public MessageDTO mapRow(ResultSet rs, int arg1) {
 
 		try{
-			Message bean = new Message();
+			MessageDTO bean = new MessageDTO();
 			bean.setMessageOrder(rs.getString("username"));
 			bean.setContent(rs.getString("content"));
-		 
-			bean.setPathologyNo(rs.getString("patientname"));
+		    bean.setMemo("");
+		    bean.setUsername(rs.getString("username"));
+			bean.setPathologyNo(rs.getString("pathology_no"));
 			/*bean.setId(rs.getInt("username"));
 			bean.setCure(rs.getString("content"));
 			bean.setCreate_time(rs.getString("create_time"));

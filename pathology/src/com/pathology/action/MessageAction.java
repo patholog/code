@@ -6,25 +6,33 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
  
 
  
 
 import com.opensymphony.xwork2.ActionContext;
+import com.pathology.dto.MessageDTO;
 import com.pathology.entity.Message;
 import com.pathology.service.IMessageService;
 public class MessageAction extends BaseAction{
 
 	public IMessageService messageService;
 	private Message message;
-	private List<Message> messages;
+	private List<MessageDTO> messages;
 	
 	
 	public String  getMessageList(){
 		try{
+		
+			HttpServletRequest
+			 request = ServletActionContext.getRequest();	
 			
 		String hql =" from message ";
-		messages =  messageService.getListMessage("");
+		messages =  messageService.getListMessage(request,"");
 		Message me = new Message();
 		me.setIdMessage("000");
 		me.setContent("留言");
@@ -38,7 +46,7 @@ public class MessageAction extends BaseAction{
 			messages.add(me);
 		}*/
 		
-		Map  request = (Map) ActionContext.getContext().get("request");
+	 
 		return "messages";
 	  }catch(Exception e){
 		
@@ -57,12 +65,12 @@ public class MessageAction extends BaseAction{
 	}
 
 
-	public List<Message> getMessages() {
+	public List<MessageDTO> getMessages() {
 		return messages;
 	}
 
 
-	public void setMessages(List<Message> messages) {
+	public void setMessages(List<MessageDTO> messages) {
 		this.messages = messages;
 	}
 	
