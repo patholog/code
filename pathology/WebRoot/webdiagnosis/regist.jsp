@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
+<!DOCTYPE html>
 <html>
 <head>
 <title>用户注册</title>

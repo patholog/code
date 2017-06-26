@@ -1,36 +1,42 @@
-<%@ page language="java" contentType="text/html; charset=GB18030" 
-pageEncoding="GB18030"%> 
-<!doctype html>
+<%@ page language="java" contentType="text/html;charset=utf-8"
+	pageEncoding="utf8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>µã»÷µ¯³öµÇÂ¼¿ò</title>
-	<link rel="stylesheet" type="text/css" href="css/login.css"/>
-	<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<title>ç‚¹å‡»å¼¹å‡ºç™»å½•æ¡†</title>
+	<c:set var="path" value="${pageContext.request.contextPath }" />
+	<link rel="stylesheet" type="text/css" href="${path}/css/login.css"/>
+	<script src="${path}/js/login.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${path}/js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 
 	<div class="nav">
 		<ul>
-			<li><a href="javascript:void(0)" onClick="showBox()">ÓÃ»§µÇÂ¼</a></li>
+			<li><a href="javascript:void(0)" onClick="showBox()">ç”¨æˆ·ç™»å½•</a></li>
 		</ul>
 	</div>
 	<div class="event" id="login_box" style="display: none;">
 		<div class="login">
 			<div class="title">
-				<span class="t_txt">ÓÃ»§µÇÂ¼</span>
+				<span class="t_txt">ç”¨æˆ·ç™»å½•</span>
 				<span class="del" onClick="deleteLogin()">X</span>
 			</div>
 			<form action="" method="post">
-				<input type="text" name="" id="" value="" placeholder="ÇëÊäÈëÓÃ»§Ãû"/>
-				<input type="password" name="" id="" value="" placeholder="ÇëÊäÈëÃÜÂë"/>
+				<input type="text" name="user.username" id="" value="" placeholder="è¯·è¾“å…¥ç”¨æˆ·å"/>
+				<input type="password" name="user.password" id="" value="" placeholder="è¯·è¾“å…¥å¯†ç "/>
                 <input type="checkbox" name="" id="rmpasswd" value=""/>
-                <a id="rmfont">¼Ç×¡ÃÜÂë</a>
-                <a href="" id="forgetpwd">Íü¼ÇÃÜÂë</a>
-                <input type="button" name="" id="" value="µÇÂ¼" class="btn" onclick="location.href='index.jsp'" />
-				<!--<a href="javascript:void(0)" class="wapper" onclick='obj.sweep()'>É¨ÂëµÇÂ¼</a>-->
-                <a id="about">¹ØÓÚÎÒÃÇ</a>
-                <a id="register">×¢²á</a>
+                <a id="rmfont">è®°ä½å¯†ç </a>
+                <a href="" id="forgetpwd">å¿˜è®°å¯†ç </a>
+                <input type="button" name="" id="" value="ç™»å½•" class="btn" onclick="location.href='index.jsp'" />
+				<!--<a href="javascript:void(0)" class="wapper" onclick='obj.sweep()'>æ‰«ç ç™»å½•</a>-->
+                <a id="about">å…³äºŽæˆ‘ä»¬</a>
+                <a id="register" href="regist.jsp">æ³¨å†Œ</a>
                 
 			</form>	
 		</div>
@@ -38,7 +44,7 @@ pageEncoding="GB18030"%>
 	
 	<div class="bg_color" onClick="deleteLogin()" id="bg_filter" style="display: none;"></div>
 	
-	<script src="js/login.js" type="text/javascript" charset="utf-8"></script>
+	
 <div style="text-align:center;">
 
 </div>
