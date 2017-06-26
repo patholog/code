@@ -72,7 +72,16 @@
 								<td align="left"><input type="password" name="password2"
 									placeholder="确认密码" required /><span id="pwsd2tip"></span></td>
 							</tr>
+							<tr>
 							<td align="right">邮 箱：</td>
+							<td align="left">
+							<select id="" name="" multiple="multiple">
+								<option value=""></option>
+							</select>
+							<span id="hospital"></span></td>
+							</tr>
+							<tr>
+							<td align="right">所属医院：</td>
 							<td align="left"><input type="email" name="user.email"
 								placeholder="邮箱" id="email" required /><span id="emailtip"></span></td>
 							</tr>
