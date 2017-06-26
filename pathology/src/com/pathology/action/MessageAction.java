@@ -6,17 +6,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+ 
 
-import sun.misc.Request;
+ 
 
 import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 import com.pathology.entity.Message;
-import com.pathology.entity.Users;
 import com.pathology.service.IMessageService;
-import com.pathology.service.IUsersService;
-
-public class MessageAction {
+public class MessageAction extends ActionSupport{
 
 	public IMessageService messageService;
 	private Message message;
