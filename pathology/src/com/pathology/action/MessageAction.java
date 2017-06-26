@@ -11,10 +11,9 @@ import java.util.Map;
  
 
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 import com.pathology.entity.Message;
 import com.pathology.service.IMessageService;
-public class MessageAction extends ActionSupport{
+public class MessageAction extends BaseAction{
 
 	public IMessageService messageService;
 	private Message message;
