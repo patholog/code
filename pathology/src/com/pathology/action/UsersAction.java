@@ -2,7 +2,6 @@ package com.pathology.action;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,13 +13,16 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.pathology.entity.Users;
 import com.pathology.service.IUsersService;
 import com.pathology.util.DigestMD5;
 import com.pathology.util.SessionAgentManager;
 
 public class UsersAction extends BaseAction{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Users u = new Users();
 	public IUsersService userservice;
 
@@ -37,22 +39,24 @@ public class UsersAction extends BaseAction{
 	private File photo;
 
 	public String login(){
-
-		if(user!=null){
-			String username = null;
-			//String adress=null;
-			//String realname=null;
-			//验证用户
+		String hql=" and  s.username='"+user.getUsername()+"' and s.password='"+DigestMD5.getDigestPassWord(user.getPassword())+"'";
+		List<Users> userT = userservice.getAllUser(Users.class, hql);
+		if(userT!=null && userT.size()==1){
+			SessionAgentManager.setSessionAgentBean( user,"admin"); 
+			return "loginSuccess";
+		}else{
+			return "false";
 		}
-
-		SessionAgentManager.setSessionAgentBean( user,"admin"); 
-		return "loginSuccess";
 	}
 	
 	public String checkEmail(){
-		String hql=" s.email='"+user.getEmail()+"'";
+		String hql=" and s.email='"+user.getEmail()+"'";
 		List<Users> userT = userservice.getAllUser(Users.class, hql);
-		return "";
+		if(userT!=null && userT.size()>0){
+			return "false";
+		}else{
+			return SUCCESS;
+		}
 	}
 
 

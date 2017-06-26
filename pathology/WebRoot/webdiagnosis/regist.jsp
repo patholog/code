@@ -15,27 +15,33 @@
 <link rel="stylesheet" type="text/css" href="${path }/css/settings.css" />
 <script src="${path }/js/regist.js" type="text/javascript"></script>
 <script type="text/javascript">
-	function play() {
-		document.getElementById("menu_item").style.display = "";
-	}
-	function noplay() {
-		document.getElementById("menu_item").style.display = "none";
-	}
-	function passwd() {
-		var pass = document.getElementById("password").value;
-		var tip = document.getElementById("tip");
-		if (pass.length < 4) {
-			document.getElementById("meter").value = pass.length;
-			tip.innerHTML = "差";
-		} else if (pass.length <= 8) {
-			document.getElementById("meter").value = pass.length;
-			tip.innerHTML = "中";
-		} else {
-			document.getElementById("meter").value = pass.length;
-			tip.innerHTML = "高";
-		}
-	}
-</script>
+        
+            $("#email").blur(function() {
+                var email = $("#email").val().trim();
+                if (email == '') {
+                    alert("邮箱不能为空");
+                    return false;
+                }else{
+                //login1为Action类命名空间名称；AjaxExecute为Action方法名称
+                $.ajax({
+                    type : "post",
+                    url : 'UserAction?checkEmail',
+                    data : {//设置数据源
+                        email:email
+                    },
+                    dataType : "json",//设置需要返回的数据类型
+                    success : function(d) {
+                        
+                    },
+                    error : function(d) {
+                        alert("邮箱已注册！");
+                    }
+                });
+                }
+                
+            });
+        
+    </script> 
 </head>
 <body>
 	<div id="3" style="position: relative; top: 100px; z-index: 3;">
@@ -79,16 +85,6 @@
 								<td align="left"><span><img id="img" src=""
 										width="200" height="200" />
 								</span></td>
-								<script>
-									function show() {
-										var file = document.getElementById("f").files[0];
-										var fileReader = new FileReader();
-										fileReader.readAsDataURL(file);
-										fileReader.onload = function() {
-											document.getElementById("img").src = fileReader.result;
-										}
-									}
-								</script>
 								</td>
 							</tr>
 							<tr>
