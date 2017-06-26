@@ -13,7 +13,7 @@
     	<h3><a href="${path}/webdiagnosis/collectdiag/collectdiag_list.jsp">收藏病例</a></h3>
     </div>
     <div name="leftmenu">
-    	<h3><a href="${path}/webdiagnosis/message/message_list.jsp">留言列表</a></h3>
+    	<h3><a href="MessageAction!getMessageList">留言列表</a></h3>
     </div>
     <div name="leftmenu">
     	<h3><a href="${path}/webdiagnosis/diagreport/diagreport_list.jsp">诊断报表</a></h3>
