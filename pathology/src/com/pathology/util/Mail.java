@@ -56,11 +56,11 @@ public class Mail
 	}
 	
 	/**
-	 * �����ʼ�
-	 * @param to �ռ����ʼ���ַ
-	 * @param subject ����
-	 * @param content ���� String
-	 * @return boolean �Ƿ��ͳɹ�
+	 * 发送邮件
+	 * @param to
+	 * @param subject
+	 * @param content
+	 * @return
 	 */
 	public static boolean send(String to, String subject, String content)
 	{
@@ -69,25 +69,25 @@ public class Mail
 	}
 
 	/**
-	 * �����ʼ�
-	 * @param to �ռ����ʼ���ַ
-	 * @param subject ����
-	 * @param content ���� String[]
-	 * @return boolean �Ƿ��ͳɹ�
+	 * 发送邮件
+	 * @param to
+	 * @param subject
+	 * @param content
+	 * @return
 	 */
 	public static boolean send(String to, String subject, String[] content)
 	{
 		return send(to, subject, content,null);
 	}
 
-	/**
-	 * �����ʼ�
-	 * @param to �ռ����ʼ���ַ
-	 * @param subject ����
-	 * @param content ���� String
-	 * @param files ����
-	 * @return boolean �Ƿ��ͳɹ�
-	 */
+/**
+ * 发送邮件
+ * @param to
+ * @param subject
+ * @param content
+ * @param files
+ * @return
+ */
 	public static boolean send(String to, String subject, String content, String[] files)
 	{
 		String[] tmp = new String[]{content};
@@ -316,12 +316,12 @@ public class Mail
 		return result;
 	}
 	/**
-	 * �����ʼ�
-	 * @param to �ռ����ʼ���ַ
-	 * @param subject ����
-	 * @param content ���� String[]
-	 * @param files ����
-	 * @return boolean �Ƿ��ͳɹ�
+	 * 
+	 * @param to
+	 * @param subject
+	 * @param content
+	 * @param files
+	 * @return
 	 */
 	public static boolean send(String to, String subject, String[] content, String[] files)
 	{		
