@@ -16,6 +16,6 @@ public interface IMessageService {
 	public Message getMessage(Class clazz,String id);
 	public void updateMessage(Message em);
 	public void addMessage(Message em);
-	public List<MessageDTO>  getListMessage(HttpServletRequest
+	public List<Message>  getListMessage(HttpServletRequest
 			 request,String name);
 }

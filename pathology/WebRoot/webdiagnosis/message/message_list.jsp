@@ -60,15 +60,12 @@
 				          <th width="10%">留言状态</th>
 				          <th width="15%">留言时间</th>
 				          <th width="10%">操作</th>
+				            
 						</tr>
 						         <s:iterator value="messages" id="message" status="11">
 						         <tr>
-						         <td><s:property value="#message.idMessage"/></td>
-						         <td> <s:property value="#message.fromDoctorId"/></td>
-						         <td><s:property value="#message.memo"/></td>
-						         <td><s:property value="#message.toDoctorId"/></td>
-						         <td> <s:property value="#message.content"/></td>
-						         <td> <s:property value="#message.isReaded"/></td>
+						         <td><s:property value="#message.pathologyNo"/></td>
+						         
 						          <td align="center">2016-02-25 23:29:08</td>
 						          <td align="center"><a href="daizhenduan" target="_blank">查看</a></td>
 						        </tr>
@@ -76,27 +73,8 @@
 
 						<tr class="lightrow">
 							<td colspan="8"><div id="pageDir">
-									<c:set var="pageCount" value="${(sessionScope.count-1)/10+1 }" />
-									<fmt:formatNumber var="lastIndex" value="${pageCount}"
-										pattern="#" />
-
-									第${sessionScope.thisindex }/${lastIndex }页 &nbsp; &nbsp; <a
-										href="HospitalAction!hospitalList?index=1" target="mainFrame">首页</a>&nbsp; 
-									<!-- 
-							<c:set var="pageCount" value="${fn:length(userList)%10==0?fn:length(userList)/10:fn:length(userList)/10+1 }"/>
-						-->
-									<c:forEach var="i" begin="1" step="1" end="${lastIndex }">
-										<a href="HospitalAction!hospitalList?index=${i } " target="mainFrame"><c:out
-												value="${i }" /> </a>
-									</c:forEach>
-									&nbsp;<a href="HospitalAction?index=${lastIndex}" target="mainFrame">尾页</a>
-
-									<s:form action="HospitalAction!hospitalList" theme="simple"
-										target="mainFrame">
-							第&nbsp;<s:textfield name="index" cssStyle="width:25px;height:20px;" />&nbsp;页&nbsp; &nbsp;
-							<s:submit value="Go" id="go" />
-									</s:form>
-
+								
+  <%=request.getAttribute("page")!=null?request.getAttribute("page"):"" %>
 								</div></td>
 						</tr>
 

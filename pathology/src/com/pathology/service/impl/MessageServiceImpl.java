@@ -54,14 +54,14 @@ public class MessageServiceImpl implements IMessageService {
 	}
 	
 	
-	public List<MessageDTO>  getListMessage(HttpServletRequest
+	public List<Message>  getListMessage(HttpServletRequest
 			 request,String name){
 		
 		String pageNum = request.getParameter("pageNum");
 		pageNum = pageNum != null?pageNum:"1";
 		String title = "";
 		int status = 1;
-		String sql = " select  c.username,b.content,a.patientname from   pathology  a"
+		String sql = " select  c.username,b.content,a.patientname,a.pathology_no from   pathology  a"
 						+" left join  message  b  on a.pathology_no = b.pathology_no"
 						+" left join  users  c on b.fromDoctorId = c.id_users";
 		
@@ -72,9 +72,9 @@ public class MessageServiceImpl implements IMessageService {
 		int totalNum = jdbcTemplate.queryForInt(sqlcount);
 		if(totalNum > 0){
 			Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
-			List<Message> messages = jdbcTemplate.query(sql +"  "+page.getPageLimit(), new MessageMapping());
+			//List<Message> messages = jdbcTemplate.query(sql +"  "+page.getPageLimit(), new MessageMapping());
 			request.setAttribute("page", page.getPageStr());
-			request.setAttribute("messages", messages);
+			//request.setAttribute("list", messages);
 		 
 		}
 		

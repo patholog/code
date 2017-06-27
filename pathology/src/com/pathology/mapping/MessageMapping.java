@@ -7,20 +7,21 @@ import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.pathology.dto.MessageDTO;
+import com.pathology.entity.Message;
 
 
 
 public class MessageMapping  implements RowMapper {
 	private final Logger logger = Logger.getLogger(MessageMapping.class);
 	@Override
-	public MessageDTO mapRow(ResultSet rs, int arg1) {
+	public Message mapRow(ResultSet rs, int arg1) {
 
 		try{
-			MessageDTO bean = new MessageDTO();
+			Message bean = new Message();
 			bean.setMessageOrder(rs.getString("username"));
 			bean.setContent(rs.getString("content"));
 		    bean.setMemo("");
-		    bean.setUsername(rs.getString("username"));
+		    //bean.setUsername(rs.getString("username"));
 			bean.setPathologyNo(rs.getString("pathology_no"));
 			/*bean.setId(rs.getInt("username"));
 			bean.setCure(rs.getString("content"));

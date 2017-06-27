@@ -22,7 +22,7 @@ public class MessageAction extends BaseAction{
 
 	public IMessageService messageService;
 	private Message message;
-	private List<MessageDTO> messages;
+	private List<Message> messages;
 	
 	
 	public String  getMessageList(){
@@ -65,12 +65,12 @@ public class MessageAction extends BaseAction{
 	}
 
 
-	public List<MessageDTO> getMessages() {
+	public List<Message> getMessages() {
 		return messages;
 	}
 
 
-	public void setMessages(List<MessageDTO> messages) {
+	public void setMessages(List<Message> messages) {
 		this.messages = messages;
 	}
 	
