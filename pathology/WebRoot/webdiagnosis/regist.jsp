@@ -75,15 +75,17 @@
 							<tr>
 							<td align="right">邮 箱：</td>
 							<td align="left">
-							<select id="" name="" multiple="multiple">
-								<option value=""></option>
-							</select>
-							<span id="hospital"></span></td>
+							<input type="email" name="user.email"
+								placeholder="邮箱" id="email" required /><span id="emailtip"></span>
+							</td>
 							</tr>
 							<tr>
 							<td align="right">所属医院：</td>
-							<td align="left"><input type="email" name="user.email"
-								placeholder="邮箱" id="email" required /><span id="emailtip"></span></td>
+							<td align="left">
+							<select id="" name="" multiple="multiple">
+								<option value="">医院</option>
+							</select>
+							<span id="hospital"></span></td>
 							</tr>
 							<tr>
 								<td align="right">医师资格证：</td>
