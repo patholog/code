@@ -36,7 +36,7 @@
                 <input type="button" name="" id="" value="登录" class="btn" onclick="location.href='index.jsp'" />
 				<!--<a href="javascript:void(0)" class="wapper" onclick='obj.sweep()'>扫码登录</a>-->
                 <a id="about">关于我们</a>
-                <a id="register" href="regist.jsp">注册</a>
+                <a id="register" href="HospitalAction!allHostpital">注册</a>
                 
 			</form>	
 		</div>
