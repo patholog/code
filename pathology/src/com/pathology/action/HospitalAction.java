@@ -142,7 +142,12 @@ public class HospitalAction extends BaseAction{
 		hospitalservice.deleteHospital(hos);
 		return "deletesuccess";
 	}
-	
+	 public String allHostpital(){
+		 List<Hospital> list= hospitalservice.getAllHospital(Hospital.class, "");
+		 HttpSession session=ServletActionContext.getRequest().getSession();
+		 session.setAttribute("hoslist",list);
+		 return "regist";
+	 }
 	public HttpServletRequest getRequest() {
 		return request;
 	}

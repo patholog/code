@@ -88,7 +88,9 @@
 							<tr>
 								<td align="right">所属医院：</td>
 								<td align="left"><select id="" name="" multiple="multiple">
-										<option value="">医院</option>
+								<c:forEach var="hospital" items="${hoslist}">
+									<option value="${hospital.idHospital }">${hospital.name}</option>
+								</c:forEach>
 								</select> <span id="hospital"></span>
 								</td>
 							</tr>
