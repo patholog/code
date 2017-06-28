@@ -8,7 +8,7 @@ public class MessageDTO implements java.io.Serializable {
 
 	// Fields
 
-	 
+	private int num;
 	private String patientname;
 	private String username;
 	private String content;
@@ -22,6 +22,15 @@ public class MessageDTO implements java.io.Serializable {
 	private String lastUpdUserId;
 	private Integer delF;
 	private String pathologyNo;
+	
+	
+	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getPatientname() {
 		return patientname;
 	}

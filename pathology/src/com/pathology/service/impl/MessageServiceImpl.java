@@ -54,15 +54,15 @@ public class MessageServiceImpl implements IMessageService {
 	}
 	
 	
-	public List<Message>  getListMessage(HttpServletRequest
+	public List<MessageDTO>  getListMessage(HttpServletRequest
 			 request,String name){
 		
 		String pageNum = request.getParameter("pageNum");
 		pageNum = pageNum != null?pageNum:"1";
 		String title = "";
 		int status = 1;
-		String sql = " select  c.username,b.content,a.patientname,a.pathology_no from   pathology  a"
-						+" left join  message  b  on a.pathology_no = b.pathology_no"
+		String sql = " select a.pathology_no ,a.patientname,c.username,b.content,b.createTime from   pathology  a "
+						+" left join  message  b  on a.pathology_no = b.pathology_no "
 						+" left join  users  c on b.fromDoctorId = c.id_users";
 		
 		String sqlcount  = "select  count(*) from   pathology  a"

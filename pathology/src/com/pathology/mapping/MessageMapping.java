@@ -14,15 +14,18 @@ import com.pathology.entity.Message;
 public class MessageMapping  implements RowMapper {
 	private final Logger logger = Logger.getLogger(MessageMapping.class);
 	@Override
-	public Message mapRow(ResultSet rs, int arg1) {
+	public MessageDTO mapRow(ResultSet rs, int arg1) {
 
 		try{
-			Message bean = new Message();
+			MessageDTO bean = new MessageDTO();
+			bean.setNum(rs.getRow());
 			bean.setMessageOrder(rs.getString("username"));
 			bean.setContent(rs.getString("content"));
 		    bean.setMemo("");
-		    //bean.setUsername(rs.getString("username"));
+		    bean.setUsername(rs.getString("username"));
 			bean.setPathologyNo(rs.getString("pathology_no"));
+			bean.setPatientname(rs.getString("patientname"));
+			bean.setCreateTime(rs.getTimestamp("createTime"));
 			/*bean.setId(rs.getInt("username"));
 			bean.setCure(rs.getString("content"));
 			bean.setCreate_time(rs.getString("create_time"));
