@@ -15,7 +15,8 @@
 <LINK rel="Shortcut icon" href="favicon.ico" />
 <link rel="stylesheet" type="text/css" href="${path }/css/settings.css" />
 <script src="${path }/js/regist.js" type="text/javascript"></script>
-<script src="${path }/js/jquery/jquery-1.4.4.min.js" type="text/javascript"></script>
+<script src="${path }/js/jquery/jquery-1.4.4.min.js"
+	type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -28,13 +29,17 @@
 				//login1为Action类命名空间名称；AjaxExecute为Action方法名称
 				$.ajax({
 					type : "post",
-					url : 'UserAction?checkEmail',
-					data : {//设置数据源
-						email : email
-					},
+					url : 'email.action?checkEmail',
+					contentType : "application/json; charset=utf-8",
+					data : JSON.stringify({//设置数据源
+						p : {
+							email : email
+						}
+					}),
 					dataType : "json",//设置需要返回的数据类型
 					success : function(d) {
-
+						//alert(JSON.stringify(d));
+						alert("邮箱没有被注册");
 					},
 					error : function(d) {
 						alert("邮箱已注册！");
@@ -70,14 +75,12 @@
 								<td align="right">密 码：</td>
 								<td align="left"><input type="password"
 									name="user.password" id="password" placeholder="密码" required
-									onkeyup="passwd()" /> <span id="pwsdtip"></span>
-								</td>
+									onkeyup="passwd()" /> <span id="pwsdtip"></span></td>
 							</tr>
 							<tr>
 								<td align="right">密码确认：</td>
 								<td align="left"><input type="password" name="password2"
-									placeholder="确认密码" required /><span id="pwsd2tip"></span>
-								</td>
+									placeholder="确认密码" required /><span id="pwsd2tip"></span></td>
 							</tr>
 							<tr>
 								<td align="right">邮 箱：</td>
@@ -88,21 +91,18 @@
 							<tr>
 								<td align="right">所属医院：</td>
 								<td align="left"><select id="" name="" multiple="multiple">
-								<c:forEach var="hospital" items="${hoslist}">
-									<option value="${hospital.idHospital }">${hospital.name}</option>
-								</c:forEach>
-								</select> <span id="hospital"></span>
-								</td>
+										<option value="">医院</option>
+								</select> <span id="hospital"></span></td>
 							</tr>
 							<tr>
 								<td align="right">医师资格证：</td>
 								<td align="left"><input name="photo" class="file"
-									type="file" id="f" accept="image/jpeg" onchange="show()" /></td>
+									type="file" id="f" accept="image/jpeg" onchange="show()" />
+								</td>
 							<tr>
 								<td></td>
 								<td align="left"><span><img id="img" src=""
-										width="200" height="200" /> </span>
-								</td>
+										width="200" height="200" /> </span></td>
 								</td>
 							</tr>
 							<tr>
@@ -114,11 +114,9 @@
 									accesskey="enter" value="注册" id="btn"
 									onmousemove="changeBgColor('btn')"
 									onmouseout="recoverBgColor('btn');" class="submit"
-									formmethod="post" />
-								</td>
+									formmethod="post" /></td>
 							</tr>
-						</table>
-					</td>
+						</table></td>
 				</tr>
 			</table>
 		</form>

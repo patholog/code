@@ -82,7 +82,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-webmvc.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sqljdbc.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts2-core-2.1.8.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts2-spring-plugin-2.1.8.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/swarmcache-1.0rc2.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/velocity-1.5.jar"/>
@@ -90,8 +89,10 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xapool.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xerces-2.6.2.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xml-apis.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xwork-core-2.1.6.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts2-core-2.1.8.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts2-json-plugin-2.1.8.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xwork-core-2.1.6.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

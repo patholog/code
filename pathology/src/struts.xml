@@ -6,6 +6,15 @@
 	<constant name="struts.devMode" value="true"></constant>
 	<constant name="struts.custom.i18n.resources" value="messages"></constant>
 	<constant name="struts.objectFactory" value="spring"></constant>
+	<package name="ajax" extends="json-default">
+		<action name="email" class="com.pathology.action.EmailAction"
+			method="checkEmail">
+			<!-- 将返回类型设置为json -->
+			<interceptor-ref name="json" />
+
+			<result type="json"></result>
+		</action>
+	</package>
 	<package name="actions" extends="struts-default">
 		<global-results>
 			<result name="loginput">/loginput.jsp</result>
@@ -20,19 +29,15 @@
 			<result>/index.jsp</result>
 		</action>
 
-		<!-- 后台管理部分 
-		<action name="admin_*" method="{1}" class="com.flp.actions.UsersAction">
-			<result name="loginSuc">/admin/AdminIndex.jsp</result>
-			<result name="loginFal">/admin/AdminLogin.jsp</result>
-			<result name="logoutSuc">/admin/AdminLogin.jsp</result>
-			<result name="addAdminSuc">/admin/AdminIndex.jsp</result>
-			<result name="failure">/Error.jsp</result>
-			<result name="userList">/admin/UserList.jsp</result>
-			<result name="findAllUser" type="redirectAction">admin_findAllUser</result>
-			<result name="allCat">/admin/TypeList.jsp</result>
-			<result name="catList" type="redirectAction">admin_catList</result>
-		</action>-->
-		<action name="UserAction" class="com.pathology.action.UsersAction" method="userList">
+		<!-- 后台管理部分 <action name="admin_*" method="{1}" class="com.flp.actions.UsersAction"> 
+			<result name="loginSuc">/admin/AdminIndex.jsp</result> <result name="loginFal">/admin/AdminLogin.jsp</result> 
+			<result name="logoutSuc">/admin/AdminLogin.jsp</result> <result name="addAdminSuc">/admin/AdminIndex.jsp</result> 
+			<result name="failure">/Error.jsp</result> <result name="userList">/admin/UserList.jsp</result> 
+			<result name="findAllUser" type="redirectAction">admin_findAllUser</result> 
+			<result name="allCat">/admin/TypeList.jsp</result> <result name="catList" 
+			type="redirectAction">admin_catList</result> </action> -->
+		<action name="UserAction" class="com.pathology.action.UsersAction"
+			method="userList">
 
 			<result name="success"> /manage/user/userlist.jsp</result>
 			<result name="deletesuccess" type="redirectAction">UserAction!userList</result>
@@ -44,14 +49,16 @@
 		</action>
 		<action name="HospitalAction" class="com.pathology.action.HospitalAction">
 			<result name="success"> /manage/hospital/hospitallist.jsp</result>
-			<result name="deletesuccess" type="redirectAction">HospitalAction!hospitalList</result>
-			<result name="updatesuccess" type="redirectAction">HospitalAction!hospitalList</result>
+			<result name="deletesuccess" type="redirectAction">HospitalAction!hospitalList
+			</result>
+			<result name="updatesuccess" type="redirectAction">HospitalAction!hospitalList
+			</result>
 			<result name="edit"> /manage/hospital/update_hospital.jsp</result>
 			<result name="regist"> /webdiagnosis/regist.jsp</result>
 		</action>
-		  <!-- 留言 -->
-			<action name="MessageAction" class="com.pathology.action.MessageAction">
-		 
+		<!-- 留言 -->
+		<action name="MessageAction" class="com.pathology.action.MessageAction">
+
 			<result name="messages"> /webdiagnosis/message/message_list.jsp</result>
 		</action>
 	</package>
