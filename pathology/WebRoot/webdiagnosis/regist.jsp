@@ -14,6 +14,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <LINK rel="Shortcut icon" href="favicon.ico" />
 <link rel="stylesheet" type="text/css" href="${path }/css/settings.css" />
+<link rel="stylesheet" type="text/css" href="${path }/css/select.css" />
 <script src="${path }/js/regist.js" type="text/javascript"></script>
 <script src="${path }/js/jquery/jquery-1.4.4.min.js"
 	type="text/javascript"></script>
@@ -51,6 +52,7 @@
 
 	});
 </script>
+
 </head>
 <body>
 	<div id="3" style="position: relative; top: 100px; z-index: 3;">
@@ -90,9 +92,12 @@
 							</tr>
 							<tr>
 								<td align="right">所属医院：</td>
-								<td align="left"><select id="" name="" multiple="multiple">
-										<option value="">医院</option>
-								</select> <span id="hospital"></span></td>
+								<td align="left">
+								<!--  <c:forEach var="hospital" items="${hoslist}">
+									<option value="${hospital.idHospital }">${hospital.name}</option>
+								</c:forEach>s -->
+								<%@include file="CheckSelect.jsp"%>
+								<span id="hospital"></span></td>
 							</tr>
 							<tr>
 								<td align="right">医师资格证：</td>
