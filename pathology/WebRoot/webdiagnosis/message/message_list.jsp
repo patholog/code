@@ -64,9 +64,13 @@
 						</tr>
 						         <s:iterator value="messages" id="message" status="11">
 						         <tr>
+						         <td><s:property value="#message.messageOrder"/></td>
 						         <td><s:property value="#message.pathologyNo"/></td>
-						         
-						          <td align="center">2016-02-25 23:29:08</td>
+						         <td><s:property value="#message.patientname"/></td>
+						         <td><s:property value="#message.username"/></td>
+						         <td><s:property value="#message.content"/></td>
+						         <td><s:property value="#message.isReaded"/></td>
+						         <td><s:property value="#message.createTime"/></td>
 						          <td align="center"><a href="daizhenduan" target="_blank">查看</a></td>
 						        </tr>
 						        </s:iterator>
