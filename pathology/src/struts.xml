@@ -14,7 +14,14 @@
 
 			<result type="json"></result>
 		</action>
+		<action name="login2" class="com.pathology.action.LoginAction"
+			method="login">
+			<!-- 将返回类型设置为json -->
+			<interceptor-ref name="json" />
+			<result type="json"></result>
+		</action>
 	</package>
+
 	<package name="actions" extends="struts-default">
 		<global-results>
 			<result name="loginput">/loginput.jsp</result>
