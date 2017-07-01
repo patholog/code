@@ -6,18 +6,17 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.pathology.dto.MessageDTO;
-import com.pathology.entity.Message;
+import com.pathology.dto.CollectionDTO;
 
 
 
 public class CollectionMapping  implements RowMapper {
 	private final Logger logger = Logger.getLogger(CollectionMapping.class);
 	@Override
-	public MessageDTO mapRow(ResultSet rs, int arg1) {
+	public CollectionDTO mapRow(ResultSet rs, int arg1) {
 
 		try{
-			MessageDTO bean = new MessageDTO();
+			CollectionDTO bean = new CollectionDTO();
 			bean.setNum(rs.getRow());
 			bean.setMessageOrder(rs.getString("username"));
 			bean.setContent(rs.getString("memo"));
