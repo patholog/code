@@ -114,5 +114,25 @@
 		scope="prototype">
 		<property name="collectionService" ref="collectionService"></property>
 	</bean>
+	<!-- 分享 -->
+	<bean id="sharedao" class="com.pathology.dao.impl.ShareDaoImpl" parent="pt" />
+	<bean id="shareService" class="com.pathology.service.impl.ShareServiceImpl">
+		<property name="sharedao" ref="sharedao"></property>
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+		<bean id="shareAction" class="com.pathology.action.ShareAction"
+		scope="prototype">
+		<property name="shareService" ref="shareService"></property>
+	</bean>
+		<!-- 病例表 -->
+	<bean id="pathologydao" class="com.pathology.dao.impl.PathologyDaoImpl" parent="pt" />
+	<bean id="pathologyService" class="com.pathology.service.impl.PathologyServiceImpl">
+		<property name="pathologydao" ref="pathologydao"></property>
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+		<bean id="pathologyAction" class="com.pathology.action.PathologyAction"
+		scope="prototype">
+		<property name="pathologyService" ref="pathologyService"></property>
+	</bean>
 	
 </beans>

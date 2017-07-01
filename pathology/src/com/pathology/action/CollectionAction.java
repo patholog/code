@@ -49,7 +49,7 @@ public class CollectionAction extends BaseAction{
 	}
 
 
-	public void setCollection(List<CollectionDTO> collections) {
+	public void setCollections(List<CollectionDTO> collections) {
 		this.collections = collections;
 	}
 	
