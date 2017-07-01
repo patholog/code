@@ -104,5 +104,15 @@
 		scope="prototype">
 		<property name="messageService" ref="messageService"></property>
 	</bean>
+	<!-- 收藏 -->
+	<bean id="collectiondao" class="com.pathology.dao.impl.CollectionDaoImpl" parent="pt" />
+	<bean id="collectionService" class="com.pathology.service.impl.CollectionServiceImpl">
+		<property name="collectiondao" ref="collectiondao"></property>
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+		<bean id="collectionAction" class="com.pathology.action.CollectionAction"
+		scope="prototype">
+		<property name="collectionService" ref="collectionService"></property>
+	</bean>
 	
 </beans>

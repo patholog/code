@@ -30,7 +30,7 @@
 			<result>/{1}.jsp</result>
 		</action>
 		<action name="daizhenduan">
-			<result>/daizhenduan.html</result>
+			<result>/webdiagnosis/needdiag/needdiag.html</result>
 		</action>
 		<action name="login">
 			<result>/index.jsp</result>
@@ -67,6 +67,11 @@
 		<action name="MessageAction" class="com.pathology.action.MessageAction">
 
 			<result name="messages"> /webdiagnosis/message/message_list.jsp</result>
+		</action>
+		<!--  收藏 -->
+		<action name="CollectionAction" class="com.pathology.action.CollectionAction">
+
+			<result name="collections">/webdiagnosis/collectdiag/collectdiag_list.jsp</result>
 		</action>
 	</package>
 </struts>
