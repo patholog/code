@@ -61,44 +61,26 @@
 				          <th width="15%">申请时间</th>
 				          <th width="15%">诊断时间</th>
 				          <th width="20%">操作</th>
+				            
 						</tr>
-						<c:forEach items="${sessionScope.hoslist }" var="hospital" varStatus="status">
-							<tr bgColor="${status.index%2==0?'#f9f9ff':'#ffffff' }">
-							<td>${hospital.name}</td>
-							<td>${hospital.code}</td>
-							<td>${hospital.tel }</td>
-							<td>${hospital.address }</td>
-							<td>${hospital.memo }</td>
-								<td class="action_collomn"><a
-									href="HospitalAction!updateHospital?hospital.idHospital=${hospital.idHospital }">修改</a> &nbsp; | &nbsp; <a
-									href="HospitalAction!deleteHospital?hospital.idHospital=${hospital.idHospital }">删除</a>
-							</tr>
-						</c:forEach>
-
+						         <s:iterator value="collections" id="collection" status="11">
+						         <tr>
+						         <td><s:property value="#collection.messageOrder"/></td>
+						         <td><s:property value="#collection.pathologyNo"/></td>
+						         <td><s:property value="#collection.pathologyNo"/></td>
+						         <td><s:property value="#collection.patientname"/></td>
+						         <td><s:property value="#collection.username"/></td>
+						         <td><s:property value="#collection.content"/></td>
+						         <td><s:property value="#collection.isReaded"/></td>
+						         <td><s:property value="#collection.createTime"/></td>
+						          <td align="center"><a href="daizhenduan" target="_blank">查看</a></td>
+						        </tr>
+						        </s:iterator>
 
 						<tr class="lightrow">
-							<td colspan="8"><div id="pageDir">
-									<c:set var="pageCount" value="${(sessionScope.count-1)/10+1 }" />
-									<fmt:formatNumber var="lastIndex" value="${pageCount}"
-										pattern="#" />
-
-									第${sessionScope.thisindex }/${lastIndex }页 &nbsp; &nbsp; <a
-										href="HospitalAction!hospitalList?index=1" target="mainFrame">首页</a>&nbsp; 
-									<!-- 
-							<c:set var="pageCount" value="${fn:length(userList)%10==0?fn:length(userList)/10:fn:length(userList)/10+1 }"/>
-						-->
-									<c:forEach var="i" begin="1" step="1" end="${lastIndex }">
-										<a href="HospitalAction!hospitalList?index=${i } " target="mainFrame"><c:out
-												value="${i }" /> </a>
-									</c:forEach>
-									&nbsp;<a href="HospitalAction?index=${lastIndex}" target="mainFrame">尾页</a>
-
-									<s:form action="HospitalAction!hospitalList" theme="simple"
-										target="mainFrame">
-							第&nbsp;<s:textfield name="index" cssStyle="width:25px;height:20px;" />&nbsp;页&nbsp; &nbsp;
-							<s:submit value="Go" id="go" />
-									</s:form>
-
+							<td colspan="9"><div id="pageDir">
+								
+  <%=request.getAttribute("page")!=null?request.getAttribute("page"):"" %>
 								</div></td>
 						</tr>
 

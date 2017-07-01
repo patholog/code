@@ -10,7 +10,7 @@
     	<h3><a href="${path}/webdiagnosis/retreatdiag/retreatdiag_list.jsp">退回病例</a></h3>
     </div>
     <div name="leftmenu">
-    	<h3><a href="${path}/webdiagnosis/collectdiag/collectdiag_list.jsp">收藏病例</a></h3>
+    	<h3><a href="CollectionAction!getCollectionList">收藏病例</a></h3>
     </div>
     <div name="leftmenu">
     	<h3><a href="MessageAction!getMessageList">留言列表</a></h3>
