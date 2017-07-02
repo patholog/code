@@ -39,7 +39,7 @@ $(function () {
           // highlight: false,
           // background: false,
 
-          // autoCrop: false,
+           autoCrop: false,
           // autoCropArea: 0.5,
           // dragCrop: false,
           // movable: false,
@@ -202,7 +202,7 @@ $(function () {
 
 
     // Tooltips
-    $('[data-toggle="tooltip"]').tooltip();
+//    $('[data-toggle="tooltip"]').tooltip();
 
   }());
 
