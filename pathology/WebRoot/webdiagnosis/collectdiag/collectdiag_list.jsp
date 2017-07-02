@@ -18,8 +18,8 @@
 <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
 <script type="text/javascript">
 	function confirmDelete(id) {
-		if (confirm('你确定删除此产品？'))
-			window.location.href = '?action=delete&id=' + id;
+		if (confirm('确定取消收藏？'))
+			window.location.href = 'CollectionAction!deleteCollection?collection.collectionId=' + id;
 	}
 </script>
 </head>
@@ -73,7 +73,7 @@
 						         <td><s:property value="#collection.content"/></td>
 						         <td><s:property value="#collection.isReaded"/></td>
 						         <td><s:property value="#collection.createTime"/></td>
-						          <td align="center"><a href="CollectionAction!deleteCollection?collection.collectionId=${collection.collectionId }">取消收藏</a></td>
+						          <td align="center"><a href="#"  onclick="confirmDelete('${collection.collectionId }')">取消收藏</a></td>
 						        </tr>
 						        </s:iterator>
 
