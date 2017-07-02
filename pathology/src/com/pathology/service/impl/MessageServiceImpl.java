@@ -61,9 +61,9 @@ public class MessageServiceImpl implements IMessageService {
 		pageNum = pageNum != null?pageNum:"1";
 		String title = "";
 		int status = 1;
-		String sql = " select a.pathology_no ,a.patientname,c.username,b.content,b.createTime from   pathology  a "
-						+" left join  message  b  on a.pathology_no = b.pathology_no "
-						+" left join  users  c on b.fromDoctorId = c.id_users";
+		String sql = " select b.pathology_no ,b.patientname,c.username,a.content,a.createTime from message  a "
+						+" left join  pathology  b  on a.case_id = b.id_case "
+						+" left join  users  c on a.fromDoctorId = c.id_users";
 		
 		String sqlcount  = "select  count(*) from   pathology  a"
 				+"  left join  message  b  on a.pathology_no = b.pathology_no"
