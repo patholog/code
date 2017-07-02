@@ -10,6 +10,12 @@
             <column name="id_case" length="32" />
             <generator class="assigned"></generator>
         </id>
+        <property name="pathologyno" type="java.lang.String">
+            <column name="pathologyno" length="50" />
+        </property>
+        <property name="diagStatus" type="java.lang.String">
+            <column name="diag_status" length="10" />
+        </property>
         <property name="hospitalcode" type="java.lang.String">
             <column name="hospitalcode" length="50" not-null="true" />
         </property>
@@ -30,9 +36,6 @@
         </property>
         <property name="patientoccupation" type="java.lang.String">
             <column name="patientoccupation" length="50" />
-        </property>
-        <property name="pathologyno" type="java.lang.String">
-            <column name="pathologyno" length="50" />
         </property>
         <property name="idcard" type="java.lang.String">
             <column name="idcard" length="32" />
@@ -63,6 +66,9 @@
         </property>
         <property name="memo" type="java.lang.String">
             <column name="memo" />
+        </property>
+        <property name="diagTime" type="java.sql.Timestamp">
+            <column name="diag_time" length="0" />
         </property>
         <property name="sortNo" type="java.lang.String">
             <column name="SORT_NO" />
@@ -96,11 +102,6 @@
         </property>
         <property name="delF" type="java.lang.Integer">
             <column name="DEL_F" />
-        </property>
-        <property name="pathologyNo" type="java.lang.String">
-            <column name="pathology_no">
-                <comment>bignlihao</comment>
-            </column>
         </property>
     </class>
 </hibernate-mapping>

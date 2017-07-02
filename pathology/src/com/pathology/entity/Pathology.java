@@ -11,6 +11,8 @@ public class Pathology implements java.io.Serializable {
 	// Fields
 
 	private String idCase;
+	private String pathologyno;
+	private String diagStatus;
 	private String hospitalcode;
 	private String patientname;
 	private String patientage;
@@ -18,7 +20,6 @@ public class Pathology implements java.io.Serializable {
 	private String patientsex;
 	private Timestamp patientbirthday;
 	private String patientoccupation;
-	private String pathologyno;
 	private String idcard;
 	private String mobile;
 	private String specimenname;
@@ -29,6 +30,7 @@ public class Pathology implements java.io.Serializable {
 	private String isdeleted;
 	private String deletor;
 	private String memo;
+	private Timestamp diagTime;
 	private String sortNo;
 	private String spellNo;
 	private String wubiNo;
@@ -40,7 +42,6 @@ public class Pathology implements java.io.Serializable {
 	private String lastUpdDeptCd;
 	private String lastUpdUserId;
 	private Integer delF;
-	private String pathologyNo;
 
 	// Constructors
 
@@ -55,17 +56,19 @@ public class Pathology implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Pathology(String idCase, String hospitalcode, String patientname,
-			String patientage, String ageunit, String patientsex,
-			Timestamp patientbirthday, String patientoccupation,
-			String pathologyno, String idcard, String mobile,
+	public Pathology(String idCase, String pathologyno, String diagStatus,
+			String hospitalcode, String patientname, String patientage,
+			String ageunit, String patientsex, Timestamp patientbirthday,
+			String patientoccupation, String idcard, String mobile,
 			String specimenname, String specimentype, Timestamp inspectiondate,
 			String clinicdiagnose, String historysummary, String isdeleted,
-			String deletor, String memo, String sortNo, String spellNo,
-			String wubiNo, Integer updCnt, Timestamp crtTime, String crtUserId,
-			String crtDeptCd, Timestamp lastUpdTime, String lastUpdDeptCd,
-			String lastUpdUserId, Integer delF, String pathologyNo) {
+			String deletor, String memo, Timestamp diagTime, String sortNo,
+			String spellNo, String wubiNo, Integer updCnt, Timestamp crtTime,
+			String crtUserId, String crtDeptCd, Timestamp lastUpdTime,
+			String lastUpdDeptCd, String lastUpdUserId, Integer delF) {
 		this.idCase = idCase;
+		this.pathologyno = pathologyno;
+		this.diagStatus = diagStatus;
 		this.hospitalcode = hospitalcode;
 		this.patientname = patientname;
 		this.patientage = patientage;
@@ -73,7 +76,6 @@ public class Pathology implements java.io.Serializable {
 		this.patientsex = patientsex;
 		this.patientbirthday = patientbirthday;
 		this.patientoccupation = patientoccupation;
-		this.pathologyno = pathologyno;
 		this.idcard = idcard;
 		this.mobile = mobile;
 		this.specimenname = specimenname;
@@ -84,6 +86,7 @@ public class Pathology implements java.io.Serializable {
 		this.isdeleted = isdeleted;
 		this.deletor = deletor;
 		this.memo = memo;
+		this.diagTime = diagTime;
 		this.sortNo = sortNo;
 		this.spellNo = spellNo;
 		this.wubiNo = wubiNo;
@@ -95,7 +98,6 @@ public class Pathology implements java.io.Serializable {
 		this.lastUpdDeptCd = lastUpdDeptCd;
 		this.lastUpdUserId = lastUpdUserId;
 		this.delF = delF;
-		this.pathologyNo = pathologyNo;
 	}
 
 	// Property accessors
@@ -106,6 +108,22 @@ public class Pathology implements java.io.Serializable {
 
 	public void setIdCase(String idCase) {
 		this.idCase = idCase;
+	}
+
+	public String getPathologyno() {
+		return this.pathologyno;
+	}
+
+	public void setPathologyno(String pathologyno) {
+		this.pathologyno = pathologyno;
+	}
+
+	public String getDiagStatus() {
+		return this.diagStatus;
+	}
+
+	public void setDiagStatus(String diagStatus) {
+		this.diagStatus = diagStatus;
 	}
 
 	public String getHospitalcode() {
@@ -162,14 +180,6 @@ public class Pathology implements java.io.Serializable {
 
 	public void setPatientoccupation(String patientoccupation) {
 		this.patientoccupation = patientoccupation;
-	}
-
-	public String getPathologyno() {
-		return this.pathologyno;
-	}
-
-	public void setPathologyno(String pathologyno) {
-		this.pathologyno = pathologyno;
 	}
 
 	public String getIdcard() {
@@ -250,6 +260,14 @@ public class Pathology implements java.io.Serializable {
 
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+
+	public Timestamp getDiagTime() {
+		return this.diagTime;
+	}
+
+	public void setDiagTime(Timestamp diagTime) {
+		this.diagTime = diagTime;
 	}
 
 	public String getSortNo() {
@@ -338,14 +356,6 @@ public class Pathology implements java.io.Serializable {
 
 	public void setDelF(Integer delF) {
 		this.delF = delF;
-	}
-
-	public String getPathologyNo() {
-		return this.pathologyNo;
-	}
-
-	public void setPathologyNo(String pathologyNo) {
-		this.pathologyNo = pathologyNo;
 	}
 
 }
