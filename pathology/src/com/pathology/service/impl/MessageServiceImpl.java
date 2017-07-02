@@ -65,9 +65,9 @@ public class MessageServiceImpl implements IMessageService {
 						+" left join  pathology  b  on a.case_id = b.id_case "
 						+" left join  users  c on a.fromDoctorId = c.id_users";
 		
-		String sqlcount  = "select  count(*) from   pathology  a"
-				+"  left join  message  b  on a.pathology_no = b.pathology_no"
-				+"   left join  users  c on b.fromDoctorId = c.id_users";
+		String sqlcount  = "select  count(*) from   message  a"
+				+"  left join  pathology  b  on  b.id_case=a.case_id "
+				+"   left join  users  c on  c.id_users=b.fromDoctorId";
 		
 		int totalNum = jdbcTemplate.queryForInt(sqlcount);
 		if(totalNum > 0){
