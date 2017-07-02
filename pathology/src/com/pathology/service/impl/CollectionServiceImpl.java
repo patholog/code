@@ -61,7 +61,7 @@ public class CollectionServiceImpl implements ICollectionService {
 		pageNum = pageNum != null?pageNum:"1";
 		String title = "";
 		int status = 1;
-		String sql = " select b.pathology_no ,b.patientname,c.username,a.memo,a.crt_Time,a.id_collection from collection a   "
+		String sql = " select b.pathologyno ,b.patientname,c.username,a.memo,a.crt_Time,a.id_collection from collection a   "
 						+" left join pathology  b  on a.case_id = b.id_case "
 						+" left join  users  c on a.collectioner_Id = c.id_users";
 		

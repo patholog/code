@@ -23,7 +23,7 @@ public class CollectionMapping  implements RowMapper {
 		    bean.setMemo("");
 		    bean.setCollectionId(rs.getString("id_collection"));
 		    bean.setUsername(rs.getString("username"));
-			bean.setPathologyNo(rs.getString("pathology_no"));
+			bean.setPathologyNo(rs.getString("pathologyno"));
 			bean.setPatientname(rs.getString("patientname"));
 			bean.setCreateTime(rs.getTimestamp("crt_Time"));
 			/*bean.setId(rs.getInt("username"));

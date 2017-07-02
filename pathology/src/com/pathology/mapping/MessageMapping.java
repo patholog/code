@@ -23,7 +23,7 @@ public class MessageMapping  implements RowMapper {
 			bean.setContent(rs.getString("content"));
 		    bean.setMemo("");
 		    bean.setUsername(rs.getString("username"));
-			bean.setPathologyNo(rs.getString("pathology_no"));
+			bean.setPathologyNo(rs.getString("pathologyno"));
 			bean.setPatientname(rs.getString("patientname"));
 			bean.setCreateTime(rs.getTimestamp("createTime"));
 			/*bean.setId(rs.getInt("username"));
