@@ -9,17 +9,13 @@
 <title></title>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" type="text/css" href="${path }/css/style.css" />
-<script type="text/javascript"
-	src="${path }/CKEditor/ckeditor/ckeditor.js"></script>
-<script type="text/javascript"
-	src="${path }/CKFinder/ckfinder/ckfinder.js"></script>
 <script type="text/javascript" src="${path }/js/treeView.js"></script>
 <script type="text/javascript" src="${path }/js/common-cn.js"></script>
 <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
 <script type="text/javascript">
 	function confirmDelete(id) {
-		if (confirm('你确定删除此产品？'))
-			window.location.href = '?action=delete&id=' + id;
+		if (confirm('确定取消分享？'))
+			window.location.href = 'ShareAction!deleteShare?share.shareId=' + id;
 	}
 </script>
 </head>
@@ -71,7 +67,7 @@
 						         <td><s:property value="#share.username"/></td>
 						         <td><s:property value="#share.memo"/></td>
 						         <td><s:property value="#share.shareId"/></td>
-						          <td align="center"><a href="ShareAction!deleteShare?share.shareId=${share.shareId}">取消收藏</a></td>
+						          <td align="center"><a href="javascript:void(0);"  onclick="confirmDelete(${share.shareId })">取消分享</a></td>
 						        </tr>
 						        </s:iterator>
 
