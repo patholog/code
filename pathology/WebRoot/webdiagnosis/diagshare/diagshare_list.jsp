@@ -67,7 +67,7 @@
 						         <td><s:property value="#share.username"/></td>
 						         <td><s:property value="#share.memo"/></td>
 						         <td><s:property value="#share.shareId"/></td>
-						          <td align="center"><a href="javascript:void(0);"  onclick="confirmDelete(${share.shareId })">取消分享</a></td>
+						          <td align="center"><a href="#"  onclick="confirmDelete('${share.shareId }')">取消分享</a></td>
 						        </tr>
 						        </s:iterator>
 
