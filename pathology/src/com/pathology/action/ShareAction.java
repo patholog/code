@@ -11,13 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 
 import com.pathology.dto.ShareDTO;
+import com.pathology.entity.Collection;
+import com.pathology.entity.Share;
 import com.pathology.service.IShareService;
 
 public class ShareAction extends BaseAction{
 
 	public IShareService shareService;
 	private List<ShareDTO> shares;
-	
+	private ShareDTO share;
 	
 	public String  getShareList(){
 		try{
@@ -32,6 +34,21 @@ public class ShareAction extends BaseAction{
 		
 	   }
 		return "shares";
+	}
+
+	public String deleteShare(){
+		Share hos=shareService.getShare(Share.class, share.getShareId());
+		shareService.deleteShare(hos);
+		return "deletesuccess";
+	}
+
+	public ShareDTO getShare() {
+		return share;
+	}
+
+
+	public void setShare(ShareDTO share) {
+		this.share = share;
 	}
 
 
