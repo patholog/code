@@ -21,6 +21,7 @@ public class CollectionMapping  implements RowMapper {
 			bean.setMessageOrder(rs.getString("username"));
 			bean.setContent(rs.getString("memo"));
 		    bean.setMemo("");
+		    bean.setCollectionId(rs.getString("id_collection"));
 		    bean.setUsername(rs.getString("username"));
 			bean.setPathologyNo(rs.getString("pathology_no"));
 			bean.setPatientname(rs.getString("patientname"));

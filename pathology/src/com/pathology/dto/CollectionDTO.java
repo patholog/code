@@ -13,6 +13,13 @@ public class CollectionDTO implements java.io.Serializable {
 	private String username;
 	private String content;
 	private String caseId;
+	private String collectionId;
+	public String getCollectionId() {
+		return collectionId;
+	}
+	public void setCollectionId(String collectionId) {
+		this.collectionId = collectionId;
+	}
 	private String messageOrder;
 	private String isReaded;
 	private Timestamp createTime;

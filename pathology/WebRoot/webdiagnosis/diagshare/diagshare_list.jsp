@@ -65,12 +65,12 @@
 						         <s:iterator value="shares" id="share" status="11">
 						         <tr>
 						         <td><s:property value="#share.pathologyNo"/></td>
-						         <td><s:property value="#shares.patientname"/></td>
-						          <td><s:property value="#share.createTime"/></td>
+						         <td><s:property value="#share.patientname"/></td>
+						         <td><s:property value="#share.createTime"/></td>
 						         <td><s:property value="#share.username"/></td>
 						         <td><s:property value="#share.username"/></td>
 						         <td><s:property value="#share.memo"/></td>
-						         <td><s:property value="#share.isReaded"/></td>
+						         <td><s:property value="#share.shareId"/></td>
 						        
 						          <td align="center"><a href="daizhenduan" target="_blank">查看</a></td>
 						        </tr>
