@@ -13,6 +13,7 @@ public class ShareDTO implements java.io.Serializable {
 	private String username;
 	private String content;
 	private String caseId;
+	private String shareId;
 	private String messageOrder;
 	private String isReaded;
 	private Timestamp createTime;
@@ -25,6 +26,12 @@ public class ShareDTO implements java.io.Serializable {
 	
 	
 	
+	public String getShareId() {
+		return shareId;
+	}
+	public void setShareId(String shareId) {
+		this.shareId = shareId;
+	}
 	public int getNum() {
 		return num;
 	}

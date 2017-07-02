@@ -20,6 +20,7 @@ public class ShareMapping  implements RowMapper {
 		try{
 			ShareDTO bean = new ShareDTO();
 			bean.setNum(rs.getRow());
+			bean.setShareId(rs.getString("id_share"));
 			bean.setMessageOrder(rs.getString("username"));
 			bean.setContent(rs.getString("memo"));
 		    bean.setMemo("memo");
