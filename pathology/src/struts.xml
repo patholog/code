@@ -78,6 +78,7 @@
 		<action name="ShareAction" class="com.pathology.action.ShareAction">
 
 			<result name="shares">/webdiagnosis/diagshare/diagshare_list.jsp</result>
+			<result name="deletesuccess" type="redirectAction">ShareAction!getShareList</result>
 		</action>
 		<!-- 病例表 -->
 		<action name="PathologyAction" class="com.pathology.action.PathologyAction">
