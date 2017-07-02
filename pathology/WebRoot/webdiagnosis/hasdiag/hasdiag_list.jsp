@@ -64,12 +64,13 @@
 						</tr>
 						         <s:iterator value="pathologys" id="pathology" status="11">
 						         <tr>
-						         <td><s:property value="#pathology.messageOrder"/></td>
+						         
 						         <td><s:property value="#pathology.pathologyNo"/></td>
 						         <td><s:property value="#pathology.patientname"/></td>
 						         <td><s:property value="#pathology.username"/></td>
 						         <td><s:property value="#pathology.content"/></td>
-						         <td><s:property value="#pathology.isReaded"/></td>
+						         <td><s:property value="#pathology.username"/></td>
+						         <td><s:property value="#pathology.username"/></td>
 						         <td><s:property value="#pathology.createTime"/></td>
 						         <td><s:property value="#pathology.createTime"/></td>
 						          <td align="center"><a href="daizhenduan" target="_blank">查看</a></td>
@@ -77,7 +78,7 @@
 						        </s:iterator>
 
 						<tr class="lightrow">
-							<td colspan="8"><div id="pageDir">
+							<td colspan="9"><div id="pageDir">
 								
   <%=request.getAttribute("page")!=null?request.getAttribute("page"):"" %>
 								</div></td>

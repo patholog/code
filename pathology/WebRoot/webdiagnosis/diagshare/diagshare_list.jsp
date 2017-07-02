@@ -71,7 +71,6 @@
 						         <td><s:property value="#share.username"/></td>
 						         <td><s:property value="#share.memo"/></td>
 						         <td><s:property value="#share.shareId"/></td>
-						        
 						          <td align="center"><a href="daizhenduan" target="_blank">查看</a></td>
 						        </tr>
 						        </s:iterator>
