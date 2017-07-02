@@ -10,13 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 import com.pathology.dto.CollectionDTO;
+import com.pathology.entity.Collection;
+import com.pathology.entity.Hospital;
 import com.pathology.service.ICollectionService;
 
 public class CollectionAction extends BaseAction{
 
 	public ICollectionService collectionService;
 	private List<CollectionDTO> collections;
-	
+	private CollectionDTO collection;
 	
 	public String  getCollectionList(){
 		try{
@@ -31,6 +33,16 @@ public class CollectionAction extends BaseAction{
 		
 	   }
 		return "collections";
+	}
+
+
+	public CollectionDTO getCollection() {
+		return collection;
+	}
+
+
+	public void setCollection(CollectionDTO collection) {
+		this.collection = collection;
 	}
 
 
@@ -52,7 +64,11 @@ public class CollectionAction extends BaseAction{
 	public void setCollections(List<CollectionDTO> collections) {
 		this.collections = collections;
 	}
-	
+	public String deleteCollection(){
+		Collection hos=collectionService.getCollection(Collection.class, collection.getCollectionId());
+		collectionService.deleteCollection(hos);
+		return "deletesuccess";
+	}
 	
 	
 }

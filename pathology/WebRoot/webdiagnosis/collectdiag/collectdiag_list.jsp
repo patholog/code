@@ -73,7 +73,8 @@
 						         <td><s:property value="#collection.content"/></td>
 						         <td><s:property value="#collection.isReaded"/></td>
 						         <td><s:property value="#collection.createTime"/></td>
-						          <td align="center"><a href="daizhenduan" target="_blank">查看</a></td>
+						          <td align="center"><a href="daizhenduan" target="_blank">查看</a>&nbsp; | &nbsp; <a
+									href="CollectionAction!deleteCollection?hospital.idHospital=${collection.collectionId }">删除</a></td>
 						        </tr>
 						        </s:iterator>
 

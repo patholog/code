@@ -72,6 +72,7 @@
 		<action name="CollectionAction" class="com.pathology.action.CollectionAction">
 
 			<result name="collections">/webdiagnosis/collectdiag/collectdiag_list.jsp</result>
+			<result name="deletesuccess" type="redirectAction">CollectionAction!getCollectionList</result>
 		</action>
 		<!--  收藏 -->
 		<action name="ShareAction" class="com.pathology.action.ShareAction">
