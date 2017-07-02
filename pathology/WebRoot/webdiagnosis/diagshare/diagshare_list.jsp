@@ -64,14 +64,14 @@
 						</tr>
 						         <s:iterator value="shares" id="share" status="11">
 						         <tr>
-						         <td><s:property value="#share.pathologyNo"/></td>
+						         <td><s:property value="#share.pathologyNo"/><input type="hidden" value="#share.shareId"></td>
 						         <td><s:property value="#share.patientname"/></td>
 						         <td><s:property value="#share.createTime"/></td>
 						         <td><s:property value="#share.username"/></td>
 						         <td><s:property value="#share.username"/></td>
 						         <td><s:property value="#share.memo"/></td>
 						         <td><s:property value="#share.shareId"/></td>
-						          <td align="center"><a href="daizhenduan" target="_blank">查看</a></td>
+						          <td align="center"><a href="ShareAction!deleteShare?share.shareId=${share.shareId}">取消收藏</a></td>
 						        </tr>
 						        </s:iterator>
 

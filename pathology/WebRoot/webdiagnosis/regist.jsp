@@ -55,7 +55,7 @@
 
 </head>
 <body>
-	<div id="3" style="position: relative; top: 100px; z-index: 3;">
+	<div id="3" style="position: relative;  z-index: 3;">
 		<form id="f1" action="UserAction!registUser" method="post"
 			enctype="multipart/form-data">
 			<table align="center" cellspacing="0" class="registtb">
@@ -77,12 +77,14 @@
 								<td align="right">密 码：</td>
 								<td align="left"><input type="password"
 									name="user.password" id="password" placeholder="密码" required
-									onkeyup="passwd()" /> <span id="pwsdtip"></span></td>
+									onkeyup="passwd()" /> <span id="pwsdtip"></span>
+								</td>
 							</tr>
 							<tr>
 								<td align="right">密码确认：</td>
 								<td align="left"><input type="password" name="password2"
-									placeholder="确认密码" required /><span id="pwsd2tip"></span></td>
+									placeholder="确认密码" required /><span id="pwsd2tip"></span>
+								</td>
 							</tr>
 							<tr>
 								<td align="right">邮 箱：</td>
@@ -93,21 +95,20 @@
 							<tr>
 								<td align="right">所属医院：</td>
 								<td align="left">
-								<!--  <c:forEach var="hospital" items="${hoslist}">
+									<!--  <c:forEach var="hospital" items="${hoslist}">
 									<option value="${hospital.idHospital }">${hospital.name}</option>
-								</c:forEach>s -->
-								<%@include file="CheckSelect.jsp"%>
-								<span id="hospital"></span></td>
+								</c:forEach>s --> <%@include file="CheckSelect.jsp"%>
+									<span id="hospital"></span>
+								</td>
 							</tr>
 							<tr>
 								<td align="right">医师资格证：</td>
 								<td align="left"><input name="photo" class="file"
-									type="file" id="f" accept="image/jpeg" onchange="show()" />
-								</td>
+									type="file" id="f" accept="image/jpeg" onchange="show()" /></td>
 							<tr>
 								<td></td>
 								<td align="left"><span><img id="img" src=""
-										width="200" height="200" /> </span></td>
+										width="200" height="200" /> </span>
 								</td>
 							</tr>
 							<tr>
@@ -119,9 +120,11 @@
 									accesskey="enter" value="注册" id="btn"
 									onmousemove="changeBgColor('btn')"
 									onmouseout="recoverBgColor('btn');" class="submit"
-									formmethod="post" /></td>
+									formmethod="post" />
+								</td>
 							</tr>
-						</table></td>
+						</table>
+					</td>
 				</tr>
 			</table>
 		</form>

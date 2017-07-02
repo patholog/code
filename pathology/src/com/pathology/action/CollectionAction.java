@@ -35,6 +35,11 @@ public class CollectionAction extends BaseAction{
 		return "collections";
 	}
 
+	public String deleteCollection(){
+		Collection hos=collectionService.getCollection(Collection.class, collection.getCollectionId());
+		collectionService.deleteCollection(hos);
+		return "deletesuccess";
+	}
 
 	public CollectionDTO getCollection() {
 		return collection;
@@ -64,11 +69,7 @@ public class CollectionAction extends BaseAction{
 	public void setCollections(List<CollectionDTO> collections) {
 		this.collections = collections;
 	}
-	public String deleteCollection(){
-		Collection hos=collectionService.getCollection(Collection.class, collection.getCollectionId());
-		collectionService.deleteCollection(hos);
-		return "deletesuccess";
-	}
+	
 	
 	
 }
