@@ -69,7 +69,7 @@
 						         <td><s:property value="#pathology.patientname"/></td>
 						         <td><s:property value="#pathology.username"/></td>
 						         <td><s:property value="#pathology.content"/></td>
-								 <td><s:property value="#pathology.username"/></td>
+								 <td><s:property value="#pathology.hospitalname"/></td>
 						         <td><s:property value="#pathology.createTime"/></td>
 						          <td align="center"><a href="daizhenduan" target="_blank">查看</a></td>
 						        </tr>

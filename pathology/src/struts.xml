@@ -85,6 +85,7 @@
 
 			<result name="pathologysneed">/webdiagnosis/needdiag/needdiag_list.jsp</result>
 			<result name="pathologyshas">/webdiagnosis/hasdiag/hasdiag_list.jsp</result>
+			<result name="pathologysback">/webdiagnosis/retreatdiag/retreatdiag_list.jsp</result>
 		</action>
 	</package>
 </struts>

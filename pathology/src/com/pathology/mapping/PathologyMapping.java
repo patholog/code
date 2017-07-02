@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.pathology.dto.MessageDTO;
+import com.pathology.dto.PathologyDTO;
 import com.pathology.dto.ShareDTO;
 import com.pathology.entity.Message;
 
@@ -15,17 +16,14 @@ import com.pathology.entity.Message;
 public class PathologyMapping  implements RowMapper {
 	private final Logger logger = Logger.getLogger(PathologyMapping.class);
 	@Override
-	public ShareDTO mapRow(ResultSet rs, int arg1) {
+	public PathologyDTO mapRow(ResultSet rs, int arg1) {
 
 		try{
-			ShareDTO bean = new ShareDTO();
+			PathologyDTO bean = new PathologyDTO();
 			bean.setNum(rs.getRow());
-			bean.setMessageOrder(rs.getString("username"));
-			bean.setContent(rs.getString("memo"));
-		    bean.setMemo("memo");
-		    bean.setUsername(rs.getString("username"));
 			bean.setPathologyNo(rs.getString("pathologyno"));
 			bean.setPatientname(rs.getString("patientname"));
+			bean.setHospitalname(rs.getString("hospitalname"));
 			bean.setCreateTime(rs.getTimestamp("crt_Time"));
 			/*bean.setId(rs.getInt("username"));
 			bean.setCure(rs.getString("content"));

@@ -61,18 +61,19 @@
 				          <th width="15%">退回原因</th>
 				          <th width="10%">退回时间</th>
 						</tr>
-						<c:forEach items="${sessionScope.hoslist }" var="hospital" varStatus="status">
-							<tr bgColor="${status.index%2==0?'#f9f9ff':'#ffffff' }">
-							<td>${hospital.name}</td>
-							<td>${hospital.code}</td>
-							<td>${hospital.tel }</td>
-							<td>${hospital.address }</td>
-							<td>${hospital.memo }</td>
-								<td class="action_collomn"><a
-									href="HospitalAction!updateHospital?hospital.idHospital=${hospital.idHospital }">修改</a> &nbsp; | &nbsp; <a
-									href="HospitalAction!deleteHospital?hospital.idHospital=${hospital.idHospital }">删除</a>
-							</tr>
-						</c:forEach>
+						<s:iterator value="pathologys" id="pathology" status="11">
+						         <tr>
+						         
+						         <td><s:property value="#pathology.pathologyNo"/></td>
+						         <td><s:property value="#pathology.patientname"/></td>
+						         <td><s:property value="#pathology.username"/></td>
+						         <td><s:property value="#pathology.content"/></td>
+						         <td><s:property value="#pathology.username"/></td>
+						         <td><s:property value="#pathology.hospitalname"/></td>
+						         <td><s:property value="#pathology.createTime"/></td>
+						         <td><s:property value="#pathology.createTime"/></td>
+						        </tr>
+						 </s:iterator>
 
 
 						<tr class="lightrow">

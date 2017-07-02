@@ -61,13 +61,13 @@ public class MessageServiceImpl implements IMessageService {
 		pageNum = pageNum != null?pageNum:"1";
 		String title = "";
 		int status = 1;
-		String sql = " select b.pathology_no ,b.patientname,c.username,a.content,a.createTime from message  a "
+		String sql = " select b.pathologyno ,b.patientname,c.username,a.content,a.createTime from message  a "
 						+" left join  pathology  b  on a.case_id = b.id_case "
 						+" left join  users  c on a.fromDoctorId = c.id_users";
 		
 		String sqlcount  = "select  count(*) from   message  a"
-				+"  left join  pathology  b  on  b.id_case=a.case_id "
-				+"   left join  users  c on  c.id_users=b.fromDoctorId";
+				+"  left join  pathology  b  on  on a.case_id = b.id_case "
+				+"   left join  users  c on  a.fromDoctorId = c.id_users";
 		
 		int totalNum = jdbcTemplate.queryForInt(sqlcount);
 		if(totalNum > 0){

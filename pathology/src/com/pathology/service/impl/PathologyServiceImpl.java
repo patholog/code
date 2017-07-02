@@ -61,13 +61,16 @@ public class PathologyServiceImpl implements IPathologyService {
 		pageNum = pageNum != null?pageNum:"1";
 		String title = "";
 		int status = 1;
-		String sql = " select b.pathologyno ,b.patientname,c.username,a.memo,a.crt_Time from share a   "
-						+" left join pathology  b  on a.case_id = b.id_case "
-						+" left join  users  c on a.doctorId = c.id_users";
-		
-		String sqlcount  = "select  count(*) from   collection  a"
-				+"  left join  pathology  b  on a.case_id = b.id_case"
-				+"   left join  users  c on a.collectioner_Id = c.id_users";
+		String sql = " select a.pathologyno ,a.patientname,a.crt_Time,d.name as hospitalname from pathology a   "
+						+" left join image  b  on a.id_case = b.case_id "
+						+" left join result  c on a.id_case = c.case_id"
+						+" left join hospital  d on a.hospitalcode = d.id_hospital"
+						+"  where a.diag_status='2'";
+		String sqlcount  = "select count(*) from pathology a "
+				+" left join image  b  on a.id_case = b.case_id "
+				+" left join result  c on a.id_case = c.case_id"
+				+" left join hospital  d on a.hospitalcode = d.id_hospital"
+				+"  where a.diag_status='2'";
 		
 		int totalNum = jdbcTemplate.queryForInt(sqlcount);
 		if(totalNum > 0){
@@ -85,13 +88,17 @@ public class PathologyServiceImpl implements IPathologyService {
 		pageNum = pageNum != null?pageNum:"1";
 		String title = "";
 		int status = 1;
-		String sql = " select b.pathology_no ,b.patientname,c.username,a.memo,a.crt_Time from share a   "
-						+" left join pathology  b  on a.case_id = b.id_case "
-						+" left join  users  c on a.doctorId = c.id_users";
+		String sql = " select a.pathologyno ,a.patientname,a.crt_Time,d.name as hospitalname from pathology a   "
+				+" left join image  b  on a.id_case = b.case_id "
+				+" left join result  c on a.id_case = c.case_id"
+				+" left join hospital  d on a.hospitalcode = d.id_hospital"
+				+"  where a.diag_status='7'";
 		
-		String sqlcount  = "select  count(*) from   collection  a"
-				+"  left join  pathology  b  on a.case_id = b.id_case"
-				+"   left join  users  c on a.collectioner_Id = c.id_users";
+		String sqlcount  = "select count(*) from pathology a "
+				+" left join image  b  on a.id_case = b.case_id "
+				+" left join result  c on a.id_case = c.case_id"
+				+" left join hospital  d on a.hospitalcode = d.id_hospital"
+				+"  where a.diag_status='7'";
 		
 		int totalNum = jdbcTemplate.queryForInt(sqlcount);
 		if(totalNum > 0){
@@ -99,6 +106,36 @@ public class PathologyServiceImpl implements IPathologyService {
 			request.setAttribute("page", page.getPageStr());
 		 
 		}
+		return jdbcTemplate.query(sql, new PathologyMapping());
+	 
+	}
+	
+	public List<PathologyDTO>  getListPathologyToBack(HttpServletRequest
+			 request,String name){
+		
+		String pageNum = request.getParameter("pageNum");
+		pageNum = pageNum != null?pageNum:"1";
+		String title = "";
+		int status = 1;
+		String sql = " select a.pathologyno ,a.patientname,a.crt_Time,d.name as hospitalname from pathology a   "
+				+" left join image  b  on a.id_case = b.case_id "
+				+" left join result  c on a.id_case = c.case_id"
+				+" left join hospital  d on a.hospitalcode = d.id_hospital"
+				+"  where a.diag_status='3'";
+		
+		String sqlcount  = "select count(*) from pathology a "
+				+" left join image  b  on a.id_case = b.case_id "
+				+" left join result  c on a.id_case = c.case_id"
+				+" left join hospital  d on a.hospitalcode = d.id_hospital"
+				+"  where a.diag_status='3'";
+		
+		int totalNum = jdbcTemplate.queryForInt(sqlcount);
+		if(totalNum > 0){
+			Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
+			request.setAttribute("page", page.getPageStr());
+		 
+		}
+		List<PathologyDTO> ss=(List<PathologyDTO>)jdbcTemplate.query(sql, new PathologyMapping());
 		return jdbcTemplate.query(sql, new PathologyMapping());
 	 
 	}

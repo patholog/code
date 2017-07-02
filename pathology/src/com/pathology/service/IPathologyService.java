@@ -18,4 +18,6 @@ public interface IPathologyService {
 			 request,String name);
 	public List<PathologyDTO>  getListPathologyToHas(HttpServletRequest
 			 request,String name);
+	public List<PathologyDTO>  getListPathologyToBack(HttpServletRequest
+			 request,String name);
 }

@@ -7,7 +7,7 @@
     	<h3><a href="PathologyAction!getPathologyListToHas">已诊断</a></h3>
     </div>
     <div name="leftmenu">
-    	<h3><a href="${path}/webdiagnosis/retreatdiag/retreatdiag_list.jsp">退回病例</a></h3>
+    	<h3><a href="PathologyAction!getPathologyListToBack">退回病例</a></h3>
     </div>
     <div name="leftmenu">
     	<h3><a href="CollectionAction!getCollectionList">收藏病例</a></h3>

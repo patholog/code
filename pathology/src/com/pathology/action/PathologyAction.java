@@ -47,7 +47,20 @@ public class PathologyAction extends BaseAction{
 	   }
 		return "pathologyshas";
 	}
-
+	public String  getPathologyListToBack(){
+		try{
+		
+			HttpServletRequest
+			 request = ServletActionContext.getRequest();	
+			
+			pathologys =  pathologyService.getListPathologyToBack(request,"");
+		
+		return "pathologysback";
+	  }catch(Exception e){
+		e.printStackTrace();
+	   }
+		return "pathologysback";
+	}
 	public IPathologyService getPathologyService() {
 		return pathologyService;
 	}

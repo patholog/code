@@ -11,6 +11,7 @@ public class PathologyDTO implements java.io.Serializable {
 	private int num;
 	private String patientname;
 	private String username;
+	private String hospitalname;
 	private String content;
 	private String caseId;
 	private String messageOrder;
@@ -25,6 +26,12 @@ public class PathologyDTO implements java.io.Serializable {
 	
 	
 	
+	public String getHospitalname() {
+		return hospitalname;
+	}
+	public void setHospitalname(String hospitalname) {
+		this.hospitalname = hospitalname;
+	}
 	public int getNum() {
 		return num;
 	}
