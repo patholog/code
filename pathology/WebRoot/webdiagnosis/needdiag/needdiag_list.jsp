@@ -38,8 +38,8 @@
 					<table cellspacing="0" cellpadding="0" width="100%" border="0"
 						class="toolstable">
 						<tr>
-							<td width="86%" style="text-align:left;"><label>医院名称：</label>
-								<input type="text" name="hospital.name" id="hostpital_name" value="" style="width:120px;" /> <label>编码：</label> 
+							<td width="86%" style="text-align:left;"><label>患者姓名：</label>
+								<input type="text" name="hospital.name" id="hostpital_name" value="" style="width:120px;" /> <label>送检单位：</label> 
 								<input type="text" name="hospital.code" id="hostpital_code" value="" style="width:120px;" /> 
 								<input name="searchButton" id="searchButton" onclick="" type="submit" style="width:80px;background:url(css/img-blue/search.gif) 8px top no-repeat;"
 									value="  搜索" />
