@@ -32,7 +32,7 @@ public class Message implements java.io.Serializable {
 	private String lastUpdUserId;
 	private Integer delF;
 	private String pathologyNo;
-
+    private String patientname;
 	// Constructors
 
 	/** default constructor */
@@ -245,4 +245,13 @@ public class Message implements java.io.Serializable {
 		this.pathologyNo = pathologyNo;
 	}
 
+	public String getPatientname() {
+		return patientname;
+	}
+
+	public void setPatientname(String patientname) {
+		this.patientname = patientname;
+	}
+
+	
 }

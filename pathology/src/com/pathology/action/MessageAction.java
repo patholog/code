@@ -22,9 +22,10 @@ public class MessageAction extends BaseAction{
 
 	public IMessageService messageService;
 	private Message message;
+	private MessageDTO messageDTO;
 	private List<MessageDTO> messages;
-	
-	
+	private String patientname ;
+	private String content;
 	public String  getMessageList(){
 		try{
 		
@@ -33,6 +34,39 @@ public class MessageAction extends BaseAction{
 			
 		String hql =" from message ";
 		messages =  messageService.getListMessage(request,"");
+		Message me = new Message();
+		me.setIdMessage("000");
+		me.setContent("留言");
+		//me.setCreateTime(new Timestamp(0));
+		me.setMessageOrder("留言内容");
+		me.setFromDoctorId("ssss");
+		me.setToDoctorId("sss");
+		me.setMemo("说明");
+		/*if(messages  == null){
+			messages = new ArrayList();
+			messages.add(me);
+		}*/
+		
+	 
+		return "messages";
+	  }catch(Exception e){
+		
+	   }
+		return "messages";
+	}
+
+	
+	
+	
+	public String  SearchMessageList(){
+		try{
+		
+			HttpServletRequest
+			 request = ServletActionContext.getRequest();	
+		 String conent = this.messageDTO.getContent();
+		String nam = this.message.getPatientname();
+		String hql =" from message ";
+		messages =  messageService.getListMessage(request,conent);
 		Message me = new Message();
 		me.setIdMessage("000");
 		me.setContent("留言");
@@ -72,6 +106,62 @@ public class MessageAction extends BaseAction{
 
 	public void setMessages(List<MessageDTO> messages) {
 		this.messages = messages;
+	}
+
+
+
+
+	public String getPatientname() {
+		return patientname;
+	}
+
+
+
+
+	public Message getMessage() {
+		return message;
+	}
+
+
+
+
+	public void setMessage(Message message) {
+		this.message = message;
+	}
+
+
+
+
+	public String getContent() {
+		return content;
+	}
+
+
+
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+
+
+
+	public void setPatientname(String patientname) {
+		this.patientname = patientname;
+	}
+
+
+
+
+	public MessageDTO getMessageDTO() {
+		return messageDTO;
+	}
+
+
+
+
+	public void setMessageDTO(MessageDTO messageDTO) {
+		this.messageDTO = messageDTO;
 	}
 	
 	

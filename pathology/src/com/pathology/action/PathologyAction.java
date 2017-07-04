@@ -8,15 +8,32 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import net.sf.json.JSONObject;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.pathology.dto.PathologyDTO;
+import com.pathology.entity.Pathology;
 import com.pathology.service.IPathologyService;
 
 public class PathologyAction extends BaseAction{
 
 	public IPathologyService pathologyService;
 	private List<PathologyDTO> pathologys;
+	
+	/**
+	 * 保存病理
+	 * @param pathologgyjson
+	 * @return
+	 */
+   public   Pathology  savePathology(String pathologgyjson){
+	   JSONObject obj = new JSONObject().fromObject(pathologgyjson);//将json字符串转换为json对象
+	    // 将json对象转换为java对象
+	   Pathology jb = (Pathology)JSONObject.toBean(obj,Pathology.class);//将建json对象转换为Person对象
+	     pathologyService.addPathology(jb);
+	   return  jb;
+   }
+	
 	
 	
 	public String  getPathologyListToNeed(){
