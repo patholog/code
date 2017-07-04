@@ -2,8 +2,8 @@
 
 	<div class="top-thickline"><img src="${path}/css/img-blue/spacer.gif" width="5" height="5" /></div>
 	<ul class="quickbar">
-	<!--	<li style="float:right;">Logout </li>
-		<li style="float:right;">Welcome, Ray Lee </li> -->
+		<li style="float:right;">Logout </li>
+		<li style="float:right;">Welcome, Ray Lee </li> 
 		<li style="margin-left:15px;" id="mytimer"></li>
     <script>Time();</script>
     </ul>
