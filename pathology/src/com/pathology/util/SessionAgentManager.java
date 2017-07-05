@@ -54,7 +54,24 @@ public class SessionAgentManager {
 	   return (Users)session.get("users"); 
 		}
     
- 
+	
+/**
+ * 
+ * @return
+ */
+  public static  boolean islogin(){
+	  try{
+	  Map<String,Object> session = ActionContext.getContext().getSession();
+	    Users user =  (Users)session.get("users"); 
+	    if(user != null && user.getUsername() != null){
+	    	return true;
+	    }else{
+	    	return false;
+	    }
+	  }catch(Exception e){
+		  return false;
+	  }
+  }
 
 	/**
 	 *  退出销毁session

@@ -7,6 +7,13 @@
 	<constant name="struts.custom.i18n.resources" value="messages"></constant>
 	<constant name="struts.objectFactory" value="spring"></constant>
 	<package name="ajax" extends="json-default">
+	
+	    <global-results>   
+              
+              <result name="exception">/exception.jsp</result>
+               <result name="err">/err.jsp</result>
+              <result name="notfound">/notfound.jsp</result>
+         </global-results>
 		<action name="email" class="com.pathology.action.EmailAction"
 			method="checkEmail">
 			<!-- 将返回类型设置为json -->
@@ -55,7 +62,8 @@
 			<result name="edit"> /manage/user/update_user.jsp</result>
 			<result name="check"> /manage/user/check_user.jsp</result>
 			<result name="registsuccess"> /webdiagnosis/login.jsp</result>
-			<result name="loginSuccess"> /manage/manage.jsp</result>
+			<result name="loginSuccess">/index.jsp</result>
+			<result name="err">/err.jsp</result>
 		</action>
 		<action name="HospitalAction" class="com.pathology.action.HospitalAction">
 			<result name="success"> /manage/hospital/hospitallist.jsp</result>

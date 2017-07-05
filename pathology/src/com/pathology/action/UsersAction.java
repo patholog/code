@@ -39,81 +39,113 @@ public class UsersAction extends BaseAction{
 	private File photo;
 
 	public String login(){
-		String hql=" and  s.username='"+user.getUsername()+"' and s.password='"+DigestMD5.getDigestPassWord(user.getPassword())+"'";
-		List<Users> userT = userservice.getAllUser(Users.class, hql);
-		if(userT!=null && userT.size()==1){
-			SessionAgentManager.setSessionAgentBean( user,"admin"); 
-			return "loginSuccess";
-		}else{
-			return "false";
+		try{
+			String hql=" and  s.username='"+user.getUsername()+"' and s.password='"+DigestMD5.getDigestPassWord(user.getPassword())+"'";
+			List<Users> userT = userservice.getAllUser(Users.class, hql);
+			if(userT!=null && userT.size()==1){
+				SessionAgentManager.setSessionAgentBean( user,"admin"); 
+				return "loginSuccess";
+			}else{
+				return "false";
+			}
+		}catch(Exception e){
+			return  "err";
 		}
 	}
 	
 	public String checkEmail(){
-		String hql=" and s.email='"+user.getEmail()+"'";
-		List<Users> userT = userservice.getAllUser(Users.class, hql);
-		if(userT!=null && userT.size()>0){
-			return "false";
-		}else{
-			return SUCCESS;
+		try{
+			String hql=" and s.email='"+user.getEmail()+"'";
+			List<Users> userT = userservice.getAllUser(Users.class, hql);
+			if(userT!=null && userT.size()>0){
+				return "false";
+			}else{
+				return SUCCESS;
+			}
+		}catch(Exception e){
+			return  "err";
 		}
 	}
 
 
 	public String userList(){
-
-		String hql="";
-		if(user!=null){
-			String username = null;
-			String adress=null;
-			String realname=null;
-			if(username!=null&&!("".equals(username)))
-				hql+=" and username like '%"+username+"%'";
-			if(user.getTel()!=null&&!("".equals(user.getTel())))
-				hql+=" and tel = "+user.getTel();
+       try{
+			String hql="";
+			if(user!=null){
+				String username = null;
+				String adress=null;
+				String realname=null;
+				if(username!=null&&!("".equals(username)))
+					hql+=" and username like '%"+username+"%'";
+				if(user.getTel()!=null&&!("".equals(user.getTel())))
+					hql+=" and tel = "+user.getTel();
+			}
+	
+			List<Users> list = index != 0 ? userservice.getByPage(index, Users.class,hql)
+					:userservice.getByPage(1, Users.class,hql);
+	
+			HttpSession session=ServletActionContext.getRequest().getSession();
+			session.setAttribute("list",list);
+			session.setAttribute("thisindex",index==0?1:index);
+	
+			session.setAttribute("count",userservice.getAllUser(Users.class,hql).size());
+			System.out.println("0000"+list.size());
+			return SUCCESS;
+       }catch(Exception e){
+			return  "err";
 		}
-
-		List<Users> list = index != 0 ? userservice.getByPage(index, Users.class,hql)
-				:userservice.getByPage(1, Users.class,hql);
-
-		HttpSession session=ServletActionContext.getRequest().getSession();
-		session.setAttribute("list",list);
-		session.setAttribute("thisindex",index==0?1:index);
-
-		session.setAttribute("count",userservice.getAllUser(Users.class,hql).size());
-		System.out.println("0000"+list.size());
-		return SUCCESS;
 	}
 
 	public String updateUser() throws IOException{
-		HttpSession session=ServletActionContext.getRequest().getSession();
-		Users userT = userservice.getUser(Users.class, user.getIdUsers());
-		session.setAttribute("user",userT);
-		return "edit";
+		try{
+			HttpSession session=ServletActionContext.getRequest().getSession();
+			Users userT = userservice.getUser(Users.class, user.getIdUsers());
+			session.setAttribute("user",userT);
+			return "edit";
+		}catch(Exception e){
+			return  "err";
+		}
 	}
 	public String checkUser() throws IOException{
-		HttpSession session=ServletActionContext.getRequest().getSession();
-		Users userT = userservice.getUser(Users.class, user.getIdUsers());
-		session.setAttribute("user",userT);
-		return "check";
+		try{
+			HttpSession session=ServletActionContext.getRequest().getSession();
+			Users userT = userservice.getUser(Users.class, user.getIdUsers());
+			session.setAttribute("user",userT);
+			return "check";
+		}catch(Exception e){
+			return  "err";
+		}
 	}
 	public String deleteUser(){
-		Users userT = userservice.getUser(Users.class, user.getIdUsers());
-		userservice.deleteUser(userT);
-		return "deletesuccess";
+		try{
+			Users userT = userservice.getUser(Users.class, user.getIdUsers());
+			userservice.deleteUser(userT);
+			return "deletesuccess";
+		}catch(Exception e){
+			return  "err";
+		}
 	}
 	public String saveUser() throws IOException{
-		userservice.updateUser(user);
-		return "updatesuccess";
+		try{
+			userservice.updateUser(user);
+			return "updatesuccess";
+		}catch(Exception e){
+			return  "err";
+		}
 	}
 	public String addUser() throws IOException{
+		try{
 		user.setIdUsers(getEandomId(16));
 		user.setUserstatus("0");
 		userservice.addUser(user);
 		return "updatesuccess";
+		}catch(Exception e){
+			return  "err";
+		}
 	}
 
 	public String registUser() throws IOException{
+		try{
 		user.setPassword(DigestMD5.getDigestPassWord(user.getPassword()));
 		user.setDoctorctfsrc(upImg());
 		user.setIdUsers(getEandomId(16));
@@ -121,10 +153,14 @@ public class UsersAction extends BaseAction{
 		userservice.addUser(user);
 
 		return "registsuccess";
+		}catch(Exception e){
+			return  "err";
+		}
 	}
 
 	//图片上传
 	public String upImg(){
+		try{
 		String img=null;
 		if(photo!=null){
 			String realpath=ServletActionContext.getServletContext().getRealPath("upload/img/")+"\\";
@@ -152,20 +188,31 @@ public class UsersAction extends BaseAction{
 			img=picturePath;
 		}
 		return img;
+		}catch(Exception e){
+			return  "err";
+		}
 	}
 
 	public String checkUserStatus(){
+		try{
 		Users userT = userservice.getUser(Users.class, user.getIdUsers());
 		userT.setUserstatus("1");
 		userservice.updateUser(userT);
 		return "updatesuccess";
+		}catch(Exception e){
+			return  "err";
+		}
 	}
 	
 	public String refuseCheck(){
+		try{
 		Users userT = userservice.getUser(Users.class, this.idUsers);
 		userT.setUserstatus("2");
 		userservice.updateUser(userT);
 		return "updatesuccess";
+		}catch(Exception e){
+			return  "err";
+		}
 	}
 
 	public IUsersService getUserservice() {
