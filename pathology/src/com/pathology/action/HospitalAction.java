@@ -9,14 +9,18 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import com.pathology.entity.Hospital;
 import com.pathology.service.IHospitalService;
 import com.pathology.util.Constant;
 import com.pathology.util.SessionAgentManager;
+ 
 
 public class HospitalAction extends BaseAction{
+	
+	private final Logger logger = Logger.getLogger(HospitalAction.class);
 	private Hospital hos = new Hospital();
 	private IHospitalService hospitalservice;
 	private String idHospital;
@@ -35,78 +39,54 @@ public class HospitalAction extends BaseAction{
 		
 		return "updatesuccess";
        }catch(Exception e){
-    	   
+    	   logger.error(e.getMessage());
     	   return Constant.ERR;
        }
 	}
 	
 	public String hospitalList(){
-
-		String hql="";
-		if(hospital!=null){
-			String hospitalname = null;
-			try {
-				hospitalname = new String((hospital.getName().getBytes("ISO8859-1")),"UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
+	    try{
+			
+	        if(!SessionAgentManager.islogin()) return Constant.ERR;
+			String hql="";
+			if(hospital!=null){
+				String hospitalname = null;
+				try {
+					hospitalname = new String((hospital.getName().getBytes("ISO8859-1")),"UTF-8");
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+	
+				if(hospitalname!=null&&!("".equals(hospitalname)))
+					hql+=" and name like '%"+hospitalname+"%'";
+				if(hospital.getCode()!=null&&!("".equals(hospital.getCode())))
+					hql+=" and code like '%"+hospital.getCode()+"%'";
+	
 			}
-
-			if(hospitalname!=null&&!("".equals(hospitalname)))
-				hql+=" and name like '%"+hospitalname+"%'";
-			if(hospital.getCode()!=null&&!("".equals(hospital.getCode())))
-				hql+=" and code like '%"+hospital.getCode()+"%'";
-
-		}
-
-		List<Hospital> list = index != 0 ? hospitalservice.getByPage(index, Hospital.class,hql)
-				:hospitalservice.getByPage(1, Hospital.class,hql);
-
-		HttpSession session=ServletActionContext.getRequest().getSession();
-		session.setAttribute("hoslist",list);
-		session.setAttribute("thisindex",index==0?1:index);
-
-		session.setAttribute("count",hospitalservice.getAllHospital(Hospital.class,hql).size());
-		System.out.println("0000"+list.size());
-		return SUCCESS;
+	
+			List<Hospital> list = index != 0 ? hospitalservice.getByPage(index, Hospital.class,hql)
+					:hospitalservice.getByPage(1, Hospital.class,hql);
+	
+			HttpSession session=ServletActionContext.getRequest().getSession();
+			session.setAttribute("hoslist",list);
+			session.setAttribute("thisindex",index==0?1:index);
+	
+			session.setAttribute("count",hospitalservice.getAllHospital(Hospital.class,hql).size());
+			System.out.println("0000"+list.size());
+			return SUCCESS;
+	    }catch(Exception e){
+	    	 logger.error(e.getMessage());
+	    	   return Constant.ERR;
+	       }
 	}
 
 	public String updateHospital() throws IOException{
+		
 		HttpSession session=ServletActionContext.getRequest().getSession();
 		Hospital hospitalT = hospitalservice.getHospital(Hospital.class, hospital.getIdHospital());
 		session.setAttribute("hospital",hospitalT);
 		return "edit";
-//		if(hospital.getAddress()!=null){
-//			hospital.setAddress(new String(hospital.getAddress().getBytes("ISO8859-1"),"UTF-8"));
-//		}
-//		if(hospital.getCode()!=null){
-//			hospital.setCode(new String(hospital.getCode().getBytes("ISO8859-1"),"UTF-8"));
-//		}
-//		if(hospital.getCreator()!=null){
-//	 		hospital.setCreator(new String(hospital.getCreator().getBytes("ISO8859-1"),"UTF-8"));
-//		}
-//		if(hospital.getDeleted()!=null){
-//			hospital.setDeleted(new String(hospital.getDeleted().getBytes("ISO8859-1"),"UTF-8"));
-//		}
-// 		if(hospital.getHospitalcode()!=null){
-// 	 		hospital.setHospitalcode(new String(hospital.getHospitalcode().getBytes("ISO8859-1"),"UTF-8"));
-// 		}
-// 		if(hospital.getName()!=null){
-// 			hospital.setName(new String(hospital.getName().getBytes("ISO8859-1"),"UTF-8"));
-// 		}
-// 		if(hospital.getTransferedhospital()!=null){
-// 	 		hospital.setTransferedhospital(new String(hospital.getTransferedhospital().getBytes("ISO8859-1"),"UTF-8"));
-// 		}
-// 		if(hospital.getTel()!=null){
-// 			hospital.setTel(new String(hospital.getTel().getBytes("ISO8859-1"),"UTF-8"));
-// 		}
-//		if(hospital.getMemo()!=null){
-//			hospital.setMemo(new String(hospital.getMemo().getBytes("ISO8859-1"),"UTF-8"));
-//		}
-//		if(hospital.getCreateTime()!=null){
-//			hospital.setCreateTime(new Timestamp(new Date().getTime()));
-//		}
-//		hospitalservice.updateHospital(hospital);
-//		return "updatesuccess";
+ 
 	}
 	
 	public String saveHospital() throws IOException{
