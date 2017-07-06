@@ -40,7 +40,8 @@ public class UsersAction extends BaseAction{
 
 	public String login(){
 		try{
-			String hql=" and  s.username='"+user.getUsername()+"' and s.password='"+DigestMD5.getDigestPassWord(user.getPassword())+"'";
+		     //String hql=" and  s.username='"+user.getUsername()+"' and s.password='"+DigestMD5.getDigestPassWord(user.getPassword())+"'";
+			String hql=" and  s.username='"+user.getUsername()+"' and s.password='"+user.getPassword()+"'";
 			List<Users> userT = userservice.getAllUser(Users.class, hql);
 			if(userT!=null && userT.size()==1){
 				SessionAgentManager.setSessionAgentBean( user,"admin"); 
