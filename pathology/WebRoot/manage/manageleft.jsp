@@ -20,15 +20,15 @@
             <div name="leftmenu" id="funcmenu">
         <h3>功能</h3>
         <ul>
-          <li><a href="${path}/manage/hospital/add_hospital.jsp">添加功能</a> </li>
-          <li><a href="HospitalAction!hospitalList">管理功能</a> </li>
+          <li><a href="${path}/manage/function/add_function.jsp">添加功能</a> </li>
+          <li><a href="FunctionAction!functionList">管理功能</a> </li>
         </ul>
       </div>
             <div name="leftmenu" id="rolemenu">
         <h3>角色</h3>
         <ul>
-          <li><a href="${path}/manage/hospital/add_hospital.jsp">添加角色</a> </li>
-          <li><a href="HospitalAction!hospitalList">管理角色</a> </li>
+          <li><a href="${path}/manage/roles/add_roles.jsp">添加角色</a> </li>
+          <li><a href="RolesAction!rolesList">管理角色</a> </li>
         </ul>
       </div>
             <div name="leftmenu" id="powermenu">
