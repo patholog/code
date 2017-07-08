@@ -24,7 +24,8 @@
 		$("#email").blur(function() {
 			var email = $("#email").val().trim();
 			if (email == '') {
-				alert("邮箱不能为空");
+				$("#emailtip").html("<a style='color:#2ca9cc;font-size:14px;'>邮箱不能为空！</a>");
+				$("#btn").attr("disabled",true);
 				return false;
 			} else {
 				//login1为Action类命名空间名称；AjaxExecute为Action方法名称
@@ -39,15 +40,47 @@
 					}),
 					dataType : "json",//设置需要返回的数据类型
 					success : function(d) {
-						//alert(JSON.stringify(d));
-						alert("邮箱没有被注册");
+						$("#emailtip").html("");
+						$("#btn").attr("disabled",false);
+						//alert("邮箱没有被注册");
 					},
 					error : function(d) {
-						alert("邮箱已注册！");
+						$("#emailtip").html("<a style='color:#2ca9cc;font-size:14px;'>邮箱已注册!</a>");
+						$("#btn").attr("disabled",true);
 					}
 				});
 			}
 
+		});
+		
+		$("#password2").blur(function() {
+			var pswd = $("#password").val().trim();
+			var pswd2 = $("#password2").val().trim();
+			if(pswd==pswd2){
+			$("#pwsd2tip").html("");
+			$("#btn").attr("disabled",false);
+			return true;
+			}else{
+				$("#pwsd2tip").html("<a style='color:#2ca9cc;font-size:14px;'>两次密码输入不一致!</a>");
+				$("#btn").attr("disabled",true);
+				
+				return false;
+			}
+		});
+		
+		$("#username").blur(function() {
+			var name = $("#username").val().trim();
+			var zmnumReg=/^[0-9a-zA-Z]*$/;  
+			if(name!=""&&!zmnumReg.test(name)){  
+				$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>只能输入字母或数字!</a>");
+				$("#username").val("");
+				$("#btn").attr("disabled",true);
+				return false;
+			}else{
+				$("#nametip").html("");
+				$("#btn").attr("disabled",false);
+				return true;
+			}
 		});
 
 	});
@@ -56,7 +89,7 @@
 </head>
 <body>
 	<div id="3" style="position: relative;  z-index: 3;">
-		<form id="f1" action="UserAction!registUser" method="post"
+		<form id="f1" action="UserAction!registUser"  method="post"
 			enctype="multipart/form-data">
 			<table align="center" cellspacing="0" class="registtb">
 				<tr class="thead">
@@ -69,22 +102,21 @@
 							<tr>
 							<tr>
 								<td align="right">用户名：</td>
-								<td align="left"><input type="text" name="user.username"
-									placeholder="用户名" required onblur="" /><span id="nametip"></span>
-								</td>
+								<td align="left"><input id="username" type="text" name="user.username"
+									placeholder="用户名" required /><span
+									id="nametip"></span></td>
 							</tr>
 							<tr>
 								<td align="right">密 码：</td>
 								<td align="left"><input type="password"
 									name="user.password" id="password" placeholder="密码" required
-									onkeyup="passwd()" /> <span id="pwsdtip"></span>
-								</td>
+									onkeyup="passwd()" /> <span id="pwsdtip"></span></td>
 							</tr>
 							<tr>
 								<td align="right">密码确认：</td>
 								<td align="left"><input type="password" name="password2"
-									placeholder="确认密码" required /><span id="pwsd2tip"></span>
-								</td>
+									placeholder="确认密码" id="password2" required /><span
+									id="pwsd2tip"></span></td>
 							</tr>
 							<tr>
 								<td align="right">邮 箱：</td>
@@ -98,18 +130,18 @@
 									<!--  <c:forEach var="hospital" items="${hoslist}">
 									<option value="${hospital.idHospital }">${hospital.name}</option>
 								</c:forEach>s --> <%@include file="CheckSelect.jsp"%>
-									<span id="hospital"></span>
-								</td>
+									<span id="hospital"></span></td>
 							</tr>
 							<tr>
 								<td align="right">医师资格证：</td>
 								<td align="left"><input name="photo" class="file"
-									type="file" id="f" accept="image/jpeg" onchange="show()" /></td>
+									type="file" id="f" accept="image/jpeg" onchange="show()"
+									required />
+								</td>
 							<tr>
 								<td></td>
 								<td align="left"><span><img id="img" src=""
-										width="200" height="200" /> </span>
-								</td>
+										width="200" height="200" /> </span></td>
 							</tr>
 							<tr>
 								<td colspan="2"></td>
@@ -120,11 +152,9 @@
 									accesskey="enter" value="注册" id="btn"
 									onmousemove="changeBgColor('btn')"
 									onmouseout="recoverBgColor('btn');" class="submit"
-									formmethod="post" />
-								</td>
+									formmethod="post" disabled="disabled" /></td>
 							</tr>
-						</table>
-					</td>
+						</table></td>
 				</tr>
 			</table>
 		</form>
