@@ -103,7 +103,9 @@
 							<tr>
 								<td align="right">用户名：</td>
 								<td align="left"><input id="username" type="text" name="user.username"
-									placeholder="用户名" required /><span
+									placeholder="用户名" required />
+									<input id="belonghospital" type="hidden" name="user.belonghospital"/>
+									<span
 									id="nametip"></span></td>
 							</tr>
 							<tr>
@@ -152,7 +154,7 @@
 									accesskey="enter" value="注册" id="btn"
 									onmousemove="changeBgColor('btn')"
 									onmouseout="recoverBgColor('btn');" class="submit"
-									formmethod="post" disabled="disabled" /></td>
+									formmethod="post"  /></td>
 									<td align="center" ><input type="button"
 									 value="已注册" id="back"
 									onmousemove="changeBgColor('back')"

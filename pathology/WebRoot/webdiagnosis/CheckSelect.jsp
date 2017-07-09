@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <div id="mainbox">
-	<div id="box0"><input type="hidden" name="user.belonghospital" value=""></div>
+	<div id="box0"></div>
 	<div id="box1">
 		<img src="${path}/images/icon_select.png" width="20" height="20" />
 	</div>
@@ -61,8 +61,8 @@
                                 selectName += name + " | ";
                         }
                 }         
-                document.getElementById("box0").innerHTML=selectName.substring(0, selectName.length-2);
-                document.getElementsByName("user.belonghospital").value=selectValue.substring(0, selectValue.length-2);
+                document.getElementById("box0").innerHTML=selectName.substring(0, selectName.length-1);
+                document.getElementById("belonghospital").value=selectValue.substring(0, selectValue.length-1);
         } 
 </script>
 
