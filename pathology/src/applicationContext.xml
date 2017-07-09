@@ -138,7 +138,6 @@
 	<bean id="functiondao" class="com.pathology.dao.impl.FunctionDaoImpl" parent="pt" />
 	<bean id="functionService" class="com.pathology.service.impl.FunctionServiceImpl">
 		<property name="functiondao" ref="functiondao"></property>
-		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
 		<bean id="functionAction" class="com.pathology.action.FunctionAction"
 		scope="prototype">
@@ -148,7 +147,6 @@
 	<bean id="rolesdao" class="com.pathology.dao.impl.RolesDaoImpl" parent="pt" />
 	<bean id="rolesService" class="com.pathology.service.impl.RolesServiceImpl">
 		<property name="rolesdao" ref="rolesdao"></property>
-		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
 		<bean id="rolesAction" class="com.pathology.action.RolesAction"
 		scope="prototype">
