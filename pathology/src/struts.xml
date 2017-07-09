@@ -63,6 +63,7 @@
 			<result name="check"> /manage/user/check_user.jsp</result>
 			<result name="registsuccess"> /webdiagnosis/login.jsp</result>
 			<result name="loginSuccess">/index.jsp</result>
+			<result name="manageLoginSuccess">/manage/manage.jsp</result>
 			<result name="err">/err.jsp</result>
 		</action>
 		<action name="HospitalAction" class="com.pathology.action.HospitalAction">
@@ -73,6 +74,7 @@
 			</result>
 			<result name="edit"> /manage/hospital/update_hospital.jsp</result>
 			<result name="regist"> /webdiagnosis/regist.jsp</result>
+			<result name="err">/err.jsp</result>
 		</action>
 		<action name="FunctionAction" class="com.pathology.action.FunctionAction">
 			<result name="success"> /manage/function/functionlist.jsp</result>
@@ -81,6 +83,7 @@
 			<result name="updatesuccess" type="redirectAction">FunctionAction!functionList
 			</result>
 			<result name="edit"> /manage/function/update_function.jsp</result>
+			<result name="err">/err.jsp</result>
 		</action>
 		<action name="RolesAction" class="com.pathology.action.RolesAction">
 			<result name="success"> /manage/roles/roleslist.jsp</result>
@@ -89,6 +92,7 @@
 			<result name="updatesuccess" type="redirectAction">RolesAction!rolesList
 			</result>
 			<result name="edit"> /manage/roles/update_roles.jsp</result>
+			<result name="err">/err.jsp</result>
 		</action>
 		<!-- 留言 -->
 		<action name="MessageAction" class="com.pathology.action.MessageAction">

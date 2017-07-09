@@ -53,6 +53,21 @@ public class UsersAction extends BaseAction{
 			return  "err";
 		}
 	}
+	public String manageLogin(){
+		try{
+		     //String hql=" and  s.username='"+user.getUsername()+"' and s.password='"+DigestMD5.getDigestPassWord(user.getPassword())+"'";
+			String hql=" and  s.username='"+user.getUsername()+"' and s.password='"+user.getPassword()+"'";
+			List<Users> userT = userservice.getAllUser(Users.class, hql);
+			if(userT!=null && userT.size()==1){
+				SessionAgentManager.setSessionAgentBean( user,"admin"); 
+				return "manageLoginSuccess";
+			}else{
+				return "false";
+			}
+		}catch(Exception e){
+			return  "err";
+		}
+	}
 	
 	public String checkEmail(){
 		try{
