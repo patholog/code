@@ -59,7 +59,7 @@
               </tr>			  
               <tr>
                 <th>简称</th>
-                <td><input type="text" name="function.short" id="title" value="" style="width:300px;" /> </td>
+                <td><input type="text" name="function.short_" id="title" value="" style="width:300px;" /> </td>
               </tr>			  
               <tr>
                 <th>描述</th>

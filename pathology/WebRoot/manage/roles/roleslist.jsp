@@ -18,8 +18,8 @@
 <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
 <script type="text/javascript">
 	function confirmDelete(id) {
-		if (confirm('你确定删除此产品？'))
-			window.location.href = '?action=delete&id=' + id;
+		if (confirm('确定删除吗？'))
+			window.location.href = 'RolesAction!deleteRoles?roles.idRoles=' + id;
 	}
 </script>
 </head>
@@ -68,7 +68,7 @@
 							<td>${roles.memo }</td>
 								<td class="action_collomn"><a
 									href="RolesAction!updateRoles?roles.idRoles=${roles.idRoles }">修改</a> &nbsp; | &nbsp; <a
-									href="RolesAction!deleteRoles?roles.idRoles=${roles.idRoles }">删除</a>
+									href="#" onclick="confirmDelete('${roles.idRoles }')">删除</a>
 							</tr>
 						</c:forEach>
 

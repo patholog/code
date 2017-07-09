@@ -82,7 +82,7 @@ input[type="password"] {
 			<STRONG><s:fielderror /> </STRONG>
 		</div>
 		<div id="Layer1">
-			<form style="height:250px;width:480px;" method="post" action="UserAction!login">
+			<form style="height:250px;width:480px;" method="post" action="UserAction!manageLogin">
 				<table width="441" height="110" border="0" cellpadding="0"
 					cellspacing="0">
 

@@ -14,6 +14,12 @@
 <script type="text/javascript" src="${path}/js/treeView.js"></script>
 <script type="text/javascript" src="${path}/js/common-cn.js"></script>
 <script type="text/javascript" src="${path}/js/forbid-refresh.js"></script>
+<script type="text/javascript">
+	function confirmDelete(id) {
+		if (confirm('确定删除吗？'))
+			window.location.href = 'UserAction!deleteUser?user.idUsers=' + id;
+	}
+</script>
 </head>
 <body>
 	<div id="header">
@@ -76,7 +82,7 @@
 									&nbsp; | &nbsp; <a
 									href="UserAction!updateUser?user.idUsers=${user.idUsers}">修改</a>
 									&nbsp; | &nbsp; <a
-									href="UserAction!deleteUser?user.idUsers=${user.idUsers}">删除</a>
+									href="#" onclick="confirmDelete('${user.idUsers }')">删除</a>
 							</tr>
 						</c:forEach>
 						<tr class="lightrow">
