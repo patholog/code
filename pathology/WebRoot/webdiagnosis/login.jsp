@@ -60,7 +60,7 @@
 					placeholder="请输入用户名" /> <input type="password"
 					name="user.password" id="" value="" placeholder="请输入密码" /> <input
 					type="checkbox" name="" id="rmpasswd" value="" /> <a id="rmfont">记住密码</a>
-				<a href="" id="forgetpwd">忘记密码</a> <input type="button" name=""
+				<a href="${path}/webdiagnosis/regist/getpassword.jsp" id="forgetpwd">忘记密码</a> <input type="button" name=""
 					id="loginBtn" value="登录" class="btn" />
 				<!--<a href="javascript:void(0)" class="wapper" onclick='obj.sweep()'>扫码登录</a>-->
 				<a id="about">关于我们</a> <a id="register"
