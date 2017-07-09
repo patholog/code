@@ -32,6 +32,17 @@ public class EmailAction extends BaseAction {
 			return Action.SUCCESS;
 		}
 	}
+	
+	public String checkUserName(){
+		String name = this.p.get("username");
+		String hql=" and s.username='"+name+"'";
+		List<Users> userT = userservice.getAllUser(Users.class, hql);
+		if (userT!=null && userT.size()>0) {
+			return Action.ERROR;
+		} else {
+			return Action.SUCCESS;
+		}
+	}
 
 	public IUsersService getUserservice() {
 		return userservice;

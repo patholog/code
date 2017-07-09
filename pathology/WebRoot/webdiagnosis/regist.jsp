@@ -148,16 +148,23 @@
 							</tr>
 
 							<tr height="60px">
-								<td align="center" colspan="2"><input type="submit"
+								<td align="center" ><input type="submit"
 									accesskey="enter" value="注册" id="btn"
 									onmousemove="changeBgColor('btn')"
 									onmouseout="recoverBgColor('btn');" class="submit"
 									formmethod="post" disabled="disabled" /></td>
+									<td align="center" ><input type="button"
+									 value="已注册" id="back"
+									onmousemove="changeBgColor('back')"
+									onmouseout="recoverBgColor('back');" class="submit"
+									 onclick="javascrtpt:window.location.href='${path }/webdiagnosis/login.jsp'" /></td>
 							</tr>
 						</table></td>
 				</tr>
 			</table>
 		</form>
 	</div>
+	<%@include file="loginbox.jsp"%>
+	
 </body>
 </html>
