@@ -55,7 +55,7 @@
               </tr>			  
               <tr>
                 <th>医院编码</th>
-                <td><input type="text" name="hospital.code" id="title" value="" style="width:300px;" /> </td>
+                <td><input type="text" name="hospital.hospitalcode" id="title" value="" style="width:300px;" /> </td>
               </tr>			  
               <tr>
                 <th>电话</th>

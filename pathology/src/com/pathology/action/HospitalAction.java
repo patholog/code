@@ -35,6 +35,7 @@ public class HospitalAction extends BaseAction{
 		
      if(!SessionAgentManager.islogin()) return Constant.ERR;
 		hospital.setIdHospital(getEandomId(16));
+		hospital.setCode(getEandomId(16));
 		hospitalservice.addHospital(hospital);
 		
 		return "updatesuccess";

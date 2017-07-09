@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.opensymphony.xwork2.Action;
+import com.pathology.entity.Hospital;
 import com.pathology.entity.Users;
+import com.pathology.service.IHospitalService;
 import com.pathology.service.IUsersService;
 
 public class EmailAction extends BaseAction {
@@ -14,6 +16,7 @@ public class EmailAction extends BaseAction {
 	private Map<String, String> p;
 
 	public IUsersService userservice;
+	private IHospitalService hospitalservice;
 	// public Map<String, String> getP() {
 	// return this.p;
 	// }
@@ -32,12 +35,22 @@ public class EmailAction extends BaseAction {
 			return Action.SUCCESS;
 		}
 	}
-	
+
 	public String checkUserName(){
 		String name = this.p.get("username");
 		String hql=" and s.username='"+name+"'";
 		List<Users> userT = userservice.getAllUser(Users.class, hql);
 		if (userT!=null && userT.size()>0) {
+			return Action.ERROR;
+		} else {
+			return Action.SUCCESS;
+		}
+	}
+	public String checkCode(){
+		String code = this.p.get("hoscode");
+		String hql=" and s.hospitalcode='"+code+"'";
+		List<Hospital> hosT = hospitalservice.getAllHospital(Hospital.class, hql);
+		if (hosT!=null && hosT.size()>0) {
 			return Action.ERROR;
 		} else {
 			return Action.SUCCESS;
@@ -51,6 +64,15 @@ public class EmailAction extends BaseAction {
 	public void setUserservice(IUsersService userservice) {
 		this.userservice = userservice;
 	}
+
+	public IHospitalService getHospitalservice() {
+		return hospitalservice;
+	}
+
+	public void setHospitalservice(IHospitalService hospitalservice) {
+		this.hospitalservice = hospitalservice;
+	}
 	
+
 
 }
