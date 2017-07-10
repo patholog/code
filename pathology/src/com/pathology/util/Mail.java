@@ -235,7 +235,7 @@ public class Mail
         }
         else
         {
-        	 msg.setContent(formatContent(content), "text/plain; charset=Shift_JIS");
+        	 msg.setContent(formatContent(content), "text/plain; charset=UTF-8");
         }
        
         Transport.send(msg);  

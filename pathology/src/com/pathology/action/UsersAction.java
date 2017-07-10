@@ -236,7 +236,6 @@ public class UsersAction extends BaseAction {
 		Mail.setName("病例平台管理员");
 		Mail.setPassword("Founder123");
 		Mail.setUser("zhq567888@126.com");
-		Mail.setCharset("Shift-JIS");
 		String[] content = new String[] { "您好：", "恭喜您的账号已经审核通过", "感谢您的使用" };
 		Mail.send("zou_haiqiang@founder.com.cn", "病例平台审核通过", content);
 		// end demo
@@ -257,7 +256,6 @@ public class UsersAction extends BaseAction {
 		Mail.setName("病理平台管理员");
 		Mail.setPassword("Founder123");
 		Mail.setUser("zhq567888@126.com");
-		Mail.setCharset("Shift-JIS");
 		String[] content = new String[] { "您好：", "恭喜您的账号没有审核通过", "请重新提交相关证件" };
 		Mail.send("zou_haiqiang@founder.com.cn", "病理平台审核没通过", content);
 		try {
