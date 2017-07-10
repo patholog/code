@@ -37,7 +37,7 @@ import org.apache.log4j.Logger;
  */
 public class Mail
 {
-	private static Logger log = Logger.getLogger(Mail.getName());
+	//private static Logger log = Logger.getLogger(Mail.getName());
 
 	private static String user = "hold\\kodansha";
 	private static String password = "bfi_322";
@@ -164,11 +164,11 @@ public class Mail
             		addrs[i] = new InternetAddress(tos[i]);
             	}
         		send(addrs, subject, content, files, false);
-        		log.info(subject + " mail to " + toAddrs + " succeeded.");
+        		//log.info(subject + " mail to " + toAddrs + " succeeded.");
         	} catch (Exception e)
 			{
         		result = false;
-            	log.error(subject + " mail to " + toAddrs + " failed. Info: " + e.getMessage());
+            	//log.error(subject + " mail to " + toAddrs + " failed. Info: " + e.getMessage());
             	e.printStackTrace();
 			}
         } else {
@@ -176,11 +176,11 @@ public class Mail
         	{
         		try {
         			send(tos[i], subject, content, files, true);
-        			log.info(subject + " mail to " + tos[i] + " succeeded.");
+        			//log.info(subject + " mail to " + tos[i] + " succeeded.");
         		} catch (Exception e)
 				{
         			result = false;
-                	log.error(subject + " mail to " + tos[i] + " failed. Info: " + e.getMessage());
+                	//log.error(subject + " mail to " + tos[i] + " failed. Info: " + e.getMessage());
                 	e.printStackTrace();
 				}            		
         	}
@@ -329,12 +329,12 @@ public class Mail
         try
         {
 	        send(to, subject, content, files, true);
-            log.info(subject + " mail to " + to + " succeeded.");
+            //log.info(subject + " mail to " + to + " succeeded.");
 	    }
         catch (Exception e)
         {
         	result = false;
-        	log.error(subject + " mail to " + to + " failed. Info: " + e.getMessage());
+        	//log.error(subject + " mail to " + to + " failed. Info: " + e.getMessage());
         	e.printStackTrace();
         }
         return result;
