@@ -93,11 +93,8 @@ public class UsersAction extends BaseAction {
 		try {
 			String hql = "";
 			if (user != null) {
-				String username = null;
-				String adress = null;
-				String realname = null;
-				if (username != null && !("".equals(username)))
-					hql += " and username like '%" + username + "%'";
+				if (user.getUsername() != null && !("".equals(user.getUsername())))
+					hql += " and username like '%" + user.getUsername() + "%'";
 				if (user.getTel() != null && !("".equals(user.getTel())))
 					hql += " and tel = " + user.getTel();
 			}
