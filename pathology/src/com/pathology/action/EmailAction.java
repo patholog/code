@@ -57,17 +57,11 @@ public class EmailAction extends BaseAction {
 		}
 	}
 
-	public IUsersService getUserservice() {
-		return userservice;
-	}
 
 	public void setUserservice(IUsersService userservice) {
 		this.userservice = userservice;
 	}
 
-	public IHospitalService getHospitalservice() {
-		return hospitalservice;
-	}
 
 	public void setHospitalservice(IHospitalService hospitalservice) {
 		this.hospitalservice = hospitalservice;
