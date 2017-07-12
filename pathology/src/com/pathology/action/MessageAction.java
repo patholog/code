@@ -18,6 +18,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.pathology.dto.MessageDTO;
 import com.pathology.entity.Message;
 import com.pathology.service.IMessageService;
+import com.pathology.util.Constant;
 public class MessageAction extends BaseAction{
 
 	public IMessageService messageService;
@@ -56,6 +57,20 @@ public class MessageAction extends BaseAction{
 	}
 
 	
+    public String getMessageId(){
+    	
+    	try{
+    		
+			HttpServletRequest
+			 request = ServletActionContext.getRequest();	
+	    String id = (String)request.getAttribute("id");
+	    message =  messageService.getMessage(Message.class, id);
+		return "messageInfo";
+	  }catch(Exception e){
+		  return Constant.ERR;
+	   }
+		
+    }
 	
 	
 	public String  SearchMessageList(){
