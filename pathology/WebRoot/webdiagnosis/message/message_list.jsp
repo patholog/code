@@ -71,7 +71,7 @@
 						         <td><s:property value="#message.content"/></td>
 						         <td><s:property value="#message.isReaded"/></td>
 						         <td><s:property value="#message.createTime"/></td>
-						          <td align="center"><a href="daizhenduan" target="_blank">查看</a></td>
+						          <td align="center"><a href="MessageAction!getMessageId?id=<s:property value="#message.id_message"/>" target="_blank">查看</a></td>
 						        </tr>
 						        </s:iterator>
 
