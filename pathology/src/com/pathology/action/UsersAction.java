@@ -95,8 +95,8 @@ public class UsersAction extends BaseAction {
 			if (user != null) {
 				if (user.getUsername() != null && !("".equals(user.getUsername())))
 					hql += " and username like '%" + user.getUsername() + "%'";
-				if (user.getTel() != null && !("".equals(user.getTel())))
-					hql += " and tel = " + user.getTel();
+				if (user.getEmail() != null && !("".equals(user.getEmail())))
+					hql += " and email like " + user.getEmail();
 			}
 
 			List<Users> list = index != 0 ? userservice.getByPage(index,
@@ -110,7 +110,7 @@ public class UsersAction extends BaseAction {
 
 			session.setAttribute("count",
 					userservice.getAllUser(Users.class, hql).size());
-			System.out.println("0000" + list.size());
+			
 			return SUCCESS;
 		} catch (Exception e) {
 			return "err";
