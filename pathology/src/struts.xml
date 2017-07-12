@@ -98,6 +98,8 @@
 		<action name="MessageAction" class="com.pathology.action.MessageAction">
 
 			<result name="messages"> /webdiagnosis/message/message_list.jsp</result>
+			<result name="messageInfo"> /webdiagnosis/message/messageInfo.jsp</result>
+			 
 		</action>
 		<!--  收藏 -->
 		<action name="CollectionAction" class="com.pathology.action.CollectionAction">
