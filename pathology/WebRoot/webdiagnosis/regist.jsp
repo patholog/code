@@ -85,12 +85,20 @@
 
 	});
 </script>
-
+<script type="text/javascript">
+	function Check(){
+	  if(confirm('提交当前信息吗？')){
+	    return true;
+	  }else{
+	    return false;
+	  }
+	}
+</script>
 </head>
 <body>
 	<div id="3" style="position: relative;  z-index: 3;">
 		<form id="f1" action="UserAction!registUser"  method="post"
-			enctype="multipart/form-data">
+			enctype="multipart/form-data" onsubmit="return Check()">
 			<table align="center" cellspacing="0" class="registtb">
 				<tr class="thead">
 					<td align="center">用户注册</td>
@@ -150,16 +158,17 @@
 							</tr>
 
 							<tr height="60px">
+								<td align="center" ><input type="button"
+									 value="已有账号" id="back"
+									onmousemove="changeBgColor('back')"
+									onmouseout="recoverBgColor('back');" class="submit"
+									 onclick="javascrtpt:window.location.href='${path }/webdiagnosis/login.jsp'" /></td>
 								<td align="center" ><input type="submit"
 									accesskey="enter" value="注册" id="btn"
 									onmousemove="changeBgColor('btn')"
 									onmouseout="recoverBgColor('btn');" class="submit"
 									formmethod="post"  /></td>
-									<td align="center" ><input type="button"
-									 value="已注册" id="back"
-									onmousemove="changeBgColor('back')"
-									onmouseout="recoverBgColor('back');" class="submit"
-									 onclick="javascrtpt:window.location.href='${path }/webdiagnosis/login.jsp'" /></td>
+									
 							</tr>
 						</table></td>
 				</tr>
