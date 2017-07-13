@@ -118,7 +118,7 @@
 								<td align="left"><input type="text" name="user.email"
 									placeholder="验证码" id="email" required /><span id="emailtip"></span>
 								</td>
-								<td><input type="button" value="获取验证码"></td>
+								<td><input type="button" value="获取验证码" onclick="UserAction!sendEmailForPassWord"></td>
 							</tr>
 							
 							<tr>
