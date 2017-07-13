@@ -7,19 +7,26 @@
 	<constant name="struts.custom.i18n.resources" value="messages"></constant>
 	<constant name="struts.objectFactory" value="spring"></constant>
 	<package name="ajax" extends="json-default">
-	
-	    <global-results>   
-              
-              <result name="exception">/exception.jsp</result>
-               <result name="err">/err.jsp</result>
-              <result name="notfound">/notfound.jsp</result>
-         </global-results>
+
+		<global-results>
+
+			<result name="exception">/exception.jsp</result>
+			<result name="err">/err.jsp</result>
+			<result name="notfound">/notfound.jsp</result>
+		</global-results>
 		<action name="email" class="com.pathology.action.EmailAction"
 			method="checkEmail">
 			<!-- 将返回类型设置为json -->
 			<interceptor-ref name="json" />
-
 			<result type="json"></result>
+		</action>
+		<action name="demo" class="com.pathology.action.DemoAction"
+			method="demo">
+			<!-- 将返回类型设置为json -->
+			<interceptor-ref name="json" />
+			<result type="json">
+				<param name="root">result</param>
+			</result>
 		</action>
 		<action name="login2" class="com.pathology.action.LoginAction"
 			method="login">
@@ -43,7 +50,7 @@
 			<result>/index.jsp</result>
 		</action>
 		<action name="test">
-			 <result>/webdiagnosis/viewpathologypic.jsp</result>			
+			<result>/webdiagnosis/viewpathologypic.jsp</result>
 		</action>
 
 		<!-- 后台管理部分 <action name="admin_*" method="{1}" class="com.flp.actions.UsersAction"> 
@@ -99,24 +106,27 @@
 
 			<result name="messages"> /webdiagnosis/message/message_list.jsp</result>
 			<result name="messageInfo"> /webdiagnosis/message/messageInfo.jsp</result>
-			 
+
 		</action>
-		<!--  收藏 -->
+		<!-- 收藏 -->
 		<action name="CollectionAction" class="com.pathology.action.CollectionAction">
 
-			<result name="collections">/webdiagnosis/collectdiag/collectdiag_list.jsp</result>
+			<result name="collections">/webdiagnosis/collectdiag/collectdiag_list.jsp
+			</result>
 		</action>
-		<!--  收藏 -->
+		<!-- 收藏 -->
 		<action name="ShareAction" class="com.pathology.action.ShareAction">
 
-			<result name="shares">/webdiagnosis/diagshare/diagshare_list.jsp</result>
+			<result name="shares">/webdiagnosis/diagshare/diagshare_list.jsp
+			</result>
 		</action>
 		<!-- 病例表 -->
 		<action name="PathologyAction" class="com.pathology.action.PathologyAction">
 
 			<result name="pathologysneed">/webdiagnosis/needdiag/needdiag_list.jsp</result>
 			<result name="pathologyshas">/webdiagnosis/hasdiag/hasdiag_list.jsp</result>
-			<result name="pathologysback">/webdiagnosis/retreatdiag/retreatdiag_list.jsp</result>
+			<result name="pathologysback">/webdiagnosis/retreatdiag/retreatdiag_list.jsp
+			</result>
 		</action>
 	</package>
 </struts>
