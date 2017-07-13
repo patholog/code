@@ -113,10 +113,10 @@
 		</action>
 		<!-- 病例表 -->
 		<action name="PathologyAction" class="com.pathology.action.PathologyAction">
-
 			<result name="pathologysneed">/webdiagnosis/needdiag/needdiag_list.jsp</result>
 			<result name="pathologyshas">/webdiagnosis/hasdiag/hasdiag_list.jsp</result>
 			<result name="pathologysback">/webdiagnosis/retreatdiag/retreatdiag_list.jsp</result>
+			<result name="daizhenduan">/webdiagnosis/needdiag/needdiag.jsp</result>
 		</action>
 	</package>
 </struts>

@@ -1,20 +1,13 @@
 package com.pathology.action;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import net.sf.json.JSONObject;
-
-import org.apache.struts2.ServletActionContext;
-
 import com.pathology.dto.PathologyDTO;
 import com.pathology.entity.Pathology;
 import com.pathology.service.IPathologyService;
+import net.sf.json.JSONObject;
+import org.apache.struts2.ServletActionContext;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public class PathologyAction extends BaseAction{
 
@@ -33,23 +26,32 @@ public class PathologyAction extends BaseAction{
 	     pathologyService.addPathology(jb);
 	   return  jb;
    }
-	
-	
-	
-	public String  getPathologyListToNeed(){
-		try{
-		
-			HttpServletRequest
-			 request = ServletActionContext.getRequest();	
-			
-			pathologys =  pathologyService.getListPathologyToNeed(request,"");
-		
-		return "pathologysneed";
-	  }catch(Exception e){
-		
-	   }
-		return "pathologysneed";
-	}
+
+
+	/**
+	 * 待诊断
+	 * @return
+	 */
+  public String getPathologyListToNeed(){
+    try{
+      HttpServletRequest request = ServletActionContext.getRequest();
+      pathologys =  pathologyService.getListPathologyToNeed(request,"");
+      return "pathologysneed";
+    } catch (Exception e) {
+		  e.printStackTrace();
+    }
+    return "pathologysneed";
+  }
+
+  /**
+   * 查看待诊断
+   * @return
+   */
+  public String daizhenduan() {
+
+    return "daizhenduan";
+  }
+
 	public String  getPathologyListToHas(){
 		try{
 		
