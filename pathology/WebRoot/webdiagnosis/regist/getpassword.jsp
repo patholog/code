@@ -60,6 +60,25 @@
 			}
 		});
 
+		$("#verification").click(function() {
+			$.ajax({
+					type : "post",
+					url : 'UserAction.action?sendEmailForPassWord',
+					contentType : "application/json; charset=utf-8",
+					data : JSON.stringify({//设置数据源
+						p : {
+							email : document.getElementById("email").value
+						}
+					}),
+					dataType : "json",//设置需要返回的数据类型
+					success : function(d) {
+						alert("验证码发送成功");
+					},
+					error : function(d) {
+						alert("验证码发送失败");
+					}
+				});
+		});
 	});
 </script>
 <script type="text/javascript">
