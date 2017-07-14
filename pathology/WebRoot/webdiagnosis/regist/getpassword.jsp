@@ -61,13 +61,14 @@
 		});
 
 		$("#getverification").click(function() {
+			var a=document.getElementById("email").value;
 			$.ajax({
 					type : "post",
-					url : 'email.action?sendEmailForPassWord',
+					url : 'email_sendEmailForPassWord',
 					contentType : "application/json; charset=utf-8",
 					data : JSON.stringify({//设置数据源
 						p : {
-							email : 'document.getElementById("email").value'
+							getemail : a
 						}
 					}),
 					dataType : "json",//设置需要返回的数据类型
@@ -81,6 +82,8 @@
 		});
 	});
 </script>
+
+
 </head>
 <body>
 	<div id="3" style="position: relative;  z-index: 3;">
