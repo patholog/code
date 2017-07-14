@@ -47,7 +47,7 @@
             <column name="tel" length="16" />
         </property>
         <property name="doctorctfsrc" type="java.lang.String">
-            <column name="doctorctfsrc" length="5000"/>
+            <column name="doctorctfsrc" />
         </property>
         <property name="isdeleted" type="java.lang.String">
             <column name="isdeleted" length="10" />
@@ -96,8 +96,11 @@
         </property>
         <property name="userType" type="java.lang.String">
             <column name="user_type">
-                <comment>ç"¨æˆ·ç±»åž‹</comment>
+                <comment>用户类型</comment>
             </column>
+        </property>
+        <property name="verification" type="java.lang.String">
+            <column name="verification" length="32" />
         </property>
     </class>
 </hibernate-mapping>
