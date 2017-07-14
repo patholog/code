@@ -122,8 +122,7 @@
 								<td align="left">
 								<input type="text" name="user.verification"
 									placeholder="验证码" id="verification" required />
-									<input id="getverification" type="button"  name="getverification"  
-					onClick="getEmail()" value="获取验证码" />
+									<input id="getverification" type="button"  name="getverification"  value="获取验证码" />
 									<span id="emailtip"></span>
 								</td>
 							</tr>
