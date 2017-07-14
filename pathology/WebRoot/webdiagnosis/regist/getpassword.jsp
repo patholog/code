@@ -27,30 +27,7 @@
 				$("#emailtip").html("<a style='color:#2ca9cc;font-size:14px;'>邮箱不能为空！</a>");
 				$("#btn").attr("disabled",true);
 				return false;
-			} else {
-				//login1为Action类命名空间名称；AjaxExecute为Action方法名称
-				$.ajax({
-					type : "post",
-					url : 'email.action?checkEmail',
-					contentType : "application/json; charset=utf-8",
-					data : JSON.stringify({//设置数据源
-						p : {
-							email : email
-						}
-					}),
-					dataType : "json",//设置需要返回的数据类型
-					success : function(d) {
-						$("#emailtip").html("");
-						$("#btn").attr("disabled",false);
-						//alert("邮箱没有被注册");
-					},
-					error : function(d) {
-						$("#emailtip").html("<a style='color:#2ca9cc;font-size:14px;'>邮箱已注册!</a>");
-						$("#btn").attr("disabled",true);
-					}
-				});
-			}
-
+			} 
 		});
 		
 		$("#password2").blur(function() {
@@ -115,10 +92,13 @@
 							
 							<tr>
 								<td align="right">验证码：</td>
-								<td align="left"><input type="text" name="user.email"
-									placeholder="验证码" id="email" required /><span id="emailtip"></span>
+								<td align="left">
+								<input type="text" name="user.verification"
+									placeholder="验证码" id="verification" required />
+									<input id="getverification" type="button"  name="getverification"  
+					onClick="window.location.href='UserAction!sendEmailForPassWord?=result1'" value="获取验证码" />
+									<span id="emailtip"></span>
 								</td>
-								<td><input type="button" value="获取验证码" onclick="UserAction!sendEmailForPassWord"></td>
 							</tr>
 							
 							<tr>
