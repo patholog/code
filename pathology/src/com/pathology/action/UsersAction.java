@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
+import com.opensymphony.xwork2.Action;
 import com.pathology.entity.Users;
 import com.pathology.service.IUsersService;
 import com.pathology.util.DigestMD5;
@@ -272,7 +273,7 @@ public class UsersAction extends BaseAction {
 			return "err";
 		}
 	}
-	public void sendEmailForPassWord() {
+	public String sendEmailForPassWord() {
 		
 		String randomStr=getStringRandom(6);
 		
@@ -280,6 +281,7 @@ public class UsersAction extends BaseAction {
 		List<Users> userT = userservice.getAllUser(Users.class, hql);
 		
 		if(userT.size()>0){
+			
 			Users[] userArr=(Users[]) userT.toArray(new Users[0]);
 			Users todoUser =userArr[0];
 			todoUser.setVerification(randomStr);
@@ -292,6 +294,9 @@ public class UsersAction extends BaseAction {
 			Mail.setUser("zhq567888@126.com");
 			String[] content = new String[] { "您好：", "恭喜您的随机验证码是"+randomStr+",注意保存", "感谢您的使用" };
 			Mail.send("zou_haiqiang@founder.com.cn", "您正在找回密码", content);
+			return Action.SUCCESS;
+		}else{
+			return Action.ERROR;
 		}
 		
 	}
