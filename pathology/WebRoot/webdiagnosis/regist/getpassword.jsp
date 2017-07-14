@@ -30,34 +30,28 @@
 			} 
 		});
 		
-		$("#password2").blur(function() {
-			var pswd = $("#password").val().trim();
-			var pswd2 = $("#password2").val().trim();
-			if(pswd==pswd2){
-			$("#pwsd2tip").html("");
-			$("#btn").attr("disabled",false);
-			return true;
-			}else{
-				$("#pwsd2tip").html("<a style='color:#2ca9cc;font-size:14px;'>两次密码输入不一致!</a>");
-				$("#btn").attr("disabled",true);
-				
-				return false;
-			}
-		});
-		
-		$("#username").blur(function() {
-			var name = $("#username").val().trim();
-			var zmnumReg=/^[0-9a-zA-Z]*$/;  
-			if(name!=""&&!zmnumReg.test(name)){  
-				$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>只能输入字母或数字!</a>");
-				$("#username").val("");
-				$("#btn").attr("disabled",true);
-				return false;
-			}else{
-				$("#nametip").html("");
-				$("#btn").attr("disabled",false);
-				return true;
-			}
+		$("#verification").blur(function() {
+			var a=document.getElementById("getverification").value;
+			var b=document.getElementById("email").value;
+			$.ajax({
+					type : "post",
+					url : 'email_checkVerification',
+					contentType : "application/json; charset=utf-8",
+					data : JSON.stringify({//设置数据源
+						p : {
+							verification : a,
+							email : b
+						}
+					}),
+					dataType : "json",//设置需要返回的数据类型
+					success : function(d) {
+						return true;
+					},
+					error : function(d) {
+						$("#verificationtip").html("<a style='color:#2ca9cc;font-size:14px;'>验证失败！</a>");
+						return false;
+					}
+				});
 		});
 
 		$("#getverification").click(function() {
@@ -73,7 +67,7 @@
 					}),
 					dataType : "json",//设置需要返回的数据类型
 					success : function(d) {
-						alert("验证码发送成功");
+						alert("验证码发送成功,请注意查收");
 					},
 					error : function(d) {
 						alert("验证码发送失败");
