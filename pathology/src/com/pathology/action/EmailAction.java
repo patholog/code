@@ -59,7 +59,7 @@ public class EmailAction extends BaseAction {
 	public String checkVerification(){
 		String verification = this.p.get("verification");
 		String email = this.p.get("email");
-		String hql=" and s.verification='"+verification+"'";
+		String hql=" and s.email='"+email+"'";
 		List<Users> userT = userservice.getAllUser(Users.class, hql);
 		if (userT!=null && userT.size()>0) {
 			Users[] userArr=(Users[]) userT.toArray(new Users[0]);
