@@ -56,6 +56,23 @@ public class EmailAction extends BaseAction {
 			return Action.SUCCESS;
 		}
 	}
+	public String checkVerification(){
+		String verification = this.p.get("verification");
+		String email = this.p.get("email");
+		String hql=" and s.verification='"+verification+"'";
+		List<Users> userT = userservice.getAllUser(Users.class, hql);
+		if (userT!=null && userT.size()>0) {
+			Users[] userArr=(Users[]) userT.toArray(new Users[0]);
+			Users todoUser =userArr[0];
+			if(todoUser.getVerification().equals(verification)){
+				return Action.SUCCESS;
+			}else{
+				return Action.ERROR;
+			}
+		} else {
+			return Action.ERROR;
+		}
+	}
 	public String sendEmailForPassWord() {
 		
 		String randomStr=getStringRandom(6);
