@@ -67,7 +67,7 @@
 					contentType : "application/json; charset=utf-8",
 					data : JSON.stringify({//设置数据源
 						p : {
-							email : document.getElementById("email").value
+							email : 'document.getElementById("email").value'
 						}
 					}),
 					dataType : "json",//设置需要返回的数据类型
@@ -81,15 +81,6 @@
 		});
 	});
 </script>
-<script type="text/javascript">
-  function getEmail(){  
-   var a=document.getElementById("email").value;  
-   window.location.href='UserAction!sendEmailForPassWord?email='+a;
-  }  
-</script>
-
-
-
 </head>
 <body>
 	<div id="3" style="position: relative;  z-index: 3;">
@@ -123,7 +114,7 @@
 								<input type="text" name="user.verification"
 									placeholder="验证码" id="verification" required />
 									<input id="getverification" type="button"  name="getverification"  value="获取验证码" />
-									<span id="emailtip"></span>
+									<span id="verificationtip"></span>
 								</td>
 							</tr>
 							
