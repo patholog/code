@@ -41,6 +41,8 @@ public class UsersAction extends BaseAction {
 	private String photoFileName;
 	private String photoType;
 	private File photo;
+	private String username;
+	private String email;
 	private Map<String, Object> result = new HashMap<String, Object>();
 
 	public String login() {
@@ -271,14 +273,27 @@ public class UsersAction extends BaseAction {
 		}
 	}
 	public void sendEmailForPassWord() {
-		Mail.setFrom("zhq567888@126.com");
-		Mail.setHost("smtp.126.com");
-		Mail.setName("病理平台管理员");
-		Mail.setPassword("Founder123");
-		Mail.setUser("zhq567888@126.com");
-		String[] content = new String[] { "您好：", "恭喜您的随机验证码是"+getStringRandom(6)+",注意保存", "感谢您的使用" };
-		Mail.send("zou_haiqiang@founder.com.cn", "您正在找回密码", content);
-
+		
+		String randomStr=getStringRandom(6);
+		
+		String hql = " and  s.email='" + email + "'";
+		List<Users> userT = userservice.getAllUser(Users.class, hql);
+		
+		if(userT.size()>0){
+			Users[] userArr=(Users[]) userT.toArray();
+			Users todoUser =userArr[0];
+			todoUser.setVerification(randomStr);
+			userservice.updateUser(todoUser);
+			
+			Mail.setFrom("zhq567888@126.com");
+			Mail.setHost("smtp.126.com");
+			Mail.setName("病理平台管理员");
+			Mail.setPassword("Founder123");
+			Mail.setUser("zhq567888@126.com");
+			String[] content = new String[] { "您好：", "恭喜您的随机验证码是"+randomStr+",注意保存", "感谢您的使用" };
+			Mail.send("zou_haiqiang@founder.com.cn", "您正在找回密码", content);
+		}
+		
 	}
 	//生成随机数字和字母,  
     public String getStringRandom(int length) {  
@@ -380,6 +395,24 @@ public class UsersAction extends BaseAction {
 	public void setResult(Map<String, Object> result) {
 		this.result = result;
 	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 	// public IUsersService getUserserv() {
 	// return userserv;
 	// }
