@@ -44,7 +44,7 @@ public class UsersAction extends BaseAction {
 	private File photo;
 	private String username;
 	private String email;
-	private Map<String, Object> result = new HashMap<String, Object>();
+	private Map<String, String> result;
 
 	public String login() {
 		try {
@@ -276,7 +276,7 @@ public class UsersAction extends BaseAction {
 	public String sendEmailForPassWord() {
 		
 		String randomStr=getStringRandom(6);
-		
+		String email = this.result.get("email");
 		String hql = " and  s.email='" + email + "'";
 		List<Users> userT = userservice.getAllUser(Users.class, hql);
 		
@@ -393,11 +393,11 @@ public class UsersAction extends BaseAction {
 		this.photo = photo;
 	}
 	
-	public Map<String, Object> getResult() {
+	public Map<String, String> getResult() {
 		return result;
 	}
 
-	public void setResult(Map<String, Object> result) {
+	public void setResult(Map<String, String> result) {
 		this.result = result;
 	}
 
