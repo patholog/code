@@ -148,7 +148,15 @@
 								<td align="right">密 码：</td>
 								<td align="left"><input type="password"
 									name="user.password" id="password" placeholder="密码" required
-									onkeyup="passwd()" /> <span id="pwsdtip"></span>
+									onKeyUp=pwStrength(this.value) onBlur=pwStrength(this.value) /> <span id="pwsdtip"></span>
+								</td>
+							</tr>
+							<tr>
+								<td align="right">密 码强度：</td>
+								<td align="left">
+								<div id="strength_L" class="pwdcheck">弱</div>
+								<div id="strength_M" class="pwdcheck">中</div>
+								<div id="strength_H" class="pwdcheck">强</div>
 								</td>
 							</tr>
 							<tr>

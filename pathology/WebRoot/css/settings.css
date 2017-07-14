@@ -68,3 +68,10 @@ input {
 	line-height: 30px;
 	border-radius: 1px;
 }
+.pwdcheck{
+	width:20%;
+	height:10px;
+	bgcolor:#eeeeee;
+	float:left;
+	border-radius: 3px;
+}
