@@ -55,44 +55,40 @@
 		
 		
 		$("#username").blur(function() {
-	var username = $("#username").val().trim();
-	if (username == '') {
-		$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名不能为空！</a>");
-		$("#btn").attr("disabled",true);
-		return false;
-	} else {
-
-		var zmnumReg=/^[0-9a-zA-Z]*$/;  
-		if(username!=""&&!zmnumReg.test(username)){  
-			$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>只能输入字母或数字!</a>");
-			$("#username").val("");
-			$("#btn").attr("disabled",true);
-			return false;
-		}else{
-			//login1为Action类命名空间名称；AjaxExecute为Action方法名称
-			$.ajax({
-				type : "post",
-				url : 'email_checkUserName',
-				contentType : "application/json; charset=utf-8",
-				data : JSON.stringify({//设置数据源
-					p : {
-						username : username
-					}
-				}),
-				dataType : "json",//设置需要返回的数据类型
-				success : function(d) {
-					$("#nametip").html("");
-					$("#btn").attr("disabled",false);
-					return true;
-				},
-				error : function(d) {
-					$("#emailtip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名已注册!</a>");
+			var username = $("#username").val().trim();
+			if (username == '') {
+				$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名不能为空！</a>");
+				$("#btn").attr("disabled",true);
+				return false;
+			} else {
+				var zmnumReg=/^[0-9a-zA-Z]*$/;  
+				if(username!=""&&!zmnumReg.test(username)){  
+					$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>只能输入字母或数字!</a>");
+					$("#username").val("");
 					$("#btn").attr("disabled",true);
 					return false;
+				}else{
+			//login1为Action类命名空间名称；AjaxExecute为Action方法名称
+					$.ajax({
+						type : "post",
+						url : 'email_checkUserName',
+						contentType : "application/json; charset=utf-8",
+						data : JSON.stringify({//设置数据源
+							p : {
+								username : username
+							}
+						}),
+						dataType : "json",//设置需要返回的数据类型
+						success : function(d) {
+							$("#nametip").html("");
+							$("#btn").attr("disabled",false);
+						},
+						error : function(d) {
+							$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名已注册!</a>");
+							$("#btn").attr("disabled",true);
+						}
+					});
 				}
-			});
-			return true;
-		}
 
 	}
 
