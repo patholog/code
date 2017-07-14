@@ -280,7 +280,7 @@ public class UsersAction extends BaseAction {
 		List<Users> userT = userservice.getAllUser(Users.class, hql);
 		
 		if(userT.size()>0){
-			Users[] userArr=(Users[]) userT.toArray();
+			Users[] userArr=(Users[]) userT.toArray(new Users[0]);
 			Users todoUser =userArr[0];
 			todoUser.setVerification(randomStr);
 			userservice.updateUser(todoUser);
