@@ -62,6 +62,14 @@
 
 	});
 </script>
+<script type="text/javascript">
+  function getEmail(){  
+   var a=document.getElementById("email").value;  
+   window.location.href='UserAction!sendEmailForPassWord?email='+a;
+  }  
+</script>
+
+
 
 </head>
 <body>
@@ -96,7 +104,7 @@
 								<input type="text" name="user.verification"
 									placeholder="验证码" id="verification" required />
 									<input id="getverification" type="button"  name="getverification"  
-					onClick="window.location.href='UserAction!sendEmailForPassWord?=result1'" value="获取验证码" />
+					onClick="getEmail()" value="获取验证码" />
 									<span id="emailtip"></span>
 								</td>
 							</tr>
