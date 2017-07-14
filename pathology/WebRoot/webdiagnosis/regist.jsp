@@ -31,7 +31,7 @@
 				//login1为Action类命名空间名称；AjaxExecute为Action方法名称
 				$.ajax({
 					type : "post",
-					url : 'email.action?checkEmail',
+					url : 'email_checkEmail',
 					contentType : "application/json; charset=utf-8",
 					data : JSON.stringify({//设置数据源
 						p : {
@@ -53,6 +53,51 @@
 
 		});
 		
+		
+		$("#username").blur(function() {
+	var username = $("#username").val().trim();
+	if (username == '') {
+		$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名不能为空！</a>");
+		$("#btn").attr("disabled",true);
+		return false;
+	} else {
+
+		var zmnumReg=/^[0-9a-zA-Z]*$/;  
+		if(username!=""&&!zmnumReg.test(username)){  
+			$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>只能输入字母或数字!</a>");
+			$("#username").val("");
+			$("#btn").attr("disabled",true);
+			return false;
+		}else{
+			//login1为Action类命名空间名称；AjaxExecute为Action方法名称
+			$.ajax({
+				type : "post",
+				url : 'email_checkUserName',
+				contentType : "application/json; charset=utf-8",
+				data : JSON.stringify({//设置数据源
+					p : {
+						username : username
+					}
+				}),
+				dataType : "json",//设置需要返回的数据类型
+				success : function(d) {
+					$("#nametip").html("");
+					$("#btn").attr("disabled",false);
+					return true;
+				},
+				error : function(d) {
+					$("#emailtip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名已注册!</a>");
+					$("#btn").attr("disabled",true);
+					return false;
+				}
+			});
+			return true;
+		}
+
+	}
+
+});
+		
 		$("#password2").blur(function() {
 			var pswd = $("#password").val().trim();
 			var pswd2 = $("#password2").val().trim();
@@ -68,20 +113,7 @@
 			}
 		});
 		
-		$("#username").blur(function() {
-			var name = $("#username").val().trim();
-			var zmnumReg=/^[0-9a-zA-Z]*$/;  
-			if(name!=""&&!zmnumReg.test(name)){  
-				$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>只能输入字母或数字!</a>");
-				$("#username").val("");
-				$("#btn").attr("disabled",true);
-				return false;
-			}else{
-				$("#nametip").html("");
-				$("#btn").attr("disabled",false);
-				return true;
-			}
-		});
+		
 
 	});
 </script>
@@ -97,7 +129,7 @@
 </head>
 <body>
 	<div id="3" style="position: relative;  z-index: 3;">
-		<form id="f1" action="UserAction!registUser"  method="post"
+		<form id="f1" action="UserAction!registUser" method="post"
 			enctype="multipart/form-data" onsubmit="return Check()">
 			<table align="center" cellspacing="0" class="registtb">
 				<tr class="thead">
@@ -110,23 +142,25 @@
 							<tr>
 							<tr>
 								<td align="right">用户名：</td>
-								<td align="left"><input id="username" type="text" name="user.username"
-									placeholder="用户名" required />
-									<input id="belonghospital" type="hidden" name="user.belonghospital"/>
-									<span
-									id="nametip"></span></td>
+								<td align="left"><input id="username" type="text"
+									name="user.username" placeholder="用户名" required /> <input
+									id="belonghospital" type="hidden" name="user.belonghospital" />
+									<span id="nametip"></span>
+								</td>
 							</tr>
 							<tr>
 								<td align="right">密 码：</td>
 								<td align="left"><input type="password"
 									name="user.password" id="password" placeholder="密码" required
-									onkeyup="passwd()" /> <span id="pwsdtip"></span></td>
+									onkeyup="passwd()" /> <span id="pwsdtip"></span>
+								</td>
 							</tr>
 							<tr>
 								<td align="right">密码确认：</td>
 								<td align="left"><input type="password" name="password2"
 									placeholder="确认密码" id="password2" required /><span
-									id="pwsd2tip"></span></td>
+									id="pwsd2tip"></span>
+								</td>
 							</tr>
 							<tr>
 								<td align="right">邮 箱：</td>
@@ -140,42 +174,44 @@
 									<!--  <c:forEach var="hospital" items="${hoslist}">
 									<option value="${hospital.idHospital }">${hospital.name}</option>
 								</c:forEach>s --> <%@include file="CheckSelect.jsp"%>
-									<span id="hospital"></span></td>
+									<span id="hospital"></span>
+								</td>
 							</tr>
 							<tr>
 								<td align="right">医师资格证：</td>
 								<td align="left"><input name="photo" class="file"
 									type="file" id="f" accept="image/jpeg" onchange="show()"
-									required />
-								</td>
+									required /></td>
 							<tr>
 								<td></td>
 								<td align="left"><span><img id="img" src=""
-										width="200" height="200" /> </span></td>
+										width="200" height="200" /> </span>
+								</td>
 							</tr>
 							<tr>
 								<td colspan="2"></td>
 							</tr>
 
 							<tr height="60px">
-								<td align="center" ><input type="button"
-									 value="已有账号" id="back"
-									onmousemove="changeBgColor('back')"
+								<td align="center"><input type="button" value="已有账号"
+									id="back" onmousemove="changeBgColor('back')"
 									onmouseout="recoverBgColor('back');" class="submit"
-									 onclick="javascrtpt:window.location.href='${path }/webdiagnosis/login.jsp'" /></td>
-								<td align="center" ><input type="submit"
-									accesskey="enter" value="注册" id="btn"
-									onmousemove="changeBgColor('btn')"
+									onclick="javascrtpt:window.location.href='${path }/webdiagnosis/login.jsp'" />
+								</td>
+								<td align="center"><input type="submit" accesskey="enter"
+									value="注册" id="btn" onmousemove="changeBgColor('btn')"
 									onmouseout="recoverBgColor('btn');" class="submit"
-									formmethod="post"  /></td>
-									
+									formmethod="post" />
+								</td>
+
 							</tr>
-						</table></td>
+						</table>
+					</td>
 				</tr>
 			</table>
 		</form>
 	</div>
 	<%@include file="loginbox.jsp"%>
-	
+
 </body>
 </html>

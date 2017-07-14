@@ -17,9 +17,7 @@ public class EmailAction extends BaseAction {
 
 	public IUsersService userservice;
 	private IHospitalService hospitalservice;
-	// public Map<String, String> getP() {
-	// return this.p;
-	// }
+	
 
 	public void setP(Map<String, String> p) {
 		this.p = p;

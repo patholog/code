@@ -14,8 +14,8 @@
                <result name="err">/err.jsp</result>
               <result name="notfound">/notfound.jsp</result>
          </global-results>
-		<action name="email" class="com.pathology.action.EmailAction"
-			method="checkEmail">
+		<action name="email_*" class="com.pathology.action.EmailAction"
+			method="{1}">
 			<!-- 将返回类型设置为json -->
 			<interceptor-ref name="json" />
 
