@@ -176,7 +176,6 @@
 </head>
 <body>
 <div id="header">
-<jsp:include page="${path }/isLogin.jsp"/>
   <%@include file="/webdiagnosis/maintop.jsp" %>
 </div>
 <table id="main" cellpadding="0" cellspacing="0" border="0">

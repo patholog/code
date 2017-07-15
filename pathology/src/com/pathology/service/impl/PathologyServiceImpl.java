@@ -58,7 +58,7 @@ public class PathologyServiceImpl implements IPathologyService {
     pageNum = pageNum != null ? pageNum : "1";
     String title = "";
     int status = 1;
-    String sql = " SELECT a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
+    String sql = "SELECT a.id_case caseId, a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
         + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
         + "a.specimenname specimenName, a.idcard idCard "
         + " FROM pathology a "
@@ -83,7 +83,7 @@ public class PathologyServiceImpl implements IPathologyService {
 
   @Override
   public PathologyDTO getPathologyToNeed(HttpServletRequest request, String caseId) {
-    String sql = " SELECT a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
+    String sql = "SELECT a.id_case caseId, a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
         + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
         + "a.specimenname specimenName, a.idcard idCard "
         + " FROM pathology a "

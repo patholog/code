@@ -59,27 +59,19 @@ public class PathologyAction extends BaseAction {
 
   public String getPathologyListToHas() {
     try {
-
-      HttpServletRequest
-          request = ServletActionContext.getRequest();
-
+      HttpServletRequest request = ServletActionContext.getRequest();
       pathologys = pathologyService.getListPathologyToHas(request, "");
-
       return "pathologyshas";
     } catch (Exception e) {
-
+      e.printStackTrace();
     }
     return "pathologyshas";
   }
 
   public String getPathologyListToBack() {
     try {
-
-      HttpServletRequest
-          request = ServletActionContext.getRequest();
-
+      HttpServletRequest request = ServletActionContext.getRequest();
       pathologys = pathologyService.getListPathologyToBack(request, "");
-
       return "pathologysback";
     } catch (Exception e) {
       e.printStackTrace();
@@ -91,20 +83,23 @@ public class PathologyAction extends BaseAction {
     return pathologyService;
   }
 
-
   public void setPathologyService(IPathologyService shareService) {
     this.pathologyService = shareService;
   }
-
 
   public List<PathologyDTO> getPathologys() {
     return pathologys;
   }
 
-
   public void setPathologys(List<PathologyDTO> pathologys) {
     this.pathologys = pathologys;
   }
 
+  public PathologyDTO getPathology() {
+    return pathology;
+  }
 
+  public void setPathology(PathologyDTO pathology) {
+    this.pathology = pathology;
+  }
 }
