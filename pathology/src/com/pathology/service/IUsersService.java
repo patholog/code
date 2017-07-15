@@ -12,5 +12,5 @@ public interface IUsersService {
 	public Users getUser(Class clazz,String id);
 	public void updateUser(Users em);
 	public void addUser(Users em);
-	public Boolean findUser(String id);
+	public Boolean findUser (String id)throws Exception;
 }

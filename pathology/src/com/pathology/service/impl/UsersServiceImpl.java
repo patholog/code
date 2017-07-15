@@ -25,7 +25,7 @@ public class UsersServiceImpl implements IUsersService {
 	public void setUserdao(IUserDao udao) {
 		this.userdao = udao;
 	}
-	
+
 
 	public IRolesDao getRolesdao() {
 		return rolesdao;
@@ -46,14 +46,14 @@ public class UsersServiceImpl implements IUsersService {
 	}
 
 	public void deleteUser(Users em) {
-//		Users user = userdao.getUser(Users.class, em.getIdUsers());
+		//		Users user = userdao.getUser(Users.class, em.getIdUsers());
 		if(em!=null)
 			userdao.deleteUser(em);
 
 	}
 
 	public Users getUser(Class clazz, String id) {
-		
+
 		return userdao.getUser(clazz, id);
 	}
 
@@ -81,19 +81,21 @@ public class UsersServiceImpl implements IUsersService {
 	}
 
 	@Override
-	public Boolean findUser(String id) {
+	public Boolean findUser(String id) throws Exception{
 		HttpSession session = ServletActionContext.getRequest()
 				.getSession();
 		Users userT = userdao.getUser(Users.class, id);
+
 		List<Object> roleT = rolesdao.getAllRoles(Roles.class, "");
 		List<Roles> rollist = new ArrayList<Roles>();
+
 		for (Object obj : roleT) {
 
 			Roles em = (Roles) obj;
 			rollist.add(em);
 		}
-		 session.setAttribute("rolelist",rollist);
-		session.setAttribute("user", userT);
+		session.setAttribute("rolelist",rollist);
+		session.setAttribute("edituser", userT);
 		if(userT!=null && rollist.size()>0){
 			return true;
 		}

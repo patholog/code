@@ -159,7 +159,12 @@ public class UsersAction extends BaseAction {
 
 	public String saveUser() throws IOException {
 		try {
-			userservice.updateUser(user);
+			Users userT = userservice.getUser(Users.class, user.getIdUsers());
+			userT.setRealname(user.getRealname());
+			userT.setSex(user.getSex());
+			userT.setTel(user.getTel());
+			userT.setRoleId(user.getRoleId());
+			userservice.updateUser(userT);
 			return "updatesuccess";
 		} catch (Exception e) {
 			return "err";

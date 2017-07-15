@@ -32,7 +32,14 @@ public class RolesDaoImpl extends SuperDao implements IRolesDao{
 
 
 	public List<Object> getAllRoles(Class clazz,String hql) {
-		return super.getAllObject(clazz,hql);
+		try {
+			return super.getAllObject(clazz,hql);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 
 

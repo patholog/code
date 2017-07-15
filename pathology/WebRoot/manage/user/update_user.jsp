@@ -51,39 +51,39 @@
 		    <table class="maintable form_top_thin">
               <tr>
                 <th>用户名</th>
-                <td><input type="text" name="user.username" id="title" value="${sessionScope.user.username}" style="width:300px;" disabled/> 
-                	<input type="hidden" name="user.idUsers" value="${sessionScope.user.idUsers}" disabled/>
+                <td><input type="text" name="user.username" id="title" value="${sessionScope.edituser.username}" style="width:300px;" disabled/> 
+                	<input type="hidden" name="user.idUsers" value="${sessionScope.edituser.idUsers}"/>
                 </td>
               </tr>			  
               <tr>
                 <th>密码</th>
-                <td><input type="password" name="user.password" id="title" value="${sessionScope.user.password}" style="width:300px;" disabled/> </td>
+                <td><input type="password" name="user.password" id="title" value="${sessionScope.edituser.password}" style="width:300px;" disabled/> </td>
               </tr>			  
               <tr>
                 <th>电子邮箱</th>
-                <td><input type="text" name="user.email" id="title" value="${sessionScope.user.email}" style="width:300px;" disabled/> </td>
+                <td><input type="text" name="user.email" id="title" value="${sessionScope.edituser.email}" style="width:300px;" disabled/> </td>
               </tr>			  
               <tr>
                 <th>真实姓名</th>
-                <td><input type="text" name="user.realname" id="title2" value="${sessionScope.user.realname}" style="width:300px;" /></td>
+                <td><input type="text" name="user.realname" id="title2" value="${sessionScope.edituser.realname}" style="width:300px;" /></td>
               </tr>			  
               <tr>
                 <th>性别</th>
-                <td><input type="radio" name="user.sex" value="男" />
+                <td><input type="radio" name="user.sex"<c:if test="${sessionScope.edituser.sex=='男'}">checked</c:if> value="男"  />
                 男  &nbsp;&nbsp;
-                  <input type="radio" name="user.sex" value="女" />
+                  <input type="radio" name="user.sex"<c:if test="${sessionScope.edituser.sex=='女'}">checked</c:if> value="女" />
                 女 </td>
               </tr>			  
               <tr>
                 <th>联系电话</th>
-                <td><input type="text" name="user.mobile" id="title" value="${sessionScope.user.mobile}" style="width:300px;" /> </td>
+                <td><input type="text" name="user.mobile" id="title" value="${sessionScope.edituser.mobile}" style="width:300px;" /> </td>
               </tr>			  
              		  
               <tr>
                 <th>角色</th>
-                <td><select name="select">
+                <td><select name="user.roleId">
                 <c:forEach var="roles" items="${rolelist}">
-                  <option value="${roles.idRoles}">${roles.name}</option>
+                  <option <c:if test="${sessionScope.edituser.sex=='女'}">selected="selected"</c:if> value="${roles.idRoles}">${roles.name}</option>
                   
                   </c:forEach>
 				
