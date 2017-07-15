@@ -12,4 +12,7 @@ public interface IRolesService {
 	public Roles getRoles(Class clazz,String id) throws Exception;
 	public void updateRoles(Roles em) throws Exception;
 	public void addRoles(Roles em) throws Exception;
+	public Boolean findRoles(String id) throws Exception;
+	public void addRoles(Roles em,String idfunctions)throws Exception;
+	public void updateRoles(Roles em,String idfunctions)throws Exception;
 }

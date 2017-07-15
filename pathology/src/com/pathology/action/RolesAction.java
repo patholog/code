@@ -25,14 +25,25 @@ public class RolesAction extends BaseAction {
 	private Roles roles;
 	private List<Roles> roleslist;
 	private int index;
+	private String function;
+
+	
+	public String getFunction() {
+		return function;
+	}
+
+	public void setFunction(String function) {
+		this.function = function;
+	}
 
 	public String addRoles() throws Exception {
 		try {
 
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
+			
 			roles.setIdRoles(getEandomId(16));
-			rolesservice.addRoles(roles);
+			rolesservice.addRoles(roles,function);
 
 			return "updatesuccess";
 		} catch (Exception e) {
@@ -84,12 +95,13 @@ public class RolesAction extends BaseAction {
 
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
-			HttpSession session = ServletActionContext.getRequest()
-					.getSession();
-			Roles hospitalT = rolesservice.getRoles(Roles.class,
-					roles.getIdRoles());
-			session.setAttribute("roles", hospitalT);
+			Boolean result=rolesservice.findRoles(roles.getIdRoles());
+			if(result){
 			return "edit";
+			}
+			else{
+				return Constant.ERR;
+			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return Constant.ERR;
@@ -102,7 +114,7 @@ public class RolesAction extends BaseAction {
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
 
-			rolesservice.updateRoles(roles);
+			rolesservice.updateRoles(roles,function);
 			return "updatesuccess";
 		} catch (Exception e) {
 			logger.error(e.getMessage());

@@ -90,6 +90,7 @@
 			</result>
 			<result name="edit"> /manage/function/update_function.jsp</result>
 			<result name="err">/err.jsp</result>
+			<result name="addroles">/manage/roles/add_roles.jsp</result>
 		</action>
 		<action name="RolesAction" class="com.pathology.action.RolesAction">
 			<result name="success"> /manage/roles/roleslist.jsp</result>

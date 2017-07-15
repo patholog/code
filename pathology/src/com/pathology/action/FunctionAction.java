@@ -136,7 +136,7 @@ public class FunctionAction extends BaseAction {
 			HttpSession session = ServletActionContext.getRequest()
 					.getSession();
 			session.setAttribute("functionlist", list);
-			return "regist";
+			return "addroles";
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return Constant.ERR;

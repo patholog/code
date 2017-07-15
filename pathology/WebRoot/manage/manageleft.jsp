@@ -27,7 +27,7 @@
             <div name="leftmenu" id="rolemenu">
         <h3>角色</h3>
         <ul>
-          <li><a href="${path}/manage/roles/add_roles.jsp">添加角色</a> </li>
+          <li><a href="FunctionAction!allFunction">添加角色</a> </li>
           <li><a href="RolesAction!rolesList">管理角色</a> </li>
         </ul>
       </div>

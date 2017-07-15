@@ -11,12 +11,14 @@ public class RoleFunctionServiceImpl implements IRoleFunctionService {
 
 	private IRoleFunctionDao rolefunctiondao;
 	
-	public IRoleFunctionDao getFunctiondao() {
+	
+
+	public IRoleFunctionDao getRolefunctiondao() {
 		return rolefunctiondao;
 	}
 
-	public void setRoleFunctiondao(IRoleFunctionDao hospitaldao) {
-		this.rolefunctiondao = hospitaldao;
+	public void setRolefunctiondao(IRoleFunctionDao rolefunctiondao) {
+		this.rolefunctiondao = rolefunctiondao;
 	}
 
 	public List<RoleFunction> getByPage(int index, Class clazz, String hql)  throws Exception{

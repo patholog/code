@@ -152,7 +152,7 @@
 	<bean id="rolesservice" class="com.pathology.service.impl.RolesServiceImpl">
 		<property name="rolesdao" ref="rolesdao"></property>
 		<property name="functiondao" ref="functiondao"></property>
-		<!--<property name="rolefunctiondao" ref="rolefunctiondao"></property>-->
+		<property name="rolefunctiondao" ref="rolefunctiondao"></property>
 	</bean>
 	<bean id="rolesAction" class="com.pathology.action.RolesAction" scope="prototype">
 		<property name="rolesservice" ref="rolesservice"></property>
@@ -162,8 +162,6 @@
 	<bean id="rolefunctionservice" class="com.pathology.service.impl.RoleFunctionServiceImpl">
 		<property name="rolefunctiondao" ref="rolefunctiondao"></property>
 	</bean>
-	<bean id="rolefunctionAction" class="com.pathology.action.RoleFunctionAction" scope="prototype">
-		<property name="rolefunctionservice" ref="rolefunctionservice"></property>
-	</bean>
+	
 	
 </beans>
