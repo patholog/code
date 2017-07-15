@@ -17,6 +17,77 @@
 <script type="text/javascript" src="${path }/js/common-cn.js"></script>
 <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
 <script type="text/javascript">
+	$(document).ready(function() {
+		$("#hospitalcode").blur(function() {
+					var hospitalcode = $("#hospitalcode").val().trim();
+					if (hospitalcode == '') {
+						$("#hospitalcodetip").html("<a style='color:#2ca9cc;font-size:14px;'>编码不能为空！</a>");
+						$("#btn").attr("disabled",true);
+						return false;
+					}else if(hospitalcode.length<6){
+							$("#hospitalcodetip").html("<a style='color:#2ca9cc;font-size:14px;'>编码不能少于6位！</a>");
+							$("#btn").attr("disabled",true);
+							return false;
+					}else if(hospitalcode.length>20){
+							$("#hospitalcodetip").html("<a style='color:#2ca9cc;font-size:14px;'>编码不能超过20位！</a>");
+							$("#btn").attr("disabled",true);
+							return false;
+					}
+					else {
+						
+						var zmnumReg=/^[0-9a-zA-Z]*$/;  
+						if(hospitalcode!=""&&!zmnumReg.test(hospitalcode)){  
+							$("#hospitalcodetip").html("<a style='color:#2ca9cc;font-size:14px;'>只能输入字母或数字!</a>");
+							$("#hospitalcode").val("");
+							$("#btn").attr("disabled",true);
+							return false;
+						}
+			}
+		});	
+		
+		$("#name").blur(function() {
+					var name = $("#name").val().trim();
+					if (name == '') {
+						$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>名称不能为空！</a>");
+						$("#btn").attr("disabled",true);
+						return false;
+					}else if(name.length>50){
+							$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>名称过长！</a>");
+							$("#btn").attr("disabled",true);
+							return false;
+					}
+			
+		});	
+		
+		$("#memo").blur(function() {
+			var spe = $("#memo").val().trim();
+			if(spe.length>128){
+				$("#memotip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
+				$("#btn").attr("disabled",true);
+				return false;
+			}else{
+				$("#memotip").html("");
+				$("#btn").attr("disabled",false);
+				return true;
+			}
+		});
+		$("#address").blur(function() {
+			var spe = $("#address").val().trim();
+			if(spe.length>128){
+				$("#addresstip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
+				$("#btn").attr("disabled",true);
+				return false;
+			}else{
+				$("#addresstip").html("");
+				$("#btn").attr("disabled",false);
+				return true;
+			}
+		});
+		
+
+	});
+</script>
+<script type="text/javascript">
 	$(function() {
 		$(".ta tr").each(function(i) {
 			this.style.backgroundColor = [ '#799AE1', '#D6DFF7' ][i % 2]
@@ -51,23 +122,23 @@
 		    <table class="maintable form_top_thin">
               <tr>
                 <th>医院名称</th>
-                <td><input type="text" name="hospital.name" id="title" value="" style="width:300px;" /> </td>
+                <td><input type="text" name="hospital.name" id="name" value="" style="width:300px;" required/> <span id="nametip"></span></td>
               </tr>			  
               <tr>
                 <th>医院编码</th>
-                <td><input type="text" name="hospital.hospitalcode" id="title" value="" style="width:300px;" /> </td>
+                <td><input type="text" name="hospital.hospitalcode" id="hospitalcode" value="" style="width:300px;" required/><span id="hospitalcodetip"></span> </td>
               </tr>			  
               <tr>
                 <th>电话</th>
-                <td><input type="text" name="hospital.tel" id="title" value="" style="width:300px;" /> </td>
+                <td><input type="text" name="hospital.tel" id="tel" value="" style="width:300px;" required/><span id="teltip"></span> </td>
               </tr>			  
               <tr>
                 <th>地址</th>
-                <td><input type="text" name="hospital.address" id="title" value="" style="width:300px;" /></td>
+                <td><input type="text" name="hospital.address" id="address" value="" style="width:300px;" required/><span id="addresstip"></span></td>
               </tr>	
               <tr>
                 <th>备注</th>
-                <td><input type="text" name="hospital.memo" id="title" value="" style="width:300px;" /></td>
+                <td><input type="text" name="hospital.memo" id="memo" value="" style="width:300px;" required/><span id="memotip"></span></td>
               </tr>			  
               
             </table>

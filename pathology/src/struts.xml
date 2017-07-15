@@ -106,20 +106,21 @@
 
 			<result name="messages"> /webdiagnosis/message/message_list.jsp</result>
 			<result name="messageInfo"> /webdiagnosis/message/messageInfo.jsp</result>
-			 
+			 <result name="err">/err.jsp</result>
 		</action>
 		<!--  收藏 -->
 		<action name="CollectionAction" class="com.pathology.action.CollectionAction">
-
+			<result name="err">/err.jsp</result>
 			<result name="collections">/webdiagnosis/collectdiag/collectdiag_list.jsp</result>
 		</action>
 		<!--  收藏 -->
 		<action name="ShareAction" class="com.pathology.action.ShareAction">
-
+			<result name="err">/err.jsp</result>
 			<result name="shares">/webdiagnosis/diagshare/diagshare_list.jsp</result>
 		</action>
 		<!-- 病例表 -->
 		<action name="PathologyAction" class="com.pathology.action.PathologyAction">
+			<result name="err">/err.jsp</result>
 			<result name="pathologysneed">/webdiagnosis/needdiag/needdiag_list.jsp</result>
 			<result name="pathologyshas">/webdiagnosis/hasdiag/hasdiag_list.jsp</result>
 			<result name="pathologysback">/webdiagnosis/retreatdiag/retreatdiag_list.jsp</result>
