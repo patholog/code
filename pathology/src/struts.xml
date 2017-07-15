@@ -126,5 +126,8 @@
 			<result name="pathologysback">/webdiagnosis/retreatdiag/retreatdiag_list.jsp</result>
 			<result name="daizhenduan">/webdiagnosis/needdiag/needdiag.jsp</result>
 		</action>
+		<action name="DiaReportAction" class="com.pathology.action.DiaReportAction">
+			<result name="pathologyreport">/webdiagnosis/hasdiag/diagnosisreport.jsp</result>
+		</action>
 	</package>
 </struts>

@@ -67,7 +67,7 @@ public class PathologyAction extends BaseAction{
 
     return "daizhenduan";
   }
-
+  
 	public String  getPathologyListToHas(){
 		try {
 
