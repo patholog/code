@@ -39,6 +39,12 @@
 		<action name="daizhenduan">
 			<result>/webdiagnosis/needdiag/needdiag.html</result>
 		</action>
+		
+	  <action name="loginout" class="com.pathology.action.LoginAction"
+			method="LoginOut">
+			<!-- 将返回类型设置为json -->
+				<result name="success">/login.jsp</result>
+		</action>
 		<action name="login">
 			<result>/index.jsp</result>
 		</action>

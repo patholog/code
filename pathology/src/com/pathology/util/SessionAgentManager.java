@@ -48,10 +48,19 @@ public class SessionAgentManager {
 	/**
 	 * 从Session中获取当前登陆的信息
 	 * @return 当前登陆的信息,如果为空表示没有登陆
+	 * @throws Exception 
 	 */
-	public static Users getSessionAgentBean(){
+	public static Users getSessionAgentBean() throws Exception{
 	   Map<String,Object> session = ActionContext.getContext().getSession();
-	   return (Users)session.get("users"); 
+	     Users  user  =  (Users)session.get("users");
+	     return user;
+	    /* if(user != null &&  user.getIdUsers() != null){
+	    	 return user;
+	     }else{
+	    	throw new Exception("err"); 
+	     }*/
+	     
+	    	
 		}
     
 	
@@ -106,12 +115,22 @@ public class SessionAgentManager {
 		   return (MemberBean)session.getAttribute("memberBean");
 	}
  */
-	
-//	public static void DestroySessionMember(HttpSession session){
-//		      System.out.println("memberBean-----注销---");
-//			  session.removeAttribute("memberBean");
-//			  logger.info("DestroySessionMember:注销-----memberBean---");
-//		  } 
-//		  session.removeAttribute("adminBean1");
-//		  session.invalidate();
+	  /***
+	   * 
+	   * @return
+	   */
+		public static boolean DestroySessionMember(){
+			try{
+			Map<String,Object> session = ActionContext.getContext().getSession();
+		    Users user =  (Users)session.get("users"); 
+		    if(user != null && user.getUsername() != null){
+		    	session.remove("users");
+		    	return true;
+		    }else{
+		    	return false;
+		    }
+		  }catch(Exception e){
+			  return false;
+		  }
+	}
 }
