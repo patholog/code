@@ -25,8 +25,11 @@
 			var email = $("#email").val().trim();
 			if (email == '') {
 				$("#emailtip").html("<a style='color:#2ca9cc;font-size:14px;'>邮箱不能为空！</a>");
-				$("#btn").attr("disabled",true);
+				$("#btn").attr("disabled",false);
 				return false;
+			}else{
+				$("#emailtip").html("");
+				return true;
 			} 
 		});
 		
@@ -45,6 +48,7 @@
 					}),
 					dataType : "json",//设置需要返回的数据类型
 					success : function(d) {
+						$("#verificationtip").html("");
 						return true;
 					},
 					error : function(d) {
