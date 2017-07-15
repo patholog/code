@@ -111,3 +111,13 @@ a img { border:none; }
 .pagetable {border:none; border-collapse:collapse; }
 .pagetable th { border:none; padding:8px; background-color:#f3f7ff; color:#444; font-weight:bold; text-align:left; vertical-align:middle; }
 .pagetable td { border:none; padding:8px; vertical-align:middle; }
+.pwdcheck{
+	width:40px;
+	margin-left:2px;
+	margin-top:10px;
+	height:10px;
+	bgcolor:#eeeeee;
+	float:right;
+	border-radius: 3px;
+	font-size:12px;
+}

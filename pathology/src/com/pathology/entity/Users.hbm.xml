@@ -102,5 +102,8 @@
         <property name="verification" type="java.lang.String">
             <column name="verification" length="32" />
         </property>
+        <property name="roleId" type="java.lang.String">
+            <column name="role_id" length="32" />
+        </property>
     </class>
 </hibernate-mapping>

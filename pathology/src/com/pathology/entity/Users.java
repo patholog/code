@@ -42,6 +42,7 @@ public class Users implements java.io.Serializable {
 	private Integer delF;
 	private String userType;
 	private String verification;
+	private String roleId;
 
 	// Constructors
 
@@ -64,7 +65,7 @@ public class Users implements java.io.Serializable {
 			String sortNo, String spellNo, String wubiNo, Integer updCnt,
 			Timestamp crtTime, String crtUserId, String crtDeptCd,
 			Date lastUpdTime, String lastUpdDeptCd, String lastUpdUserId,
-			Integer delF, String userType, String verification) {
+			Integer delF, String userType, String verification, String roleId) {
 		this.idUsers = idUsers;
 		this.username = username;
 		this.realname = realname;
@@ -96,6 +97,7 @@ public class Users implements java.io.Serializable {
 		this.delF = delF;
 		this.userType = userType;
 		this.verification = verification;
+		this.roleId = roleId;
 	}
 
 	// Property accessors
@@ -346,6 +348,14 @@ public class Users implements java.io.Serializable {
 
 	public void setVerification(String verification) {
 		this.verification = verification;
+	}
+
+	public String getRoleId() {
+		return this.roleId;
+	}
+
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
 	}
 
 }

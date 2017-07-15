@@ -16,6 +16,7 @@
 <link rel="stylesheet" type="text/css" href="${path }/css/settings.css" />
 <link rel="stylesheet" type="text/css" href="${path }/css/select.css" />
 <script src="${path }/js/regist.js" type="text/javascript"></script>
+<script type="text/javascript" src="${path }/js/passwordcheck.js"></script>
 <script src="${path }/js/jquery/jquery-1.4.4.min.js"
 	type="text/javascript"></script>
 <script type="text/javascript">
