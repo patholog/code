@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -126,11 +125,11 @@ public class UsersAction extends BaseAction {
 
 	public String updateUser() throws IOException {
 		try {
-			HttpSession session = ServletActionContext.getRequest()
-					.getSession();
-			Users userT = userservice.getUser(Users.class, user.getIdUsers());
-			session.setAttribute("user", userT);
-			return "edit";
+			Boolean result=userservice.findUser(user.getIdUsers());
+			if(result){
+				return "edit";
+			}
+			else{return "err";}
 		} catch (Exception e) {
 			return "err";
 		}
@@ -418,12 +417,5 @@ public class UsersAction extends BaseAction {
 	}
 	
 	
-	// public IUsersService getUserserv() {
-	// return userserv;
-	// }
-	//
-	// public void setUserserv(IUsersService userserv) {
-	// this.userserv = userserv;
-	// }
 
 }
