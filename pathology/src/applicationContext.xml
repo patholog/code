@@ -82,6 +82,7 @@
 	<bean id="rolesdao" class="com.pathology.dao.impl.RolesDaoImpl" parent="pt" />
 	<bean id="hospitaldao" class="com.pathology.dao.impl.HospitalDaoImpl" parent="pt" />
 	<bean id="functiondao" class="com.pathology.dao.impl.FunctionDaoImpl" parent="pt" />
+	<bean id="rolefunctiondao" class="com.pathology.dao.impl.RoleFunctionDaoImpl" parent="pt" />
 	
 	<bean id="userservice" class="com.pathology.service.impl.UsersServiceImpl">
 		<property name="userdao" ref="userdao"></property>
@@ -151,9 +152,18 @@
 	<bean id="rolesservice" class="com.pathology.service.impl.RolesServiceImpl">
 		<property name="rolesdao" ref="rolesdao"></property>
 		<property name="functiondao" ref="functiondao"></property>
+		<!--<property name="rolefunctiondao" ref="rolefunctiondao"></property>-->
 	</bean>
 	<bean id="rolesAction" class="com.pathology.action.RolesAction" scope="prototype">
 		<property name="rolesservice" ref="rolesservice"></property>
+	</bean>
+	<!--  角色功能 -->
+	
+	<bean id="rolefunctionservice" class="com.pathology.service.impl.RoleFunctionServiceImpl">
+		<property name="rolefunctiondao" ref="rolefunctiondao"></property>
+	</bean>
+	<bean id="rolefunctionAction" class="com.pathology.action.RoleFunctionAction" scope="prototype">
+		<property name="rolefunctionservice" ref="rolefunctionservice"></property>
 	</bean>
 	
 </beans>
