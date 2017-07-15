@@ -117,7 +117,7 @@ public class PathologyServiceImpl implements IPathologyService {
 		pageNum = pageNum != null?pageNum:"1";
 		String title = "";
 		int status = 1;
-		String sql = " select a.pathologyno ,a.patientname,a.crt_Time,d.name as hospitalname from pathology a   "
+		String sql = " select a.pathologyno ,a.patientname,a.crt_Time,d.name as hospitalname,a.id_case from pathology a   "
 				+" left join image  b  on a.id_case = b.case_id "
 				+" left join result  c on a.id_case = c.case_id"
 				+" left join hospital  d on a.hospitalcode = d.id_hospital"
