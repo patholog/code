@@ -6,10 +6,10 @@ import com.pathology.entity.Hospital;
 
 
 public interface IHospitalService {
-	public List<Hospital> getByPage(int index,Class clazz,String hql);
-	public List<Hospital> getAllHospital(Class clazz,String hql);
-	public void deleteHospital(Hospital em);
-	public Hospital getHospital(Class clazz,String id);
-	public void updateHospital(Hospital em);
-	public void addHospital(Hospital em);
+	public List<Hospital> getByPage(int index,Class clazz,String hql) throws Exception;
+	public List<Hospital> getAllHospital(Class clazz,String hql) throws Exception;
+	public void deleteHospital(Hospital em) throws Exception;
+	public Hospital getHospital(Class clazz,String id) throws Exception;
+	public void updateHospital(Hospital em) throws Exception;
+	public void addHospital(Hospital em) throws Exception;
 }

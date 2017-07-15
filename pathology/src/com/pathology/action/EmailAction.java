@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
+
 import com.opensymphony.xwork2.Action;
 import com.pathology.entity.Hospital;
 import com.pathology.entity.Users;
@@ -14,7 +16,7 @@ import com.pathology.util.Mail;
 public class EmailAction extends BaseAction {
 
 	private static final long serialVersionUID = 1L;
-
+	private final Logger logger = Logger.getLogger(EmailAction.class);
 	private Map<String, String> p;
 
 	public IUsersService userservice;
@@ -49,12 +51,19 @@ public class EmailAction extends BaseAction {
 	public String checkCode(){
 		String code = this.p.get("hoscode");
 		String hql=" and s.hospitalcode='"+code+"'";
-		List<Hospital> hosT = hospitalservice.getAllHospital(Hospital.class, hql);
-		if (hosT!=null && hosT.size()>0) {
+		List<Hospital> hosT;
+		try {
+			hosT = hospitalservice.getAllHospital(Hospital.class, hql);
+			if (hosT!=null && hosT.size()>0) {
+				return Action.ERROR;
+			} else {
+				return Action.SUCCESS;
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
 			return Action.ERROR;
-		} else {
-			return Action.SUCCESS;
 		}
+
 	}
 	public String checkVerification(){
 		String verification = this.p.get("verification");

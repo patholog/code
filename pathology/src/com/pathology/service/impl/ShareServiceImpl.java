@@ -37,17 +37,17 @@ public class ShareServiceImpl implements IShareService {
 		this.sharedao = udao;
 	}
 
-	public List<Share> getByPage(int index, Class clazz, String hql) {
+	public List<Share> getByPage(int index, Class clazz, String hql) throws Exception {
 
 		List<Object> list = sharedao.getByPage(index, clazz, hql);
 		return this.obj2Empl(list);
 	}
 
-	public List<Share> getAllShare(Class clazz, String hql) {
+	public List<Share> getAllShare(Class clazz, String hql) throws Exception {
 		return this.obj2Empl(sharedao.getAllShare(clazz, hql));
 	}
 
-	public void deleteShare(Share em) {
+	public void deleteShare(Share em) throws Exception {
 		if(em!=null)
 			sharedao.deleteShare(em);
 
@@ -55,7 +55,7 @@ public class ShareServiceImpl implements IShareService {
 	
 	
 	public List<ShareDTO>  getListShare(HttpServletRequest
-			 request,String name){
+			 request,String name) throws Exception{
 		
 		String pageNum = request.getParameter("pageNum");
 		pageNum = pageNum != null?pageNum:"1";
@@ -80,18 +80,18 @@ public class ShareServiceImpl implements IShareService {
 	 
 	}
 
-	public Share getShare(Class clazz, String id) {
+	public Share getShare(Class clazz, String id) throws Exception {
 		
 		return sharedao.getShare(clazz, id);
 	}
 
-	public void updateShare(Share em) {
+	public void updateShare(Share em) throws Exception {
 
 		sharedao.updateShare(em);
 
 	}
 
-	public void addShare(Share em) {
+	public void addShare(Share em) throws Exception {
 
 		sharedao.addShare(em);
 	}

@@ -13,11 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.Action;
 import com.pathology.entity.Users;
 import com.pathology.service.IUsersService;
+import com.pathology.util.Constant;
 import com.pathology.util.DigestMD5;
 import com.pathology.util.Mail;
 import com.pathology.util.SessionAgentManager;
@@ -26,6 +28,7 @@ public class UsersAction extends BaseAction {
 	/**
 	 * 
 	 */
+	private final Logger logger = Logger.getLogger(UsersAction.class);
 	private static final long serialVersionUID = 1L;
 	private Users u = new Users();
 	public IUsersService userservice;
@@ -97,6 +100,9 @@ public class UsersAction extends BaseAction {
 
 	public String userList() {
 		try {
+
+			if (!SessionAgentManager.islogin())
+				return Constant.ERR;
 			String hql = "";
 			if (user != null) {
 				if (user.getUsername() != null && !("".equals(user.getUsername())))
@@ -125,6 +131,9 @@ public class UsersAction extends BaseAction {
 
 	public String updateUser() throws IOException {
 		try {
+
+			if (!SessionAgentManager.islogin())
+				return Constant.ERR;
 			Boolean result=userservice.findUser(user.getIdUsers());
 			if(result){
 				return "edit";
@@ -137,6 +146,9 @@ public class UsersAction extends BaseAction {
 
 	public String checkUser() throws IOException {
 		try {
+
+			if (!SessionAgentManager.islogin())
+				return Constant.ERR;
 			HttpSession session = ServletActionContext.getRequest()
 					.getSession();
 			Users userT = userservice.getUser(Users.class, user.getIdUsers());
@@ -149,6 +161,9 @@ public class UsersAction extends BaseAction {
 
 	public String deleteUser() {
 		try {
+
+			if (!SessionAgentManager.islogin())
+				return Constant.ERR;
 			Users userT = userservice.getUser(Users.class, user.getIdUsers());
 			userservice.deleteUser(userT);
 			return "deletesuccess";

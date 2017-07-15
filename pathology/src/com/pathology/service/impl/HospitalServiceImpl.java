@@ -19,13 +19,13 @@ public class HospitalServiceImpl implements IHospitalService {
 		this.hospitaldao = hospitaldao;
 	}
 
-	public List<Hospital> getByPage(int index, Class clazz, String hql) {
+	public List<Hospital> getByPage(int index, Class clazz, String hql)  throws Exception{
 
 		List<Object> list = hospitaldao.getByPage(index, clazz, hql);
 		return this.obj2Empl(list);
 	}
 
-	public List<Hospital> getAllHospital(Class clazz, String hql) {
+	public List<Hospital> getAllHospital(Class clazz, String hql)  throws Exception{
 		return this.obj2Empl(hospitaldao.getAllHospital(clazz, hql));
 	}
 
@@ -36,18 +36,18 @@ public class HospitalServiceImpl implements IHospitalService {
 
 	}
 
-	public Hospital getHospital(Class clazz, String id) {
+	public Hospital getHospital(Class clazz, String id)  throws Exception{
 		
 		return hospitaldao.getHospital(clazz, id);
 	}
 
-	public void updateHospital(Hospital em) {
+	public void updateHospital(Hospital em)  throws Exception{
 
 		hospitaldao.updateHospital(em);
 
 	}
 
-	public void addHospital(Hospital em) {
+	public void addHospital(Hospital em)  throws Exception{
 
 		hospitaldao.addHospital(em);
 	}

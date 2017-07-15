@@ -36,17 +36,17 @@ public class CollectionServiceImpl implements ICollectionService {
 		this.collectiondao = udao;
 	}
 
-	public List<Collection> getByPage(int index, Class clazz, String hql) {
+	public List<Collection> getByPage(int index, Class clazz, String hql)  throws Exception{
 
 		List<Object> list = collectiondao.getByPage(index, clazz, hql);
 		return this.obj2Empl(list);
 	}
 
-	public List<Collection> getAllCollection(Class clazz, String hql) {
+	public List<Collection> getAllCollection(Class clazz, String hql)  throws Exception{
 		return this.obj2Empl(collectiondao.getAllCollection(clazz, hql));
 	}
 
-	public void deleteCollection(Collection em) {
+	public void deleteCollection(Collection em)  throws Exception{
 //		Message Message = Messagedao.getMessage(Message.class, em.getIdMessage());
 		if(em!=null)
 			collectiondao.deleteCollection(em);
@@ -55,7 +55,7 @@ public class CollectionServiceImpl implements ICollectionService {
 	
 	
 	public List<CollectionDTO>  getListCollection(HttpServletRequest
-			 request,String name){
+			 request,String name)  throws Exception{
 		
 		String pageNum = request.getParameter("pageNum");
 		pageNum = pageNum != null?pageNum:"1";
@@ -80,18 +80,18 @@ public class CollectionServiceImpl implements ICollectionService {
 	 
 	}
 
-	public Collection getCollection(Class clazz, String id) {
+	public Collection getCollection(Class clazz, String id)  throws Exception{
 		
 		return collectiondao.getCollection(clazz, id);
 	}
 
-	public void updateCollection(Collection em) {
+	public void updateCollection(Collection em)  throws Exception{
 
 		collectiondao.updateCollection(em);
 
 	}
 
-	public void addCollection(Collection em) {
+	public void addCollection(Collection em)  throws Exception{
 
 		collectiondao.addCollection(em);
 	}

@@ -3,7 +3,12 @@ package com.pathology.action;
 import com.pathology.dto.PathologyDTO;
 import com.pathology.entity.Pathology;
 import com.pathology.service.IPathologyService;
+import com.pathology.util.Constant;
+import com.pathology.util.SessionAgentManager;
+
 import net.sf.json.JSONObject;
+
+import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +16,7 @@ import java.util.List;
 
 public class PathologyAction extends BaseAction{
 
+	private final Logger logger = Logger.getLogger(PathologyAction.class);
 	public IPathologyService pathologyService;
 	private List<PathologyDTO> pathologys;
 	
@@ -20,10 +26,16 @@ public class PathologyAction extends BaseAction{
 	 * @return
 	 */
    public   Pathology  savePathology(String pathologgyjson){
+
 	   JSONObject obj = new JSONObject().fromObject(pathologgyjson);//将json字符串转换为json对象
 	    // 将json对象转换为java对象
 	   Pathology jb = (Pathology)JSONObject.toBean(obj,Pathology.class);//将建json对象转换为Person对象
-	     pathologyService.addPathology(jb);
+	     try {
+			pathologyService.addPathology(jb);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	   return  jb;
    }
 
@@ -33,14 +45,17 @@ public class PathologyAction extends BaseAction{
 	 * @return
 	 */
   public String getPathologyListToNeed(){
-    try{
+		try {
+
+			if (!SessionAgentManager.islogin())
+				return Constant.ERR;
       HttpServletRequest request = ServletActionContext.getRequest();
       pathologys =  pathologyService.getListPathologyToNeed(request,"");
       return "pathologysneed";
-    } catch (Exception e) {
-		  e.printStackTrace();
-    }
-    return "pathologysneed";
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return Constant.ERR;
+		}
   }
 
   /**
@@ -53,32 +68,36 @@ public class PathologyAction extends BaseAction{
   }
 
 	public String  getPathologyListToHas(){
-		try{
-		
+		try {
+
+			if (!SessionAgentManager.islogin())
+				return Constant.ERR;
 			HttpServletRequest
 			 request = ServletActionContext.getRequest();	
 			
 			pathologys =  pathologyService.getListPathologyToHas(request,"");
 		
 		return "pathologyshas";
-	  }catch(Exception e){
-		
-	   }
-		return "pathologyshas";
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return Constant.ERR;
+		}
 	}
 	public String  getPathologyListToBack(){
-		try{
-		
+		try {
+
+			if (!SessionAgentManager.islogin())
+				return Constant.ERR;
 			HttpServletRequest
 			 request = ServletActionContext.getRequest();	
 			
 			pathologys =  pathologyService.getListPathologyToBack(request,"");
 		
 		return "pathologysback";
-	  }catch(Exception e){
-		e.printStackTrace();
-	   }
-		return "pathologysback";
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return Constant.ERR;
+		}
 	}
 	public IPathologyService getPathologyService() {
 		return pathologyService;

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
  
@@ -21,6 +22,7 @@ import com.pathology.service.IMessageService;
 import com.pathology.util.Constant;
 public class MessageAction extends BaseAction{
 
+	private final Logger logger = Logger.getLogger(HospitalAction.class);
 	public IMessageService messageService;
 	private Message message;
 	private MessageDTO messageDTO;

@@ -19,35 +19,35 @@ public class FunctionServiceImpl implements IFunctionService {
 		this.functiondao = hospitaldao;
 	}
 
-	public List<Function> getByPage(int index, Class clazz, String hql) {
+	public List<Function> getByPage(int index, Class clazz, String hql)  throws Exception{
 
 		List<Object> list = functiondao.getByPage(index, clazz, hql);
 		return this.obj2Empl(list);
 	}
 
-	public List<Function> getAllFunction(Class clazz, String hql) {
+	public List<Function> getAllFunction(Class clazz, String hql) throws Exception {
 		return this.obj2Empl(functiondao.getAllFunction(clazz, hql));
 	}
 
-	public void deleteFunction(Function em) {
+	public void deleteFunction(Function em) throws Exception {
 //		Hospital Hospital = hospitaldao.getHospital(Hospital.class, em.getIdHospitals());
 		if(em!=null)
 			functiondao.deleteFunction(em);
 
 	}
 
-	public Function getFunction(Class clazz, String id) {
+	public Function getFunction(Class clazz, String id) throws Exception {
 		
 		return functiondao.getFunction(clazz, id);
 	}
 
-	public void updateFunction(Function em) {
+	public void updateFunction(Function em) throws Exception {
 
 		functiondao.updateFunction(em);
 
 	}
 
-	public void addFunction(Function em) {
+	public void addFunction(Function em) throws Exception {
 
 		functiondao.addFunction(em);
 	}

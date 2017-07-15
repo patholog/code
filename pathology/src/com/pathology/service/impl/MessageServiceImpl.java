@@ -36,17 +36,17 @@ public class MessageServiceImpl implements IMessageService {
 		this.messagedao = udao;
 	}
 
-	public List<Message> getByPage(int index, Class clazz, String hql) {
+	public List<Message> getByPage(int index, Class clazz, String hql)  throws Exception{
 
 		List<Object> list = messagedao.getByPage(index, clazz, hql);
 		return this.obj2Empl(list);
 	}
 
-	public List<Message> getAllMessage(Class clazz, String hql) {
+	public List<Message> getAllMessage(Class clazz, String hql)  throws Exception{
 		return this.obj2Empl(messagedao.getAllMessage(clazz, hql));
 	}
 
-	public void deleteMessage(Message em) {
+	public void deleteMessage(Message em) throws Exception {
 //		Message Message = Messagedao.getMessage(Message.class, em.getIdMessage());
 		if(em!=null)
 			messagedao.deleteMessage(em);
@@ -55,7 +55,7 @@ public class MessageServiceImpl implements IMessageService {
 	
 	
 	public List<MessageDTO>  getListMessage(HttpServletRequest
-			 request,String name){
+			 request,String name) throws Exception{
 		
 		String pageNum = request.getParameter("pageNum");
 		pageNum = pageNum != null?pageNum:"1";
@@ -82,18 +82,18 @@ public class MessageServiceImpl implements IMessageService {
 	 
 	}
 
-	public Message getMessage(Class clazz, String id) {
+	public Message getMessage(Class clazz, String id)  throws Exception{
 		
 		return messagedao.getMessage(clazz, id);
 	}
 
-	public void updateMessage(Message em) {
+	public void updateMessage(Message em) throws Exception {
 
 		messagedao.updateMessage(em);
 
 	}
 
-	public void addMessage(Message em) {
+	public void addMessage(Message em) throws Exception {
 
 		messagedao.addMessage(em);
 	}

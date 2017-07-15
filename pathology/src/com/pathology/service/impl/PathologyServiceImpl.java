@@ -37,17 +37,17 @@ public class PathologyServiceImpl implements IPathologyService {
 		this.pathologydao = udao;
 	}
 
-	public List<Pathology> getByPage(int index, Class clazz, String hql) {
+	public List<Pathology> getByPage(int index, Class clazz, String hql) throws Exception {
 
 		List<Object> list = pathologydao.getByPage(index, clazz, hql);
 		return this.obj2Empl(list);
 	}
 
-	public List<Pathology> getAllPathology(Class clazz, String hql) {
+	public List<Pathology> getAllPathology(Class clazz, String hql) throws Exception {
 		return this.obj2Empl(pathologydao.getAllPathology(clazz, hql));
 	}
 
-	public void deletePathology(Pathology em) {
+	public void deletePathology(Pathology em) throws Exception {
 		if(em!=null)
 			pathologydao.deletePathology(em);
 
@@ -55,7 +55,7 @@ public class PathologyServiceImpl implements IPathologyService {
 	
 	
 	public List<PathologyDTO>  getListPathologyToNeed(HttpServletRequest
-			 request,String name){
+			 request,String name) throws Exception{
 		
 		String pageNum = request.getParameter("pageNum");
 		pageNum = pageNum != null?pageNum:"1";
@@ -82,7 +82,7 @@ public class PathologyServiceImpl implements IPathologyService {
 	 
 	}
 	public List<PathologyDTO>  getListPathologyToHas(HttpServletRequest
-			 request,String name){
+			 request,String name) throws Exception{
 		
 		String pageNum = request.getParameter("pageNum");
 		pageNum = pageNum != null?pageNum:"1";
@@ -111,7 +111,7 @@ public class PathologyServiceImpl implements IPathologyService {
 	}
 	
 	public List<PathologyDTO>  getListPathologyToBack(HttpServletRequest
-			 request,String name){
+			 request,String name) throws Exception{
 		
 		String pageNum = request.getParameter("pageNum");
 		pageNum = pageNum != null?pageNum:"1";
@@ -139,18 +139,18 @@ public class PathologyServiceImpl implements IPathologyService {
 		return jdbcTemplate.query(sql, new PathologyMapping());
 	 
 	}
-	public Pathology getPathology(Class clazz, String id) {
+	public Pathology getPathology(Class clazz, String id) throws Exception {
 		
 		return pathologydao.getPathology(clazz, id);
 	}
 
-	public void updatePathology(Pathology em) {
+	public void updatePathology(Pathology em) throws Exception {
 
 		pathologydao.updatePathology(em);
 
 	}
 
-	public void addPathology(Pathology em) {
+	public void addPathology(Pathology em) throws Exception {
 
 		pathologydao.addPathology(em);
 	}

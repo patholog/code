@@ -9,12 +9,12 @@ import com.pathology.dto.CollectionDTO;
 
 public interface ICollectionService {
 	
-	public List<Collection> getByPage(int index,Class clazz,String hql);
-	public List<Collection> getAllCollection(Class clazz,String hql);
-	public void deleteCollection(Collection em);
-	public Collection getCollection(Class clazz,String id);
-	public void updateCollection(Collection em);
-	public void addCollection(Collection em);
+	public List<Collection> getByPage(int index,Class clazz,String hql) throws Exception;
+	public List<Collection> getAllCollection(Class clazz,String hql) throws Exception;
+	public void deleteCollection(Collection em) throws Exception;
+	public Collection getCollection(Class clazz,String id) throws Exception;
+	public void updateCollection(Collection em) throws Exception;
+	public void addCollection(Collection em) throws Exception;
 	public List<CollectionDTO>  getListCollection(HttpServletRequest
-			 request,String name);
+			 request,String name) throws Exception;
 }
