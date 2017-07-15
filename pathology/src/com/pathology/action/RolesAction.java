@@ -2,11 +2,11 @@ package com.pathology.action;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
@@ -16,7 +16,7 @@ import com.pathology.util.Constant;
 import com.pathology.util.SessionAgentManager;
 
 public class RolesAction extends BaseAction {
-
+	private static final long serialVersionUID = 1L;
 	private final Logger logger = Logger.getLogger(RolesAction.class);
 	private IRolesService rolesservice;
 	private String idRoles;

@@ -2,8 +2,6 @@ package com.pathology.action;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +16,7 @@ import com.pathology.util.Constant;
 import com.pathology.util.SessionAgentManager;
 
 public class FunctionAction extends BaseAction {
-
+	private static final long serialVersionUID = 1L;
 	private final Logger logger = Logger.getLogger(FunctionAction.class);
 	private IFunctionService functionservice;
 	private String idFunction;

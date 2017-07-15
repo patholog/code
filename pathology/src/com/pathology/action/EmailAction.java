@@ -11,7 +11,6 @@ import com.pathology.entity.Hospital;
 import com.pathology.entity.Users;
 import com.pathology.service.IHospitalService;
 import com.pathology.service.IUsersService;
-import com.pathology.util.Constant;
 import com.pathology.util.Mail;
 
 public class EmailAction extends BaseAction {

@@ -1,21 +1,22 @@
 package com.pathology.action;
 
-import com.pathology.dto.PathologyDTO;
-import com.pathology.entity.Pathology;
-import com.pathology.service.IPathologyService;
-import com.pathology.util.Constant;
-import com.pathology.util.SessionAgentManager;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import com.pathology.dto.PathologyDTO;
+import com.pathology.entity.Pathology;
+import com.pathology.service.IPathologyService;
+import com.pathology.util.Constant;
+import com.pathology.util.SessionAgentManager;
 
 public class PathologyAction extends BaseAction{
-
+	private static final long serialVersionUID = 1L;
 	private final Logger logger = Logger.getLogger(PathologyAction.class);
 	public IPathologyService pathologyService;
 	private List<PathologyDTO> pathologys;
@@ -27,7 +28,7 @@ public class PathologyAction extends BaseAction{
 	 */
    public   Pathology  savePathology(String pathologgyjson){
 
-	   JSONObject obj = new JSONObject().fromObject(pathologgyjson);//将json字符串转换为json对象
+	   JSONObject obj = JSONObject.fromObject(pathologgyjson);//将json字符串转换为json对象
 	    // 将json对象转换为java对象
 	   Pathology jb = (Pathology)JSONObject.toBean(obj,Pathology.class);//将建json对象转换为Person对象
 	     try {

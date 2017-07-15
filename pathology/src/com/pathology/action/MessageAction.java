@@ -1,27 +1,18 @@
 package com.pathology.action;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
- 
-
- 
-
-import com.opensymphony.xwork2.ActionContext;
 import com.pathology.dto.MessageDTO;
 import com.pathology.entity.Message;
 import com.pathology.service.IMessageService;
 import com.pathology.util.Constant;
 public class MessageAction extends BaseAction{
-
+	private static final long serialVersionUID = 1L;
 	private final Logger logger = Logger.getLogger(HospitalAction.class);
 	public IMessageService messageService;
 	private Message message;
@@ -35,7 +26,7 @@ public class MessageAction extends BaseAction{
 			HttpServletRequest
 			 request = ServletActionContext.getRequest();	
 			
-		String hql =" from message ";
+//		String hql =" from message ";
 		messages =  messageService.getListMessage(request,"");
 		Message me = new Message();
 		me.setIdMessage("000");
@@ -69,6 +60,7 @@ public class MessageAction extends BaseAction{
 	    message =  messageService.getMessage(Message.class, id);
 		return "messageInfo";
 	  }catch(Exception e){
+		  logger.error(e.getMessage());
 		  return Constant.ERR;
 	   }
 		
@@ -81,8 +73,8 @@ public class MessageAction extends BaseAction{
 			HttpServletRequest
 			 request = ServletActionContext.getRequest();	
 		 String conent = this.messageDTO.getContent();
-		String nam = this.message.getPatientname();
-		String hql =" from message ";
+//		String nam = this.message.getPatientname();
+//		String hql =" from message ";
 		messages =  messageService.getListMessage(request,conent);
 		Message me = new Message();
 		me.setIdMessage("000");

@@ -38,7 +38,7 @@ public class UsersAction extends BaseAction {
 	private HttpServletRequest request;
 
 	private Users user;
-	private List<Users> list;
+//	private List<Users> list;
 	private int index;
 
 	private String photoFileName;
