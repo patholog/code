@@ -107,7 +107,13 @@ public class HospitalAction extends BaseAction {
 
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
-			hospitalservice.updateHospital(hospital);
+			Hospital hospitalT =hospitalservice.getHospital(Hospital.class, hospital.getIdHospital());
+			hospitalT.setName(hospital.getName());
+			hospitalT.setHospitalcode(hospital.getHospitalcode());
+			hospitalT.setMemo(hospital.getMemo());
+			hospitalT.setTel(hospital.getTel());
+			hospitalT.setAddress(hospital.getAddress());
+			hospitalservice.updateHospital(hospitalT);
 			return "updatesuccess";
 		} catch (Exception e) {
 			logger.error(e.getMessage());

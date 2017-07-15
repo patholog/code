@@ -52,7 +52,7 @@
               <tr>
                 <th>医院名称</th>
                 <td><input type="text" name="hospital.name" id="title" value="${sessionScope.hospital.name}" style="width:300px;" /> 
-                	<input type="hidden" name="{hospital.idHospital" value="${sessionScope.hospital.idHospital}" />
+                	<input type="hidden" name="hospital.idHospital" value="${sessionScope.hospital.idHospital}" />
                 </td>
               </tr>		  
               <tr>
