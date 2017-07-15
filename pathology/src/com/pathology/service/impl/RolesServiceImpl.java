@@ -129,12 +129,17 @@ public class RolesServiceImpl implements IRolesService {
 
 	@Override
 	public void updateRoles(Roles em, String idfunctions)throws Exception {
+		List<Object> functions=rolefunctiondao.getAllRoleFunction(RoleFunction.class, "s.id_role='"+em.getIdRoles()+"'");
+		for(Object obj :functions){
+			rolefunctiondao.deleteRoleFunction((RoleFunction)obj);
+		}
 		String[] funcs=idfunctions.split(",");
 		for(String funcid:funcs){
 			RoleFunction rolefunc=new RoleFunction();
 			rolefunc.setIdRoleFounction(RandomNumbers.getEandomId(16));
 			rolefunc.setIdRole(em.getIdRoles());
 			rolefunc.setIdFounction(funcid);
+			rolefunctiondao.addRoleFunction(rolefunc);
 		}
 		rolesdao.updateRoles(em);
 	}
