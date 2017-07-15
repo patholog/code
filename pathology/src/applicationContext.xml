@@ -10,7 +10,7 @@
    	
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory"></property>
+		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	<aop:config> 
  		<aop:advisor pointcut="execution(* com.pathology.service.impl.*.*(..))" advice-ref="txAdvice" /> 
@@ -36,8 +36,8 @@
 		</property>
 		<property name="url" value="jdbc:mysql://123.206.28.85:3306/pathology?useUnicode=true&amp;characterEncoding=UTF-8">
 		</property>
-		<property name="username" value="root"></property>
-		<property name="password" value="mysql"></property>
+		<property name="username" value="root"/>
+		<property name="password" value="mysql"/>
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">

@@ -9,10 +9,8 @@
   <title></title>
   <c:set var="path" value="${pageContext.request.contextPath }"/>
   <link rel="stylesheet" type="text/css" href="${path }/css/style.css"/>
-  <script type="text/javascript"
-          src="${path }/CKEditor/ckeditor/ckeditor.js"></script>
-  <script type="text/javascript"
-          src="${path }/CKFinder/ckfinder/ckfinder.js"></script>
+  <script type="text/javascript" src="${path }/CKEditor/ckeditor/ckeditor.js"></script>
+  <script type="text/javascript" src="${path }/CKFinder/ckfinder/ckfinder.js"></script>
   <script type="text/javascript" src="${path }/js/treeView.js"></script>
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>

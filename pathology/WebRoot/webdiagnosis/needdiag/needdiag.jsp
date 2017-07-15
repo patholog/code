@@ -143,6 +143,12 @@
       font-size: 14px;
       outline: solid thin #555555;
     }
+    .fl_r_table textarea {
+      font-size: 14px;
+      outline: solid thin #555555;
+      resize: none;
+      width: 400px;
+    }
     .input-50 {
       width: 50px;
     }
@@ -205,7 +211,7 @@
                       <option value="2">女</option>
                     </select>
                   </td>
-                  <td>
+                  <td colspan="2">
                     <label for="qcbw">取材部位</label>
                     <input id="qcbw" type="text" value="脚趾">
                   </td>
@@ -223,9 +229,112 @@
                     <label for="mobileRel">家属电话</label>
                     <input class="input-120" id="mobileRel" type="text" value="18600002222">
                   </td>
-                  <td>
+                  <td colspan="2">
                     <label for="sjDate">送检时间</label>
                     <input class="input-150" id="sjDate" type="text" value="2017-01-01 12:12:12">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="category">系统分类</label>
+                    <input class="input-120" id="category" type="text" value="全科">
+                  </td>
+                  <td>
+                    <label for="sendCompany">送检单位</label>
+                    <input class="input-120" id="sendCompany" type="text" value="北京">
+                  </td>
+                  <td colspan="2">
+                    <label for="sendKeshi">送检科室</label>
+                    <input class="input-120" id="sendKeshi" type="text" value="0">
+                  </td>
+                  <td>
+                    <label for="nation">民族</label>
+                    <input class="input-50" id="nation" type="text" value="0">
+                  </td>
+                  <td>
+                    <label for="urgent">加急</label>
+                    <input class="input-50" id="urgent" type="text" value="0">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="consultationNo">会诊号</label>
+                    <input class="input-150" id="consultationNo" type="text" value="110101199901011234">
+                  </td>
+                  <td>
+                    <label for="admissionNo">住院号</label>
+                    <input class="input-120" id="admissionNo" type="text" value="18600001111">
+                  </td>
+                  <td colspan="2">
+                    <label for="wardNo">病区号</label>
+                    <input class="input-120" id="wardNo" type="text" value="18600002222">
+                  </td>
+                  <td colspan="2">
+                    <label for="roomNo">病房号</label>
+                    <input class="input-150" id="roomNo" type="text" value="2017-01-01 12:12:12">
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="6">
+                    <hr>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <label>临床资料</label>
+                  </td>
+                  <td colspan="4">
+                    <label>病史</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <textarea>临床资料内容</textarea>
+                  </td>
+                  <td colspan="4">
+                    <textarea>病史内容</textarea>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <label>初诊意见</label>
+                  </td>
+                  <td colspan="4">
+                    <label>免疫组化</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <textarea>初诊意见内容</textarea>
+                  </td>
+                  <td colspan="4">
+                    <textarea>免疫组化内容</textarea>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <label>大体所见</label>
+                  </td>
+                  <td colspan="4">
+                    <label>影像学检查</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <label>大体所见内容</label>
+                  </td>
+                  <td colspan="4">
+                    <label>影像学检查内容</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <label>备注</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <textarea>备注内容</textarea>
                   </td>
                 </tr>
               </table>
