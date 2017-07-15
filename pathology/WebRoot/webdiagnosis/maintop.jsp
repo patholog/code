@@ -5,7 +5,7 @@
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";%>
 	<div class="top-thickline"><img src="${path}/css/img-blue/spacer.gif" width="5" height="5" /></div>
 	<ul class="quickbar">
-		<li style="float:right;">Logout <input type="button" value ="退出" onclick ="logout()"/></li>
+		<li style="float:right;"><input type="button" value ="退出" onclick ="logout()"/></li>
 		    <%
        if(SessionAgentManager.getSessionAgentBean()==null){
               %>
