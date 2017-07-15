@@ -139,6 +139,18 @@
 					return true;
 			}
 		});
+		$("#specialty").blur(function() {
+			var spe = $("#specialty").val().trim();
+			if(spe.length>200){
+				$("#specialtytip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
+				$("#btn").attr("disabled",true);
+				return false;
+			}else{
+				$("#specialtytip").html("");
+				$("#btn").attr("disabled",false);
+				return true;
+			}
+		});
 		
 
 	});
@@ -207,6 +219,13 @@
 									<option value="${hospital.idHospital }">${hospital.name}</option>
 								</c:forEach>s --> <%@include file="CheckSelect.jsp"%>
 									<span id="hospital"></span>
+								</td>
+							</tr>
+							<tr>
+								<td align="right">特长：</td>
+								<td align="left"><input id="specialty" type="text"
+									name="user.specialty" placeholder="特长" /> 
+									<span id="specialtytip"></span>
 								</td>
 							</tr>
 							<tr>
