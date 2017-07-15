@@ -59,7 +59,7 @@ public class UsersAction extends BaseAction {
 				SessionAgentManager.setSessionAgentBean(user, "admin");
 				return "loginSuccess";
 			} else {
-				return "false";
+				return "err";
 			}
 		} catch (Exception e) {
 			return "err";
@@ -77,7 +77,7 @@ public class UsersAction extends BaseAction {
 				SessionAgentManager.setSessionAgentBean(user, "admin");
 				return "manageLoginSuccess";
 			} else {
-				return "false";
+				return "err";
 			}
 		} catch (Exception e) {
 			return "err";
