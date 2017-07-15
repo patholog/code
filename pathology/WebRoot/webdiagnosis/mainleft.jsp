@@ -24,5 +24,8 @@
     <div name="leftmenu">
     	<h3><a href="ShareAction!getShareList">病例分享</a></h3>
     </div>
+      <div name="leftmenu">
+    	<h3><a href="${path}/manage/user/add_user.jsp">添加用户</a> </h3>
+    </div>
 
 
