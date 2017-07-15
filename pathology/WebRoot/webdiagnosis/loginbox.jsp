@@ -5,7 +5,7 @@
 				<span class="t_txt">用户登录</span> <span class="del"
 					onClick="deleteLogin()">X</span>
 			</div>
-			<form action="" method="post">
+			<form action="UserAction!login" method="post">
 				<input type="text" name="user.username" id="" value=""
 					placeholder="请输入用户名" /> <input type="password"
 					name="user.password" id="" value="" placeholder="请输入密码" /> <input
