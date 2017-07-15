@@ -52,7 +52,7 @@
               <tr>
                 <th>功能名称</th>
                 <td><input type="text" name="function.name" id="title" value="${sessionScope.function.name}" style="width:300px;" /> 
-                	<input type="hidden" name="{function.idFunction" value="${sessionScope.function.idFunction}" />
+                	<input type="hidden" name="function.idFunction" value="${sessionScope.function.idFunction}" />
                 </td>
               </tr>		  
               <tr>

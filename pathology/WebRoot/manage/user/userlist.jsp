@@ -40,7 +40,7 @@
 						<tr>
 							<td width="86%" style="text-align:left;"><label>用户名：</label>
 								<input type="text" name="user.username" id="hostpital_name"
-								value="" style="width:120px;" />  <input type="text"
+								value="" style="width:120px;" /> <label>邮箱：</label> <input type="text"
 								name="user.email" id="hostpital_user" value=""
 								style="width:120px;" /> <input name="searchButton"
 								id="searchButton" onclick="" type="submit"

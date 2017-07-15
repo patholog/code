@@ -52,7 +52,7 @@
               <tr>
                 <th>角色名称</th>
                 <td><input type="text" name="roles.name" id="title" value="${sessionScope.roles.name}" style="width:300px;" /> 
-                	<input type="hidden" name="{roles.idRoles" value="${sessionScope.roles.idRoles}" />
+                	<input type="hidden" name="roles.idRoles" value="${sessionScope.roles.idRoles}" />
                 </td>
               </tr>		  
               <tr>

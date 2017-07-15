@@ -56,9 +56,9 @@
 					width="100%">
 					<tbody>
 						<tr>
-							<th width="20%">名称</th>
-							<th width="20%">url</th>
-							<th width="20%">简称</th>
+							<th width="15%">名称</th>
+							<th width="30%">url</th>
+							<th width="15%">简称</th>
 							<th width="30%">描述</th>
 							<th width="10%">操作</th>
 						</tr>
