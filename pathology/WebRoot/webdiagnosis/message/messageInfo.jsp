@@ -28,7 +28,7 @@
 	<div id="header">
 		<%@include file="/webdiagnosis/maintop.jsp"%>
 	</div>
-	<table class="listtable" cellspacing="0" cellpadding="0">
+	<table   cellspacing="0" cellpadding="0">
 	    
 		<tr>
 		<textarea id="tbContent" placeholder="输入文字信息留言"></textarea>
