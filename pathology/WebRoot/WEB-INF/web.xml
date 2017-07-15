@@ -48,7 +48,7 @@
 	</filter-mapping>
 	<!-- *************************end encoding filter ************************* -->
   <welcome-file-list>
-    <welcome-file>index_web.jsp</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
   
   <session-config>  
