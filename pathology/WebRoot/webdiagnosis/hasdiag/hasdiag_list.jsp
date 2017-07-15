@@ -32,19 +32,20 @@
 		<tr>
 			<td id="leftmenu"><%@include file="/webdiagnosis/mainleft.jsp"%>
 			</td>
-			<td id="contents">
-				 <s:form action="HospitalAction!hospitalList" theme="simple"
-					target="mainFrame">
+			<td id="contents"><s:form action="HospitalAction!hospitalList"
+					theme="simple" target="mainFrame">
 					<table cellspacing="0" cellpadding="0" width="100%" border="0"
 						class="toolstable">
 						<tr>
 							<td width="86%" style="text-align:left;"><label>医院名称：</label>
-								<input type="text" name="hospital.name" id="hostpital_name" value="" style="width:120px;" /> <label>编码：</label> 
-								<input type="text" name="hospital.code" id="hostpital_code" value="" style="width:120px;" /> 
-								<input name="searchButton" id="searchButton" onclick="" type="submit" style="width:80px;background:url(css/img-blue/search.gif) 8px top no-repeat;"
-									value="  搜索" />
-							</td>
-				
+								<input type="text" name="hospital.name" id="hostpital_name"
+								value="" style="width:120px;" /> <label>编码：</label> <input
+								type="text" name="hospital.code" id="hostpital_code" value=""
+								style="width:120px;" /> <input name="searchButton"
+								id="searchButton" onclick="" type="submit"
+								style="width:80px;background:url(css/img-blue/search.gif) 8px top no-repeat;"
+								value="  搜索" /></td>
+
 						</tr>
 					</table>
 				</s:form>
@@ -52,41 +53,51 @@
 					width="100%">
 					<tbody>
 						<tr>
-				          <th width="10%">病理号</th>
-				          <th width="10%">病人姓名</th>
-				          <th width="15%">材料部位</th>
-				          <th width="10%">病例状态</th>
-				          <th width="10%">系统分类</th>
-				          <th width="15%">送检单位</th>
-				          <th width="10%">申请时间</th>
-				          <th width="10%">诊断时间</th>
-				          <th width="10%">操作</th>
+							<th width="10%">病理号</th>
+							<th width="10%">病人姓名</th>
+							<th width="15%">材料部位</th>
+							<th width="10%">病例状态</th>
+							<th width="10%">系统分类</th>
+							<th width="15%">送检单位</th>
+							<th width="10%">申请时间</th>
+							<th width="10%">诊断时间</th>
+							<th width="10%">操作</th>
 						</tr>
-						         <s:iterator value="pathologys" id="pathology" status="11">
-						         <tr>
-						         
-						         <td><s:property value="#pathology.pathologyNo"/></td>
-						         <td><s:property value="#pathology.patientname"/></td>
-						         <td><s:property value="#pathology.username"/></td>
-						         <td><s:property value="#pathology.content"/></td>
-						         <td><s:property value="#pathology.username"/></td>
-						         <td><s:property value="#pathology.hospitalname"/></td>
-						         <td><s:property value="#pathology.createTime"/></td>
-						         <td><s:property value="#pathology.createTime"/></td>
-						          <td align="center"><a href="PathologyAction!daizhenduan" target="_blank">查看</a></td>
-						        </tr>
-						        </s:iterator>
+						<s:iterator value="pathologys" id="pathology" status="11">
+							<tr>
+
+								<td><s:property value="#pathology.pathologyNo" />
+								</td>
+								<td><s:property value="#pathology.patientname" />
+								</td>
+								<td><s:property value="#pathology.username" />
+								</td>
+								<td><s:property value="#pathology.content" />
+								</td>
+								<td><s:property value="#pathology.username" />
+								</td>
+								<td><s:property value="#pathology.hospitalname" />
+								</td>
+								<td><s:property value="#pathology.createTime" />
+								</td>
+								<td><s:property value="#pathology.createTime" />
+								</td>
+								<td align="center"><a href="PathologyAction!daizhenduan"
+									target="_blank">查看</a>
+								</td>
+							</tr>
+						</s:iterator>
 
 						<tr class="lightrow">
 							<td colspan="9"><div id="pageDir">
-								
-  <%=request.getAttribute("page")!=null?request.getAttribute("page"):"" %>
-								</div></td>
+
+									<%=request.getAttribute("page") != null ? request.getAttribute("page") : ""%>
+								</div>
+							</td>
 						</tr>
 
 					</tbody>
-				</table>
-			</td>
+				</table></td>
 		</tr>
 	</table>
 
