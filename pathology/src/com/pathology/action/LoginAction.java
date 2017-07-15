@@ -2,6 +2,11 @@ package com.pathology.action;
 
 import com.opensymphony.xwork2.Action;
 import com.pathology.entity.Users;
+import com.pathology.service.IUsersService;
+import com.pathology.util.Constant;
+import com.pathology.util.DigestMD5;
+import com.pathology.util.SessionAgentManager;
+
 
 public class LoginAction extends BaseAction {
 	/**
@@ -9,11 +14,11 @@ public class LoginAction extends BaseAction {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Users user;
+	public Users user;
 
-	// public Users getUser() {
-	// return user;
-	// }
+	 public Users getUser() {
+	  return user;
+	 }
 
 	private String msg;
 
@@ -34,5 +39,24 @@ public class LoginAction extends BaseAction {
 			this.msg = "失败";
 		}
 		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 退出登录
+	 * @return
+	 */
+	public String LoginOut(){
+	   try{
+		   SessionAgentManager.DestroySessionMember();
+			/*if (u.getUsername().equals("ll")) {
+				this.msg = "成功";
+			} else {
+				this.msg = "失败";
+			}*/
+			return Action.SUCCESS;
+	   }catch(Exception e){
+		   
+	   }
+		return  Constant.ERR;
 	}
 }
