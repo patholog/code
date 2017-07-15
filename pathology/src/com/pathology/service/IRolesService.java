@@ -6,10 +6,10 @@ import com.pathology.entity.Roles;
 
 
 public interface IRolesService {
-	public List<Roles> getByPage(int index,Class clazz,String hql);
-	public List<Roles> getAllRoles(Class clazz,String hql);
-	public void deleteRoles(Roles em);
-	public Roles getRoles(Class clazz,String id);
-	public void updateRoles(Roles em);
-	public void addRoles(Roles em);
+	public List<Roles> getByPage(int index,Class clazz,String hql) throws Exception;
+	public List<Roles> getAllRoles(Class clazz,String hql) throws Exception;
+	public void deleteRoles(Roles em) throws Exception;
+	public Roles getRoles(Class clazz,String id) throws Exception;
+	public void updateRoles(Roles em) throws Exception;
+	public void addRoles(Roles em) throws Exception;
 }

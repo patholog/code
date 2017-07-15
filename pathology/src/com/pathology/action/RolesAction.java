@@ -14,90 +14,134 @@ import com.pathology.entity.Roles;
 import com.pathology.service.IRolesService;
 import com.pathology.util.Constant;
 import com.pathology.util.SessionAgentManager;
- 
 
-public class RolesAction extends BaseAction{
-	
+public class RolesAction extends BaseAction {
+
 	private final Logger logger = Logger.getLogger(RolesAction.class);
 	private IRolesService rolesservice;
 	private String idRoles;
 	private HttpServletRequest request;
-	
+
 	private Roles roles;
 	private List<Roles> roleslist;
 	private int index;
-	
+
 	public String addRoles() throws Exception {
-       try{
-		
-     if(!SessionAgentManager.islogin()) return Constant.ERR;
-     	roles.setIdRoles(getEandomId(16));
-     	rolesservice.addRoles(roles);
-		
-		return "updatesuccess";
-       }catch(Exception e){
-    	   logger.error(e.getMessage());
-    	   return Constant.ERR;
-       }
+		try {
+
+			if (!SessionAgentManager.islogin())
+				return Constant.ERR;
+			roles.setIdRoles(getEandomId(16));
+			rolesservice.addRoles(roles);
+
+			return "updatesuccess";
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return Constant.ERR;
+		}
 	}
-	
-	public String rolesList(){
-	    try{
-			
-	        if(!SessionAgentManager.islogin()) return Constant.ERR;
-			String hql="";
-			if(roles!=null){
+
+	public String rolesList() {
+		try {
+
+			if (!SessionAgentManager.islogin())
+				return Constant.ERR;
+			String hql = "";
+			if (roles != null) {
 				String rolesname = null;
 				try {
-					rolesname = new String((roles.getName().getBytes("ISO8859-1")),"UTF-8");
+					rolesname = new String(
+							(roles.getName().getBytes("ISO8859-1")), "UTF-8");
 				} catch (UnsupportedEncodingException e) {
 					e.printStackTrace();
 				}
-	
-				if(rolesname!=null&&!("".equals(rolesname)))
-					hql+=" and name like '%"+rolesname+"%'";
-	
+
+				if (rolesname != null && !("".equals(rolesname)))
+					hql += " and name like '%" + rolesname + "%'";
+
 			}
-	
-			List<Roles> list = index != 0 ? rolesservice.getByPage(index, Roles.class,hql)
-					:rolesservice.getByPage(1, Roles.class,hql);
-	
-			HttpSession session=ServletActionContext.getRequest().getSession();
-			session.setAttribute("roleslist",list);
-			session.setAttribute("thisindex",index==0?1:index);
-	
-			session.setAttribute("count",rolesservice.getAllRoles(Roles.class,hql).size());
+
+			List<Roles> list = index != 0 ? rolesservice.getByPage(index,
+					Roles.class, hql) : rolesservice.getByPage(1, Roles.class,
+					hql);
+
+			HttpSession session = ServletActionContext.getRequest()
+					.getSession();
+			session.setAttribute("roleslist", list);
+			session.setAttribute("thisindex", index == 0 ? 1 : index);
+
+			session.setAttribute("count",
+					rolesservice.getAllRoles(Roles.class, hql).size());
 			return SUCCESS;
-	    }catch(Exception e){
-	    	 logger.error(e.getMessage());
-	    	   return Constant.ERR;
-	       }
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return Constant.ERR;
+		}
 	}
 
-	public String updateRoles() throws IOException{
-		
-		HttpSession session=ServletActionContext.getRequest().getSession();
-		Roles hospitalT = rolesservice.getRoles(Roles.class, roles.getIdRoles());
-		session.setAttribute("roles",hospitalT);
-		return "edit";
- 
+	public String updateRoles() throws IOException {
+		try {
+
+			if (!SessionAgentManager.islogin())
+				return Constant.ERR;
+			HttpSession session = ServletActionContext.getRequest()
+					.getSession();
+			Roles hospitalT = rolesservice.getRoles(Roles.class,
+					roles.getIdRoles());
+			session.setAttribute("roles", hospitalT);
+			return "edit";
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return Constant.ERR;
+		}
 	}
-	
-	public String saveRoles() throws IOException{
-		rolesservice.updateRoles(roles);
-		return "updatesuccess";
+
+	public String saveRoles() throws IOException {
+		try {
+
+			if (!SessionAgentManager.islogin())
+				return Constant.ERR;
+
+			rolesservice.updateRoles(roles);
+			return "updatesuccess";
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return Constant.ERR;
+		}
 	}
-	public String deleteRoles(){
-		Roles hos=rolesservice.getRoles(Roles.class, roles.getIdRoles());
-		rolesservice.deleteRoles(hos);
-		return "deletesuccess";
+
+	public String deleteRoles() {
+		try {
+
+			if (!SessionAgentManager.islogin())
+				return Constant.ERR;
+
+			Roles hos = rolesservice.getRoles(Roles.class, roles.getIdRoles());
+			rolesservice.deleteRoles(hos);
+			return "deletesuccess";
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return Constant.ERR;
+		}
 	}
-	 public String allRoles(){
-		 List<Roles> list= rolesservice.getAllRoles(Roles.class, "");
-		 HttpSession session=ServletActionContext.getRequest().getSession();
-		 session.setAttribute("roleslist",list);
-		 return "regist";
-	 }
+
+	public String allRoles() {
+		try {
+
+			if (!SessionAgentManager.islogin())
+				return Constant.ERR;
+
+			List<Roles> list = rolesservice.getAllRoles(Roles.class, "");
+			HttpSession session = ServletActionContext.getRequest()
+					.getSession();
+			session.setAttribute("roleslist", list);
+			return "regist";
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return Constant.ERR;
+		}
+	}
+
 	public HttpServletRequest getRequest() {
 		return request;
 	}
@@ -146,6 +190,4 @@ public class RolesAction extends BaseAction{
 		this.index = index;
 	}
 
-	
-	
 }

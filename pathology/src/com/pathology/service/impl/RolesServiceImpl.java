@@ -19,34 +19,34 @@ public class RolesServiceImpl implements IRolesService {
 		this.rolesdao = rolesdao;
 	}
 
-	public List<Roles> getByPage(int index, Class clazz, String hql) {
+	public List<Roles> getByPage(int index, Class clazz, String hql)  throws Exception{
 
 		List<Object> list = rolesdao.getByPage(index, clazz, hql);
 		return this.obj2Empl(list);
 	}
 
-	public List<Roles> getAllRoles(Class clazz, String hql) {
+	public List<Roles> getAllRoles(Class clazz, String hql) throws Exception {
 		return this.obj2Empl(rolesdao.getAllRoles(clazz, hql));
 	}
 
-	public void deleteRoles(Roles em) {
+	public void deleteRoles(Roles em) throws Exception {
 		if(em!=null)
 			rolesdao.deleteRoles(em);
 
 	}
 
-	public Roles getRoles(Class clazz, String id) {
+	public Roles getRoles(Class clazz, String id) throws Exception {
 		
 		return rolesdao.getRoles(clazz, id);
 	}
 
-	public void updateRoles(Roles em) {
+	public void updateRoles(Roles em) throws Exception {
 
 		rolesdao.updateRoles(em);
 
 	}
 
-	public void addRoles(Roles em) {
+	public void addRoles(Roles em) throws Exception {
 
 		rolesdao.addRoles(em);
 	}
