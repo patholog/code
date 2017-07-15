@@ -8,7 +8,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>待诊断初步</title>
+  <title>病理远程会诊平台-待诊断初步</title>
   <style type="text/css">
     body {
       margin: 0;

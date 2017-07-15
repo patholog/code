@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>找回密码</title>
+<title>病理远程会诊平台-找回密码</title>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="this is my page">

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>病理图片查看</title>
+<title>病理远程会诊平台-病理图片查看</title>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <link rel="stylesheet" type="text/css" href="${path }/cropper/css/normalize.css"/>
 <link rel="stylesheet" type="text/css" href="${path }/cropper/css/default.css"/>

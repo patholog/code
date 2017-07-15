@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>病理管理系统-病理图片查看</title>
+	<title>病理远程会诊平台-病理图片查看</title>
 	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="css/default.css">
 	<link href="assets/css/bootstrap.min.css" rel="stylesheet">

@@ -6,7 +6,7 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <html>
 <head>
-<title></title>
+<title>病理远程会诊平台-已诊断</title>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" type="text/css" href="${path }/css/style.css" />
 <script type="text/javascript"

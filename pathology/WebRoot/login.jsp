@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <html>
   <head>
-   <title>Login</title>
+   <title>登录-病理远程会诊平台</title>
      <style type="text/css">
      	.login{
      		font-family: Arial;

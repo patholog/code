@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script>Time();</script>
     </ul>
 	<div class="title">
-		<span style=" display:block; margin-top:6px">病理管理系统</span>
+		<span style=" display:block; margin-top:6px">病理远程会诊平台</span>
 	</div>
 	<div class="clear"></div>
 
