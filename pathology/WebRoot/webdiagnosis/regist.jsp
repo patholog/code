@@ -60,7 +60,17 @@
 				$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名不能为空！</a>");
 				$("#btn").attr("disabled",true);
 				return false;
-			} else {
+			}else if(username.length<6){
+					$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名不能少于6位！</a>");
+					$("#btn").attr("disabled",true);
+					return false;
+			}else if(username.length>20){
+					$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名不能超过20位！</a>");
+					$("#btn").attr("disabled",true);
+					return false;
+			}
+			else {
+				
 				var zmnumReg=/^[0-9a-zA-Z]*$/;  
 				if(username!=""&&!zmnumReg.test(username)){  
 					$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>只能输入字母或数字!</a>");
@@ -108,7 +118,27 @@
 				return false;
 			}
 		});
-		
+		$("#password").bind('input propertychange',function() {
+			var pswd = $("#password").val().trim();
+			if(pswd==''){
+					$("#pwsdtip").html("<a style='color:#2ca9cc;font-size:14px;'>密码不能为空！</a>");
+					$("#btn").attr("disabled",true);
+					return false;
+			}
+			else if(pswd.length<6){
+					$("#pwsdtip").html("<a style='color:#2ca9cc;font-size:14px;'>密码不能少于6位！</a>");
+					$("#btn").attr("disabled",true);
+					return false;
+			}else if(username.length>16){
+					$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名不能超过16位！</a>");
+					$("#btn").attr("disabled",true);
+					return false;
+			}else{
+				$("#pwsdtip").html("<div id='strength_H' class='pwdcheck'></div><div id='strength_M' class='pwdcheck'></div><div id='strength_L' class='pwdcheck'></div>");
+					$("#btn").attr("disabled",false);
+					return true;
+			}
+		});
 		
 
 	});
@@ -148,22 +178,20 @@
 								<td align="right">密 码：</td>
 								<td align="left"><input type="password"
 									name="user.password" id="password" placeholder="密码" required
-									onKeyUp=pwStrength(this.value) onBlur=pwStrength(this.value) /> <span id="pwsdtip"></span>
+									onKeyUp=pwStrength(this.value) onBlur=pwStrength(this.value) />
+									<span id="pwsdtip"> 
+									<div id="strength_H" class="pwdcheck"></div>
+									<div id="strength_M" class="pwdcheck"></div>
+									<div id="strength_L" class="pwdcheck"></div></span>
 								</td>
 							</tr>
-							<tr>
-								<td align="right">密 码强度：</td>
-								<td align="left">
-								<div id="strength_L" class="pwdcheck">弱</div>
-								<div id="strength_M" class="pwdcheck">中</div>
-								<div id="strength_H" class="pwdcheck">强</div>
-								</td>
-							</tr>
+
 							<tr>
 								<td align="right">密码确认：</td>
 								<td align="left"><input type="password" name="password2"
 									placeholder="确认密码" id="password2" required /><span
-									id="pwsd2tip"></span>
+									id="pwsd2tip">
+									</span>
 								</td>
 							</tr>
 							<tr>
