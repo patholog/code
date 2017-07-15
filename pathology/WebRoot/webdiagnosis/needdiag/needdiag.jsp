@@ -1,5 +1,4 @@
-﻿<%@ page language="java" contentType="text/html;charset=utf-8"
-         pageEncoding="utf-8" %>
+﻿<%@ page language="java" contentType="text/html;charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -39,7 +38,6 @@
 
     .box {
       margin: 0 auto;
-      width: 950px;
     }
 
     .fl_l {
@@ -64,8 +62,8 @@
     }
 
     .fl_r {
-      float: right;
-      width: 960px;
+      float: left;
+      /*width: 960px;*/
       alignment: top;
     }
 
@@ -124,7 +122,7 @@
   <script type="text/javascript" src="js/global.js"></script>
   <c:set var="path" value="${pageContext.request.contextPath }"/>
   <link rel="stylesheet" type="text/css" href="${path }/css/style.css"/>
-  <script type="text/javascript" src="${path }/CKEditor/ckeditor/ckeditor.js"></script>
+  <script type="text/javascript" src="${path }/js/CKEditor/ckeditor.js"></script>
   <script type="text/javascript" src="${path }/CKFinder/ckfinder/ckfinder.js"></script>
   <script type="text/javascript" src="${path }/js/treeView.js"></script>
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
@@ -133,33 +131,46 @@
     .fl_r_table {
       font-size: 16px;
     }
+
     .fl_r_table_tr {
       margin: 15px 0;
     }
+
     .fl_r_table label {
       font-size: 16px;
     }
+
     .fl_r_table input {
       font-size: 14px;
       outline: solid thin #555555;
+
     }
+
     .fl_r_table textarea {
       font-size: 14px;
       outline: solid thin #555555;
       resize: none;
       width: 400px;
     }
+
     .input-50 {
       width: 50px;
     }
+
     .input-80 {
       width: 80px;
     }
+
     .input-120 {
       width: 120px;
     }
+
     .input-150 {
       width: 150px;
+    }
+
+    .main-contents {
+      padding-left: 10px;
     }
   </style>
 </head>
@@ -173,7 +184,7 @@
     <td id="leftmenu">
       <%@include file="/webdiagnosis/mainleft.jsp" %>
     </td>
-    <td id="contents">
+    <td class="main-contents">
       <div class="box">
         <ul class="fl_t">
           <li class="active"><a href="#">病历信息</a></li>
@@ -182,12 +193,12 @@
           <li><a href="#">留言</a></li>
         </ul>
         <ul class="fl_r">
-          <li style="height: 600px;">
+          <li>
             <hr>
             <div class="fl_r_row">
-              <span>请选择会诊分类</span>
-              <input name="hzlx" type="radio" value="1">普通会诊
-              <input name="hzlx" type="radio" value="2">冰冻会诊
+              <label>请选择会诊分类： </label>
+              <input title="hzlx" name="hzlx" type="radio" value="1">普通会诊
+              <input title="hzlx" name="hzlx" type="radio" value="2">冰冻会诊
             </div>
             <hr>
             <div class="fl_r_row">
@@ -195,32 +206,37 @@
                 <tr class="fl_r_table_tr">
                   <td>
                     <label for="name">病人姓名</label>
-                    <input class="input-80" id="name" type="text" value="姓名">
+                    <input class="input-80" id="name" type="text" value="<s:property value="pathology.patientname"/>">
                   </td>
                   <td>
                     <label for="blh">病理号</label>
-                    <input class="input-120" id="blh" type="text" value="123">
+                    <input class="input-120" id="blh" type="text" value="<s:property value="pathology.pathologyNo"/>">
                   </td>
                   <td>
                     <label for="age">年龄</label>
-                    <input class="input-50" id="age" type="text" value="12">
+                    <input class="input-50" id="age" type="text"
+                           value="<s:property value="pathology.patientAge"/>">
                   </td>
                   <td>
                     <label for="sex">性别</label>
                     <select id="sex">
-                      <option value="1" selected>男</option>
-                      <option value="2">女</option>
+                      <s:if test='%{pathology.patientSex=="男"}'>
+                        <option value="男" selected>男</option>
+                      </s:if>
+                      <s:if test='%{pathology.patientSex=="女"}'>
+                        <option value="女" selected>女</option>
+                      </s:if>
                     </select>
                   </td>
                   <td colspan="2">
                     <label for="qcbw">取材部位</label>
-                    <input id="qcbw" type="text" value="脚趾">
+                    <input id="qcbw" type="text" value="<s:property value="pathology.specimenName"/>">
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <label for="sfzh">身份证号</label>
-                    <input class="input-150" id="sfzh" type="text" value="110101199901011234">
+                    <input class="input-150" id="sfzh" type="text" value="<s:property value="pathology.idCard"/>">
                   </td>
                   <td>
                     <label for="mobile">手机号</label>
@@ -298,44 +314,48 @@
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <label>初诊意见</label>
+                    <label for="preliminaryOpinion">初诊意见</label>
                   </td>
                   <td colspan="4">
-                    <label>免疫组化</label>
+                    <label for="ihc">免疫组化</label>
                   </td>
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <textarea>初诊意见内容</textarea>
+                    <textarea id="preliminaryOpinion">初诊意见内容</textarea>
                   </td>
                   <td colspan="4">
-                    <textarea>免疫组化内容</textarea>
+                    <textarea id="ihc">免疫组化内容</textarea>
                   </td>
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <label>大体所见</label>
+                    <label for="roughlySee">大体所见</label>
                   </td>
                   <td colspan="4">
-                    <label>影像学检查</label>
+                    <label for="imaging">影像学检查</label>
                   </td>
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <label>大体所见内容</label>
+                    <textarea id="roughlySee" cols="10" rows="2" class="ckeditor">
+                      <s:property value="pathology.patientname"/>
+                    </textarea>
                   </td>
                   <td colspan="4">
-                    <label>影像学检查内容</label>
+                    <textarea id="imaging" cols="10" rows="2" class="ckeditor">
+                      <s:property value="pathology.patientname"/>
+                    </textarea>
                   </td>
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <label>备注</label>
+                    <label for="remark">备注</label>
                   </td>
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <textarea>备注内容</textarea>
+                    <textarea id="remark">备注内容</textarea>
                   </td>
                 </tr>
               </table>
@@ -352,8 +372,12 @@
   </tr>
 </table>
 <script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript">
+<script>
   $(function () {
+    // 禁用所有input
+    $('input').attr("disabled", "true");
+    $('textarea').attr("disabled", "true");
+    $('select').attr("disabled", "true");
     //设置标杆
     var _line = parseInt($(window).height() / 3);
     $(window).scroll(function () {

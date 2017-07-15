@@ -13,159 +13,173 @@ import com.pathology.entity.Pathology;
 import com.pathology.mapping.PathologyMapping;
 import com.pathology.service.IPathologyService;
 import com.pathology.util.Pages;
- 
+
 
 public class PathologyServiceImpl implements IPathologyService {
 
-	private IPathologyDao pathologydao;
-	
-	private JdbcTemplate  jdbcTemplate;
+  private IPathologyDao pathologydao;
 
-	public JdbcTemplate getJdbcTemplate() {
-		return jdbcTemplate;
-	}
+  private JdbcTemplate jdbcTemplate;
 
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
+  public JdbcTemplate getJdbcTemplate() {
+    return jdbcTemplate;
+  }
 
-	public IPathologyDao getPathologydao() {
-		return pathologydao;
-	}
+  public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+    this.jdbcTemplate = jdbcTemplate;
+  }
 
-	public void setPathologydao(IPathologyDao udao) {
-		this.pathologydao = udao;
-	}
+  public IPathologyDao getPathologydao() {
+    return pathologydao;
+  }
 
-	public List<Pathology> getByPage(int index, Class clazz, String hql) throws Exception {
+  public void setPathologydao(IPathologyDao udao) {
+    this.pathologydao = udao;
+  }
 
-		List<Object> list = pathologydao.getByPage(index, clazz, hql);
-		return this.obj2Empl(list);
-	}
+  public List<Pathology> getByPage(int index, Class clazz, String hql) {
 
-	public List<Pathology> getAllPathology(Class clazz, String hql) throws Exception {
-		return this.obj2Empl(pathologydao.getAllPathology(clazz, hql));
-	}
+    List<Object> list = pathologydao.getByPage(index, clazz, hql);
+    return this.obj2Empl(list);
+  }
 
-	public void deletePathology(Pathology em) throws Exception {
-		if(em!=null)
-			pathologydao.deletePathology(em);
+  public List<Pathology> getAllPathology(Class clazz, String hql) {
+    return this.obj2Empl(pathologydao.getAllPathology(clazz, hql));
+  }
 
-	}
-	
-	
-	public List<PathologyDTO>  getListPathologyToNeed(HttpServletRequest
-			 request,String name) throws Exception{
-		
-		String pageNum = request.getParameter("pageNum");
-		pageNum = pageNum != null?pageNum:"1";
-		String title = "";
-		int status = 1;
-		String sql = " select a.pathologyno ,a.patientname,a.crt_Time,d.name as hospitalname,a.id_case from pathology a   "
-						+" left join image  b  on a.id_case = b.case_id "
-						+" left join result  c on a.id_case = c.case_id"
-						+" left join hospital  d on a.hospitalcode = d.id_hospital"
-						+"  where a.diag_status='2'";
-		String sqlcount  = "select count(*) from pathology a "
-				+" left join image  b  on a.id_case = b.case_id "
-				+" left join result  c on a.id_case = c.case_id"
-				+" left join hospital  d on a.hospitalcode = d.id_hospital"
-				+"  where a.diag_status='2'";
-		
-		int totalNum = jdbcTemplate.queryForInt(sqlcount);
-		if(totalNum > 0){
-			Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
-			request.setAttribute("page", page.getPageStr());
-		 
-		}
-		return jdbcTemplate.query(sql, new PathologyMapping());
-	 
-	}
-	public List<PathologyDTO>  getListPathologyToHas(HttpServletRequest
-			 request,String name) throws Exception{
-		
-		String pageNum = request.getParameter("pageNum");
-		pageNum = pageNum != null?pageNum:"1";
-		String title = "";
-		int status = 1;
-		String sql = " select a.pathologyno ,a.patientname,a.crt_Time,d.name as hospitalname,a.id_case from pathology a   "
-				+" left join image  b  on a.id_case = b.case_id "
-				+" left join result  c on a.id_case = c.case_id"
-				+" left join hospital  d on a.hospitalcode = d.id_hospital"
-				+"  where a.diag_status='7'";
-		
-		String sqlcount  = "select count(*) from pathology a "
-				+" left join image  b  on a.id_case = b.case_id "
-				+" left join result  c on a.id_case = c.case_id"
-				+" left join hospital  d on a.hospitalcode = d.id_hospital"
-				+"  where a.diag_status='7'";
-		
-		int totalNum = jdbcTemplate.queryForInt(sqlcount);
-		if(totalNum > 0){
-			Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
-			request.setAttribute("page", page.getPageStr());
-		 
-		}
-		return jdbcTemplate.query(sql, new PathologyMapping());
-	 
-	}
-	
-	public List<PathologyDTO>  getListPathologyToBack(HttpServletRequest
-			 request,String name) throws Exception{
-		
-		String pageNum = request.getParameter("pageNum");
-		pageNum = pageNum != null?pageNum:"1";
-		String title = "";
-		int status = 1;
-		String sql = " select a.pathologyno ,a.patientname,a.crt_Time,d.name as hospitalname,a.id_case from pathology a   "
-				+" left join image  b  on a.id_case = b.case_id "
-				+" left join result  c on a.id_case = c.case_id"
-				+" left join hospital  d on a.hospitalcode = d.id_hospital"
-				+"  where a.diag_status='3'";
-		
-		String sqlcount  = "select count(*) from pathology a "
-				+" left join image  b  on a.id_case = b.case_id "
-				+" left join result  c on a.id_case = c.case_id"
-				+" left join hospital  d on a.hospitalcode = d.id_hospital"
-				+"  where a.diag_status='3'";
-		
-		int totalNum = jdbcTemplate.queryForInt(sqlcount);
-		if(totalNum > 0){
-			Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
-			request.setAttribute("page", page.getPageStr());
-		 
-		}
-		List<PathologyDTO> ss=(List<PathologyDTO>)jdbcTemplate.query(sql, new PathologyMapping());
-		return jdbcTemplate.query(sql, new PathologyMapping());
-	 
-	}
-	public Pathology getPathology(Class clazz, String id) throws Exception {
-		
-		return pathologydao.getPathology(clazz, id);
-	}
+  public void deletePathology(Pathology em) {
+    if (em != null)
+      pathologydao.deletePathology(em);
 
-	public void updatePathology(Pathology em) throws Exception {
+  }
 
-		pathologydao.updatePathology(em);
+  public List<PathologyDTO> getListPathologyToNeed(HttpServletRequest request, String name) {
+    String pageNum = request.getParameter("pageNum");
+    pageNum = pageNum != null ? pageNum : "1";
+    String title = "";
+    int status = 1;
+    String sql = " SELECT a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
+        + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
+        + "a.specimenname specimenName, a.idcard idCard "
+        + " FROM pathology a "
+        + " LEFT JOIN image  b  ON a.id_case = b.case_id "
+        + " LEFT JOIN result  c ON a.id_case = c.case_id"
+        + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
+        + " WHERE a.diag_status='2'";
+    String sqlcount = "SELECT count(*) FROM pathology a "
+        + " LEFT JOIN image  b  ON a.id_case = b.case_id "
+        + " LEFT JOIN result  c ON a.id_case = c.case_id"
+        + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
+        + "  WHERE a.diag_status='2'";
 
-	}
+    int totalNum = jdbcTemplate.queryForInt(sqlcount);
+    if (totalNum > 0) {
+      Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
+      request.setAttribute("page", page.getPageStr());
 
-	public void addPathology(Pathology em) throws Exception {
+    }
+    return jdbcTemplate.query(sql, new PathologyMapping());
+  }
 
-		pathologydao.addPathology(em);
-	}
+  @Override
+  public PathologyDTO getPathologyToNeed(HttpServletRequest request, String caseId) {
+    String sql = " SELECT a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
+        + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
+        + "a.specimenname specimenName, a.idcard idCard "
+        + " FROM pathology a "
+        + " LEFT JOIN image  b  ON a.id_case = b.case_id "
+        + " LEFT JOIN result  c ON a.id_case = c.case_id"
+        + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
+        + " WHERE a.diag_status='2' AND a.id_case = '" + caseId + "'";
+    return (PathologyDTO) jdbcTemplate.queryForObject(sql, new PathologyMapping());
+  }
 
-	public List<Pathology> obj2Empl(List<Object> list) {
+  public List<PathologyDTO> getListPathologyToHas(HttpServletRequest
+                                                      request, String name) {
 
-		List<Pathology> elist = new ArrayList<Pathology>();
-		for (Object obj : list) {
+    String pageNum = request.getParameter("pageNum");
+    pageNum = pageNum != null ? pageNum : "1";
+    String title = "";
+    int status = 1;
+    String sql = " SELECT a.pathologyno ,a.patientname,a.crt_Time,d.name AS hospitalname FROM pathology a   "
+        + " LEFT JOIN image  b  ON a.id_case = b.case_id "
+        + " LEFT JOIN result  c ON a.id_case = c.case_id"
+        + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
+        + "  WHERE a.diag_status='7'";
 
-			Pathology em = (Pathology) obj;
-			elist.add(em);
-		}
+    String sqlcount = "SELECT count(*) FROM pathology a "
+        + " LEFT JOIN image  b  ON a.id_case = b.case_id "
+        + " LEFT JOIN result  c ON a.id_case = c.case_id"
+        + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
+        + "  WHERE a.diag_status='7'";
 
-		return elist;
-	}
+    int totalNum = jdbcTemplate.queryForInt(sqlcount);
+    if (totalNum > 0) {
+      Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
+      request.setAttribute("page", page.getPageStr());
 
- 
+    }
+    return jdbcTemplate.query(sql, new PathologyMapping());
+
+  }
+
+  public List<PathologyDTO> getListPathologyToBack(HttpServletRequest
+                                                       request, String name) {
+
+    String pageNum = request.getParameter("pageNum");
+    pageNum = pageNum != null ? pageNum : "1";
+    String title = "";
+    int status = 1;
+    String sql = " SELECT a.pathologyno ,a.patientname,a.crt_Time,d.name AS hospitalname FROM pathology a   "
+        + " LEFT JOIN image  b  ON a.id_case = b.case_id "
+        + " LEFT JOIN result  c ON a.id_case = c.case_id"
+        + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
+        + "  WHERE a.diag_status='3'";
+
+    String sqlcount = "SELECT count(*) FROM pathology a "
+        + " LEFT JOIN image  b  ON a.id_case = b.case_id "
+        + " LEFT JOIN result  c ON a.id_case = c.case_id"
+        + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
+        + "  WHERE a.diag_status='3'";
+
+    int totalNum = jdbcTemplate.queryForInt(sqlcount);
+    if (totalNum > 0) {
+      Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
+      request.setAttribute("page", page.getPageStr());
+
+    }
+    List<PathologyDTO> ss = (List<PathologyDTO>) jdbcTemplate.query(sql, new PathologyMapping());
+    return jdbcTemplate.query(sql, new PathologyMapping());
+
+  }
+
+  public Pathology getPathology(Class clazz, String id) {
+
+    return pathologydao.getPathology(clazz, id);
+  }
+
+  public void updatePathology(Pathology em) {
+
+    pathologydao.updatePathology(em);
+
+  }
+
+  public void addPathology(Pathology em) {
+
+    pathologydao.addPathology(em);
+  }
+
+  public List<Pathology> obj2Empl(List<Object> list) {
+
+    List<Pathology> elist = new ArrayList<Pathology>();
+    for (Object obj : list) {
+
+      Pathology em = (Pathology) obj;
+      elist.add(em);
+    }
+
+    return elist;
+  }
+
+
 }

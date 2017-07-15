@@ -6,133 +6,186 @@ import java.util.Date;
 
 public class PathologyDTO implements java.io.Serializable {
 
-	// Fields
+  // Fields
+  private int num;
+  private String patientname;
+  private String username;
+  private String hospitalname;
+  private String content;
+  private String caseId;
+  private String messageOrder;
+  private String isReaded;
+  private Timestamp createTime;
+  private String memo;
+  private Date lastUpdTime;
+  private String lastUpdDeptCd;
+  private String lastUpdUserId;
+  private Integer delF;
+  private String pathologyNo;
+  private Date patientBirthday;
+  private String patientSex;
+  private String patientAge;
+  private String specimenName;
+  private String idCard;
 
-	private int num;
-	private String patientname;
-	private String username;
-	private String hospitalname;
-	private String content;
-	private String caseId;
-	private String messageOrder;
-	private String isReaded;
-	private Timestamp createTime;
-	private String memo;
-	private Date lastUpdTime;
-	private String lastUpdDeptCd;
-	private String lastUpdUserId;
-	private Integer delF;
-	private String pathologyNo;
-	
-	
-	
-	public String getHospitalname() {
-		return hospitalname;
-	}
-	public void setHospitalname(String hospitalname) {
-		this.hospitalname = hospitalname;
-	}
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
-	}
-	public String getPatientname() {
-		return patientname;
-	}
-	public void setPatientname(String patientname) {
-		this.patientname = patientname;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public String getCaseId() {
-		return caseId;
-	}
-	public void setCaseId(String caseId) {
-		this.caseId = caseId;
-	}
-	public String getMessageOrder() {
-		return messageOrder;
-	}
-	public void setMessageOrder(String messageOrder) {
-		this.messageOrder = messageOrder;
-	}
-	public String getIsReaded() {
-		return isReaded;
-	}
-	public void setIsReaded(String isReaded) {
-		this.isReaded = isReaded;
-	}
-	public Timestamp getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
-	}
-	public String getMemo() {
-		return memo;
-	}
-	public void setMemo(String memo) {
-		this.memo = memo;
-	}
-	public Date getLastUpdTime() {
-		return lastUpdTime;
-	}
-	public void setLastUpdTime(Date lastUpdTime) {
-		this.lastUpdTime = lastUpdTime;
-	}
-	public String getLastUpdDeptCd() {
-		return lastUpdDeptCd;
-	}
-	public void setLastUpdDeptCd(String lastUpdDeptCd) {
-		this.lastUpdDeptCd = lastUpdDeptCd;
-	}
-	public String getLastUpdUserId() {
-		return lastUpdUserId;
-	}
-	public void setLastUpdUserId(String lastUpdUserId) {
-		this.lastUpdUserId = lastUpdUserId;
-	}
-	public Integer getDelF() {
-		return delF;
-	}
-	public void setDelF(Integer delF) {
-		this.delF = delF;
-	}
-	public String getPathologyNo() {
-		return pathologyNo;
-	}
-	public void setPathologyNo(String pathologyNo) {
-		this.pathologyNo = pathologyNo;
-	}
+  public String getHospitalname() {
+    return hospitalname;
+  }
 
-	// Constructors
+  public void setHospitalname(String hospitalname) {
+    this.hospitalname = hospitalname;
+  }
 
-	/** default constructor */
-	 
+  public int getNum() {
+    return num;
+  }
 
-	/** minimal constructor */
- 
+  public void setNum(int num) {
+    this.num = num;
+  }
 
- 
+  public String getPatientname() {
+    return patientname;
+  }
 
-	// Property accessors
+  public void setPatientname(String patientname) {
+    this.patientname = patientname;
+  }
 
-	 
+  public String getUsername() {
+    return username;
+  }
 
- 
- 
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
+  public String getContent() {
+    return content;
+  }
+
+  public void setContent(String content) {
+    this.content = content;
+  }
+
+  public String getCaseId() {
+    return caseId;
+  }
+
+  public void setCaseId(String caseId) {
+    this.caseId = caseId;
+  }
+
+  public String getMessageOrder() {
+    return messageOrder;
+  }
+
+  public void setMessageOrder(String messageOrder) {
+    this.messageOrder = messageOrder;
+  }
+
+  public String getIsReaded() {
+    return isReaded;
+  }
+
+  public void setIsReaded(String isReaded) {
+    this.isReaded = isReaded;
+  }
+
+  public Timestamp getCreateTime() {
+    return createTime;
+  }
+
+  public void setCreateTime(Timestamp createTime) {
+    this.createTime = createTime;
+  }
+
+  public String getMemo() {
+    return memo;
+  }
+
+  public void setMemo(String memo) {
+    this.memo = memo;
+  }
+
+  public Date getLastUpdTime() {
+    return lastUpdTime;
+  }
+
+  public void setLastUpdTime(Date lastUpdTime) {
+    this.lastUpdTime = lastUpdTime;
+  }
+
+  public String getLastUpdDeptCd() {
+    return lastUpdDeptCd;
+  }
+
+  public void setLastUpdDeptCd(String lastUpdDeptCd) {
+    this.lastUpdDeptCd = lastUpdDeptCd;
+  }
+
+  public String getLastUpdUserId() {
+    return lastUpdUserId;
+  }
+
+  public void setLastUpdUserId(String lastUpdUserId) {
+    this.lastUpdUserId = lastUpdUserId;
+  }
+
+  public Integer getDelF() {
+    return delF;
+  }
+
+  public void setDelF(Integer delF) {
+    this.delF = delF;
+  }
+
+  public String getPathologyNo() {
+    return pathologyNo;
+  }
+
+  public void setPathologyNo(String pathologyNo) {
+    this.pathologyNo = pathologyNo;
+  }
+
+  public Date getPatientBirthday() {
+    return patientBirthday;
+  }
+
+  public void setPatientBirthday(Date patientBirthday) {
+    this.patientBirthday = patientBirthday;
+  }
+
+  public String getPatientSex() {
+    return patientSex;
+  }
+
+  public void setPatientSex(String patientSex) {
+    this.patientSex = patientSex;
+  }
+
+  public String getPatientAge() {
+    return patientAge;
+  }
+
+  public void setPatientAge(String patientAge) {
+    this.patientAge = patientAge;
+  }
+
+  public String getSpecimenName() {
+    return specimenName;
+  }
+
+  public void setSpecimenName(String specimenName) {
+    this.specimenName = specimenName;
+  }
+
+  public String getIdCard() {
+    return idCard;
+  }
+
+  public void setIdCard(String idCard) {
+    this.idCard = idCard;
+  }
 }
 

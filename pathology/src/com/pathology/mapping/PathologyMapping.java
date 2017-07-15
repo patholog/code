@@ -12,21 +12,24 @@ import com.pathology.dto.ShareDTO;
 import com.pathology.entity.Message;
 
 
+public class PathologyMapping implements RowMapper {
+  private final Logger logger = Logger.getLogger(PathologyMapping.class);
 
-public class PathologyMapping  implements RowMapper {
-	private final Logger logger = Logger.getLogger(PathologyMapping.class);
-	@Override
-	public PathologyDTO mapRow(ResultSet rs, int arg1) {
-
-		try{
-			PathologyDTO bean = new PathologyDTO();
-			bean.setNum(rs.getRow());
-			bean.setPathologyNo(rs.getString("pathologyno"));
-			bean.setPatientname(rs.getString("patientname"));
-			bean.setHospitalname(rs.getString("hospitalname"));
-			bean.setCreateTime(rs.getTimestamp("crt_Time"));
-			bean.setCaseId(rs.getString("id_case"));
-			/*bean.setId(rs.getInt("username"));
+  @Override
+  public PathologyDTO mapRow(ResultSet rs, int arg1) {
+    try {
+      PathologyDTO bean = new PathologyDTO();
+      bean.setNum(rs.getRow());
+      bean.setPathologyNo(rs.getString("pathologyno"));
+      bean.setPatientname(rs.getString("patientname"));
+      bean.setHospitalname(rs.getString("hospitalname"));
+      bean.setCreateTime(rs.getTimestamp("crt_Time"));
+      bean.setPatientBirthday(rs.getDate("patientBirthday"));
+      bean.setPatientSex(rs.getString("patientSex"));
+      bean.setPatientAge(rs.getString("patientAge"));
+      bean.setSpecimenName(rs.getString("specimenName"));
+      bean.setIdCard(rs.getString("idCard"));
+      /*bean.setId(rs.getInt("username"));
 			bean.setCure(rs.getString("content"));
 			bean.setCreate_time(rs.getString("create_time"));
 			bean.setDescription(rs.getString("patientname"));
@@ -51,11 +54,11 @@ public class PathologyMapping  implements RowMapper {
 			bean.setHospital_id(rs.getInt("hospital_id"));
 			bean.setHospital_name(rs.getString("hospital_name"));
 			bean.setDomain(rs.getString("domain"));*/
-			return bean;
-		}catch(Exception e){
-			logger.error(e.getMessage());
-			 
-		}
-		return null;
-	}
+      return bean;
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+
+    }
+    return null;
+  }
 }
