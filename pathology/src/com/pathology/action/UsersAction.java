@@ -297,26 +297,33 @@ public class UsersAction extends BaseAction {
 		String randomStr=getStringRandom(6);
 		String email = this.result.get("email");
 		String hql = " and  s.email='" + email + "'";
-		List<Users> userT = userservice.getAllUser(Users.class, hql);
-		
-		if(userT.size()>0){
-			
-			Users[] userArr=(Users[]) userT.toArray(new Users[0]);
-			Users todoUser =userArr[0];
-			todoUser.setVerification(randomStr);
-			userservice.updateUser(todoUser);
-			
-			Mail.setFrom("zhq567888@126.com");
-			Mail.setHost("smtp.126.com");
-			Mail.setName("病理平台管理员");
-			Mail.setPassword("Founder123");
-			Mail.setUser("zhq567888@126.com");
-			String[] content = new String[] { "您好：", "恭喜您的随机验证码是"+randomStr+",注意保存", "感谢您的使用" };
-			Mail.send("zou_haiqiang@founder.com.cn", "您正在找回密码", content);
-			return Action.SUCCESS;
-		}else{
-			return Action.ERROR;
+		List<Users> userT;
+		try {
+			userT = userservice.getAllUser(Users.class, hql);
+			if(userT.size()>0){
+				
+				Users[] userArr=(Users[]) userT.toArray(new Users[0]);
+				Users todoUser =userArr[0];
+				todoUser.setVerification(randomStr);
+				userservice.updateUser(todoUser);
+				
+				Mail.setFrom("zhq567888@126.com");
+				Mail.setHost("smtp.126.com");
+				Mail.setName("病理平台管理员");
+				Mail.setPassword("Founder123");
+				Mail.setUser("zhq567888@126.com");
+				String[] content = new String[] { "您好：", "恭喜您的随机验证码是"+randomStr+",注意保存", "感谢您的使用" };
+				Mail.send("zou_haiqiang@founder.com.cn", "您正在找回密码", content);
+				return Action.SUCCESS;
+			}else{
+				return Action.ERROR;
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return Constant.ERR;
 		}
+		
+
 		
 	}
 	//生成随机数字和字母,  

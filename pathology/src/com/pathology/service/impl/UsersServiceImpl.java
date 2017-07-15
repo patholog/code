@@ -35,24 +35,24 @@ public class UsersServiceImpl implements IUsersService {
 		this.rolesdao = rolesdao;
 	}
 
-	public List<Users> getByPage(int index, Class clazz, String hql) {
+	public List<Users> getByPage(int index, Class clazz, String hql)  throws Exception{
 
 		List<Object> list = userdao.getByPage(index, clazz, hql);
 		return this.obj2Empl(list);
 	}
 
-	public List<Users> getAllUser(Class clazz, String hql) {
+	public List<Users> getAllUser(Class clazz, String hql) throws Exception {
 		return this.obj2Empl(userdao.getAllUser(clazz, hql));
 	}
 
-	public void deleteUser(Users em) {
+	public void deleteUser(Users em) throws Exception {
 		//		Users user = userdao.getUser(Users.class, em.getIdUsers());
 		if(em!=null)
 			userdao.deleteUser(em);
 
 	}
 
-	public Users getUser(Class clazz, String id) {
+	public Users getUser(Class clazz, String id) throws Exception {
 
 		return userdao.getUser(clazz, id);
 	}
@@ -63,7 +63,7 @@ public class UsersServiceImpl implements IUsersService {
 
 	}
 
-	public void addUser(Users em) {
+	public void addUser(Users em) throws Exception {
 
 		userdao.addUser(em);
 	}
