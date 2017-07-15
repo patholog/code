@@ -54,12 +54,13 @@
 						<tr>
 				          <th width="10%">病理号</th>
 				          <th width="10%">病人姓名</th>
-				          <th width="15%">材料部位</th>
+				          <th width="10%">材料部位</th>
 				          <th width="10%">病例状态</th>
 				          <th width="10%">系统分类</th>
-				          <th width="20%">送检单位</th>
+				          <th width="15%">送检单位</th>
 				          <th width="15%">退回原因</th>
 				          <th width="10%">退回时间</th>
+				          <th width="10%">操作</th>
 						</tr>
 						<s:iterator value="pathologys" id="pathology" status="11">
 						         <tr>
@@ -72,33 +73,15 @@
 						         <td><s:property value="#pathology.hospitalname"/></td>
 						         <td><s:property value="#pathology.createTime"/></td>
 						         <td><s:property value="#pathology.createTime"/></td>
+						         <td align="center"><a href="PathologyAction!daizhenduan" target="_blank">查看</a></td>
 						        </tr>
 						 </s:iterator>
 
 
 						<tr class="lightrow">
-							<td colspan="8"><div id="pageDir">
-									<c:set var="pageCount" value="${(sessionScope.count-1)/10+1 }" />
-									<fmt:formatNumber var="lastIndex" value="${pageCount}"
-										pattern="#" />
-
-									第${sessionScope.thisindex }/${lastIndex }页 &nbsp; &nbsp; <a
-										href="HospitalAction!hospitalList?index=1" target="mainFrame">首页</a>&nbsp; 
-									<!-- 
-							<c:set var="pageCount" value="${fn:length(userList)%10==0?fn:length(userList)/10:fn:length(userList)/10+1 }"/>
-						-->
-									<c:forEach var="i" begin="1" step="1" end="${lastIndex }">
-										<a href="HospitalAction!hospitalList?index=${i } " target="mainFrame"><c:out
-												value="${i }" /> </a>
-									</c:forEach>
-									&nbsp;<a href="HospitalAction?index=${lastIndex}" target="mainFrame">尾页</a>
-
-									<s:form action="HospitalAction!hospitalList" theme="simple"
-										target="mainFrame">
-							第&nbsp;<s:textfield name="index" cssStyle="width:25px;height:20px;" />&nbsp;页&nbsp; &nbsp;
-							<s:submit value="Go" id="go" />
-									</s:form>
-
+							<td colspan="9"><div id="pageDir">
+								
+  <%=request.getAttribute("page")!=null?request.getAttribute("page"):"" %>
 								</div></td>
 						</tr>
 
