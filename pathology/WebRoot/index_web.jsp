@@ -20,7 +20,7 @@
 			//login1为Action类命名空间名称；AjaxExecute为Action方法名称
 			$.ajax({
 				type : "post",
-				url : 'login2.action?login',
+				url : 'UserAction!login',
 				contentType : "application/json; charset=utf-8",
 				data : JSON.stringify({//设置数据源
 					user : {
