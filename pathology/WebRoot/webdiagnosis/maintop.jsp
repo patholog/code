@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          %>
      
  
-		<li style="float:right;"> <%= SessionAgentManager.getSessionAgentBean().getUsername()%></li> 
+		<li style="float:right;"> <%= username%></li> 
  
 		<li style="margin-left:15px;" id="mytimer"></li>
       <script>Time();</script>
