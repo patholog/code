@@ -27,17 +27,19 @@ public class PathologyMapping implements RowMapper {
       bean.setPatientBirthday(rs.getDate("patientBirthday"));
       bean.setPatientSex(rs.getString("patientSex"));
       bean.setPatientAge(rs.getString("patientAge"));
-      bean.setSpecimenName(rs.getString("specimenName"));
+      bean.setSpecimenName(rs.getString("specimenname"));
       bean.setIdCard(rs.getString("idCard"));
       bean.setCaseId(rs.getString("caseId"));
-      bean.setMobile(rs.getString("mobile"));
-      bean.setDiagTime(rs.getDate("diagTime"));
-      bean.setHistorySummary(rs.getString("historySummary"));
+//      bean.setMobile(rs.getString("mobile"));
+      bean.setDiagTime(rs.getDate("diag_time"));
+      bean.setHistorySummary(rs.getString("historysummary"));
       bean.setClinicDiagnose(rs.getString("clinicdiagnose"));
       bean.setInspectionDate(rs.getDate("inspectionDate"));
-      bean.setGeneralSee(rs.getString("generalSee"));
-      bean.setMicroscopeSee(rs.getString("microscopeSee"));
+//      bean.setGeneralSee(rs.getString("generalSee"));
+//      bean.setMicroscopeSee(rs.getString("microscopeSee"));
       bean.setMemo(rs.getString("memo"));
+      //TODO 系统分类
+      bean.setContent("tt");
       /*bean.setId(rs.getInt("username"));
 			bean.setCure(rs.getString("content"));
 			bean.setCreate_time(rs.getString("create_time"));

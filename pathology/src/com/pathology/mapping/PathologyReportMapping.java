@@ -28,7 +28,7 @@ public class PathologyReportMapping implements RowMapper {
 			//标本付数
 			bean.setOrders(1);
 			//标本部位
-			bean.setPartBody(res.getString("specimename"));
+			bean.setPartBody(res.getString("specimenname"));
 			bean.setPathologyNo(res.getString("pathologyno"));
 			bean.setPatientName(res.getString("patientname"));
 			bean.setResult(res.getString("result"));

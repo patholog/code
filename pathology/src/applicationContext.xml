@@ -144,6 +144,7 @@
 	</bean>
 	<bean id="diareportAction" class="com.pathology.action.DiaReportAction" scope="prototype">
 		<property name="pathologyreportService" ref="pathologyreportService"></property>
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
 	<!--  功能 -->
 	

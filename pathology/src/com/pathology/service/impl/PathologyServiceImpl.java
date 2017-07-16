@@ -60,7 +60,7 @@ public class PathologyServiceImpl implements IPathologyService {
     int status = 1;
     String sql = "SELECT a.id_case caseId, a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
         + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
-        + "a.specimenname specimenName, a.idcard idCard, a.mobile, a.diag_time diagTime,"
+        + "a.specimenname specimenName, a.idcard idCard, a.mobile, a.diag_time,"
         + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
         + "c.generalSee, c.microscopeSee, a.memo "
         + " FROM pathology a "
@@ -105,11 +105,10 @@ public class PathologyServiceImpl implements IPathologyService {
     pageNum = pageNum != null ? pageNum : "1";
     String title = "";
     int status = 1;
-    String sql = " SELECT a.pathologyno ,a.patientname,a.crt_Time,d.name AS hospitalname ,"
-        + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
-        + "a.specimenname specimenName, a.idcard idCard,a.id_case as caseId, a.mobile, a.diag_time diagTime,"
-        + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
-        + "c.generalSee, c.microscopeSee, a.memo  FROM pathology a   "
+    String sql = " SELECT a.pathologyno ,a.patientname,a.inspectiondate,a.diag_time,d.name AS hospitalname ,"
+        + "a.memo,a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,a.crt_time,"
+        + "a.mobile,a.historysummary,a.clinicdiagnose,a.specimenname specimenName, a.idcard idCard,a.id_case as caseId "
+        + "FROM pathology a   "
         + " LEFT JOIN image  b  ON a.id_case = b.case_id "
         + " LEFT JOIN result  c ON a.id_case = c.case_id"
         + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
@@ -138,15 +137,14 @@ public class PathologyServiceImpl implements IPathologyService {
     pageNum = pageNum != null ? pageNum : "1";
     String title = "";
     int status = 1;
-    String sql = " SELECT a.pathologyno ,a.patientname,a.crt_Time,d.name AS hospitalname ,"
-        + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
-        + "a.specimenname specimenName, a.idcard idCard,a.id_case  as caseId, a.mobile, a.diag_time diagTime,"
-        + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
-        + "c.generalSee, c.microscopeSee, a.memo  FROM pathology a   "
+    String sql = " SELECT a.pathologyno ,a.patientname,a.crt_Time,d.name AS hospitalname ,a.inspectiondate,a.memo,"
+        + " a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,a.diag_time,"
+        + " a.specimenname specimenName, a.idcard idCard,b.case_id as caseId,a.historysummary,a.clinicdiagnose"
+        + " FROM pathology a   "
         + " LEFT JOIN image  b  ON a.id_case = b.case_id "
         + " LEFT JOIN result  c ON a.id_case = c.case_id"
         + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
-        + "  WHERE a.diag_status='3'";
+        + " WHERE a.diag_status='3'";
 
     String sqlcount = "SELECT count(*) FROM pathology a "
         + " LEFT JOIN image  b  ON a.id_case = b.case_id "
@@ -165,6 +163,20 @@ public class PathologyServiceImpl implements IPathologyService {
 
   }
 
+  @Override
+  public PathologyDTO getPathologyByIdAndDiagStatus(String id, String diagStatus) {
+  	String sql = "SELECT a.id_case caseId, a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
+  	        + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
+  	        + "a.specimenname specimenName, a.idcard idCard , a.mobile, a.diag_time diagTime,"
+          + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
+          + "c.generalSee, c.microscopeSee, a.memo "
+  	        + " FROM pathology a "
+  	        + " LEFT JOIN image  b  ON a.id_case = b.case_id "
+  	        + " LEFT JOIN result  c ON a.id_case = c.case_id"
+  	        + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
+  	        + " WHERE a.diag_status='"+diagStatus+"' AND a.id_case = '" + id + "'";
+  	    return (PathologyDTO) jdbcTemplate.queryForObject(sql, new PathologyMapping());
+  }
   public Pathology getPathology(Class clazz, String id) {
 
     return pathologydao.getPathology(clazz, id);
@@ -192,21 +204,6 @@ public class PathologyServiceImpl implements IPathologyService {
 
     return elist;
   }
-
-@Override
-public PathologyDTO getPathologyByIdAndDiagStatus(String id, String diagStatus) {
-	String sql = "SELECT a.id_case caseId, a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
-	        + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
-	        + "a.specimenname specimenName, a.idcard idCard , a.mobile, a.diag_time diagTime,"
-        + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
-        + "c.generalSee, c.microscopeSee, a.memo "
-	        + " FROM pathology a "
-	        + " LEFT JOIN image  b  ON a.id_case = b.case_id "
-	        + " LEFT JOIN result  c ON a.id_case = c.case_id"
-	        + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
-	        + " WHERE a.diag_status='"+diagStatus+"' AND a.id_case = '" + id + "'";
-	    return (PathologyDTO) jdbcTemplate.queryForObject(sql, new PathologyMapping());
-}
 
 
 }
