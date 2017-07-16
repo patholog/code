@@ -31,7 +31,6 @@
 </script>
 </head>
 <div id="header">
-<jsp:include page="${path }/isLogin.jsp"/>
 		<%@include file="/manage/managetop.jsp"%>
 	</div>
 	<!-- dcHead 结束 -->
