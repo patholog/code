@@ -98,6 +98,13 @@ public class RolesServiceImpl implements IRolesService {
 				.getSession();
 		Roles roles=rolesdao.getRoles(Roles.class, id);
 		List<Object> functionT=functiondao.getAllFunction(Function.class, "");
+		
+		List<Object> functions=rolefunctiondao.getAllRoleFunction(RoleFunction.class, " and id_role='"+id+"'");
+		StringBuffer  idfuns=new StringBuffer();
+		for(Object obj:functions){
+			RoleFunction rolefunc=(RoleFunction)obj;
+			idfuns.append(rolefunc.getIdFounction()+",");
+		}
 		List<Function> funclist = new ArrayList<Function>();
 
 		for (Object obj : functionT) {
@@ -107,6 +114,8 @@ public class RolesServiceImpl implements IRolesService {
 		}
 		session.setAttribute("roles",roles);
 		session.setAttribute("functionlist", funclist);
+		session.setAttribute("functionlist", funclist);
+		
 		if(roles!=null && funclist.size()>0){
 			return true;
 		}
@@ -129,7 +138,7 @@ public class RolesServiceImpl implements IRolesService {
 
 	@Override
 	public void updateRoles(Roles em, String idfunctions)throws Exception {
-		List<Object> functions=rolefunctiondao.getAllRoleFunction(RoleFunction.class, "s.id_role='"+em.getIdRoles()+"'");
+		List<Object> functions=rolefunctiondao.getAllRoleFunction(RoleFunction.class, " and id_role='"+em.getIdRoles()+"'");
 		for(Object obj :functions){
 			rolefunctiondao.deleteRoleFunction((RoleFunction)obj);
 		}
