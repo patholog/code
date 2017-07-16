@@ -1,5 +1,6 @@
 package com.pathology.util;
 
+import java.util.Date;
 import java.util.Random;
 
 public class RandomNumbers {
@@ -13,7 +14,7 @@ public class RandomNumbers {
 	 * 随机ID生成器，由数字、小写字母和大写字母组成 
 	 *  
 	 * @param size 
-	 * @return 
+	 * @return c
 	 */  
 	public static String getEandomId(int size) {  
 		Random random = new Random();  
@@ -22,6 +23,11 @@ public class RandomNumbers {
 			cs[i] = digits[random.nextInt(digits.length)];  
 		}  
 		return new String(cs);  
-	}  
+	}
+	
+	public static String getRandomId(){
+		String date=(new Date()).toString().substring(0, 7);
+		return date+getEandomId(8);
+	}
 
 }

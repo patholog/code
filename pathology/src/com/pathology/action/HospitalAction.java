@@ -13,6 +13,7 @@ import org.apache.struts2.ServletActionContext;
 import com.pathology.entity.Hospital;
 import com.pathology.service.IHospitalService;
 import com.pathology.util.Constant;
+import com.pathology.util.RandomNumbers;
 import com.pathology.util.SessionAgentManager;
 
 public class HospitalAction extends BaseAction {
@@ -32,8 +33,8 @@ public class HospitalAction extends BaseAction {
 
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
-			hospital.setIdHospital(getEandomId(16));
-			hospital.setCode(getEandomId(16));
+			hospital.setIdHospital(RandomNumbers.getRandomId());
+			hospital.setCode(RandomNumbers.getEandomId(16));
 			hospitalservice.addHospital(hospital);
 
 			return "updatesuccess";

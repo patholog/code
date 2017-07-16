@@ -13,6 +13,7 @@ import org.apache.struts2.ServletActionContext;
 import com.pathology.entity.Roles;
 import com.pathology.service.IRolesService;
 import com.pathology.util.Constant;
+import com.pathology.util.RandomNumbers;
 import com.pathology.util.SessionAgentManager;
 
 public class RolesAction extends BaseAction {
@@ -42,7 +43,7 @@ public class RolesAction extends BaseAction {
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
 			
-			roles.setIdRoles(getEandomId(16));
+			roles.setIdRoles(RandomNumbers.getRandomId());
 			rolesservice.addRoles(roles,function);
 
 			return "updatesuccess";

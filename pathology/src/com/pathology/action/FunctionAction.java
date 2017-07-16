@@ -13,6 +13,7 @@ import org.apache.struts2.ServletActionContext;
 import com.pathology.entity.Function;
 import com.pathology.service.IFunctionService;
 import com.pathology.util.Constant;
+import com.pathology.util.RandomNumbers;
 import com.pathology.util.SessionAgentManager;
 
 public class FunctionAction extends BaseAction {
@@ -31,7 +32,7 @@ public class FunctionAction extends BaseAction {
 
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
-			function.setIdFunction(getEandomId(16));
+			function.setIdFunction(RandomNumbers.getRandomId());
 			functionservice.addFunction(function);
 
 			return "updatesuccess";

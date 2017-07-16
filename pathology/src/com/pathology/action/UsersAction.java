@@ -22,6 +22,7 @@ import com.pathology.service.IUsersService;
 import com.pathology.util.Constant;
 import com.pathology.util.DigestMD5;
 import com.pathology.util.Mail;
+import com.pathology.util.RandomNumbers;
 import com.pathology.util.SessionAgentManager;
 
 public class UsersAction extends BaseAction {
@@ -188,7 +189,7 @@ public class UsersAction extends BaseAction {
 
 	public String addUser() throws IOException {
 		try {
-			user.setIdUsers(getEandomId(16));
+			user.setIdUsers(RandomNumbers.getRandomId());
 			user.setUserstatus("0");
 			userservice.addUser(user);
 			return "updatesuccess";
@@ -203,7 +204,7 @@ public class UsersAction extends BaseAction {
 		try {
 			user.setPassword(DigestMD5.getDigestPassWord(user.getPassword()));
 			user.setDoctorctfsrc(upImg());
-			user.setIdUsers(getEandomId(16));
+			user.setIdUsers(RandomNumbers.getRandomId());
 			user.setUserstatus("0");
 			userservice.addUser(user);
 

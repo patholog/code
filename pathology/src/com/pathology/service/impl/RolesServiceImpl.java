@@ -131,7 +131,7 @@ public class RolesServiceImpl implements IRolesService {
 		String[] funcs=idfunctions.split(",");
 		for(String funcid:funcs){
 			RoleFunction rolefunc=new RoleFunction();
-			rolefunc.setIdRoleFounction(RandomNumbers.getEandomId(16));
+			rolefunc.setIdRoleFounction(RandomNumbers.getRandomId());
 			rolefunc.setIdRole(em.getIdRoles());
 			rolefunc.setIdFounction(funcid);
 			rolefunctiondao.addRoleFunction(rolefunc);
@@ -149,7 +149,7 @@ public class RolesServiceImpl implements IRolesService {
 		String[] funcs=idfunctions.split(",");
 		for(String funcid:funcs){
 			RoleFunction rolefunc=new RoleFunction();
-			rolefunc.setIdRoleFounction(RandomNumbers.getEandomId(16));
+			rolefunc.setIdRoleFounction(RandomNumbers.getRandomId());
 			rolefunc.setIdRole(em.getIdRoles());
 			rolefunc.setIdFounction(funcid);
 			rolefunctiondao.addRoleFunction(rolefunc);
