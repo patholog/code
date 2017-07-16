@@ -16,6 +16,7 @@
 <script type="text/javascript" src="${path }/js/treeView.js"></script>
 <script type="text/javascript" src="${path }/js/common-cn.js"></script>
 <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
+<script src="${path }/js/jquery/jquery-1.4.4.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#hospitalcode").blur(function() {
