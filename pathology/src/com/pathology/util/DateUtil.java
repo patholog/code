@@ -6,11 +6,14 @@
  */
 package com.pathology.util;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author xu_dengfeng
@@ -20,6 +23,76 @@ import java.util.List;
  */
 public class DateUtil
 {
+	public static int MINSECS_SECOND = 1000; // 1秒
+	public static int MINSECS_MINUTE = MINSECS_SECOND * 60; // 1分钟
+	public static int MINSECS_HOUR = MINSECS_MINUTE * 60; // 1小时
+	public static int MINSECS_DAY = MINSECS_HOUR * 24;// 1天
+
+	public static int YEAR = 2000; // 日期分组所有的年份
+	/**
+	 * 时间常量，秒
+	 */
+	public static final String SS = "s";
+	/**
+	 * 时间常量，分
+	 */
+	public static final String MI = "mi";
+	/**
+	 * 时间常量，时
+	 */
+	public static final String HH = "h";
+	/**
+	 * 时间常量，日
+	 */
+	public static final String DD = "d";
+	/**
+	 * 时间常量，月
+	 */
+	public static final String MM = "m";
+	/**
+	 * 时间常量，年
+	 */
+	public static final String YY = "y";
+	/**
+	 * 分隔符
+	 */
+	public static final String SEPARATOR = "-"; // -分隔符
+	/**
+	 * 年-月-日
+	 */
+	public static final String PATTERN = "yyyy-MM-dd";
+	/**
+	 * 时:分
+	 */
+	public static final String SHORT_PATTERN_WITHOUT_SEC = "HH:mm";
+	/**
+	 * 时:分:秒
+	 */
+	public static final String SHORT_PATTERN = "HH:mm:ss";
+	/**
+	 * 年-月-日 时:分:秒
+	 */
+	public static final String FULL_PATTERN = "yyyy-MM-dd HH:mm:ss";
+	/**
+	 * 年-月-日 时:分
+	 */
+	public static final String FULL_PATTERN_NO_SEC = "yyyy-MM-dd HH:mm";
+	/**
+	 * 年月日
+	 */
+	public static final String PATTERN_CHINA = "yyyy年MM月dd日";
+	/**
+	 * 月日
+	 */
+	public static final String PATTERN_CHINA_1 = "MM月dd日";
+	/**
+	 * 年月日时分秒
+	 */
+	public static final String TIMESTAMP_PATTERN = "yyyyMMddHHmmssSSSS";
+
+	public static final String DATE_MAP_BEGINDATE = "beginDate";
+
+	public static final String DATE_MAP_ENDDATE = "endDate";
 	
     public static String getDate(){
     	
@@ -29,6 +102,27 @@ public class DateUtil
         strCurrentDate= formatter.format(currentDate); 
         return  strCurrentDate; 	
     }  
+	/**
+	 * 字符串转换成日期
+	 * 
+	 */
+	public static Date strToDate(String s, String pattern) {
+		Date theDate = null;
+		if (StringUtil.isBlank(s)) {
+			return null;
+		}
+		if (pattern == null) {
+			pattern = PATTERN;
+		}
+		try {
+			SimpleDateFormat formatter = new SimpleDateFormat(pattern, Locale.CHINA);
+			theDate = formatter.parse(s);
+		} catch (ParseException ex) {
+			theDate = null;
+			System.out.println("String " + s + " is error");
+		}
+		return theDate;
+	}
 	/**
 	 * 将给出的日期加上相应的偏移量，并返回结果日期格式化后的字符串 
 	 * @param origin 要计算的原始日期字符 
@@ -486,6 +580,18 @@ public class DateUtil
 		String month = rollMonth(date.substring(0, 7), 1);
 		int days = getMonthDays(month);
 		return month + "/" + days;
+	}
+	/**
+	 * Date类型转Timestamp类型
+	 * 
+	 * @param date
+	 *            Date类型
+	 * @return
+	 */
+	public static Timestamp dateToTimestamp(Date date) {
+		if (date == null)
+			return null;
+		return new Timestamp(date.getTime());
 	}
 
 	/**

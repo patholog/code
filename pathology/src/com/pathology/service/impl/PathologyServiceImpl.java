@@ -107,7 +107,7 @@ public class PathologyServiceImpl implements IPathologyService {
     int status = 1;
     String sql = " SELECT a.pathologyno ,a.patientname,a.crt_Time,d.name AS hospitalname ,"
         + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
-        + "a.specimenname specimenName, a.idcard idCard,b.case_id as caseId FROM pathology a   "
+        + "a.specimenname specimenName, a.idcard idCard,a.id_case as caseId FROM pathology a   "
         + " LEFT JOIN image  b  ON a.id_case = b.case_id "
         + " LEFT JOIN result  c ON a.id_case = c.case_id"
         + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
@@ -138,7 +138,7 @@ public class PathologyServiceImpl implements IPathologyService {
     int status = 1;
     String sql = " SELECT a.pathologyno ,a.patientname,a.crt_Time,d.name AS hospitalname ,"
         + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
-        + "a.specimenname specimenName, a.idcard idCard,b.case_id as caseId FROM pathology a   "
+        + "a.specimenname specimenName, a.idcard idCard,a.id_case  as caseId FROM pathology a   "
         + " LEFT JOIN image  b  ON a.id_case = b.case_id "
         + " LEFT JOIN result  c ON a.id_case = c.case_id"
         + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
@@ -188,6 +188,19 @@ public class PathologyServiceImpl implements IPathologyService {
 
     return elist;
   }
+
+@Override
+public PathologyDTO getPathologyByIdAndDiagStatus(String id, String diagStatus) {
+	String sql = "SELECT a.id_case caseId, a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
+	        + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
+	        + "a.specimenname specimenName, a.idcard idCard "
+	        + " FROM pathology a "
+	        + " LEFT JOIN image  b  ON a.id_case = b.case_id "
+	        + " LEFT JOIN result  c ON a.id_case = c.case_id"
+	        + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
+	        + " WHERE a.diag_status='"+diagStatus+"' AND a.id_case = '" + id + "'";
+	    return (PathologyDTO) jdbcTemplate.queryForObject(sql, new PathologyMapping());
+}
 
 
 }

@@ -16,6 +16,8 @@ public interface IPathologyService {
   public void deletePathology(Pathology em);
 
   public Pathology getPathology(Class clazz, String id);
+  
+  public PathologyDTO getPathologyByIdAndDiagStatus(String id,String diagStatus);
 
   public void updatePathology(Pathology em);
 

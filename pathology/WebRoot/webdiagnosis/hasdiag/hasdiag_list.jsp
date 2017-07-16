@@ -72,7 +72,7 @@
 						         <td><s:property value="#pathology.hospitalname"/></td>
 						         <td><s:property value="#pathology.createTime"/></td>
 						         <td><s:property value="#pathology.createTime"/></td>
-						          <td align="center"><a href="DiaReportAction!getDianosisReport?caseid='${pathology.caseId}'" target="_blank">查看</a></td>
+						          <td align="center"><a href="PathologyAction!getPathologyDto?diagStatus=7&id=${pathology.caseId}" target="_blank">查看</a></td>
 						        </tr>
 						        </s:iterator>
 

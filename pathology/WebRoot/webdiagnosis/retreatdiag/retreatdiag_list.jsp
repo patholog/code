@@ -73,7 +73,7 @@
 						         <td><s:property value="#pathology.hospitalname"/></td>
 						         <td><s:property value="#pathology.createTime"/></td>
 						         <td><s:property value="#pathology.createTime"/></td>
-						         <td align="center"><a href="PathologyAction!daizhenduan" target="_blank">查看</a></td>
+						         <td align="center"><a href="PathologyAction!getPathologyDto?diagStatus=3&id=<s:property value="#pathology.caseId"/>" target="_blank">查看</a></td>
 						        </tr>
 						 </s:iterator>
 

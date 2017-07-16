@@ -3,14 +3,22 @@ package com.pathology.action;
 import com.pathology.dto.PathologyDTO;
 import com.pathology.entity.Pathology;
 import com.pathology.service.IPathologyService;
+import com.pathology.util.Constant;
+import com.pathology.util.StringUtil;
+
+import com.alibaba.fastjson.JSON;
 import net.sf.json.JSONObject;
+import net.sf.json.util.JSONBuilder;
+import net.sf.json.util.JSONUtils;
+
+import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class PathologyAction extends BaseAction {
-
+	private final Logger logger = Logger.getLogger(PathologyAction.class);
 	/**
 	 * 
 	 */
@@ -54,10 +62,19 @@ public class PathologyAction extends BaseAction {
 	 * 
 	 * @return
 	 */
-	public String daizhenduan() {
+	public String getPathologyDto() {
 		HttpServletRequest request = ServletActionContext.getRequest();
-		pathology = pathologyService.getPathologyToNeed(request,
-				request.getParameter("id"));
+		String id=request.getParameter("id");
+		String diagStatus=request.getParameter("diagStatus");
+		if(StringUtil.isBlank(id)){
+			logger.error("缺少必要参数id,请求参数为："+JSON.toJSONString(request.getParameterMap()));
+			return Constant.ERR;
+		}
+		if(StringUtil.isBlank(diagStatus)){
+			logger.error("缺少必要参数diagStatus,请求参数为："+JSON.toJSONString(request.getParameterMap()));
+			return Constant.ERR;
+		}
+		pathology = pathologyService.getPathologyByIdAndDiagStatus(id, diagStatus);
 		return "daizhenduan";
 	}
 
