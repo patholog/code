@@ -33,7 +33,7 @@
 			<td id="leftmenu"><%@include file="/webdiagnosis/mainleft.jsp"%>
 			</td>
 			<td id="contents">
-				 <s:form action="HospitalAction!hospitalList" theme="simple"
+				 <s:form action="CollectionAction!getCollectionList" theme="simple"
 					target="mainFrame">
 					<table cellspacing="0" cellpadding="0" width="100%" border="0"
 						class="toolstable">
