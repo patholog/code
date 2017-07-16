@@ -107,7 +107,9 @@ public class PathologyServiceImpl implements IPathologyService {
     int status = 1;
     String sql = " SELECT a.pathologyno ,a.patientname,a.crt_Time,d.name AS hospitalname ,"
         + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
-        + "a.specimenname specimenName, a.idcard idCard,a.id_case as caseId FROM pathology a   "
+        + "a.specimenname specimenName, a.idcard idCard,a.id_case as caseId, a.mobile, a.diag_time diagTime,"
+        + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
+        + "c.generalSee, c.microscopeSee, a.memo  FROM pathology a   "
         + " LEFT JOIN image  b  ON a.id_case = b.case_id "
         + " LEFT JOIN result  c ON a.id_case = c.case_id"
         + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
@@ -138,7 +140,9 @@ public class PathologyServiceImpl implements IPathologyService {
     int status = 1;
     String sql = " SELECT a.pathologyno ,a.patientname,a.crt_Time,d.name AS hospitalname ,"
         + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
-        + "a.specimenname specimenName, a.idcard idCard,a.id_case  as caseId FROM pathology a   "
+        + "a.specimenname specimenName, a.idcard idCard,a.id_case  as caseId, a.mobile, a.diag_time diagTime,"
+        + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
+        + "c.generalSee, c.microscopeSee, a.memo  FROM pathology a   "
         + " LEFT JOIN image  b  ON a.id_case = b.case_id "
         + " LEFT JOIN result  c ON a.id_case = c.case_id"
         + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"

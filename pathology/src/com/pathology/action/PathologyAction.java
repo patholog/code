@@ -58,7 +58,7 @@ public class PathologyAction extends BaseAction {
 	}
 
 	/**
-	 * 查看待诊断
+	 * 查看病历
 	 * 
 	 * @return
 	 */
