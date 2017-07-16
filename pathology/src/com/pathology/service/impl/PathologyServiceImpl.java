@@ -87,7 +87,7 @@ public class PathologyServiceImpl implements IPathologyService {
   public PathologyDTO getPathologyToNeed(HttpServletRequest request, String caseId) {
     String sql = "SELECT a.id_case caseId, a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
         + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
-        + "a.specimenname specimenName, a.idcard idCard, a.mobile, a.diag_time diagTime,"
+        + "a.specimenname specimenName, a.idcard idCard, a.mobile, a.diag_time ,"
         + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
         + "c.generalSee, c.microscopeSee, a.memo "
         + " FROM pathology a "
@@ -167,7 +167,7 @@ public class PathologyServiceImpl implements IPathologyService {
   public PathologyDTO getPathologyByIdAndDiagStatus(String id, String diagStatus) {
   	String sql = "SELECT a.id_case caseId, a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
   	        + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
-  	        + "a.specimenname specimenName, a.idcard idCard , a.mobile, a.diag_time diagTime,"
+  	        + "a.specimenname specimenName, a.idcard idCard , a.mobile, a.diag_time ,"
           + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
           + "c.generalSee, c.microscopeSee, a.memo "
   	        + " FROM pathology a "
