@@ -197,7 +197,9 @@ public class PathologyServiceImpl implements IPathologyService {
 public PathologyDTO getPathologyByIdAndDiagStatus(String id, String diagStatus) {
 	String sql = "SELECT a.id_case caseId, a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
 	        + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
-	        + "a.specimenname specimenName, a.idcard idCard "
+	        + "a.specimenname specimenName, a.idcard idCard , a.mobile, a.diag_time diagTime,"
+        + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
+        + "c.generalSee, c.microscopeSee, a.memo "
 	        + " FROM pathology a "
 	        + " LEFT JOIN image  b  ON a.id_case = b.case_id "
 	        + " LEFT JOIN result  c ON a.id_case = c.case_id"
