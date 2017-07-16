@@ -142,27 +142,29 @@
 
     .fl_r_table input {
       font-size: 14px;
-      outline: solid thin #555555;
-
+      outline: solid thin #bbb;
+      margin: 0 8px;
+      padding: 0 7px;
     }
 
     .fl_r_table textarea {
       font-size: 14px;
-      outline: solid thin #555555;
+      outline: solid thin #bbb;
       resize: none;
       width: 400px;
+      padding: 0 7px;
     }
 
-    .label-70 {
-      width: 70px;
+    .input-20 {
+      width: 20px;
+    }
+
+    .input-30 {
+      width: 30px;
     }
 
     .input-50 {
       width: 50px;
-    }
-
-    .input-80 {
-      width: 80px;
     }
 
     .input-120 {
@@ -175,6 +177,30 @@
 
     .main-contents {
       padding-left: 10px;
+    }
+
+    span.red-star, .half-word {
+      display: inline-block;
+      *display: inline;
+      *zoom: 1;
+      width: 0.5em;
+    }
+
+    span.red-star {
+      color: #cb1d20;
+    }
+    .remarks {
+      line-height: 25px;
+      font-size: 14px;
+      padding: 0 8px;
+      border-radius: 3px;
+      margin-top: 10px;
+      background-color: #e4e4e4;
+      border: 1px solid #dcdcdc;
+      width: auto;
+    }
+    hr.split-line {
+      border: 1px solid #63B8FF;
     }
   </style>
 </head>
@@ -197,31 +223,33 @@
         </ul>
         <ul class="fl_r">
           <li>
-            <hr>
+            <hr class="split-line">
             <div class="fl_r_row">
-              <label>请选择会诊分类： </label>
+              <label><span class="red-star">*</span>请选择会诊分类<span style="color: red">（费用不同）</span>： </label>
               <input title="hzlx" name="hzlx" type="radio" value="1">普通会诊
               <input title="hzlx" name="hzlx" type="radio" value="2">冰冻会诊
             </div>
-            <hr>
+            <hr class="split-line">
             <div class="fl_r_row">
               <table class="fl_r_table">
                 <tr class="fl_r_table_tr">
                   <td>
-                    <label class="label-70" for="name">病人姓名</label>
-                    <input class="input-80" id="name" type="text" value="<s:property value="pathology.patientname"/>">
+                    <label for="name"><span class="red-star">*</span>病人姓名</label>
+                    <input class="input-150" id="name" type="text" value="<s:property value="pathology.patientname"/>">
                   </td>
                   <td>
-                    <label class="label-70" for="blh">病理号</label>
+                    <label>
+                      <span class="red-star">*</span>病<span class="half-word"></span>理<span class="half-word"></span>号
+                    </label>
                     <input class="input-120" id="blh" type="text" value="<s:property value="pathology.pathologyNo"/>">
                   </td>
                   <td>
-                    <label for="age">年龄</label>
-                    <input class="input-50" id="age" type="text"
+                    <label for="age"><span class="red-star">*</span>年龄</label>
+                    <input class="input-30" id="age" type="text"
                            value="<s:property value="pathology.patientAge"/>">
                   </td>
                   <td>
-                    <label for="sex">性别</label>
+                    <label for="sex"><span class="red-star">*</span>性别</label>
                     <select id="sex">
                       <s:if test='%{pathology.patientSex=="男"}'>
                         <option value="男" selected>男</option>
@@ -232,79 +260,92 @@
                     </select>
                   </td>
                   <td colspan="2">
-                    <label class="label-70" for="qcbw">取材部位</label>
-                    <input id="qcbw" type="text" value="<s:property value="pathology.specimenName"/>">
+                    <label class="label-70" for="qcbw"><span class="red-star">*</span>取材部位</label>
+                    <input class="input-150" id="qcbw" type="text" value="<s:property value="pathology.specimenName"/>">
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <label for="sfzh">身份证号</label>
+                    <label for="sfzh"><span class="half-word"></span>身份证号</label>
                     <input class="input-150" id="sfzh" type="text" value="<s:property value="pathology.idCard"/>">
                   </td>
                   <td>
-                    <label for="mobile">手机号</label>
+                    <label for="mobile">
+                      <span class="half-word"></span>手<span class="half-word"></span>机<span class="half-word"></span>号
+                    </label>
                     <input class="input-120" id="mobile" type="text" value="<s:property value="pathology.mobile"/>">
                   </td>
                   <td colspan="2">
-                    <label for="mobileRel">家属电话</label>
+                    <label for="mobileRel"><span class="half-word"></span>家属电话</label>
                     <input class="input-120" id="mobileRel" type="text" value="<s:property value="pathology.mobile"/>">
                   </td>
                   <td colspan="2">
-                    <label for="sjDate">送检时间</label>
-                    <input class="input-150" id="sjDate" type="text" value="<s:property value="pathology.inspectionDate"/>">
+                    <label for="sjDate"><span class="red-star">*</span>送检时间</label>
+                    <input class="input-150" id="sjDate" type="text"
+                           value="<s:property value="pathology.inspectionDate"/>">
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <label for="category">系统分类</label>
-                    <input class="input-120" id="category" type="text" value="全科">
+                    <label for="category"><span class="half-word"></span>系统分类</label>
+                    <input class="input-150" id="category" type="text" value="全科">
                   </td>
                   <td>
-                    <label for="sendCompany">送检单位</label>
-                    <input class="input-120" id="sendCompany" type="text" value="<s:property value="pathology.hospitalname"/>">
+                    <label for="sendCompany"><span class="half-word"></span>送检单位</label>
+                    <input class="input-120" id="sendCompany" type="text"
+                           value="<s:property value="pathology.hospitalname"/>">
                   </td>
                   <td colspan="2">
-                    <label for="sendKeshi">送检科室</label>
-                    <input class="input-120" id="sendKeshi" type="text" value="<s:property value="pathology.hospitalname"/>">
+                    <label for="sendKeshi"><span class="half-word"></span>送检科室</label>
+                    <input class="input-120" id="sendKeshi" type="text"
+                           value="<s:property value="pathology.hospitalname"/>">
                   </td>
                   <td>
-                    <label for="nation">民族</label>
+                    <label for="nation"><span class="half-word"></span>民族</label>
                     <input class="input-50" id="nation" type="text" value="0">
                   </td>
                   <td>
                     <label for="urgent">加急</label>
-                    <input class="input-50" id="urgent" type="text" value="0">
+                    <input class="input-20" id="urgent" type="text" value="0">
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <label for="consultationNo">会诊号</label>
+                    <label for="consultationNo">
+                      <span class="half-word"></span>会<span class="half-word"></span>诊<span class="half-word"></span>号
+                    </label>
                     <input class="input-150" id="consultationNo" type="text" value="110101199901011234">
                   </td>
                   <td>
-                    <label for="admissionNo">住院号</label>
+                    <label for="admissionNo">
+                      <span class="half-word"></span>住<span class="half-word"></span>院<span class="half-word"></span>号
+                    </label>
                     <input class="input-120" id="admissionNo" type="text" value="18600001111">
                   </td>
                   <td colspan="2">
-                    <label for="wardNo">病区号</label>
+                    <label for="wardNo">
+                      <span class="half-word"></span>病<span class="half-word"></span>区<span class="half-word"></span>号
+                    </label>
                     <input class="input-120" id="wardNo" type="text" value="18600002222">
                   </td>
                   <td colspan="2">
-                    <label for="roomNo">病房号</label>
+                    <label for="roomNo">
+                      <span class="half-word"></span>病<span class="half-word"></span>房<span class="half-word"></span>号
+                    </label>
                     <input class="input-150" id="roomNo" type="text" value="2017-01-01 12:12:12">
                   </td>
                 </tr>
                 <tr>
                   <td colspan="6">
-                    <hr>
+                    <hr class="split-line">
                   </td>
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <label for="clinicDiagnose">临床资料</label>
+                    <label for="clinicDiagnose"><span class="red-star">*</span>临床资料</label>
                   </td>
                   <td colspan="4">
-                    <label for="historySummary">病史</label>
+                    <label for="historySummary"><span class="half-word"></span>病史</label>
                   </td>
                 </tr>
                 <tr>
@@ -317,10 +358,10 @@
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <label for="preliminaryOpinion">初诊意见</label>
+                    <label for="preliminaryOpinion"><span class="red-star">*</span>初诊意见</label>
                   </td>
                   <td colspan="4">
-                    <label for="ihc">免疫组化</label>
+                    <label for="ihc"><span class="half-word"></span>免疫组化</label>
                   </td>
                 </tr>
                 <tr>
@@ -333,10 +374,11 @@
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <label for="generalSee">大体所见</label>
+                    <label for="generalSee"><span class="red-star">*</span>大体所见</label>
                   </td>
                   <td colspan="4">
-                    <label for="microscopeSee">影像学检查</label>
+                    <label for="microscopeSee">
+                      <span class="half-word"></span>影像学检查</label>
                   </td>
                 </tr>
                 <tr>
@@ -353,7 +395,7 @@
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <label for="memo">备注</label>
+                    <label for="memo"><span class="half-word"></span>备注</label>
                   </td>
                 </tr>
                 <tr>
@@ -362,8 +404,13 @@
                   </td>
                 </tr>
               </table>
+              <div class="remarks" style="width: 500px;">
+                <span>注：</span>
+                <span style="color: red">“*”</span>
+                <span>为必填内容，病史与备注中的内容不在诊断结果中显示</span>
+              </div>
             </div>
-            <hr>
+            <hr class="split-line">
           </li>
           <li style="height: 600px;">附件切片内容2</li>
           <li style="height: 400px;">填写诊断内容3</li>
