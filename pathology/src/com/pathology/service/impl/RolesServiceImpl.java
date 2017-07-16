@@ -21,7 +21,7 @@ public class RolesServiceImpl implements IRolesService {
 	private IRolesDao rolesdao;
 	private IFunctionDao functiondao;
 	private IRoleFunctionDao rolefunctiondao;
-	
+
 	public IRolesDao getRolesdao() {
 		return rolesdao;
 	}
@@ -29,7 +29,7 @@ public class RolesServiceImpl implements IRolesService {
 	public void setRolesdao(IRolesDao rolesdao) {
 		this.rolesdao = rolesdao;
 	}
-	
+
 
 	public IFunctionDao getFunctiondao() {
 		return functiondao;
@@ -38,7 +38,7 @@ public class RolesServiceImpl implements IRolesService {
 	public void setFunctiondao(IFunctionDao functiondao) {
 		this.functiondao = functiondao;
 	}
-	
+
 
 	public IRoleFunctionDao getRolefunctiondao() {
 		return rolefunctiondao;
@@ -59,13 +59,17 @@ public class RolesServiceImpl implements IRolesService {
 	}
 
 	public void deleteRoles(Roles em) throws Exception {
-		if(em!=null)
-			rolesdao.deleteRoles(em);
+		if(em==null)return;
+		rolesdao.deleteRoles(em);
+		List<Object> functions=rolefunctiondao.getAllRoleFunction(RoleFunction.class, " and id_role='"+em.getIdRoles()+"'");
+		for(Object obj :functions){
+			rolefunctiondao.deleteRoleFunction((RoleFunction)obj);
+		}
 
 	}
 
 	public Roles getRoles(Class clazz, String id) throws Exception {
-		
+
 		return rolesdao.getRoles(clazz, id);
 	}
 
@@ -98,7 +102,7 @@ public class RolesServiceImpl implements IRolesService {
 				.getSession();
 		Roles roles=rolesdao.getRoles(Roles.class, id);
 		List<Object> functionT=functiondao.getAllFunction(Function.class, "");
-		
+
 		List<Object> functions=rolefunctiondao.getAllRoleFunction(RoleFunction.class, " and id_role='"+id+"'");
 		StringBuffer  idfuns=new StringBuffer();
 		for(Object obj:functions){
@@ -114,8 +118,8 @@ public class RolesServiceImpl implements IRolesService {
 		}
 		session.setAttribute("roles",roles);
 		session.setAttribute("functionlist", funclist);
-		session.setAttribute("functionlist", funclist);
-		
+		session.setAttribute("functionids", idfuns.toString().substring(0, idfuns.length()-1));
+
 		if(roles!=null && funclist.size()>0){
 			return true;
 		}
@@ -133,7 +137,7 @@ public class RolesServiceImpl implements IRolesService {
 			rolefunctiondao.addRoleFunction(rolefunc);
 		}
 		rolesdao.addRoles(em);
-		
+
 	}
 
 	@Override
@@ -152,7 +156,7 @@ public class RolesServiceImpl implements IRolesService {
 		}
 		rolesdao.updateRoles(em);
 	}
-	
-	
+
+
 
 }

@@ -74,7 +74,7 @@
 						<th>功能分配</th>
 						<td><c:forEach var="func" items="${functionlist}">
 								<label><input type="checkbox" name="function" id="title" 
-								<c:if test="${sessionScope.functionids.indexOf(func.idFunction)>0}">checked="true"</c:if>
+								<c:if test="${fn:contains(sessionScope.functionids, func.idFunction)}">checked="true"</c:if>
 									value="${func.idFunction}" /> ${func.name}</label>
 							</c:forEach>
 						</td>

@@ -113,8 +113,11 @@ public class RolesAction extends BaseAction {
 
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
-
-			rolesservice.updateRoles(roles,function);
+			Roles rolesT =rolesservice.getRoles(Roles.class, roles.getIdRoles());
+			rolesT.setName(roles.getName());
+			rolesT.setDescription(roles.getDescription());
+			rolesT.setMemo(roles.getMemo());
+			rolesservice.updateRoles(rolesT,function);
 			return "updatesuccess";
 		} catch (Exception e) {
 			logger.error(e.getMessage());
