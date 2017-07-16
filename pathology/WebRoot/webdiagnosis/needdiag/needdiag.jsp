@@ -153,6 +153,10 @@
       width: 400px;
     }
 
+    .label-70 {
+      width: 70px;
+    }
+
     .input-50 {
       width: 50px;
     }
@@ -204,11 +208,11 @@
               <table class="fl_r_table">
                 <tr class="fl_r_table_tr">
                   <td>
-                    <label for="name">病人姓名</label>
+                    <label class="label-70" for="name">病人姓名</label>
                     <input class="input-80" id="name" type="text" value="<s:property value="pathology.patientname"/>">
                   </td>
                   <td>
-                    <label for="blh">病理号</label>
+                    <label class="label-70" for="blh">病理号</label>
                     <input class="input-120" id="blh" type="text" value="<s:property value="pathology.pathologyNo"/>">
                   </td>
                   <td>
@@ -228,7 +232,7 @@
                     </select>
                   </td>
                   <td colspan="2">
-                    <label for="qcbw">取材部位</label>
+                    <label class="label-70" for="qcbw">取材部位</label>
                     <input id="qcbw" type="text" value="<s:property value="pathology.specimenName"/>">
                   </td>
                 </tr>
@@ -239,15 +243,15 @@
                   </td>
                   <td>
                     <label for="mobile">手机号</label>
-                    <input class="input-120" id="mobile" type="text" value="18600001111">
+                    <input class="input-120" id="mobile" type="text" value="<s:property value="pathology.mobile"/>">
                   </td>
                   <td colspan="2">
                     <label for="mobileRel">家属电话</label>
-                    <input class="input-120" id="mobileRel" type="text" value="18600002222">
+                    <input class="input-120" id="mobileRel" type="text" value="<s:property value="pathology.mobile"/>">
                   </td>
                   <td colspan="2">
                     <label for="sjDate">送检时间</label>
-                    <input class="input-150" id="sjDate" type="text" value="2017-01-01 12:12:12">
+                    <input class="input-150" id="sjDate" type="text" value="<s:property value="pathology.inspectionDate"/>">
                   </td>
                 </tr>
                 <tr>
@@ -257,11 +261,11 @@
                   </td>
                   <td>
                     <label for="sendCompany">送检单位</label>
-                    <input class="input-120" id="sendCompany" type="text" value="北京">
+                    <input class="input-120" id="sendCompany" type="text" value="<s:property value="pathology.hospitalname"/>">
                   </td>
                   <td colspan="2">
                     <label for="sendKeshi">送检科室</label>
-                    <input class="input-120" id="sendKeshi" type="text" value="0">
+                    <input class="input-120" id="sendKeshi" type="text" value="<s:property value="pathology.hospitalname"/>">
                   </td>
                   <td>
                     <label for="nation">民族</label>
@@ -297,18 +301,18 @@
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <label>临床资料</label>
+                    <label for="clinicDiagnose">临床资料</label>
                   </td>
                   <td colspan="4">
-                    <label>病史</label>
+                    <label for="historySummary">病史</label>
                   </td>
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <textarea>临床资料内容</textarea>
+                    <textarea id="clinicDiagnose"><s:property value="pathology.clinicDiagnose"/></textarea>
                   </td>
                   <td colspan="4">
-                    <textarea>病史内容</textarea>
+                    <textarea id="historySummary"><s:property value="pathology.historySummary"/></textarea>
                   </td>
                 </tr>
                 <tr>
@@ -329,32 +333,32 @@
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <label for="roughlySee">大体所见</label>
+                    <label for="generalSee">大体所见</label>
                   </td>
                   <td colspan="4">
-                    <label for="imaging">影像学检查</label>
+                    <label for="microscopeSee">影像学检查</label>
                   </td>
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <textarea id="roughlySee" cols="10" rows="2" class="ckeditor">
-                      <s:property value="pathology.patientname"/>
+                    <textarea id="generalSee" cols="10" rows="2" class="ckeditor">
+                      <s:property value="pathology.generalSee"/>
                     </textarea>
                   </td>
                   <td colspan="4">
-                    <textarea id="imaging" cols="10" rows="2" class="ckeditor">
-                      <s:property value="pathology.patientname"/>
+                    <textarea id="microscopeSee" cols="10" rows="2" class="ckeditor">
+                      <s:property value="pathology.microscopeSee"/>
                     </textarea>
                   </td>
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <label for="remark">备注</label>
+                    <label for="memo">备注</label>
                   </td>
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <textarea id="remark">备注内容</textarea>
+                    <textarea id="memo"><s:property value="pathology.memo"/></textarea>
                   </td>
                 </tr>
               </table>

@@ -27,6 +27,29 @@ public class PathologyDTO implements java.io.Serializable {
   private String patientAge;
   private String specimenName;
   private String idCard;
+  private String mobile;
+  private Date diagTime;
+  /**
+   * 病史
+   */
+  private String historySummary;
+  /**
+   * 临床诊断
+   */
+  private String clinicDiagnose;
+  /**
+   * 检验时间
+   */
+  private Date inspectionDate;
+  /**
+   * 大体所见
+   */
+  private String generalSee;
+
+  /**
+   * 影像学所见
+   */
+  private String microscopeSee;
 
   public String getHospitalname() {
     return hospitalname;
@@ -187,5 +210,60 @@ public class PathologyDTO implements java.io.Serializable {
   public void setIdCard(String idCard) {
     this.idCard = idCard;
   }
-}
 
+  public String getMobile() {
+    return mobile;
+  }
+
+  public void setMobile(String mobile) {
+    this.mobile = mobile;
+  }
+
+  public Date getDiagTime() {
+    return diagTime;
+  }
+
+  public void setDiagTime(Date diagTime) {
+    this.diagTime = diagTime;
+  }
+
+  public String getHistorySummary() {
+    return historySummary;
+  }
+
+  public void setHistorySummary(String historySummary) {
+    this.historySummary = historySummary;
+  }
+
+  public String getClinicDiagnose() {
+    return clinicDiagnose;
+  }
+
+  public void setClinicDiagnose(String clinicDiagnose) {
+    this.clinicDiagnose = clinicDiagnose;
+  }
+
+  public Date getInspectionDate() {
+    return inspectionDate;
+  }
+
+  public void setInspectionDate(Date inspectionDate) {
+    this.inspectionDate = inspectionDate;
+  }
+
+  public String getGeneralSee() {
+    return generalSee;
+  }
+
+  public void setGeneralSee(String generalSee) {
+    this.generalSee = generalSee;
+  }
+
+  public String getMicroscopeSee() {
+    return microscopeSee;
+  }
+
+  public void setMicroscopeSee(String microscopeSee) {
+    this.microscopeSee = microscopeSee;
+  }
+}

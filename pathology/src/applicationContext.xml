@@ -140,7 +140,7 @@
 	</bean>
 	
 	<!-- 病理报告 -->
-	<bean id="pathologyreportService" class="com.pathology.service.impl.PathologyReportServiceImpl">					
+	<bean id="pathologyreportService" class="com.pathology.service.impl.PathologyReportServiceImpl">
 	</bean>
 	<bean id="diareportAction" class="com.pathology.action.DiaReportAction" scope="prototype">
 		<property name="pathologyreportService" ref="pathologyreportService"></property>
