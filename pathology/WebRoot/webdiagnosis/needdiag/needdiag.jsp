@@ -189,6 +189,7 @@
     span.red-star {
       color: #cb1d20;
     }
+
     .remarks {
       line-height: 25px;
       font-size: 14px;
@@ -199,6 +200,7 @@
       border: 1px solid #dcdcdc;
       width: auto;
     }
+
     hr.split-line {
       border: 1px solid #63B8FF;
     }
@@ -412,7 +414,46 @@
             </div>
             <hr class="split-line">
           </li>
-          <li style="height: 600px;">附件切片内容2</li>
+          <li>
+            <div class="upload-module">
+              <div class="title-left">上传切片</div>
+              <table class="listtable" cellspacing="0" cellpadding="0" width="100%">
+                <tbody>
+                <tr>
+                  <th>序号</th>
+                  <th>状态</th>
+                  <th>切片名称</th>
+                  <th>上传时间</th>
+                  <th>物镜倍数</th>
+                  <th>切片大小</th>
+                  <th>免疫组化</th>
+                  <th>操作</th>
+                </tr>
+                <s:iterator value="pathologys" id="pathology" status="11">
+                  <tr>
+                    <td><s:property value="#pathology.pathologyNo"/></td>
+                    <td><s:property value="#pathology.patientname"/></td>
+                    <td><s:property value="#pathology.patientname"/></td>
+                    <td><s:property value="#pathology.username"/></td>
+                    <td><s:property value="#pathology.content"/></td>
+                    <td><s:property value="#pathology.hospitalname"/></td>
+                    <td><s:property value="#pathology.createTime"/></td>
+                    <td align="center">
+                      <a href="PathologyAction!null?id=<s:property value="#pathology.caseId"/> target='_blank'">查看</a>
+                    </td>
+                  </tr>
+                </s:iterator>
+                <tr class="lightrow">
+                  <td colspan="8">
+                    <div id="pageDir">
+                      <%=request.getAttribute("page") != null ? request.getAttribute("page") : "" %>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </li>
           <li style="height: 400px;">填写诊断内容3</li>
           <li style="height: 500px;">留言内容4</li>
         </ul>

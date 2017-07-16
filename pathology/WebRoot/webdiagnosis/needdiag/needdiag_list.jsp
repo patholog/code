@@ -46,8 +46,7 @@
           </tr>
         </table>
       </s:form>
-      <table class="listtable" cellspacing="0" cellpadding="0"
-             width="100%">
+      <table class="listtable" cellspacing="0" cellpadding="0" width="100%">
         <tbody>
         <tr>
           <th width="10%">病理号</th>
