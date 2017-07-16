@@ -9,14 +9,64 @@
 <title></title>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" type="text/css" href="${path }/css/style.css" />
-<script type="text/javascript"
-	src="${path }/CKEditor/ckeditor/ckeditor.js"></script>
-<script type="text/javascript"
-	src="${path }/CKFinder/ckfinder/ckfinder.js"></script>
+<script src="${path }/js/jquery/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="${path }/js/treeView.js"></script>
 <script type="text/javascript" src="${path }/js/common-cn.js"></script>
 <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
 <script type="text/javascript">
+$(document).ready(function() {
+
+		$("#url").blur(function() {
+			var spe = $("#url").val().trim();
+			if(spe.length>128){
+				$("#urltip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
+				$("#Submit").attr("disabled",true);
+				return false;
+			}else{
+				$("#urltip").html("");
+				$("#Submit").attr("disabled",false);
+				return true;
+			}
+		});
+		$("#short").blur(function() {
+			var spe = $("#short").val().trim();
+			if(spe.length>128){
+				$("#shorttip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
+				$("#Submit").attr("disabled",true);
+				return false;
+			}else{
+				$("#shorttip").html("");
+				$("#Submit").attr("disabled",false);
+				return true;
+			}
+		});
+		
+		$("#description").blur(function() {
+			var spe = $("#description").val().trim();
+			if(spe.length>128){
+				$("#descriptiontip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
+				$("#Submit").attr("disabled",true);
+				return false;
+			}else{
+				$("#descriptiontip").html("");
+				$("#Submit").attr("disabled",false);
+				return true;
+			}
+		});
+		
+		$("#name").blur(function() {
+			var spe = $("#name").val().trim();
+			if(spe.length>100){
+				$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
+				$("#btn").attr("disabled",true);
+				return false;
+			}else{
+				$("#nametip").html("");
+				$("#Submit").attr("disabled",false);
+				return true;
+			}
+		}); 
+	});
 	$(function() {
 		$(".ta tr").each(function(i) {
 			this.style.backgroundColor = [ '#799AE1', '#D6DFF7' ][i % 2]
@@ -28,6 +78,7 @@
 			$(this).removeClass("mousehover");
 		}); //移除该行的class
 	});
+	
 </script>
 </head>
 <div id="header">
@@ -51,19 +102,19 @@
 		    <table class="maintable form_top_thin">
               <tr>
                 <th>功能名称</th>
-                <td><input type="text" name="function.name" id="title" value="" style="width:300px;" /> </td>
+                <td><input type="text" name="function.name" id="name" value="" style="width:300px;" /><span id="nametip"></span> </td>
               </tr>			  
               <tr>
                 <th>URL</th>
-                <td><input type="text" name="function.url" id="title" value="" style="width:300px;" /> </td>
+                <td><input type="text" name="function.url" id="url" value="" style="width:300px;" /> <span id="urltip"></span></td>
               </tr>			  
               <tr>
                 <th>简称</th>
-                <td><input type="text" name="function.short_" id="title" value="" style="width:300px;" /> </td>
+                <td><input type="text" name="function.short_" id="short" value="" style="width:300px;" /><span id="shorttip"></span> </td>
               </tr>			  
               <tr>
                 <th>描述</th>
-                <td><input type="text" name="function.description" id="title" value="" style="width:300px;" /></td>
+                <td><input type="text" name="function.description" id="description" value="" style="width:300px;" /><span id="descriptiontip"></span></td>
               </tr>			  
               
             </table>

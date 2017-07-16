@@ -23,15 +23,15 @@
 					var hospitalcode = $("#hospitalcode").val().trim();
 					if (hospitalcode == '') {
 						$("#hospitalcodetip").html("<a style='color:#2ca9cc;font-size:14px;'>编码不能为空！</a>");
-						$("#btn").attr("disabled",true);
+						$("#Submit").attr("disabled",true);
 						return false;
 					}else if(hospitalcode.length<6){
 							$("#hospitalcodetip").html("<a style='color:#2ca9cc;font-size:14px;'>编码不能少于6位！</a>");
-							$("#btn").attr("disabled",true);
+							$("#Submit").attr("disabled",true);
 							return false;
 					}else if(hospitalcode.length>20){
 							$("#hospitalcodetip").html("<a style='color:#2ca9cc;font-size:14px;'>编码不能超过20位！</a>");
-							$("#btn").attr("disabled",true);
+							$("#Submit").attr("disabled",true);
 							return false;
 					}
 					else {
@@ -40,7 +40,7 @@
 						if(hospitalcode!=""&&!zmnumReg.test(hospitalcode)){  
 							$("#hospitalcodetip").html("<a style='color:#2ca9cc;font-size:14px;'>只能输入字母或数字!</a>");
 							$("#hospitalcode").val("");
-							$("#btn").attr("disabled",true);
+							$("#Submit").attr("disabled",true);
 							return false;
 						}
 			}
@@ -50,11 +50,11 @@
 					var name = $("#name").val().trim();
 					if (name == '') {
 						$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>名称不能为空！</a>");
-						$("#btn").attr("disabled",true);
+						$("#Submit").attr("disabled",true);
 						return false;
 					}else if(name.length>50){
 							$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>名称过长！</a>");
-							$("#btn").attr("disabled",true);
+							$("#Submit").attr("disabled",true);
 							return false;
 					}
 			
@@ -64,11 +64,11 @@
 			var spe = $("#memo").val().trim();
 			if(spe.length>128){
 				$("#memotip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
-				$("#btn").attr("disabled",true);
+				$("#Submit").attr("disabled",true);
 				return false;
 			}else{
 				$("#memotip").html("");
-				$("#btn").attr("disabled",false);
+				$("#Submit").attr("disabled",false);
 				return true;
 			}
 		});
@@ -76,11 +76,11 @@
 			var spe = $("#address").val().trim();
 			if(spe.length>128){
 				$("#addresstip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
-				$("#btn").attr("disabled",true);
+				$("#Submit").attr("disabled",true);
 				return false;
 			}else{
 				$("#addresstip").html("");
-				$("#btn").attr("disabled",false);
+				$("#Submit").attr("disabled",false);
 				return true;
 			}
 		});

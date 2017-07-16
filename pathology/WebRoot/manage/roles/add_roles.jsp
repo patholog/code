@@ -9,17 +9,55 @@
 <title></title>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" type="text/css" href="${path }/css/style.css" />
-<script type="text/javascript"
-	src="${path }/CKEditor/ckeditor/ckeditor.js"></script>
-<script type="text/javascript"
-	src="${path }/CKFinder/ckfinder/ckfinder.js"></script>
+<script src="${path }/js/jquery/jquery-1.4.4.min.js"></script>	
 <script type="text/javascript" src="${path }/js/treeView.js"></script>
 <script type="text/javascript" src="${path }/js/common-cn.js"></script>
 <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
 <script type="text/javascript">
+	$(document).ready(function() {
+
+		$("#memo").blur(function() {
+			var spe = $("#memo").val().trim();
+			if(spe.length>128){
+				$("#memotip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
+				$("#Submit").attr("disabled",true);
+				return false;
+			}else{
+				$("#memotip").html("");
+				$("#Submit").attr("disabled",false);
+				return true;
+			}
+		});
+		
+		$("#description").blur(function() {
+			var spe = $("#description").val().trim();
+			if(spe.length>128){
+				$("#descriptiontip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
+				$("#Submit").attr("disabled",true);
+				return false;
+			}else{
+				$("#descriptiontip").html("");
+				$("#Submit").attr("disabled",false);
+				return true;
+			}
+		});
+		
+		$("#name").blur(function() {
+			var spe = $("#name").val().trim();
+			if(spe.length>100){
+				$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
+				$("#btn").attr("disabled",true);
+				return false;
+			}else{
+				$("#nametip").html("");
+				$("#Submit").attr("disabled",false);
+				return true;
+			}
+		}); 
+	});
 	$(function() {
 		$(".ta tr").each(function(i) {
-			this.style.backgroundColor = [ '#799AE1', '#D6DFF7' ][i % 2]
+			this.style.backgroundColor = [ '#799AE1', '#D6DFF7' ][i % 2];
 		});
 
 		$(".ta tr").mouseover(function() {//如果鼠标移到class为stripe的表格的tr上时，执行函数
@@ -40,7 +78,9 @@
 		}else{
 			document.articles.action="RolesAction!addRoles?function"+s;
 		}
-	} 
+	}
+	
+	
 </script>
 </head>
 <div id="header">
@@ -66,18 +106,18 @@
 				<table class="maintable form_top_thin">
 					<tr>
 						<th>角色名称</th>
-						<td><input type="text" name="roles.name" id="title" value=""
-							style="width:300px;" /></td>
+						<td><input type="text" name="roles.name" id="name" value=""
+							style="width:300px;" /><span id="nametip"></span></td>
 					</tr>
 					<tr>
 						<th>角色描述</th>
-						<td><input type="text" name="roles.description" id="title"
-							value="" style="width:300px;" /></td>
+						<td><input type="text" name="roles.description" id="description"
+							value="" style="width:300px;" /><span id="descriptiontip"></span></td>
 					</tr>
 					<tr>
 						<th>角色备注</th>
-						<td><input type="text" name="roles.memo" id="title" value=""
-							style="width:300px;" /></td>
+						<td><input type="text" name="roles.memo" id="memo" value=""
+							style="width:300px;" /><span id="memostip"></span></td>
 					</tr>
 					<tr>
 						<th>功能分配</th>
