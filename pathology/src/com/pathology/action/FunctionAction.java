@@ -100,8 +100,11 @@ public class FunctionAction extends BaseAction {
 
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
-
-			functionservice.updateFunction(function);
+			Function functionT =functionservice.getFunction(Function.class, function.getIdFunction());
+			functionT.setName(function.getName());
+			functionT.setUrl(function.getUrl());
+			functionT.setDescription(function.getDescription());
+			functionservice.updateFunction(functionT);
 			return "updatesuccess";
 		} catch (Exception e) {
 			logger.error(e.getMessage());
