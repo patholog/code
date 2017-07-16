@@ -71,8 +71,8 @@
 						         <td><s:property value="#collection.patientname"/></td>
 						         <td><s:property value="#collection.username"/></td>
 						         <td><s:property value="#collection.hospitalname"/></td>
-						         <td><s:property value="#collection.isReaded"/></td>
 						         <td><s:property value="#collection.createTime"/></td>
+						         <td><s:property value="#collection.diagtime"/></td>
 						          <td align="center"><a href="#"  onclick="confirmDelete('${collection.collectionId }')">取消收藏</a></td>
 						        </tr>
 						        </s:iterator>

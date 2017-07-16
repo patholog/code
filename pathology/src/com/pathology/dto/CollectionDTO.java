@@ -25,7 +25,7 @@ public class CollectionDTO implements java.io.Serializable {
 	private String lastUpdUserId;
 	private Integer delF;
 	private String pathologyNo;
-	private Timestamp diagtime;
+	private Date diagtime;
 	
 	public String getCollectionId() {
 		return collectionId;
@@ -46,10 +46,11 @@ public class CollectionDTO implements java.io.Serializable {
 	public void setHospitalname(String hospitalname) {
 		this.hospitalname = hospitalname;
 	}
-	public Timestamp getDiagtime() {
+	
+	public Date getDiagtime() {
 		return diagtime;
 	}
-	public void setDiagtime(Timestamp diagtime) {
+	public void setDiagtime(Date diagtime) {
 		this.diagtime = diagtime;
 	}
 	public int getNum() {
