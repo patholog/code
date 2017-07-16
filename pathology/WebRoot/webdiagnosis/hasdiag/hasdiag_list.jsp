@@ -66,12 +66,14 @@
 						         <tr>						         
 						         <td><s:property value="#pathology.pathologyNo"/></td>
 						         <td><s:property value="#pathology.patientname"/></td>
-						         <td><s:property value="#pathology.username"/></td>
+						         <td><s:property value="#pathology.specimenname"/></td>
+						         <!-- todo 确定病例状态 -->
 						         <td><s:property value="#pathology.content"/></td>
+						         <!-- todo 系统分类需要获取 -->
 						         <td><s:property value="#pathology.username"/></td>
 						         <td><s:property value="#pathology.hospitalname"/></td>
-						         <td><s:property value="#pathology.createTime"/></td>
-						         <td><s:property value="#pathology.createTime"/></td>
+						         <td><s:property value="#pathology.inspectiondate"/></td>
+						         <td><s:property value="#pathology.diagtime"/></td>
 						          <td align="center"><a href="PathologyAction!getPathologyDto?diagStatus=7&id=${pathology.caseId}" target="_blank">查看</a></td>
 						        </tr>
 						        </s:iterator>
