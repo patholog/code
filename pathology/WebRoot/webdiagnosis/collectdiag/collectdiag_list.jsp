@@ -61,16 +61,16 @@
 				          <th width="10%">申请时间</th>
 				          <th width="10%">诊断时间</th>
 				          <th width="15%">操作</th>
-				            
+				             
 						</tr>
 						         <s:iterator value="collections" id="collection" status="11">
 						         <tr>
-						         <td><s:property value="#collection.messageOrder"/><input type="hidden" value="#collection.collectionId"></td>
-						         <td><s:property value="#collection.pathologyNo"/></td>
+						         <td><s:property value="#collection.pathologyNo"/><input type="hidden" value="#collection.collectionId"></td>
+						         <td><s:property value="#collection.patientname"/></td>
 						         <td><s:property value="#collection.pathologyNo"/></td>
 						         <td><s:property value="#collection.patientname"/></td>
 						         <td><s:property value="#collection.username"/></td>
-						         <td><s:property value="#collection.content"/></td>
+						         <td><s:property value="#collection.hospitalname"/></td>
 						         <td><s:property value="#collection.isReaded"/></td>
 						         <td><s:property value="#collection.createTime"/></td>
 						          <td align="center"><a href="#"  onclick="confirmDelete('${collection.collectionId }')">取消收藏</a></td>

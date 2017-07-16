@@ -18,14 +18,16 @@ public class CollectionMapping  implements RowMapper {
 		try{
 			CollectionDTO bean = new CollectionDTO();
 			bean.setNum(rs.getRow());
-			bean.setMessageOrder(rs.getString("username"));
 			bean.setContent(rs.getString("memo"));
 		    bean.setMemo("");
 		    bean.setCollectionId(rs.getString("id_collection"));
 		    bean.setUsername(rs.getString("username"));
+		    bean.setHospitalname(rs.getString("hospitalname"));
 			bean.setPathologyNo(rs.getString("pathologyno"));
 			bean.setPatientname(rs.getString("patientname"));
 			bean.setCreateTime(rs.getTimestamp("crt_Time"));
+			bean.setDiagtime(rs.getTimestamp("diag_Time"));
+			bean.setIdcase(rs.getString("id_case"));
 			/*bean.setId(rs.getInt("username"));
 			bean.setCure(rs.getString("content"));
 			bean.setCreate_time(rs.getString("create_time"));
