@@ -37,6 +37,11 @@ public class RolesAction extends BaseAction {
 		this.function = function;
 	}
 
+	/**
+	 * 新增角色
+	 * @return
+	 * @throws Exception
+	 */
 	public String addRoles() throws Exception {
 		try {
 
@@ -53,6 +58,10 @@ public class RolesAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 获取所有角色
+	 * @return
+	 */
 	public String rolesList() {
 		try {
 
@@ -91,6 +100,11 @@ public class RolesAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 编辑角色
+	 * @return
+	 * @throws IOException
+	 */
 	public String updateRoles() throws IOException {
 		try {
 
@@ -109,6 +123,11 @@ public class RolesAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 编辑保存
+	 * @return
+	 * @throws IOException
+	 */
 	public String saveRoles() throws IOException {
 		try {
 
@@ -126,6 +145,10 @@ public class RolesAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 删除角色
+	 * @return
+	 */
 	public String deleteRoles() {
 		try {
 
@@ -141,6 +164,10 @@ public class RolesAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 所有角色
+	 * @return
+	 */
 	public String allRoles() {
 		try {
 

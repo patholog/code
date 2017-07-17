@@ -27,6 +27,11 @@ public class FunctionAction extends BaseAction {
 	private List<Function> functionlist;
 	private int index;
 
+	/**
+	 * 新增功能
+	 * @return
+	 * @throws Exception
+	 */
 	public String addFunction() throws Exception {
 		try {
 
@@ -42,6 +47,10 @@ public class FunctionAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 获取所有功能
+	 * @return
+	 */
 	public String functionList() {
 		try {
 
@@ -79,6 +88,11 @@ public class FunctionAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 编辑功能
+	 * @return
+	 * @throws IOException
+	 */
 	public String updateFunction() throws IOException {
 		try {
 
@@ -96,6 +110,11 @@ public class FunctionAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 编辑保存
+	 * @return
+	 * @throws IOException
+	 */
 	public String saveFunction() throws IOException {
 		try {
 
@@ -113,6 +132,10 @@ public class FunctionAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 删除功能
+	 * @return
+	 */
 	public String deleteFunction() {
 		try {
 
@@ -129,6 +152,10 @@ public class FunctionAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 获取功能
+	 * @return
+	 */
 	public String allFunction() {
 		try {
 

@@ -28,6 +28,11 @@ public class HospitalAction extends BaseAction {
 	private List<Hospital> hospitallist;
 	private int index;
 
+	/**
+	 * 新增医院
+	 * @return
+	 * @throws Exception
+	 */
 	public String addHospital() throws Exception {
 		try {
 
@@ -44,6 +49,10 @@ public class HospitalAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 获取所有医院
+	 * @return
+	 */
 	public String hospitalList() {
 		try {
 
@@ -85,6 +94,11 @@ public class HospitalAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 编辑医院
+	 * @return
+	 * @throws IOException
+	 */
 	public String updateHospital() throws IOException {
 		try {
 
@@ -103,6 +117,11 @@ public class HospitalAction extends BaseAction {
 
 	}
 
+	/**
+	 * 编辑保存
+	 * @return
+	 * @throws IOException
+	 */
 	public String saveHospital() throws IOException {
 		try {
 
@@ -122,6 +141,10 @@ public class HospitalAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 删除医院
+	 * @return
+	 */
 	public String deleteHospital() {
 		try {
 
@@ -139,6 +162,10 @@ public class HospitalAction extends BaseAction {
 
 	}
 
+	/**
+	 * 所有医院
+	 * @return
+	 */
 	public String allHostpital() {
 		try {
 

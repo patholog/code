@@ -49,6 +49,10 @@ public class UsersAction extends BaseAction {
 	private String email;
 	private Map<String, String> result;
 
+	/**
+	 * 用户登录
+	 * @return
+	 */
 	public String login() {
 		try {
 			// String
@@ -67,38 +71,10 @@ public class UsersAction extends BaseAction {
 		}
 	}
 
-	public String manageLogin() {
-		try {
-			// String
-			// hql=" and  s.username='"+user.getUsername()+"' and s.password='"+DigestMD5.getDigestPassWord(user.getPassword())+"'";
-			String hql = " and  s.username='" + user.getUsername()
-					+ "' and s.password='" + user.getPassword() + "'";
-			List<Users> userT = userservice.getAllUser(Users.class, hql);
-			if (userT != null && userT.size() == 1) {
-				SessionAgentManager.setSessionAgentBean(user, "admin");
-				return "manageLoginSuccess";
-			} else {
-				return "err";
-			}
-		} catch (Exception e) {
-			return "err";
-		}
-	}
-
-	public String checkEmail() {
-		try {
-			String hql = " and s.email='" + user.getEmail() + "'";
-			List<Users> userT = userservice.getAllUser(Users.class, hql);
-			if (userT != null && userT.size() > 0) {
-				return "false";
-			} else {
-				return SUCCESS;
-			}
-		} catch (Exception e) {
-			return "err";
-		}
-	}
-
+	/**
+	 * 获取所有用户列集合
+	 * @return
+	 */
 	public String userList() {
 		try {
 
@@ -130,6 +106,11 @@ public class UsersAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 编辑根据id返回单个用户
+	 * @return
+	 * @throws IOException
+	 */
 	public String updateUser() throws IOException {
 		try {
 
@@ -145,6 +126,11 @@ public class UsersAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 审核用户
+	 * @return
+	 * @throws IOException
+	 */
 	public String checkUser() throws IOException {
 		try {
 
@@ -160,6 +146,10 @@ public class UsersAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 删除用户
+	 * @return
+	 */
 	public String deleteUser() {
 		try {
 
@@ -173,6 +163,11 @@ public class UsersAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 编辑保存用户
+	 * @return
+	 * @throws IOException
+	 */
 	public String saveUser() throws IOException {
 		try {
 			Users userT = userservice.getUser(Users.class, user.getIdUsers());
@@ -187,6 +182,11 @@ public class UsersAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 新增用户
+	 * @return
+	 * @throws IOException
+	 */
 	public String addUser() throws IOException {
 		try {
 			user.setIdUsers(RandomNumbers.getRandomId());
@@ -198,6 +198,11 @@ public class UsersAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 注册用户
+	 * @return
+	 * @throws IOException
+	 */
 	public String registUser() throws IOException {
 		
 		
@@ -255,6 +260,10 @@ public class UsersAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 审核通过发送邮件
+	 * @return
+	 */
 	public String checkUserStatus() {
 		// send email demo by ldq
 		Mail.setFrom("zhq567888@126.com");
@@ -276,6 +285,10 @@ public class UsersAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 审核拒绝发送邮件
+	 * @return
+	 */
 	public String refuseCheck() {
 		Mail.setFrom("zhq567888@126.com");
 		Mail.setHost("smtp.126.com");
@@ -293,6 +306,10 @@ public class UsersAction extends BaseAction {
 			return "err";
 		}
 	}
+	/**
+	 * 密码找回发送验证码
+	 * @return
+	 */
 	public String sendEmailForPassWord() {
 		
 		String randomStr=getStringRandom(6);
