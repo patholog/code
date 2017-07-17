@@ -205,8 +205,8 @@
       border: 1px solid #63B8FF;
     }
   </style>
-  <link rel="stylesheet" type="text/css" href="${path }/css/diag_style.css"/>
   <link rel="stylesheet" type="text/css" href="${path }/css/diag_theme.css"/>
+  <link rel="stylesheet" type="text/css" href="${path }/css/diag_style.css"/>
 </head>
 <body>
 <div id="header">
@@ -227,293 +227,142 @@
         </ul>
         <ul class="fl_r">
           <li>
-            <div id="divTitle">
-              <div class="title">
-                <span class="left">诊断报告</span>
-                <a class="history">病史备注</a>
-                <a class="history">导出</a>
-                <a class="history">打印</a>
-                <a class="history">分享</a>
-              </div>
-            </div>
-            <div id="divReport">
-              <div class="logo-title">
-                <span>病理远程会诊咨询意见书</span>
-              </div>
-              <div class="subtitle">
-                <span>原病理号：17040601</span>
-                <span>会诊号：20170406800</span>
-              </div>
-              <div class="hr-report">
-                <hr>
-              </div>
-              <div class="">
-                <table>
-                  <tr>
-                    <td>
-                      <label>姓名</label>
-                      <span><s:property value="pathology.patientname"/>"</span>
-                    </td>
-                    <td>
-                      <label>性别</label>
-                      <span>男</span>
-                    </td>
-                    <td>
-                      <label>年龄</label>
-                      <span>30</span>
-                    </td>
-                    <td>
-                      <label>送检时间</label>
-                      <span>2017-01-01 12:00:00</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">
-                      <label>送检单位</label>
-                      <span>武汉千屏影像技术有限责任公司</span>
-                    </td>
-                    <td>
-                      <label>切片&附件数：</label>
-                      <span>1</span>
-                    </td>
-                    <td>
-                      <label>诊断时间：</label>
-                      <span>2017-01-01 12:00:00</span>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-              <div>
-                <hr>
-              </div>
-              <div>
-                <span>临床资料（手术所见、影像学、相关检验等）：</span>
-                <span>我院乳腺彩超：左乳外上象限可及大小约2.0 cm×1.2 cm肿物，呈低回声，形态规则，边界不清，无包膜，后方回声增强。临床考虑恶性肿瘤可能性大。于我院行乳腺穿刺病理示：考虑纤维上皮性肿瘤，不除外恶性病变，等手术标本进一步确诊。临床遂行手术。术中冷冻：纤维上皮性肿瘤，导管上皮增生活跃，细胞中等异型，间质细胞丰富，异型明显，高度疑为恶性。行肿物切除术。</span>
-              </div>
-              <div><hr></div>
-              <div>
-                <span>材料部位：</span>
-                <span>左乳肿物</span>
-              </div>
-              <div><hr></div>
-              <div>
-                <span>大体所见：</span>
-              </div>
-              <div><hr></div>
-              <div>
-                <span>免疫组化</span>
-                <span>免疫组化</span>
-              </div>
-              <div><hr></div>
-              <div>
-                <span>初诊意见（或其他单位诊断意见）：</span>
-              </div>
-              <div><hr></div>
-              <div>
-                <span>病理图像：</span>
-                <div>
-                  <img>
+            <div class="in_box_bl inbox_0">
+              <div id="divTitle">
+                <div class="title">
+                  <span class="left">诊断报告</span>
+                  <a class="history">
+                    <div class="share right">分享</div>
+                  </a>
+                  <a class="history">
+                    <div class="print right">打印</div>
+                  </a>
+                  <a class="history">
+                    <div class="export right">导出</div>
+                  </a>
+                  <a class="history">
+                    <div class="show-history right">病史备注</div>
+                  </a>
                 </div>
               </div>
-              <div><hr></div>
-              <div>
-                <span>远程病理专家诊断意见：</span>
-                <span></span>
+              <div id="divReport">
+                <div class="logo-title">
+                  <span>病理远程会诊咨询意见书</span>
+                </div>
+                <div class="subtitle">
+                  <span>原病理号：17040601</span>
+                  <span>会诊号：20170406800</span>
+                </div>
+                <div class="hr-report">
+                  <hr>
+                </div>
+                <div class="">
+                  <table>
+                    <tr>
+                      <td>
+                        <label>姓名：</label>
+                        <span><s:property value="pathology.patientname"/></span>
+                      </td>
+                      <td>
+                        <label>性别：</label>
+                        <span><s:property value="pathology.patientSex"/></span>
+                      </td>
+                      <td>
+                        <label>年龄：</label>
+                        <span><s:property value="pathology.patientAge"/></span>
+                      </td>
+                      <td>
+                        <label>送检时间：</label>
+                        <span><s:property value="pathology.inspectionDate"/></span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        <label>送检单位：</label>
+                        <span>未处理</span>
+                      </td>
+                      <td>
+                        <label>切片&附件数：</label>
+                        <span>未处理</span>
+                      </td>
+                      <td>
+                        <label>诊断时间：</label>
+                        <span><s:property value="pathology.createTime"/></span>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
                 <div>
-                  <span>
-                    注：会诊资料局限，以上报告仅为所见切片的咨询意见，仅供原单位病理科参考。
-如治疗，请结合原单位临床资料综合分析。
-                  </span>
+                  <hr>
+                </div>
+                <div>
+                  <span>临床资料（手术所见、影像学、相关检验等）：</span>
+                  <div>
+                    <span><s:property value="pathology.clinicDiagnose"/></span>
+                  </div>
+                </div>
+                <hr>
+                <div>
+                  <span>材料部位：</span>
+                  <div>
+                    <span><s:property value="pathology.specimenName"/></span>
+                  </div>
+                </div>
+                <hr>
+                <div>
+                  <span>大体所见：</span>
+                  <div>
+                  <textarea id="generalSee" cols="10" rows="1" class="ckeditor">
+                    <s:property value="pathology.generalSee"/>
+                  </textarea>
+                  </div>
+                </div>
+                <hr>
+                <div>
+                  <span>免疫组化：</span>
+                  <div>
+                    <span>未处理免疫组化</span>
+                  </div>
+                </div>
+                <hr>
+                <div>
+                  <span>初诊意见（或其他单位诊断意见）：</span>
+                  <div>
+                    <span>未处理</span>
+                  </div>
+                </div>
+                <hr>
+                <div>
+                  <span>病理图像：</span>
+                  <div>
+                    <img alt="未处理">
+                  </div>
+                </div>
+                <hr>
+                <div>
+                  <span>远程病理专家诊断意见：</span>
+                  <div>
+                    <span>未处理</span>
+                  </div>
+                </div>
+                <div class="divFoot">
+                  <div style="float: left;">
+                    <span>注：</span>
+                  </div>
+                  <div style="float: left;">
+                    <span>会诊资料局限，以上报告仅为所见切片的咨询意见，仅供原单位病理科参考。</span>
+                    <br>
+                    <span>如治疗，请结合原单位临床资料综合分析。</span>
+                  </div>
+                </div>
+                <hr>
+                <div>
+                  <span>本报告由武汉千屏影像技术有限责任公司  </span>
+                  <span>袁主任</span>
+                  <span>专家会诊</span>
                 </div>
               </div>
-              <div><hr></div>
-              <div>
-                <span>本报告由武汉千屏影像技术有限责任公司  袁主任  专家会诊</span>
-              </div>
             </div>
-            <div class="fl_r_row">
-              <label><span class="red-star">*</span>请选择会诊分类<span style="color: red">（费用不同）</span>： </label>
-              <input title="hzlx" name="hzlx" type="radio" value="1">普通会诊
-              <input title="hzlx" name="hzlx" type="radio" value="2">冰冻会诊
-            </div>
-            <hr class="split-line">
-            <div class="fl_r_row">
-              <table class="fl_r_table">
-                <tr class="fl_r_table_tr">
-                  <td>
-                    <label>
-                      <span class="red-star">*</span>病<span class="half-word"></span>理<span class="half-word"></span>号
-                    </label>
-                    <input class="input-120" id="blh" type="text" value="<s:property value="pathology.pathologyNo"/>">
-                  </td>
-                  <td>
-                    <label for="age"><span class="red-star">*</span>年龄</label>
-                    <input class="input-30" id="age" type="text"
-                           value="<s:property value="pathology.patientAge"/>">
-                  </td>
-                  <td>
-                    <label for="sex"><span class="red-star">*</span>性别</label>
-                    <select id="sex">
-                      <s:if test='%{pathology.patientSex=="男"}'>
-                        <option value="男" selected>男</option>
-                      </s:if>
-                      <s:if test='%{pathology.patientSex=="女"}'>
-                        <option value="女" selected>女</option>
-                      </s:if>
-                    </select>
-                  </td>
-                  <td colspan="2">
-                    <label class="label-70" for="qcbw"><span class="red-star">*</span>取材部位</label>
-                    <input class="input-150" id="qcbw" type="text" value="<s:property value="pathology.specimenName"/>">
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label for="sfzh"><span class="half-word"></span>身份证号</label>
-                    <input class="input-150" id="sfzh" type="text" value="<s:property value="pathology.idCard"/>">
-                  </td>
-                  <td>
-                    <label for="mobile">
-                      <span class="half-word"></span>手<span class="half-word"></span>机<span class="half-word"></span>号
-                    </label>
-                    <input class="input-120" id="mobile" type="text" value="<s:property value="pathology.mobile"/>">
-                  </td>
-                  <td colspan="2">
-                    <label for="mobileRel"><span class="half-word"></span>家属电话</label>
-                    <input class="input-120" id="mobileRel" type="text" value="<s:property value="pathology.mobile"/>">
-                  </td>
-                  <td colspan="2">
-                    <label for="sjDate"><span class="red-star">*</span>送检时间</label>
-                    <input class="input-150" id="sjDate" type="text"
-                           value="<s:property value="pathology.inspectionDate"/>">
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label for="category"><span class="half-word"></span>系统分类</label>
-                    <input class="input-150" id="category" type="text" value="全科">
-                  </td>
-                  <td>
-                    <label for="sendCompany"><span class="half-word"></span>送检单位</label>
-                    <input class="input-120" id="sendCompany" type="text"
-                           value="<s:property value="pathology.hospitalname"/>">
-                  </td>
-                  <td colspan="2">
-                    <label for="sendKeshi"><span class="half-word"></span>送检科室</label>
-                    <input class="input-120" id="sendKeshi" type="text"
-                           value="<s:property value="pathology.hospitalname"/>">
-                  </td>
-                  <td>
-                    <label for="nation"><span class="half-word"></span>民族</label>
-                    <input class="input-50" id="nation" type="text" value="0">
-                  </td>
-                  <td>
-                    <label for="urgent">加急</label>
-                    <input class="input-20" id="urgent" type="text" value="0">
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label for="consultationNo">
-                      <span class="half-word"></span>会<span class="half-word"></span>诊<span class="half-word"></span>号
-                    </label>
-                    <input class="input-150" id="consultationNo" type="text" value="110101199901011234">
-                  </td>
-                  <td>
-                    <label for="admissionNo">
-                      <span class="half-word"></span>住<span class="half-word"></span>院<span class="half-word"></span>号
-                    </label>
-                    <input class="input-120" id="admissionNo" type="text" value="18600001111">
-                  </td>
-                  <td colspan="2">
-                    <label for="wardNo">
-                      <span class="half-word"></span>病<span class="half-word"></span>区<span class="half-word"></span>号
-                    </label>
-                    <input class="input-120" id="wardNo" type="text" value="18600002222">
-                  </td>
-                  <td colspan="2">
-                    <label for="roomNo">
-                      <span class="half-word"></span>病<span class="half-word"></span>房<span class="half-word"></span>号
-                    </label>
-                    <input class="input-150" id="roomNo" type="text" value="2017-01-01 12:12:12">
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="6">
-                    <hr class="split-line">
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <label for="clinicDiagnose"><span class="red-star">*</span>临床资料</label>
-                  </td>
-                  <td colspan="4">
-                    <label for="historySummary"><span class="half-word"></span>病史</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <textarea id="clinicDiagnose"><s:property value="pathology.clinicDiagnose"/></textarea>
-                  </td>
-                  <td colspan="4">
-                    <textarea id="historySummary"><s:property value="pathology.historySummary"/></textarea>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <label for="preliminaryOpinion"><span class="red-star">*</span>初诊意见</label>
-                  </td>
-                  <td colspan="4">
-                    <label for="ihc"><span class="half-word"></span>免疫组化</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <textarea id="preliminaryOpinion">初诊意见内容</textarea>
-                  </td>
-                  <td colspan="4">
-                    <textarea id="ihc">免疫组化内容</textarea>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <label for="generalSee"><span class="red-star">*</span>大体所见</label>
-                  </td>
-                  <td colspan="4">
-                    <label for="microscopeSee">
-                      <span class="half-word"></span>影像学检查</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <textarea id="generalSee" cols="10" rows="2" class="ckeditor">
-                      <s:property value="pathology.generalSee"/>
-                    </textarea>
-                  </td>
-                  <td colspan="4">
-                    <textarea id="microscopeSee" cols="10" rows="2" class="ckeditor">
-                      <s:property value="pathology.microscopeSee"/>
-                    </textarea>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <label for="memo"><span class="half-word"></span>备注</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <textarea id="memo"><s:property value="pathology.memo"/></textarea>
-                  </td>
-                </tr>
-              </table>
-              <div class="remarks" style="width: 500px;">
-                <span>注：</span>
-                <span style="color: red">“*”</span>
-                <span>为必填内容，病史与备注中的内容不在诊断结果中显示</span>
-              </div>
-            </div>
-            <hr class="split-line">
           </li>
           <li>
             <div class="upload-module">

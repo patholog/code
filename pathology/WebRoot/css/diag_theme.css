@@ -1,12 +1,23 @@
 /*diag theme相关的CSS*/
-.fl_r .title {
-  background: #ececec;
-}
-
-.fl_r .title span {
+.fl_r .title .left {
   color: #63B8FF;
 }
 
 .fl_r .title .icon_right {
+  border: solid 1px #7e8183;
+}
+
+.in_box_bl {
+  background: #ffffff;
+  border: 1px solid #dddddd;
+}
+
+.in_box_bl .title {
+  background: #ececec;
+}
+.in_box_bl .title .left {
+  color: #63B8FF;
+}
+.in_box_bl .title .icon_right {
   border: solid 1px #7e8183;
 }
