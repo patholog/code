@@ -227,7 +227,7 @@
         </ul>
         <ul class="fl_r">
           <li>
-            <div class="in_box_bl inbox_0">
+            <div class="in-box-bl inbox-0">
               <div id="divTitle">
                 <div class="title">
                   <span class="left">诊断报告</span>

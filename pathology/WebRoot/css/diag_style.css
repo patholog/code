@@ -2,18 +2,18 @@
 .right {
   float: right;
 }
-.in_box_bl {
+.in-box-bl {
   width: 100%;
   min-height: 58px;
   border-radius: 5px;
   margin-bottom: 30px;
 }
 
-.inbox_0 {
+.inbox-0 {
   position: relative;
 }
 
-.in_box_bl .title {
+.in-box-bl .title {
   width: 100%;
   height: 58px;
   cursor: pointer;
@@ -23,11 +23,11 @@
   line-height: 55px;
 }
 
-.in_box_bl .title span {
+.in-box-bl .title span {
   font-size: 20px;
 }
 
-.in_box_bl .inbox {
+.in-box-bl .inbox {
   width: 100%;
   min-height: 175px;
   padding-bottom: 6px;

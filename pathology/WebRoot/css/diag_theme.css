@@ -7,17 +7,23 @@
   border: solid 1px #7e8183;
 }
 
-.in_box_bl {
+.in-box-bl {
   background: #ffffff;
   border: 1px solid #dddddd;
 }
 
-.in_box_bl .title {
+.in-box-bl .title {
   background: #ececec;
 }
-.in_box_bl .title .left {
+
+.in-box-bl .title .left {
   color: #63B8FF;
 }
-.in_box_bl .title .icon_right {
+
+.in-box-bl .title .icon_right {
   border: solid 1px #7e8183;
+}
+
+.logo-title span {
+  color: #3176ec;
 }
