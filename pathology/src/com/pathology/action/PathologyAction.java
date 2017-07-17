@@ -61,7 +61,6 @@ public class PathologyAction extends BaseAction {
   public String getPathologyDto() {
     HttpServletRequest request = ServletActionContext.getRequest();
     String id = request.getParameter("id");
-    String diagStatus = request.getParameter("diagStatus");
     if (StringUtil.isBlank(id)) {
       logger.error("缺少必要参数id,请求参数为：" + JSON.toJSONString(request.getParameterMap()));
       return Constant.ERR;
