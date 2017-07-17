@@ -13,6 +13,7 @@ import com.pathology.entity.Pathology;
 import com.pathology.mapping.PathologyMapping;
 import com.pathology.service.IPathologyService;
 import com.pathology.util.Pages;
+import com.pathology.util.StringUtil;
 
 
 public class PathologyServiceImpl implements IPathologyService {
@@ -83,7 +84,10 @@ public class PathologyServiceImpl implements IPathologyService {
 
   @Override
   public PathologyDTO getPathologyByIdAndDiagStatus(String caseId, String diagStatus) {
-    String sql = basicSql + " WHERE a.id_case = '" + caseId + "' AND a.diag_status = '" + diagStatus + "'";
+    String sql = basicSql + " WHERE a.id_case = '" + caseId + "' ";
+    if(StringUtil.isNotBlank(diagStatus)){
+		sql+="AND a.diag_status = '" + diagStatus + "'";
+	}
     try {
       return (PathologyDTO) jdbcTemplate.queryForObject(sql, new PathologyMapping());
     } catch (Exception e) {
