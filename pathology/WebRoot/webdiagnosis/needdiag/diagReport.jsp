@@ -249,14 +249,11 @@
                 <div class="logo-title">
                   <span>病理远程会诊咨询意见书</span>
                 </div>
-                <div class="subtitle">
-                  <span>原病理号：17040601</span>
-                  <span>会诊号：20170406800</span>
+                <div class="pl-subtitle border-bom">
+                  <a>原病理号：<span id="pathologyNo">未处理</span></a>
+                  <a style="float: right;">会诊号：<span id="">未处理</span></a>
                 </div>
-                <div class="hr-report">
-                  <hr>
-                </div>
-                <div class="">
+                <div class="report-list border-bom">
                   <table>
                     <tr>
                       <td>
@@ -292,25 +289,22 @@
                     </tr>
                   </table>
                 </div>
-                <div>
-                  <hr>
-                </div>
-                <div>
-                  <span>临床资料（手术所见、影像学、相关检验等）：</span>
+                <div class="inbox-detail-list">
+                  <div class="report-title">临床资料（手术所见、影像学、相关检验等）：</div>
                   <div>
                     <span><s:property value="pathology.clinicDiagnose"/></span>
                   </div>
                 </div>
                 <hr>
-                <div>
-                  <span>材料部位：</span>
+                <div class="inbox-detail-list">
+                  <div class="report-title">材料部位：</div>
                   <div>
                     <span><s:property value="pathology.specimenName"/></span>
                   </div>
                 </div>
                 <hr>
-                <div>
-                  <span>大体所见：</span>
+                <div class="inbox-detail-list">
+                  <div class="report-title">大体所见：</div>
                   <div>
                   <textarea id="generalSee" cols="10" rows="1" class="ckeditor">
                     <s:property value="pathology.generalSee"/>
@@ -318,29 +312,29 @@
                   </div>
                 </div>
                 <hr>
-                <div>
-                  <span>免疫组化：</span>
+                <div class="inbox-detail-list">
+                  <div class="report-title">免疫组化：</div>
                   <div>
                     <span>未处理免疫组化</span>
                   </div>
                 </div>
                 <hr>
-                <div>
-                  <span>初诊意见（或其他单位诊断意见）：</span>
+                <div class="inbox-detail-list">
+                  <div class="report-title">初诊意见（或其他单位诊断意见）：</div>
                   <div>
                     <span>未处理</span>
                   </div>
                 </div>
                 <hr>
-                <div>
-                  <span>病理图像：</span>
+                <div class="inbox-detail-list">
+                  <div class="report-title">病理图像：</div>
                   <div>
                     <img alt="未处理">
                   </div>
                 </div>
                 <hr>
-                <div>
-                  <span>远程病理专家诊断意见：</span>
+                <div class="inbox-detail-list">
+                  <div class="report-title">远程病理专家诊断意见：</div>
                   <div>
                     <span>未处理</span>
                   </div>

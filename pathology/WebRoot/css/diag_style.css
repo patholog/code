@@ -2,6 +2,7 @@
 .right {
   float: right;
 }
+
 .in-box-bl {
   width: 100%;
   min-height: 58px;
@@ -33,27 +34,85 @@
   padding-bottom: 6px;
 }
 
+.in-box-bl a {
+  text-decoration: none;
+  color: #000;
+}
+
 .show-history {
   width: 98px;
   margin-right: 25px;
   color: #9d9d9d;
   background: url("../img/showhis2_1.png") no-repeat left center;
 }
+
 .export {
   width: 98px;
   margin-right: 25px;
   color: #9d9d9d;
   background: url("../img/showhis2_1.png") no-repeat left center;
 }
+
 .print {
   width: 98px;
   margin-right: 25px;
   color: #9d9d9d;
   background: url("../img/showhis2_1.png") no-repeat left center;
 }
+
 .share {
   width: 98px;
   margin-right: 25px;
   color: #9d9d9d;
   background: url("../img/showhis2_1.png") no-repeat left center;
+}
+
+.logo-title {
+  text-align: center;
+  width: 100%;
+  height: 36px;
+  position: relative;
+}
+
+.logo-title span {
+  font-size: 26px;
+  letter-spacing: 0.05em;
+}
+
+.pl-subtitle {
+  line-height: 50px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.report-list {
+  min-height: 24px;
+  padding-bottom: 10px;
+  font-size: 14px;
+  padding-left: 5px;
+  padding-top: 10px;
+}
+
+.report-list tr {
+  height: 25px;
+}
+
+.report-list tr td {
+  font-weight: bold;
+}
+
+.report-list tr td span {
+  font-weight: normal;
+}
+
+.inbox-detail-list {
+  width: 100%;
+  min-height: 34px;
+  margin-bottom: 20px;
+}
+
+.report-title {
+  width: 100%;
+  height: 34px;
+  font-weight: bold;
 }
