@@ -17,7 +17,7 @@ public interface IPathologyService {
 
   Pathology getPathology(Class clazz, String id);
 
-  PathologyDTO getPathologyByIdAndDiagStatus(String id, String diagStatus);
+  PathologyDTO getPathologyByIdAndDiagStatus(String id);
 
   void updatePathology(Pathology em);
 

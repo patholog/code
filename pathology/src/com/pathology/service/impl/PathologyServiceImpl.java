@@ -83,11 +83,8 @@ public class PathologyServiceImpl implements IPathologyService {
   }
 
   @Override
-  public PathologyDTO getPathologyByIdAndDiagStatus(String caseId, String diagStatus) {
-    String sql = basicSql + " WHERE a.id_case = '" + caseId + "' ";
-    if(StringUtil.isNotBlank(diagStatus)){
-		sql+="AND a.diag_status = '" + diagStatus + "'";
-	}
+  public PathologyDTO getPathologyByIdAndDiagStatus(String caseId) {
+    String sql = basicSql + " WHERE a.id_case = '" + caseId + "'";
     try {
       return (PathologyDTO) jdbcTemplate.queryForObject(sql, new PathologyMapping());
     } catch (Exception e) {

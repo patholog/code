@@ -66,11 +66,7 @@ public class PathologyAction extends BaseAction {
       logger.error("缺少必要参数id,请求参数为：" + JSON.toJSONString(request.getParameterMap()));
       return Constant.ERR;
     }
-    if (StringUtil.isBlank(diagStatus)) {
-      logger.error("缺少必要参数diagStatus,请求参数为：" + JSON.toJSONString(request.getParameterMap()));
-      return Constant.ERR;
-    }
-    pathology = pathologyService.getPathologyByIdAndDiagStatus(id, diagStatus);
+    pathology = pathologyService.getPathologyByIdAndDiagStatus(id);
     return "getPathologyDto";
   }
 
