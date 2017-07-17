@@ -74,7 +74,7 @@
 						         <td><s:property value="#collection.createTime"/></td>
 						         <td><s:property value="#collection.diagtime"/></td>
 						          <td align="center"><a href="#"  onclick="confirmDelete('${collection.collectionId }')">取消收藏</a>
-						          &nbsp; | &nbsp;	<a href="PathologyAction!getPathologyDto?diagStatus=7&id=${collection.caseId}" target="_blank">查看</a></td>
+						          &nbsp; | &nbsp;	<a href="PathologyAction!getPathologyDto?id=${collection.caseId}" target="_blank">查看</a></td>
 						          </td>
 						        </tr>
 						        </s:iterator>
