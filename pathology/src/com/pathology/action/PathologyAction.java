@@ -66,7 +66,7 @@ public class PathologyAction extends BaseAction {
       return Constant.ERR;
     }
     pathology = pathologyService.getPathologyByIdAndDiagStatus(id);
-    return "getPathologyDto";
+    return "diagReport";
   }
 
   public String getPathologyListToHas() {

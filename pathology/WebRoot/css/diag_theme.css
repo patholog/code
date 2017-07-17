@@ -1,0 +1,12 @@
+/*diag theme相关的CSS*/
+.fl_r .title {
+  background: #ececec;
+}
+
+.fl_r .title span {
+  color: #63B8FF;
+}
+
+.fl_r .title .icon_right {
+  border: solid 1px #7e8183;
+}

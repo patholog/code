@@ -125,6 +125,7 @@
 			<result name="pathologyshas">/webdiagnosis/hasdiag/hasdiag_list.jsp</result>
 			<result name="pathologysback">/webdiagnosis/retreatdiag/retreatdiag_list.jsp</result>
 			<result name="getPathologyDto">/webdiagnosis/needdiag/needdiag.jsp</result>
+			<result name="diagReport">/webdiagnosis/needdiag/diagReport.jsp</result>
 		</action>
 		<action name="DiaReportAction" class="com.pathology.action.DiaReportAction">
 			<result name="pathologyreport">/webdiagnosis/hasdiag/diagnosisreport.jsp</result>

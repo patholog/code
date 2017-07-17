@@ -1,0 +1,10 @@
+/*diag style相关的CSS*/
+.fl_r .title {
+  width: 100%;
+  height: 58px;
+  cursor: pointer;
+  border-bottom: 0;
+  border-radius: 5px 5px 0px 0px;
+  text-indent: 2em;
+  line-height: 55px;
+}
