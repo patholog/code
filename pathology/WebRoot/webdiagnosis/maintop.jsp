@@ -17,7 +17,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <%
          }
          Users user=SessionAgentManager.getSessionAgentBean();
-         String username=user==null?"":user.getUsername();
+         String username=user==null?"":user.getUsername() +" " +user.getRoleName();
+        
          %>
      
  
