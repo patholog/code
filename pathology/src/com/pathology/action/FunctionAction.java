@@ -14,6 +14,7 @@ import com.pathology.entity.Function;
 import com.pathology.service.IFunctionService;
 import com.pathology.util.Constant;
 import com.pathology.util.RandomNumbers;
+import com.pathology.util.RequestUtil;
 import com.pathology.util.SessionAgentManager;
 
 public class FunctionAction extends BaseAction {
@@ -74,12 +75,11 @@ public class FunctionAction extends BaseAction {
 					Function.class, hql) : functionservice.getByPage(1,
 					Function.class, hql);
 
-			HttpSession session = ServletActionContext.getRequest()
-					.getSession();
-			session.setAttribute("functionlist", list);
-			session.setAttribute("thisindex", index == 0 ? 1 : index);
+			HttpServletRequest request = RequestUtil.getRequest();
+			request.setAttribute("functionlist", list);
+			request.setAttribute("thisindex", index == 0 ? 1 : index);
 
-			session.setAttribute("count",
+			request.setAttribute("count",
 					functionservice.getAllFunction(Function.class, hql).size());
 			return SUCCESS;
 		} catch (Exception e) {

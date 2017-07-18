@@ -11,4 +11,6 @@ public interface IFunctionService {
 	public Function getFunction(Class clazz,String id) throws Exception;
 	public void updateFunction(Function em) throws Exception;
 	public void addFunction(Function em) throws Exception;
+	
+	public List<Function> getFunctionList(String id_role)throws Exception;
 }

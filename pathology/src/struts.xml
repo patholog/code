@@ -45,8 +45,9 @@
 			<!-- 将返回类型设置为json -->
 				<result name="success">/login.jsp</result>
 		</action>
-		<action name="login">
-			<result>/index.jsp</result>
+		<action name="login"  class="com.pathology.action.LoginAction"
+			method="login">
+			<result name="loginSuccess">/index.jsp</result>
 		</action>
 		<action name="test">
 			 <result>/webdiagnosis/viewpathologypic.jsp</result>			

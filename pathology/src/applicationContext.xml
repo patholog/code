@@ -91,6 +91,13 @@
 	<bean id="hospitalservice" class="com.pathology.service.impl.HospitalServiceImpl">
 		<property name="hospitaldao" ref="hospitaldao"></property>
 	</bean>
+	<!-- 登录action -->
+		<bean id="LoginAction" class="com.pathology.action.LoginAction" scope="prototype">
+		<property name="userservice" ref="userservice"></property>
+		<property name="rolesservice" ref="rolesservice"></property>
+		<property name="functionservice" ref="functionservice"></property>
+	</bean>
+	
 	<bean id="usersAction" class="com.pathology.action.UsersAction" scope="prototype">
 		<property name="userservice" ref="userservice"></property>
 	</bean>
@@ -150,6 +157,7 @@
 	
 	<bean id="functionservice" class="com.pathology.service.impl.FunctionServiceImpl">
 		<property name="functiondao" ref="functiondao"></property>
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
 	<bean id="functionAction" class="com.pathology.action.FunctionAction" scope="prototype">
 		<property name="functionservice" ref="functionservice"></property>

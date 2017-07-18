@@ -43,6 +43,7 @@ public class Users implements java.io.Serializable {
 	private String userType;
 	private String verification;
 	private String roleId;
+	private String roleName;
 
 	// Constructors
 
@@ -356,6 +357,14 @@ public class Users implements java.io.Serializable {
 
 	public void setRoleId(String roleId) {
 		this.roleId = roleId;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 }
