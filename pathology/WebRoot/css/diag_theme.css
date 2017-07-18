@@ -32,3 +32,11 @@
   border-bottom: solid 1px #bababa;
 }
 
+.in-box-bl .inbox .inbox-ul li {
+  border: solid 1px #d8dbe5;
+  background: #e6ebef;
+}
+
+.in-box-bl .inbox .inbox-ul li a .inbox-ul-msg {
+  background: #ffffff;
+}

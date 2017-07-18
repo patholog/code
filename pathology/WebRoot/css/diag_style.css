@@ -19,7 +19,7 @@
   height: 58px;
   cursor: pointer;
   border-bottom: 0;
-  border-radius: 5px 5px 0px 0px;
+  border-radius: 5px 5px 0 0;
   text-indent: 2em;
   line-height: 55px;
 }
@@ -43,28 +43,28 @@
   width: 98px;
   margin-right: 25px;
   color: #9d9d9d;
-  background: url("../img/showhis2_1.png") no-repeat left center;
+  background: no-repeat left center;
 }
 
 .export {
   width: 98px;
   margin-right: 25px;
   color: #9d9d9d;
-  background: url("../img/showhis2_1.png") no-repeat left center;
+  background: no-repeat left center;
 }
 
 .print {
   width: 98px;
   margin-right: 25px;
   color: #9d9d9d;
-  background: url("../img/showhis2_1.png") no-repeat left center;
+  background: no-repeat left center;
 }
 
 .share {
   width: 98px;
   margin-right: 25px;
   color: #9d9d9d;
-  background: url("../img/showhis2_1.png") no-repeat left center;
+  background: no-repeat left center;
 }
 
 .logo-title {
@@ -127,4 +127,50 @@
   min-height: 24px;
   padding-bottom: 20px;
   font-size: 14px;
+}
+
+.sep-20 {
+  height: 20px;
+}
+
+.in-box-bl .inbox .inbox-ul {
+  width: 780px;
+  /*margin-top: 25px;
+  padding-left: 20px;*/
+  zoom: 1;
+}
+
+.in-box-bl .inbox .inbox-ul li {
+  width: 170px;
+  min-height: 252px;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.in-box-bl .inbox .inbox-ul li a {
+  display: block;
+  width: 100%;
+  height: 117px;
+  position: relative;
+}
+
+.in-box-bl .inbox .inbox-ul li a img {
+  width: 88px;
+  height: 63px;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.font-12 {
+  font-size: 12px;
+}
+
+.font-14 {
+  font-size: 14px;
+}
+
+.text-box {
+  margin-left: 5px;
+  margin-right: 5px;
 }
