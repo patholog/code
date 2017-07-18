@@ -29,9 +29,9 @@
 }
 
 .in-box-bl .inbox {
-  width: 100%;
   min-height: 175px;
-  padding-bottom: 6px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .in-box-bl a {
@@ -108,11 +108,23 @@
 .inbox-detail-list {
   width: 100%;
   min-height: 34px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.inbox-detail-list span {
+  font-size: 14px;
 }
 
 .report-title {
   width: 100%;
   height: 34px;
   font-weight: bold;
+}
+
+.inbox-list {
+  width: 100%;
+  min-height: 24px;
+  padding-bottom: 20px;
+  font-size: 14px;
 }

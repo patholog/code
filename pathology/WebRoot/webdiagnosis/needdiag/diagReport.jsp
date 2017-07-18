@@ -63,7 +63,7 @@
 
     .fl_r {
       float: left;
-      /*width: 960px;*/
+      width: 900px;
       alignment: top;
     }
 
@@ -245,7 +245,7 @@
                   </a>
                 </div>
               </div>
-              <div id="divReport">
+              <div id="divReport" class="inbox">
                 <div class="logo-title">
                   <span>病理远程会诊咨询意见书</span>
                 </div>
@@ -339,7 +339,7 @@
                     <span>未处理</span>
                   </div>
                 </div>
-                <div class="divFoot">
+                <div id="divFoot" class="inbox-list border-bom">
                   <div style="float: left;">
                     <span>注：</span>
                   </div>
@@ -349,11 +349,16 @@
                     <span>如治疗，请结合原单位临床资料综合分析。</span>
                   </div>
                 </div>
-                <hr>
-                <div>
-                  <span>本报告由武汉千屏影像技术有限责任公司  </span>
-                  <span>袁主任</span>
-                  <span>专家会诊</span>
+                <div class="inbox-detail-list">
+                  <div class="left">
+                    <span>本报告由</span>
+                    <span>未处理</span>
+                    <span>袁主任</span>
+                    <span>专家会诊</span>
+                  </div>
+                  <div class="right">专家签字：
+                    <span id="proName">未处理名称</span>
+                  </div>
                 </div>
               </div>
             </div>
