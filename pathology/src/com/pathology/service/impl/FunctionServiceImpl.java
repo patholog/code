@@ -38,7 +38,7 @@ public class FunctionServiceImpl implements IFunctionService {
 	}
 
 	public List<Function> getFunctionList(String id_role)throws Exception{
-		String sql = " select f.name,f.url,f.id_function from function  f, role_function r where f.id_function = r.id_founction and  r.id_role = '"+id_role+"'";
+		String sql = " select f.name,f.url,f.id_function from function  f left join role_function r  on f.id_function = r.id_founction and  r.id_role = '"+id_role+"'";
 	    return jdbcTemplate.query(sql, new FunctionMapping());
 	}
 	
