@@ -13,7 +13,7 @@
   <body topmargin="150px">
   <center>
         <p></p>
-    	<form action="UserAction!login" method="post">
+    	<form action="login.action" method="post">
     	   <fieldset id="inputs" style="width: 400; height: 150" class="newStyle"><br>
     	      <legend>User Login</legend>
      User Name:<input type="text" class="login" value="lizheng" name="user.username" placeholder="Enter User Name" autofocus required><br><br>
@@ -29,5 +29,8 @@
               <input type="reset" value="Reset">
     	</form>
    </center>
+   
+    <p> <a id="register"
+					href="HospitalAction!allHostpital">注册</a></p>
   </body>
 </html>
