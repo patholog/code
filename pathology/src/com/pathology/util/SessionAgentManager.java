@@ -1,10 +1,13 @@
 package com.pathology.util;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
+import com.pathology.entity.Function;
 import com.pathology.entity.Users;
 
 /**
@@ -43,6 +46,41 @@ public class SessionAgentManager {
 		}
 		
 		//System.out.println("seession =1="+session.getId());
+	}
+	
+	
+	/**
+	 * 功能集合
+	 * @param session
+	 * @param functionList
+	 * @return
+	 */
+	public static void setSessionAgentFunctionList(String key,List<Function> functionlist){
+		
+		 try {
+			 ServletActionContext.getContext().getSession().put(key, functionlist);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+
+	
+	/**
+	 * 功能集合
+	 * @param session
+	 * @param functionList
+	 * @return
+	 */
+	public static List<Function> getSessionAgentFunctionList(String key){
+		
+		   try {
+			    return  (List<Function>)ServletActionContext.getContext().getSession().get(key);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return null;
 	}
 
 	/**

@@ -1,11 +1,15 @@
 package com.pathology.util;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.pathology.entity.Function;
 
 public class RequestUtil {
   
@@ -25,6 +29,7 @@ public class RequestUtil {
 		return request;
 	}
 	
+ 
 	
 	/**
 	 * 获取response

@@ -80,7 +80,7 @@ public class LoginAction extends BaseAction {
 				Roles role = rolesservice.getRoles(Roles.class, user.getRoleId());
 				user.setRoleName(role.getName());
 				List<Function> functionlist = functionservice.getFunctionList(user.getRoleId());
-				RequestUtil.getRequest().setAttribute("functionList", functionlist);
+				SessionAgentManager.setSessionAgentFunctionList("functionList", functionlist);
 				SessionAgentManager.setSessionAgentBean(user, "admin");
 				return "loginSuccess";
 			} else {
