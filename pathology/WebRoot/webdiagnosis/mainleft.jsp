@@ -8,7 +8,7 @@
           Function bean =(Function)list.get(i);
                 %>
                 <div name="leftmenu">
-                 <h3><a href="${path}<%=bean.getUrl()%>" target="body"><%=bean.getName() %></a></h3>
+                 <h3><a href="${path}/<%=bean.getUrl()%>"><%=bean.getName() %></a></h3>
                  </div>
                  <%
                 }
