@@ -1,0 +1,11 @@
+/*左侧导航*/
+.menu_left{position:fixed;top:95px;height:100%;margin-right:-182px; z-index: 98;}
+.menu_left ul{height:100%;width:182px;}
+.menu_left li{padding: 6px;box-sizing: border-box;}
+.menu_left li a div{position: relative;height: 40px;font-size: 16px;line-height: 40px;}
+.menu_left li a div i{display:inline-block;width:30px;height:30px;vertical-align:middle;margin:3px 5px 7px 5px;}
+.menu_left li.active a div,.menu_left li a:hover div{border-radius: 4px;}
+.menu_left li a div .buoy{  position: absolute;top: 11px;right: 10px;width:30px;font-size: 12px;text-align: center;line-height: 18px;border-radius: 4px;}
+.menu_left .contraction,.menu_left .contraction2{cursor:pointer;position: absolute;top:210px;width: 11px;height: 87px;}
+.menu_left .contraction{right: 0;}
+.menu_left .contraction2{left:0;display: none;}

@@ -1,0 +1,80 @@
+/*大背景*/
+html,body { min-width: 1000px;}
+.index_bg{ font-family: "微软雅黑";}
+#whole {min-width: 1000px;}
+/*右侧内容*/
+.content_right{float:right;width:100%;margin-top: 95px;}
+.index_right{margin-left:182px;position: relative;}
+.index_right .title {float: left;height: 40px; line-height: 40px;margin: 5px 0;padding-right:10px;font-size: 20px;}
+/*步骤指示条*/
+.new_step{height: 50px;padding-left:20px;box-sizing: border-box;}
+.new_step li{float:left;margin-right: 20px;padding: 10px 0;}
+.new_step li .step{min-width:90px;height: 30px;line-height: 30px;cursor:pointer;display: inline-block;padding: 0 15px 0 12px;border-radius:4px;}
+.new_step li .step span{text-align: center;margin-left: 23px;}
+/*右侧内容-搜索*/
+.index_search{padding:0 0 10px 20px;}
+.index_search li{float:left;height:26px;margin-top:12px;line-height: 26px;padding-right: 10px;font-size: 14px;}
+.index_search li.title_li{margin-top:0;}
+.index_search .index_search_btn{*height:26px;font-size: 14px;padding: 3px 7px;border-radius:3px;cursor: pointer;}
+.index_search input{font-family: "微软雅黑";font-size: 14px;}
+.index_search .keyword{padding:4px 6px;width:105px;height: 18px;}
+.index_search .time_s {width: 115px;height: 24px;padding-left:8px;border-radius:3px;vertical-align: middle;cursor: pointer;-webkit-appearance: textfield;}
+.search_terms{float:left;}
+.new_button{height: 26px;line-height: 26px;cursor: pointer;text-align: center;padding: 0 15px;border: none; border-radius: 3px;margin-right: 30px;}
+/*公共下拉框样式*/
+.index_search .styled_select,.index_search .select_hos{float:left; position: relative;border-radius: 3px;height:24px;zoom: 1;line-height: 24px;}
+.index_search .styled_select label,.index_search .select_hos label{display: inline-block;height: 24px;line-height: 24px;font-family: "微软雅黑";padding-left: 5px;font-size: 12px;overflow:hidden;word-break: break-all;margin-right: 28px;}
+.index_search .styled_select select,.index_search .select_hos select{position: absolute;bottom: 0;left: 0;padding: 0;border: none;margin: 0; opacity: 0;width: 100%;height: 24px;line-height: 24px; font-size:12px; font-family: "微软雅黑";cursor: pointer;filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);display: inline-block;zoom: 1;}
+/*下拉框样式*/
+.index_search .select_hospital,.index_search .select_hos{width: 115px;}
+.index_search .classification{width:80px;}
+.index_search .select_state,.index_search .select_ci{width:115px;}
+.index_search .select_ex{width:105px;}		
+/*右侧内容-表格background-color: #f1f6fa;background-color: #eaf1f8;*/
+.index_diagnosis_table{box-sizing: border-box;padding:10px 20px 50px;}
+.diagnosis_table{min-height: 26px;}
+.index_diagnosis_table .table{width: 100%;}
+.index_diagnosis_table .table tr{height:40px;font-size: 14px;text-align: center;}
+.index_diagnosis_table .table tr:first-child{font-size: 16px;border-bottom:0;}
+.index_diagnosis_table .table td.last a{text-decoration: underline;}
+.index_diagnosis_table .table td.last a.diagnosis{margin-right: 20px;}
+.index_diagnosis_table .table td.last a.sdiagnosis{margin-right: 5px;}
+/*评价*/
+.appraise{ padding:15px 20px 5px;}
+.appraise li{ float:left; position:relative; margin-right:30px;}
+.appraise li a{ display:block; padding:3px 15px; color:#fff; font-size:14px;}
+.appraise li.yellow a{ background-color:#fb9403;}
+.appraise li.yellow a:hover{ background-color:#e98c08;}
+.appraise li.green a{ background-color:#81b26b;}
+.appraise li.green a:hover{ background-color:#74a45e;}
+.appraise li.yellow span{ position:absolute; bottom:-5px; left:50%; margin-left:-3px; border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid #fb9403; color:#fff; width:0; height:0; line-height:0; font-size:0;}
+.appraise li.green span{ position:absolute; bottom:-5px; left:50%; margin-left:-3px; border-left:6px solid transparent; border-right:6px solid transparent; border-top:6px solid #81b26b; color:#fff; width:0; height:0; line-height:0; font-size:0;}
+.appraise li.yellow a:hover span{ border-top:6px solid #e98c08;}
+.appraise li.green a:hover span{ border-top:6px solid #74a45e;}
+/*ie下输入关键词样式*/
+.index_search input[placeholder]{font-size: 12px;}
+
+@media screen and (max-width:1280px) {
+/*10*/
+.index_diagnosis_table .table tr{height:40px;}	
+}
+
+@media screen and (min-width:1281px) and (max-width:1439px) {
+/*10*/
+.index_diagnosis_table .table tr{height:40px;}		
+}
+
+@media screen and (min-width:1440px) and (max-width:1678px) {
+/*15*/
+.index_diagnosis_table .table tr{height:40px;}		
+}
+
+@media screen and (min-width:1679px) and (max-width:1680px) {
+/*15*/
+.index_diagnosis_table .table tr{height:35px;}		
+}
+
+@media screen and (min-width:1681px) {
+/*20*/
+.index_diagnosis_table .table tr{height:35px;}		
+}

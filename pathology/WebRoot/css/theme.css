@@ -1,0 +1,315 @@
+span.red,span.red_star{color: #cb1d20;}
+.index_search input[placeholder]{color: #b2b4b6;}
+input.gray{color: #b2b4b6;}
+input.black{color:#333333;}
+
+/*comc_index_style.css--登录页*/
+body.login_page {background: #f1f5f7;}
+.login_page a:hover {color: #f96f33;}
+.login_header {border-top: solid 5px #1a7ed3;border-bottom: solid 1px #C4C5C6;box-shadow: 0px -3px 8px #000000;}
+.in_header .logo span {background: #47A3F2;color: #ffffff;}
+.in_header .moblie a {background: url(../img/icon_mobile.png) no-repeat left center;}
+.login_wallpaper {background: url(../img/comc_index_bgimg_02.jpg) no-repeat center;}
+.login {background: #ebf0f3;}
+.login_box .login_title{color: #1a7ed3;}
+.login_box .login_canvas .login_msgbd {border: solid 2px #e1e8ed;}
+.login_box .login_canvas .login_msg img {border-right: solid 1px #cfdae3;}
+.login_box .login_canvas .login_msg input {background: #f8fafb;}
+.login_box .login_canvas .login_msg input.login_button {background: #1b74c0;color: #ffffff;}
+.login_canvas .login_msg input.login_button:active { box-shadow:inset 0 2px 3px rgba(0,0,0,0.3);}
+.dialog-mask {background: url(../img/dialog_bg.png);_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod="scale", src="/weebox/src/../images/dialog_bg.png"); _background: none;}
+/*二维码弹出层*/
+.dialog-mask {background: #000;}
+/*低版本浏览器，版本过低提示*/
+.browser_note{background-color: white; color:#7b7777;}
+.browser_note a{color:#2d64b3;}
+
+/*comc_head_style.css--公共头部样式*/
+.header {background:#468cf9; border-bottom: solid 1px #468cf9;}
+.header .nav .logo p.left {background: #6c9ef4;color: #ffffff;}
+.header .nav .logo .news_roll {color: #ffffff;}
+.header .nav .user_msg .logo_home a {color: #ffffff;}
+.header .nav .user_msg .logo_home a.on_home,.header .nav .user_msg .logo_home a:hover {color: #ffffff; background: #3a4f61;box-shadow: 0 1px 1px rgba(255,255,255,0.4);}
+.header .nav .user_msg .msg_box {color: #ffffff;}
+.header .nav .user_msg .msg_box .user_box {border: solid 1px #cdcdcd;}
+.header .nav .user_msg .msg_box .user_box_index span { color: #ffffff; }
+.header .nav .user_msg .msg_box .user_box_index .user_inbox { background: #ffffff;}
+.header .nav .user_msg .msg_box .user_box_index .user_inbox ul li {border-bottom: solid 1px #e9e8e8;}
+.header .nav .user_msg .msg_box .user_box_index .user_inbox ul li a{color: #929596;}
+.header .nav .user_msg .msg_box .user_box_index .user_inbox ul li:hover { background: #74a5f7;}
+.header .nav .user_msg .msg_box .user_box_index .user_inbox ul li:hover a { color: #ffffff;}
+.s_language{color: #ffffff;}
+.l_language{color: #5090f6;}
+.i_language{color: #373535;}
+.wallpaper {background: #fafafa;}
+.c_content {color: #000000;}
+.footer p {color: #ffffff;}
+.s_language span:hover,.i_language span:hover{ text-decoration:underline;}
+/*头部新增*/
+.nav2_item li{color: #ffffff;}
+.nav2_item li a{color: #ffffff;}
+.nav2_item li a:hover{ font-weight:bold;}
+.nav2_item1{background: url(../img/head_nav_icon1.png) no-repeat left center;}
+.nav2_item2{background: url(../img/head_nav_icon2.png) no-repeat left center;}
+.nav2_item3{background: url(../img/head_nav_icon3.png) no-repeat left center;}
+.nav2_item4{background: url(../img/head_nav_icon4.png) no-repeat left center;}
+.nav2_item5{background: url(../img/head_nav_icon5.png) no-repeat left center;}
+
+/*comc_left_nav_style.css--公共左侧导航*/
+.menu_left ul{background-color: #e5f4fd;}
+.menu_left li a div{color: #7e7e7e;}
+.menu_left li a div i{background-image:url("../img/index_icons.png");background-repeat:no-repeat;background-size:120px auto;}
+.menu_left li a div .buoy{background-color: #f26925;color: #ffffff;}
+.menu_left .icon_index_0 i{background-position:0 -30px;}
+.menu_left .icon_index_1 i{background-position:-30px -30px;}
+.menu_left .icon_index_2 i{background-position:-60px -30px;}
+.menu_left .icon_index_3 i{background-position:-90px -30px;}
+.menu_left .icon_index_4 i{background-position:0 -90px;}
+.menu_left .icon_index_5 i{background-position:-30px -90px;}
+.menu_left .icon_index_6 i{background-position:-60px -90px;}
+.menu_left .icon_index_7 i{background-position:-90px -90px;}
+.menu_left .icon_index_8 i{background-position:0 -150px;}
+.menu_left .icon_index_9 i{background-position:-30px -150px;}
+.menu_left .icon_index_10 i{background-position:-60px -150px;}
+.menu_left .active a div,.menu_left li a:hover div{color: #ffffff; background-color:#5f98f6;}
+.menu_left .active .icon_index_0 i,.menu_left a:hover .icon_index_0 i{background-position:0 0;}
+.menu_left .active .icon_index_1 i,.menu_left a:hover .icon_index_1 i{background-position:-30px 0;}
+.menu_left .active .icon_index_2 i,.menu_left a:hover .icon_index_2 i{background-position:-60px 0;}
+.menu_left .active .icon_index_3 i,.menu_left a:hover .icon_index_3 i{background-position:-90px 0;}
+.menu_left .active .icon_index_4 i,.menu_left a:hover .icon_index_4 i{background-position:0 -60px;}
+.menu_left .active .icon_index_5 i,.menu_left a:hover .icon_index_5 i{background-position:-30px -60px;}
+.menu_left .active .icon_index_6 i,.menu_left a:hover .icon_index_6 i{background-position:-60px -60px;}
+.menu_left .active .icon_index_7 i,.menu_left a:hover .icon_index_7 i{background-position:-90px -60px;}
+.menu_left .active .icon_index_8 i,.menu_left a:hover .icon_index_8 i{background-position:0 -120px;}
+.menu_left .active .icon_index_9 i,.menu_left a:hover .icon_index_9 i{background-position:-30px -120px;}
+.menu_left .active .icon_index_10 i,.menu_left a:hover .icon_index_10 i{background-position:-60px -120px;}
+.menu_left div.contraction{background: url("../img/icon_index_left2.png") no-repeat;}
+.menu_left div.contraction2{background: url(../img/icon_index_right2.png) no-repeat;}
+
+/*comc_diagnosis_wait_style.css--通用右侧模块*/
+/*右侧内容*/
+.index_right .index_search .title {color: #808385;border-right: 1px solid #d9dfea;}
+/*右侧内容-搜索*/
+.index_search{background-color: #ececec;border-bottom: 1px solid #dbdbdb;}
+.index_search li{color: #808385;}
+.index_search .index_search_btn{color: #fff;background-color: #57d4be;}
+.index_search .index_search_btn:hover{ background-color:#47c7b0;}
+.index_search .time_s {color: #b2b4b6;border: 1px solid #e7e9ea;background: url(../img/calende.jpg) no-repeat 98px center #fff;}
+.new_button{background: #5f98f6;color: #ffffff;}
+.new_button:hover{ background:#4485f1;}
+/*搜索条件栏--公共下拉框样式*/
+.styled_select,.select_hos{background:#ffffff url("../img/drop-down.jpg") no-repeat 100% 100%;border:1px solid #e7e9ea;}
+.styled_select label,.select_hos label{color: #b2b4b6;}
+.styled_select select,.select_hos select{color: #b2b4b6;}
+/*右侧内容-表格*/
+.index_diagnosis_table .table tr{background-color: #ffffff;color: #666666;border-bottom:1px solid #d8dbdf;}
+.index_diagnosis_table .table tr:hover{background-color: #a0c8ff;color: #ffffff;}
+.index_diagnosis_table .table tr:first-child{background-color: #ececec;color: #333333;}
+.index_diagnosis_table .table td.urgent {color: #f96a39;}
+.index_diagnosis_table .table td.last a{color: #5090f6;}
+.index_diagnosis_table .table tr.choose_tr { background:#8EAAD4; color:#ffffff;}
+
+/*comc_diagnosis_wait_in_style.css--查看诊断报告*/
+/*查看诊断报告--左侧导航*/
+.in_box_nav .nav {border-left: solid 1px #c3c3c4;}
+.in_box_nav .nav ul li p { background: url(../img/left2_nav_dot2.png) no-repeat;}
+.in_box_nav .nav ul li a { color: #919191;}
+.in_box_nav .nav ul li a .in_box_nav_icon1 {background: url(../img/icon2_1.png) no-repeat 15px 0;}
+.in_box_nav .nav ul li a .in_box_nav_icon2 {background: url(../img/icon2_2.png) no-repeat 15px 0;}
+.in_box_nav .nav ul li a .in_box_nav_icon3 {background: url(../img/icon5_2.png) no-repeat 15px 0;}
+.in_box_nav .nav ul li a .in_box_nav_icon4 {background: url(../img/icon2_3.png) no-repeat 15px 0;}
+.in_box_nav .nav ul li a .in_box_nav_icon0 {background: url(../img/icon2_4.png) no-repeat 15px 0;}
+.in_box_nav .nav li.in_box_nav_on .in_box_nav_icon1,.in_box_nav .nav li:hover .in_box_nav_icon1 {background: url(../img/icon_1.png) no-repeat 15px 0;}
+.in_box_nav .nav li.in_box_nav_on .in_box_nav_icon2,.in_box_nav .nav li:hover .in_box_nav_icon2 {background: url(../img/icon_2.png) no-repeat 15px 0;}
+.in_box_nav .nav li.in_box_nav_on .in_box_nav_icon4,.in_box_nav .nav li:hover .in_box_nav_icon4 {background: url(../img/icon_3.png) no-repeat 15px 0;}
+.in_box_nav .nav li.in_box_nav_on .in_box_nav_icon0,.in_box_nav .nav li:hover .in_box_nav_icon0 {background: url(../img/icon_4.png) no-repeat 15px 0;}
+.in_box_nav .nav li.in_box_nav_on .in_box_nav_icon3,.in_box_nav .nav li:hover .in_box_nav_icon3 {background: url(../img/icon_5.png) no-repeat 15px 0;}
+.in_box_nav .nav ul li.in_box_nav_on p,.in_box_nav .nav ul li:hover p {background: url(../img/left2_nav_dot1.png) no-repeat;}
+.in_box_nav .nav ul li.in_box_nav_on a,.in_box_nav .nav ul li:hover a {background:#5c97f7;border-radius:4px;color: #ffffff;}
+/*右侧诊断报告、..*/
+.in_box_bl {background: #ffffff;border:1px solid #dddddd;}
+.in_box_bl .title {background: #ececec;}
+.in_box_bl .title span {color: #3277ed;}
+.border_bom { border-bottom: solid 1px #bababa;}
+.inbox_title span {color: #3277ed;}
+.in_box_bl .inbox .inbox_ul li {border: solid 1px #d8dbe5; background: #e6ebef;}
+.in_box_bl .inbox .inbox_ul li a .inbox_ul_msg {background: #ffffff;}
+.in_box_bl .title p { color: #ffffff;background: url(../img/icon_3.png) no-repeat 0px 17px;}
+.in_box_bl .inbox_add .add_title .left font {color: #1f7ed0;}
+.in_box_bl .inbox_add .add_title .right a {background: url(../img/icon_chg.png) no-repeat;color: #6b6b70;}
+.in_box_bl .inbox_add .in_text {border: solid 1px #c8c8c8;}
+.in_box_bl .inbox_add .in_text textarea {background: none;}
+.inbox_add .hos_chg {border-bottom: solid 1px #bbbbbb; color: #474747;}
+.inbox_add .hos_chg .left .icon_right {border: solid 1px #7e8183; }
+.inbox_add .hos_chg .left .icon_right.on { background: url(../img/icon_right.png) no-repeat;}
+.inbox_add .hos_chg .right .pro_select {background: url(../img/select_down.png) no-repeat #ffffff 76px 0px; border: solid 1px #c9c9c9;}
+.hos_text ul li {color: #181717; }
+.wait_in_button input, .wait_in_button2 input{background: #1f7ed0; color: #fffefe;}
+.wait_in_button input:hover, .wait_in_button2 input:hover{background: #1672c2;}
+.inbox_file_look {background: rgba(57,81,138,0.75);}
+.inbox_file_look .icon_down { color: #ffffff;}
+.f_stamp{background:#fff url("../img/icon_pr_on.png") no-repeat 9px center;}
+.f_export{background:#fff url("../img/icon_out_on.png") no-repeat 9px center;}
+.return_top{background:#fff url('../img/top_button.png') no-repeat;background-position: -3px -53px;}
+.f_stamp_text,.f_export_text,.return_top_text{color: #395878;}
+ul.addimg_box li{border:1px solid #dbdbdb;}
+.add_img .delete_img{color: #ffffff;background-color: #17a0e7;}
+
+/*comc_user_style.css--账号设置页*/
+.chgpw_box_title{background: #6196f3;color: #ffffff;border:1px solid #dddddd;border-bottom:0;}
+.chgpw_box {background: #ffffff;border:1px solid #dddddd;border-top:0;}
+.chgpw_box .user_message .title {color: #18353d;background:none;border-bottom: solid 2px #6196f3;}
+.chgpw_box .user_message li {color: #4b4b4b;}
+.select_city{background: #ffffff;border: 1px solid #dcdcdc;}
+.select_city label{color: #b2b4b6;}
+.select_city select{color: #a5a5a5;}
+.message_box input {color: #4b4b4b;border: 1px solid #dcdcdc;background-color: #ffffff;}
+.signature_btn input{ color: #fff;background-color: #3987e2;}
+.preserve_btn input{color: #fff;background-color: #5c97f7;}
+input.calendar {color: #b9b9b9;background: #ffffff url("../img/calendar.jpg") no-repeat 120px center;}
+.upload_explain{color: #8c8c8c;}
+
+/*comc_diagnosis_wait_on_style.css--医院端查看诊断报告*/
+.logo_title span {color: #3176ec;}
+.tab_right li{border:1px solid #fff;}
+.tab_right li.curr,.tab_right li:hover{background-color: #5c97f7;box-shadow: 0px 0px 3px rgba(0,0,0,0.3) inset,0px 1px 1px rgba(200,200,200,0.3);}
+.tab_right li.curr a,.tab_right li:hover a{color:#ffffff;}
+.tab_right li a,.stamp,.export,.share{color: #9d9d9d;}
+.stamp{background: url("../img/icon2_pr1.png") no-repeat left center;}
+.stamp:hover{color: #4482ec;background: url("../img/icon2_pr2.png") no-repeat left center;}
+.export{background: url("../img/icon2_out1.png") no-repeat left center;}
+.export:hover{color: #4482ec;background: url("../img/icon2_out2.png") no-repeat left center;}
+.share{background: url("../img/icon2_share1.png") no-repeat left center;}
+.share:hover{color: #4482ec;background: url("../img/icon2_share2.png") no-repeat left center;}
+.con_add{color: #3176ec;border:1px solid #3176ec;background-color: #fff;}
+#inbox_3 .massges input.massges_btn{background: #1f7ed0;color: #fffefe;}
+#inbox_4 .massges input.massges_btn{background: #1f7ed0;color: #fffefe;}
+#inbox_3 .massges input.massges_btn:hover,#inbox_4 .massges input.massges_btn:hover{ background:#1672c2;}
+.showhistory{color: #9d9d9d;background: url("../img/showhis2_1.png") no-repeat left center;}
+.showhistory:hover{color: #4482ec;background: url("../img/showhis2_2.png") no-repeat left center;}
+
+/*comc_diagnosis_new_style.css--新建列表-病例信息*/
+.new_step{background-color: #ececec;border-bottom: 1px solid #dbdbdb;}
+.new_step li .step{color: #ffffff;background: #9ac0f9 url("../img/arrow_tip.png") no-repeat 28px top;}
+.new_step li .step:hover,.new_step li .step.curr{color: #fff;background-color: #5f98f6;}
+.new_step li .step span a { color: #ffffff;}
+.information,.information2{border-top:2px solid #9ac0f9;background-color: #ffffff;color: #060606;}
+.information input,.information2 textarea{color: #a5a5a5;border:1px solid #dcdcdc;background-color: #ffffff;}
+.information .tick{border: 1px solid #dcdcdc;}
+.information .tick_on { background: url(../img/tick.jpg) no-repeat;}
+.information .state_four li input.calendar {background: #ffffff url("../img/calendar.jpg") no-repeat 130px center;}
+.information2 {border-bottom:2px solid #9ac0f9;}
+.information2 .remarks{background-color: #e4e4e4;border: 1px solid #dcdcdc;}
+.inf_btn{color: #fff;background-color: #5f98f6;}
+.inf_btn:hover{ background-color:#4485f1;}
+
+/*comc_diagnosis_new_uload_style.css--新建列表-上传*/
+.upload_module .title{color:#3987e2;border-bottom:0;}
+.upload_module .table tr{color:#666666;border-bottom:1px solid #dfdfdf;background-color: #ffffff;}
+.upload_module .table tr.choose_tr { background:#a0c8ff; color:#ffffff;}
+.order_number{color: #fff;background-color: #c6c6c6;}
+td.operate a {color: #5090f6;}
+.upload_module .table tr:first-child{color: #333333;background-color: #ececec;}
+.upload_module .table tr:first-child div{border-left:1px solid #ababab;}
+.um_btn_bg{background-color: #ffffff;}
+.pagination_btn{border-top:2px solid #58bbd7;}
+.chgpro_select li {color: #555555;}
+.selected_title{color: #4c93e5;}
+.selected_name{color: #fff;background-color: #609ee7;}
+.choose{background: url(../img/choose_no.png) no-repeat;}
+/*.choose:hover,*/ .choose_on {background: url(../img/choose_yes.png) no-repeat;}
+.bd_bottom{border-bottom: 2px solid #58bbd7;}
+
+/*新建-选择专家--公共下拉框*/
+.styled_select,.select_hos{background:#ffffff url("../img/drop-down.jpg") no-repeat 100% 100%;border:1px solid #e7e9ea;}
+.styled_select label,.select_hos label,
+.styled_select select,.select_hos select{color: #b2b4b6;}
+
+/*comc_diagnosis_return_style.css--选择诊断专家浮窗*/
+.detail_text{background-color: #fff;color: #6d90df;border:1px solid #d8dbdf;-moz-box-shadow: 0 0 10px rgba(0,0,0,.12);-webkit-box-shadow: 0 0 10px rgba(0,0,0,.12);box-shadow: 0 0 10px rgba(0,0,0,.12);}
+.con_title span{background: url(../img/nav-angle-up.png) no-repeat center center;}
+
+/*comc_linkus_style.css--联系我们*/
+.linkus .wallpaper,.register .wallpaper{background: url(../img/in_login_bg2.jpg) no-repeat center;}
+.in_content .left {color: #ffffff;}
+.in_content .left .title {border-bottom: solid 1px #ffffff;}
+
+/*comc_register_style.css--注册页*/
+.rg_title{background: url("../img/rg_logo.png") no-repeat top center;}
+.rg_box ul p{color: #ffffff;}
+.rg_box ul input{background-color: #fff;color: #8b8c8c;}
+.rg_pw{background:#fff url("../img/pw_hidden.png") no-repeat right center;}
+.rg_pw2{background:#fff url("../img/pw_show.png") no-repeat right center;}
+.rg_btn input{color: #fff;text-shadow: 1px 1px 1px rgba(0,0,0,0.4);}
+.rg_btn input.return{background: none repeat scroll 0% 0% transparent;border:1px solid #fff;}
+.rg_btn input.return:hover{background: #c5d6e4;color: #386793;text-shadow: none;}
+.rg_btn input.submit{background: #d9b836;box-shadow: 0 -1px 1px rgba(0,0,0,0.4) inset;}
+.rg_btn input.submit:hover{background-color: #ceaf33;box-shadow: 0 1px 1px rgba(0,0,0,0.4) inset;}
+.register .wallpaper{background: url(../img/in_login_bg2.jpg) no-repeat center;}
+/*注册页下拉框*/
+.rg_box ul .styled_select{background:#fff url("../img/drop-down3.png") no-repeat right center;}
+.rg_box ul .styled_select label{color: #8b8c8c;}
+.rg_box ul .styled_select select{color: #8b8c8c;}
+
+/*comc_dynamic_style.css
+.content {background: url(../img/comcsoft_index_wallpaper.png) #eaf1f8;}
+.title {border-bottom: solid 3px #b0c9ee;}
+.title nav ul li:hover { border-bottom: solid 3px #54588a;}
+.list ul li {border-bottom: dashed 1px #b5b5b5;}
+.list ul li a:hover { color: #f96f33;}
+.list ul li font {color: #467ac1;}
+*/
+
+/*comc_page_style.css*/
+.page{background-color: #f1f6fa;border-bottom:1px solid #d8dbdf;}
+.page .p_num a.pn_num,.page .p_num .pn_break{color: #8b8d8f;}
+.page .p_num a.curr,.page .p_num .pn_num:hover{color: #ffffff;background-color: #8eaad4;}
+.page a.pn_prev{background: url("../img/pn-prev.png") no-repeat center;}
+.page a.pn_next{background: url("../img/pn-next.png") no-repeat center;}
+.page .p_num em{color: #605e5f;}
+.page .styled_select{border:1px solid #e7e9ea;background:#ffffff url("../img/drop-down.jpg") no-repeat 100% 100%;}
+.page .styled_select select{color: #b2b4b6;background: none repeat scroll 0% 0% transparent;}
+.select_page{color: #b2b4b6;border:1px solid #e7e9ea;background:#ffffff url("../img/drop-down.jpg") no-repeat 100% 100%;}
+.page .p_skip{color: #514e4e;}
+
+/*账号设置页、新建病例信息--公共下拉框*/
+.select_box{background: #ffffff url("../img/drop-down2.jpg") no-repeat 100% 100%;border:1px solid #dcdcdc;}
+.select_box label{color: #b2b4b6;}
+.select_box select{color: #a5a5a5;}
+
+/*分页样式*/
+.page_num{background: #ececec;color: #666666;}
+.page_num .input1{border: 1px solid #0084D0;background-color: #ffffff;}
+.page_num a{color: #666666;}
+.page_num .btn1{color:#666666;background:none;}
+.page_num .prev{color:#666666;}
+.page_num .next{color:#666666;}
+#pagerSection  table tbody  tr td{color:#666666;}
+#pagerAppendix table tbody  tr td{color:#666666;}
+.page_num  table tbody  tr td{color: #666666;}
+
+/*新首页头部*/
+.index_header_left a{color:#00c59e;}
+.index_header_right{color:#373535;}
+.index_login{background-color: #3fb3e8;}
+.login_box .title{color:#2f84e5;}
+.index_login .login_canvas .login_msg{border:1px solid #a1cadd; background-color:#e4f5fc;}
+.login_msg .login_id, .login_msg .login_pass{border-right:1px solid #a1cadd;}
+.index_login .login_box .login_canvas .login_msg input{background-color:#e4f5fc;border:none;}
+.login_canvas .noborder{border:none;}
+.noborder input{border:none;}
+.login_canvas .login_button{background-color: #008fd5; color:#fefefe;}
+.login_canvas .login_button:hover{background-color: #0381be;}
+.forgotten_pass{color:#706e6e;}
+.register{color:#ffa200;}
+.login_id_words, .login_pass_words{color:#808385}
+/*首页浅灰背景色*/
+.index_content1, .index_coopration{background-color: #eef1f2;}
+/*首页小字颜色*/
+.short_line, .index_coop_icons, .index_download, .index_download a{color:#626262;}
+/*首页底部配色*/
+.index_bottom, .index_bottom a{background-color:#373c44; color:#9b9ea2;}
+.index_bottom p{border-bottom:1px solid #9B9EA2;}
+.index_bottom .last_line{border:none;}
+.index_bottom .bottom_words{border:none;}
+

@@ -1,0 +1,9 @@
+/*右侧内容-分页*/
+.page{height: 45px;font-size: 14px;line-height: 45px;text-align: center;}
+.page .p_num a.pn_num,.page .p_num .pn_break{padding:0 5px;}
+.page .p_num a.curr,.page .p_num .pn_num:hover{border-radius: 3px;}
+.page a.pn_prev,.page a.pn_next{width: 26px;height: 26px;padding: 13px;margin: 0 8px;}
+.page .styled_select{width:60px;height:26px;line-height: 23px;vertical-align: middle;overflow: hidden;border-radius: 3px;box-sizing: border-box;display: inline-block;}
+.page .styled_select select{height: 23px;line-height: 23px;vertical-align: baseline;font-family: "微软雅黑";padding-left:5px;border:0; }
+.select_page{ cursor: pointer; width:88px;height:26px;padding-left:7px;border-radius: 3px;box-sizing: border-box;}
+.page .p_skip{margin-right: 30px;}

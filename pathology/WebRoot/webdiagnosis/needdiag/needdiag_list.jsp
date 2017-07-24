@@ -7,8 +7,15 @@
 <head>
   <title>病理远程会诊平台-待诊断</title>
   <c:set var="path" value="${pageContext.request.contextPath }"/>
-  <link rel="stylesheet" type="text/css" href="${path }/css/style.css"/>
-  <script type="text/javascript" src="${path }/CKFinder/ckfinder/ckfinder.js"></script>
+<link rel="stylesheet" type="text/css" href="${path }/css/comc_diagnosis_wait_style.css"/>
+<link rel="stylesheet" type="text/css" href="${path }/css/comc_head_style.css"/>
+<link rel="stylesheet" type="text/css" href="${path }/css/comc_left_nav_style.css"/>
+<link rel="stylesheet" type="text/css" href="${path }/css/comc_page_style.css"/>
+<link rel="stylesheet" type="text/css" href="${path }/css/datepicker.css"/>
+<link rel="stylesheet" type="text/css" href="${path }/css/public_flat.css"/>
+<link rel="stylesheet" type="text/css" href="${path }/css/theme.css"/>
+<link rel="stylesheet" type="text/css" href="${path }/css/WdatePicker.css"/>
+<link rel="stylesheet" type="text/css" href="${path }/css/weebox.css"/>
   <script type="text/javascript" src="${path }/js/treeView.js"></script>
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
@@ -21,71 +28,60 @@
 </head>
 
 <body>
-<div id="header">
-  <%@include file="/webdiagnosis/maintop.jsp" %>
-</div>
-<table id="main" cellpadding="0" cellspacing="0" border="0">
-  <tr>
-    <td id="leftmenu">
-      <%@include file="/webdiagnosis/mainleft.jsp" %>
-    </td>
-    <td id="contents">
-      <s:form action="PathologyAction!getPathologyListToNeed" theme="simple"
-              target="mainFrame">
-        <table cellspacing="0" cellpadding="0" width="100%" border="0"
-               class="toolstable">
-          <tr>
-            <td width="86%" style="text-align:left;"><label>患者姓名：</label>
-              <input type="text" name="hospital.name" id="hostpital_name" value="" style="width:120px;"/>
-              <label>送检单位：</label>
-              <input type="text" name="hospital.code" id="hostpital_code" value="" style="width:120px;"/>
-              <input name="searchButton" id="searchButton" onclick="" type="submit"
-                     style="width:80px;background:url(css/img-blue/search.gif) 8px top no-repeat;"
-                     value="  搜索"/>
-            </td>
-          </tr>
-        </table>
-      </s:form>
-      <table class="listtable" cellspacing="0" cellpadding="0" width="100%">
-        <tbody>
-        <tr>
-          <th width="10%">病理号</th>
-          <th width="10%">病人姓名</th>
-          <th width="15%">材料部位</th>
-          <th width="10%">病例状态</th>
-          <th width="10%">系统分类</th>
-          <th width="20%">送检单位</th>
-          <th width="15%">申请时间</th>
-          <th width="10%">操作</th>
-        </tr>
-        <s:iterator value="pathologys" id="pathology" status="11">
-          <tr>
-            <td><s:property value="#pathology.pathologyNo"/></td>
-            <td><s:property value="#pathology.patientname"/></td>
-            <td><s:property value="#pathology.patientname"/></td>
-            <td><s:property value="#pathology.username"/></td>
-            <td><s:property value="#pathology.content"/></td>
-            <td><s:property value="#pathology.hospitalname"/></td>
-            <td><s:property value="#pathology.createTime"/></td>
-            <td align="center">
-              <a href="PathologyAction!getPathologyDto?diagStatus=2&id=<s:property value="#pathology.caseId"/>">查看</a>
-            </td>
-          </tr>
-        </s:iterator>
-
-        <tr class="lightrow">
-          <td colspan="8">
-            <div id="pageDir">
-              <%=request.getAttribute("page") != null ? request.getAttribute("page") : "" %>
-            </div>
-          </td>
-        </tr>
-
-        </tbody>
-      </table>
-    </td>
-  </tr>
-</table>
+<div class="header">
+		<%@include file="/webdiagnosis/maintop.jsp"%>
+	</div>
+	<div class="menu_left">
+		<ul id="Left1_MenuList">
+		<%@include file="/webdiagnosis/mainleft.jsp" %>
+		</ul>
+	</div>
+	
+	<div class="content_right">
+		<div class="index_right" style="min-height: 494px;">
+			<div class="index_diagnosis_table">
+                 <div class="diagnosis_table">
+                        <table class="table">
+					        <tbody>
+					        <tr>
+					          <th width="10%">病理号</th>
+					          <th width="10%">病人姓名</th>
+					          <th width="15%">材料部位</th>
+					          <th width="10%">病例状态</th>
+					          <th width="10%">系统分类</th>
+					          <th width="20%">送检单位</th>
+					          <th width="15%">申请时间</th>
+					          <th width="10%">操作</th>
+					        </tr>
+					        <s:iterator value="pathologys" id="pathology" status="11">
+					          <tr>
+					            <td><s:property value="#pathology.pathologyNo"/></td>
+					            <td><s:property value="#pathology.patientname"/></td>
+					            <td><s:property value="#pathology.patientname"/></td>
+					            <td><s:property value="#pathology.username"/></td>
+					            <td><s:property value="#pathology.content"/></td>
+					            <td><s:property value="#pathology.hospitalname"/></td>
+					            <td><s:property value="#pathology.createTime"/></td>
+					            <td align="center">
+					              <a href="PathologyAction!getPathologyDto?diagStatus=2&id=<s:property value="#pathology.caseId"/>">查看</a>
+					            </td>
+					          </tr>
+					        </s:iterator>
+					
+					        <tr class="lightrow">
+					          <td colspan="8">
+					            <div id="pageDir">
+					              <%=request.getAttribute("page") != null ? request.getAttribute("page") : "" %>
+					            </div>
+					          </td>
+					        </tr>
+					
+					        </tbody>
+					   </table>
+                  </div>
+			   </div>
+			</div>
+		</div>
 
 </body>
 </html>

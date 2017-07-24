@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html;charset=utf-8"
 	pageEncoding="utf8"%>
-	<%@ page language="java" import="com.pathology.entity.Function"%>
-	<%String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -11,7 +8,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <title>病理远程会诊平台-收藏病例</title>
 <c:set var="path" value="${pageContext.request.contextPath }" />
-<link rel="stylesheet" type="text/css" href="${path }/css/style.css" />
+<link rel="stylesheet" type="text/css" href="${path }/css/comc_diagnosis_wait_style.css"/>
+<link rel="stylesheet" type="text/css" href="${path }/css/comc_head_style.css"/>
+<link rel="stylesheet" type="text/css" href="${path }/css/comc_left_nav_style.css"/>
+<link rel="stylesheet" type="text/css" href="${path }/css/comc_page_style.css"/>
+<link rel="stylesheet" type="text/css" href="${path }/css/datepicker.css"/>
+<link rel="stylesheet" type="text/css" href="${path }/css/public_flat.css"/>
+<link rel="stylesheet" type="text/css" href="${path }/css/theme.css"/>
+<link rel="stylesheet" type="text/css" href="${path }/css/WdatePicker.css"/>
+<link rel="stylesheet" type="text/css" href="${path }/css/weebox.css"/>
 <script type="text/javascript"
 	src="${path }/CKEditor/ckeditor/ckeditor.js"></script>
 <script type="text/javascript"
@@ -28,31 +33,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body>
-	<div id="header">
+
+	<div class="header">
 		<%@include file="/webdiagnosis/maintop.jsp"%>
 	</div>
-	<table id="main" cellpadding="0" cellspacing="0" border="0">
-		<tr>
-			<td id="leftmenu"><%@include file="/webdiagnosis/mainleft.jsp"%>
-			</td>
-			<td id="contents">
-				 <s:form action="CollectionAction!getCollectionList" theme="simple"
-					target="mainFrame">
-					<table cellspacing="0" cellpadding="0" width="100%" border="0"
-						class="toolstable">
-						<tr>
-							<td width="86%" style="text-align:left;"><label>患者姓名：</label>
-								<input type="text" name="hospital.name" id="hostpital_name" value="" style="width:120px;" /> <label>送检单位：</label> 
-								<input type="text" name="hospital.code" id="hostpital_code" value="" style="width:120px;" /> 
-								<input name="searchButton" id="searchButton" onclick="" type="submit" style="width:80px;background:url(css/img-blue/search.gif) 8px top no-repeat;"
-									value="  搜索" />
-							</td>
-				
-						</tr>
-					</table>
-				</s:form>
-				<table class="listtable" cellspacing="0" cellpadding="0"
-					width="100%">
+	<div class="menu_left">
+		<ul id="Left1_MenuList">
+		<%@include file="/webdiagnosis/mainleft.jsp" %>
+		</ul>
+	</div>
+
+	<div class="content_right">
+		<div class="index_right" style="min-height: 494px;">
+			<div class="index_diagnosis_table">
+                 <div class="diagnosis_table">
+                        <table class="table">
 					<tbody>
 						<tr>
 				          <th width="10%">病理号</th>
@@ -91,9 +86,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 					</tbody>
 				</table>
-			</td>
-		</tr>
-	</table>
+                  </div>
+			  </div>
+			</div>
+		</div>
 
 </body>
 </html>

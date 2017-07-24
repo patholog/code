@@ -8,9 +8,9 @@
          for(int i =0;i<list.size();i++){
           Function bean =(Function)list.get(i);
                 %>
-                <div name="leftmenu">
-                 <h3><a href="${path}/<%=bean.getUrl()%>"  target="_self" ><%=bean.getName() %></a></h3>
-                 </div>
+                
+                <li><a href="${path}/<%=bean.getUrl()%>"  target="_self" ><div class="icon_index_0"><i></i><%=bean.getName() %></div></a></li>
+                
                  <%
                 }
             }

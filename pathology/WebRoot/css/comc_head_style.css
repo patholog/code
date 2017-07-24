@@ -1,0 +1,78 @@
+/*html,body{height:100%}*/
+body { width: 100%;}
+.pos_r{position:relative;}
+/*#whole { width: 1280px;} border-left: solid 2px #cdcdcd;*/
+.header { width: 100%; min-width:1000px; height: 94px; background-size: cover;  position: fixed; top: 0; left: 0; z-index: 99;*z-index: 999;}
+.header .nav {height: 40px; padding-top: 13px;}
+.header .nav .logo { min-width:411px;}
+.header .nav .logo img.left { width: 411px;}
+.header .nav .logo p.left { width: 52px; height: 20px; font-size: 13px; border-radius: 2px; line-height: 20px; margin-left: 10px; margin-top: 14px;}
+.header .nav .logo .news_roll { width: 320px; margin-top: 13px;overflow:hidden;}
+.header .nav .logo .news_roll img { float: left; width: 20px; margin-right: 10px;}
+.header .nav .logo .news_roll p { width: 290px; height: 21px; font-size: 14px; line-height: 22px;}
+.header .nav .logo .news_roll p marquee { width: 286px; height: 21px;}
+.header .nav .user_msg { min-width:354px;*width:240px; margin-top: 10px;}
+.header .nav .user_msg .logo_home { width: 70px; height: 27px;}
+.header .nav .user_msg .logo_home a { display: block; width: 50px; height: 17px; font-size: 12px; padding: 5px 10px;}
+.header .nav .user_msg .logo_home a img { width: 16px; height: 15px;}
+.header .nav .user_msg .logo_home a span { text-indent: 0.5em;}
+.header .nav .user_msg .logo_home a.on_home,.header .nav .user_msg .logo_home a:hover { display: block; width: 50px; height: 17px; border-radius: 20px; font-size: 12px; padding: 5px 10px;}
+.header .nav .user_msg .msg_box { min-width: 210px;*width: 240px; height: 27px;  font-size: 14px;position: relative;}
+.header .nav .user_msg .msg_box span.t_left { float:right;margin-right: 10px; margin-top: 3px;}
+.header .nav .user_msg .msg_box .user_box { text-indent: 1.5em;height: 23px; border-radius: 5px; line-height: 22px; cursor: pointer; padding-right:10px;}
+.header .nav .user_msg .msg_box .user_box_index { position: absolute; width: 115px; min-height: 190px; right: -5px; top: 20px; z-index: 9999;}
+.header .nav .user_msg .msg_box .user_box_index span { height: 4px; font-size: 16px; overflow: hidden;}
+.header .nav .user_msg .msg_box .user_box_index .user_inbox { min-height: 186px; width: 100%; border-radius: 5px; margin-top: -5px; padding: 7px 0 0 0;}
+.header .nav .user_msg .msg_box .user_box_index .user_inbox ul { width: 100%; min-height: 180px; padding-bottom: 5px;}
+.header .nav .user_msg .msg_box .user_box_index .user_inbox ul li { height: 44px; font-size: 14px; line-height: 45px;}
+.header .nav .user_msg .msg_box .user_box_index .user_inbox ul li a { width:100%; height:44px; display:block;}
+.header .nav .user_msg .msg_box .user_box_index .user_inbox ul li.noborder { border-bottom: none;}
+.wallpaper { width: 100%; height: 100%;position: fixed; z-index: -1; top: 0; left: 0;}
+.mask { width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index:10}
+.c_content { width: 100%; text-align: center; font-size: 12px; position: absolute; bottom: 10px;}
+.c_content a:hover{ text-decoration:underline;}
+.manual{color:#999; text-decoration :underline; padding-left:10px;}
+.footer {position:absolute;bottom:0;padding: 0 0 8px;width: 100%; min-width:994px;}
+.footer p {line-height: 25px; text-align: center;}
+.s_language{font-size:12px;padding-top:4px;cursor: pointer;}
+.l_language{font-size:12px;cursor: pointer;position:absolute; bottom:120px; left:30px;}
+.go_home{font-size:14px;color:#fff;background: url("../img/icon_xiaowu.png") 0px 6px no-repeat;padding-left:20px;padding-right: 30px; padding-top:4px; margin-left:35px;}
+/*ÐÂÔö*/
+.header .nav ,.header .nav2{ min-width: 960px;}
+.nav2_item li{float: left;font-size: 14px;line-height: 40px;padding:0 40px 0 25px;}
+.header .nav2 .user_msg { min-width:210px;*width:240px; margin-top: 20px;}
+.slogan{width:156px;height:15px;}
+.nav2_item li span{font-size:18px;padding:0 4px;}
+.header .nav2 .user_msg .logo_home { width: 70px; height: 27px;}
+.header .nav2 .user_msg .logo_home a { display: block; width: 50px; height: 17px; font-size: 12px; padding: 5px 10px;}
+.header .nav2 .user_msg .logo_home a img { width: 16px; height: 15px;}
+.header .nav2 .user_msg .logo_home a span { text-indent: 0.5em;}
+.header .nav2 .user_msg .logo_home a.on_home,.header .nav2 .user_msg .logo_home a:hover { display: block; width: 50px; height: 17px; border-radius: 20px; font-size: 12px; padding: 5px 10px;}
+.header .nav2 .user_msg .msg_box { min-width: 210px;*width: 240px; height: 27px;  font-size: 14px;position: relative;}
+.header .nav2 .user_msg .msg_box span.t_left { float:right;margin-right: 10px; margin-top: 3px;}
+.header .nav2 .user_msg .msg_box .user_box { text-indent: 1.5em;height: 23px; border-radius: 5px; line-height: 22px; cursor: pointer; padding-right:10px;}
+.header .nav2 .user_msg .msg_box .user_box_index { position: absolute; width: 115px; min-height: 190px; right: -5px; top: 20px; z-index: 9999;}
+.header .nav2 .user_msg .msg_box .user_box_index span { height: 4px; font-size: 16px; overflow: hidden;}
+.header .nav2 .user_msg .msg_box .user_box_index .user_inbox { min-height: 186px; width: 100%; border-radius: 5px; margin-top: -5px; padding: 7px 0 0 0;}
+.header .nav2 .user_msg .msg_box .user_box_index .user_inbox ul { width: 100%; min-height: 180px; padding-bottom: 5px;}
+.header .nav2 .user_msg .msg_box .user_box_index .user_inbox ul li { height: 44px; font-size: 14px; line-height: 45px;}
+.header .nav2 .user_msg .msg_box .user_box_index .user_inbox ul li a { width:100%; height:44px; display:block;}
+.header .nav2 .user_msg .msg_box .user_box_index .user_inbox ul li.noborder { border-bottom: none;}
+
+@media screen and (max-width:1280px) {
+	.header .nav ,.header .nav2{ width: 95%;padding-left:2.5%; padding-right:2.5%;}
+	.footer p { font-size: 12px}
+	
+}
+
+@media screen and (min-width:1281px) and (max-width:1680px) {
+	.header .nav ,.header .nav2{ width: 95%;padding-left:2.5%; padding-right:2.5%;}
+	.footer p { font-size: 14px;}
+	
+}
+
+@media screen and (min-width:1681px) and (max-width:1920px) {
+	.header .nav ,.header .nav2{ width: 95%;padding-left:2.5%; padding-right:2.5%;}
+	.footer p { font-size: 16px;}
+	
+}
