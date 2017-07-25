@@ -372,14 +372,24 @@
               </div>
               <div class="inbox">
                 <div class="sep-20"></div>
-                <ul class="inbox-ul">
+                <ul class="inbox-ul inbox-ul-check">
+                  <li>
+                    <a>
+                      <img alt="haha">
+                      <div class="inbox-ul-msg">
+                        <div class="inbox-span font-14">切片</div>
+                        <div class="inbox-span font-12">时间</div>
+                        <div class="inbox-span font-12">免疫组化</div>
+                      </div>
+                    </a>
+                  </li>
                   <li>
                     <a>
                       <img>
-                      <div class="text-box">
-                        <div class="font-14">切片</div>
-                        <div class="font-12">时间</div>
-                        <div class="font-12">免疫组化</div>
+                      <div class="inbox-ul-msg">
+                        <div class="inbox-span font-14">切片</div>
+                        <div class="inbox-span font-12">时间</div>
+                        <div class="inbox-span font-12">免疫组化</div>
                       </div>
                     </a>
                   </li>
@@ -388,10 +398,28 @@
             </div>
           </li>
           <li>
-            <div>填写诊断内容3</div>
-          </li>
-          <li>
-            <div>留言内容4</div>
+            <div class="in-box-bl inbox-0">
+              <div>
+                <div class="title">
+                  <span class="left">留言内容</span>
+                </div>
+              </div>
+              <div class="inbox">
+                <div class="sep-20"></div>
+                <div class="inbox-add">
+                  <div class="in-text comments">
+                    <textarea class="leave-word" placeholder="请输入留言"></textarea>
+                  </div>
+                  <div class="message">
+                    <div class="left">
+                      <input value="1" type="radio" checked><span>所有专家可见</span>
+                      <input value="0" type="radio" checked><span>部分专家可见</span>
+                    </div>
+                    <input name="createMessage" type="button"/>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
         </ul>
         <%--<div style="clear: both;"></div>--%>
@@ -403,9 +431,9 @@
 <script>
   $(function () {
     // 禁用所有input
-    $('input').attr("disabled", "true");
-    $('textarea').attr("disabled", "true");
-    $('select').attr("disabled", "true");
+//    $('input').attr("disabled", "true");
+//    $('textarea').attr("disabled", "true");
+//    $('select').attr("disabled", "true");
     //设置标杆
     var _line = parseInt($(window).height() / 3);
     $(window).scroll(function () {
