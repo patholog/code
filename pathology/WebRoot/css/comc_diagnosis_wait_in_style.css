@@ -57,7 +57,7 @@
 .in_box_nav .nav ul li a .in_box_nav_icon1,
 .in_box_nav .nav ul li a .in_box_nav_icon2,
 .in_box_nav .nav ul li a .in_box_nav_icon3, .in_box_nav .nav ul li a .in_box_nav_icon4 {
-  float: right;
+  float: left;
   height: 20px;
   padding: 0 25px 16px 25px;
 }
