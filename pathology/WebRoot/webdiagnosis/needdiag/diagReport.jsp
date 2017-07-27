@@ -26,6 +26,7 @@
   <script type="text/javascript" src="${path }/js/treeView.js"></script>
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
+  <script type="text/javascript" src="${path }/js/scrolllisten.js"></script>
 </head>
 <body>
 <form>
@@ -215,8 +216,8 @@
                     <div class="report_title">病理图像：</div>
                     <div id="divCaseList" class="case_list border_bom">
                       <div class="show_img">
-                        <a class="go" href="../CutImage/2017/4/20170407093319_8007_1.png" rel="gallery">
-                          <img alt="" src="../CutImage/2017/4/20170407093319_8007.png"></a>
+                        <a class="go" href="../upload/img/2017/4/20170407093319_8007_1.png" rel="gallery">
+                          <img alt="" src="../upload/img/2017/4/20170407093319_8007_1.png"></a>
                         <p>可见核分裂像</p>
                       </div>
                       <div class="clear"></div>
@@ -332,8 +333,41 @@
       </div>
     </div>
   </div>
+  <div id="iviewer" class="wrapper" style="display: none;">
+    <div class="loader" style="display: none;"></div>
+    <div id="viewer" class="viewer iviewer_cursor"
+         style="width: 1249px; height: 230px; margin-left: 50px; margin-top: 50px; overflow: hidden; display: block;">
+      <img src="../upload/img/2017/4/20170407093254_8007_1.png"
+           style="position: absolute; top: 0px; left: 349px; max-width: none; width: 551px; height: 414px; transform: rotate(0deg);">
+      <div class="iviewer_zoom_in iviewer_common iviewer_button"></div>
+      <div class="iviewer_zoom_out iviewer_common iviewer_button"></div>
+      <div class="iviewer_zoom_zero iviewer_common iviewer_button"></div>
+      <div class="iviewer_zoom_fit iviewer_common iviewer_button"></div>
+      <div class="iviewer_zoom_status iviewer_common">100%</div>
+      <div class="iviewer_rotate_left iviewer_common iviewer_button"></div>
+      <div class="iviewer_rotate_right iviewer_common iviewer_button"></div>
+      <a href="../upload/img/2017/4/20170407093254_8007_1.png" target="_blank" download="">
+        <div class="iviewer_download iviewer_common iviewer_button"></div>
+      </a></div>
+    <div class="info">
+      <div id="topBar">
+        <a href="../upload/img/2017/4/20170407093254_8007_1.png" id="prevLink" class="go"
+           style="width: 40px; visibility: visible;"><img src="../img/iviewer/btn_prev.png"></a>
+        <p id="imageCount"> (2/3)</p>
+        <a href="../upload/img/2017/4/20170407093254_8007_1.png" id="nextLink" class="go"
+           style="width: 40px; visibility: visible;"><img src="../img/iviewer/btn_next.png"></a>
+        <ul class="controls">
+          <li class="close"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </form>
-<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="${path }/js/jquery.min.js"></script>
+<script type="text/javascript" src="${path }/js/iviewer/jqueryui.js"></script>
+<script type="text/javascript" src="${path }/js/iviewer/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="${path }/js/iviewer/jquery.iviewer.js"></script>
+<script type="text/javascript" src="${path }/js/iviewer/main.js"></script>
 <script>
   $(function () {
     // 禁用所有input

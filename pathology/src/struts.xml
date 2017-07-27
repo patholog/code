@@ -1,135 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
-	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
-	<constant name="struts.devMode" value="true"></constant>
-	<constant name="struts.custom.i18n.resources" value="messages"></constant>
-	<constant name="struts.objectFactory" value="spring"></constant>
-	<package name="ajax" extends="json-default">
-	
-	    <global-results>   
-              
-              <result name="exception">/exception.jsp</result>
-               <result name="err">/err.jsp</result>
-              <result name="notfound">/notfound.jsp</result>
-         </global-results>
-		<action name="email_*" class="com.pathology.action.EmailAction"
-			method="{1}">
-			<!-- 将返回类型设置为json -->
-			<interceptor-ref name="json" />
+  <constant name="struts.devMode" value="true"/>
+  <constant name="struts.custom.i18n.resources" value="messages"/>
+  <constant name="struts.objectFactory" value="spring"/>
+  <constant name="struts.action.excludePattern" value="/upload/img/.*?"/>
+  <package name="ajax" extends="json-default">
 
-			<result type="json"></result>
-		</action>
-		<action name="login2" class="com.pathology.action.LoginAction"
-			method="login">
-			<!-- 将返回类型设置为json -->
-			<interceptor-ref name="json" />
-			<result type="json"></result>
-		</action>
-	</package>
+    <global-results>
 
-	<package name="actions" extends="struts-default">
-		<global-results>
-			<result name="loginput">/loginput.jsp</result>
-		</global-results>
-		<action name="*">
-			<result>/{1}.jsp</result>
-		</action>
-		<action name="daizhenduan">
-			<result>/webdiagnosis/needdiag/needdiag.html</result>
-		</action>
-		
-	  <action name="loginout" class="com.pathology.action.LoginAction"
-			method="LoginOut">
-			<!-- 将返回类型设置为json -->
-				<result name="success">/login.jsp</result>
-		</action>
-		<action name="login"  class="com.pathology.action.LoginAction"
-			method="login">
-			<result name="loginSuccess">/index.jsp</result>
-		</action>
-		<action name="test">
-			 <result>/webdiagnosis/viewpathologypic.jsp</result>			
-		</action>
+      <result name="exception">/exception.jsp</result>
+      <result name="err">/err.jsp</result>
+      <result name="notfound">/notfound.jsp</result>
+    </global-results>
+    <action name="email_*" class="com.pathology.action.EmailAction"
+            method="{1}">
+      <!-- 将返回类型设置为json -->
+      <interceptor-ref name="json"/>
 
-		<!-- 后台管理部分 <action name="admin_*" method="{1}" class="com.flp.actions.UsersAction"> 
-			<result name="loginSuc">/admin/AdminIndex.jsp</result> <result name="loginFal">/admin/AdminLogin.jsp</result> 
-			<result name="logoutSuc">/admin/AdminLogin.jsp</result> <result name="addAdminSuc">/admin/AdminIndex.jsp</result> 
-			<result name="failure">/Error.jsp</result> <result name="userList">/admin/UserList.jsp</result> 
-			<result name="findAllUser" type="redirectAction">admin_findAllUser</result> 
-			<result name="allCat">/admin/TypeList.jsp</result> <result name="catList" 
-			type="redirectAction">admin_catList</result> </action> -->
-		<action name="UserAction" class="com.pathology.action.UsersAction"
-			method="userList">
+      <result type="json"/>
+    </action>
+    <action name="login2" class="com.pathology.action.LoginAction"
+            method="login">
+      <!-- 将返回类型设置为json -->
+      <interceptor-ref name="json"/>
+      <result type="json"/>
+    </action>
+  </package>
 
-			<result name="success"> /manage/user/userlist.jsp</result>
-			<result name="deletesuccess" type="redirectAction">UserAction!userList</result>
-			<result name="updatesuccess" type="redirectAction">UserAction!userList</result>
-			<result name="edit"> /manage/user/update_user.jsp</result>
-			<result name="check"> /manage/user/check_user.jsp</result>
-			<result name="registsuccess"> /webdiagnosis/login.jsp</result>
-			<result name="loginSuccess">/index.jsp</result>
-			<result name="manageLoginSuccess">/manage/manage.jsp</result>
-			<result name="err">/err.jsp</result>
-		</action>
-		<action name="HospitalAction" class="com.pathology.action.HospitalAction">
-			<result name="success"> /manage/hospital/hospitallist.jsp</result>
-			<result name="deletesuccess" type="redirectAction">HospitalAction!hospitalList
-			</result>
-			<result name="updatesuccess" type="redirectAction">HospitalAction!hospitalList
-			</result>
-			<result name="edit"> /manage/hospital/update_hospital.jsp</result>
-			<result name="regist"> /webdiagnosis/regist.jsp</result>
-			<result name="err">/err.jsp</result>
-		</action>
-		<action name="FunctionAction" class="com.pathology.action.FunctionAction">
-			<result name="success"> /manage/function/functionlist.jsp</result>
-			<result name="deletesuccess" type="redirectAction">FunctionAction!functionList
-			</result>
-			<result name="updatesuccess" type="redirectAction">FunctionAction!functionList
-			</result>
-			<result name="edit"> /manage/function/update_function.jsp</result>
-			<result name="err">/err.jsp</result>
-			<result name="addroles">/manage/roles/add_roles.jsp</result>
-		</action>
-		<action name="RolesAction" class="com.pathology.action.RolesAction">
-			<result name="success"> /manage/roles/roleslist.jsp</result>
-			<result name="deletesuccess" type="redirectAction">RolesAction!rolesList
-			</result>
-			<result name="updatesuccess" type="redirectAction">RolesAction!rolesList
-			</result>
-			<result name="edit"> /manage/roles/update_roles.jsp</result>
-			<result name="err">/err.jsp</result>
-		</action>
-		<!-- 留言 -->
-		<action name="MessageAction" class="com.pathology.action.MessageAction">
+  <package name="actions" extends="struts-default">
+    <global-results>
+      <result name="loginput">/loginput.jsp</result>
+    </global-results>
+    <action name="*">
+      <result>/{1}.jsp</result>
+    </action>
+    <action name="daizhenduan">
+      <result>/webdiagnosis/needdiag/needdiag.html</result>
+    </action>
 
-			<result name="messages"> /webdiagnosis/message/message_list.jsp</result>
-			<result name="messageInfo"> /webdiagnosis/message/messageInfo.jsp</result>
-			 <result name="err">/err.jsp</result>
-		</action>
-		<!--  收藏 -->
-		<action name="CollectionAction" class="com.pathology.action.CollectionAction">
-			<result name="err">/err.jsp</result>
-			<result name="collections">/webdiagnosis/collectdiag/collectdiag_list.jsp</result>
-		</action>
-		<!--  收藏 -->
-		<action name="ShareAction" class="com.pathology.action.ShareAction">
-			<result name="err">/err.jsp</result>
-			<result name="shares">/webdiagnosis/diagshare/diagshare_list.jsp</result>
-		</action>
-		<!-- 病例表 -->
-		<action name="PathologyAction" class="com.pathology.action.PathologyAction">
-			<result name="err">/err.jsp</result>
-			<result name="pathologysneed">/webdiagnosis/needdiag/needdiag_list.jsp</result>
-			<result name="pathologyshas">/webdiagnosis/hasdiag/hasdiag_list.jsp</result>
-			<result name="pathologysback">/webdiagnosis/retreatdiag/retreatdiag_list.jsp</result>
-			<result name="getPathologyDto">/webdiagnosis/needdiag/needdiag.jsp</result>
-			<result name="diagReport">/webdiagnosis/needdiag/diagReport.jsp</result>
-		</action>
-		<action name="DiaReportAction" class="com.pathology.action.DiaReportAction">
-			<result name="pathologyreport">/webdiagnosis/hasdiag/diagnosisreport.jsp</result>
-		</action>
-	</package>
+    <action name="loginout" class="com.pathology.action.LoginAction"
+            method="LoginOut">
+      <!-- 将返回类型设置为json -->
+      <result name="success">/login.jsp</result>
+    </action>
+    <action name="login" class="com.pathology.action.LoginAction"
+            method="login">
+      <result name="loginSuccess">/index.jsp</result>
+    </action>
+    <action name="test">
+      <result>/webdiagnosis/viewpathologypic.jsp</result>
+    </action>
+
+    <!-- 后台管理部分 <action name="admin_*" method="{1}" class="com.flp.actions.UsersAction">
+      <result name="loginSuc">/admin/AdminIndex.jsp</result> <result name="loginFal">/admin/AdminLogin.jsp</result>
+      <result name="logoutSuc">/admin/AdminLogin.jsp</result> <result name="addAdminSuc">/admin/AdminIndex.jsp</result>
+      <result name="failure">/Error.jsp</result> <result name="userList">/admin/UserList.jsp</result>
+      <result name="findAllUser" type="redirectAction">admin_findAllUser</result>
+      <result name="allCat">/admin/TypeList.jsp</result> <result name="catList"
+      type="redirectAction">admin_catList</result> </action> -->
+    <action name="UserAction" class="com.pathology.action.UsersAction"
+            method="userList">
+
+      <result name="success">/manage/user/userlist.jsp</result>
+      <result name="deletesuccess" type="redirectAction">UserAction!userList</result>
+      <result name="updatesuccess" type="redirectAction">UserAction!userList</result>
+      <result name="edit">/manage/user/update_user.jsp</result>
+      <result name="check">/manage/user/check_user.jsp</result>
+      <result name="registsuccess">/webdiagnosis/login.jsp</result>
+      <result name="loginSuccess">/index.jsp</result>
+      <result name="manageLoginSuccess">/manage/manage.jsp</result>
+      <result name="err">/err.jsp</result>
+    </action>
+    <action name="HospitalAction" class="com.pathology.action.HospitalAction">
+      <result name="success">/manage/hospital/hospitallist.jsp</result>
+      <result name="deletesuccess" type="redirectAction">HospitalAction!hospitalList
+      </result>
+      <result name="updatesuccess" type="redirectAction">HospitalAction!hospitalList
+      </result>
+      <result name="edit">/manage/hospital/update_hospital.jsp</result>
+      <result name="regist">/webdiagnosis/regist.jsp</result>
+      <result name="err">/err.jsp</result>
+    </action>
+    <action name="FunctionAction" class="com.pathology.action.FunctionAction">
+      <result name="success">/manage/function/functionlist.jsp</result>
+      <result name="deletesuccess" type="redirectAction">FunctionAction!functionList
+      </result>
+      <result name="updatesuccess" type="redirectAction">FunctionAction!functionList
+      </result>
+      <result name="edit">/manage/function/update_function.jsp</result>
+      <result name="err">/err.jsp</result>
+      <result name="addroles">/manage/roles/add_roles.jsp</result>
+    </action>
+    <action name="RolesAction" class="com.pathology.action.RolesAction">
+      <result name="success">/manage/roles/roleslist.jsp</result>
+      <result name="deletesuccess" type="redirectAction">RolesAction!rolesList
+      </result>
+      <result name="updatesuccess" type="redirectAction">RolesAction!rolesList
+      </result>
+      <result name="edit">/manage/roles/update_roles.jsp</result>
+      <result name="err">/err.jsp</result>
+    </action>
+    <!-- 留言 -->
+    <action name="MessageAction" class="com.pathology.action.MessageAction">
+
+      <result name="messages">/webdiagnosis/message/message_list.jsp</result>
+      <result name="messageInfo">/webdiagnosis/message/messageInfo.jsp</result>
+      <result name="err">/err.jsp</result>
+    </action>
+    <!--  收藏 -->
+    <action name="CollectionAction" class="com.pathology.action.CollectionAction">
+      <result name="err">/err.jsp</result>
+      <result name="collections">/webdiagnosis/collectdiag/collectdiag_list.jsp</result>
+    </action>
+    <!--  收藏 -->
+    <action name="ShareAction" class="com.pathology.action.ShareAction">
+      <result name="err">/err.jsp</result>
+      <result name="shares">/webdiagnosis/diagshare/diagshare_list.jsp</result>
+    </action>
+    <!-- 病例表 -->
+    <action name="PathologyAction" class="com.pathology.action.PathologyAction">
+      <result name="err">/err.jsp</result>
+      <result name="pathologysneed">/webdiagnosis/needdiag/needdiag_list.jsp</result>
+      <result name="pathologyshas">/webdiagnosis/hasdiag/hasdiag_list.jsp</result>
+      <result name="pathologysback">/webdiagnosis/retreatdiag/retreatdiag_list.jsp</result>
+      <result name="getPathologyDto">/webdiagnosis/needdiag/needdiag.jsp</result>
+      <result name="diagReport">/webdiagnosis/needdiag/diagReport.jsp</result>
+    </action>
+    <action name="DiaReportAction" class="com.pathology.action.DiaReportAction">
+      <result name="pathologyreport">/webdiagnosis/hasdiag/diagnosisreport.jsp</result>
+    </action>
+  </package>
 </struts>
