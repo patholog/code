@@ -1,0 +1,353 @@
+.logo_title {
+  width: 100%;
+  height: 36px;
+  position: relative;
+}
+
+.logo_title span {
+  font-size: 26px;
+  letter-spacing: 0.05em;
+}
+
+.logo_title .comc_logo {
+  position: absolute;
+  width: 85px;
+  height: 40px;
+  right: 0;
+  top: 3px;
+}
+
+.in_box_nav_icon0 {
+  float: left;
+  height: 20px;
+  padding: 0 25px 16px 25px;
+}
+
+.mpt80 {
+  margin-top: -80px;
+  padding-top: 80px;
+}
+
+.inbox_0 {
+  position: relative;
+}
+
+.tab_right {
+  position: absolute;
+  top: 0;
+  right: -48px;
+  width: 48px;
+}
+
+.tab_right li {
+  width: 20px;
+  padding: 0 6px;
+  margin-bottom: 20px;
+  border-left: 0;
+  border-radius: 0 3px 3px 0;
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+
+.tab_right li.curr, .tab_right li:hover {
+  padding: 0 6px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  border: 1px solid #5c97f7;
+  border-left: 0;
+}
+
+.tab_right li a {
+  font-size: 20px;
+}
+
+.tab_right_en {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  width: auto;
+}
+
+.tab_right_en li {
+  width: auto;
+  padding: 0 5px;
+  height: 30px;
+  line-height: 30px;
+  float: right;
+  border-radius: 3px 3px 0 0;
+}
+
+.tab_right_en li.curr, .tab_right li:hover {
+  padding: 0 6px;
+}
+
+.tab_right_en li a {
+  font-size: 16px;
+}
+
+.stamp, .share {
+  margin-right: 30px;
+}
+
+input.export {
+  line-height: 55px;
+  padding-left: 32px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+input.stamp {
+  line-height: 55px;
+  padding-left: 32px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.export {
+  margin-right: 25px;
+}
+
+.pl_number {
+  line-height: 50px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.report_title {
+  width: 100%;
+  height: 34px;
+  font-weight: bold;
+}
+
+.report_title input {
+  font-family: "å¾®è½¯é›…é»‘";
+  cursor: pointer;
+}
+
+.report_list {
+  width: 100%;
+  min-height: 24px;
+  padding-bottom: 10px;
+  font-size: 14px;
+  padding-left: 5px;
+}
+
+.report_list ul {
+  width: 100%;
+  height: 55px;
+  margin-top: 20px;
+}
+
+.report_list ul li {
+  width: 25%;
+  float: left;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.report_list ul li.half {
+  width: 50%;
+}
+
+.report_list ul li span {
+  font-weight: normal;
+}
+
+.case_list {
+  padding: 7px 0 10px;
+}
+
+.case_img {
+  width: 49%;
+  display: inline-block;
+  text-align: center;
+}
+
+.case_img img {
+  width: 193px;
+  height: 109px;
+}
+
+.case_img p {
+  line-height: 30px;
+  font-size: 14px;
+}
+
+.con_add {
+  border-radius: 3px;
+  font-size: 16px;
+  padding: 3px 5px;
+}
+
+.results_text {
+  min-height: 100px;
+}
+
+.showhistory {
+  width: 98px;
+  margin-right: 25px;
+}
+
+.choose_sign_type {
+  float: left;
+  width: 100px;
+}
+
+.choose_sign_type .styled_select {
+  width: 100px;
+  float: left;
+  position: relative;
+  border-radius: 3px;
+  height: 24px;
+  zoom: 1;
+  line-height: 24px;
+}
+
+.choose_sign_type .styled_select label {
+  display: inline-block;
+  height: 24px;
+  line-height: 24px;
+  font-family: "å¾®è½¯é›…é»‘";
+  padding-left: 5px;
+  font-size: 12px;
+  color: #666
+}
+
+.choose_sign_type .styled_select select {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  border: none;
+  margin: 0;
+  opacity: 0;
+  width: 100%;
+  height: 24px;
+  line-height: 24px;
+  font-size: 12px;
+  font-family: "å¾®è½¯é›…é»‘";
+  cursor: pointer;
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+  display: inline-block;
+  zoom: 1;
+}
+
+.pro_name {
+  height: 26px;
+  line-height: 26px;
+}
+
+.choosen_type .l_username {
+  padding: 5px;
+  color: #3277ed;
+}
+
+.choosen_type .l_signimg img {
+  max-height: 36px;
+  width: auto;
+  margin: 5px;
+}
+
+.choosen_type {
+  float: right;
+  min-height: 26px;
+  min-width: 30px;
+  margin-top: 10px;
+}
+
+/*é€‰æ‹©ä¸“å®¶*/
+
+/*ç•™è¨€*/
+.in_box_bl .inbox_add .comments {
+  height: 180px;
+}
+
+.in_box_bl .inbox_add .in_text textarea.leave_word {
+  width: 694px;
+  height: 160px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+#inbox_3 .massges input.massges_btn {
+  cursor: pointer;
+  border: none;
+  width: 89px;
+  height: 32px;
+  font-size: 16px;
+  font-family: "å¾®è½¯é›…é»‘";
+  border-radius: 5px;
+  float: right;
+  text-align: center;
+  margin: 5px 0 15px 0;
+}
+
+.message_text .inbox_con_list:last-child .border_bom {
+  border-bottom: 0;
+}
+
+#inbox_3 .massges .massges_div, #inbox_4 .massges .massges_div {
+  margin-top: 2px;
+}
+
+#inbox_3 .massges .massges_div span, #inbox_4 .massges .massges_div span {
+  padding-left: 10px;
+  font-size: 14px;
+}
+
+#inbox_4 .massges input.massges_btn {
+  cursor: pointer;
+  border: none;
+  width: 89px;
+  height: 32px;
+  font-size: 16px;
+  font-family: "å¾®è½¯é›…é»‘";
+  border-radius: 5px;
+  float: right;
+  text-align: center;
+  margin: 5px 0 15px 0;
+}
+
+.message_text .inbox_con_list:last-child .border_bom {
+  border-bottom: 0;
+}
+
+.choose_experts {
+  display: none;
+  border: 1px solid #f1f1f1;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.choose_experts span {
+  padding-right: 20px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.choose_experts span input {
+  margin-right: 5px;
+}
+
+/*ç¬¬ä¸‰æ–¹æŠ¥å‘Š*/
+.logo_title .comc_logo2 {
+  position: absolute;
+  width: 85px;
+  height: 40px;
+  left: 0;
+  top: 3px;
+}
+
+.logo_title .ht_logo {
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  right: 0;
+  top: 3px;
+}
+
+.inbox_title .left, .inbox_title span {
+  font-size: 14px;
+  line-height: 18px;
+  color: #000;
+}
