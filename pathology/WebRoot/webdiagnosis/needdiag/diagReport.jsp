@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="${path }/css/comc_page_style.css"/>
   <link rel="stylesheet" href="${path }/css/WdatePicker.css"/>
   <link rel="stylesheet" href="${path }/css/weebox.css"/>
+  <link rel="stylesheet" href="${path }/js/iviewer/jquery.iviewer.css"/>
   <script type="text/javascript" src="${path }/js/jquery.min.js"></script>
   <script type="text/javascript" src="${path }/js/global.js"></script>
   <script type="text/javascript" src="${path }/js/CKEditor/ckeditor.js"></script>
@@ -27,10 +28,29 @@
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
   <script type="text/javascript" src="${path }/js/scrolllisten.js"></script>
+  <style type="text/css">
+    #divGeneralObservation img
+    {
+      width:auto;
+      cursor:pointer;
+    }
+    .viewer
+    {
+      width: 50%;
+      height: 500px;
+      border: 1px solid black;
+      position: relative;
+      background-color:White;
+    }
+    .wrapper
+    {
+      overflow: hidden;
+    }
+  </style>
 </head>
 <body>
 <form>
-  <div class="mlrAuto">
+  <div id="whole" class="mlrAuto">
     <div class="header">
       <%@include file="/webdiagnosis/maintop.jsp" %>
     </div>
@@ -39,7 +59,7 @@
         <%@include file="/webdiagnosis/mainleft.jsp" %>
       </ul>
     </div>--%>
-    <div class="in_box">
+    <div id="divAllBoxTop" class="in_box">
       <div id="divAllBoxLeft" class="in_box_section" style="margin-bottom:20px;">
         <div id="leftDiv" class="left in_box_nav">
           <div class="nav" style="min-height:298px;">
@@ -216,8 +236,8 @@
                     <div class="report_title">病理图像：</div>
                     <div id="divCaseList" class="case_list border_bom">
                       <div class="show_img">
-                        <a class="go" href="../upload/img/2017/4/20170407093319_8007_1.png" rel="gallery">
-                          <img alt="" src="../upload/img/2017/4/20170407093319_8007_1.png"></a>
+                        <a class="go" href="${path}/upload/img/2017/4/20170407093319_8007_1.png" rel="gallery">
+                          <img alt="" src="${path}/upload/img/2017/4/20170407093319_8007_1.png"></a>
                         <p>可见核分裂像</p>
                       </div>
                       <div class="clear"></div>
@@ -337,8 +357,6 @@
     <div class="loader" style="display: none;"></div>
     <div id="viewer" class="viewer iviewer_cursor"
          style="width: 1249px; height: 230px; margin-left: 50px; margin-top: 50px; overflow: hidden; display: block;">
-      <img src="../upload/img/2017/4/20170407093254_8007_1.png"
-           style="position: absolute; top: 0px; left: 349px; max-width: none; width: 551px; height: 414px; transform: rotate(0deg);">
       <div class="iviewer_zoom_in iviewer_common iviewer_button"></div>
       <div class="iviewer_zoom_out iviewer_common iviewer_button"></div>
       <div class="iviewer_zoom_zero iviewer_common iviewer_button"></div>
@@ -346,16 +364,16 @@
       <div class="iviewer_zoom_status iviewer_common">100%</div>
       <div class="iviewer_rotate_left iviewer_common iviewer_button"></div>
       <div class="iviewer_rotate_right iviewer_common iviewer_button"></div>
-      <a href="../upload/img/2017/4/20170407093254_8007_1.png" target="_blank" download="">
+      <a href="${path}/upload/img/2017/4/20170407093319_8007_1.png" target="_blank" download>
         <div class="iviewer_download iviewer_common iviewer_button"></div>
       </a></div>
     <div class="info">
       <div id="topBar">
-        <a href="../upload/img/2017/4/20170407093254_8007_1.png" id="prevLink" class="go"
-           style="width: 40px; visibility: visible;"><img src="../img/iviewer/btn_prev.png"></a>
+        <a href="${path}/upload/img/2017/4/20170407093319_8007_1.png" id="prevLink" class="go"
+           style="width: 40px; visibility: visible;"><img src="${path}/images/iviewer/btn_prev.png"></a>
         <p id="imageCount"> (2/3)</p>
-        <a href="../upload/img/2017/4/20170407093254_8007_1.png" id="nextLink" class="go"
-           style="width: 40px; visibility: visible;"><img src="../img/iviewer/btn_next.png"></a>
+        <a href="${path}/upload/img/2017/4/20170407093319_8007_1.png" id="nextLink" class="go"
+           style="width: 40px; visibility: visible;"><img src="${path}/images/iviewer/btn_next.png"></a>
         <ul class="controls">
           <li class="close"></li>
         </ul>
@@ -363,51 +381,51 @@
     </div>
   </div>
 </form>
+<div style="text-align:center;">
+</div>
+</body>
 <script type="text/javascript" src="${path }/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path }/js/iviewer/jqueryui.js"></script>
 <script type="text/javascript" src="${path }/js/iviewer/jquery.mousewheel.min.js"></script>
 <script type="text/javascript" src="${path }/js/iviewer/jquery.iviewer.js"></script>
 <script type="text/javascript" src="${path }/js/iviewer/main.js"></script>
 <script>
-  $(function () {
-    // 禁用所有input
+    $(function () {
+        // 禁用所有input
 //    $('input').attr("disabled", "true");
 //    $('textarea').attr("disabled", "true");
 //    $('select').attr("disabled", "true");
-    //设置标杆
-    var _line = parseInt($(window).height() / 3);
-    $(window).scroll(function () {
-      //滚动730px，左侧导航固定定位
-      if ($(window).scrollTop() > 730) {
-        $('.fl_t').css({'position': 'fixed', 'top': 10})
-      } else {
-        $('.fl_t').css({'position': '', 'top': ''})
-      }
-      ;
-      $('.fl_t li').eq(0).addClass('active');
-      //滚动到标杆位置,左侧导航加active
-      $('.fl_r li').each(function () {
-        var _target = parseInt($(this).offset().top - $(window).scrollTop() - _line);
-        var _i = $(this).index();
-        if (_target <= 0) {
-          $('.fl_t li').removeClass('active');
-          $('.fl_t li').eq(_i).addClass('active');
-        }
-        //如果到达页面底部，给左侧导航最后一个加active
-        else if ($(document).height() == $(window).scrollTop() + $(window).height()) {
-          $('.fl_t li').removeClass('active');
-          $('.fl_t li').eq($('.fl_r li').length - 1).addClass('active');
-        }
-      });
+        //设置标杆
+        var _line = parseInt($(window).height() / 3);
+        $(window).scroll(function () {
+            //滚动730px，左侧导航固定定位
+            if ($(window).scrollTop() > 730) {
+                $('.fl_t').css({'position': 'fixed', 'top': 10})
+            } else {
+                $('.fl_t').css({'position': '', 'top': ''})
+            }
+            ;
+            $('.fl_t li').eq(0).addClass('active');
+            //滚动到标杆位置,左侧导航加active
+            $('.fl_r li').each(function () {
+                var _target = parseInt($(this).offset().top - $(window).scrollTop() - _line);
+                var _i = $(this).index();
+                if (_target <= 0) {
+                    $('.fl_t li').removeClass('active');
+                    $('.fl_t li').eq(_i).addClass('active');
+                }
+                //如果到达页面底部，给左侧导航最后一个加active
+                else if ($(document).height() == $(window).scrollTop() + $(window).height()) {
+                    $('.fl_t li').removeClass('active');
+                    $('.fl_t li').eq($('.fl_r li').length - 1).addClass('active');
+                }
+            });
+        });
+        $('.fl_t li').click(function () {
+            $(this).addClass('active').siblings().removeClass('active');
+            var _i = $(this).index();
+            $('body, html').animate({scrollTop: $('.fl_r li').eq(_i).offset().top - _line}, 500);
+        });
     });
-    $('.fl_t li').click(function () {
-      $(this).addClass('active').siblings().removeClass('active');
-      var _i = $(this).index();
-      $('body, html').animate({scrollTop: $('.fl_r li').eq(_i).offset().top - _line}, 500);
-    });
-  });
 </script>
-<div style="text-align:center;">
-</div>
-</body>
 </html>
