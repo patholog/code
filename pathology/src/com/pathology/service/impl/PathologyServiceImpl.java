@@ -7,32 +7,42 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.pathology.dao.IImageDao;
 import com.pathology.dao.IPathologyDao;
 import com.pathology.dto.PathologyDTO;
+import com.pathology.entity.Image;
 import com.pathology.entity.Pathology;
 import com.pathology.mapping.PathologyMapping;
 import com.pathology.service.IPathologyService;
 import com.pathology.util.Pages;
-import com.pathology.util.StringUtil;
 
 
 public class PathologyServiceImpl implements IPathologyService {
 
   private IPathologyDao pathologydao;
-  private JdbcTemplate jdbcTemplate;
+  private IImageDao imagedao;
+  public IImageDao getImagedao() {
+	return imagedao;
+}
+
+public void setImagedao(IImageDao imagedao) {
+	this.imagedao = imagedao;
+}
+
+private JdbcTemplate jdbcTemplate;
   private String basicSql = "SELECT a.id_case caseId, a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
       + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
       + "a.specimenname specimenName, a.idcard idCard, a.mobile, a.diag_time,"
       + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
-      + "c.generalSee, c.microscopeSee, a.memo "
+      + "c.generalSee, c.microscopeSee, a.memo,E.ID_COLLECTION"
       + " FROM pathology a "
-      + " LEFT JOIN image  b  ON a.id_case = b.case_id "
+      + " LEFT JOIN COLLECTION E ON E.CASE_ID=A.ID_CASE"
       + " LEFT JOIN result  c ON a.id_case = c.case_id"
       + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital";
   private String basicCountSql = "SELECT count(1) FROM pathology a "
-      + " LEFT JOIN image  b  ON a.id_case = b.case_id "
       + " LEFT JOIN result  c ON a.id_case = c.case_id"
-      + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital";
+      + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
+      +	" LEFT JOIN COLLECTION E ON A.ID_CASE=E.CASE_ID";
 
   public JdbcTemplate getJdbcTemplate() {
     return jdbcTemplate;
@@ -63,7 +73,6 @@ public class PathologyServiceImpl implements IPathologyService {
   public void deletePathology(Pathology em) {
     if (em != null)
       pathologydao.deletePathology(em);
-
   }
 
   public List<PathologyDTO> getListPathologyToNeed(HttpServletRequest request, String name) {
@@ -86,7 +95,12 @@ public class PathologyServiceImpl implements IPathologyService {
   public PathologyDTO getPathologyByIdAndDiagStatus(String caseId) {
     String sql = basicSql + " WHERE a.id_case = '" + caseId + "'";
     try {
-      return (PathologyDTO) jdbcTemplate.queryForObject(sql, new PathologyMapping());
+    	PathologyDTO pathologyDto=(PathologyDTO) jdbcTemplate.queryForObject(sql, new PathologyMapping());
+    	if(pathologyDto==null)
+    		return null;
+		List<Image> lst=imagedao.getImages(Image.class, pathologyDto.getCaseId());
+		pathologyDto.setImages(lst);
+		return pathologyDto;
     } catch (Exception e) {
       throw new RuntimeException("查询出现错误");
     }

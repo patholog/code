@@ -1,7 +1,9 @@
 package com.pathology.dto;
 
-import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
+
+import com.pathology.entity.Image;
 
 public class PathologyReportDTO implements java.io.Serializable{
 
@@ -117,4 +119,12 @@ public class PathologyReportDTO implements java.io.Serializable{
 	private String diagnosed;
 	private String result;
 	private String suggestion;
+	private List<Image> images;
+	//图片实体
+	public List<Image> getImages() {
+		return images;
+	}
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
 }

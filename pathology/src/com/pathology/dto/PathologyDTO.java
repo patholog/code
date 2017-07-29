@@ -3,6 +3,9 @@ package com.pathology.dto;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
+
+import com.pathology.entity.Image;
 
 public class PathologyDTO implements java.io.Serializable {
 
@@ -29,7 +32,25 @@ public class PathologyDTO implements java.io.Serializable {
   private String idCard;
   private String mobile;
   private Date diagTime;
-  /**
+  private String collectionId;
+  private List<Image> Images;
+  public List<Image> getImages() {
+	return Images;
+}
+
+public void setImages(List<Image> images) {
+	Images = images;
+}
+
+public String getCollectionId() {
+	return collectionId;
+}
+
+public void setCollectionId(String collectionId) {
+	this.collectionId = collectionId;
+}
+
+/**
    * 病史
    */
   private String historySummary;

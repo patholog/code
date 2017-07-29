@@ -137,8 +137,10 @@
 	</bean>
 		<!-- 病例表 -->
 	<bean id="pathologydao" class="com.pathology.dao.impl.PathologyDaoImpl" parent="pt" />
+	<bean id="imagedao" class="com.pathology.dao.impl.ImageDaoImpl" parent="pt" />
 	<bean id="pathologyService" class="com.pathology.service.impl.PathologyServiceImpl">
 		<property name="pathologydao" ref="pathologydao"></property>
+		<property name="imagedao" ref="imagedao"></property>
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
 		<bean id="pathologyAction" class="com.pathology.action.PathologyAction"
