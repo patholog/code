@@ -34,15 +34,13 @@ private JdbcTemplate jdbcTemplate;
       + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
       + "a.specimenname specimenName, a.idcard idCard, a.mobile, a.diag_time,"
       + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
-      + "c.generalSee, c.microscopeSee, a.memo,E.ID_COLLECTION"
+      + "c.generalSee, c.microscopeSee, a.memo"
       + " FROM pathology a "
-      + " LEFT JOIN COLLECTION E ON E.CASE_ID=A.ID_CASE"
       + " LEFT JOIN result  c ON a.id_case = c.case_id"
       + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital";
   private String basicCountSql = "SELECT count(1) FROM pathology a "
       + " LEFT JOIN result  c ON a.id_case = c.case_id"
-      + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
-      +	" LEFT JOIN COLLECTION E ON A.ID_CASE=E.CASE_ID";
+      + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital";
 
   public JdbcTemplate getJdbcTemplate() {
     return jdbcTemplate;
