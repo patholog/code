@@ -15,6 +15,7 @@ import com.pathology.entity.Pathology;
 import com.pathology.mapping.PathologyMapping;
 import com.pathology.service.IPathologyService;
 import com.pathology.util.Pages;
+import com.pathology.util.SessionAgentManager;
 
 
 public class PathologyServiceImpl implements IPathologyService {
@@ -34,13 +35,15 @@ private JdbcTemplate jdbcTemplate;
       + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
       + "a.specimenname specimenName, a.idcard idCard, a.mobile, a.diag_time,"
       + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
-      + "c.generalSee, c.microscopeSee, a.memo"
+      + "c.generalSee, c.microscopeSee, a.memo,E.ID_COLLECTION"
       + " FROM pathology a "
+      + " LEFT JOIN COLLECTION E ON E.CASE_ID=A.ID_CASE AND A.ID_DOCTOR=E.ID_DOCTOR"
       + " LEFT JOIN result  c ON a.id_case = c.case_id"
       + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital";
   private String basicCountSql = "SELECT count(1) FROM pathology a "
       + " LEFT JOIN result  c ON a.id_case = c.case_id"
-      + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital";
+      + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
+      +	" LEFT JOIN COLLECTION E ON A.ID_CASE=E.CASE_ID AND A.ID_DOCTOR=E.ID_DOCTOR";
 
   public JdbcTemplate getJdbcTemplate() {
     return jdbcTemplate;
@@ -73,26 +76,40 @@ private JdbcTemplate jdbcTemplate;
       pathologydao.deletePathology(em);
   }
 
-  public List<PathologyDTO> getListPathologyToNeed(HttpServletRequest request, String name) {
-    String pageNum = request.getParameter("pageNum");
-    pageNum = pageNum != null ? pageNum : "1";
-    String title = "";
-    int status = 1;
-    String sql = basicSql + " WHERE a.diag_status='2'";
-    String countSql = basicCountSql + " WHERE a.diag_status='2'";
+  
+/*
+ * 获取待诊断列表
+ */
+public List<PathologyDTO> getListPathologyToNeed(HttpServletRequest request, String name) {
+	try
+	{
+        String pageNum = request.getParameter("pageNum");
+        pageNum = pageNum != null ? pageNum : "1";
+        String title = "";
+        int status = 1;
+        String sql = basicSql + " WHERE a.diag_status='2' and a.id_doctor='"+name+"'";
+        String countSql = basicCountSql + " WHERE a.diag_status='2' and a.id_doctor='"+name+"'";
 
-    int totalNum = jdbcTemplate.queryForInt(countSql);
-    if (totalNum > 0) {
-      Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
-      request.setAttribute("page", page.getPageStr());
-    }
-    return jdbcTemplate.query(sql, new PathologyMapping());
+        int totalNum = jdbcTemplate.queryForInt(countSql);
+        if (totalNum > 0) {
+          Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
+          request.setAttribute("page", page.getPageStr());
+        }
+        return jdbcTemplate.query(sql, new PathologyMapping());
+	}
+	catch(Exception ex)
+	{
+		throw new RuntimeException("查询出现错误");
+	}
+
   }
 
   @Override
   public PathologyDTO getPathologyByIdAndDiagStatus(String caseId) {
-    String sql = basicSql + " WHERE a.id_case = '" + caseId + "'";
     try {
+//    	//获取当前登陆用户
+//    	String userId=SessionAgentManager.getSessionAgentBean().getIdUsers();
+        String sql = basicSql + " WHERE a.id_case = '" + caseId + "'";
     	PathologyDTO pathologyDto=(PathologyDTO) jdbcTemplate.queryForObject(sql, new PathologyMapping());
     	if(pathologyDto==null)
     		return null;
@@ -104,15 +121,14 @@ private JdbcTemplate jdbcTemplate;
     }
   }
 
-  public List<PathologyDTO> getListPathologyToHas(HttpServletRequest
-                                                      request, String name) {
+  public List<PathologyDTO> getListPathologyToHas(HttpServletRequest request, String name) {
 
     String pageNum = request.getParameter("pageNum");
     pageNum = pageNum != null ? pageNum : "1";
     String title = "";
     int status = 1;
-    String sql = basicSql + " WHERE a.diag_status='7'";
-    String countSql = basicCountSql + " WHERE a.diag_status='7'";
+    String sql = basicSql + " WHERE a.diag_status='7' and a.id_doctor='"+name+"'";
+    String countSql = basicCountSql + " WHERE a.diag_status='7' and a.id_doctor='"+name+"'";
 
     int totalNum = jdbcTemplate.queryForInt(countSql);
     if (totalNum > 0) {
@@ -145,7 +161,6 @@ private JdbcTemplate jdbcTemplate;
 
   public void updatePathology(Pathology em) {
     pathologydao.updatePathology(em);
-
   }
 
   public void addPathology(Pathology em) {

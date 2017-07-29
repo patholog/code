@@ -5,6 +5,7 @@ import com.pathology.dto.PathologyDTO;
 import com.pathology.entity.Pathology;
 import com.pathology.service.IPathologyService;
 import com.pathology.util.Constant;
+import com.pathology.util.SessionAgentManager;
 import com.pathology.util.StringUtil;
 import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
@@ -13,6 +14,10 @@ import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * @author yi
+ *
+ */
 public class PathologyAction extends BaseAction {
   private final Logger logger = Logger.getLogger(PathologyAction.class);
   /**
@@ -44,8 +49,10 @@ public class PathologyAction extends BaseAction {
    */
   public String getPathologyListToNeed() {
     try {
+    	//获取当前登陆用户
+      String userId=SessionAgentManager.getSessionAgentBean().getIdUsers();
       HttpServletRequest request = ServletActionContext.getRequest();
-      pathologys = pathologyService.getListPathologyToNeed(request, "");
+      pathologys = pathologyService.getListPathologyToNeed(request, userId);
       return "pathologysneed";
     } catch (Exception e) {
       e.printStackTrace();
@@ -71,15 +78,20 @@ public class PathologyAction extends BaseAction {
 
   public String getPathologyListToHas() {
     try {
+    //获取当前登陆用户
+      String userId=SessionAgentManager.getSessionAgentBean().getIdUsers();
       HttpServletRequest request = ServletActionContext.getRequest();
-      pathologys = pathologyService.getListPathologyToHas(request, "");
+      pathologys = pathologyService.getListPathologyToHas(request, userId);
       return "pathologyshas";
     } catch (Exception e) {
       e.printStackTrace();
     }
     return "pathologyshas";
   }
-
+  
+  /*
+   * 已诊断
+   */
   public String getPathologyListToBack() {
     try {
       HttpServletRequest request = ServletActionContext.getRequest();
