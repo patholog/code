@@ -22,7 +22,6 @@ public class ShareAction extends BaseAction {
 
 	public String getShareList() {
 		try {
-
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
 			HttpServletRequest request = ServletActionContext.getRequest();

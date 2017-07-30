@@ -28,8 +28,17 @@ public class Collection implements java.io.Serializable {
 	private String lastUpdUserId;
 	private Integer delF;
 	private String pathologyNo;
+	private String doctorId;
 
 	// Constructors
+
+	public String getDoctorId() {
+		return doctorId;
+	}
+
+	public void setDoctorId(String doctorId) {
+		this.doctorId = doctorId;
+	}
 
 	/** default constructor */
 	public Collection() {

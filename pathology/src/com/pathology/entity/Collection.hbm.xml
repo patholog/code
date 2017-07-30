@@ -57,7 +57,12 @@
         </property>
         <property name="pathologyNo" type="java.lang.String">
             <column name="pathology_no">
-                <comment>ç-…ç�†å�·</comment>
+                <comment>病理号</comment>
+            </column>
+        </property>
+        <property name="doctorId" type="java.lang.String">
+            <column name="id_doctor">
+                <comment>收藏人</comment>
             </column>
         </property>
     </class>

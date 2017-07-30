@@ -79,6 +79,8 @@ public class PathologyAction extends BaseAction {
   public String getPathologyListToHas() {
     try {
     //获取当前登陆用户
+    	if (!SessionAgentManager.islogin())
+			return Constant.ERR;
       String userId=SessionAgentManager.getSessionAgentBean().getIdUsers();
       HttpServletRequest request = ServletActionContext.getRequest();
       pathologys = pathologyService.getListPathologyToHas(request, userId);

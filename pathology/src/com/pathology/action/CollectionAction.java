@@ -9,9 +9,12 @@ import org.apache.struts2.ServletActionContext;
 
 import com.pathology.dto.CollectionDTO;
 import com.pathology.entity.Collection;
+import com.pathology.entity.Pathology;
 import com.pathology.service.ICollectionService;
 import com.pathology.util.Constant;
 import com.pathology.util.SessionAgentManager;
+
+import net.sf.json.JSONObject;
 
 public class CollectionAction extends BaseAction {
 
@@ -55,6 +58,23 @@ public class CollectionAction extends BaseAction {
 		}
 	}
 
+	public String saveCollection(String collectionJson)
+	{
+		try{
+			if (!SessionAgentManager.islogin())
+				return Constant.ERR;
+			JSONObject obj = JSONObject.fromObject(collectionJson);// 将json字符串转换为json对象
+			// 将json对象转换为java对象
+			Collection jb = (Collection) JSONObject.toBean(obj, Collection.class);// 将建json对象转换为Person对象
+			collectionService.addCollection(jb);
+			return Constant.SUCCESS;
+		}
+		catch(Exception ex)
+		{
+			logger.error(ex.getMessage());
+			return Constant.ERR;
+		}
+	}
 	public CollectionDTO getCollection() {
 		return collection;
 	}
