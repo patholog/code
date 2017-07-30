@@ -24,14 +24,14 @@
 <script type="text/javascript">
     function collectCase(id) {
         $.ajax({
-            url: '收藏的url',
+            url: 'CollectionAction!saveCollection',
             type: 'post',
             data: {},
             dataType: 'json',
             success: function (data) {
                 self.location.reload();
             },
-            error: function () {
+            err: function () {
                 self.location.reload();
             }
         })
@@ -45,12 +45,12 @@
         $.ajax({
             url:'取消收藏的url',
             type:'post',
-            data:{},
+            data:id,
             dataType:'json',
             success:function (data) {
                 self.location.reload();
             },
-            error:function () {
+            err:function () {
 
             }})
 
@@ -104,11 +104,11 @@
 								         <td><s:property value="#pathology.inspectiondate"/></td>
 								         <td><s:property value="#pathology.diagtime"/></td>
 								          <td align="center"><a href="PathologyAction!getPathologyDto?diagStatus=7&id=${pathology.caseId}" target="_blank">查看</a>
-											  <c:if test="${pathology.caseId !=null and pathology.caseId!='undefined'}">
-											  <a id="${pathology.pathologyNo}" href="javascript:collectCase(''${pathology.pathologyNo}')" target="_blank" >
+											  <c:if test="${pathology.collectionId ==null or pathology.collectionId=='undefined'}">
+											  <a id="${pathology.collectionId}" href="javascript:collectCase('${pathology.caseId}')" target="_blank" >
 															收藏</a>
 											  </c:if>
-											  <c:if test="${pathology.caseId ==null || pathology.caseId=='undefined'}"> <a id="${pathology.pathologyNo}" href="javascript:cancelCase('${pathology.pathologyNo}')" target="_blank">
+											  <c:if test="${pathology.collectionId !=null and pathology.collectionId!='undefined'}"> <a id="${pathology.caseId}" href="javascript:cancelCase('${pathology.collectionId}')" target="_blank">
 															  取消收藏</a></c:if>
 										  </td>
 								        </tr>
