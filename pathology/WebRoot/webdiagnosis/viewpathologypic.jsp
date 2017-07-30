@@ -6,29 +6,30 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <!doctype html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>病理远程会诊平台-病理图片查看</title>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
-<link rel="stylesheet" type="text/css" href="${path }/cropper/css/normalize.css"/>
-<link rel="stylesheet" type="text/css" href="${path }/cropper/css/default.css"/>
 <link ref="stylesheet" href="${path }/cropper/assets/css/bootstrap.min.css"/>
-<link rel="stylesheet" type="text/css" href="${path }/css/style.css" />
 <link ref="stylesheet" href="${path }/cropper/dist/cropper.css"/>
 <link ref="stylesheet" href="${path }/cropper/css/main.css"/>
 </head>
 <body>
-	<c:set var="path" value="${pageContext.request.contextPath }" />
-<div class="htmleaf-container">
+<c:set var="path" value="${pageContext.request.contextPath }" />
+	<div class="htmleaf-container">
+		<!-- Content -->
+		<!--<div style="text-align:center;clear:both">
+		<script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>
+		<script src="/follow.js" type="text/javascript"></script>
+		</div>-->
   <div class="container">
     <div class="row">
       <div class="col-md-9">
+        <!-- <h3 class="page-header">Demo:</h3> -->
         <div class="img-container">
-        <img src="${path }/webdiagnosis/picture.jpg" alt="Picture">
+        	<img src="${path }/webdiagnosis/picture.jpg" alt="Picture">
         </div>
       </div>
       <div class="col-md-3">
+        <!-- <h3 class="page-header">Preview:</h3> -->
         <div class="docs-preview clearfix">
           <div class="img-preview preview-lg"></div>
           <div class="img-preview preview-md"></div>
@@ -36,6 +37,7 @@
           <div class="img-preview preview-xs"></div>
         </div>
 
+        <!-- <h3 class="page-header">Data:</h3> -->
         <div class="docs-data">
           <div class="input-group">
             <label class="input-group-addon" for="dataX">X</label>
@@ -341,10 +343,10 @@
       </div><!-- /.docs-toggles -->
     </div>
   </div>
-  <!-- Alert -->	
-    <script src="${path }/js/jquery.min.js"></script>
-    <script src="${path }/cropper/assets/js/bootstrap.min.js"></script>
-	<script src="${path }/cropper/dist/cropper.js"></script>
-	<script src="${path }/cropper/js/main.js"></script>
+  <!-- Alert -->
+<script src="${path }/cropper/assets/js/jquery.min.js"></script>
+<script src="${path }/cropper/assets/js/bootstrap.min.js"></script>
+<script src="${path }/cropper/dist/cropper.js"></script>
+<script src="${path }/cropper/js/main.js"></script>
 </body>
 </html>
