@@ -28,11 +28,11 @@
             url: 'CollectionAction!saveCollection',
             type: 'post',
             data: {"collectionDo":JSON.stringify(collectionDo)},
-            dataType: 'json',
-            success: function () {
+            dataType: 'text',
+            success: function (data) {
                 self.location.reload();
             },
-            err: function () {
+            err: function (data) {
                 self.location.reload();
             }
         })
@@ -47,12 +47,12 @@
             url:'CollectionAction!deleteCollection?collectionId='+id,
             type:'post',
             data:{},
-            dataType:'json',
-            success:function () {
+            dataType:'text',
+            success:function (data) {
                 self.location.reload();
             },
-            err:function () {
-
+            err:function (data) {
+                self.location.reload();
             }})
 
     }
