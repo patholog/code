@@ -47,13 +47,14 @@ public class CollectionAction extends BaseAction {
 
   public String deleteCollection() {
     try {
-
+      HttpServletRequest request = ServletActionContext.getRequest();
+      String strCollectionId=request.getParameter("collectionId");
       if (!SessionAgentManager.islogin())
         return Constant.ERR;
       Collection hos = collectionService.getCollection(Collection.class,
-          collection.getCollectionId());
+    		  strCollectionId);
       collectionService.deleteCollection(hos);
-      return "deletesuccess";
+      return Constant.SUCCESS;
     } catch (Exception e) {
       logger.error(e.getMessage());
       return Constant.ERR;
@@ -78,7 +79,7 @@ public class CollectionAction extends BaseAction {
       collectionService.addCollection(jb);
       return Constant.SUCCESS;
     } catch (Throwable ex) {
-      logger.error(ex.getMessage());
+      logger.error(ex);
       return Constant.ERR;
     }
   }
