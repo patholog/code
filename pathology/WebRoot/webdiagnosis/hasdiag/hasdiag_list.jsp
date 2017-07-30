@@ -29,7 +29,7 @@
             type: 'post',
             data: {"collectionDo":JSON.stringify(collectionDo)},
             dataType: 'json',
-            success: function (data) {
+            success: function () {
                 self.location.reload();
             },
             err: function () {
@@ -44,11 +44,11 @@
     function cancelCase(id) {
 
         $.ajax({
-            url:'取消收藏的url',
+            url:'CollectionAction!deleteCollection?collectionId='+id,
             type:'post',
-            data:id,
+            data:{},
             dataType:'json',
-            success:function (data) {
+            success:function () {
                 self.location.reload();
             },
             err:function () {

@@ -61,7 +61,7 @@
 					            <td><s:property value="#pathology.username"/></td>
 					            <td><s:property value="#pathology.content"/></td>
 					            <td><s:property value="#pathology.hospitalname"/></td>
-					            <td><s:property value="#pathology.createTime"/></td>
+					            <td><s:property /><fmt:formatDate value="${pathology.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 					            <td align="center">
 					              <a href="PathologyAction!getPathologyDto?diagStatus=2&id=<s:property value="#pathology.caseId"/>">查看</a>
 					            </td>
