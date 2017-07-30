@@ -20,11 +20,47 @@
 <script type="text/javascript" src="${path }/js/treeView.js"></script>
 <script type="text/javascript" src="${path }/js/common-cn.js"></script>
 <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
+<script type="text/javascript" src="${path }/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
+    function collectCase(id) {
+        $.ajax({
+            url: '收藏的url',
+            type: 'post',
+            data: {},
+            dataType: 'json',
+            success: function (data) {
+                self.location.reload();
+            },
+            error: function () {
+                self.location.reload();
+            }
+        })
+    }
+
+
+
+
+    function cancelCase(id) {
+
+        $.ajax({
+            url:'取消收藏的url',
+            type:'post',
+            data:{},
+            dataType:'json',
+            success:function (data) {
+                self.location.reload();
+            },
+            error:function () {
+
+            }})
+
+    }
+
 	function confirmDelete(id) {
 		if (confirm('你确定删除此产品？'))
 			window.location.href = '?action=delete&id=' + id;
 	}
+
 </script>
 </head>
 
@@ -67,7 +103,14 @@
 								         <td><s:property value="#pathology.hospitalname"/></td>
 								         <td><s:property value="#pathology.inspectiondate"/></td>
 								         <td><s:property value="#pathology.diagtime"/></td>
-								          <td align="center"><a href="PathologyAction!getPathologyDto?diagStatus=7&id=${pathology.caseId}" target="_blank">查看</a></td>
+								          <td align="center"><a href="PathologyAction!getPathologyDto?diagStatus=7&id=${pathology.caseId}" target="_blank">查看</a>
+											  <c:if test="${pathology.caseId !=null and pathology.caseId!='undefined'}">
+											  <a id="${pathology.pathologyNo}" href="javascript:collectCase(''${pathology.pathologyNo}')" target="_blank" >
+															收藏</a>
+											  </c:if>
+											  <c:if test="${pathology.caseId ==null || pathology.caseId=='undefined'}"> <a id="${pathology.pathologyNo}" href="javascript:cancelCase('${pathology.pathologyNo}')" target="_blank">
+															  取消收藏</a></c:if>
+										  </td>
 								        </tr>
 								        </s:iterator>
 		
@@ -85,4 +128,5 @@
 			</div>
 		</div>
 </body>
+
 </html>
