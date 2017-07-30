@@ -23,10 +23,11 @@
 <script type="text/javascript" src="${path }/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
     function collectCase(id) {
+    	var collectionDo={"patientname":"yangyang","username":"122"}
         $.ajax({
             url: 'CollectionAction!saveCollection',
             type: 'post',
-            data: {},
+            data: {"collectionDo":JSON.stringify(collectionDto)},
             dataType: 'json',
             success: function (data) {
                 self.location.reload();
@@ -110,6 +111,7 @@
 											  </c:if>
 											  <c:if test="${pathology.collectionId !=null and pathology.collectionId!='undefined'}"> <a id="${pathology.caseId}" href="javascript:cancelCase('${pathology.collectionId}')" target="_blank">
 															  取消收藏</a></c:if>
+											  <a href="ShareAction">分享</a>
 										  </td>
 								        </tr>
 								        </s:iterator>
