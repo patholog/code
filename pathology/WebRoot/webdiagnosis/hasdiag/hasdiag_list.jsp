@@ -22,12 +22,12 @@
 <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
 <script type="text/javascript" src="${path }/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
-    function collectCase(id) {
-    	var collectionDo={"patientname":"yangyang","username":"122"}
+    function collectCase(id,pathologyno) {
+    	var collectionDo={"caseId":id,"pathologyNo":pathologyno}
         $.ajax({
             url: 'CollectionAction!saveCollection',
             type: 'post',
-            data: {"collectionDo":JSON.stringify(collectionDto)},
+            data: {"collectionDo":JSON.stringify(collectionDo)},
             dataType: 'json',
             success: function (data) {
                 self.location.reload();
@@ -106,7 +106,7 @@
 								         <td><s:property value="#pathology.diagtime"/></td>
 								          <td align="center"><a href="PathologyAction!getPathologyDto?diagStatus=7&id=${pathology.caseId}" target="_blank">查看</a>
 											  <c:if test="${pathology.collectionId ==null or pathology.collectionId=='undefined'}">
-											  <a id="${pathology.collectionId}" href="javascript:collectCase('${pathology.caseId}')" target="_blank" >
+											  <a id="${pathology.collectionId}" href="javascript:collectCase('${pathology.caseId}','${pathology.pathologyNo}')" target="_blank" >
 															收藏</a>
 											  </c:if>
 											  <c:if test="${pathology.collectionId !=null and pathology.collectionId!='undefined'}"> <a id="${pathology.caseId}" href="javascript:cancelCase('${pathology.collectionId}')" target="_blank">
