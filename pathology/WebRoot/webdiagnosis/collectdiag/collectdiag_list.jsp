@@ -17,6 +17,7 @@
 <link rel="stylesheet" type="text/css" href="${path }/css/theme.css"/>
 <link rel="stylesheet" type="text/css" href="${path }/css/WdatePicker.css"/>
 <link rel="stylesheet" type="text/css" href="${path }/css/weebox.css"/>
+<script type="text/javascript" src="${path }/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript"
 	src="${path }/CKEditor/ckeditor/ckeditor.js"></script>
 <script type="text/javascript"
@@ -25,10 +26,22 @@
 <script type="text/javascript" src="${path }/js/common-cn.js"></script>
 <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
 <script type="text/javascript">
-	function confirmDelete(id) {
-		if (confirm('确定取消收藏？'))
-			window.location.href = 'CollectionAction!deleteCollection?collection.collectionId=' + id;
-	}
+	
+    function cancelCase(id) {
+
+        $.ajax({
+            url:'CollectionAction!deleteCollection?collectionId='+id,
+            type:'post',
+            data:{},
+            dataType:'text',
+            success:function (data) {
+                self.location.reload();
+            },
+            error:function (data) {
+                self.location.reload();
+            }})
+
+    }
 </script>
 </head>
 
@@ -71,7 +84,7 @@
 						         <td><s:property value="#collection.hospitalname"/></td>
 						         <td><s:property value="#collection.createTime"/></td>
 						         <td><s:property value="#collection.diagtime"/></td>
-						          <td align="center"><a href="#"  onclick="confirmDelete('${collection.collectionId }')">取消收藏</a>
+						          <td align="center"><a href="#"  onclick="cancelCase('${collection.collectionId }')">取消收藏</a>
 						          &nbsp; | &nbsp;	<a href="PathologyAction!getPathologyDto?id=${collection.caseId}" target="_blank">查看</a></td>
 						          </td>
 						        </tr>
