@@ -32,7 +32,7 @@
             success: function (data) {
                 self.location.reload();
             },
-            err: function (data) {
+            error: function (data) {
                 self.location.reload();
             }
         })
@@ -51,7 +51,7 @@
             success:function (data) {
                 self.location.reload();
             },
-            err:function (data) {
+            error:function (data) {
                 self.location.reload();
             }})
 
