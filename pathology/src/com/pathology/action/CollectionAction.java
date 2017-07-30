@@ -1,5 +1,6 @@
 package com.pathology.action;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import com.pathology.entity.Collection;
 import com.pathology.entity.Pathology;
 import com.pathology.service.ICollectionService;
 import com.pathology.util.Constant;
+import com.pathology.util.RandomNumbers;
 import com.pathology.util.SessionAgentManager;
 
 import net.sf.json.JSONObject;
@@ -66,6 +68,13 @@ public class CollectionAction extends BaseAction {
 			JSONObject obj = JSONObject.fromObject(this.collectionDo);// 将json字符串转换为json对象
 			// 将json对象转换为java对象
 			Collection jb = (Collection) JSONObject.toBean(obj, Collection.class);// 将建json对象转换为Person对象
+			jb.setCollectionerId(SessionAgentManager.getSessionAgentBean().getIdUsers());
+			jb.setDoctorId(SessionAgentManager.getSessionAgentBean().getIdUsers());
+			Timestamp d = new Timestamp(System.currentTimeMillis()); 
+			//收藏时间
+			jb.setCollectionTime(d);
+			//主键ID
+			jb.setIdCollection(RandomNumbers.getEandomId(20));
 			collectionService.addCollection(jb);
 			return Constant.SUCCESS;
 		}
