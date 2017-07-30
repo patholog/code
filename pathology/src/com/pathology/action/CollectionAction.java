@@ -58,12 +58,12 @@ public class CollectionAction extends BaseAction {
 		}
 	}
 
-	public String saveCollection(String collectionJson)
+	public String saveCollection()
 	{
 		try{
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
-			JSONObject obj = JSONObject.fromObject(collectionJson);// 将json字符串转换为json对象
+			JSONObject obj = JSONObject.fromObject(this.collectionDo);// 将json字符串转换为json对象
 			// 将json对象转换为java对象
 			Collection jb = (Collection) JSONObject.toBean(obj, Collection.class);// 将建json对象转换为Person对象
 			collectionService.addCollection(jb);
@@ -98,5 +98,14 @@ public class CollectionAction extends BaseAction {
 	public void setCollections(List<CollectionDTO> collections) {
 		this.collections = collections;
 	}
+	
+	private String collectionDo;
 
+	public String getCollectionDo() {
+		return collectionDo;
+	}
+
+	public void setCollectionDo(String collectionDo) {
+		this.collectionDo = collectionDo;
+	}	
 }

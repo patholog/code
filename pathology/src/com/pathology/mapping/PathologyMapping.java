@@ -1,15 +1,14 @@
 package com.pathology.mapping;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.pathology.dto.MessageDTO;
 import com.pathology.dto.PathologyDTO;
-import com.pathology.dto.ShareDTO;
-import com.pathology.entity.Message;
+import com.sun.jmx.snmp.Timestamp;
 
 
 public class PathologyMapping implements RowMapper {
@@ -18,6 +17,8 @@ public class PathologyMapping implements RowMapper {
   @Override
   public PathologyDTO mapRow(ResultSet rs, int arg1) {
     try {
+      DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+      Timestamp stamp=new Timestamp();
       PathologyDTO bean = new PathologyDTO();
       bean.setNum(rs.getRow());
       bean.setPathologyNo(rs.getString("pathologyno"));
