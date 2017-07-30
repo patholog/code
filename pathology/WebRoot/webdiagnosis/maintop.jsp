@@ -5,7 +5,7 @@
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";%>
 <div class="top-thickline"><img src="${path}/css/img-blue/spacer.gif" width="5" height="5" /></div>
 	<ul>
-		<li style="float:right;"><input type="button" value ="退出" onclick ="logout()"/></li>
+		<!--  <li style="float:right;"><input type="button" value ="退出" onclick ="logout()"/></li>-->
 		    <%
        if(SessionAgentManager.getSessionAgentBean()==null){
               %>
@@ -20,9 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          String username=user==null?"":user.getUsername() +" " +user.getRoleName();
         
          %>
-     
- 
-		<li style="float:right;"> <%= username%></li> 
+		<!--<li style="float:right;"> <%= username%></li> -->
  
 		<li style="margin-left:15px;" id="mytimer"></li>
       <script>Time();</script>
