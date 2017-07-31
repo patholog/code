@@ -36,10 +36,15 @@ public class PathologyAction extends BaseAction {
    * @return
    */
   public Pathology savePathology() {
-    JSONObject obj = JSONObject.fromObject(this.content);// 将json字符串转换为json对象
-    // 将json对象转换为java对象
-    PathologyDTO pathology = (PathologyDTO) JSONObject.toBean(obj, PathologyDTO.class);// 将建json对象转换为Person对象
-    return null;
+    try {
+      JSONObject obj = JSONObject.fromObject(this.content);// 将json字符串转换为json对象
+      // 将json对象转换为java对象
+      PathologyDTO pathology = (PathologyDTO) JSONObject.toBean(obj, PathologyDTO.class);// 将建json对象转换为Person对象
+      return null;
+    } catch (Throwable e) {
+      logger.error(e.getMessage());
+      return null;
+    }
   }
 
   /**
