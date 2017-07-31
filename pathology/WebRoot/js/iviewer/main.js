@@ -1,4 +1,4 @@
-(function ($) {
+$(function () {
     var gallery = new Array();
     function init() {
         var viewer = $("#iviewer .viewer").
@@ -147,5 +147,5 @@
     $(window).resize(function () {
         init();
     })
-})(jQuery);
+});
 

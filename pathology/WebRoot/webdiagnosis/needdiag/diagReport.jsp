@@ -20,31 +20,45 @@
   <link rel="stylesheet" href="${path }/css/WdatePicker.css"/>
   <link rel="stylesheet" href="${path }/css/weebox.css"/>
   <link rel="stylesheet" href="${path }/js/iviewer/jquery.iviewer.css"/>
-  <script type="text/javascript" src="${path }/js/jquery.min.js"></script>
+  <script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
+  <script type="text/javascript" src="${path }/js/iviewer/jqueryui.js"></script>
+  <script type="text/javascript" src="${path }/js/iviewer/jquery.mousewheel.min.js"></script>
+  <script type="text/javascript" src="${path }/js/iviewer/jquery.iviewer.js"></script>
+  <script type="text/javascript" src="${path }/js/iviewer/main.js"></script>
   <script type="text/javascript" src="${path }/js/global.js"></script>
   <script type="text/javascript" src="${path }/js/CKEditor/ckeditor.js"></script>
-  <script type="text/javascript" src="${path }/CKFinder/ckfinder/ckfinder.js"></script>
   <script type="text/javascript" src="${path }/js/treeView.js"></script>
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
   <script type="text/javascript" src="${path }/js/scrolllisten.js"></script>
   <style type="text/css">
-    #divGeneralObservation img
-    {
-      width:auto;
-      cursor:pointer;
+    #divGeneralObservation img {
+      width: auto;
+      cursor: pointer;
     }
-    .viewer
-    {
+
+    .viewer {
       width: 50%;
       height: 500px;
       border: 1px solid black;
       position: relative;
-      background-color:White;
+      background-color: White;
     }
-    .wrapper
-    {
+
+    .wrapper {
       overflow: hidden;
+    }
+
+    .massges_btn {
+      cursor: pointer;
+      border: none;
+      width: 89px;
+      height: 32px;
+      font-size: 16px;
+      border-radius: 5px;
+      float: right;
+      text-align: center;
+      margin: 5px 0 15px 0;
     }
   </style>
 </head>
@@ -121,6 +135,7 @@
                     </div>
                     <div class="pl_number border_bom">
                       <a>原病理号：<span id="lblPathologyNumber">未处理</span></a>
+                      <input type="hidden" id="caseId" value="<s:property value="pathology.caseId"/>">
                       <a style=" float:right">会诊号：<span id="lblCheckNumber">未处理</span></a>
                     </div>
                     <div class="report_list border_bom">
@@ -268,6 +283,11 @@
                       </div>
                     </div>
                   </div>
+                  <div class="inbox_con_list">
+                    <div class="message right">
+                      <input type="button" id="btnSaveContent" class="massges_btn" value="保存">
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -328,13 +348,13 @@
                   </div>
                   <div class="massges">
                     <div id="divIsAllExpert" class="massges_div left">
-                      <input value="1" type="radio" name="readable" checked="checked"><span>所有专家可见</span>
+                      <input value="1" type="radio" name="readable" checked><span>所有专家可见</span>
                       <input value="0" type="radio" name="readable"><span>部分专家可见</span>
                     </div>
                     <input name="btnCreateMeeting" type="button" id="btnCreateMeeting" class="massges_btn"
                            style="width:130px; margin-left:10px;" value="创建视频会议" onclick="openMeeting()">
-                    <input type="button" id="btnSaveContent" class="massges_btn" value="发送留言"
-                           onclick="SaveContentByID('btnSaveContent')">
+                    <input type="button" id="btnSaveMessage" class="massges_btn" value="发送留言"
+                           onclick="saveMessage();">
                     <div class="clear">
                     </div>
                   </div>
@@ -384,48 +404,58 @@
 <div style="text-align:center;">
 </div>
 </body>
-<script type="text/javascript" src="${path }/js/jquery.min.js"></script>
-<script type="text/javascript" src="${path }/js/iviewer/jqueryui.js"></script>
-<script type="text/javascript" src="${path }/js/iviewer/jquery.mousewheel.min.js"></script>
-<script type="text/javascript" src="${path }/js/iviewer/jquery.iviewer.js"></script>
-<script type="text/javascript" src="${path }/js/iviewer/main.js"></script>
+</html>
 <script>
-    $(function () {
-        // 禁用所有input
+  $(function () {
+    // 禁用所有input
 //    $('input').attr("disabled", "true");
 //    $('textarea').attr("disabled", "true");
 //    $('select').attr("disabled", "true");
-        //设置标杆
-        var _line = parseInt($(window).height() / 3);
-        $(window).scroll(function () {
-            //滚动730px，左侧导航固定定位
-            if ($(window).scrollTop() > 730) {
-                $('.fl_t').css({'position': 'fixed', 'top': 10})
-            } else {
-                $('.fl_t').css({'position': '', 'top': ''})
-            }
-            ;
-            $('.fl_t li').eq(0).addClass('active');
-            //滚动到标杆位置,左侧导航加active
-            $('.fl_r li').each(function () {
-                var _target = parseInt($(this).offset().top - $(window).scrollTop() - _line);
-                var _i = $(this).index();
-                if (_target <= 0) {
-                    $('.fl_t li').removeClass('active');
-                    $('.fl_t li').eq(_i).addClass('active');
-                }
-                //如果到达页面底部，给左侧导航最后一个加active
-                else if ($(document).height() == $(window).scrollTop() + $(window).height()) {
-                    $('.fl_t li').removeClass('active');
-                    $('.fl_t li').eq($('.fl_r li').length - 1).addClass('active');
-                }
-            });
-        });
-        $('.fl_t li').click(function () {
-            $(this).addClass('active').siblings().removeClass('active');
-            var _i = $(this).index();
-            $('body, html').animate({scrollTop: $('.fl_r li').eq(_i).offset().top - _line}, 500);
-        });
+    $('#btnSaveContent').click(function() {
+      var content = {'caseId': $('#caseId').val(), 'generalSee': CKEDITOR.instances.generalSee.getData()};
+      $.ajax({
+        type: 'post',
+        url: "../PathologyAction!savePathology",
+        data: {content: JSON.stringify(content)},
+        //contentType:"text/html;charset=utf-8",
+        dataType: "text",
+        success: function (result) {
+          if (result) {
+
+          }
+        }
+      });
     });
+
+    //设置标杆
+    var _line = parseInt($(window).height() / 3);
+    $(window).scroll(function () {
+      //滚动730px，左侧导航固定定位
+      if ($(window).scrollTop() > 730) {
+        $('.fl_t').css({'position': 'fixed', 'top': 10})
+      } else {
+        $('.fl_t').css({'position': '', 'top': ''})
+      }
+      $('.fl_t li').eq(0).addClass('active');
+      //滚动到标杆位置,左侧导航加active
+      $('.fl_r li').each(function () {
+        var _target = parseInt($(this).offset().top - $(window).scrollTop() - _line);
+        var _i = $(this).index();
+        if (_target <= 0) {
+          $('.fl_t li').removeClass('active');
+          $('.fl_t li').eq(_i).addClass('active');
+        }
+        //如果到达页面底部，给左侧导航最后一个加active
+        else if ($(document).height() == $(window).scrollTop() + $(window).height()) {
+          $('.fl_t li').removeClass('active');
+          $('.fl_t li').eq($('.fl_r li').length - 1).addClass('active');
+        }
+      });
+    });
+    $('.fl_t li').click(function () {
+      $(this).addClass('active').siblings().removeClass('active');
+      var _i = $(this).index();
+      $('body, html').animate({scrollTop: $('.fl_r li').eq(_i).offset().top - _line}, 500);
+    });
+  });
 </script>
-</html>

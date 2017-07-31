@@ -1,6 +1,7 @@
 package com.pathology.action;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.pathology.dto.PathologyDTO;
 import com.pathology.entity.Pathology;
 import com.pathology.service.IPathologyService;
@@ -27,19 +28,18 @@ public class PathologyAction extends BaseAction {
   private IPathologyService pathologyService;
   private List<PathologyDTO> pathologys;
   private PathologyDTO pathology;
+  private String content;
 
   /**
    * 保存病理
    *
-   * @param pathologgyjson
    * @return
    */
-  public Pathology savePathology(String pathologgyjson) {
-    JSONObject obj = JSONObject.fromObject(pathologgyjson);// 将json字符串转换为json对象
+  public Pathology savePathology() {
+    JSONObject obj = JSONObject.fromObject(this.content);// 将json字符串转换为json对象
     // 将json对象转换为java对象
-    Pathology jb = (Pathology) JSONObject.toBean(obj, Pathology.class);// 将建json对象转换为Person对象
-    pathologyService.addPathology(jb);
-    return jb;
+    PathologyDTO pathology = (PathologyDTO) JSONObject.toBean(obj, PathologyDTO.class);// 将建json对象转换为Person对象
+    return null;
   }
 
   /**
@@ -127,5 +127,13 @@ public class PathologyAction extends BaseAction {
 
   public void setPathology(PathologyDTO pathology) {
     this.pathology = pathology;
+  }
+
+  public String getContent() {
+    return content;
+  }
+
+  public void setContent(String content) {
+    this.content = content;
   }
 }
