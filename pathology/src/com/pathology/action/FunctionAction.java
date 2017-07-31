@@ -75,11 +75,12 @@ public class FunctionAction extends BaseAction {
 					Function.class, hql) : functionservice.getByPage(1,
 					Function.class, hql);
 
-			HttpServletRequest request = RequestUtil.getRequest();
-			request.setAttribute("functionlist", list);
-			request.setAttribute("thisindex", index == 0 ? 1 : index);
+			HttpSession session = ServletActionContext.getRequest()
+					.getSession();
+			session.setAttribute("functionlist", list);
+			session.setAttribute("thisindex", index == 0 ? 1 : index);
 
-			request.setAttribute("count",
+			session.setAttribute("count",
 					functionservice.getAllFunction(Function.class, hql).size());
 			return SUCCESS;
 		} catch (Exception e) {
