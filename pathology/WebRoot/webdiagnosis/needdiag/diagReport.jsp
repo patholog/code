@@ -305,10 +305,8 @@
                 </ul>
                 <ul id="ulSection" class="inbox_ul inbox_ul_check">
                   <li>
-                    <a style="cursor:pointer"
-                       href=" http://slide.91360.com:8090/IndexPc.aspx?slideid=MTE0MzM%3d&amp;userid=1913&amp;pid=8007&amp;SessionId=888426"
-                       target="_blank">
-                      <img src="http://120.26.45.137:8077/Thumbnail/2017/3/20170331132926234_2017_3_31_132931.jpg"
+                    <a style="cursor:pointer" href="" target="_blank">
+                      <img src=""
                            alt="">
                       <div class="inbox_ul_msg">
                         <div class="mlrAuto inbox_span font14">切片：<span
