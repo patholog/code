@@ -6,6 +6,7 @@ import com.pathology.dto.PathologyDTO;
 import com.pathology.entity.Pathology;
 import com.pathology.entity.Result;
 import com.pathology.service.IPathologyService;
+import com.pathology.service.IResultService;
 import com.pathology.util.Constant;
 import com.pathology.util.SessionAgentManager;
 import com.pathology.util.StringUtil;
@@ -30,18 +31,20 @@ public class PathologyAction extends BaseAction {
   private List<PathologyDTO> pathologys;
   private PathologyDTO pathology;
   private String content;
+  private IResultService resultService;
 
   /**
    * 保存病理
    *
    * @return
    */
-  public Pathology savePathology() {
+  public String savePathology() {
     try {
       JSONObject obj = JSONObject.fromObject(this.content);// 将json字符串转换为json对象
       // 将json对象转换为java对象
       Result result = (Result) JSONObject.toBean(obj, Result.class);// 将建json对象转换为Person对象
-      return null;
+      resultService.updateResult(result);
+      return "true";
     } catch (Throwable e) {
       logger.error(e.getMessage());
       return null;
@@ -141,5 +144,13 @@ public class PathologyAction extends BaseAction {
 
   public void setContent(String content) {
     this.content = content;
+  }
+
+  public IResultService getResultService() {
+    return resultService;
+  }
+
+  public void setResultService(IResultService resultService) {
+    this.resultService = resultService;
   }
 }

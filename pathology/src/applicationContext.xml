@@ -147,6 +147,13 @@
 		scope="prototype">
 		<property name="pathologyService" ref="pathologyService"></property>
 	</bean>
+
+	<bean id="resultDao" class="com.pathology.dao.impl.ResultDaoImpl" parent="pt">
+    <property name="jdbcTemplate" ref="jdbcTemplate"/>
+  </bean>
+  <bean id="resultService" class="com.pathology.service.impl.ResultServiceImpl">
+    <property name="resultDao" ref="resultDao"/>
+  </bean>
 	
 	<!-- 病理报告 -->
 	<bean id="pathologyreportService" class="com.pathology.service.impl.PathologyReportServiceImpl">

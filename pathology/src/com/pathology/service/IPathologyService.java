@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.pathology.dto.PathologyDTO;
 import com.pathology.entity.Pathology;
+import com.pathology.entity.Result;
 
 public interface IPathologyService {
 

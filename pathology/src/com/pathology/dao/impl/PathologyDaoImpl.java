@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.pathology.entity.Result;
 import org.hibernate.SessionFactory;
 
 import com.pathology.dao.IPathologyDao;
@@ -52,7 +53,5 @@ public class PathologyDaoImpl extends SuperDao implements IPathologyDao {
 	public void addPathology(Pathology em){
 		super.add(em);
 	}
-
-
 
 }

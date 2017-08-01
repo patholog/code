@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.pathology.entity.Result;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.pathology.dao.IImageDao;
@@ -22,15 +23,16 @@ public class PathologyServiceImpl implements IPathologyService {
 
   private IPathologyDao pathologydao;
   private IImageDao imagedao;
+
   public IImageDao getImagedao() {
-	return imagedao;
-}
+    return imagedao;
+  }
 
-public void setImagedao(IImageDao imagedao) {
-	this.imagedao = imagedao;
-}
+  public void setImagedao(IImageDao imagedao) {
+    this.imagedao = imagedao;
+  }
 
-private JdbcTemplate jdbcTemplate;
+  private JdbcTemplate jdbcTemplate;
   private String basicSql = "SELECT a.id_case caseId, a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
       + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
       + "a.specimenname specimenName, a.idcard idCard, a.mobile, a.diag_time,"
@@ -43,7 +45,7 @@ private JdbcTemplate jdbcTemplate;
   private String basicCountSql = "SELECT count(1) FROM pathology a "
       + " LEFT JOIN result  c ON a.id_case = c.case_id"
       + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
-      +	" LEFT JOIN COLLECTION E ON A.ID_CASE=E.CASE_ID AND A.ID_DOCTOR=E.ID_DOCTOR";
+      + " LEFT JOIN COLLECTION E ON A.ID_CASE=E.CASE_ID AND A.ID_DOCTOR=E.ID_DOCTOR";
 
   public JdbcTemplate getJdbcTemplate() {
     return jdbcTemplate;
@@ -76,31 +78,27 @@ private JdbcTemplate jdbcTemplate;
       pathologydao.deletePathology(em);
   }
 
-  
-/*
- * 获取待诊断列表
- */
-public List<PathologyDTO> getListPathologyToNeed(HttpServletRequest request, String name) {
-	try
-	{
-        String pageNum = request.getParameter("pageNum");
-        pageNum = pageNum != null ? pageNum : "1";
-        String title = "";
-        int status = 1;
-        String sql = basicSql + " WHERE a.diag_status='2' and a.id_doctor='"+name+"'";
-        String countSql = basicCountSql + " WHERE a.diag_status='2' and a.id_doctor='"+name+"'";
+  /*
+   * 获取待诊断列表
+   */
+  public List<PathologyDTO> getListPathologyToNeed(HttpServletRequest request, String name) {
+    try {
+      String pageNum = request.getParameter("pageNum");
+      pageNum = pageNum != null ? pageNum : "1";
+      String title = "";
+      int status = 1;
+      String sql = basicSql + " WHERE a.diag_status='2' and a.id_doctor='" + name + "'";
+      String countSql = basicCountSql + " WHERE a.diag_status='2' and a.id_doctor='" + name + "'";
 
-        int totalNum = jdbcTemplate.queryForInt(countSql);
-        if (totalNum > 0) {
-          Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
-          request.setAttribute("page", page.getPageStr());
-        }
-        return jdbcTemplate.query(sql, new PathologyMapping());
-	}
-	catch(Exception ex)
-	{
-		throw new RuntimeException("查询出现错误");
-	}
+      int totalNum = jdbcTemplate.queryForInt(countSql);
+      if (totalNum > 0) {
+        Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
+        request.setAttribute("page", page.getPageStr());
+      }
+      return jdbcTemplate.query(sql, new PathologyMapping());
+    } catch (Exception ex) {
+      throw new RuntimeException("查询出现错误");
+    }
 
   }
 
@@ -109,13 +107,13 @@ public List<PathologyDTO> getListPathologyToNeed(HttpServletRequest request, Str
     try {
 //    	//获取当前登陆用户
 //    	String userId=SessionAgentManager.getSessionAgentBean().getIdUsers();
-        String sql = basicSql + " WHERE a.id_case = '" + caseId + "'";
-    	PathologyDTO pathologyDto=(PathologyDTO) jdbcTemplate.queryForObject(sql, new PathologyMapping());
-    	if(pathologyDto==null)
-    		return null;
-		List<Image> lst=imagedao.getImages(Image.class, pathologyDto.getCaseId());
-		pathologyDto.setImages(lst);
-		return pathologyDto;
+      String sql = basicSql + " WHERE a.id_case = '" + caseId + "'";
+      PathologyDTO pathologyDto = (PathologyDTO) jdbcTemplate.queryForObject(sql, new PathologyMapping());
+      if (pathologyDto == null)
+        return null;
+      List<Image> lst = imagedao.getImages(Image.class, pathologyDto.getCaseId());
+      pathologyDto.setImages(lst);
+      return pathologyDto;
     } catch (Exception e) {
       throw new RuntimeException("查询出现错误");
     }
@@ -127,8 +125,8 @@ public List<PathologyDTO> getListPathologyToNeed(HttpServletRequest request, Str
     pageNum = pageNum != null ? pageNum : "1";
     String title = "";
     int status = 1;
-    String sql = basicSql + " WHERE a.diag_status='7' and a.id_doctor='"+name+"'";
-    String countSql = basicCountSql + " WHERE a.diag_status='7' and a.id_doctor='"+name+"'";
+    String sql = basicSql + " WHERE a.diag_status='7' and a.id_doctor='" + name + "'";
+    String countSql = basicCountSql + " WHERE a.diag_status='7' and a.id_doctor='" + name + "'";
 
     int totalNum = jdbcTemplate.queryForInt(countSql);
     if (totalNum > 0) {

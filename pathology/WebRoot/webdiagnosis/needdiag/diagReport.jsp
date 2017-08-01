@@ -418,8 +418,8 @@
         //contentType:"text/html;charset=utf-8",
         dataType: "text",
         success: function (result) {
-          if (result) {
-
+          if (result && "true" == result) {
+            alert("1");
           }
         }
       });
