@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>jQuery图片支持鼠标滚轮缩放以及点击自定义缩放图片的插件smartZoom.js下载</title>
+<title>病理图片查看</title>
 
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <link rel="stylesheet" href="${path }/cropper/dist/image.css"/>
