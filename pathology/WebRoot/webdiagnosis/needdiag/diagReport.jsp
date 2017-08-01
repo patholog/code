@@ -305,9 +305,9 @@
                 </ul>
                 <ul id="ulSection" class="inbox_ul inbox_ul_check">
                   <li>
-                    <a style="cursor:pointer" href="" target="_blank">
+                    <a style="cursor:pointer" href="test" target="_blank">
                       <img src=""
-                           alt="">
+                           alt="" href="">
                       <div class="inbox_ul_msg">
                         <div class="mlrAuto inbox_span font14">切片：<span
                             title="20161205135531603.kfb">20161205135531603...</span>
