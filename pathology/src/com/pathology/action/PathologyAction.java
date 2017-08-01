@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.pathology.dto.PathologyDTO;
 import com.pathology.entity.Pathology;
+import com.pathology.entity.Result;
 import com.pathology.service.IPathologyService;
 import com.pathology.util.Constant;
 import com.pathology.util.SessionAgentManager;
@@ -39,7 +40,7 @@ public class PathologyAction extends BaseAction {
     try {
       JSONObject obj = JSONObject.fromObject(this.content);// 将json字符串转换为json对象
       // 将json对象转换为java对象
-      PathologyDTO pathology = (PathologyDTO) JSONObject.toBean(obj, PathologyDTO.class);// 将建json对象转换为Person对象
+      Result result = (Result) JSONObject.toBean(obj, Result.class);// 将建json对象转换为Person对象
       return null;
     } catch (Throwable e) {
       logger.error(e.getMessage());
