@@ -13,33 +13,7 @@
 <link rel="stylesheet" type="text/css" href="${path}/css/login.css" />
 <script src="${path}/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <script src="${path}/js/login.js" type="text/javascript"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
 
-		$("#loginBtn").click(function() {
-			//login1为Action类命名空间名称；AjaxExecute为Action方法名称
-			$.ajax({
-				type : "post",
-				url : 'login2.action?login',
-				contentType : "application/json; charset=utf-8",
-				data : JSON.stringify({//设置数据源
-					user : {
-						username : 'ff',
-						password : 'ff'
-					}
-				}),
-				dataType : "json",//设置需要返回的数据类型
-				success : function(d) {
-
-					alert(JSON.stringify(d));
-				},
-				error : function(d) {
-				}
-			});
-		});
-
-	});
-</script>
 </head>
 <body>
 
