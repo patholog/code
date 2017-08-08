@@ -11,6 +11,7 @@ import com.pathology.service.IFunctionService;
 import com.pathology.service.IRolesService;
 import com.pathology.service.IUsersService;
 import com.pathology.util.Constant;
+import com.pathology.util.DigestMD5;
 import com.pathology.util.RequestUtil;
 import com.pathology.util.SessionAgentManager;
 
@@ -69,10 +70,10 @@ public class LoginAction extends BaseAction {
 	public String login() {
 		Users u = this.user;
 		try {
-			// String
-			// hql=" and  s.username='"+user.getUsername()+"' and s.password='"+DigestMD5.getDigestPassWord(user.getPassword())+"'";
-			String hql = " and  s.username='" + user.getUsername()
-					+ "' and s.password='" + user.getPassword() + "'";
+			String
+			hql=" and  s.username='"+user.getUsername()+"' and s.password='"+DigestMD5.getDigestPassWord(user.getPassword())+"'";
+//			String hql = " and  s.username='" + user.getUsername()
+//					+ "' and s.password='" + user.getPassword() + "'";
 			List<Users> userT = userservice.getAllUser(Users.class, hql);
 			
 			if (userT != null && userT.size() == 1) {
