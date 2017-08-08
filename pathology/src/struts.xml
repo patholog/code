@@ -116,11 +116,12 @@
       <result name="collections">/webdiagnosis/collectdiag/collectdiag_list.jsp</result>
 	  <result name="deletesuccess" type="redirectAction">CollectionAction!getCollectionList</result>
     </action>
-    <!--  收藏 -->
+    <!--  分享-->
     <action name="ShareAction" class="com.pathology.action.ShareAction">
       <result name="err">/err.jsp</result>
       <result name="shares">/webdiagnosis/diagshare/diagshare_list.jsp</result>
        <result name="deletesuccess" type="redirectAction">ShareAction!getShareList</result>
+       <result name="success" type="redirectAction">ShareAction!getShareList</result>
     </action>
     <!-- 病例表 -->
     <action name="PathologyAction" class="com.pathology.action.PathologyAction">
