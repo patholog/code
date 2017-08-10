@@ -16,7 +16,7 @@ public class ShareDTO implements java.io.Serializable {
 	private String shareId;
 	private String messageOrder;
 	private String isReaded;
-	private Timestamp createTime;
+	private String createTime;
 	private String memo;
 	private Date lastUpdTime;
 	private String lastUpdDeptCd;
@@ -74,10 +74,10 @@ public class ShareDTO implements java.io.Serializable {
 	public void setIsReaded(String isReaded) {
 		this.isReaded = isReaded;
 	}
-	public Timestamp getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Timestamp createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
 	public String getMemo() {

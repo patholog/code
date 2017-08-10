@@ -2,6 +2,7 @@ package com.pathology.mapping;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,7 +17,7 @@ public class ShareMapping  implements RowMapper {
 	private final Logger logger = Logger.getLogger(ShareMapping.class);
 	@Override
 	public ShareDTO mapRow(ResultSet rs, int arg1) {
-
+		SimpleDateFormat myFmt1=new SimpleDateFormat("yyyy/MM/dd HH:mm");
 		try{
 			ShareDTO bean = new ShareDTO();
 			bean.setNum(rs.getRow());
@@ -27,7 +28,7 @@ public class ShareMapping  implements RowMapper {
 		    bean.setUsername(rs.getString("username"));
 			bean.setPathologyNo(rs.getString("pathologyno"));
 			bean.setPatientname(rs.getString("patientname"));
-			bean.setCreateTime(rs.getTimestamp("crt_Time"));
+			bean.setCreateTime(myFmt1.format(rs.getTimestamp("crt_Time")));
 			bean.setCaseId(rs.getString("case_id"));
 			/*bean.setId(rs.getInt("username"));
 			bean.setCure(rs.getString("content"));

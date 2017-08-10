@@ -2,6 +2,7 @@ package com.pathology.mapping;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.RowMapper;
@@ -15,8 +16,9 @@ public class MessageMapping  implements RowMapper {
 	private final Logger logger = Logger.getLogger(MessageMapping.class);
 	@Override
 	public MessageDTO mapRow(ResultSet rs, int arg1) {
-
+		
 		try{
+			SimpleDateFormat myFmt1=new SimpleDateFormat("yyyy/MM/dd HH:mm");
 			MessageDTO bean = new MessageDTO();
 			bean.setNum(rs.getRow());
 			bean.setMessageOrder(rs.getString("username"));
@@ -25,7 +27,7 @@ public class MessageMapping  implements RowMapper {
 		    bean.setUsername(rs.getString("username"));
 			bean.setPathologyNo(rs.getString("pathologyno"));
 			bean.setPatientname(rs.getString("patientname"));
-			bean.setCreateTime(rs.getTimestamp("createTime"));
+			bean.setCreateTime(myFmt1.format(rs.getTimestamp("createTime")));
 			/*bean.setId(rs.getInt("username"));
 			bean.setCure(rs.getString("content"));
 			bean.setCreate_time(rs.getString("create_time"));

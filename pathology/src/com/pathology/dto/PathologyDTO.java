@@ -18,7 +18,7 @@ public class PathologyDTO implements java.io.Serializable {
   private String caseId;
   private String messageOrder;
   private String isReaded;
-  private Timestamp createTime;
+  private String createTime;
   private String memo;
   private Date lastUpdTime;
   private String lastUpdDeptCd;
@@ -31,7 +31,7 @@ public class PathologyDTO implements java.io.Serializable {
   private String specimenName;
   private String idCard;
   private String mobile;
-  private Date diagTime;
+  private String diagTime;
   private String collectionId;
   private List<Image> Images;
   public List<Image> getImages() {
@@ -136,11 +136,11 @@ public void setCollectionId(String collectionId) {
     this.isReaded = isReaded;
   }
 
-  public Timestamp getCreateTime() {
+  public String getCreateTime() {
     return createTime;
   }
 
-  public void setCreateTime(Timestamp createTime) {
+  public void setCreateTime(String createTime) {
     this.createTime = createTime;
   }
 
@@ -240,11 +240,11 @@ public void setCollectionId(String collectionId) {
     this.mobile = mobile;
   }
 
-  public Date getDiagTime() {
+  public String getDiagTime() {
     return diagTime;
   }
 
-  public void setDiagTime(Date diagTime) {
+  public void setDiagTime(String diagTime) {
     this.diagTime = diagTime;
   }
 

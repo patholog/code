@@ -19,12 +19,13 @@ public class PathologyMapping implements RowMapper {
     try {
       DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
       Timestamp stamp=new Timestamp();
+      SimpleDateFormat myFmt1=new SimpleDateFormat("yyyy/MM/dd HH:mm"); 
       PathologyDTO bean = new PathologyDTO();
       bean.setNum(rs.getRow());
       bean.setPathologyNo(rs.getString("pathologyno"));
       bean.setPatientname(rs.getString("patientname"));
       bean.setHospitalname(rs.getString("hospitalname"));
-      bean.setCreateTime(rs.getTimestamp("crt_Time"));
+      bean.setCreateTime(myFmt1.format(rs.getTimestamp("crt_Time")));
       bean.setPatientBirthday(rs.getDate("patientBirthday"));
       bean.setPatientSex(rs.getString("patientSex"));
       bean.setPatientAge(rs.getString("patientAge"));
@@ -32,7 +33,7 @@ public class PathologyMapping implements RowMapper {
       bean.setIdCard(rs.getString("idCard"));
       bean.setCaseId(rs.getString("caseId"));
       bean.setMobile(rs.getString("mobile"));
-      bean.setDiagTime(rs.getDate("diag_time"));
+      bean.setDiagTime(myFmt1.format(rs.getDate("diag_time")));
       bean.setHistorySummary(rs.getString("historysummary"));
       bean.setClinicDiagnose(rs.getString("clinicdiagnose"));
       bean.setInspectionDate(rs.getDate("inspectionDate"));

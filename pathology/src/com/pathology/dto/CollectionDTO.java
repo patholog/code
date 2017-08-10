@@ -18,14 +18,14 @@ public class CollectionDTO implements java.io.Serializable {
 	private String collectionId;
 	private String messageOrder;
 	private String isReaded;
-	private Timestamp createTime;
+	private String createTime;
 	private String memo;
 	private Date lastUpdTime;
 	private String lastUpdDeptCd;
 	private String lastUpdUserId;
 	private Integer delF;
 	private String pathologyNo;
-	private Date diagtime;
+	private String diagtime;
 	
 	public String getCollectionId() {
 		return collectionId;
@@ -47,10 +47,10 @@ public class CollectionDTO implements java.io.Serializable {
 		this.hospitalname = hospitalname;
 	}
 	
-	public Date getDiagtime() {
+	public String getDiagtime() {
 		return diagtime;
 	}
-	public void setDiagtime(Date diagtime) {
+	public void setDiagtime(String diagtime) {
 		this.diagtime = diagtime;
 	}
 	public int getNum() {
@@ -95,10 +95,10 @@ public class CollectionDTO implements java.io.Serializable {
 	public void setIsReaded(String isReaded) {
 		this.isReaded = isReaded;
 	}
-	public Timestamp getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Timestamp createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
 	public String getMemo() {
