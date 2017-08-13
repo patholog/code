@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.pathology.dto.PathologyDTO;
 import com.pathology.entity.Pathology;
 import com.pathology.entity.Result;
+import com.pathology.entity.SlideResult;
 import com.pathology.service.IPathologyService;
 import com.pathology.service.IResultService;
 import com.pathology.util.Constant;
@@ -15,11 +16,13 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 /**
  * @author yi
- *
  */
 public class PathologyAction extends BaseAction {
   private final Logger logger = Logger.getLogger(PathologyAction.class);
@@ -58,8 +61,8 @@ public class PathologyAction extends BaseAction {
    */
   public String getPathologyListToNeed() {
     try {
-    	//获取当前登陆用户
-      String userId=SessionAgentManager.getSessionAgentBean().getIdUsers();
+      //获取当前登陆用户
+      String userId = SessionAgentManager.getSessionAgentBean().getIdUsers();
       HttpServletRequest request = ServletActionContext.getRequest();
       pathologys = pathologyService.getListPathologyToNeed(request, userId);
       return "pathologysneed";
@@ -87,10 +90,10 @@ public class PathologyAction extends BaseAction {
 
   public String getPathologyListToHas() {
     try {
-    //获取当前登陆用户
-    	if (!SessionAgentManager.islogin())
-			return Constant.ERR;
-      String userId=SessionAgentManager.getSessionAgentBean().getIdUsers();
+      //获取当前登陆用户
+      if (!SessionAgentManager.islogin())
+        return Constant.ERR;
+      String userId = SessionAgentManager.getSessionAgentBean().getIdUsers();
       HttpServletRequest request = ServletActionContext.getRequest();
       pathologys = pathologyService.getListPathologyToHas(request, userId);
       return "pathologyshas";
@@ -99,7 +102,20 @@ public class PathologyAction extends BaseAction {
     }
     return "pathologyshas";
   }
-  
+
+  public String OpenSlideHandler() throws IOException {
+    HttpServletResponse response = ServletActionContext.getResponse();
+    response.setContentType("text/html;charset=utf-8");
+    PrintWriter out = response.getWriter();
+    String url = "http://localhost:8080/imagesystem/show.do?filename=&id=5&zoom=08&PositionX=3&PositionY=2";
+    SlideResult slideResult = new SlideResult("", "58112", "64000", "40", "256", "",
+        "", "0", "P500B15001", url, "", "", "");
+    out.println(slideResult.toString() + "$" + slideResult.toString() + "#" + slideResult.toString());
+    out.flush();
+    out.close();
+    return SUCCESS;
+  }
+
   /*
    * 已诊断
    */
