@@ -19,15 +19,15 @@
   <link href="${path }/assets/css/smoothness/jquery.ui.theme.css" rel="stylesheet" type="text/css"/>
   <link href="${path }/assets/css/smoothness/jquery.ui.dialog.css" rel="stylesheet" type="text/css"/>
   <link href="${path }/assets/css/viewerpage.css" rel="stylesheet" type="text/css"/>
-  <script src="${path }/assets/js/jquery/jquery-1.7.2.min.js" type="text/javascript"></script>
+  <script src="${path }/assets/jquery/jquery-1.7.2.min.js" type="text/javascript"></script>
   <!-- easing -->
   <script src="${path }/assets/js/jquery.easing.1.3.js" type="text/javascript"></script>
   <!-- liteAccordion js -->
   <script src="${path }/assets/js/liteaccordion.jquery.js" type="text/javascript"></script>
   <script src="${path }/assets/js/jquery-ui-1.8.14.custom.min.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/jquery/jquery.cookie.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/jquery/farbtastic.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/jquery/colpick.js" type="text/javascript"></script>
+  <script src="${path }/assets/jquery/jquery.cookie.js" type="text/javascript"></script>
+  <script src="${path }/assets/jquery/farbtastic.js" type="text/javascript"></script>
+  <script src="${path }/assets/jquery/colpick.js" type="text/javascript"></script>
   <script src="${path }/assets/js/bootstrap-checkbox.js" type="text/javascript"></script>
 
 
@@ -36,43 +36,43 @@
 <script src="assets/SlideViewer/b.js" type="text/javascript"></script>
 -->
   <script src="${path }/assets/js/syncfuture.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/SlideViewer/SlideViewerUtility.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/Seadragon/Seadragon.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/SlideViewer/SlideViewerCommon.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/SlideViewer/SlideViewerConfig.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/SlideViewer/SlideViewerSupport.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/SlideViewer/SlideViewerImageInfo.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/ImageProcess/ImageProcess.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/SlideViewer/SeadragonTileSource.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/NavigationView.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/AnnotationType.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/SlideViewer/SeadragonViewer.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/SlideViewer/SlideViewerStrings.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/SlideViewer/SlideViewerDialog.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/SlideViewer/SlideViewerToolbar.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/SlideViewer/SlideViewerProvider.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/SlideViewer/SlideViewerCreateView.js" type="text/javascript"></script>
+  <script src="${path }/assets/SlideViewer/SlideViewerUtility.js" type="text/javascript"></script>
+  <script src="${path }/assets/Seadragon/Seadragon.js" type="text/javascript"></script>
+  <script src="${path }/assets/SlideViewer/SlideViewerCommon.js" type="text/javascript"></script>
+  <script src="${path }/assets/SlideViewer/SlideViewerConfig.js" type="text/javascript"></script>
+  <script src="${path }/assets/SlideViewer/SlideViewerSupport.js" type="text/javascript"></script>
+  <script src="${path }/assets/SlideViewer/SlideViewerImageInfo.js" type="text/javascript"></script>
+  <script src="${path }/assets/ImageProcess/ImageProcess.js" type="text/javascript"></script>
+  <script src="${path }/assets/SlideViewer/SeadragonTileSource.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/NavigationView.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/AnnotationType.js" type="text/javascript"></script>
+  <script src="${path }/assets/SlideViewer/SeadragonViewer.js" type="text/javascript"></script>
+  <script src="${path }/assets/SlideViewer/SlideViewerStrings.js" type="text/javascript"></script>
+  <script src="${path }/assets/SlideViewer/SlideViewerDialog.js" type="text/javascript"></script>
+  <script src="${path }/assets/SlideViewer/SlideViewerToolbar.js" type="text/javascript"></script>
+  <script src="${path }/assets/SlideViewer/SlideViewerProvider.js" type="text/javascript"></script>
+  <script src="${path }/assets/SlideViewer/SlideViewerCreateView.js" type="text/javascript"></script>
 
-  <script src="${path }/assets/js/DynamicGeometry/ShapeViewer.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/Rect.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/ShapeCanvas.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/ActiveMove.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/ShapeDefaultConfig.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/Shape.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/Line.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/Arrow.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/Rectangle.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/Remark.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/Position.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/Ellipse.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/CurveRounded.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/Curve.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/SizeOrientation.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/Measure.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/Point.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/Grid.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/Ruler.js" type="text/javascript"></script>
-  <script src="${path }/assets/js/DynamicGeometry/SlideLabel.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/ShapeViewer.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/Rect.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/ShapeCanvas.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/ActiveMove.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/ShapeDefaultConfig.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/Shape.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/Line.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/Arrow.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/Rectangle.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/Remark.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/Position.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/Ellipse.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/CurveRounded.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/Curve.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/SizeOrientation.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/Measure.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/Point.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/Grid.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/Ruler.js" type="text/javascript"></script>
+  <script src="${path }/assets/DynamicGeometry/SlideLabel.js" type="text/javascript"></script>
   <script src="${path }/assets/js/hammer.min.js" type="text/javascript"></script>
 
 </head>
@@ -197,10 +197,10 @@
 <script>
   var mFirstLoad = 0;
   var loc = document.location.href;
-  var uabc = '';
+  var uabc = '/pathology';
   var WebReLocation = '';
-  var WebServerUrl = "http://" + window.location.host + uabc + "/PathologyAction!test/";
-  var WebServerShotUrl = "http://" + window.location.host + uabc + "/PathologyAction/";
+  var WebServerUrl = "http://" + window.location.host + uabc + "/PathologyAction!";
+  var WebServerShotUrl = "http://" + window.location.host + uabc + "/PathologyAction!";
   //var WebReLocation = '';
   var SyncImageServer = '192.168.20.100:8030';
   var mCurrentLevel = 0;
