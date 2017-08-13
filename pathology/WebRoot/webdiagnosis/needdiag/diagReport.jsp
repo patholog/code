@@ -305,7 +305,7 @@
                 </ul>
                 <ul id="ulSection" class="inbox_ul inbox_ul_check">
                   <li>
-                    <a style="cursor:pointer" href="test" target="_blank">
+                    <a style="cursor:pointer" href="test?caseId=5" target="_blank">
                       <img src=""
                            alt="" href="">
                       <div class="inbox_ul_msg">

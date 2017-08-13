@@ -25,7 +25,7 @@ public class HttpUtil {
     String result = "";
     BufferedReader in = null;
     try {
-      String urlNameString = url + "?" + param;
+      String urlNameString = StringUtil.isEmpty(param) ? url : url + "?" + param;
       URL realUrl = new URL(urlNameString);
       // 打开和URL之间的连接
       URLConnection connection = realUrl.openConnection();

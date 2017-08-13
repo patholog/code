@@ -30,8 +30,7 @@ var SlideViewerProvider;
         for (i = 0; i < dif; i++) {
           m_LevelRows.unshift(1);
         }
-      }
-      else if (dif < 0) {
+      } else if (dif < 0) {
         for (i = 0; i > dif; i--) {
           levelCols.unshift(1);
         }
@@ -94,12 +93,12 @@ var SlideViewerProvider;
         i.ScanMac = SlideInfo[8];
         //i.DigitalSlidePath = SlideInfo[9];
         i.ConsultID = "";
-        if (SlideInfo[3] == "20")
+        if (SlideInfo[3] === "20")
           i.calibration = "0.5";
         else
           i.calibration = "0.2439";
         i.UserID = getcookie("UserID");
-        i.CaseNo = getQueryString("caseno");
+        i.CaseNo = getQueryString("caseId");
         var url = getthumbnail(i);//[i.DigitalSlidePath,"/TileGroup0/0-0-0.jpg"].join("");
         //var url = i.DigitalSlidePath.toLowerCase().replace("decodetile.aspx", "getqiepianimg.aspx");
         $("#xinxi").attr("src", url);
@@ -108,7 +107,7 @@ var SlideViewerProvider;
         //for (var j = 10; j < SlideInfo.length; j++) { //modified by harry at 20150713
         var CurrentSlideInfoArr = SlideGroupArr[1].split('#');
         for (var j = 0; j < CurrentSlideInfoArr.length; j++) {
-          if (CurrentSlideInfoArr[j] != "") {
+          if (CurrentSlideInfoArr[j] !== "") {
             var slide = CurrentSlideInfoArr[j].split('|');
             SlideGroup += slide[0] + "|" + slide[9] + '#';
             var a1 = document.getElementById("slide" + slide[0]);
@@ -123,8 +122,8 @@ var SlideViewerProvider;
         //    SlideGroup = SlideGroup.substr(0, SlideGroup.length - 1);
         //}
         //SlideBind(SlideGroup);
-        if (typeof e == "function")  //e=rrBack
-        {
+        if (typeof e === "function") {
+          //e=rrBack
           e(i);
         }
       }
@@ -139,7 +138,6 @@ var SlideViewerProvider;
           url = i.DigitalSlidePath;
           var port = window.location.port;
           if (port !== null && port !== '' && port !== "80") {
-
           } else {
             if (WebReLocation !== '' && document.location.href.indexOf('/unic/') > 0) {
               tt = i.DigitalSlidePath.split('decodetile.aspx');
@@ -151,15 +149,15 @@ var SlideViewerProvider;
           CalLevelTiles(i.Width, i.Height);
           return [url, "/TileGroup0/0-0-0.jpg"].join("");
         }
-      }
-      else
+      } else {
         return "";
+      }
     }
 
     function getcookie(name) {
       var cookie_start = document.cookie.indexOf(name);
       var cookie_end = document.cookie.indexOf(";", cookie_start);
-      return cookie_start == -1 ? '' : unescape(document.cookie.substring(cookie_start + name.length + 1, (cookie_end > cookie_start ? cookie_end : document.cookie.length)));
+      return cookie_start === -1 ? '' : unescape(document.cookie.substring(cookie_start + name.length + 1, (cookie_end > cookie_start ? cookie_end : document.cookie.length)));
     }
 
     function TagBind(id) {
@@ -167,13 +165,14 @@ var SlideViewerProvider;
       var host = window.location.host;
       var ProxyIP = getQueryString("ProxyIP");
       var SlidePath = getQueryString("SlidePath");
-      if (ProxyIP != "")
+      if (ProxyIP !== "") {
         ProxyIP = "&ProxyIP=" + ProxyIP;
-
+      }
       url = "../LabelHandler.ashx?ID=" + id + ProxyIP;   //url
 
-      if (document.getElementById("labelImage"))
+      if (document.getElementById("labelImage")) {
         document.getElementById("labelImage").src = url;
+      }
     }
 
     function SlideBind(SeaViewer) {
@@ -194,8 +193,7 @@ var SlideViewerProvider;
 //                                            if(document.getElementById("shot"))
 //                                    document.getElementById("shot").style.bottom = "55px";
 //                                }
-      }
-      else {
+      } else {
         if (document.getElementById("SlideLists")) {
           document.getElementById("SlideLists").style.display = "inline";
         }
@@ -248,10 +246,10 @@ var SlideViewerProvider;
       var Case_No = "";
       var SlideDID = "";
       SlideIDs = SlideId;//getQueryString("SlideID");
-      Case_No = getQueryString("caseno");
+      Case_No = getQueryString("caseId");
       SlideDID = getQueryString("SlideDID");
       if (Case_No !== "" && Case_No !== null) {
-        Case_No = "&CaseNo=" + Case_No;
+        Case_No = "&caseId=" + Case_No;
       }
       if (SlideIDs !== "" && SlideIDs !== null) {
         SlideIDs = "&SlideID=" + SlideIDs;
@@ -279,27 +277,26 @@ var SlideViewerProvider;
         dataType: "text",
         complete: v
       });
+    };
+    this.updateImageAdjustment = function (n, i, r, u) {
+      function e(n, t) {
+        var i = new UpdateResult;
+        t === "success" ? i.success = !0 : i.error = t,
+        f && f(i)
+      }
 
-    },
-        this.updateImageAdjustment = function (n, i, r, u) {
-          function e(n, t) {
-            var i = new UpdateResult;
-            t == "success" ? i.success = !0 : i.error = t,
-            f && f(i)
-          }
-
-          var f = typeof u == "function" ? u : null,
-              s = [t, "?op=UpdateImageAdjustmentDocument"].join(""),
-              o = '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">                                 <soap:Body>                                     <UpdateImageAdjustmentDocument xmlns="http://www.motic.com/">                                         <slideId>' + n + "</slideId>                                          <imgId>" + i + "</imgId>                                          <doc>" + c(r) + "</doc>                                     </UpdateImageAdjustmentDocument>                                 </soap:Body>                                 </soap:Envelope>";
-          $.ajax({
-            url: s,
-            type: "POST",
-            dataType: "xml",
-            data: o,
-            complete: e,
-            contentType: 'text/xml; charset="utf-8"'
-          })
-        };
+      var f = typeof u === "function" ? u : null,
+          s = [t, "?op=UpdateImageAdjustmentDocument"].join(""),
+          o = '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">                                 <soap:Body>                                     <UpdateImageAdjustmentDocument xmlns="http://www.motic.com/">                                         <slideId>' + n + "</slideId>                                          <imgId>" + i + "</imgId>                                          <doc>" + c(r) + "</doc>                                     </UpdateImageAdjustmentDocument>                                 </soap:Body>                                 </soap:Envelope>";
+      $.ajax({
+        url: s,
+        type: "POST",
+        dataType: "xml",
+        data: o,
+        complete: e,
+        contentType: 'text/xml; charset="utf-8"'
+      })
+    };
     this.getTileUrl = function (slideKey, level, PositionX, PositionY, FileNum, ID, TileSize, gamma, contrast, light, r, g, b, DigitalSlidePath) {
       var str0 = [DigitalSlidePath, "/TileGroup", group, "/", mlevel, "-", PositionX, "-", PositionY, ".jpg"].join("");
       //str0 = [DigitalSlidePath, "&level=", level - 8, "&xpos=", PositionX, "&ypos=", PositionY].join("");
@@ -308,16 +305,33 @@ var SlideViewerProvider;
       if (url.indexOf("filename=") >= 0) {
         url = DigitalSlidePath;
         var port = window.location.port;
-        if (port != null && port != '' && port != "80") {
-
+        if (port !== null && port !== '' && port !== "80") {
         } else {
-          if (WebReLocation != '' && document.location.href.indexOf('/unic/') > 0) {
+          if (WebReLocation !== '' && document.location.href.indexOf('/unic/') > 0) {
             tt = DigitalSlidePath.split('decodetile.aspx');
             url = "http://" + window.location.host + "/unic/decodetile/decodetile.aspx" + tt[1];
           }
         }
         mCurrentLevel = level - 8;
-        str0 = [url, "&level=", level - 8, "&xpos=", PositionX, "&ypos=", PositionY].join("");
+        var mlevel = level > 8 ? level - 8 : 0;
+        url = url.substring(0, url.indexOf("zoom") - 1);
+        var zoom;
+        if (level < 2) {
+          zoom = '01';
+        } else if (level >=2 && level < 4) {
+          zoom = '02';
+        } else if (level >=4 && level < 8) {
+          zoom = '04';
+        } else if (level >=8 && level < 10) {
+          zoom = '08';
+        } else if (level >=10 && level < 20) {
+          zoom = '10';
+        } else if (level >=20 && level < 40) {
+          zoom = '20';
+        } else if (level >=40 && level < 80) {
+          zoom = '40';
+        }
+        str0 = [url, "&zoom=", zoom, '&level=', level, "&PositionX=", PositionX, "&PositionY=", PositionY].join("");
       } else {
         var mlevel = level > 8 ? level - 8 : 0;
         if (level > 6 && mlevel < m_LevelCols.Length) {
@@ -336,11 +350,10 @@ var SlideViewerProvider;
       if (url.indexOf("filename=") >= 0) {
         url = DigitalSlidePath;
         var port = window.location.port;
-        if (port != null && port != '' && port != "80") {
-
+        if (port !== null && port !== '' && port !== "80") {
         }
         else {
-          if (WebReLocation != '' && document.location.href.indexOf('/unic/') > 0) {
+          if (WebReLocation !== '' && document.location.href.indexOf('/unic/') > 0) {
             tt = DigitalSlidePath.split('decodetile.aspx');
             url = "http://" + window.location.host + "/unic/decodetile/decodetile.aspx" + tt[1];
           }

@@ -1,7 +1,7 @@
-﻿function GetSlideList(caseno, SlideId)   //i=rrBack
-{
+﻿function GetSlideList(caseno, SlideId) {
+  //i=rrBack
   WebServerPath = WebServerUrl + "OpenSlideHandler";
-  e = typeof i == "function" ? i : null;
+  e = typeof i === "function" ? i : null;
   var SlideIDs = "";
   var Case_No = "";
   var SlideDID = "";
@@ -9,7 +9,7 @@
   Case_No = caseno; // getQueryString("caseno");
   //SlideDID = getQueryString("SlideDID");
   if (Case_No !== "" && Case_No !== null) {
-    Case_No = "&CaseNo=" + Case_No;
+    Case_No = "&caseId=" + Case_No;
   }
   if (SlideIDs !== "" && SlideIDs !== null) {
     SlideIDs = "&SlideID=" + SlideIDs;
@@ -40,9 +40,9 @@ function ParseSlideInfo(result) {
   */
   var SlideGroupArr = result.split('$');
   var SlideInfoList = null;
-  if (SlideGroupArr.length === 2)
+  if (SlideGroupArr.length === 2) {
     SlideInfoList = SlideGroupArr[1];
-  else {
+  } else {
     alert("无数字切片");
     return;
   }
@@ -71,8 +71,7 @@ function SlideBind(SeaViewer) {
       document.getElementById("SlideLists").style.display = "none";
     if (document.getElementById("slides"))
       document.getElementById("slides").style.display = "none";
-  }
-  else {
+  } else {
     if (document.getElementById("SlideLists")) {
       document.getElementById("SlideLists").style.display = "inline";
     }
@@ -92,8 +91,7 @@ function SlideBind(SeaViewer) {
       var port = window.location.port;
       if (port !== null && port !== '' && port !== "80") {
 
-      }
-      else {
+      } else {
         if (WebReLocation !== '' && document.location.href.indexOf('/unic/') > 0) {
           tt = ThumnailUrl.split('decodetile.aspx');
           ThumnailUrl = "http://" + window.location.host + "/unic/decodetile/decodetile.aspx" + tt[1];

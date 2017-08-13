@@ -551,8 +551,8 @@
       toolswitch("0"); //0=收起截图列表;1=展开
     }
     var SlideID = getQueryString("SlideID");
-    var Case_No = getQueryString("caseno");
-    GetSlideList(Case_No, SlideID); //卓健用的时候需要把这句话注释掉
+    var Case_No = getQueryString("caseId");
+    GetSlideList(Case_No, SlideID);
     GotoSlide(SlideID);
     /*
     var slideId = 0; // parseID();

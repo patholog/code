@@ -9,6 +9,7 @@ import com.pathology.entity.SlideResult;
 import com.pathology.service.IPathologyService;
 import com.pathology.service.IResultService;
 import com.pathology.util.Constant;
+import com.pathology.util.HttpUtil;
 import com.pathology.util.SessionAgentManager;
 import com.pathology.util.StringUtil;
 import net.sf.json.JSONObject;
@@ -103,11 +104,27 @@ public class PathologyAction extends BaseAction {
     return "pathologyshas";
   }
 
+  /**
+   * 查看切片
+   *
+   * @return 查询切片信息
+   * @throws IOException IO
+   */
   public String OpenSlideHandler() throws IOException {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    String caseId = request.getParameter("caseId"); // 病理编号
+    String remotePath = "/pptest"; // FTP远程文件路径
+    String filename = "123.jpg"; // FTP远程文件名
+    // 下载图片
+    String imageSystemLocation = "localhost:8080/imagesystem";
+    String download = "http://" + imageSystemLocation + "/ftp/download.do?caseuid=" + caseId
+        + "&remotepath=" + remotePath + "&filename=" + filename;
+    String downloadResult = HttpUtil.sendGet(download, "");
     HttpServletResponse response = ServletActionContext.getResponse();
     response.setContentType("text/html;charset=utf-8");
     PrintWriter out = response.getWriter();
-    String url = "http://localhost:8080/imagesystem/show.do?filename=&id=5&zoom=08&PositionX=3&PositionY=2";
+    String url = "http://localhost:8080/imagesystem/show.do?filename=&id=" + caseId + "&zoom=08&PositionX=0&PositionY=0";
+    // 组装切片数据
     SlideResult slideResult = new SlideResult("", "58112", "64000", "40", "256", "",
         "", "0", "P500B15001", url, "", "", "");
     out.println(slideResult.toString() + "$" + slideResult.toString() + "#" + slideResult.toString());
