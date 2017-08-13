@@ -71,7 +71,7 @@ public class LoginAction extends BaseAction {
 		Users u = this.user;
 		try {
 			String
-			hql=" and  s.username='"+user.getUsername()+"' and s.password='"+DigestMD5.getDigestPassWord(user.getPassword())+"'";
+			hql=" and s.userstatus='1' and  s.username='"+user.getUsername()+"' and s.password='"+DigestMD5.getDigestPassWord(user.getPassword())+"'";
 //			String hql = " and  s.username='" + user.getUsername()
 //					+ "' and s.password='" + user.getPassword() + "'";
 			List<Users> userT = userservice.getAllUser(Users.class, hql);

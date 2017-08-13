@@ -63,5 +63,14 @@
                 <comment>ç-…ç�†å�·</comment>
             </column>
         </property>
+        <property name="shareUrl" type="java.lang.String">
+            <column name="SHAREURL" length="500" />
+        </property>
+        <property name="sharePsd" type="java.lang.String">
+            <column name="SHAREPSD" length="32" />
+        </property>
+        <property name="shareTerm" type="java.lang.String">
+            <column name="SHARETERM" length="32" />
+        </property>
     </class>
 </hibernate-mapping>

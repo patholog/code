@@ -272,13 +272,14 @@ public class UsersAction extends BaseAction {
 		Mail.setPassword("Founder123");
 		Mail.setUser("zhq567888@126.com");
 		String[] content = new String[] { "您好：", "恭喜您的账号已经审核通过", "感谢您的使用" };
-		Mail.send("zou_haiqiang@founder.com.cn", "病例平台审核通过", content);
+		
 		// end demo
 
 		try {
 			Users userT = userservice.getUser(Users.class, user.getIdUsers());
 			userT.setUserstatus("1");
 			userservice.updateUser(userT);
+			Mail.send(userT.getEmail(), "病例平台审核通过", content);
 			return "updatesuccess";
 		} catch (Exception e) {
 			return "err";
@@ -296,11 +297,12 @@ public class UsersAction extends BaseAction {
 		Mail.setPassword("Founder123");
 		Mail.setUser("zhq567888@126.com");
 		String[] content = new String[] { "您好：", "恭喜您的账号没有审核通过", "请重新提交相关证件" };
-		Mail.send("zou_haiqiang@founder.com.cn", "病理平台审核没通过", content);
+		
 		try {
 			Users userT = userservice.getUser(Users.class, this.idUsers);
 			userT.setUserstatus("2");
 			userservice.updateUser(userT);
+			Mail.send(userT.getEmail(), "病理平台审核拒绝", content);
 			return "updatesuccess";
 		} catch (Exception e) {
 			return "err";
