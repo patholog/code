@@ -1,0 +1,108 @@
+input,textarea,select{font-family: "å¾®è½¯é›…é»‘";}
+select{cursor: pointer;}
+#whole{ min-width: 1280px;*width:100%;}
+span.red_star,.half_words{display: inline-block;*display:inline;*zoom:1;width:0.5em;}
+/*å³ä¾§å†…å®¹*/
+.content_right{float:right;width:100%;padding-top: 95px;}
+.index_right{margin-left:182px;position: relative;}
+/*æ­¥éª¤æŒ‡ç¤ºæ¡*/
+.new_step{height: 50px;padding-left:20px;box-sizing: border-box;}
+.new_step li{float:left;margin-right: 20px;padding: 10px 0;}
+.new_step li .step{min-width:90px;height: 30px;line-height: 30px;cursor:pointer;display: inline-block;padding: 0 15px 0 12px;border-radius:4px;}
+.new_step li .step span{text-align: center;margin-left: 23px;}
+/*---æ­¥éª¤ä¸€ç›¸å…³å†…å®¹å—å¼€å§‹---*/
+.step1_information{padding: 10px 20px 40px 20px;}
+.information,.information2{padding:10px;}
+.information li{float:left;line-height: 40px;}
+.information .age{float:left;width: 112px;*width: 120px;}
+.information .sex,.information .urgent{float:left;}
+.information .nation{float:left;width: 163px;*width: 163px;}
+/*è§„åˆ™inputæ¡†ã€textareaæ¡†æ ·å¼*/
+.information input,.information2 textarea{outline:medium;}
+.information input{-webkit-appearance: textfield;height:26px;line-height: 26px;margin:0 8px;padding: 0 7px;}
+.information .state_six li{width: 24%;}
+.information .state_six li input{width: 136px;}
+/*éžè§„åˆ™inputæ¡†æ ·å¼*/
+.information .tick{ cursor:pointer; width: 26px;height: 24px;display: inline-block;margin-left:4px;vertical-align: middle;}
+.information .tick img {width: 100%;}
+.information .state_six li input.nationalist{width:70px;}
+.information .state_six li input.inf_age{width: 24px;}
+.information .state_six li input.calendar {cursor: pointer; width: 136px;  font-size: 12px;}
+/*å…¬å…±ä¸‹æ‹‰æ¡†æ ·å¼*/
+.select_box{display: inline-block; position: relative;height:24px;zoom: 1;line-height: 24px;margin: 0 8px;vertical-align: middle;}
+.select_box label{display: inline-block;height: 24px;line-height: 24px;font-family: "å¾®è½¯é›…é»‘";padding-left: 5px;font-size: 12px;overflow:hidden;word-break: break-all;margin-right: 18px;}
+.select_box select{position: absolute;bottom: 0;left: 0;padding: 0;border: none;margin: 0; opacity: 0;width:100%;height: 24px;line-height: 24px; font-size:12px; font-family: "å¾®è½¯é›…é»‘";cursor: pointer;filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);display: inline-block;zoom: 1;}
+/*ä¸‹æ‹‰æ¡†æ ·å¼*/
+.information .sex .select_box {width: 70px;}
+.information .nation .select_box,.state_six li .select_box {width: 150px;text-align: left;}
+/*ä¿¡æ¯æ¨¡å—äºŒ*/
+.information2 {line-height: 40px;}
+.information2 textarea {width: 98%;font-size: 16px;resize: none;overflow: auto;line-height: 30px;padding:0 1%;}
+.information2 .remarks{line-height: 25px;font-size: 14px;padding: 0 8px;border-radius: 3px;margin-top: 10px;}
+.information2 .row1{height: 44px;}
+.information2 .row2{height: 62px;}
+.information2 .row3{height: 80px;}
+textarea::-moz-input-placeholder{ color:red}
+/*æŒ‰é’®å—*/
+.inf_btn{ height:28px;line-height: 28px;cursor:pointer;font-size: 16px; text-align: center;padding:0 15px;margin:20px 15px;border:0;border-radius:3px;}
+.diagnosis_footer { width: 100%; text-align: center; font-size: 12px; margin-top: 10px; margin-bottom: 5px;}
+
+/*ç•™è¨€*/
+.inbox {padding: 20px 50px 50px 50px;}
+.inbox_add .comments {height: 180px;}
+.inbox_add .in_text {height: 230px;border: solid 1px #c8c8c8;}
+.inbox_add .in_text textarea.leave_word {width: 98%;height: 210px;background: none;border: none;font-family: "å¾®è½¯é›…é»‘";padding: 10px 1%;font-size: 16px;}
+.massges input.massges_btn {cursor: pointer;border: none;width: 89px;height: 32px;background: #5f98f6;color: #fffefe;font-size: 16px;font-family: "å¾®è½¯é›…é»‘";border-radius: 5px;float: right;text-align: center;margin: 5px 0 15px 0;}
+.massges input.massges_btn:hover{ background: #4485f1;}
+.massges .massges_div{margin-top:2px;}
+.massges .massges_div span{padding-left:10px;font-size:14px;}
+.choose_experts{display:none; border:1px solid #ddd;padding:10px; margin-bottom:10px;}
+.choose_experts span{padding-right:20px; height:30px; line-height:30px;}
+.choose_experts span input{margin-right:5px;}
+.inbox_con_list {width: 100%;min-height: 34px;margin-bottom: 20px;padding-bottom: 10px;}
+.border_bom{border-bottom:1px solid #bababa}
+.inbox_title {width: 100%;height: 34px;}
+.inbox_list {min-height: 24px;font-size: 14px;padding-left: 5px;}
+.pl50{padding-left:50px;}
+.inbox_list p {line-height: 25px;}
+
+/*åŠ åšåŒ»å˜±*/
+.additems{background-color:#fafafa;padding:10px;font-size:14px;}
+.additems p{line-height:20px;border-bottom:1px solid #ddd;}
+.additems p.at-title{color:red;border-bottom:none;margin-bottom:5px;}
+.additems p span.at-btn{float:right;color:#5f98f6;}
+.additems p a:hover{text-decoration:underline;}
+
+/*ç•™è¨€æ ·å¼*/
+.one_word{display:inline-block; width:1em;}
+.c_time{font-size:12px; color:#999;}
+.cmt_icon{width:26px; height:20px; background: url("../img/comt_icon2_3.png") no-repeat 0 0; margin-left:4px; display:inline-block;float:left;}
+.cmt_icon:hover{background: url("../img/comt_icon_3.png") no-repeat 0 0;}
+.first_c{ min-height:24px; padding-bottom:6px; }
+.first_c p{line-height:24px; min-height:24px; font-size:15px;}
+.first_c span{font-size:14px; color:#666}
+.first_c font{color:#3277ed;}
+.first_c .c_time, .second_c .c_time{font-size:12px; color:#999; height:20px;}
+.second_c{padding-left:80px;}
+.second_c span{color:#3277ed;}
+.c_time span{font-size:12px;color:#999;float:left;}
+
+@media screen and (min-width:1281px) and (max-width:1680px) {
+  .step1_information{padding: 15px 25px 40px 25px;}
+  .information, .information2 {padding: 15px;}
+  .information li {line-height: 45px;}
+  .information2 {line-height: 45px;}
+  .information2 .left textarea{margin-bottom: 10px;}
+  .information2 .right textarea{margin-bottom: 10px;}
+  .information2 .remarks {line-height: 30px;margin-top: 5px;}
+}
+@media screen and (min-width:1681px) and (max-width:1920px) {
+  .step1_information{padding: 20px 30px 68px 30px;}
+  .information, .information2 {padding: 20px 25px;}
+  .information li {line-height: 48px;}
+  .information2 {line-height: 48px;}
+  .information2 .left textarea{margin-bottom: 15px;}
+  .information2 .right textarea{margin-bottom: 15px;}
+  .information2 .remarks {line-height: 30px;margin-top: 0;}
+}
+

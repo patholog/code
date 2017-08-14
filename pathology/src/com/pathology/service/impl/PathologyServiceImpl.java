@@ -2,10 +2,12 @@ package com.pathology.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.pathology.entity.Result;
+import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.pathology.dao.IImageDao;
@@ -116,6 +118,25 @@ public class PathologyServiceImpl implements IPathologyService {
       return pathologyDto;
     } catch (Exception e) {
       throw new RuntimeException("查询出现错误");
+    }
+  }
+
+  @Override
+  public void updatePathology(Map<String, String[]> paramMap) {
+    try {
+      Pathology pathology = new Pathology();
+      pathology.setPatientname(paramMap.get("patientName")[0]);
+      pathology.setPathologyno(paramMap.get("pathologyNo")[0]);
+      pathology.setIdCase(paramMap.get("pathologyNo")[0]);
+      pathology.setPatientage(paramMap.get("patientAge")[0]);
+      pathology.setPatientsex(paramMap.get("patientSex")[0]);
+      pathology.setSpecimenname(paramMap.get("specimenName")[0]);
+      pathology.setIdcard(paramMap.get("idCard")[0]);
+      pathology.setMobile(paramMap.get("mobile")[0]);
+      pathology.setHospitalcode(paramMap.get("hospitalname")[0]);
+      addPathology(pathology);
+    } catch (Exception e) {
+      Logger.getLogger(PathologyServiceImpl.class).error(e.getMessage());
     }
   }
 

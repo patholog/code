@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author yi
@@ -53,6 +54,13 @@ public class PathologyAction extends BaseAction {
       logger.error(e.getMessage());
       return null;
     }
+  }
+
+  public String saveInfo() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    Map<String, String[]> paramMap = request.getParameterMap();
+    pathologyService.updatePathology(paramMap);
+    return null;
   }
 
   /**
@@ -102,6 +110,10 @@ public class PathologyAction extends BaseAction {
       e.printStackTrace();
     }
     return "pathologyshas";
+  }
+
+  public String addPathology() {
+    return "addPathology";
   }
 
   /**

@@ -1,0 +1,35 @@
+.rg_box{width:56%;min-width: 940px;*width: 940px;padding-top:55px;padding-bottom:70px;}
+.rg_title{min-height:151px;padding-bottom: 45px;}
+.rg_box ul,.rg_btn div{width: 45%;min-width:300px;}
+.rg_box ul p{width: 20%;*width:64px;float: left;text-align: right;font-size: 16px;padding-top: 9px;margin-right:8%;}
+.rg_box ul input{width: 62%;*width:218px;padding: 0 8% 0 2%;*padding: 0 30px 0 10px;font-size: 14px;line-height: 40px;}
+.rg_box ul input,.rg_box ul .styled_select{float:right;height: 40px;margin-bottom: 15px;border-radius: 4px;}
+.rg_password{position: relative;}
+.pw_btn{position: absolute;top:0;right:0;width: 40px;height:40px;cursor: pointer;}
+.rg_box ul .styled_select{width: 72%;*width:258px;display: inline-block;position: relative;zoom: 1;line-height: 40px;border:0;}
+.rg_box ul .styled_select label {display: inline-block;height: 40px;line-height: 40px;font-family: "Microsoft Yahei";padding-left: 10px;font-size: 14px;border:0;}
+.rg_box ul .styled_select select{ border: none;width: 100%;*width:256px;height: 40px;margin-right: 10px;line-height: 40px;cursor: pointer; position: absolute;margin: 0;opacity: 0;padding: 0;bottom: 0;*bottom: -10px;left: 0;filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);display: inline-block;zoom: 1;}
+
+.rg_btn{padding-top: 60px;}
+.rg_btn input{border-radius: 4px;font-size: 16px;}
+.rg_btn input.return{padding: 5px 40px;float:right;}
+.rg_btn input.submit{padding: 6px 40px;}
+.pos_r{position: relative;}
+.pos_r .success,.pos_r .error {position: absolute;top:5px;right: 8px;width: 30px;height: 30px;display:none;}
+@media screen and (min-width:1281px) and (max-width:1680px) {
+  .rg_box{padding-top:65px;}
+  .rg_title{padding-bottom: 50px;}
+  .rg_box ul input,.rg_box ul .styled_select{margin-bottom: 30px;}
+  .rg_btn input.rethgixrurn{padding: 6px 50px;}
+  .rg_btn input.submit{padding: 7px 50px;}
+  .rg_btn{padding-top: 70px;}
+}
+@media screen and (min-width:1681px) and (max-width:1920px) {
+  .rg_box{padding-top:90px;}
+  .rg_title{padding-bottom: 80px;}
+  .rg_box ul input,.rg_box ul .styled_select{margin-bottom: 35px;}
+  .rg_btn input.return{padding: 7px 60px;}
+  .rg_btn input.submit{padding: 8px 60px;}
+  .rg_btn{padding-top: 80px;}
+}
+.rg_password .success, .rg_password .error{position: absolute;top:5px;right: -36px;width: 30px;height: 30px;display:none;}

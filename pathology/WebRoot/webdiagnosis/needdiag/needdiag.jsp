@@ -8,501 +8,515 @@
 <head>
   <meta charset="UTF-8">
   <title>病理远程会诊平台-待诊断初步</title>
-  <style type="text/css">
-    body {
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background: #ddd;
-    }
-
-    ul {
-      list-style: none;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    .nav {
-      background: #fff;
-      width: 100%;
-      height: 100px;
-      font-size: 20px;
-      line-height: 100px;
-      text-align: center;
-      border-bottom: 1px solid #f60;
-    }
-
-    .box {
-      margin: 0 auto;
-    }
-
-    .fl_l {
-      width: 200px;
-      float: left;
-      border: 1px solid #f4f4f4;
-      background: #fff;
-    }
-
-    .fl_l li a {
-      border-bottom: 1px solid #eee;
-      text-align: center;
-      display: inline;
-      color: #333;
-      font-size: 14px;
-      line-height: 60px;
-    }
-
-    .fl_l li.active a {
-      background: #63B8FF;
-      color: #fff;
-    }
-
-    .fl_r {
-      float: left;
-      /*width: 960px;*/
-      alignment: top;
-    }
-
-    .fl_r li {
-      margin-top: 10px;
-      margin-bottom: 30px;
-      background: #fff;
-      font-size: 16px;
-    }
-
-    .fl_r_row {
-      margin-top: 10px;
-      margin-bottom: 10px;
-    }
-
-    .fl_t {
-      width: 800px;
-      float: left;
-      border: 1px solid #f4f4f4;
-      background: #fff;
-      white-space: nowrap;
-    }
-
-    .fl_t li {
-      display: inline-block;
-    }
-
-    .fl_t li a {
-      width: 200px;
-      border-bottom: 1px solid #eee;
-      text-align: center;
-      display: inline-block;
-      color: #333;
-      font-size: 14px;
-      line-height: 60px;
-    }
-
-    .fl_t li.active a {
-      background: #63B8FF;
-      color: #fff;
-    }
-
-    .banner {
-      background: #fff;
-      width: 100%;
-      height: 600px;
-      font-size: 40px;
-      line-height: 600px;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-  </style>
-  <meta name="Copyright" content="Douco Design."/>
-  <link href="css/public.css" rel="stylesheet" type="text/css">
-  <script type="text/javascript" src="js/jquery.min.js"></script>
-  <script type="text/javascript" src="js/global.js"></script>
   <c:set var="path" value="${pageContext.request.contextPath }"/>
-  <link rel="stylesheet" type="text/css" href="${path }/css/style.css"/>
-  <script type="text/javascript" src="${path }/js/CKEditor/ckeditor.js"></script>
-  <script type="text/javascript" src="${path }/CKFinder/ckfinder/ckfinder.js"></script>
+  <%--<link rel="stylesheet" href="${path }/css/comc_diagnosis_wait_style.css"/>
+  <link rel="stylesheet" href="${path }/css/comc_head_style.css"/>
+  <link rel="stylesheet" href="${path }/css/comc_left_nav_style.css"/>
+  <link rel="stylesheet" href="${path }/css/comc_page_style.css"/>--%>
+  <link rel="stylesheet" href="${path }/css/public_flat.css"/>
+  <link rel="stylesheet" href="${path }/css/theme.css?Version=5.5.1.1"/>
+  <link rel="stylesheet" href="${path }/css/comc_head_style.css?Version=5.5.1.1"/>
+  <link rel="stylesheet" href="${path }/css/comc_diagnosis_new_style.css?Version=5.5.1.1"/>
+  <link rel="stylesheet" href="${path }/css/comc_left_nav_style.css?Version=5.5.1.1"/>
+  <link rel="stylesheet" href="${path }/css/comc_register_style.css?Version=5.5.1.1"/>
+  <link rel="stylesheet" href="${path }/css/datepicker.css"/>
+  <link rel="stylesheet" href="${path }/css/theme.css"/>
+  <link rel="stylesheet" href="${path }/css/WdatePicker.css"/>
+  <link rel="stylesheet" href="${path }/css/weebox.css"/>
+
+  <script type="text/javascript" src="${path }/js/jquery.min.js"></script>
+  <script type="text/javascript" src="${path }/js/jquery.form.min.js"></script>
   <script type="text/javascript" src="${path }/js/treeView.js"></script>
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
-  <style>
-    .fl_r_table {
-      font-size: 16px;
+  <script type="text/javascript" src="${path }/js/CKEditor/ckeditor.js"></script>
+  <script type="text/javascript">
+    function ShowAddedItem() {
+      var MedicalCaseInfoID = $("#hidMedcialCaseId").val();
+      var wetitle = '预览';
+      if ($.cookie("choosenLanguage") && $.cookie("choosenLanguage") != "null" && $.cookie("choosenLanguage") != "") {
+        wetitle = 'Preview';
+      }
+      $.weeboxs.open("../AddedItem/AddedItemList.aspx?MedicalCaseInfoID=" + MedicalCaseInfoID, {
+        title: wetitle, contentType: 'iframe', width: 920, height: 480,
+        showButton: false, //不显示按钮栏
+        showOk: false, //不显示确定按钮
+        showCancel: false
+      });  //不显示取消按钮});
     }
 
-    .fl_r_table_tr {
-      margin: 15px 0;
+    //cd 待诊断禁止编辑
+    $(document).ready(function masking() {
+      var sta = $("#sta").val();
+      if (sta === "2") {
+        $("#masking").css("display", "block");
+
+        var vHeight = $("#divAll").outerHeight() - $("#divCenter").outerHeight() - $("#divFoot").outerHeight();
+        var vHeight = vHeight + "px";
+
+        $("#masking").height(vHeight);
+
+        /*$("#txtClinicalData").attr("disabled", "disabled");
+        $("#txtFirstVisit").attr("disabled", "disabled");
+        $("#txtGeneralObservation").attr("disabled", "disabled");
+        $("#txtHistoryOfDisease").attr("disabled", "disabled");
+        $("#txtImmuneOrgan").attr("disabled", "disabled");
+        $("#txtRemark").attr("disabled", "disabled");*/
+      } else {
+        $("#masking").css("display", "none");
+      }
+
+      $("#txtHospitalOfDelivery").attr("title", $("#hosNaHidd").val()); //设置title属性的值
+
+      //检测此类长文本编辑框的加载字数 by flyer
+      CheckWords(document.getElementById("txtClinicalData"));
+      CheckWords(document.getElementById("txtFirstVisit"));
+      //CheckWords(document.getElementById("txtGeneralObservation"));
+      CheckWords(document.getElementById("txtHistoryOfDisease"));
+      CheckWords(document.getElementById("txtImmuneOrgan"));
+      CheckWords(document.getElementById("txtRemark"));
+
+    });
+
+    //检测手机号码和身份证号码 by flyer
+    function CheckValue(type) {
+      var re = "";
+      var value = "";
+      if (type == "1") {
+        value = $("#txtMobilePhone").val();
+        re = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        if (value != "") {
+          if (!re.test(value)) {
+            $("#txtMobilePhone").css("color", "red");
+            //                        $("#imgMobileS").hide();
+            //                        $("#imgMobileE").show();
+          }
+          else {
+            $("#txtMobilePhone").css("color", "#a5a5a5");
+            //                        $("#imgMobileS").show();
+            //                        $("#imgMobileE").hide();
+          }
+        }
+        else {
+          $("#txtMobilePhone").css("color", "#a5a5a5");
+        }
+
+      }
+      if (type == "2") {
+        re = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/
+        value = $("#txtIdentityNumber").val();
+        if (value != "") {
+          if (!re.test(value)) {
+            $("#txtIdentityNumber").css("color", "red");
+          } else {
+            $("#txtIdentityNumber").css("color", "#a5a5a5");
+          }
+        } else {
+          $("#txtIdentityNumber").css("color", "#a5a5a5");
+        }
+      }
+      if (type == "3") {
+        value = $("#txtAge").val();
+        if (value != "") {
+          if (value > 150 || value == 0) {
+            $("#txtAge").css("color", "red");
+          } else {
+            $("#txtAge").css("color", "#a5a5a5");
+          }
+        } else {
+          $("#txtAge").css("color", "#a5a5a5");
+        }
+      }
     }
 
-    .fl_r_table label {
-      font-size: 16px;
+    //检测长文本编辑框的字数，是否超过，超过限定字数，则前景色改为红色  by flyer
+    function CheckWords(txt) {
+      var len = 0;
+      var str = txt.value;
+      $("#a" + txt.name).html(str.length);
+      if (str.length > 250) {
+        $("#a" + txt.name).css("color", "red");
+      } else {
+        $("#a" + txt.name).css("color", "#a5a5a5");
+      }
     }
 
-    .fl_r_table input {
-      font-size: 14px;
-      outline: solid thin #bbb;
-      margin: 0 8px;
-      padding: 0 7px;
+    $(function () {
+      $('#infoForm').ajaxForm({
+        dataType: 'json',
+        success: function (result) {
+          alert(123);
+        }
+      })
+    });
+  </script>
+  <style type="text/css">
+    #masking {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 83px;
+      z-index: 10;
+      display: none;
     }
 
-    .fl_r_table textarea {
-      font-size: 14px;
-      outline: solid thin #bbb;
-      resize: none;
-      width: 400px;
-      padding: 0 7px;
+    .lab {
+      border: 1px solid #DCDCDC;
+      color: #A5A5A5;
+      line-height: 26px;
+      height: 26px;
+      margin: 0px 8px;
+      font-size: 13px;
+      padding: 4px 7px;
+      font-family: "微软雅黑";
+      min-width: 120px;
     }
 
-    .input-20 {
-      width: 20px;
+    .ckTxt {
+      font-size: 12px;
+      float: right;
     }
 
-    .input-30 {
-      width: 30px;
+    .aColor {
+      color: #a5a5a5;
     }
 
-    .input-50 {
-      width: 50px;
+    input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+      color: #a5a5a5;
     }
 
-    .input-120 {
-      width: 120px;
+    input:-moz-placeholder, textarea:-moz-placeholder {
+      color: #a5a5a5;
     }
 
-    .input-150 {
-      width: 150px;
+    input::-moz-placeholder, textarea::-moz-placeholder {
+      color: #a5a5a5;
     }
 
-    .main-contents {
-      padding-left: 10px;
+    input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+      color: #a5a5a5;
     }
 
-    span.red-star, .half-word {
-      display: inline-block;
-      *display: inline;
-      *zoom: 1;
-      width: 0.5em;
+    .information input[type="radio"] {
+      -webkit-appearance: radio;
     }
 
-    span.red-star {
-      color: #cb1d20;
-    }
-
-    .remarks {
-      line-height: 25px;
-      font-size: 14px;
-      padding: 0 8px;
-      border-radius: 3px;
-      margin-top: 10px;
-      background-color: #e4e4e4;
-      border: 1px solid #dcdcdc;
-      width: auto;
-    }
-
-    hr.split-line {
-      border: 1px solid #63B8FF;
+    #preNotice {
+      color: #5f98f6;
+      text-decoration: underline;
+      font-weight: bold;
+      font-style: italic;
     }
   </style>
 </head>
 <body>
-<div id="header">
-  <%@include file="/webdiagnosis/maintop.jsp" %>
-</div>
-<table id="main" cellpadding="0" cellspacing="0" border="0">
-  <tr>
-    <td id="leftmenu">
-      <%@include file="/webdiagnosis/mainleft.jsp" %>
-    </td>
-    <td class="main-contents">
-      <div class="box">
-        <ul class="fl_t">
-          <li class="active"><a href="#">病历信息</a></li>
-          <li><a href="#">附件&切片</a></li>
-          <li><a href="#">填写诊断</a></li>
-          <li><a href="#">留言</a></li>
-        </ul>
-        <ul class="fl_r">
-          <li>
-            <hr class="split-line">
-            <div class="fl_r_row">
-              <label><span class="red-star">*</span>请选择会诊分类<span style="color: red">（费用不同）</span>： </label>
-              <input title="hzlx" name="hzlx" type="radio" value="1">普通会诊
-              <input title="hzlx" name="hzlx" type="radio" value="2">冰冻会诊
-            </div>
-            <hr class="split-line">
-            <div class="fl_r_row">
-              <table class="fl_r_table">
-                <tr class="fl_r_table_tr">
-                  <td>
-                    <label for="name"><span class="red-star">*</span>病人姓名</label>
-                    <input class="input-150" id="name" type="text" value="<s:property value="pathology.patientname"/>">
-                  </td>
-                  <td>
-                    <label>
-                      <span class="red-star">*</span>病<span class="half-word"></span>理<span class="half-word"></span>号
-                    </label>
-                    <input class="input-120" id="blh" type="text" value="<s:property value="pathology.pathologyNo"/>">
-                  </td>
-                  <td>
-                    <label for="age"><span class="red-star">*</span>年龄</label>
-                    <input class="input-30" id="age" type="text"
-                           value="<s:property value="pathology.patientAge"/>">
-                  </td>
-                  <td>
-                    <label for="sex"><span class="red-star">*</span>性别</label>
-                    <select id="sex">
-                      <s:if test='%{pathology.patientSex=="男"}'>
-                        <option value="男" selected>男</option>
-                      </s:if>
-                      <s:if test='%{pathology.patientSex=="女"}'>
-                        <option value="女" selected>女</option>
-                      </s:if>
+  <div class="header">
+    <%@include file="/webdiagnosis/maintop.jsp" %>
+  </div>
+  <form id="infoForm" method="post" action="PathologyAction!saveInfo">
+  <div id="whole" class="mlrAuto">
+    <div class="menu_left">
+      <ul id="Left1_MenuList">
+        <%@include file="/webdiagnosis/mainleft.jsp" %>
+      </ul>
+    </div>
+    <div class="content_right" style="">
+      <div class="index_right" id="divAll" style="">
+        <!--步骤指示条-->
+        <div class="new_step">
+          <ul>
+            <li>
+              <a href="">
+                <div class="step curr">
+                  1<span>病例信息</span></div>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <div class="step">
+                  2<span>上传切片&amp;附件</span></div>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <div class="step">
+                  3<span>选择诊断专家</span></div>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <div class="step">
+                  4<span>留言</span></div>
+              </a>
+            </li>
+          </ul>
+          <div class="clear">
+          </div>
+        </div>
+        <!--相关内容块-->
+        <div class="step1_information" style="position: relative;">
+          <div class="information">
+            <span class="red_star">*</span>请选择会诊分类<span style="color:Red">（费用不同）</span>：
+            <span id="rblDiagnosisType">
+              <input id="rblDiagnosisType_0" type="radio" name="rblDiagnosisType" value="1" checked="checked">
+              <label for="rblDiagnosisType_0">普通会诊</label>
+              <input id="rblDiagnosisType_1" type="radio" name="rblDiagnosisType" value="2">
+              <label for="rblDiagnosisType_1">冰冻会诊</label>
+            </span>
+            <p id="DiagnosisTypeTips" style="color:red;font-size:13px;display:none;">
+              注：请在提交冰冻病例前，务必与会诊专家联系好，确保能够及时诊断。冰冻切片添加后24小时内请勿关机，确保网络访问正常。
+              <a href="javascript:void(0)" id="preNotice" style="display:none">准备事项告知</a>
+            </p>
+          </div>
+          <div class="information" id="divHead">
+            <div id="masking" style="display: block; height: 375px;"></div>
+            <ul class="state_six">
+              <li>
+                <div>
+                  <span class="red_star">*</span>病人姓名
+                  <input name="patientName" id="patientName" class="patient_name" maxlength="8">
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span class="red_star">*</span>病
+                  <ins class="half_words"></ins>理
+                  <ins class="half_words"></ins>号
+                  <input name="pathologyNo" id="pathologyNo" class="patient_name">
+                </div>
+              </li>
+              <li>
+                <div>
+                  <div class="age"><span class="red_star">*</span>年龄
+                    <input name="patientAge" id="patientAge" class="inf_age" maxlength="3" onblur="CheckValue('3')"
+                           onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                           value="">
+                  </div>
+                  <div class="sex">
+                    <span class="red_star">*</span>性别
+                    <span style="width: 70px;">
+                      <select name="patientSex" id="patientSex" style="width: 70px;">
+                        <option value="男">男</option>
+	                      <option value="女">女</option>
+                      </select>
+                    </span>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span class="red_star">*</span>取材部位
+                  <input name="specimenName" id="specimenName">
+                </div>
+              </li>
+              <li>
+                <div>
+                  <div class="pos_r">
+                    <ins class="half_words"></ins>身份证号
+                    <input name="idCard" id="idCard" class="identity" maxlength="18" onblur="CheckValue('2')">
+                    <div class="clear"></div>
+                    <img src="../../img/sbm_success.png" class="success" id="imgIdentityS" style="display: none;
+	                                        right: 3px;">
+                    <img src="../../img/sbm_error.png" class="error" id="imgIdentityE" style="display: none;
+	                                        right: 3px;">
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="pos_r">
+                  <ins class="half_words"></ins>手
+                  <ins class="half_words"></ins>机
+                  <ins class="half_words"></ins>号
+                  <input name="mobile" id="mobile" maxlength="11"
+                          onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                          onblur="CheckValue('1')">
+                  <div class="clear"></div>
+                  <img src="../../img/sbm_success.png" class="success" id="imgMobileS" style="display: none;
+                                        right: 25px;">
+                  <img src="../../img/sbm_error.png" class="error" id="imgMobileE" style="display: none;
+                                        right: 25px;">
+                </div>
+              </li>
+              <li>
+                <div>
+                  <ins class="half_words"></ins>家属电话
+                  <input name="txtRelativePhone" type="text" id="txtRelativePhone"
+                             onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span class="red_star">*</span>送检时间
+                  <input name="txtDateOfDelivery" id="txtDateOfDelivery" class="calendar"
+                         onfocus="WdatePicker({isShowClear:false,dateFmt:'yyyy/MM/dd HH:mm',readOnly:false,dorisSet:'mm'})"
+                         readonly="" value="">
+                </div>
+              </li>
+              <li>
+                <div>
+                  <ins class="half_words"></ins>系统分类
+                  <span class="select_box">
+                    <select name="dListClassification" id="dListClassification">
                     </select>
-                  </td>
-                  <td colspan="2">
-                    <label class="label-70" for="qcbw"><span class="red-star">*</span>取材部位</label>
-                    <input class="input-150" id="qcbw" type="text" value="<s:property value="pathology.specimenName"/>">
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label for="sfzh"><span class="half-word"></span>身份证号</label>
-                    <input class="input-150" id="sfzh" type="text" value="<s:property value="pathology.idCard"/>">
-                  </td>
-                  <td>
-                    <label for="mobile">
-                      <span class="half-word"></span>手<span class="half-word"></span>机<span class="half-word"></span>号
-                    </label>
-                    <input class="input-120" id="mobile" type="text" value="<s:property value="pathology.mobile"/>">
-                  </td>
-                  <td colspan="2">
-                    <label for="mobileRel"><span class="half-word"></span>家属电话</label>
-                    <input class="input-120" id="mobileRel" type="text" value="<s:property value="pathology.mobile"/>">
-                  </td>
-                  <td colspan="2">
-                    <label for="sjDate"><span class="red-star">*</span>送检时间</label>
-                    <input class="input-150" id="sjDate" type="text"
-                           value="<s:property value="pathology.inspectionDate"/>">
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label for="category"><span class="half-word"></span>系统分类</label>
-                    <input class="input-150" id="category" type="text" value="全科">
-                  </td>
-                  <td>
-                    <label for="sendCompany"><span class="half-word"></span>送检单位</label>
-                    <input class="input-120" id="sendCompany" type="text"
-                           value="<s:property value="pathology.hospitalname"/>">
-                  </td>
-                  <td colspan="2">
-                    <label for="sendKeshi"><span class="half-word"></span>送检科室</label>
-                    <input class="input-120" id="sendKeshi" type="text"
-                           value="<s:property value="pathology.hospitalname"/>">
-                  </td>
-                  <td>
-                    <label for="nation"><span class="half-word"></span>民族</label>
-                    <input class="input-50" id="nation" type="text" value="0">
-                  </td>
-                  <td>
-                    <label for="urgent">加急</label>
-                    <input class="input-20" id="urgent" type="text" value="0">
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label for="consultationNo">
-                      <span class="half-word"></span>会<span class="half-word"></span>诊<span class="half-word"></span>号
-                    </label>
-                    <input class="input-150" id="consultationNo" type="text" value="110101199901011234">
-                  </td>
-                  <td>
-                    <label for="admissionNo">
-                      <span class="half-word"></span>住<span class="half-word"></span>院<span class="half-word"></span>号
-                    </label>
-                    <input class="input-120" id="admissionNo" type="text" value="18600001111">
-                  </td>
-                  <td colspan="2">
-                    <label for="wardNo">
-                      <span class="half-word"></span>病<span class="half-word"></span>区<span class="half-word"></span>号
-                    </label>
-                    <input class="input-120" id="wardNo" type="text" value="18600002222">
-                  </td>
-                  <td colspan="2">
-                    <label for="roomNo">
-                      <span class="half-word"></span>病<span class="half-word"></span>房<span class="half-word"></span>号
-                    </label>
-                    <input class="input-150" id="roomNo" type="text" value="2017-01-01 12:12:12">
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="6">
-                    <hr class="split-line">
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <label for="clinicDiagnose"><span class="red-star">*</span>临床资料</label>
-                  </td>
-                  <td colspan="4">
-                    <label for="historySummary"><span class="half-word"></span>病史</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <textarea id="clinicDiagnose"><s:property value="pathology.clinicDiagnose"/></textarea>
-                  </td>
-                  <td colspan="4">
-                    <textarea id="historySummary"><s:property value="pathology.historySummary"/></textarea>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <label for="preliminaryOpinion"><span class="red-star">*</span>初诊意见</label>
-                  </td>
-                  <td colspan="4">
-                    <label for="ihc"><span class="half-word"></span>免疫组化</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <textarea id="preliminaryOpinion">初诊意见内容</textarea>
-                  </td>
-                  <td colspan="4">
-                    <textarea id="ihc">免疫组化内容</textarea>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <label for="generalSee"><span class="red-star">*</span>大体所见</label>
-                  </td>
-                  <td colspan="4">
-                    <label for="microscopeSee">
-                      <span class="half-word"></span>影像学检查</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <textarea id="generalSee" cols="10" rows="2" class="ckeditor">
-                      <s:property value="pathology.generalSee"/>
-                    </textarea>
-                  </td>
-                  <td colspan="4">
-                    <textarea id="microscopeSee" cols="10" rows="2" class="ckeditor">
-                      <s:property value="pathology.microscopeSee"/>
-                    </textarea>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <label for="memo"><span class="half-word"></span>备注</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <textarea id="memo"><s:property value="pathology.memo"/></textarea>
-                  </td>
-                </tr>
-              </table>
-              <div class="remarks" style="width: 500px;">
-                <span>注：</span>
-                <span style="color: red">“*”</span>
-                <span>为必填内容，病史与备注中的内容不在诊断结果中显示</span>
-              </div>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <ins class="half_words"></ins>送检单位
+                  <input name="hidHospitalOfDelivery" type="hidden" id="hidHospitalOfDelivery" value="885">
+                  <input name="hospitalname" id="hospitalname">
+                </div>
+              </li>
+              <li>
+                <div>
+                  <ins class="half_words"></ins>送检科室
+                  <input name="tbDepartmentOfDelivery" id="tbDepartmentOfDelivery"></div>
+              </li>
+              <li>
+                <div>
+                  <div class="nation">
+                    <ins class="half_words"></ins>民族
+                    <input name="nation" id="nation" class="nationalist">
+                  </div>
+                  <div class="urgent">加急<span class="tick">
+                    <input name="tick_box" type="hidden" id="tick_box" value="0"></span>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <ins class="half_words"></ins>会
+                  <ins class="half_words"></ins>诊
+                  <ins class="half_words"></ins>号
+                  <input name="txtCheckNumber" id="txtCheckNumber" value="">
+                </div>
+              </li>
+              <li>
+                <div>
+                  <ins class="half_words"></ins>住
+                  <ins class="half_words"></ins>院
+                  <ins class="half_words"></ins>号
+                  <input name="txtInHospitalNumber" id="txtInHospitalNumber"
+                          onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                </div>
+              </li>
+              <li>
+                <div>
+                  <ins class="half_words"></ins>病
+                  <ins class="half_words"></ins>区
+                  <ins class="half_words"></ins>号
+                  <input name="txtBlockNumber" id="txtBlockNumber"
+                          onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                </div>
+              </li>
+              <li>
+                <div>
+                  <ins class="half_words"></ins>病
+                  <ins class="half_words"></ins>房
+                  <ins class="half_words"></ins>号
+                  <input name="txtBedNumber" id="txtBedNumber"
+                          onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                </div>
+              </li>
+            </ul>
+            <div class="clear">
             </div>
-            <hr class="split-line">
-          </li>
-          <li>
-            <div class="upload-module">
-              <div class="title-left">上传切片</div>
-              <table class="listtable" cellspacing="0" cellpadding="0" width="100%">
-                <tbody>
-                <tr>
-                  <th>序号</th>
-                  <th>状态</th>
-                  <th>切片名称</th>
-                  <th>上传时间</th>
-                  <th>物镜倍数</th>
-                  <th>切片大小</th>
-                  <th>免疫组化</th>
-                  <th>操作</th>
-                </tr>
-                <s:iterator value="pathologys" id="pathology" status="11">
-                  <tr>
-                    <td><s:property value="#pathology.pathologyNo"/></td>
-                    <td><s:property value="#pathology.patientname"/></td>
-                    <td><s:property value="#pathology.patientname"/></td>
-                    <td><s:property value="#pathology.username"/></td>
-                    <td><s:property value="#pathology.content"/></td>
-                    <td><s:property value="#pathology.hospitalname"/></td>
-                    <td><s:property value="#pathology.createTime"/></td>
-                    <td align="center">
-                      <a href="PathologyAction!null?id=<s:property value="#pathology.caseId"/> target='_blank'">查看</a>
-                    </td>
-                  </tr>
-                </s:iterator>
-                <tr class="lightrow">
-                  <td colspan="8">
-                    <div id="pageDir">
-                      <%=request.getAttribute("page") != null ? request.getAttribute("page") : "" %>
-                    </div>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+          </div>
+          <div class="information2" id="divCenter" style="">
+            <ul class="left" style="width: 47%;">
+              <li>
+                <div style="float: left"><span class="red_star">*</span>临床资料（手术所见、影像学、相关验证等）：</div>
+                <div class="ckTxt">
+                  <a class="aColor">已经输入</a>&nbsp;<a id="atxtClinicalData" style="color: rgb(165, 165, 165);">75</a>
+                  <a class="aColor">/250&nbsp;个字</a>
+                </div>
+                <div class=" clear">
+                </div>
+                <textarea name="txtClinicalData" id="txtClinicalData" rows="3" cols="20" class="row2"
+                          onkeyup="CheckWords(this)"></textarea>
+              </li>
+              <li>
+                <div style="float: left"><span class="red_star">*</span>初诊意见（请如实填写）：</div>
+                <div class="ckTxt">
+                  <a class="aColor">已经输入</a>&nbsp;<a id="atxtFirstVisit" style="color: rgb(165, 165, 165);">16</a>
+                  <a class="aColor">/250&nbsp;个字</a>
+                </div>
+                <div class=" clear">
+                </div>
+                <textarea name="txtFirstVisit" id="txtFirstVisit" rows="2" cols="20" class="row2"
+                          onkeyup="CheckWords(this)"
+                          placeholder="为确保诊断结果的准确，请如实填写初诊意见，冰冻切片请务必填写初诊考虑，或基本病变描写、疑问等。"></textarea>
+              </li>
+              <li style="">
+                <div style="float: left"><span class="red_star">*</span>大体所见：</div>
+                <div class="ckTxt">
+                  <textarea id="generalSee" name="generalSee" cols="10" rows="2" class="ckeditor"></textarea>
+                </div>
+              </li>
+              <li>
+                <div style="float: left">
+                  <ins class="half_words"></ins>备注（不在诊断结果中显示）：
+                </div>
+                <div class="ckTxt">
+                  <a class="aColor">已经输入</a>&nbsp;<a id="atxtRemark" style="color: rgb(165, 165, 165);">0</a>
+                  <a class="aColor">/250&nbsp;个字</a>
+                </div>
+                <textarea name="txtRemark" id="txtRemark" rows="1" cols="20" class="row2" onkeyup="CheckWords(this)"></textarea>
+              </li>
+              <li class="remarks" style="margin-top:20px;">注：<span class="red">“*”</span>为必填内容，病史与备注中的内容不在诊断结果中显示</li>
+            </ul>
+            <ul class="right" style="width: 47%;">
+              <li>
+                <div style="float: left">
+                  <ins class="half_words"></ins>病史（不在诊断结果中显示）：
+                </div>
+                <div class="ckTxt">
+                  <a class="aColor">已经输入</a>&nbsp;<a id="atxtHistoryOfDisease" style="color: rgb(165, 165, 165);">0</a>
+                  <a class="aColor">/250&nbsp;个字</a>
+                </div>
+                <div class=" clear">
+                </div>
+                <textarea name="txtHistoryOfDisease" id="txtHistoryOfDisease" rows="2" cols="20" class="row2"
+                          onkeyup="CheckWords(this)"></textarea>
+              </li>
+              <li>
+                <div style="float: left">
+                  <ins class="half_words"></ins>免疫组化：
+                </div>
+                <div class="ckTxt">
+                  <a class="aColor">已经输入</a>&nbsp;<a id="atxtImmuneOrgan" style="color: rgb(165, 165, 165);">0</a>
+                  <a class="aColor">/250&nbsp;个字</a>
+                </div>
+                <div class=" clear">
+                </div>
+                <textarea name="txtImmuneOrgan" id="txtImmuneOrgan" rows="2" cols="20" class="row2"
+                          onkeyup="CheckWords(this)"></textarea>
+              </li>
+              <li style="">
+                <div style="float: left">
+                  <ins class="half_words"></ins>影像学检查：
+                </div>
+                <div class="ckTxt">
+                  <textarea id="microscopeSee" cols="10" rows="2" class="ckeditor"></textarea>
+                </div>
+                <div class=" clear">
+                </div>
+              </li>
+            </ul>
+            <div class="clear">
             </div>
-          </li>
-          <li style="height: 400px;">填写诊断内容3</li>
-          <li style="height: 500px;">留言内容4</li>
-        </ul>
-        <div style="clear: both;"></div>
+          </div>
+          <div class="information_btn" id="divFoot">
+            <input type="submit" name="saveInfo" value="保存" id="btnSaveInfo" class="inf_btn right">
+            <div class="clear">
+            </div>
+          </div>
+        </div>
       </div>
-    </td>
-  </tr>
-</table>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script>
-  $(function () {
-    // 禁用所有input
-    $('input').attr("disabled", "true");
-    $('textarea').attr("disabled", "true");
-    $('select').attr("disabled", "true");
-    //设置标杆
-    var _line = parseInt($(window).height() / 3);
-    $(window).scroll(function () {
-      //滚动730px，左侧导航固定定位
-      if ($(window).scrollTop() > 730) {
-        $('.fl_t').css({'position': 'fixed', 'top': 10})
-      } else {
-        $('.fl_t').css({'position': '', 'top': ''})
-      }
-      ;
-      $('.fl_t li').eq(0).addClass('active');
-      //滚动到标杆位置,左侧导航加active
-      $('.fl_r li').each(function () {
-        var _target = parseInt($(this).offset().top - $(window).scrollTop() - _line);
-        var _i = $(this).index();
-        if (_target <= 0) {
-          $('.fl_t li').removeClass('active');
-          $('.fl_t li').eq(_i).addClass('active');
-        }
-        //如果到达页面底部，给左侧导航最后一个加active
-        else if ($(document).height() == $(window).scrollTop() + $(window).height()) {
-          $('.fl_t li').removeClass('active');
-          $('.fl_t li').eq($('.fl_r li').length - 1).addClass('active');
-        }
-      });
-    });
-    $('.fl_t li').click(function () {
-      $(this).addClass('active').siblings().removeClass('active');
-      var _i = $(this).index();
-      $('body, html').animate({scrollTop: $('.fl_r li').eq(_i).offset().top - _line}, 500);
-    });
-  });
-</script>
-<div style="text-align:center;">
-</div>
+    </div>
+  </div>
+</form>
 </body>
 </html>

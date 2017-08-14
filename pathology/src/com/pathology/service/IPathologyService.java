@@ -1,6 +1,7 @@
 package com.pathology.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +22,8 @@ public interface IPathologyService {
   PathologyDTO getPathologyByIdAndDiagStatus(String id);
 
   void updatePathology(Pathology em);
+
+  void updatePathology(Map<String, String[]> paramMap);
 
   void addPathology(Pathology em);
 
