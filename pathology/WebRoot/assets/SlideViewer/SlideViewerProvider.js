@@ -318,10 +318,25 @@ var SlideViewerProvider;
         }
         mCurrentLevel = level - 8;
         var zoom;
-        if (level < 10) {
-          zoom = '0' + level;
-        } else {
-          zoom = level;
+        /*
+         * 根据level等级设置zoom倍数，需要调整
+         */
+        if (mCurrentLevel <= 1) {
+          zoom = '01';
+        } else if (mCurrentLevel === 2) {
+          zoom = '02';
+        } else if (mCurrentLevel === 3) {
+          zoom = '04';
+        } else if (mCurrentLevel === 4) {
+          zoom = '08';
+        } else if (mCurrentLevel === 5) {
+          zoom = '10';
+        } else if (mCurrentLevel === 6) {
+          zoom = '20';
+        } else if (mCurrentLevel === 7) {
+          zoom = '40';
+        } else if (mCurrentLevel === 8) {
+          zoom = '80';
         }
         str0 = [url, "&zoom=", zoom, '&level=', mCurrentLevel, "&PositionX=", PositionX, "&PositionY=", PositionY].join("");
       } else {
