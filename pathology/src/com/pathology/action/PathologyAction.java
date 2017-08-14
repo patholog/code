@@ -123,7 +123,7 @@ public class PathologyAction extends BaseAction {
     HttpServletResponse response = ServletActionContext.getResponse();
     response.setContentType("text/html;charset=utf-8");
     PrintWriter out = response.getWriter();
-    String url = "http://localhost:8080/imagesystem/show.do?filename=&id=" + caseId + "&zoom=08&PositionX=0&PositionY=0";
+    String url = "http://localhost:8080/imagesystem/show.do?filename=&id=" + caseId;
     // 组装切片数据
     SlideResult slideResult = new SlideResult("", "58112", "64000", "40", "256", "",
         "", "0", "P500B15001", url, "", "", "");

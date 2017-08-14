@@ -4,7 +4,10 @@
   this.fileFormat = tileFormat;
   this.tileFormat = tileFormat;
 
-
+  /**
+   * 生成缩略图URL
+   * 被SeadragonViewer.js中OpenImage()调用
+   */
   this.getTileUrl = function (level, x, y, gamma, contrast, light, r, g, b) {
     return Provider.getTileUrl(slideKey, level, x, y, FileNum, ID, tileSize, gamma, contrast, light, r, g, b, dslidePath);
   };

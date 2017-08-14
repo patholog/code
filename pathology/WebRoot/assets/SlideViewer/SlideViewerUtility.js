@@ -1,4 +1,10 @@
-﻿function GetSlideList(caseno, SlideId) {
+﻿/**
+ * 加载左侧切片列表
+ * @param caseno
+ * @param SlideId
+ * @constructor
+ */
+function GetSlideList(caseno, SlideId) {
   //i=rrBack
   WebServerPath = WebServerUrl + "OpenSlideHandler";
   e = typeof i === "function" ? i : null;
@@ -62,6 +68,11 @@ function ParseSlideInfo(result) {
   SlideBind(SlideGroup);
 }
 
+/**
+ * 查看左侧切片列表
+ * @param SeaViewer
+ * @constructor
+ */
 function SlideBind(SeaViewer) {
   var Slidelists = SeaViewer.split("#");
   var ThumnailUrl, LabelUrl;
@@ -87,7 +98,7 @@ function SlideBind(SeaViewer) {
       } else {
         ClickourTouch = "onclick=\"GotoSlide('" + thumnailarr[0] + "');\"";
       }
-      ThumnailUrl = thumnailarr[1] + "&level=0&xpos=0&ypos=0";
+      ThumnailUrl = thumnailarr[1] + "&zoom=01&level=0&PositionX=0&PositionY=0";
       var port = window.location.port;
       if (port !== null && port !== '' && port !== "80") {
 

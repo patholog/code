@@ -126,7 +126,7 @@ var SeadragonPoint = Seadragon.Point;
 (function () {
   if (!SeadragonPoint) {
     SeadragonPoint = Seadragon.Point = function (n, t) {
-      this.x = typeof n == "number" ? n : 0, this.y = typeof t == "number" ? t : 0
+      this.x = typeof n === "number" ? n : 0, this.y = typeof t === "number" ? t : 0
     };
     var n = SeadragonPoint.prototype;
     n.plus = function (n) {

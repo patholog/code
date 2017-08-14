@@ -265,7 +265,7 @@
     var t = n.originalEvent,
         f, e, r, u;
     t.preventDefault(),
-    i.viewport && t.targetTouches.length == 1 && (f = y - t.targetTouches[0].clientX, e = v - t.targetTouches[0].clientY, y = t.targetTouches[0].clientX, v = t.targetTouches[0].clientY, r = new SeadragonPoint(f, e), u = i.viewport.deltaPointsFromPixels(r), i.viewport.panBy(u))
+    i.viewport && t.targetTouches.length === 1 && (f = y - t.targetTouches[0].clientX, e = v - t.targetTouches[0].clientY, y = t.targetTouches[0].clientX, v = t.targetTouches[0].clientY, r = new SeadragonPoint(f, e), u = i.viewport.deltaPointsFromPixels(r), i.viewport.panBy(u))
   }
 
   function touchend() {
@@ -432,9 +432,9 @@
       this.zoomToObj = function (n) {
         var f = n / r.Rate * r.Width,    //该倍率下的切片宽度
             u = i.viewport.getContainerSize(),   //窗口宽高
-            ui = i.getShapeCanvas(),   //ShanpeCanvas
+            ui = i.getShapeCanvas(),   //ShapeCanvas
             t = f / u.x;    //切片宽度与窗口宽度的比值
-        isIElast() ? null : SlideViewerConfig.showRuler == !1 ? null : ui.showrulers()
+        isIElast() ? null : SlideViewerConfig.showRuler === !1 ? null : ui.showrulers()
         i.viewport.zoomTo(t)
       },
       this.dataChanged = function () {   //return !1

@@ -101,7 +101,7 @@ var SlideViewerProvider;
         i.CaseNo = getQueryString("caseId");
         var url = getthumbnail(i);//[i.DigitalSlidePath,"/TileGroup0/0-0-0.jpg"].join("");
         //var url = i.DigitalSlidePath.toLowerCase().replace("decodetile.aspx", "getqiepianimg.aspx");
-        $("#xinxi").attr("src", url);
+        $("#xinxi").attr("src", url + "&zoom=01&PositionX=0&PositionY=0");
 
         var SlideGroup = "";
         //for (var j = 10; j < SlideInfo.length; j++) { //modified by harry at 20150713
@@ -297,6 +297,10 @@ var SlideViewerProvider;
         contentType: 'text/xml; charset="utf-8"'
       })
     };
+    /**
+     * 获取缩放图片
+     * 被SeadragonLiYTileSource.js调用
+     */
     this.getTileUrl = function (slideKey, level, PositionX, PositionY, FileNum, ID, TileSize, gamma, contrast, light, r, g, b, DigitalSlidePath) {
       var str0 = [DigitalSlidePath, "/TileGroup", group, "/", mlevel, "-", PositionX, "-", PositionY, ".jpg"].join("");
       //str0 = [DigitalSlidePath, "&level=", level - 8, "&xpos=", PositionX, "&ypos=", PositionY].join("");
@@ -313,25 +317,13 @@ var SlideViewerProvider;
           }
         }
         mCurrentLevel = level - 8;
-        var mlevel = level > 8 ? level - 8 : 0;
-        url = url.substring(0, url.indexOf("zoom") - 1);
         var zoom;
-        if (level < 2) {
-          zoom = '01';
-        } else if (level >=2 && level < 4) {
-          zoom = '02';
-        } else if (level >=4 && level < 8) {
-          zoom = '04';
-        } else if (level >=8 && level < 10) {
-          zoom = '08';
-        } else if (level >=10 && level < 20) {
-          zoom = '10';
-        } else if (level >=20 && level < 40) {
-          zoom = '20';
-        } else if (level >=40 && level < 80) {
-          zoom = '40';
+        if (level < 10) {
+          zoom = '0' + level;
+        } else {
+          zoom = level;
         }
-        str0 = [url, "&zoom=", zoom, '&level=', level, "&PositionX=", PositionX, "&PositionY=", PositionY].join("");
+        str0 = [url, "&zoom=", zoom, '&level=', mCurrentLevel, "&PositionX=", PositionX, "&PositionY=", PositionY].join("");
       } else {
         var mlevel = level > 8 ? level - 8 : 0;
         if (level > 6 && mlevel < m_LevelCols.Length) {
@@ -342,6 +334,9 @@ var SlideViewerProvider;
 
       return str0;
     };
+    /**
+     * 获取缩略图（左上角）
+     */
     this.getThumbnailUrl = function (slideKey, FileNum, ID, TileSize, gamma, contrast, light, r, g, b, DigitalSlidePath) {
       var str0 = [DigitalSlidePath, "/TileGroup0/0-0-0.jpg"].join("");
       //var str0 = [DigitalSlidePath, "&level=", 0, "&xpos=", 0, "&ypos=", 0].join("");
@@ -351,8 +346,7 @@ var SlideViewerProvider;
         url = DigitalSlidePath;
         var port = window.location.port;
         if (port !== null && port !== '' && port !== "80") {
-        }
-        else {
+        } else {
           if (WebReLocation !== '' && document.location.href.indexOf('/unic/') > 0) {
             tt = DigitalSlidePath.split('decodetile.aspx');
             url = "http://" + window.location.host + "/unic/decodetile/decodetile.aspx" + tt[1];
@@ -361,11 +355,10 @@ var SlideViewerProvider;
 
         url = url.toLowerCase().replace("decodetile.aspx", "getqiepianimg.aspx");
 
-        str0 = [url, "&type=", 2].join("");
-      }
-      else
+        str0 = [url, "&zoom=01&PositionX=0&PositionY=0&type=", 2].join("");
+      } else {
         str0 = [url, "/TileGroup0/0-0-0.jpg"].join("");
-
+      }
       return str0;
     };
     this.getLabelUrl = function (t, i) {
