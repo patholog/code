@@ -2,11 +2,13 @@ package com.pathology.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -99,7 +101,6 @@ public class UsersAction extends BaseAction {
 
 			session.setAttribute("count",
 					userservice.getAllUser(Users.class, hql).size());
-			
 			return SUCCESS;
 		} catch (Exception e) {
 			return "err";
@@ -266,11 +267,13 @@ public class UsersAction extends BaseAction {
 	 */
 	public String checkUserStatus() {
 		// send email demo by ldq
-		Mail.setFrom("zhq567888@126.com");
-		Mail.setHost("smtp.126.com");
-		Mail.setName("病例平台管理员");
-		Mail.setPassword("Founder123");
-		Mail.setUser("zhq567888@126.com");
+		Properties pro=getProperties();
+		Mail.setFrom(pro.getProperty("mailAdd"));
+		Mail.setHost(pro.getProperty("mailServerHost"));
+		Mail.setPassword(pro.getProperty("mailPassWord"));
+		Mail.setUser(pro.getProperty("mailUserName"));
+		Mail.setName(pro.getProperty("mailSendName"));
+
 		String[] content = new String[] { "您好：", "恭喜您的账号已经审核通过", "感谢您的使用" };
 		
 		// end demo
@@ -291,11 +294,12 @@ public class UsersAction extends BaseAction {
 	 * @return
 	 */
 	public String refuseCheck() {
-		Mail.setFrom("zhq567888@126.com");
-		Mail.setHost("smtp.126.com");
-		Mail.setName("病理平台管理员");
-		Mail.setPassword("Founder123");
-		Mail.setUser("zhq567888@126.com");
+		Properties pro=getProperties();
+		Mail.setFrom(pro.getProperty("mailAdd"));
+		Mail.setHost(pro.getProperty("mailServerHost"));
+		Mail.setPassword(pro.getProperty("mailPassWord"));
+		Mail.setUser(pro.getProperty("mailUserName"));
+		Mail.setName(pro.getProperty("mailSendName"));
 		String[] content = new String[] { "您好：", "恭喜您的账号没有审核通过", "请重新提交相关证件" };
 		
 		try {
@@ -326,12 +330,12 @@ public class UsersAction extends BaseAction {
 				Users todoUser =userArr[0];
 				todoUser.setVerification(randomStr);
 				userservice.updateUser(todoUser);
-				
-				Mail.setFrom("zhq567888@126.com");
-				Mail.setHost("smtp.126.com");
-				Mail.setName("病理平台管理员");
-				Mail.setPassword("Founder123");
-				Mail.setUser("zhq567888@126.com");
+				Properties pro=getProperties();
+				Mail.setFrom(pro.getProperty("mailAdd"));
+				Mail.setHost(pro.getProperty("mailServerHost"));
+				Mail.setPassword(pro.getProperty("mailPassWord"));
+				Mail.setUser(pro.getProperty("mailUserName"));
+				Mail.setName(pro.getProperty("mailSendName"));
 				String[] content = new String[] { "您好：", "恭喜您的随机验证码是"+randomStr+",注意保存", "感谢您的使用" };
 				Mail.send("zou_haiqiang@founder.com.cn", "您正在找回密码", content);
 				return Action.SUCCESS;
@@ -366,6 +370,22 @@ public class UsersAction extends BaseAction {
             }  
         }  
         return val;  
+    }  
+    private Properties  getProperties() {  
+        InputStream in = UsersAction.class.getClassLoader()  
+                .getResourceAsStream("properties.properties");  
+        Properties p = new Properties();  
+        try {  
+            p.load(in);  
+            p.getProperty("mailUserName");  
+            p.getProperty("mailPassWord"); 
+            p.getProperty("mailAdd"); 
+            p.getProperty("mailServerHost"); 
+        } catch (IOException e) {  
+            // TODO Auto-generated catch block  
+            e.printStackTrace();  
+        } 
+        return p;
     }  
 	public IUsersService getUserservice() {
 		return userservice;
