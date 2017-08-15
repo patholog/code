@@ -139,13 +139,17 @@
 	<bean id="pathologydao" class="com.pathology.dao.impl.PathologyDaoImpl" parent="pt" />
 	<bean id="imagedao" class="com.pathology.dao.impl.ImageDaoImpl" parent="pt" />
 	<bean id="pathologyService" class="com.pathology.service.impl.PathologyServiceImpl">
-		<property name="pathologydao" ref="pathologydao"></property>
-		<property name="imagedao" ref="imagedao"></property>
-		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		<property name="pathologydao" ref="pathologydao"/>
+		<property name="imagedao" ref="imagedao"/>
+    <property name="imageService" ref="imageService"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
 	</bean>
+	<bean id="imageService" class="com.pathology.service.impl.ImageServiceImpl">
+    <property name="imageDao" ref="imagedao"/>
+  </bean>
 		<bean id="pathologyAction" class="com.pathology.action.PathologyAction"
 		scope="prototype">
-		<property name="pathologyService" ref="pathologyService"></property>
+		<property name="pathologyService" ref="pathologyService"/>
 	</bean>
 
 	<bean id="resultDao" class="com.pathology.dao.impl.ResultDaoImpl" parent="pt">

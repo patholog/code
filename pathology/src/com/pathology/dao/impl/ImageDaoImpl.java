@@ -40,4 +40,8 @@ public class ImageDaoImpl extends SuperDao implements IImageDao {
 		return (List<Image>) super.findByClz(Image.class, param);
 	}
 
+	@Override
+	public void insertImage(Image image) {
+    super.add(image);
+  }
 }

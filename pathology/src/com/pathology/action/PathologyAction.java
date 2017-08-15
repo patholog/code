@@ -18,8 +18,7 @@ import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +36,8 @@ public class PathologyAction extends BaseAction {
   private PathologyDTO pathology;
   private String content;
   private IResultService resultService;
+  private File slide;
+  private String slideFileName;
 
   /**
    * 保存病理
@@ -59,8 +60,22 @@ public class PathologyAction extends BaseAction {
   public String saveInfo() {
     HttpServletRequest request = ServletActionContext.getRequest();
     Map<String, String[]> paramMap = request.getParameterMap();
-    pathologyService.updatePathology(paramMap);
-    return null;
+    try {
+      InputStream is = new FileInputStream(getSlide()); //根据上传的文件得到输入流
+      OutputStream os = new FileOutputStream("d:\\upload\\" + slideFileName); //指定输出流地址
+      byte buffer[] = new byte[1024];
+      int count;
+      while ((count = is.read(buffer)) > 0) {
+        os.write(buffer, 0, count); //把文件写到指定位置的文件中
+      }
+      os.close(); //关闭
+      is.close();
+      paramMap.put("slideFilePath", new String[]{"d:\\upload\\" + slideFileName});
+      pathologyService.addPathology(paramMap);
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+    }
+    return paramMap.get("pathologyNo")[0];
   }
 
   /**
@@ -197,5 +212,21 @@ public class PathologyAction extends BaseAction {
 
   public void setResultService(IResultService resultService) {
     this.resultService = resultService;
+  }
+
+  public File getSlide() {
+    return slide;
+  }
+
+  public void setSlide(File slide) {
+    this.slide = slide;
+  }
+
+  public String getSlideFileName() {
+    return slideFileName;
+  }
+
+  public void setSlideFileName(String slideFileName) {
+    this.slideFileName = slideFileName;
   }
 }

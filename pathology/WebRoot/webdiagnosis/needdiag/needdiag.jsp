@@ -145,7 +145,9 @@
       $('#infoForm').ajaxForm({
         dataType: 'json',
         success: function (result) {
-          alert(123);
+          if (result && result !== "") {
+            $('#caseIdHidden').val(result);
+          }
         }
       })
     });
@@ -214,7 +216,7 @@
   <div class="header">
     <%@include file="/webdiagnosis/maintop.jsp" %>
   </div>
-  <form id="infoForm" method="post" action="PathologyAction!saveInfo">
+  <form id="infoForm" method="post" action="PathologyAction!saveInfo" enctype="multipart/form-data">
   <div id="whole" class="mlrAuto">
     <div class="menu_left">
       <ul id="Left1_MenuList">
@@ -232,7 +234,7 @@
                   1<span>病例信息</span></div>
               </a>
             </li>
-            <li>
+            <%--<li>
               <a href="">
                 <div class="step">
                   2<span>上传切片&amp;附件</span></div>
@@ -249,7 +251,7 @@
                 <div class="step">
                   4<span>留言</span></div>
               </a>
-            </li>
+            </li>--%>
           </ul>
           <div class="clear">
           </div>
@@ -390,7 +392,8 @@
                   <ins class="half_words"></ins>会
                   <ins class="half_words"></ins>诊
                   <ins class="half_words"></ins>号
-                  <input name="txtCheckNumber" id="txtCheckNumber" value="">
+                  <input name="caseId" id="caseId" value="">
+                  <input name="caseIdHidden" id="caseIdHidden" value="">
                 </div>
               </li>
               <li>
@@ -507,6 +510,12 @@
             </ul>
             <div class="clear">
             </div>
+          </div>
+          <div class="information2">
+            <div style="float: left">
+              <ins class="half_words"></ins>上传切片：
+            </div>
+            <input type="file" name="slide" id="slide">
           </div>
           <div class="information_btn" id="divFoot">
             <input type="submit" name="saveInfo" value="保存" id="btnSaveInfo" class="inf_btn right">

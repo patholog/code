@@ -23,7 +23,7 @@ public interface IPathologyService {
 
   void updatePathology(Pathology em);
 
-  void updatePathology(Map<String, String[]> paramMap);
+  void addPathology(Map<String, String[]> paramMap);
 
   void addPathology(Pathology em);
 

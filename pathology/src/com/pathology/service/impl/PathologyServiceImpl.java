@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.pathology.entity.Result;
+import com.pathology.service.IImageService;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -25,6 +26,7 @@ public class PathologyServiceImpl implements IPathologyService {
 
   private IPathologyDao pathologydao;
   private IImageDao imagedao;
+  private IImageService imageService;
 
   public IImageDao getImagedao() {
     return imagedao;
@@ -122,7 +124,7 @@ public class PathologyServiceImpl implements IPathologyService {
   }
 
   @Override
-  public void updatePathology(Map<String, String[]> paramMap) {
+  public void addPathology(Map<String, String[]> paramMap) {
     try {
       Pathology pathology = new Pathology();
       pathology.setPatientname(paramMap.get("patientName")[0]);
@@ -135,7 +137,13 @@ public class PathologyServiceImpl implements IPathologyService {
       pathology.setMobile(paramMap.get("mobile")[0]);
       pathology.setHospitalcode(paramMap.get("hospitalname")[0]);
       addPathology(pathology);
+      Image image = new Image();
+      image.setIdImage(paramMap.get("pathologyNo")[0]);
+      image.setCaseId(paramMap.get("pathologyNo")[0]);
+      image.setPathImage(paramMap.get("slideFilePath")[0]);
+      imageService.insertImage(image);
     } catch (Exception e) {
+      e.printStackTrace();
       Logger.getLogger(PathologyServiceImpl.class).error(e.getMessage());
     }
   }
@@ -195,4 +203,11 @@ public class PathologyServiceImpl implements IPathologyService {
     return elist;
   }
 
+  public IImageService getImageService() {
+    return imageService;
+  }
+
+  public void setImageService(IImageService imageService) {
+    this.imageService = imageService;
+  }
 }
