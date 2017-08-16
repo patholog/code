@@ -131,6 +131,7 @@ public class PathologyServiceImpl implements IPathologyService {
       pathology.setPathologyno(paramMap.get("pathologyNo")[0]);
       pathology.setIdCase(paramMap.get("pathologyNo")[0]);
       pathology.setPatientage(paramMap.get("patientAge")[0]);
+      pathology.setAgeunit(paramMap.get("ageUnit")[0]);
       pathology.setPatientsex(paramMap.get("patientSex")[0]);
       pathology.setSpecimenname(paramMap.get("specimenName")[0]);
       pathology.setIdcard(paramMap.get("idCard")[0]);

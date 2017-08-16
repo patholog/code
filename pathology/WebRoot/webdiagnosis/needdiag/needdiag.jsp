@@ -78,57 +78,6 @@
 
     });
 
-    //检测手机号码和身份证号码 by flyer
-    function CheckValue(type) {
-      var re = "";
-      var value = "";
-      if (type == "1") {
-        value = $("#txtMobilePhone").val();
-        re = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
-        if (value != "") {
-          if (!re.test(value)) {
-            $("#txtMobilePhone").css("color", "red");
-            //                        $("#imgMobileS").hide();
-            //                        $("#imgMobileE").show();
-          }
-          else {
-            $("#txtMobilePhone").css("color", "#a5a5a5");
-            //                        $("#imgMobileS").show();
-            //                        $("#imgMobileE").hide();
-          }
-        }
-        else {
-          $("#txtMobilePhone").css("color", "#a5a5a5");
-        }
-
-      }
-      if (type == "2") {
-        re = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/
-        value = $("#txtIdentityNumber").val();
-        if (value != "") {
-          if (!re.test(value)) {
-            $("#txtIdentityNumber").css("color", "red");
-          } else {
-            $("#txtIdentityNumber").css("color", "#a5a5a5");
-          }
-        } else {
-          $("#txtIdentityNumber").css("color", "#a5a5a5");
-        }
-      }
-      if (type == "3") {
-        value = $("#txtAge").val();
-        if (value != "") {
-          if (value > 150 || value == 0) {
-            $("#txtAge").css("color", "red");
-          } else {
-            $("#txtAge").css("color", "#a5a5a5");
-          }
-        } else {
-          $("#txtAge").css("color", "#a5a5a5");
-        }
-      }
-    }
-
     //检测长文本编辑框的字数，是否超过，超过限定字数，则前景色改为红色  by flyer
     function CheckWords(txt) {
       var len = 0;
@@ -142,19 +91,98 @@
     }
 
     $(function () {
-      $('#infoForm').ajaxForm({
-        dataType: 'json',
-        success: function (result) {
-          if (result && result !== "") {
-            $('#caseIdHidden').val(result);
-          } else {
-            alert("新建病理失败");
-          }
+      var flag = false; // 表单校验
+      /**
+       * 提交表单
+       */
+      $('#btnSave').click(function() {
+        validate();
+        if (flag) {
+          $('#infoForm').ajaxSubmit({
+            dataType: 'json',
+            success: function (result) {
+              if (result && result !== "") {
+                $('#caseIdHidden').val(result);
+              } else {
+                alert("新建病理失败");
+              }
+            }
+          });
+        } else {
+          alert('信息有误，请核对');
         }
       });
+      /**
+       * 更改送检单位获取医院编号
+       */
       $('#hospitalCode').change(function () {
         $('#hospitalCodeHidden').val($(this).children('option:selected').val());
-      })
+      });
+      function validate() {
+        flag = true;
+        if ($('#patientName').val() === "") {
+          flag = false;
+        }
+        if ($('#caseId').val() === "") {
+          flag = false;
+        }
+        if ($('#hospitalCode').children('option:selected').val() === "") {
+          flag = false;
+        }
+      }
+      /**
+       * 检测手机号码和身份证号码
+       */
+      function CheckValue(type) {
+        var re = "";
+        var value = "";
+        if (type === "1") {
+          // 校验手机号
+          value = $("#mobile").val();
+          re = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+          if (value !== "") {
+            if (!re.test(value)) {
+              flag = false;
+              $("#mobile").css("color", "#ff0000");
+            } else {
+              flag = true;
+              $("#mobile").css("color", "#a5a5a5");
+            }
+          } else {
+            $("#mobile").css("color", "#a5a5a5");
+          }
+        }
+        if (type === "2") {
+          // 校验身份证号
+          re = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/
+          value = $("#idCard").val();
+          if (value !== "") {
+            if (!re.test(value)) {
+              flag = false;
+              $("#idCard").css("color", "#ff0000");
+            } else {
+              flag = true;
+              $("#idCard").css("color", "#a5a5a5");
+            }
+          } else {
+            $("#idCard").css("color", "#a5a5a5");
+          }
+        }
+        if (type === "3") {
+          value = $("#patientAge").val();
+          if (value !== "") {
+            if (value > 150 || value === 0) {
+              flag = false;
+              $("#patientAge").css("color", "#ff0000");
+            } else {
+              flag = true;
+              $("#patientAge").css("color", "#a5a5a5");
+            }
+          } else {
+            $("#patientAge").css("color", "#a5a5a5");
+          }
+        }
+      }
     });
   </script>
   <style type="text/css">
@@ -287,21 +315,30 @@
               </li>
               <li>
                 <div>
-                  <span class="red_star">*</span>病<ins class="half_words"></ins>理<ins class="half_words"></ins>号
-                  <input name="pathologyNo" id="pathologyNo" class="patient_name">
+                  <span class="red_star">*</span>会<ins class="half_words"></ins>诊<ins class="half_words"></ins>号
+                  <input name="caseId" id="caseId">
+                  <input type="hidden" name="caseIdHidden" id="caseIdHidden">
                 </div>
               </li>
               <li>
                 <div>
                   <div class="age"><span class="red_star">*</span>年龄
                     <input name="patientAge" id="patientAge" class="inf_age" maxlength="3" onblur="CheckValue('3')"
-                           onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                           onkeyup="if(this.value.length===1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
                            value="">
+                    <span style="width: 40px;">
+                      <select name="ageUnit" id="ageUnit" style="width: 40px;">
+                        <option value="岁">岁</option>
+                        <option value="月">月</option>
+                        <option value="天">天</option>
+                        <option value="小时">小时</option>
+                      </select>
+                    </span>
                   </div>
                   <div class="sex">
                     <span class="red_star">*</span>性别
-                    <span style="width: 70px;">
-                      <select name="patientSex" id="patientSex" style="width: 70px;">
+                    <span style="width: 30px;">
+                      <select name="patientSex" id="patientSex" style="width: 30px;">
                         <option value="男">男</option>
 	                      <option value="女">女</option>
                       </select>
@@ -395,9 +432,8 @@
               </li>
               <li>
                 <div>
-                  <span class="red_star">*</span>会<ins class="half_words"></ins>诊<ins class="half_words"></ins>号
-                  <input name="caseId" id="caseId" value="">
-                  <input name="caseIdHidden" id="caseIdHidden" value="">
+                  <span class="red_star">*</span>病<ins class="half_words"></ins>理<ins class="half_words"></ins>号
+                  <input name="pathologyNo" id="pathologyNo" class="patient_name">
                 </div>
               </li>
               <li>
@@ -516,7 +552,8 @@
             <input type="file" name="slide" id="slide">
           </div>
           <div class="information_btn" id="divFoot">
-            <input type="submit" name="saveInfo" value="保存" id="btnSaveInfo" class="inf_btn right">
+            <input hidden type="submit" name="btnSaveInfo" value="保存" id="btnSaveInfo" class="inf_btn right">
+            <input type="button" name="btnSave" value="保存" id="btnSave" class="inf_btn right">
             <div class="clear">
             </div>
           </div>
