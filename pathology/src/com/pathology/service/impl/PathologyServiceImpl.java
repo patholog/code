@@ -140,13 +140,14 @@ public class PathologyServiceImpl implements IPathologyService {
       pathology.setIdcard(paramMap.get("idCard")[0]); // 身份证号
       pathology.setMobile(paramMap.get("mobile")[0]); // 手机号
       pathology.setHospitalcode(paramMap.get("hospitalCodeHidden")[0]); // 送检单位编码
-      pathology.setDiagTime(Timestamp.valueOf(paramMap.get("diagTime")[0])); // 送检日期
+      pathology.setDiagTime(Timestamp.valueOf(paramMap.get("diagTime")[0] + " 00:00:00")); // 送检日期
       pathology.setMemo(paramMap.get("memo")[0]); // 备注
       pathology.setCrtTime(new Timestamp(System.currentTimeMillis())); // 创建日期
       pathology.setClinicdiagnose(paramMap.get("clinicDiagnose")[0]); // 临床诊断
       pathology.setHistorysummary(paramMap.get("historySummary")[0]); // 病史
       addPathology(pathology); // 新增病理信息
-      if (paramMap.containsKey("generalSee") && !"".equals(paramMap.get("generalSee")[0])) {
+      if ((paramMap.containsKey("generalSeeHidden") && !"".equals(paramMap.get("generalSeeHidden")[0]))
+          || (paramMap.containsKey("microscopeSeeHidden") && !"".equals(paramMap.get("microscopeSeeHidden")[0]))) {
         // 大体所见等Result数据
         Result result = new Result();
         result.setCaseId(paramMap.get("caseId")[0]);

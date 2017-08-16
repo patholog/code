@@ -131,6 +131,10 @@
         if ($('#hospitalCode').children('option:selected').val() === "") {
           flag = false;
         }
+        // 大体所见取值
+        $('#generalSeeHidden').val(CKEDITOR.instances.generalSee.getData());
+        // 影像学取值
+        $('#microscopeSeeHidden').val(CKEDITOR.instances.microscopeSee.getData());
       }
       /**
        * 检测手机号码和身份证号码
@@ -492,6 +496,7 @@
                 <div style="float: left"><span class="red_star">*</span>大体所见：</div>
                 <div class="ckTxt">
                   <textarea id="generalSee" name="generalSee" cols="10" rows="2" class="ckeditor"></textarea>
+                  <input type="hidden" id="generalSeeHidden" name="generalSeeHidden"/>
                 </div>
               </li>
               <li>
@@ -538,7 +543,8 @@
                   <ins class="half_words"></ins>影像学检查：
                 </div>
                 <div class="ckTxt">
-                  <textarea id="microscopeSee" cols="10" rows="2" class="ckeditor"></textarea>
+                  <textarea id="microscopeSee" name="microscopeSee" cols="10" rows="2" class="ckeditor"></textarea>
+                  <input type="hidden" name="microscopeSeeHidden" id="microscopeSeeHidden"/>
                 </div>
                 <div class=" clear">
                 </div>
