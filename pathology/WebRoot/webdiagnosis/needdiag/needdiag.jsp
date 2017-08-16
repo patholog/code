@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="${path }/css/weebox.css"/>
 
   <script type="text/javascript" src="${path }/js/jquery.min.js"></script>
+  <script type="text/javascript" src="${path }/js/jquery-ui-1.8.20.custom.min.js"></script>
   <script type="text/javascript" src="${path }/js/jquery.form.min.js"></script>
   <script type="text/javascript" src="${path }/js/treeView.js"></script>
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
@@ -80,18 +81,19 @@
 
     //检测长文本编辑框的字数，是否超过，超过限定字数，则前景色改为红色  by flyer
     function CheckWords(txt) {
-      var len = 0;
+      /*var len = 0;
       var str = txt.value;
       $("#a" + txt.name).html(str.length);
       if (str.length > 250) {
         $("#a" + txt.name).css("color", "red");
       } else {
         $("#a" + txt.name).css("color", "#a5a5a5");
-      }
+      }*/
     }
 
     $(function () {
       var flag = false; // 表单校验
+      $('#diagTime').datepicker();
       /**
        * 提交表单
        */
@@ -388,18 +390,18 @@
               <li>
                 <div>
                   <span class="red_star">*</span>送检时间
-                  <input name="txtDateOfDelivery" id="txtDateOfDelivery" class="calendar"
-                         onfocus="WdatePicker({isShowClear:false,dateFmt:'yyyy/MM/dd HH:mm',readOnly:false,dorisSet:'mm'})"
-                         readonly="" value="">
+                  <input id="diagTime" name="diagTime"/>
                 </div>
               </li>
               <li>
                 <div>
                   <ins class="half_words"></ins>系统分类
-                  <span class="select_box">
-                    <select name="dListClassification" id="dListClassification">
-                    </select>
-                  </span>
+                  <select name="specimenType" id="specimenType" style="width: 70px;">
+                    <option value="">请选择</option>
+                    <c:forEach items="${specimenList}" var="list" varStatus="status">
+                      <option value='${list.idSpecimen}'>${list.name}</option>
+                    </c:forEach>
+                  </select>
                 </div>
               </li>
               <li>
@@ -471,7 +473,7 @@
                 </div>
                 <div class=" clear">
                 </div>
-                <textarea name="txtClinicalData" id="txtClinicalData" rows="3" cols="20" class="row2"
+                <textarea name="clinicDiagnose" id="clinicDiagnose" rows="3" cols="20" class="row2"
                           onkeyup="CheckWords(this)"></textarea>
               </li>
               <li>
@@ -500,7 +502,7 @@
                   <a class="aColor">已经输入</a>&nbsp;<a id="atxtRemark" style="color: rgb(165, 165, 165);">0</a>
                   <a class="aColor">/250&nbsp;个字</a>
                 </div>
-                <textarea name="txtRemark" id="txtRemark" rows="1" cols="20" class="row2" onkeyup="CheckWords(this)"></textarea>
+                <textarea name="memo" id="memo" rows="1" cols="20" class="row2" onkeyup="CheckWords(this)"></textarea>
               </li>
               <li class="remarks" style="margin-top:20px;">注：<span class="red">“*”</span>为必填内容，病史与备注中的内容不在诊断结果中显示</li>
             </ul>
@@ -515,7 +517,7 @@
                 </div>
                 <div class=" clear">
                 </div>
-                <textarea name="txtHistoryOfDisease" id="txtHistoryOfDisease" rows="2" cols="20" class="row2"
+                <textarea name="historySummary" id="historySummary" rows="2" cols="20" class="row2"
                           onkeyup="CheckWords(this)"></textarea>
               </li>
               <li>

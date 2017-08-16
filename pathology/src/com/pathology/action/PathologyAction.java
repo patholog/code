@@ -5,9 +5,11 @@ import com.pathology.dto.PathologyDTO;
 import com.pathology.entity.Hospital;
 import com.pathology.entity.Result;
 import com.pathology.entity.SlideResult;
+import com.pathology.entity.Specimen;
 import com.pathology.service.IHospitalService;
 import com.pathology.service.IPathologyService;
 import com.pathology.service.IResultService;
+import com.pathology.service.ISpecimenService;
 import com.pathology.util.*;
 import com.sun.istack.internal.Nullable;
 import net.sf.json.JSONObject;
@@ -33,12 +35,14 @@ public class PathologyAction extends BaseAction {
   private List<PathologyDTO> pathologys;
   private PathologyDTO pathology;
   private IHospitalService hospitalservice;
+  private ISpecimenService specimenService;
   private String content;
   private IResultService resultService;
   @Nullable
   private File slide;
   private String slideFileName;
   private List<Hospital> hospitalList;
+  private List<Specimen> specimenList;
 
   /**
    * 保存病理
@@ -146,6 +150,7 @@ public class PathologyAction extends BaseAction {
     HttpServletRequest request = ServletActionContext.getRequest();
     try {
       hospitalList = hospitalservice.getAllHospital(Hospital.class, "");
+      specimenList = specimenService.selectList(Specimen.class, "");
     } catch (Exception e) {
       logger.error(e.getMessage());
     }
@@ -259,11 +264,19 @@ public class PathologyAction extends BaseAction {
     this.hospitalList = hospitalList;
   }
 
-  public IHospitalService getHospitalservice() {
-    return hospitalservice;
-  }
-
   public void setHospitalservice(IHospitalService hospitalservice) {
     this.hospitalservice = hospitalservice;
+  }
+
+  public void setSpecimenService(ISpecimenService specimenService) {
+    this.specimenService = specimenService;
+  }
+
+  public List<Specimen> getSpecimenList() {
+    return specimenList;
+  }
+
+  public void setSpecimenList(List<Specimen> specimenList) {
+    this.specimenList = specimenList;
   }
 }

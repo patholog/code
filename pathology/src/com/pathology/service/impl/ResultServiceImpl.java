@@ -9,6 +9,11 @@ public class ResultServiceImpl implements IResultService {
   private IResultDao resultDao;
 
   @Override
+  public void insert(Result result) {
+    resultDao.insert(result);
+  }
+
+  @Override
   public void updateResult(Result result) {
     try {
       String generalSee = result.getGeneralSee();

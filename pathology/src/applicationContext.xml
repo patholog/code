@@ -143,14 +143,20 @@
 		<property name="imagedao" ref="imagedao"/>
     <property name="imageService" ref="imageService"/>
 		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    <property name="resultService" ref="resultService"/>
 	</bean>
 	<bean id="imageService" class="com.pathology.service.impl.ImageServiceImpl">
     <property name="imageDao" ref="imagedao"/>
   </bean>
+  <bean id="specimenService" class="com.pathology.service.impl.SpecimenServiceImpl">
+    <property name="specimenDao" ref="specimenDao"/>
+  </bean>
+  <bean id="specimenDao" class="com.pathology.dao.impl.SpecimenDaoImpl" parent="ht"/>
 	<bean id="pathologyAction" class="com.pathology.action.PathologyAction"
 		scope="prototype">
 		<property name="pathologyService" ref="pathologyService"/>
 		<property name="hospitalservice" ref="hospitalservice"/>
+    <property name="specimenService" ref="specimenService"/>
 	</bean>
 
 	<bean id="resultDao" class="com.pathology.dao.impl.ResultDaoImpl" parent="pt">

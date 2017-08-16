@@ -14,6 +14,11 @@ public class ResultDaoImpl extends SuperDao implements IResultDao {
   private JdbcTemplate jdbcTemplate;
 
   @Override
+  public void insert(Result result) {
+    super.add(result);
+  }
+
+  @Override
   public void updateResult(Result result) {
     super.update(result);
   }

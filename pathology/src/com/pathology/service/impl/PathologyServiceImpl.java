@@ -1,25 +1,26 @@
 package com.pathology.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import com.pathology.entity.Result;
-import com.pathology.service.IImageService;
-import org.apache.log4j.Logger;
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import com.pathology.dao.IImageDao;
 import com.pathology.dao.IPathologyDao;
 import com.pathology.dto.PathologyDTO;
 import com.pathology.entity.Image;
 import com.pathology.entity.Pathology;
+import com.pathology.entity.Result;
 import com.pathology.mapping.PathologyMapping;
+import com.pathology.service.IImageService;
 import com.pathology.service.IPathologyService;
+import com.pathology.service.IResultService;
 import com.pathology.util.Pages;
-import com.pathology.util.SessionAgentManager;
+import org.apache.log4j.Logger;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import javax.servlet.http.HttpServletRequest;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 public class PathologyServiceImpl implements IPathologyService {
@@ -27,6 +28,7 @@ public class PathologyServiceImpl implements IPathologyService {
   private IPathologyDao pathologydao;
   private IImageDao imagedao;
   private IImageService imageService;
+  private IResultService resultService;
 
   public IImageDao getImagedao() {
     return imagedao;
@@ -127,18 +129,33 @@ public class PathologyServiceImpl implements IPathologyService {
   public void addPathology(Map<String, String[]> paramMap) {
     try {
       Pathology pathology = new Pathology();
-      pathology.setPatientname(paramMap.get("patientName")[0]);
-      pathology.setPathologyno(paramMap.get("pathologyNo")[0]);
-      pathology.setIdCase(paramMap.get("pathologyNo")[0]);
-      pathology.setPatientage(paramMap.get("patientAge")[0]);
-      pathology.setAgeunit(paramMap.get("ageUnit")[0]);
-      pathology.setPatientsex(paramMap.get("patientSex")[0]);
-      pathology.setSpecimenname(paramMap.get("specimenName")[0]);
-      pathology.setIdcard(paramMap.get("idCard")[0]);
-      pathology.setMobile(paramMap.get("mobile")[0]);
-      pathology.setHospitalcode(paramMap.get("hospitalCodeHidden")[0]);
-      addPathology(pathology);
-      if (paramMap.containsKey("slideFilePath") && paramMap.get("slideFilePath")[0] != null) {
+      pathology.setPatientname(paramMap.get("patientName")[0]); // 姓名
+      pathology.setPathologyno(paramMap.get("pathologyNo")[0]); // 病理编号
+      pathology.setIdCase(paramMap.get("caseId")[0]); // 会诊号（主键）
+      pathology.setPatientage(paramMap.get("patientAge")[0]); // 年龄
+      pathology.setAgeunit(paramMap.get("ageUnit")[0]); // 年龄单位
+      pathology.setPatientsex(paramMap.get("patientSex")[0]); // 性别（男/女）
+      pathology.setSpecimenname(paramMap.get("specimenName")[0]); // 取材部位
+      pathology.setSpecimentype(paramMap.get("specimenType")[0]); // 标本类型
+      pathology.setIdcard(paramMap.get("idCard")[0]); // 身份证号
+      pathology.setMobile(paramMap.get("mobile")[0]); // 手机号
+      pathology.setHospitalcode(paramMap.get("hospitalCodeHidden")[0]); // 送检单位编码
+      pathology.setDiagTime(Timestamp.valueOf(paramMap.get("diagTime")[0])); // 送检日期
+      pathology.setMemo(paramMap.get("memo")[0]); // 备注
+      pathology.setCrtTime(new Timestamp(System.currentTimeMillis())); // 创建日期
+      pathology.setClinicdiagnose(paramMap.get("clinicDiagnose")[0]); // 临床诊断
+      pathology.setHistorysummary(paramMap.get("historySummary")[0]); // 病史
+      addPathology(pathology); // 新增病理信息
+      if (paramMap.containsKey("generalSee") && !"".equals(paramMap.get("generalSee")[0])) {
+        // 大体所见等Result数据
+        Result result = new Result();
+        result.setCaseId(paramMap.get("caseId")[0]);
+        result.setIdResult(paramMap.get("caseId")[0]);
+        result.setGeneralSee(paramMap.get("generalSee")[0]); // 大体所见
+        result.setMicroscopeSee(paramMap.get("microscopeSee")[0]); // 影像检查
+        resultService.insert(result);
+      }
+      if (paramMap.containsKey("slideFilePath") && !"".equals(paramMap.get("slideFilePath")[0])) {
         Image image = new Image();
         image.setIdImage(paramMap.get("pathologyNo")[0]);
         image.setCaseId(paramMap.get("pathologyNo")[0]);
@@ -212,5 +229,9 @@ public class PathologyServiceImpl implements IPathologyService {
 
   public void setImageService(IImageService imageService) {
     this.imageService = imageService;
+  }
+
+  public void setResultService(IResultService resultService) {
+    this.resultService = resultService;
   }
 }
