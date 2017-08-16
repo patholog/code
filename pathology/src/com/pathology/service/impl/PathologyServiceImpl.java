@@ -135,16 +135,18 @@ public class PathologyServiceImpl implements IPathologyService {
       pathology.setSpecimenname(paramMap.get("specimenName")[0]);
       pathology.setIdcard(paramMap.get("idCard")[0]);
       pathology.setMobile(paramMap.get("mobile")[0]);
-      pathology.setHospitalcode(paramMap.get("hospitalname")[0]);
+      pathology.setHospitalcode(paramMap.get("hospitalCodeHidden")[0]);
       addPathology(pathology);
-      Image image = new Image();
-      image.setIdImage(paramMap.get("pathologyNo")[0]);
-      image.setCaseId(paramMap.get("pathologyNo")[0]);
-      image.setPathImage(paramMap.get("slideFilePath")[0]);
-      imageService.insertImage(image);
+      if (paramMap.containsKey("slideFilePath") && paramMap.get("slideFilePath")[0] != null) {
+        Image image = new Image();
+        image.setIdImage(paramMap.get("pathologyNo")[0]);
+        image.setCaseId(paramMap.get("pathologyNo")[0]);
+        image.setPathImage(paramMap.get("slideFilePath")[0]);
+        imageService.insertImage(image);
+      }
     } catch (Exception e) {
-      e.printStackTrace();
       Logger.getLogger(PathologyServiceImpl.class).error(e.getMessage());
+      throw new RuntimeException(e);
     }
   }
 

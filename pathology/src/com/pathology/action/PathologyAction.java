@@ -1,17 +1,15 @@
 package com.pathology.action;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.pathology.dto.PathologyDTO;
-import com.pathology.entity.Pathology;
+import com.pathology.entity.Hospital;
 import com.pathology.entity.Result;
 import com.pathology.entity.SlideResult;
+import com.pathology.service.IHospitalService;
 import com.pathology.service.IPathologyService;
 import com.pathology.service.IResultService;
-import com.pathology.util.Constant;
-import com.pathology.util.HttpUtil;
-import com.pathology.util.SessionAgentManager;
-import com.pathology.util.StringUtil;
+import com.pathology.util.*;
+import com.sun.istack.internal.Nullable;
 import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
@@ -34,10 +32,13 @@ public class PathologyAction extends BaseAction {
   private IPathologyService pathologyService;
   private List<PathologyDTO> pathologys;
   private PathologyDTO pathology;
+  private IHospitalService hospitalservice;
   private String content;
   private IResultService resultService;
+  @Nullable
   private File slide;
   private String slideFileName;
+  private List<Hospital> hospitalList;
 
   /**
    * 保存病理
@@ -57,23 +58,32 @@ public class PathologyAction extends BaseAction {
     }
   }
 
+  /**
+   * 保存病理信息
+   *
+   * @return 病理编号
+   */
   public String saveInfo() {
     HttpServletRequest request = ServletActionContext.getRequest();
     Map<String, String[]> paramMap = request.getParameterMap();
     try {
-      InputStream is = new FileInputStream(getSlide()); //根据上传的文件得到输入流
-      OutputStream os = new FileOutputStream("d:\\upload\\" + slideFileName); //指定输出流地址
-      byte buffer[] = new byte[1024];
-      int count;
-      while ((count = is.read(buffer)) > 0) {
-        os.write(buffer, 0, count); //把文件写到指定位置的文件中
+      String slideFilePath = Property.getProperty("slideFilePath");
+      if (slide != null) {
+        InputStream is = new FileInputStream(getSlide()); //根据上传的文件得到输入流
+        OutputStream os = new FileOutputStream(slideFilePath + "\\" + slideFileName); //指定输出流地址
+        byte buffer[] = new byte[1024];
+        int count;
+        while ((count = is.read(buffer)) > 0) {
+          os.write(buffer, 0, count); //把文件写到指定位置的文件中
+        }
+        os.close(); //关闭
+        is.close();
+        paramMap.put("slideFilePath", new String[]{slideFilePath + "\\" + slideFileName});
       }
-      os.close(); //关闭
-      is.close();
-      paramMap.put("slideFilePath", new String[]{"d:\\upload\\" + slideFileName});
       pathologyService.addPathology(paramMap);
     } catch (Exception e) {
       logger.error(e.getMessage());
+      return "新建病理失败";
     }
     return paramMap.get("pathologyNo")[0];
   }
@@ -127,7 +137,18 @@ public class PathologyAction extends BaseAction {
     return "pathologyshas";
   }
 
+  /**
+   * 打开新建界面
+   *
+   * @return 新建页面
+   */
   public String addPathology() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    try {
+      hospitalList = hospitalservice.getAllHospital(Hospital.class, "");
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+    }
     return "addPathology";
   }
 
@@ -228,5 +249,21 @@ public class PathologyAction extends BaseAction {
 
   public void setSlideFileName(String slideFileName) {
     this.slideFileName = slideFileName;
+  }
+
+  public List<Hospital> getHospitalList() {
+    return hospitalList;
+  }
+
+  public void setHospitalList(List<Hospital> hospitalList) {
+    this.hospitalList = hospitalList;
+  }
+
+  public IHospitalService getHospitalservice() {
+    return hospitalservice;
+  }
+
+  public void setHospitalservice(IHospitalService hospitalservice) {
+    this.hospitalservice = hospitalservice;
   }
 }

@@ -147,8 +147,13 @@
         success: function (result) {
           if (result && result !== "") {
             $('#caseIdHidden').val(result);
+          } else {
+            alert("新建病理失败");
           }
         }
+      });
+      $('#hospitalCode').change(function () {
+        $('#hospitalCodeHidden').val($(this).children('option:selected').val());
       })
     });
   </script>
@@ -282,9 +287,7 @@
               </li>
               <li>
                 <div>
-                  <span class="red_star">*</span>病
-                  <ins class="half_words"></ins>理
-                  <ins class="half_words"></ins>号
+                  <span class="red_star">*</span>病<ins class="half_words"></ins>理<ins class="half_words"></ins>号
                   <input name="pathologyNo" id="pathologyNo" class="patient_name">
                 </div>
               </li>
@@ -327,9 +330,7 @@
               </li>
               <li>
                 <div class="pos_r">
-                  <ins class="half_words"></ins>手
-                  <ins class="half_words"></ins>机
-                  <ins class="half_words"></ins>号
+                  <ins class="half_words"></ins>手<ins class="half_words"></ins>机<ins class="half_words"></ins>号
                   <input name="mobile" id="mobile" maxlength="11"
                           onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
                           onblur="CheckValue('1')">
@@ -367,8 +368,13 @@
               <li>
                 <div>
                   <ins class="half_words"></ins>送检单位
-                  <input name="hidHospitalOfDelivery" type="hidden" id="hidHospitalOfDelivery" value="885">
-                  <input name="hospitalname" id="hospitalname">
+                  <select id="hospitalCode" name="hospitalCode">
+                    <option value="">请选择</option>
+                    <c:forEach items="${hospitalList}" var="list" varStatus="status">
+                      <option value='${list.hospitalcode}'>${list.name}</option>
+                    </c:forEach>
+                  </select>
+                  <input type="hidden" id="hospitalCodeHidden" name="hospitalCodeHidden">
                 </div>
               </li>
               <li>
@@ -389,36 +395,28 @@
               </li>
               <li>
                 <div>
-                  <ins class="half_words"></ins>会
-                  <ins class="half_words"></ins>诊
-                  <ins class="half_words"></ins>号
+                  <span class="red_star">*</span>会<ins class="half_words"></ins>诊<ins class="half_words"></ins>号
                   <input name="caseId" id="caseId" value="">
                   <input name="caseIdHidden" id="caseIdHidden" value="">
                 </div>
               </li>
               <li>
                 <div>
-                  <ins class="half_words"></ins>住
-                  <ins class="half_words"></ins>院
-                  <ins class="half_words"></ins>号
+                  <ins class="half_words"></ins>住<ins class="half_words"></ins>院<ins class="half_words"></ins>号
                   <input name="txtInHospitalNumber" id="txtInHospitalNumber"
                           onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
                 </div>
               </li>
               <li>
                 <div>
-                  <ins class="half_words"></ins>病
-                  <ins class="half_words"></ins>区
-                  <ins class="half_words"></ins>号
+                  <ins class="half_words"></ins>病<ins class="half_words"></ins>区<ins class="half_words"></ins>号
                   <input name="txtBlockNumber" id="txtBlockNumber"
                           onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
                 </div>
               </li>
               <li>
                 <div>
-                  <ins class="half_words"></ins>病
-                  <ins class="half_words"></ins>房
-                  <ins class="half_words"></ins>号
+                  <ins class="half_words"></ins>病<ins class="half_words"></ins>房<ins class="half_words"></ins>号
                   <input name="txtBedNumber" id="txtBedNumber"
                           onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
                 </div>

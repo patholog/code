@@ -147,9 +147,10 @@
 	<bean id="imageService" class="com.pathology.service.impl.ImageServiceImpl">
     <property name="imageDao" ref="imagedao"/>
   </bean>
-		<bean id="pathologyAction" class="com.pathology.action.PathologyAction"
+	<bean id="pathologyAction" class="com.pathology.action.PathologyAction"
 		scope="prototype">
 		<property name="pathologyService" ref="pathologyService"/>
+		<property name="hospitalservice" ref="hospitalservice"/>
 	</bean>
 
 	<bean id="resultDao" class="com.pathology.dao.impl.ResultDaoImpl" parent="pt">

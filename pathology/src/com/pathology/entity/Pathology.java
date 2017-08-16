@@ -357,5 +357,4 @@ public class Pathology implements java.io.Serializable {
 	public void setDelF(Integer delF) {
 		this.delF = delF;
 	}
-
 }
