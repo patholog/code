@@ -140,7 +140,9 @@ public class PathologyServiceImpl implements IPathologyService {
       pathology.setIdcard(paramMap.get("idCard")[0]); // 身份证号
       pathology.setMobile(paramMap.get("mobile")[0]); // 手机号
       pathology.setHospitalcode(paramMap.get("hospitalCodeHidden")[0]); // 送检单位编码
-      pathology.setDiagTime(Timestamp.valueOf(paramMap.get("diagTime")[0] + " 00:00:00")); // 送检日期
+      if (!"".equals(paramMap.get("diagTime")[0])) {
+        pathology.setDiagTime(Timestamp.valueOf(paramMap.get("diagTime")[0] + " 00:00:00")); // 送检日期
+      }
       pathology.setMemo(paramMap.get("memo")[0]); // 备注
       pathology.setCrtTime(new Timestamp(System.currentTimeMillis())); // 创建日期
       pathology.setClinicdiagnose(paramMap.get("clinicDiagnose")[0]); // 临床诊断
