@@ -126,6 +126,16 @@ public class PathologyAction extends BaseAction {
     return "diagReport";
   }
 
+  /**
+   * 转诊
+   *
+   * @return 转诊页面
+   */
+  public String transferPathology() {
+
+    return null;
+  }
+
   public String getPathologyListToHas() {
     try {
       //获取当前登陆用户

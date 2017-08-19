@@ -5,7 +5,7 @@
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <html>
 <head>
-  <title>病理远程会诊平台-待诊断</title>
+  <title>病理远程会诊平台-转诊</title>
   <c:set var="path" value="${pageContext.request.contextPath }"/>
   <link rel="stylesheet" type="text/css" href="${path }/css/comc_diagnosis_wait_style.css"/>
   <link rel="stylesheet" type="text/css" href="${path }/css/comc_head_style.css"/>
@@ -19,14 +19,7 @@
   <script type="text/javascript" src="${path }/js/treeView.js"></script>
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
-  <script type="text/javascript">
-    function confirmDelete(id) {
-      if (confirm('你确定删除此产品？'))
-        window.location.href = '?action=delete&id=' + id;
-    }
-  </script>
 </head>
-
 <body>
 <div class="header">
   <%@include file="/webdiagnosis/maintop.jsp" %>
@@ -38,6 +31,18 @@
 </div>
 
 <div class="content_right">
+  <div>
+    <form>
+      <table>
+        <tr>
+          <td>申请医院</td>
+          <td><input></td>
+          <td>申请医生</td>
+          <td><input></td>
+        </tr>
+      </table>
+    </form>
+  </div>
   <div class="index_right" style="min-height: 494px;">
     <div class="index_diagnosis_table">
       <div class="diagnosis_table">
@@ -45,29 +50,22 @@
           <tbody>
           <tr>
             <th width="10%">病理号</th>
-            <th width="10%">病人姓名</th>
-            <th width="15%">材料部位</th>
-            <th width="10%">病例状态</th>
-            <th width="10%">系统分类</th>
-            <th width="20%">送检单位</th>
-            <th width="15%">申请时间</th>
-            <th width="10%">操作</th>
+            <th width="10%">申请医院</th>
+            <th width="15%">申请医生</th>
+            <th width="10%">转诊医院</th>
+            <th width="10%">转诊医生</th>
+            <th width="20%">提交日期</th>
           </tr>
-          <s:iterator value="pathologys" id="pathology" status="11">
+          <%--<s:iterator value="pathologys" id="pathology" status="11">
             <tr>
-              <td><s:property value="#pathology.pathologyNo"/></td>
+              <td><s:property value="#pathology.caseId"/></td>
               <td><s:property value="#pathology.patientname"/></td>
               <td><s:property value="#pathology.patientname"/></td>
               <td><s:property value="#pathology.username"/></td>
               <td><s:property value="#pathology.content"/></td>
-              <td><s:property value="#pathology.hospitalname"/></td>
               <td><s:date name="#pathology.createTime" format="yyyy-MM-dd HH:mm:ss"/></td>
-              <td align="center">
-                <a href="PathologyAction!getPathologyDto?diagStatus=2&id=<s:property value="#pathology.caseId"/>">查看</a>
-                <a href="PathologyAction!transferPathology?id=<s:property value="#pathology.caseId"/>">转诊</a>
-              </td>
             </tr>
-          </s:iterator>
+          </s:iterator>--%>
 
           <tr class="lightrow">
             <td colspan="8">

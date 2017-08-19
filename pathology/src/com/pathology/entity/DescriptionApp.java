@@ -12,6 +12,7 @@ public class DescriptionApp implements java.io.Serializable {
 	// Fields
 
 	private String idDescriptionApp;
+	private String caseId;
 	private String fromHospitalId;
 	private String fromDoctorId;
 	private String toHospitalId;
@@ -225,4 +226,11 @@ public class DescriptionApp implements java.io.Serializable {
 		this.delF = delF;
 	}
 
+	public String getCaseId() {
+		return caseId;
+	}
+
+	public void setCaseId(String caseId) {
+		this.caseId = caseId;
+	}
 }

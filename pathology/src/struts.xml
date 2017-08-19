@@ -134,6 +134,7 @@
       <result name="OpenSlideHandler"/>
       <result name="addPathology">/webdiagnosis/needdiag/needdiag.jsp</result>
       <result name="saveInfo"/>
+      <result name="transferPathology">/webdiagnosis/needdiag/transferDiag.jsp</result>
     </action>
     <action name="DiaReportAction" class="com.pathology.action.DiaReportAction">
       <result name="pathologyreport">/webdiagnosis/hasdiag/diagnosisreport.jsp</result>
