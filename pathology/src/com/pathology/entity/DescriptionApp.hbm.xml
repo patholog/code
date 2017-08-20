@@ -34,7 +34,7 @@
     <property name="applyDateTime" type="java.sql.Timestamp">
       <column name="applyDateTime" length="0"/>
     </property>
-    <property name="transferParentId" type="java.lang.String">
+    <property name="transferParentId" type="java.lang.Integer">
       <column name="transferParentId"/>
     </property>
     <property name="memo" type="java.lang.String">

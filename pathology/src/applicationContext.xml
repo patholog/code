@@ -203,6 +203,7 @@
 	<!--转诊-->
 	<bean id="descriptionAppService" class="com.pathology.service.impl.DescriptionAppServiceImpl">
 		<property name="descriptionAppDao" ref="descriptionAppDao"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
 	</bean>
 	<bean id="descriptionAppDao" class="com.pathology.dao.impl.DescriptionAppDaoImpl" parent="pt"/>
 </beans>
