@@ -14,8 +14,15 @@
   <link rel="stylesheet" type="text/css" href="${path }/css/datepicker.css"/>
   <link rel="stylesheet" type="text/css" href="${path }/css/public_flat.css"/>
   <link rel="stylesheet" type="text/css" href="${path }/css/theme.css"/>
+  <link rel="stylesheet" href="${path }/css/comc_head_style.css?Version=5.5.1.1"/>
+  <link rel="stylesheet" href="${path }/css/comc_diagnosis_new_style.css?Version=5.5.1.1"/>
+  <link rel="stylesheet" href="${path }/css/comc_left_nav_style.css?Version=5.5.1.1"/>
+  <link rel="stylesheet" href="${path }/css/comc_register_style.css?Version=5.5.1.1"/>
   <link rel="stylesheet" type="text/css" href="${path }/css/WdatePicker.css"/>
   <link rel="stylesheet" type="text/css" href="${path }/css/weebox.css"/>
+
+  <script type="text/javascript" src="${path }/js/jquery.min.js"></script>
+  <script type="text/javascript" src="${path }/js/jquery.form.min.js"></script>
   <script type="text/javascript" src="${path }/js/treeView.js"></script>
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
@@ -30,20 +37,44 @@
   </ul>
 </div>
 
-<div class="content_right">
-  <div>
-    <form>
-      <table>
-        <tr>
-          <td>申请医院</td>
-          <td><input></td>
-          <td>申请医生</td>
-          <td><input></td>
-        </tr>
-      </table>
-    </form>
-  </div>
+<div class="content_right" style="padding-top: 10px;">
   <div class="index_right" style="min-height: 494px;">
+    <div class="step1_information" style="position: relative;">
+      <div style="display: block; position: relative">
+        <form id="transferForm" action="PathologyAction!saveTransferDiag" method="post">
+          <div class="information">
+            <ul class="state_six">
+              <li>
+                <div>
+                  <span class="red_star">*</span>转诊医院
+                  <select name="toHospitalId" id="toHospitalId" style="width: 120px;">
+                    <option value="">请选择</option>
+                    <c:forEach items="${hospitalList}" var="list" varStatus="status">
+                      <option value='${list.hospitalcode}'>${list.name}</option>
+                    </c:forEach>
+                  </select>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <span class="red_star">*</span>转诊医生
+                  <select name="toDoctorId" id="toDoctorId" style="width: 120px;">
+                    <option value="">请选择</option>
+                    <c:forEach items="${userList}" var="list" varStatus="status">
+                      <option value='${list.idUsers}'>${list.realname}</option>
+                    </c:forEach>
+                  </select>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="clear"></div>
+          <div class="information_btn">
+            <input id="save" type="button" class="inf_btn left" value="保存"/>
+          </div>
+        </form>
+      </div>
+    </div>
     <div class="index_diagnosis_table">
       <div class="diagnosis_table">
         <table class="table">
@@ -81,6 +112,24 @@
     </div>
   </div>
 </div>
-
 </body>
+<script>
+  $(function () {
+    var flag = false;
+    $("#save").click(function () {
+      if (flag) {
+        $('#transferForm').ajaxSubmit({
+          dataType: 'json',
+          success: function (result) {
+            if (result && result !== "") {
+              alert("转诊成功");
+            } else {
+              alert("新建病理失败");
+            }
+          }
+        })
+      }
+    })
+  })
+</script>
 </html>

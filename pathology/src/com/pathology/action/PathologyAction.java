@@ -32,6 +32,7 @@ public class PathologyAction extends BaseAction {
   private ISpecimenService specimenService;
   private String content;
   private IResultService resultService;
+  private IUsersService usersService;
   @Nullable
   private File slide;
   private String slideFileName;
@@ -39,6 +40,7 @@ public class PathologyAction extends BaseAction {
   private List<Specimen> specimenList;
   private DescriptionAppService descriptionAppService; // 转诊
   private List<DescriptionApp> descriptionAppList; // 转诊信息列表
+  private List<Users> usersList;
 
   /**
    * 保存病理
@@ -129,9 +131,27 @@ public class PathologyAction extends BaseAction {
    */
   public String transferPathology() {
     HttpServletRequest request = ServletActionContext.getRequest();
-    String id = request.getParameter("id");
-    descriptionAppList = descriptionAppService.selectForListByCaseId(id);
+    try {
+      String id = request.getParameter("id");
+      descriptionAppList = descriptionAppService.selectForListByCaseId(id);
+      hospitalList = hospitalservice.getAllHospital(Hospital.class, "");
+      usersList = usersService.getAllUser(Users.class, "");
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+    }
     return "transferPathology";
+  }
+
+  /**
+   * 保存转诊信息
+   *
+   * @return 结果
+   */
+  public String saveTransferDiag() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    Map<String, String[]> paramMap = request.getParameterMap();
+
+    return null;
   }
 
   public String getPathologyListToHas() {
@@ -294,5 +314,21 @@ public class PathologyAction extends BaseAction {
 
   public void setDescriptionAppList(List<DescriptionApp> descriptionAppList) {
     this.descriptionAppList = descriptionAppList;
+  }
+
+  public void setUsersList(List<Users> usersList) {
+    this.usersList = usersList;
+  }
+
+  public List<Users> getUsersList() {
+    return usersList;
+  }
+
+  public IUsersService getUsersService() {
+    return usersService;
+  }
+
+  public void setUsersService(IUsersService usersService) {
+    this.usersService = usersService;
   }
 }

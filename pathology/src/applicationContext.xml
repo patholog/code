@@ -158,6 +158,7 @@
 		<property name="hospitalservice" ref="hospitalservice"/>
     <property name="specimenService" ref="specimenService"/>
 		<property name="descriptionAppService" ref="descriptionAppService"/>
+    <property name="usersService" ref="userservice"/>
 	</bean>
 
 	<bean id="resultDao" class="com.pathology.dao.impl.ResultDaoImpl" parent="pt">
