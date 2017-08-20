@@ -125,6 +125,11 @@ public class PathologyServiceImpl implements IPathologyService {
     }
   }
 
+  /**
+   * 新建病理信息
+   *
+   * @param paramMap 表单数据
+   */
   @Override
   public void addPathology(Map<String, String[]> paramMap) {
     try {
@@ -154,8 +159,10 @@ public class PathologyServiceImpl implements IPathologyService {
         Result result = new Result();
         result.setCaseId(paramMap.get("caseId")[0]);
         result.setIdResult(paramMap.get("caseId")[0]);
-        result.setGeneralSee(paramMap.get("generalSee")[0]); // 大体所见
-        result.setMicroscopeSee(paramMap.get("microscopeSee")[0]); // 影像检查
+        result.setGeneralSee(paramMap.get("generalSeeHidden")[0]); // 大体所见
+        result.setMicroscopeSee(paramMap.get("microscopeSeeHidden")[0]); // 影像检查
+        result.setDiagnosed(paramMap.get("firstVisit")[0]); // 初诊意见
+        result.setResult(paramMap.get("immuneResult")[0]); // 免疫组化结果
         resultService.insert(result);
       }
       if (paramMap.containsKey("slideFilePath") && !"".equals(paramMap.get("slideFilePath")[0])) {

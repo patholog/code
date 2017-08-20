@@ -488,7 +488,7 @@
                 </div>
                 <div class=" clear">
                 </div>
-                <textarea name="txtFirstVisit" id="txtFirstVisit" rows="2" cols="20" class="row2"
+                <textarea name="firstVisit" id="firstVisit" rows="2" cols="20" class="row2"
                           onkeyup="CheckWords(this)"
                           placeholder="为确保诊断结果的准确，请如实填写初诊意见，冰冻切片请务必填写初诊考虑，或基本病变描写、疑问等。"></textarea>
               </li>
@@ -527,7 +527,7 @@
               </li>
               <li>
                 <div style="float: left">
-                  <ins class="half_words"></ins>免疫组化：
+                  <ins class="half_words"></ins>免疫组化结果：
                 </div>
                 <div class="ckTxt">
                   <a class="aColor">已经输入</a>&nbsp;<a id="atxtImmuneOrgan" style="color: rgb(165, 165, 165);">0</a>
@@ -535,7 +535,7 @@
                 </div>
                 <div class=" clear">
                 </div>
-                <textarea name="txtImmuneOrgan" id="txtImmuneOrgan" rows="2" cols="20" class="row2"
+                <textarea name="immuneResult" id="immuneResult" rows="2" cols="20" class="row2"
                           onkeyup="CheckWords(this)"></textarea>
               </li>
               <li style="">

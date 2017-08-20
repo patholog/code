@@ -133,7 +133,7 @@ public class PathologyAction extends BaseAction {
    */
   public String transferPathology() {
 
-    return null;
+    return "transferPathology";
   }
 
   public String getPathologyListToHas() {
