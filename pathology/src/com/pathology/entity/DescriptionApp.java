@@ -11,7 +11,7 @@ public class DescriptionApp implements java.io.Serializable {
 
 	// Fields
 
-	private String idDescriptionApp;
+	private Integer idDescriptionApp;
 	private String caseId;
 	private String fromHospitalId;
 	private String fromDoctorId;
@@ -39,12 +39,12 @@ public class DescriptionApp implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public DescriptionApp(String idDescriptionApp) {
+	public DescriptionApp(Integer idDescriptionApp) {
 		this.idDescriptionApp = idDescriptionApp;
 	}
 
 	/** full constructor */
-	public DescriptionApp(String idDescriptionApp, String fromHospitalId,
+	public DescriptionApp(Integer idDescriptionApp, String fromHospitalId,
 			String fromDoctorId, String toHospitalId, String toDoctorId,
 			Timestamp applyDateTime, String transferParentId, String memo,
 			String sortNo, String spellNo, String wubiNo, Integer updCnt,
@@ -74,11 +74,11 @@ public class DescriptionApp implements java.io.Serializable {
 
 	// Property accessors
 
-	public String getIdDescriptionApp() {
+	public Integer getIdDescriptionApp() {
 		return this.idDescriptionApp;
 	}
 
-	public void setIdDescriptionApp(String idDescriptionApp) {
+	public void setIdDescriptionApp(Integer idDescriptionApp) {
 		this.idDescriptionApp = idDescriptionApp;
 	}
 

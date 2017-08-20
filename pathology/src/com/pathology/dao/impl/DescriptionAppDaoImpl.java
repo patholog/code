@@ -19,4 +19,9 @@ public class DescriptionAppDaoImpl extends SuperDao implements DescriptionAppDao
     }
     return returnList;
   }
+
+  @Override
+  public void insert(DescriptionApp descriptionApp) {
+    super.add(descriptionApp);
+  }
 }

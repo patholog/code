@@ -6,9 +6,9 @@
 -->
 <hibernate-mapping>
   <class name="com.pathology.entity.DescriptionApp" table="description_app" catalog="pathology">
-    <id name="idDescriptionApp" type="java.lang.String">
+    <id name="idDescriptionApp" type="java.lang.Integer">
       <column name="id_description_app" length="11"/>
-      <generator class="assigned"></generator>
+      <generator class="native"/>
     </id>
     <property name="caseId" type="java.lang.String">
       <column name="case_id">

@@ -7,4 +7,6 @@ import java.util.List;
 public interface DescriptionAppDao {
 
   List<DescriptionApp> selectForListByCaseId(String caseId);
+
+  void insert(DescriptionApp descriptionApp);
 }

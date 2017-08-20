@@ -41,6 +41,7 @@ public class PathologyAction extends BaseAction {
   private DescriptionAppService descriptionAppService; // 转诊
   private List<DescriptionApp> descriptionAppList; // 转诊信息列表
   private List<Users> usersList;
+  private String caseId;
 
   /**
    * 保存病理
@@ -133,6 +134,7 @@ public class PathologyAction extends BaseAction {
     HttpServletRequest request = ServletActionContext.getRequest();
     try {
       String id = request.getParameter("id");
+      caseId = id;
       descriptionAppList = descriptionAppService.selectForListByCaseId(id);
       hospitalList = hospitalservice.getAllHospital(Hospital.class, "");
       usersList = usersService.getAllUser(Users.class, "");
@@ -150,8 +152,8 @@ public class PathologyAction extends BaseAction {
   public String saveTransferDiag() {
     HttpServletRequest request = ServletActionContext.getRequest();
     Map<String, String[]> paramMap = request.getParameterMap();
-
-    return null;
+    descriptionAppService.insert(paramMap);
+    return "保存成功";
   }
 
   public String getPathologyListToHas() {
@@ -330,5 +332,13 @@ public class PathologyAction extends BaseAction {
 
   public void setUsersService(IUsersService usersService) {
     this.usersService = usersService;
+  }
+
+  public String getCaseId() {
+    return caseId;
+  }
+
+  public void setCaseId(String caseId) {
+    this.caseId = caseId;
   }
 }
