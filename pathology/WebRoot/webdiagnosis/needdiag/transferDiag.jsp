@@ -56,16 +56,16 @@
             <th width="10%">转诊医生</th>
             <th width="20%">提交日期</th>
           </tr>
-          <%--<s:iterator value="pathologys" id="pathology" status="11">
+          <s:iterator value="descriptionAppList" id="description" status="11">
             <tr>
-              <td><s:property value="#pathology.caseId"/></td>
-              <td><s:property value="#pathology.patientname"/></td>
-              <td><s:property value="#pathology.patientname"/></td>
-              <td><s:property value="#pathology.username"/></td>
-              <td><s:property value="#pathology.content"/></td>
-              <td><s:date name="#pathology.createTime" format="yyyy-MM-dd HH:mm:ss"/></td>
+              <td><s:property value="#description.caseId"/></td>
+              <td><s:property value="#description.fromHospitalId"/></td>
+              <td><s:property value="#description.fromDoctorId"/></td>
+              <td><s:property value="#description.toHospitalId"/></td>
+              <td><s:property value="#description.toDoctorId"/></td>
+              <td><s:date name="#description.applyDateTime" format="yyyy-MM-dd HH:mm:ss"/></td>
             </tr>
-          </s:iterator>--%>
+          </s:iterator>
 
           <tr class="lightrow">
             <td colspan="8">

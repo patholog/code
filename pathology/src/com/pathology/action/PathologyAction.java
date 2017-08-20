@@ -2,14 +2,8 @@ package com.pathology.action;
 
 import com.alibaba.fastjson.JSON;
 import com.pathology.dto.PathologyDTO;
-import com.pathology.entity.Hospital;
-import com.pathology.entity.Result;
-import com.pathology.entity.SlideResult;
-import com.pathology.entity.Specimen;
-import com.pathology.service.IHospitalService;
-import com.pathology.service.IPathologyService;
-import com.pathology.service.IResultService;
-import com.pathology.service.ISpecimenService;
+import com.pathology.entity.*;
+import com.pathology.service.*;
 import com.pathology.util.*;
 import com.sun.istack.internal.Nullable;
 import net.sf.json.JSONObject;
@@ -43,6 +37,8 @@ public class PathologyAction extends BaseAction {
   private String slideFileName;
   private List<Hospital> hospitalList;
   private List<Specimen> specimenList;
+  private DescriptionAppService descriptionAppService; // 转诊
+  private List<DescriptionApp> descriptionAppList; // 转诊信息列表
 
   /**
    * 保存病理
@@ -132,7 +128,9 @@ public class PathologyAction extends BaseAction {
    * @return 转诊页面
    */
   public String transferPathology() {
-
+    HttpServletRequest request = ServletActionContext.getRequest();
+    String id = request.getParameter("id");
+    descriptionAppList = descriptionAppService.selectForListByCaseId(id);
     return "transferPathology";
   }
 
@@ -288,5 +286,13 @@ public class PathologyAction extends BaseAction {
 
   public void setSpecimenList(List<Specimen> specimenList) {
     this.specimenList = specimenList;
+  }
+
+  public void setDescriptionAppService(DescriptionAppService descriptionAppService) {
+    this.descriptionAppService = descriptionAppService;
+  }
+
+  public void setDescriptionAppList(List<DescriptionApp> descriptionAppList) {
+    this.descriptionAppList = descriptionAppList;
   }
 }

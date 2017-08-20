@@ -157,6 +157,7 @@
 		<property name="pathologyService" ref="pathologyService"/>
 		<property name="hospitalservice" ref="hospitalservice"/>
     <property name="specimenService" ref="specimenService"/>
+		<property name="descriptionAppService" ref="descriptionAppService"/>
 	</bean>
 
 	<bean id="resultDao" class="com.pathology.dao.impl.ResultDaoImpl" parent="pt">
@@ -198,6 +199,9 @@
 	<bean id="rolefunctionservice" class="com.pathology.service.impl.RoleFunctionServiceImpl">
 		<property name="rolefunctiondao" ref="rolefunctiondao"></property>
 	</bean>
-	
-	
+	<!--转诊-->
+	<bean id="descriptionAppService" class="com.pathology.service.impl.DescriptionAppServiceImpl">
+		<property name="descriptionAppDao" ref="descriptionAppDao"/>
+	</bean>
+	<bean id="descriptionAppDao" class="com.pathology.dao.impl.DescriptionAppDaoImpl" parent="pt"/>
 </beans>
