@@ -68,6 +68,9 @@ public class PathologyAction extends BaseAction {
    */
   public String saveInfo() {
     HttpServletRequest request = ServletActionContext.getRequest();
+    HttpServletResponse response=ServletActionContext.getResponse();
+    response.setContentType("text/html;charset=utf-8");
+    PrintWriter out;
     Map<String, String[]> paramMap = request.getParameterMap();
     try {
       String slideFilePath = Property.getProperty("slideFilePath");
@@ -83,12 +86,23 @@ public class PathologyAction extends BaseAction {
         is.close();
         paramMap.put("slideFilePath", new String[]{slideFilePath + "\\" + slideFileName});
       }
-      pathologyService.addPathology(paramMap);
+      int count = 0;
+      try {
+        count = pathologyService.addPathology(paramMap);
+      } catch (Exception e) {
+        logger.error(e.getMessage());
+        count = 0;
+      }
+      out = response.getWriter();
+      String jsonString = count > 0 ? "{\"success\":\"新建病理成功\"}" : "{\"failure\":\"新建病理失败\"}";
+      out.println(jsonString);
+      out.flush();
+      out.close();
     } catch (Exception e) {
       logger.error(e.getMessage());
-      return "新建病理失败";
+      return null;
     }
-    return paramMap.get("pathologyNo")[0];
+    return null;
   }
 
   /**
@@ -312,6 +326,10 @@ public class PathologyAction extends BaseAction {
 
   public void setDescriptionAppService(DescriptionAppService descriptionAppService) {
     this.descriptionAppService = descriptionAppService;
+  }
+
+  public List<DescriptionApp> getDescriptionAppList() {
+    return descriptionAppList;
   }
 
   public void setDescriptionAppList(List<DescriptionApp> descriptionAppList) {

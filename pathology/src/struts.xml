@@ -133,7 +133,9 @@
       <result name="diagReport">/webdiagnosis/needdiag/diagReport.jsp</result>
       <result name="OpenSlideHandler"/>
       <result name="addPathology">/webdiagnosis/needdiag/needdiag.jsp</result>
-      <result name="saveInfo"/>
+      <result name="saveInfo">
+        <param name="root">content</param>
+      </result>
       <result name="transferPathology">/webdiagnosis/needdiag/transferDiag.jsp</result>
       <result name="saveTransferDiag"/>
     </action>

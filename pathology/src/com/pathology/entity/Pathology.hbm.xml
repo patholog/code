@@ -103,5 +103,8 @@
         <property name="delF" type="java.lang.Integer">
             <column name="DEL_F" />
         </property>
+        <property name="doctorId" type="java.lang.String">
+          <column name="id_doctor"/>
+        </property>
     </class>
 </hibernate-mapping>

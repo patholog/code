@@ -88,16 +88,16 @@
             <th width="10%">转诊医生</th>
             <th width="20%">提交日期</th>
           </tr>
-          <s:iterator value="descriptionAppList" id="description" status="11">
+          <c:forEach items="${descriptionAppList}" var="list" varStatus="status">
             <tr>
-              <td><s:property value="#description.caseId"/></td>
-              <td><s:property value="#description.fromHospitalId"/></td>
-              <td><s:property value="#description.fromDoctorId"/></td>
-              <td><s:property value="#description.toHospitalId"/></td>
-              <td><s:property value="#description.toDoctorId"/></td>
-              <td><s:date name="#description.applyDateTime" format="yyyy-MM-dd HH:mm:ss"/></td>
+              <td>${list.caseId}</td>
+              <td>${list.fromHospitalId}</td>
+              <td>${list.fromDoctorId}</td>
+              <td>${list.toHospitalId}</td>
+              <td>${list.toDoctorId}</td>
+              <td>${list.applyDateTime}</td>
             </tr>
-          </s:iterator>
+          </c:forEach>
 
           <tr class="lightrow">
             <td colspan="8">

@@ -23,9 +23,13 @@
   <link rel="stylesheet" href="${path }/css/theme.css"/>
   <link rel="stylesheet" href="${path }/css/WdatePicker.css"/>
   <link rel="stylesheet" href="${path }/css/weebox.css"/>
+  <link rel="stylesheet" href="${path }/assets/jqueryui/jquery-ui.min.css"/>
+  <link rel="stylesheet" href="${path }/assets/jqueryui/jquery-ui-timepicker-addon.min.css"/>
 
   <script type="text/javascript" src="${path }/js/jquery.min.js"></script>
-  <script type="text/javascript" src="${path }/js/jquery-ui-1.8.20.custom.min.js"></script>
+  <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui-timepicker-addon.min.js"></script>
+  <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui-timepicker-zh-CN.js"></script>
   <script type="text/javascript" src="${path }/js/jquery.form.min.js"></script>
   <script type="text/javascript" src="${path }/js/treeView.js"></script>
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
@@ -93,7 +97,18 @@
 
     $(function () {
       var flag = false; // 表单校验
-      $('#diagTime').datepicker();
+      /**
+       * 设置日期时间控件
+       */
+      $('#diagTime').datetimepicker({
+        defaultDate: $('#diagTime').val(),
+        dateFormat: "yy-mm-dd",
+        showSecond: true,
+        timeFormat: 'hh:mm:ss',
+        stepHour: 1,
+        stepMinute: 1,
+        stepSecond: 1
+      });
       /**
        * 提交表单
        */
@@ -103,10 +118,11 @@
           $('#infoForm').ajaxSubmit({
             dataType: 'json',
             success: function (result) {
-              if (result && result !== "") {
-                $('#caseIdHidden').val(result);
+              if (result && result.success) {
+                alert(result.success);
+                window.location.href = "PathologyAction!getPathologyListToNeed";
               } else {
-                alert("新建病理失败");
+                alert("新建失败");
               }
             }
           });
@@ -298,7 +314,7 @@
         <!--相关内容块-->
         <div class="step1_information" style="position: relative;">
           <div class="information">
-            <span class="red_star">*</span>请选择会诊分类<span style="color:Red">（费用不同）</span>：
+            <span class="red_star"></span>请选择会诊分类<span style="color:Red">（费用不同）</span>：
             <span id="rblDiagnosisType">
               <input id="rblDiagnosisType_0" type="radio" name="rblDiagnosisType" value="1" checked="checked">
               <label for="rblDiagnosisType_0">普通会诊</label>
@@ -329,9 +345,9 @@
               <li>
                 <div>
                   <div class="age"><span class="red_star">*</span>年龄
-                    <input name="patientAge" id="patientAge" class="inf_age" maxlength="3" onblur="CheckValue('3')"
-                           onkeyup="if(this.value.length===1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
-                           value="">
+                    <input name="patientAge" id="patientAge" class="inf_age" maxlength="3"/>
+                    <%--<input name="patientAge" id="patientAge" class="inf_age" maxlength="3" onblur="CheckValue('3')"
+                           onkeyup="if(this.value.length===1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">--%>
                     <span style="width: 40px;">
                       <select name="ageUnit" id="ageUnit" style="width: 40px;">
                         <option value="岁">岁</option>
@@ -410,7 +426,7 @@
               </li>
               <li>
                 <div>
-                  <ins class="half_words"></ins>送检单位
+                  <span class="red_star">*</span>送检单位
                   <select id="hospitalCode" name="hospitalCode">
                     <option value="">请选择</option>
                     <c:forEach items="${hospitalList}" var="list" varStatus="status">

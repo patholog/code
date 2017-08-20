@@ -11,6 +11,7 @@ import com.pathology.service.IImageService;
 import com.pathology.service.IPathologyService;
 import com.pathology.service.IResultService;
 import com.pathology.util.Pages;
+import com.pathology.util.SessionAgentManager;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -129,7 +130,7 @@ public class PathologyServiceImpl implements IPathologyService {
    * @param paramMap 表单数据
    */
   @Override
-  public void addPathology(Map<String, String[]> paramMap) {
+  public int addPathology(Map<String, String[]> paramMap) {
     try {
       Pathology pathology = new Pathology();
       pathology.setPatientname(paramMap.get("patientName")[0]); // 姓名
@@ -144,12 +145,15 @@ public class PathologyServiceImpl implements IPathologyService {
       pathology.setMobile(paramMap.get("mobile")[0]); // 手机号
       pathology.setHospitalcode(paramMap.get("hospitalCodeHidden")[0]); // 送检单位编码
       if (!"".equals(paramMap.get("diagTime")[0])) {
-        pathology.setDiagTime(Timestamp.valueOf(paramMap.get("diagTime")[0] + " 00:00:00")); // 送检日期
+        pathology.setDiagTime(Timestamp.valueOf(paramMap.get("diagTime")[0])); // 送检日期
       }
       pathology.setMemo(paramMap.get("memo")[0]); // 备注
       pathology.setCrtTime(new Timestamp(System.currentTimeMillis())); // 创建日期
       pathology.setClinicdiagnose(paramMap.get("clinicDiagnose")[0]); // 临床诊断
       pathology.setHistorysummary(paramMap.get("historySummary")[0]); // 病史
+      pathology.setCrtUserId(SessionAgentManager.getSessionAgentBean().getIdUsers()); // 创建人
+      pathology.setDiagStatus("2"); // 病理初始状态
+      pathology.setDoctorId(SessionAgentManager.getSessionAgentBean().getIdUsers()); // 创建人
       addPathology(pathology); // 新增病理信息
       if ((paramMap.containsKey("generalSeeHidden") && !"".equals(paramMap.get("generalSeeHidden")[0]))
           || (paramMap.containsKey("microscopeSeeHidden") && !"".equals(paramMap.get("microscopeSeeHidden")[0]))) {
@@ -170,9 +174,10 @@ public class PathologyServiceImpl implements IPathologyService {
         image.setPathImage(paramMap.get("slideFilePath")[0]);
         imageService.insertImage(image);
       }
+      return 1;
     } catch (Exception e) {
       Logger.getLogger(PathologyServiceImpl.class).error(e.getMessage());
-      throw new RuntimeException(e);
+      return 0;
     }
   }
 

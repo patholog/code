@@ -42,6 +42,7 @@ public class Pathology implements java.io.Serializable {
 	private String lastUpdDeptCd;
 	private String lastUpdUserId;
 	private Integer delF;
+	private String doctorId;
 
 	// Constructors
 
@@ -356,5 +357,13 @@ public class Pathology implements java.io.Serializable {
 
 	public void setDelF(Integer delF) {
 		this.delF = delF;
+	}
+
+	public String getDoctorId() {
+		return doctorId;
+	}
+
+	public void setDoctorId(String doctorId) {
+		this.doctorId = doctorId;
 	}
 }
