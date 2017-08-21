@@ -34,6 +34,14 @@ public class PathologyDTO implements java.io.Serializable {
   private String diagTime;
   private String collectionId;
   private List<Image> Images;
+  /**
+   * 初步诊断
+   */
+  private String diagnosed;
+  /**
+   * 免疫结果
+   */
+  private String result;
   public List<Image> getImages() {
 	return Images;
 }
@@ -286,5 +294,21 @@ public void setCollectionId(String collectionId) {
 
   public void setMicroscopeSee(String microscopeSee) {
     this.microscopeSee = microscopeSee;
+  }
+
+  public String getDiagnosed() {
+    return diagnosed;
+  }
+
+  public void setDiagnosed(String diagnosed) {
+    this.diagnosed = diagnosed;
+  }
+
+  public String getResult() {
+    return result;
+  }
+
+  public void setResult(String result) {
+    this.result = result;
   }
 }

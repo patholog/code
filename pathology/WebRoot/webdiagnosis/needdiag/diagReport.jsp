@@ -224,7 +224,8 @@
                     <div class="inbox_list border_bom">
                       <p>
                         <span id="lblImmuneOrgan">
-                          <textarea id="immuneResult" name="immuneResult" cols="20" rows="2" style="height: 62px;width: 98%;"></textarea>
+                          <textarea id="immuneResult" name="immuneResult" cols="20" rows="2" style="height: 62px;width: 98%;"><s:property value="pathology.result"/>
+                          </textarea>
                         </span>
                       </p>
                     </div>
@@ -235,7 +236,8 @@
                     </div>
                     <div class="inbox_list border_bom">
                       <p>
-                        <textarea id="firstVisit" name="firstVisit" cols="20" rows="2" style="height: 62px;width: 98%;"></textarea>
+                        <textarea id="firstVisit" name="firstVisit" cols="20" rows="2" style="height: 62px;width: 98%;"><s:property value="pathology.diagnosed"/>
+                        </textarea>
                       </p>
                     </div>
                   </div>
