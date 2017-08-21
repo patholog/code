@@ -105,7 +105,7 @@
               <!--侧边栏开始-->
               <div id="divTab" class="tab_right">
                 <ul id="UserList">
-                  <li class="curr"><a href="#">主任</a></li>
+                  <%--<li class="curr"><a href="#">主任</a></li>--%>
                 </ul>
               </div>
               <!--侧边栏结束-->
@@ -308,8 +308,9 @@
                   </div>
                 </ul>
                 <ul id="ulSection" class="inbox_ul inbox_ul_check">
+                  <s:iterator value="pathology.Images" id="image" status="11">
                   <li>
-                    <a style="cursor:pointer" href="test?caseId=5" target="_blank">
+                    <a style="cursor:pointer" href="test?caseId=<s:property value='#image.caseId'/>&SlideID=<s:property value='#image.pathImage'/>" target="_blank">
                       <img src=""
                            alt="" href="">
                       <div class="inbox_ul_msg">
@@ -331,6 +332,7 @@
                       </div>
                     </a>
                   </li>
+                  </s:iterator>
                   <div class="clearleft">
                   </div>
                 </ul>
@@ -353,8 +355,8 @@
                       <input value="1" type="radio" name="readable" checked><span>所有专家可见</span>
                       <input value="0" type="radio" name="readable"><span>部分专家可见</span>
                     </div>
-                    <input name="btnCreateMeeting" type="button" id="btnCreateMeeting" class="massges_btn"
-                           style="width:130px; margin-left:10px;" value="创建视频会议" onclick="openMeeting()">
+                    <%--<input name="btnCreateMeeting" type="button" id="btnCreateMeeting" class="massges_btn"
+                           style="width:130px; margin-left:10px;" value="创建视频会议" onclick="openMeeting()">--%>
                     <input type="button" id="btnSaveMessage" class="massges_btn" value="发送留言"
                            onclick="saveMessage();">
                     <div class="clear">
@@ -416,7 +418,7 @@
       if (r !== null) return unescape(r[2]); return null; //返回参数值
     }
     // 如果是已诊断，禁用所有input
-    if (getUrlParam('diagStatus') === '7') {
+    if (getUrlParam('diagStatus') !== '2') {
       $('input').attr("disabled", "true");
       $('textarea').attr("disabled", "true");
       $('select').attr("disabled", "true");

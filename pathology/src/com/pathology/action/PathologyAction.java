@@ -83,7 +83,7 @@ public class PathologyAction extends BaseAction {
         }
         os.close(); //关闭
         is.close();
-        paramMap.put("slideFilePath", new String[]{slideFilePath + "\\" + slideFileName});
+        paramMap.put("slideFilePath", new String[]{slideFileName});
       }
       int count = 0;
       try {
@@ -232,8 +232,8 @@ public class PathologyAction extends BaseAction {
   public String OpenSlideHandler() throws IOException {
     HttpServletRequest request = ServletActionContext.getRequest();
     String caseId = request.getParameter("caseId"); // 病理编号
-    String remotePath = "/pptest"; // FTP远程文件路径
-    String filename = "123.jpg"; // FTP远程文件名
+    String remotePath = Property.getProperty("remotePath"); // FTP远程文件路径
+    String filename = request.getParameter("SlideID"); // FTP远程文件名
     // 下载图片
     String imageSystemLocation = "localhost:8080/imagesystem";
     String download = "http://" + imageSystemLocation + "/ftp/download.do?caseuid=" + caseId
