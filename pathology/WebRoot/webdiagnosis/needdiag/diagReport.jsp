@@ -280,10 +280,10 @@
                   <div class="inbox_con_list">
                     <div class="inbox_title">
                       <div class="left">本报告由
-                        <span id="lblUserHospital">有限责任公司未处理</span>
-                        &nbsp;&nbsp;袁主任&nbsp;&nbsp;专家会诊
+                        <span id="lblUserHospital"></span>
+                        &nbsp;&nbsp;<s:property value="pathology.username"/>&nbsp;&nbsp;专家会诊
                         <p></p></div>
-                      <div class="right">专家签字：<span id="lblUserName">袁主任</span>
+                      <div class="right">专家签字：<span id="lblUserName"><s:property value="pathology.username"/></span>
                       </div>
                     </div>
                   </div>
