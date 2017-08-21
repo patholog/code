@@ -274,7 +274,7 @@ public class UsersAction extends BaseAction {
 		Mail.setUser(pro.getProperty("mailUserName"));
 		Mail.setName(pro.getProperty("mailSendName"));
 
-		String[] content = new String[] { "您好：", "恭喜您的账号已经审核通过", "感谢您的使用" };
+		//String[] content = new String[] { "您好：", "恭喜您的账号已经审核通过", "感谢您的使用" };
 		
 		// end demo
 
@@ -282,6 +282,7 @@ public class UsersAction extends BaseAction {
 			Users userT = userservice.getUser(Users.class, user.getIdUsers());
 			userT.setUserstatus("1");
 			userservice.updateUser(userT);
+			String[] content = new String[] { "您好：", "恭喜您的账号"+userT.getUsername()+"已经审核通过", "感谢您的使用" };
 			Mail.send(userT.getEmail(), "病例平台审核通过", content);
 			return "updatesuccess";
 		} catch (Exception e) {
@@ -300,12 +301,13 @@ public class UsersAction extends BaseAction {
 		Mail.setPassword(pro.getProperty("mailPassWord"));
 		Mail.setUser(pro.getProperty("mailUserName"));
 		Mail.setName(pro.getProperty("mailSendName"));
-		String[] content = new String[] { "您好：", "恭喜您的账号没有审核通过", "请重新提交相关证件" };
+		//String[] content = new String[] { "您好：", "恭喜您的账号"+userT.getUsername()+"没有审核通过", "请重新提交相关证件" };
 		
 		try {
 			Users userT = userservice.getUser(Users.class, this.idUsers);
 			userT.setUserstatus("2");
 			userservice.updateUser(userT);
+			String[] content = new String[] { "您好：", "恭喜您的账号"+userT.getUsername()+"没有审核通过", "请重新提交相关证件" };
 			Mail.send(userT.getEmail(), "病理平台审核拒绝", content);
 			return "updatesuccess";
 		} catch (Exception e) {
