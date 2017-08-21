@@ -6,10 +6,12 @@ import com.pathology.dto.PathologyDTO;
 import com.pathology.entity.Image;
 import com.pathology.entity.Pathology;
 import com.pathology.entity.Result;
+import com.pathology.entity.Users;
 import com.pathology.mapping.PathologyMapping;
 import com.pathology.service.IImageService;
 import com.pathology.service.IPathologyService;
 import com.pathology.service.IResultService;
+import com.pathology.service.IUsersService;
 import com.pathology.util.Pages;
 import com.pathology.util.SessionAgentManager;
 import org.apache.log4j.Logger;
@@ -24,10 +26,13 @@ import java.util.Map;
 
 public class PathologyServiceImpl implements IPathologyService {
 
+  private Logger logger = Logger.getLogger(PathologyServiceImpl.class);
+
   private IPathologyDao pathologydao;
   private IImageDao imagedao;
   private IImageService imageService;
   private IResultService resultService;
+  private IUsersService userService;
 
   public IImageDao getImagedao() {
     return imagedao;
@@ -215,6 +220,21 @@ public class PathologyServiceImpl implements IPathologyService {
     return jdbcTemplate.query(sql, new PathologyMapping());
   }
 
+  /**
+   * 获取医生信息列表
+   *
+   * @return 医生信息列表
+   */
+  @Override
+  public List<Users> selectDoctorList() {
+    try {
+      return userService.getAllUser(Users.class, "");
+    } catch (Exception e) {
+      logger.error("获取医生信息错误");
+      return null;
+    }
+  }
+
   public Pathology getPathology(Class clazz, String id) {
     return pathologydao.getPathology(clazz, id);
   }
@@ -246,5 +266,13 @@ public class PathologyServiceImpl implements IPathologyService {
 
   public void setResultService(IResultService resultService) {
     this.resultService = resultService;
+  }
+
+  public IUsersService getUserService() {
+    return userService;
+  }
+
+  public void setUserService(IUsersService userService) {
+    this.userService = userService;
   }
 }

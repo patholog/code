@@ -32,7 +32,6 @@ public class PathologyAction extends BaseAction {
   private ISpecimenService specimenService;
   private String content;
   private IResultService resultService;
-  private IUsersService usersService;
   @Nullable
   private File slide;
   private String slideFileName;
@@ -151,7 +150,7 @@ public class PathologyAction extends BaseAction {
       caseId = id;
       descriptionAppList = descriptionAppService.selectForListByCaseId(id);
       hospitalList = hospitalservice.getAllHospital(Hospital.class, "");
-      usersList = usersService.getAllUser(Users.class, "");
+      usersList = pathologyService.selectDoctorList();
     } catch (Exception e) {
       logger.error(e.getMessage());
     }
@@ -165,8 +164,26 @@ public class PathologyAction extends BaseAction {
    */
   public String saveTransferDiag() {
     HttpServletRequest request = ServletActionContext.getRequest();
+    HttpServletResponse response = ServletActionContext.getResponse();
+    response.setContentType("text/html;charset=UTF-8");
     Map<String, String[]> paramMap = request.getParameterMap();
-    descriptionAppService.insert(paramMap);
+    String result = "";
+    try {
+      descriptionAppService.insert(paramMap);
+      result = "保存成功";
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+    }
+    try {
+      PrintWriter out;
+      out = response.getWriter();
+      String jsonString = !"".equals(result) ? "{\"success\":\"保存成功\"}" : "{\"failure\":\"保存失败\"}";
+      out.println(jsonString);
+      out.flush();
+      out.close();
+    } catch (Exception e) {
+      logger.error(e);
+    }
     return "保存成功";
   }
 
@@ -342,14 +359,6 @@ public class PathologyAction extends BaseAction {
 
   public List<Users> getUsersList() {
     return usersList;
-  }
-
-  public IUsersService getUsersService() {
-    return usersService;
-  }
-
-  public void setUsersService(IUsersService usersService) {
-    this.usersService = usersService;
   }
 
   public String getCaseId() {

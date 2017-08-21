@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.pathology.dto.PathologyDTO;
 import com.pathology.entity.Pathology;
 import com.pathology.entity.Result;
+import com.pathology.entity.Users;
 
 public interface IPathologyService {
 
@@ -32,4 +33,6 @@ public interface IPathologyService {
   List<PathologyDTO> getListPathologyToHas(HttpServletRequest request, String name);
 
   List<PathologyDTO> getListPathologyToBack(HttpServletRequest request, String name);
+
+  List<Users> selectDoctorList();
 }

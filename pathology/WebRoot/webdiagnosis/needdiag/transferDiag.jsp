@@ -61,7 +61,7 @@
                   <span class="red_star">*</span>转诊医生
                   <select name="toDoctorId" id="toDoctorId" style="width: 120px;">
                     <option value="">请选择</option>
-                    <c:forEach items="${userList}" var="list" varStatus="status">
+                    <c:forEach items="${usersList}" var="list" varStatus="status">
                       <option value='${list.idUsers}'>${list.realname}</option>
                     </c:forEach>
                   </select>
@@ -95,7 +95,7 @@
               <td>${list.fromDoctorId}</td>
               <td>${list.toHospitalId}</td>
               <td>${list.toDoctorId}</td>
-              <td>${list.applyDateTime}</td>
+              <td><fmt:formatDate value="${list.applyDateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             </tr>
           </c:forEach>
 
@@ -123,8 +123,9 @@
         $('#transferForm').ajaxSubmit({
           dataType: 'json',
           success: function (result) {
-            if (result && result !== "") {
-              alert("转诊成功");
+            if (result && result.success) {
+              alert(result.success);
+              window.location.reload();
             } else {
               alert("新建病理失败");
             }

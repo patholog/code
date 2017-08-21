@@ -126,8 +126,6 @@
               }
             }
           });
-        } else {
-          alert('信息有误，请核对');
         }
       });
       /**
@@ -139,13 +137,24 @@
       function validate() {
         flag = true;
         if ($('#patientName').val() === "") {
+          alert("姓名不能为空");
           flag = false;
+          return;
         }
         if ($('#caseId').val() === "") {
+          alert("会诊号不能为空");
           flag = false;
+          return;
         }
         if ($('#hospitalCode').children('option:selected').val() === "") {
+          alert("送检单位不能为空");
           flag = false;
+          return;
+        }
+        if ($('#diagTime').val() === "") {
+          alert("送检时间不能为空");
+          flag = false;
+          return;
         }
         // 大体所见取值
         $('#generalSeeHidden').val(CKEDITOR.instances.generalSee.getData());
@@ -416,7 +425,7 @@
               <li>
                 <div>
                   <ins class="half_words"></ins>系统分类
-                  <select name="specimenType" id="specimenType" style="width: 70px;">
+                  <select name="specimenType" id="specimenType" style="width: 100px;">
                     <option value="">请选择</option>
                     <c:forEach items="${specimenList}" var="list" varStatus="status">
                       <option value='${list.idSpecimen}'>${list.name}</option>
@@ -427,7 +436,7 @@
               <li>
                 <div>
                   <span class="red_star">*</span>送检单位
-                  <select id="hospitalCode" name="hospitalCode">
+                  <select id="hospitalCode" name="hospitalCode" style="width: 100px">
                     <option value="">请选择</option>
                     <c:forEach items="${hospitalList}" var="list" varStatus="status">
                       <option value='${list.hospitalcode}'>${list.name}</option>
@@ -438,8 +447,11 @@
               </li>
               <li>
                 <div>
-                  <ins class="half_words"></ins>送检科室
-                  <input name="tbDepartmentOfDelivery" id="tbDepartmentOfDelivery"></div>
+                  <ins class="half_words"></ins>送检医生
+                  <select name="toDoctorId" id="toDoctorId" style="width: 100px;">
+                    <option value="">请选择</option>
+                  </select>
+                </div>
               </li>
               <li>
                 <div>
@@ -486,7 +498,7 @@
           <div class="information2" id="divCenter" style="">
             <ul class="left" style="width: 47%;">
               <li>
-                <div style="float: left"><span class="red_star">*</span>临床资料（手术所见、影像学、相关验证等）：</div>
+                <div style="float: left"><span class="red_star"></span>临床资料（手术所见、影像学、相关验证等）：</div>
                 <div class="ckTxt">
                   <a class="aColor">已经输入</a>&nbsp;<a id="atxtClinicalData" style="color: rgb(165, 165, 165);">75</a>
                   <a class="aColor">/250&nbsp;个字</a>
@@ -497,7 +509,7 @@
                           onkeyup="CheckWords(this)"></textarea>
               </li>
               <li>
-                <div style="float: left"><span class="red_star">*</span>初诊意见（请如实填写）：</div>
+                <div style="float: left"><span class="red_star"></span>初诊意见（请如实填写）：</div>
                 <div class="ckTxt">
                   <a class="aColor">已经输入</a>&nbsp;<a id="atxtFirstVisit" style="color: rgb(165, 165, 165);">16</a>
                   <a class="aColor">/250&nbsp;个字</a>
@@ -509,7 +521,7 @@
                           placeholder="为确保诊断结果的准确，请如实填写初诊意见，冰冻切片请务必填写初诊考虑，或基本病变描写、疑问等。"></textarea>
               </li>
               <li style="">
-                <div style="float: left"><span class="red_star">*</span>大体所见：</div>
+                <div style="float: left"><span class="red_star"></span>大体所见：</div>
                 <div class="ckTxt">
                   <textarea id="generalSee" name="generalSee" cols="10" rows="2" class="ckeditor"></textarea>
                   <input type="hidden" id="generalSeeHidden" name="generalSeeHidden"/>

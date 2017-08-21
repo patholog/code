@@ -48,6 +48,7 @@ public class DescriptionAppServiceImpl implements DescriptionAppService {
       descriptionAppDao.insert(descriptionApp);
     } catch (Exception e) {
       logger.error(e.getMessage());
+      throw new RuntimeException(e);
     }
   }
 
