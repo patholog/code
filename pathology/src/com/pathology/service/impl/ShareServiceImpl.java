@@ -61,7 +61,7 @@ public class ShareServiceImpl implements IShareService {
 		pageNum = pageNum != null?pageNum:"1";
 		String title = "";
 		int status = 1;
-		String sql = " select b.pathologyno ,b.patientname,c.username,a.memo,a.crt_Time,a.id_share,a.case_id from share a   "
+		String sql = " select b.pathologyno ,b.patientname,c.username,a.memo,a.crt_Time,a.id_share,a.case_id,a.shareUrl,a.sharePsd,a.shareTerm from share a   "
 						+" left join pathology  b  on a.case_id = b.id_case "
 						+" left join  users  c on a.doctorId = c.id_users";
 		

@@ -23,8 +23,9 @@ public class ShareDTO implements java.io.Serializable {
 	private String lastUpdUserId;
 	private Integer delF;
 	private String pathologyNo;
-	
-	
+	private String shareUrl;
+	private String sharePsd;
+	private String shareTerm;
 	
 	public String getShareId() {
 		return shareId;
@@ -115,6 +116,24 @@ public class ShareDTO implements java.io.Serializable {
 	}
 	public void setPathologyNo(String pathologyNo) {
 		this.pathologyNo = pathologyNo;
+	}
+	public String getShareUrl() {
+		return shareUrl;
+	}
+	public void setShareUrl(String shareUrl) {
+		this.shareUrl = shareUrl;
+	}
+	public String getSharePsd() {
+		return sharePsd;
+	}
+	public void setSharePsd(String sharePsd) {
+		this.sharePsd = sharePsd;
+	}
+	public String getShareTerm() {
+		return shareTerm;
+	}
+	public void setShareTerm(String shareTerm) {
+		this.shareTerm = shareTerm;
 	}
 
 	// Constructors

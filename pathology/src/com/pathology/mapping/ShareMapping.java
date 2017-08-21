@@ -30,6 +30,9 @@ public class ShareMapping  implements RowMapper {
 			bean.setPatientname(rs.getString("patientname"));
 			bean.setCreateTime(myFmt1.format(rs.getTimestamp("crt_Time")));
 			bean.setCaseId(rs.getString("case_id"));
+			bean.setShareUrl(rs.getString("shareUrl"));
+			bean.setSharePsd(rs.getString("sharePsd"));
+			bean.setShareTerm(rs.getString("shareTerm"));
 			/*bean.setId(rs.getInt("username"));
 			bean.setCure(rs.getString("content"));
 			bean.setCreate_time(rs.getString("create_time"));
