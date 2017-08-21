@@ -262,13 +262,13 @@
                       <div class="clear"></div>
                     </div>
                   </div>
-                  <div class="inbox_con_list">
+                  <%--<div class="inbox_con_list">
                     <div class="report_title">远程病理专家诊断意见：</div>
                     <div class="inbox_list ">
                       <p><span id="txtDiagnosisConclusion">未处理</span>
                       </p>
                     </div>
-                  </div>
+                  </div>--%>
                   <div class="inbox_con_list">
                   </div>
                   <div id="divFoot" class="inbox_list border_bom" style=" height:40px">
