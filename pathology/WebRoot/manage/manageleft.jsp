@@ -38,6 +38,12 @@
           <li><a href="HospitalAction!hospitalList">管理权限</a> </li>
         </ul>
       </div>
+                  <div name="leftmenu" id="powermenu">
+        <h3>操作</h3>
+		<ul>
+          <li><a href="${path}/webdiagnosis/hasdiag/hasdiag_list.jsp">返回已诊断</a> </li>
+        </ul>
+      </div>
       <script>
 				leftMenuTreeView();
 			</script>
