@@ -169,7 +169,7 @@ public class PathologyAction extends BaseAction {
     Map<String, String[]> paramMap = request.getParameterMap();
     String result = "";
     try {
-      descriptionAppService.insert(paramMap);
+      resultService.updateResult(paramMap);
       result = "保存成功";
     } catch (Exception e) {
       logger.error(e.getMessage());
@@ -187,6 +187,11 @@ public class PathologyAction extends BaseAction {
     return "保存成功";
   }
 
+  /**
+   * 已诊断查询
+   *
+   * @return 已诊断结果列表
+   */
   public String getPathologyListToHas() {
     try {
       //获取当前登陆用户
@@ -247,9 +252,6 @@ public class PathologyAction extends BaseAction {
     return SUCCESS;
   }
 
-  /*
-   * 已诊断
-   */
   public String getPathologyListToBack() {
     try {
       HttpServletRequest request = ServletActionContext.getRequest();
@@ -259,6 +261,37 @@ public class PathologyAction extends BaseAction {
       e.printStackTrace();
     }
     return "pathologysback";
+  }
+
+  /**
+   * 更新病理结果，并转移到已诊断
+   *
+   * @return 更新结果
+   */
+  public String updateResult() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    HttpServletResponse response = ServletActionContext.getResponse();
+    response.setContentType("text/html;charset=UTF-8");
+    Map<String, String[]> paramMap = request.getParameterMap();
+    String result = "";
+    try {
+      resultService.updateResult(paramMap);
+      pathologyService.finishPathology(paramMap.get("caseId")[0]);
+      result = "保存成功";
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+    }
+    try {
+      PrintWriter out;
+      out = response.getWriter();
+      String jsonString = !"".equals(result) ? "{\"success\":\"保存成功\"}" : "{\"failure\":\"保存失败\"}";
+      out.println(jsonString);
+      out.flush();
+      out.close();
+    } catch (Exception e) {
+      logger.error(e);
+    }
+    return "保存成功";
   }
 
   public IPathologyService getPathologyService() {

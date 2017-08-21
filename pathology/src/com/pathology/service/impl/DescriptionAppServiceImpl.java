@@ -2,6 +2,8 @@ package com.pathology.service.impl;
 
 import com.pathology.dao.DescriptionAppDao;
 import com.pathology.entity.DescriptionApp;
+import com.pathology.entity.Hospital;
+import com.pathology.entity.Users;
 import com.pathology.service.DescriptionAppService;
 import com.pathology.util.SessionAgentManager;
 import org.apache.log4j.Logger;
@@ -35,10 +37,10 @@ public class DescriptionAppServiceImpl implements DescriptionAppService {
     try {
       DescriptionApp descriptionApp = new DescriptionApp();
       descriptionApp.setCaseId(paramMap.get("caseId")[0]);
-      descriptionApp.setToHospitalId(paramMap.get("toHospitalId")[0]);
-      descriptionApp.setToDoctorId(paramMap.get("toDoctorId")[0]);
-      descriptionApp.setFromDoctorId(SessionAgentManager.getSessionAgentBean().getIdUsers());
-      descriptionApp.setFromHospitalId(SessionAgentManager.getSessionAgentBean().getBelonghospital());
+      descriptionApp.setFromHospital(new Hospital(paramMap.get("toHospitalId")[0], ""));
+      descriptionApp.setToDoctor(new Users(paramMap.get("toDoctorId")[0], ""));
+      descriptionApp.setFromDoctor(new Users(SessionAgentManager.getSessionAgentBean().getIdUsers(), ""));
+      descriptionApp.setFromHospital(new Hospital(SessionAgentManager.getSessionAgentBean().getBelonghospital(), ""));
       descriptionApp.setApplyDateTime(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())));
       int first = jdbcTemplate.queryForInt("select min(id_description_app) from description_app"
           + " where case_id = '" + paramMap.get("caseId")[0] + "' order by applyDateTime");

@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="${path }/css/weebox.css"/>
   <link rel="stylesheet" href="${path }/js/iviewer/jquery.iviewer.css"/>
   <script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
+  <script type="text/javascript" src="${path }/js/jquery.form.min.js"></script>
   <script type="text/javascript" src="${path }/js/iviewer/jqueryui.js"></script>
   <script type="text/javascript" src="${path }/js/iviewer/jquery.mousewheel.min.js"></script>
   <script type="text/javascript" src="${path }/js/iviewer/jquery.iviewer.js"></script>
@@ -63,7 +64,7 @@
   </style>
 </head>
 <body>
-<form>
+<form id="contentForm" action="PathologyAction!updateResult" method="post">
   <div id="whole" class="mlrAuto">
     <div class="header">
       <%@include file="/webdiagnosis/maintop.jsp" %>
@@ -104,7 +105,7 @@
               <!--侧边栏开始-->
               <div id="divTab" class="tab_right">
                 <ul id="UserList">
-                  <li class="curr"><a href="DiagnosisList.aspx?MedicalCaseInfoID=8007&amp;UserInfoId=1914">主任</a></li>
+                  <li class="curr"><a href="#">主任</a></li>
                 </ul>
               </div>
               <!--侧边栏结束-->
@@ -135,8 +136,9 @@
                     </div>
                     <div class="pl_number border_bom">
                       <a>原病理号：<span id="lblPathologyNumber">未处理</span></a>
-                      <input type="hidden" id="caseId" value="<s:property value="pathology.caseId"/>">
-                      <a style=" float:right">会诊号：<span id="lblCheckNumber">未处理</span></a>
+                      <a style=" float:right">会诊号：<span id="lblCheckNumber">
+                        <input id="caseId" name="caseId" value="<s:property value="pathology.caseId"/>" readonly>
+                      </span></a>
                     </div>
                     <div class="report_list border_bom">
                       <ul>
@@ -210,7 +212,7 @@
                       <span>大体所见：</span>
                     </div>
                     <div class="inbox_list border_bom" id="divGeneralObservation">
-                      <textarea id="generalSee" cols="10" rows="1" class="ckeditor">
+                      <textarea id="generalSee" name="generalSee" cols="10" rows="1" class="ckeditor">
                         <s:property value="pathology.generalSee"/>
                       </textarea>
                     </div>
@@ -222,7 +224,7 @@
                     <div class="inbox_list border_bom">
                       <p>
                         <span id="lblImmuneOrgan">
-                          未处理免疫组化
+                          <textarea id="immuneResult" name="immuneResult" cols="20" rows="2" style="height: 62px;width: 98%;"></textarea>
                         </span>
                       </p>
                     </div>
@@ -233,7 +235,7 @@
                     </div>
                     <div class="inbox_list border_bom">
                       <p>
-                        <span id="lblFirstVisit">未处理</span>
+                        <textarea id="firstVisit" name="firstVisit" cols="20" rows="2" style="height: 62px;width: 98%;"></textarea>
                       </p>
                     </div>
                   </div>
@@ -405,25 +407,55 @@
 </html>
 <script>
   $(function () {
-    // 禁用所有input
-//    $('input').attr("disabled", "true");
-//    $('textarea').attr("disabled", "true");
-//    $('select').attr("disabled", "true");
+    //获取url中的参数
+    function getUrlParam(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+      var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+      if (r !== null) return unescape(r[2]); return null; //返回参数值
+    }
+    // 如果是已诊断，禁用所有input
+    if (getUrlParam('diagStatus') === '7') {
+      $('input').attr("disabled", "true");
+      $('textarea').attr("disabled", "true");
+      $('select').attr("disabled", "true");
+    }
+
+    var flag = true;
     $('#btnSaveContent').click(function() {
-      var content = {'caseId': $('#caseId').val(), 'generalSee': CKEDITOR.instances.generalSee.getData()};
-      $.ajax({
-        type: 'post',
-        url: "../PathologyAction!savePathology",
-        data: {content: JSON.stringify(content)},
-        //contentType:"text/html;charset=utf-8",
-        dataType: "text",
-        success: function (result) {
-          if (result && "true" == result) {
-            alert("1");
+      $('#generalSee').val(CKEDITOR.instances.generalSee.getData());
+      validate();
+      if (flag) {
+        $('#contentForm').ajaxSubmit({
+          dataType: "json",
+          success: function (result) {
+            if (result && result.success) {
+              alert(result.success);
+              window.location.href="PathologyAction!getPathologyListToHas";
+            } else {
+              alert("保存失败");
+            }
           }
-        }
-      });
+        });
+      }
     });
+
+    function validate() {
+      if ($('#generalSee').val() === '') {
+        flag = false;
+        alert("大体所见不能为空");
+        return;
+      }
+      if ($('#immuneResult').val() === '') {
+        flag = false;
+        alert("免疫组化不能为空");
+        return;
+      }
+      if ($('#firstVisit').val() === '') {
+        flag = false;
+        alert("初诊意见不能为空");
+        return;
+      }
+    }
 
     //设置标杆
     var _line = parseInt($(window).height() / 3);

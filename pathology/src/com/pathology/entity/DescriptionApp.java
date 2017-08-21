@@ -13,10 +13,10 @@ public class DescriptionApp implements java.io.Serializable {
 
   private Integer idDescriptionApp;
   private String caseId;
-  private String fromHospitalId;
-  private String fromDoctorId;
-  private String toHospitalId;
-  private String toDoctorId;
+  private Hospital fromHospital;
+  private Users fromDoctor;
+  private Hospital toHospital;
+  private Users toDoctor;
   private Timestamp applyDateTime;
   private Integer transferParentId;
   private String memo;
@@ -50,8 +50,8 @@ public class DescriptionApp implements java.io.Serializable {
   /**
    * full constructor
    */
-  public DescriptionApp(Integer idDescriptionApp, String caseId, String fromHospitalId,
-                        String fromDoctorId, String toHospitalId, String toDoctorId,
+  public DescriptionApp(Integer idDescriptionApp, String caseId, Hospital fromHospital,
+                        Users fromDoctor, Hospital toHospital, Users toDoctor,
                         Timestamp applyDateTime, Integer transferParentId, String memo,
                         String sortNo, String spellNo, String wubiNo, Integer updCnt,
                         Timestamp crtTime, String crtUserId, String crtDeptCd,
@@ -59,10 +59,10 @@ public class DescriptionApp implements java.io.Serializable {
                         Integer delF) {
     this.idDescriptionApp = idDescriptionApp;
     this.caseId = caseId;
-    this.fromHospitalId = fromHospitalId;
-    this.fromDoctorId = fromDoctorId;
-    this.toHospitalId = toHospitalId;
-    this.toDoctorId = toDoctorId;
+    this.fromHospital = fromHospital;
+    this.fromDoctor = fromDoctor;
+    this.toHospital = toHospital;
+    this.toDoctor = toDoctor;
     this.applyDateTime = applyDateTime;
     this.transferParentId = transferParentId;
     this.memo = memo;
@@ -89,36 +89,36 @@ public class DescriptionApp implements java.io.Serializable {
     this.idDescriptionApp = idDescriptionApp;
   }
 
-  public String getFromHospitalId() {
-    return this.fromHospitalId;
+  public Hospital getFromHospital() {
+    return this.fromHospital;
   }
 
-  public void setFromHospitalId(String fromHospitalId) {
-    this.fromHospitalId = fromHospitalId;
+  public void setFromHospital(Hospital fromHospital) {
+    this.fromHospital = fromHospital;
   }
 
-  public String getFromDoctorId() {
-    return this.fromDoctorId;
+  public Users getFromDoctor() {
+    return this.fromDoctor;
   }
 
-  public void setFromDoctorId(String fromDoctorId) {
-    this.fromDoctorId = fromDoctorId;
+  public void setFromDoctor(Users fromDoctor) {
+    this.fromDoctor = fromDoctor;
   }
 
-  public String getToHospitalId() {
-    return this.toHospitalId;
+  public Hospital getToHospital() {
+    return this.toHospital;
   }
 
-  public void setToHospitalId(String toHospitalId) {
-    this.toHospitalId = toHospitalId;
+  public void setToHospital(Hospital toHospital) {
+    this.toHospital = toHospital;
   }
 
-  public String getToDoctorId() {
-    return this.toDoctorId;
+  public Users getToDoctor() {
+    return this.toDoctor;
   }
 
-  public void setToDoctorId(String toDoctorId) {
-    this.toDoctorId = toDoctorId;
+  public void setToDoctor(Users toDoctor) {
+    this.toDoctor = toDoctor;
   }
 
   public Timestamp getApplyDateTime() {

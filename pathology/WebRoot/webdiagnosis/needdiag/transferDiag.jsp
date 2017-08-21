@@ -91,10 +91,10 @@
           <c:forEach items="${descriptionAppList}" var="list" varStatus="status">
             <tr>
               <td>${list.caseId}</td>
-              <td>${list.fromHospitalId}</td>
-              <td>${list.fromDoctorId}</td>
-              <td>${list.toHospitalId}</td>
-              <td>${list.toDoctorId}</td>
+              <td>${list.fromHospital.name}</td>
+              <td>${list.fromDoctor.realname}</td>
+              <td>${list.toHospital.name}</td>
+              <td>${list.toDoctor.realname}</td>
               <td><fmt:formatDate value="${list.applyDateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             </tr>
           </c:forEach>

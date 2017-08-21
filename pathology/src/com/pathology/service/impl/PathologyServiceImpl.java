@@ -47,7 +47,7 @@ public class PathologyServiceImpl implements IPathologyService {
       + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
       + "a.specimenname specimenName, a.idcard idCard, a.mobile, a.diag_time,"
       + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
-      + "c.generalSee, c.microscopeSee, a.memo,E.ID_COLLECTION"
+      + "c.generalSee, c.microscopeSee, c.result, c.diagnosed, a.memo,E.ID_COLLECTION"
       + " FROM pathology a "
       + " LEFT JOIN COLLECTION E ON E.CASE_ID=A.ID_CASE AND A.ID_DOCTOR=E.ID_DOCTOR"
       + " LEFT JOIN result  c ON a.id_case = c.case_id"
@@ -183,6 +183,15 @@ public class PathologyServiceImpl implements IPathologyService {
     } catch (Exception e) {
       Logger.getLogger(PathologyServiceImpl.class).error(e.getMessage());
       return 0;
+    }
+  }
+
+  @Override
+  public void finishPathology(String caseId) {
+    Pathology pathology = getPathology(Pathology.class, caseId);
+    if (pathology != null) {
+      pathology.setDiagStatus("7");
+      updatePathology(pathology);
     }
   }
 

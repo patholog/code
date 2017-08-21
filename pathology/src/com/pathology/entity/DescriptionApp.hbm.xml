@@ -15,22 +15,10 @@
         <comment>病理编号</comment>
       </column>
     </property>
-    <property name="fromHospitalId" type="java.lang.String">
-      <column name="fromHospitalId">
-        <comment>申请医院</comment>
-      </column>
-    </property>
-    <property name="fromDoctorId" type="java.lang.String">
-      <column name="fromDoctorId">
-        <comment>申请医生</comment>
-      </column>
-    </property>
-    <property name="toHospitalId" type="java.lang.String">
-      <column name="toHospitalId"/>
-    </property>
-    <property name="toDoctorId" type="java.lang.String">
-      <column name="toDoctorId"/>
-    </property>
+    <many-to-one name="fromHospital" column="fromHospitalId" class="com.pathology.entity.Hospital" insert="false" update="false"/>
+    <many-to-one name="fromDoctor" column="fromDoctorId" class="com.pathology.entity.Users" insert="false" update="false"/>
+    <many-to-one name="toHospital" column="toHospitalId" class="com.pathology.entity.Hospital" insert="false" update="false"/>
+    <many-to-one name="toDoctor" column="toDoctorId" class="com.pathology.entity.Users" insert="false" update="false"/>
     <property name="applyDateTime" type="java.sql.Timestamp">
       <column name="applyDateTime" length="0"/>
     </property>
