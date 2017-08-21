@@ -60,10 +60,10 @@
 						         <td><s:property value="#share.pathologyNo"/><input type="hidden" value="#share.shareId"></td>
 						         <td><s:property value="#share.patientname"/></td>
 						         <td><s:property value="#share.createTime"/></td>
-						         <td><s:property value="#share.username"/></td>
-						         <td><s:property value="#share.username"/></td>
-						         <td><s:property value="#share.memo"/></td>
-						         <td><s:property value="#share.shareId"/></td>
+						         <td><s:property value="#share.pathologyNo"/></td>
+						         <td><s:property value="#share.shareTerm"/></td>
+						         <td><s:property value="#share.shareUrl"/></td>
+						         <td><s:property value="#share.sharePsd"/></td>
 						          <td align="center"><a href="#"  onclick="confirmDelete('${share.shareId }')">取消分享</a>
 						          	&nbsp; | &nbsp;	<a href="PathologyAction!getPathologyDto?id=${share.caseId}" target="_blank">查看</a>
 						          </td>
