@@ -32,6 +32,12 @@
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
   <script type="text/javascript" src="${path }/js/scrolllisten.js"></script>
+  <script type="text/javascript">
+	function confirmDelete(id) {
+		if (confirm('确定退回吗？'))
+			window.location.href = 'PathologyAction!updateRetreatReason?pathology.caseId=' + id;
+	}
+</script>
   <style type="text/css">
     #divGeneralObservation img {
       width: auto;
@@ -112,6 +118,9 @@
                 <div id="divTitle" class="top_title">
                   <div class="title">
                     <span class="left">诊断报告</span>
+                    <a id="A2"  href="#" onclick="confirmDelete('${pathology.caseId }')"  >
+                      <div class="share right">退回</div>
+                    </a>
                     <%--<a id="A2" onclick="Share()">
                       <div class="share right">分享</div>
                     </a>

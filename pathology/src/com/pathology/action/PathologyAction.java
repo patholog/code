@@ -338,12 +338,15 @@ public class PathologyAction extends BaseAction {
 		  if(pathTodo==null){
 			  return Constant.ERR;
 		  }
-		  pathTodo.setRetreatReason(pathology.getRetreatReason());
+		  pathTodo.setDiagStatus("3");
+		  if(pathology.getRetreatReason()!=null){
+			  pathTodo.setRetreatReason(pathology.getRetreatReason());
+		  }
 		  pathologyService.updatePathology(pathTodo);
 		} catch (Exception e) {
 			return Constant.ERR;
 		}
-	  return "pathologysneed";
+	  return "pathologysback";
   }
 
   public IPathologyService getPathologyService() {
