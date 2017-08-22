@@ -34,6 +34,7 @@ public class PathologyDTO implements java.io.Serializable {
   private String diagTime;
   private String collectionId;
   private List<Image> Images;
+  private String retreatReason;
   /**
    * 初步诊断
    */
@@ -311,4 +312,13 @@ public void setCollectionId(String collectionId) {
   public void setResult(String result) {
     this.result = result;
   }
+
+public String getRetreatReason() {
+	return retreatReason;
+}
+
+public void setRetreatReason(String retreatReason) {
+	this.retreatReason = retreatReason;
+}
+  
 }

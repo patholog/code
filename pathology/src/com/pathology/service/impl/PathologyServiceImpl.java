@@ -45,7 +45,7 @@ public class PathologyServiceImpl implements IPathologyService {
   private JdbcTemplate jdbcTemplate;
   private String basicSql = "SELECT a.id_case caseId, a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
       + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
-      + "a.specimenname specimenName, a.idcard idCard, a.mobile, a.diag_time,"
+      + "a.specimenname specimenName, a.idcard idCard, a.mobile, a.diag_time,a.retreat_reason,"
       + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
       + "c.generalSee, c.microscopeSee, c.result, c.diagnosed, a.memo,E.ID_COLLECTION"
       + " FROM pathology a "

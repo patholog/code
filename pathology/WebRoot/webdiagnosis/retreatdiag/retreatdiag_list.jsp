@@ -64,7 +64,7 @@
 						         <td><s:property value="#pathology.content"/></td>
 						         <td><s:property value="#pathology.username"/></td>
 						         <td><s:property value="#pathology.hospitalname"/></td>
-						         <td><s:property value="#pathology.createTime"/></td>
+						         <td><s:property value="#pathology.retreatReason"/></td>
 						         <td><s:property value="#pathology.createTime"/></td>
 						         <td align="center"><a href="PathologyAction!getPathologyDto?diagStatus=3&id=<s:property value="#pathology.caseId"/>" target="_blank">查看</a></td>
 						        </tr>

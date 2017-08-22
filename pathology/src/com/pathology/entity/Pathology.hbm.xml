@@ -106,5 +106,8 @@
         <property name="doctorId" type="java.lang.String">
           <column name="id_doctor"/>
         </property>
+        <property name="retreatReason" type="java.lang.String">
+            <column name="retreat_reason" length="300" />
+        </property>
     </class>
 </hibernate-mapping>

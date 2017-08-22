@@ -43,6 +43,7 @@ public class Pathology implements java.io.Serializable {
 	private String lastUpdUserId;
 	private Integer delF;
 	private String doctorId;
+	private String retreatReason;
 
 	// Constructors
 
@@ -366,4 +367,13 @@ public class Pathology implements java.io.Serializable {
 	public void setDoctorId(String doctorId) {
 		this.doctorId = doctorId;
 	}
+
+	public String getRetreatReason() {
+		return retreatReason;
+	}
+
+	public void setRetreatReason(String retreatReason) {
+		this.retreatReason = retreatReason;
+	}
+	
 }
