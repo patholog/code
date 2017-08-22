@@ -37,7 +37,7 @@ public class DescriptionAppServiceImpl implements DescriptionAppService {
     try {
       DescriptionApp descriptionApp = new DescriptionApp();
       descriptionApp.setCaseId(paramMap.get("caseId")[0]);
-      descriptionApp.setFromHospital(new Hospital(paramMap.get("toHospitalId")[0], ""));
+      descriptionApp.setToHospital(new Hospital(paramMap.get("toHospitalId")[0], ""));
       descriptionApp.setToDoctor(new Users(paramMap.get("toDoctorId")[0], ""));
       descriptionApp.setFromDoctor(new Users(SessionAgentManager.getSessionAgentBean().getIdUsers(), ""));
       descriptionApp.setFromHospital(new Hospital(SessionAgentManager.getSessionAgentBean().getBelonghospital(), ""));
