@@ -212,9 +212,7 @@
                       <span>大体所见：</span>
                     </div>
                     <div class="inbox_list border_bom" id="divGeneralObservation">
-                      <textarea id="generalSee" name="generalSee" cols="10" rows="1" class="ckeditor">
-                        <s:property value="pathology.generalSee"/>
-                      </textarea>
+                      <textarea id="generalSee" name="generalSee" cols="10" rows="1" class="ckeditor"><s:property value="pathology.generalSee"/></textarea>
                     </div>
                   </div>
                   <div class="inbox_con_list">
@@ -224,8 +222,7 @@
                     <div class="inbox_list border_bom">
                       <p>
                         <span id="lblImmuneOrgan">
-                          <textarea id="immuneResult" name="immuneResult" cols="20" rows="2" style="height: 62px;width: 98%;"><s:property value="pathology.result"/>
-                          </textarea>
+                          <textarea id="immuneResult" name="immuneResult" cols="20" rows="2" style="height: 62px;width: 98%;"><s:property value="pathology.result"/></textarea>
                         </span>
                       </p>
                     </div>
@@ -236,8 +233,7 @@
                     </div>
                     <div class="inbox_list border_bom">
                       <p>
-                        <textarea id="firstVisit" name="firstVisit" cols="20" rows="2" style="height: 62px;width: 98%;"><s:property value="pathology.diagnosed"/>
-                        </textarea>
+                        <textarea id="firstVisit" name="firstVisit" cols="20" rows="2" style="height: 62px;width: 98%;"><s:property value="pathology.diagnosed"/></textarea>
                       </p>
                     </div>
                   </div>
