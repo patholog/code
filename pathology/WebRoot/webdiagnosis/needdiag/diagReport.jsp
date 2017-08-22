@@ -118,9 +118,9 @@
                 <div id="divTitle" class="top_title">
                   <div class="title">
                     <span class="left">诊断报告</span>
-                    <a id="A2"  href="#" onclick="confirmDelete('${pathology.caseId }')"  >
+                   <%-- <a id="A2"  href="#" onclick="confirmDelete('${pathology.caseId }')"  >
                       <div class="share right">退回</div>
-                    </a>
+                    </a>--%>
                     <a id="A2" onclick="window.open('webdiagnosis/retreatdiag/retreat.jsp','','height=200, width=650, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no')">
                       <div class="share right">退回新</div>
                     </a>
