@@ -75,7 +75,8 @@
                 <c:if test="${pathology.collectionId !=null and pathology.collectionId!='undefined'}">
                   <a id="${pathology.caseId}" href="javascript:cancelCase('${pathology.collectionId}')" target="_blank">取消收藏</a>
                 </c:if>
-                <a href="javascript:shareCase('${pathology.caseId}')">分享</a>
+                <%--<a href="javascript:shareCase('${pathology.caseId}')">分享</a>--%>
+                <a href="#">分享</a>
               </td>
             </tr>
           </s:iterator>
