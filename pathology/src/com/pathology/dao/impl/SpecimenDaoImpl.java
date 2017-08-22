@@ -12,7 +12,7 @@ public class SpecimenDaoImpl extends SuperDao implements ISpecimenDao {
   @Override
   public List<Specimen> selectList(Class clazz, String hql) {
     List<Object> list = super.getAllObject(clazz, "");
-    List<Specimen> returnList = new ArrayList<>();
+    List<Specimen> returnList = new ArrayList<Specimen>();
     for (Object object : list) {
       Specimen specimen = (Specimen) object;
       returnList.add(specimen);
