@@ -11,9 +11,9 @@ function leftMenuTreeView() {
 			if (this.parentNode.getElementsByTagName('ul')[0].style.display == 'block') 
 			{
 				this.parentNode.getElementsByTagName('ul')[0].style.display = 'none';
-				setCookie('list_display_'+this.parentNode.id,'none');
+				//setCookie('list_display_'+this.parentNode.id,'none');
 				this.className = 'iconopen';
-				setCookie('display_icon_'+this.parentNode.id,'iconopen');
+				//setCookie('display_icon_'+this.parentNode.id,'iconopen');
 			} else {
 				// close all firstly 
 				var leftmenu_n = document.getElementById('leftmenu');
@@ -21,15 +21,15 @@ function leftMenuTreeView() {
 				for ( m=0; m<list.length; m++ ) 
 				{
 					list_n[m].getElementsByTagName('ul')[0].style.display = 'none';
-					setCookie('list_display_'+list_n[m].id,'none');
+					//setCookie('list_display_'+list_n[m].id,'none');
 					list_n[m].getElementsByTagName('h3')[0].className = 'iconopen';
-					setCookie('display_icon_'+list_n[m].id,'iconopen');
+					//setCookie('display_icon_'+list_n[m].id,'iconopen');
 				}
 				// open this 
 				this.parentNode.getElementsByTagName('ul')[0].style.display = 'block';
-				setCookie('list_display_'+this.parentNode.id,'block');
+				//setCookie('list_display_'+this.parentNode.id,'block');
 				this.className = 'iconclose';
-				setCookie('display_icon_'+this.parentNode.id,'iconclose');
+				//setCookie('display_icon_'+this.parentNode.id,'iconclose');
 			}
 		}
 		cookieClassName = getCookie('display_icon_'+list[i].getElementsByTagName('h3')[0].parentNode.id)?getCookie('display_icon_'+list[i].getElementsByTagName('h3')[0].parentNode.id):'iconopen';
@@ -45,11 +45,11 @@ function leftMenuTreeView() {
 				linkitem[k].className = '';
 			}
 			this.className = 'current';
-			setCookie('link_current',this.innerHTML);
+			//setCookie('link_current',this.innerHTML);
 			this.blur();
 		}
-		if( getCookie('link_current')==linkitem[j].innerHTML )
-			linkitem[j].className = 'current';
+//		if( getCookie('link_current')==linkitem[j].innerHTML )
+//			linkitem[j].className = 'current';
 	}
 	// alert(document.cookie);
 }
@@ -60,12 +60,12 @@ function getCookie(CookieName)
 	var CookieVal = '';
 	if(document.cookie)	   //only if exists
 	{
-		var arr = document.cookie.split((escape(CookieName) + '=')); 
-		if(arr.length >= 2)
-		{
-			var arr2 = arr[1].split(';');
-			CookieVal  = unescape(arr2[0]); //unescape() : Decodes the String
-		}
+//		var arr = document.cookie.split((escape(CookieName) + '=')); 
+//		if(arr.length >= 2)
+//		{
+//			var arr2 = arr[1].split(';');
+//			CookieVal  = unescape(arr2[0]); //unescape() : Decodes the String
+//		}
 	}
 	return CookieVal;
 }
