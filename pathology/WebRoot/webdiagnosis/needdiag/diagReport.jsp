@@ -296,7 +296,7 @@
                     </div>
                     <div class="inbox_con_list">
                       <div class="message right">
-                        <input type="button" id="btnSaveContent" class="massges_btn" value="保存">
+                        <input type="button" id="btnSaveContent" class="inf_btn massges_btn" value="保存">
                       </div>
                     </div>
                   </div>
@@ -430,6 +430,7 @@
       $('input').attr("disabled", "true");
       $('textarea').attr("disabled", "true");
       $('select').attr("disabled", "true");
+      $('#btnSaveContent').attr("disabled", "true");
       $('#btnSaveMessage').attr("disabled", "true");
     }
 
@@ -490,7 +491,7 @@
     });
 
     function validateMessage() {
-      var content = $('#messagecontent').val();
+      var content = $('#messageContent').val();
       if (content === '') {
         alert("留言内容不能为空");
         return false;
