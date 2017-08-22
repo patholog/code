@@ -462,6 +462,9 @@
                   <ins class="half_words"></ins>送检医生
                   <select name="toDoctorId" id="toDoctorId" style="width: 150px;">
                     <option value="">请选择</option>
+                    <c:forEach items="${usersList}" var="list" varStatus="status">
+                      <option value='${list.idUsers}'>${list.username}</option>
+                    </c:forEach>
                   </select>
                 </div>
               </li>

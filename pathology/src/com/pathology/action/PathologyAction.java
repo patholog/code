@@ -218,6 +218,7 @@ public class PathologyAction extends BaseAction {
     try {
       hospitalList = hospitalservice.getAllHospital(Hospital.class, "");
       specimenList = specimenService.selectList(Specimen.class, "");
+      usersList = pathologyService.selectDoctorList();
     } catch (Exception e) {
       logger.error(e.getMessage());
     }
