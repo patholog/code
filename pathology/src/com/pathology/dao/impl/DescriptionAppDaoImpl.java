@@ -12,7 +12,7 @@ public class DescriptionAppDaoImpl extends SuperDao implements DescriptionAppDao
   @Override
   public List<DescriptionApp> selectForListByCaseId(String caseId) {
     List<Object> objectList = super.getAllObject(DescriptionApp.class, " and case_id = '" + caseId + "'");
-    List<DescriptionApp> returnList = new ArrayList<>();
+    List<DescriptionApp> returnList = new ArrayList<DescriptionApp>();
     for (Object object : objectList) {
       DescriptionApp descriptionApp = (DescriptionApp) object;
       returnList.add(descriptionApp);
