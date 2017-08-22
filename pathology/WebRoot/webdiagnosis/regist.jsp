@@ -20,13 +20,19 @@
 <script src="${path }/js/jquery/jquery-1.4.4.min.js"
 	type="text/javascript"></script>
 <script type="text/javascript">
+	var emailfg=false;
+	var namefg=false;
+	var pswdfg=false;
+	var pswd2fg=false;
+	var spefg=true;
 	$(document).ready(function() {
 
 		$("#email").blur(function() {
 			var email = $("#email").val().trim();
 			if (email == '') {
 				$("#emailtip").html("<a style='color:#2ca9cc;font-size:14px;'>邮箱不能为空！</a>");
-				$("#btn").attr("disabled",true);
+				//$("#btn").attr("disabled",true);
+				emailfg=false;
 				return false;
 			} else {
 				//login1为Action类命名空间名称；AjaxExecute为Action方法名称
@@ -42,12 +48,13 @@
 					dataType : "json",//设置需要返回的数据类型
 					success : function(d) {
 						$("#emailtip").html("");
-						$("#btn").attr("disabled",false);
-						//alert("邮箱没有被注册");
+						//$("#btn").attr("disabled",false);
+						emailfg=true;
 					},
 					error : function(d) {
 						$("#emailtip").html("<a style='color:#2ca9cc;font-size:14px;'>邮箱已注册!</a>");
-						$("#btn").attr("disabled",true);
+						//$("#btn").attr("disabled",true);
+						emailfg=false;
 					}
 				});
 			}
@@ -59,15 +66,18 @@
 			var username = $("#username").val().trim();
 			if (username == '') {
 				$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名不能为空！</a>");
-				$("#btn").attr("disabled",true);
+				//$("#btn").attr("disabled",true);
+				namefg=false;
 				return false;
 			}else if(username.length<6){
 					$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名不能少于6位！</a>");
-					$("#btn").attr("disabled",true);
+					//$("#btn").attr("disabled",true);
+					namefg=false;
 					return false;
 			}else if(username.length>20){
 					$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名不能超过20位！</a>");
-					$("#btn").attr("disabled",true);
+					//$("#btn").attr("disabled",true);
+					namefg=false;
 					return false;
 			}
 			else {
@@ -76,7 +86,8 @@
 				if(username!=""&&!zmnumReg.test(username)){  
 					$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>只能输入字母或数字!</a>");
 					$("#username").val("");
-					$("#btn").attr("disabled",true);
+					//$("#btn").attr("disabled",true);
+					namefg=false;
 					return false;
 				}else{
 			//login1为Action类命名空间名称；AjaxExecute为Action方法名称
@@ -92,11 +103,13 @@
 						dataType : "json",//设置需要返回的数据类型
 						success : function(d) {
 							$("#nametip").html("");
-							$("#btn").attr("disabled",false);
+							//$("#btn").attr("disabled",false);
+							namefg=true;
 						},
 						error : function(d) {
 							$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名已注册!</a>");
-							$("#btn").attr("disabled",true);
+							//$("#btn").attr("disabled",true);
+							namefg=false;
 						}
 					});
 				}
@@ -110,12 +123,13 @@
 			var pswd2 = $("#password2").val().trim();
 			if(pswd==pswd2){
 			$("#pwsd2tip").html("");
-			$("#btn").attr("disabled",false);
+			//$("#btn").attr("disabled",false);
+			pswd2fg=true;
 			return true;
 			}else{
 				$("#pwsd2tip").html("<a style='color:#2ca9cc;font-size:14px;'>两次密码输入不一致!</a>");
-				$("#btn").attr("disabled",true);
-				
+				//$("#btn").attr("disabled",true);
+				pswd2fg=false;
 				return false;
 			}
 		});
@@ -123,20 +137,24 @@
 			var pswd = $("#password").val().trim();
 			if(pswd==''){
 					$("#pwsdtip").html("<a style='color:#2ca9cc;font-size:14px;'>密码不能为空！</a>");
-					$("#btn").attr("disabled",true);
+					//$("#btn").attr("disabled",true);
+					pswdfg=false;
 					return false;
 			}
 			else if(pswd.length<6){
 					$("#pwsdtip").html("<a style='color:#2ca9cc;font-size:14px;'>密码不能少于6位！</a>");
-					$("#btn").attr("disabled",true);
+					//$("#btn").attr("disabled",true);
+					pswdfg=false;
 					return false;
 			}else if(username.length>16){
 					$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名不能超过16位！</a>");
-					$("#btn").attr("disabled",true);
+					//$("#btn").attr("disabled",true);
+					pswdfg=false;
 					return false;
 			}else{
 				$("#pwsdtip").html("<div id='strength_H' class='pwdcheck'></div><div id='strength_M' class='pwdcheck'></div><div id='strength_L' class='pwdcheck'></div>");
-					$("#btn").attr("disabled",false);
+					//$("#btn").attr("disabled",false);
+					pswdfg=true;
 					return true;
 			}
 		});
@@ -144,27 +162,36 @@
 			var spe = $("#specialty").val().trim();
 			if(spe.length>200){
 				$("#specialtytip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
-				$("#btn").attr("disabled",true);
+				//$("#btn").attr("disabled",true);
+				spefg=false;
 				return false;
 			}else{
 				$("#specialtytip").html("");
-				$("#btn").attr("disabled",false);
+				//$("#btn").attr("disabled",false);
+				spefg=true;
 				return true;
 			}
 		});
 		
 
 	});
-</script>
-<script type="text/javascript">
+	
 	function Check(){
-	  if(confirm('提交当前信息吗？')){
-	    return true;
-	  }else{
-	    return false;
-	  }
+	if(emailfg && namefg && pswdfg && pswd2fg && spefg){
+		if(confirm('提交当前信息吗？')){
+	 	   return true;
+	 	   alert("请等待审核！");
+		  }else{
+		    return false;
+		  }
+	}else{
+		alert("请修正错误信息！");
+		return false;
+		
+	}
 	}
 </script>
+
 </head>
 <body>
 	<div id="3" style="position: relative;  z-index: 3;">
