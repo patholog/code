@@ -92,9 +92,9 @@
             <tr>
               <td>${list.caseId}</td>
               <td>${list.fromHospital.name}</td>
-              <td>${list.fromDoctor.realname}</td>
+              <td>${list.fromDoctor.username}</td>
               <td>${list.toHospital.name}</td>
-              <td>${list.toDoctor.realname}</td>
+              <td>${list.toDoctor.username}</td>
               <td><fmt:formatDate value="${list.applyDateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             </tr>
           </c:forEach>
@@ -116,10 +116,8 @@
 </body>
 <script>
   $(function () {
-    var flag = false;
     $("#save").click(function () {
-      flag = true;
-      if (flag) {
+      if (validate()) {
         $('#transferForm').ajaxSubmit({
           dataType: 'json',
           success: function (result) {
@@ -132,7 +130,18 @@
           }
         })
       }
-    })
+    });
+    function validate() {
+      if ($('#toHospitalId').val() === '') {
+        alert('转诊医院不能为空');
+        return false;
+      }
+      if ($('#toDoctorId').val() === '') {
+        alert('转诊医生不能为空');
+        return false;
+      }
+      return true;
+    }
   })
 </script>
 </html>
