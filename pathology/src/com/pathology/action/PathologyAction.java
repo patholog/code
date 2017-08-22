@@ -169,7 +169,7 @@ public class PathologyAction extends BaseAction {
     Map<String, String[]> paramMap = request.getParameterMap();
     String result = "";
     try {
-      resultService.updateResult(paramMap);
+      descriptionAppService.insert(paramMap);
       result = "保存成功";
     } catch (Exception e) {
       logger.error(e.getMessage());
