@@ -10,6 +10,7 @@ import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -67,7 +68,7 @@ public class PathologyAction extends BaseAction {
    */
   public String saveInfo() {
     HttpServletRequest request = ServletActionContext.getRequest();
-    HttpServletResponse response=ServletActionContext.getResponse();
+    HttpServletResponse response = ServletActionContext.getResponse();
     response.setContentType("text/html;charset=utf-8");
     PrintWriter out;
     Map<String, String[]> paramMap = request.getParameterMap();
@@ -292,6 +293,39 @@ public class PathologyAction extends BaseAction {
       logger.error(e);
     }
     return "保存成功";
+  }
+
+  /**
+   * 诊断报告页面显示病理图片
+   *
+   * @return null
+   */
+  public String showDiagImage() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    HttpServletResponse response = ServletActionContext.getResponse();
+    String caseId = request.getParameter("caseId");
+    String imageName = request.getParameter("file");
+    ServletOutputStream out = null;
+    FileInputStream ips = null;
+    try {
+      // 获取图片存放路径
+      String imgPath = Property.getProperty("slideFilePath") + "\\" + imageName;
+      ips = new FileInputStream(new File(imgPath));
+      response.setContentType("multipart/form-data");
+      out = response.getOutputStream();
+      // 读取文件流
+      int len = 0;
+      byte[] buffer = new byte[1024 * 10];
+      while ((len = ips.read(buffer)) != -1) {
+        out.write(buffer, 0, len);
+      }
+      out.flush();
+      out.close();
+      ips.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   public IPathologyService getPathologyService() {

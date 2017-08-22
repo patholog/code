@@ -254,11 +254,13 @@
                   <div id="divConn" class="inbox_con_list">
                     <div class="report_title">病理图像：</div>
                     <div id="divCaseList" class="case_list border_bom">
-                      <div class="show_img">
-                        <a class="go" href="${path}/upload/img/2017/4/20170407093319_8007_1.png" rel="gallery">
-                          <img alt="" src="${path}/upload/img/2017/4/20170407093319_8007_1.png"></a>
-                        <p>可见核分裂像</p>
-                      </div>
+                      <s:iterator value="pathology.Images" id="image" status="11">
+                        <div class="show_img">
+                          <a class="go" href="PathologyAction!showDiagImage?caseId=<s:property value='#image.caseId'/>&file=<s:property value='#image.pathImage'/>" rel="gallery">
+                            <img alt="" src="PathologyAction!showDiagImage?caseId=<s:property value='#image.caseId'/>&file=<s:property value='#image.pathImage'/>"></a>
+                          <p></p>
+                        </div>
+                      </s:iterator>
                       <div class="clear"></div>
                     </div>
                   </div>
