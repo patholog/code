@@ -327,6 +327,24 @@ public class PathologyAction extends BaseAction {
     }
     return null;
   }
+  /**
+   * 病例退回
+   *
+   * @return 显示的界面
+   */
+  public String updateRetreatReason() {
+	  try {
+		  Pathology pathTodo= pathologyService.getPathology(Pathology.class, pathology.getCaseId());
+		  if(pathTodo==null){
+			  return Constant.ERR;
+		  }
+		  pathTodo.setRetreatReason(pathology.getRetreatReason());
+		  pathologyService.updatePathology(pathTodo);
+		} catch (Exception e) {
+			return Constant.ERR;
+		}
+	  return "pathologysneed";
+  }
 
   public IPathologyService getPathologyService() {
     return pathologyService;
