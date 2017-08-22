@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+<title>后台管理</title>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" type="text/css" href="${path}/css/style.css" />
 <script type="text/javascript" src="${path}/js/treeView.js"></script>
@@ -22,7 +22,7 @@
 <table id="main" cellpadding="0" cellspacing="0" border="0">
   <tr>
     <td id="leftmenu"><%@include file="manageleft.jsp"%></td>
-    <td id="contents"><h5>欢迎使用</h5></td>
+    <td id="contents"><h5>欢迎使用后台管理</h5></td>
   </tr>
 </table>
 </script>
