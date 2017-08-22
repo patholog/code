@@ -121,6 +121,9 @@
                     <a id="A2"  href="#" onclick="confirmDelete('${pathology.caseId }')"  >
                       <div class="share right">退回</div>
                     </a>
+                    <a id="A2" onclick="window.open('webdiagnosis/retreatdiag/retreat.jsp','','width=200,height=100')">
+                      <div class="share right">退回新</div>
+                    </a>
                     <%--<a id="A2" onclick="Share()">
                       <div class="share right">分享</div>
                     </a>
