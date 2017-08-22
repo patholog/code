@@ -1,8 +1,11 @@
 package com.pathology.action;
 
+import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
@@ -56,6 +59,36 @@ public class MessageAction extends BaseAction {
       logger.error(e.getMessage());
       return Constant.ERR;
     }
+  }
+
+  /**
+   * 保存留言
+   *
+   * @return null
+   */
+  public String saveMessage() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    HttpServletResponse response = ServletActionContext.getResponse();
+    response.setContentType("text/html;charset=UTF-8");
+    Map<String, String[]> paramMap = request.getParameterMap();
+    String result = "";
+    try {
+      messageService.insert(paramMap);
+      result = "保存成功";
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+    }
+    try {
+      PrintWriter out;
+      out = response.getWriter();
+      String jsonString = !"".equals(result) ? "{\"success\":\"保存成功\"}" : "{\"failure\":\"保存失败\"}";
+      out.println(jsonString);
+      out.flush();
+      out.close();
+    } catch (Exception e) {
+      logger.error(e);
+    }
+    return null;
   }
 
 

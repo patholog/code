@@ -1,10 +1,14 @@
 package com.pathology.service.impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.pathology.util.SessionAgentManager;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.pathology.util.Pages;
@@ -55,6 +59,32 @@ public class MessageServiceImpl implements IMessageService {
 
   }
 
+  /**
+   * 保存留言
+   *
+   * @param paramMap 数据
+   */
+  @Override
+  public void insert(Map<String, String[]> paramMap) {
+    Message message = new Message();
+    int messageOrder = 0;
+    try {
+      messageOrder = jdbcTemplate.queryForInt("SELECT max(messageOrder) from message where case_id = " + paramMap.get("caseId")[0]);
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+    }
+    try {
+      message.setContent(paramMap.get("messageContent")[0]);
+      message.setFromDoctorId(SessionAgentManager.getSessionAgentBean().getIdUsers());
+      message.setCaseId(paramMap.get("caseId")[0]);
+      message.setCreateTime(new Timestamp(new Date().getTime()));
+      message.setMessageOrder(String.valueOf(messageOrder + 1));
+      addMessage(message);
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      throw new RuntimeException(e);
+    }
+  }
 
   public List<MessageDTO> getListMessage(HttpServletRequest request, String name) throws Exception {
     String pageNum = request.getParameter("pageNum");

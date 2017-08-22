@@ -1,6 +1,7 @@
 package com.pathology.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +16,8 @@ public interface IMessageService {
   List<Message> getAllMessage(Class clazz, String hql) throws Exception;
 
   void deleteMessage(Message em) throws Exception;
+
+  void insert(Map<String, String[]> paramMap);
 
   Message getMessage(Class clazz, String id) throws Exception;
 

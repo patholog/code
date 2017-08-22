@@ -64,7 +64,6 @@
   </style>
 </head>
 <body>
-<form id="contentForm" action="PathologyAction!updateResult" method="post">
   <div id="whole" class="mlrAuto">
     <div class="header">
       <%@include file="/webdiagnosis/maintop.jsp" %>
@@ -99,276 +98,280 @@
           </div>
         </div>
         <div class="right in_box_canvas">
-          <div class="mpt80" id="inbox_0">
-            <!--诊断报告开始-->
-            <div class="in_box_bl inbox_0">
-              <!--侧边栏开始-->
-              <div id="divTab" class="tab_right">
-                <ul id="UserList">
-                  <%--<li class="curr"><a href="#">主任</a></li>--%>
-                </ul>
-              </div>
-              <!--侧边栏结束-->
-              <div id="divTitle" class="top_title">
-                <div class="title">
-                  <span class="left">诊断报告</span>
-                  <%--<a id="A2" onclick="Share()">
-                    <div class="share right">分享</div>
-                  </a>
-                  <a id="Print" onclick="ShowReport()">
-                    <div class="stamp right">打印</div>
-                  </a>
-                  <input type="submit" name="btnExcel" value="导出" onclick="return GetHeigh();" id="btnExcel"
-                         class="export right">
-                  <a id="A1" onclick="ShowHistoryRmark()">
-                    <div class="showhistory right">病史备注</div>
-                  </a>--%>
+          <form id="contentForm" action="PathologyAction!updateResult" method="post">
+            <div class="mpt80" id="inbox_0">
+              <!--诊断报告开始-->
+              <div class="in_box_bl inbox_0">
+                <!--侧边栏开始-->
+                <div id="divTab" class="tab_right">
+                  <ul id="UserList">
+                    <%--<li class="curr"><a href="#">主任</a></li>--%>
+                  </ul>
                 </div>
-              </div>
-              <div id="divReport" class="inbox">
-                <div class="inbox_content mlrAuto">
-                  <div class="inbox_con_list">
-                    <div class="logo_title" align="center">
-                      <span>病理远程会诊咨询意见书 </span>
-                      <div class="comc_logo">
-                        <%--<img id="imgLogo" src="../img/icon_logo.png">--%>
-                      </div>
-                    </div>
-                    <div class="pl_number border_bom">
-                      <a>原病理号：<span id="lblPathologyNumber">未处理</span></a>
-                      <a style=" float:right">会诊号：<span id="lblCheckNumber">
-                        <input id="caseId" name="caseId" value="<s:property value="pathology.caseId"/>" readonly>
-                      </span></a>
-                    </div>
-                    <div class="report_list border_bom">
-                      <ul>
-                        <li>
-                          <label>姓&nbsp;名：</label>
-                          <span id="lblPatientName">
-                            <s:property value="pathology.patientname"/>
-                          </span>
-                        </li>
-                        <li>
-                          <label>性&nbsp;别：</label>
-                          <span id="lblGender">
-                            <s:property value="pathology.patientSex"/>
-                          </span>
-                        </li>
-                        <li style="width: 20%">
-                          <label>年&nbsp;龄：</label>
-                          <span id="lblAge">
-                            <s:property value="pathology.patientAge"/>
-                          </span>
-                        </li>
-                        <li style="width: 30%">
-                          <label>送检时间：</label>
-                          <span id="lblDateOfDelivery">
-                            <s:date name="pathology.inspectionDate" format="yyyy-MM-dd HH:mm:ss"/>
-                          </span>
-                        </li>
-                        <li class="half">
-                          <label>送检单位：</label>
-                          <span id="lblHospitalOfDelivery">未处理</span>
-                        </li>
-                        <li style="width: 20%">
-                          <label>切片&amp;附件数：</label>
-                          <span id="lblRemark2">未处理</span>
-                        </li>
-                        <li style="width: 30%">
-                          <label>诊断时间：</label>
-                          <span id="lblDiagnosisTime">
-                            <s:date name="pathology.createTime" format="yyyy-MM-dd HH:mm:ss"/>
-                          </span>
-                        </li>
-                      </ul>
-                      <div class="clearleft">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="inbox_con_list">
-                    <div class="report_title">临床资料（手术所见、影像学、相关检验等）：</div>
-                    <div class="inbox_list border_bom">
-                      <p>
-                        <span id="lblClinicalData">
-                          <s:property value="pathology.clinicDiagnose"/>
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="inbox_con_list">
-                    <div class="report_title">
-                      <span>材料部位：</span>
-                    </div>
-                    <div class="inbox_list border_bom">
-                      <p>
-                        <span id="lblAdoptedPart">
-                          <s:property value="pathology.specimenName"/>
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="inbox_con_list">
-                    <div class="report_title">
-                      <span>大体所见：</span>
-                    </div>
-                    <div class="inbox_list border_bom" id="divGeneralObservation">
-                      <textarea id="generalSee" name="generalSee" cols="10" rows="1" class="ckeditor"><s:property value="pathology.generalSee"/></textarea>
-                    </div>
-                  </div>
-                  <div class="inbox_con_list">
-                    <div class="report_title">
-                      <span>免疫组化：</span>
-                    </div>
-                    <div class="inbox_list border_bom">
-                      <p>
-                        <span id="lblImmuneOrgan">
-                          <textarea id="immuneResult" name="immuneResult" cols="20" rows="2" style="height: 62px;width: 98%;"><s:property value="pathology.result"/></textarea>
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="inbox_con_list">
-                    <div class="report_title">
-                      <span>初诊意见（或其他单位诊断意见）：</span>
-                    </div>
-                    <div class="inbox_list border_bom">
-                      <p>
-                        <textarea id="firstVisit" name="firstVisit" cols="20" rows="2" style="height: 62px;width: 98%;"><s:property value="pathology.diagnosed"/></textarea>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="inbox_con_list" style="display: none">
-                    <div class="report_title">
-                      <span>备注：</span>
-                    </div>
-                    <div class="inbox_list border_bom">
-                      <p>
-                        <span id="lblRemark"></span>
-                      </p>
-                    </div>
-                  </div>
-                  <div id="divConn" class="inbox_con_list">
-                    <div class="report_title">病理图像：</div>
-                    <div id="divCaseList" class="case_list border_bom">
-                      <s:iterator value="pathology.Images" id="image" status="11">
-                        <div class="show_img">
-                          <a class="go" href="PathologyAction!showDiagImage?caseId=<s:property value='#image.caseId'/>&file=<s:property value='#image.pathImage'/>" rel="gallery">
-                            <img alt="" src="PathologyAction!showDiagImage?caseId=<s:property value='#image.caseId'/>&file=<s:property value='#image.pathImage'/>"></a>
-                          <p></p>
-                        </div>
-                      </s:iterator>
-                      <div class="clear"></div>
-                    </div>
-                  </div>
-                  <%--<div class="inbox_con_list">
-                    <div class="report_title">远程病理专家诊断意见：</div>
-                    <div class="inbox_list ">
-                      <p><span id="txtDiagnosisConclusion">未处理</span>
-                      </p>
-                    </div>
-                  </div>--%>
-                  <div class="inbox_con_list">
-                  </div>
-                  <div id="divFoot" class="inbox_list border_bom" style=" height:40px">
-                    <div style="float: left;"> 注：</div>
-                    <div style="float: left;">会诊资料局限，以上报告仅为所见切片的咨询意见，仅供原单位病理科参考。
-                      <br>如治疗，请结合原单位临床资料综合分析。
-                    </div>
-                  </div>
-                  <div class="inbox_con_list">
-                    <div class="inbox_title">
-                      <div class="left">本报告由
-                        <span id="lblUserHospital"></span>
-                        &nbsp;&nbsp;<s:property value="pathology.username"/>&nbsp;&nbsp;专家会诊
-                        <p></p></div>
-                      <div class="right">专家签字：<span id="lblUserName"><s:property value="pathology.username"/></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="inbox_con_list">
-                    <div class="message right">
-                      <input type="button" id="btnSaveContent" class="massges_btn" value="保存">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--诊断报告结束-->
-          <div id="inbox_2" class="mpt80">
-            <div class="in_box_bl">
-              <div class="title">
-                <span>附件&nbsp;&amp;&nbsp;切片</span>
-              </div>
-              <div class="inbox mlrAuto">
-                <ul id="ulAppendix" class="inbox_ul">
-                  <div class="clearleft">
-                  </div>
-                </ul>
-                <ul id="ulSection" class="inbox_ul inbox_ul_check">
-                  <s:iterator value="pathology.Images" id="image" status="11">
-                  <li>
-                    <a style="cursor:pointer" href="test?caseId=<s:property value='#image.caseId'/>&SlideID=<s:property value='#image.pathImage'/>" target="_blank">
-                      <img src=""
-                           alt="" href="">
-                      <div class="inbox_ul_msg">
-                        <div class="mlrAuto inbox_span font14">切片：<span
-                            title="20161205135531603.kfb">20161205135531603...</span>
-                        </div>
-                        <div class="mlrAuto inbox_span font12">时间：<span>2017/3/31 13:29:31</span>
-                        </div>
-                        <div class="mlrAuto inbox_span font12">免疫组化：<span>否</span>
-                        </div>
-                      </div>
-                      <div style="display: none;" class="inbox_file_look undis">
-                        <div class="icon_down">
-                          <center>
-                            <img src="../img/icon_look.png" class="icon_look" alt="">
-                            <p>查看</p>
-                          </center>
-                        </div>
-                      </div>
+                <!--侧边栏结束-->
+                <div id="divTitle" class="top_title">
+                  <div class="title">
+                    <span class="left">诊断报告</span>
+                    <%--<a id="A2" onclick="Share()">
+                      <div class="share right">分享</div>
                     </a>
-                  </li>
-                  </s:iterator>
-                  <div class="clearleft">
+                    <a id="Print" onclick="ShowReport()">
+                      <div class="stamp right">打印</div>
+                    </a>
+                    <input type="submit" name="btnExcel" value="导出" onclick="return GetHeigh();" id="btnExcel"
+                           class="export right">
+                    <a id="A1" onclick="ShowHistoryRmark()">
+                      <div class="showhistory right">病史备注</div>
+                    </a>--%>
                   </div>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <!--留言-->
-          <div class="mpt80" id="inbox_3">
-            <div class="in_box_bl">
-              <div class="title">
-                <span>留言</span>
-              </div>
-              <div class="inbox">
-                <div class="inbox_add mlrAuto">
-                  <div class="in_text comments">
-                    <textarea id="tbContent" class="leave_word" placeholder="输入文字信息留言"></textarea>
-                  </div>
-                  <div class="massges">
-                    <div id="divIsAllExpert" class="massges_div left">
-                      <input value="1" type="radio" name="readable" checked><span>所有专家可见</span>
-                      <input value="0" type="radio" name="readable"><span>部分专家可见</span>
+                </div>
+                <div id="divReport" class="inbox">
+                  <div class="inbox_content mlrAuto">
+                    <div class="inbox_con_list">
+                      <div class="logo_title" align="center">
+                        <span>病理远程会诊咨询意见书 </span>
+                        <div class="comc_logo">
+                          <%--<img id="imgLogo" src="../img/icon_logo.png">--%>
+                        </div>
+                      </div>
+                      <div class="pl_number border_bom">
+                        <a>原病理号：<span id="lblPathologyNumber">未处理</span></a>
+                        <a style=" float:right">会诊号：<span id="lblCheckNumber">
+                          <input id="caseId" name="caseId" value="<s:property value="pathology.caseId"/>" readonly>
+                        </span></a>
+                      </div>
+                      <div class="report_list border_bom">
+                        <ul>
+                          <li>
+                            <label>姓&nbsp;名：</label>
+                            <span id="lblPatientName">
+                              <s:property value="pathology.patientname"/>
+                            </span>
+                          </li>
+                          <li>
+                            <label>性&nbsp;别：</label>
+                            <span id="lblGender">
+                              <s:property value="pathology.patientSex"/>
+                            </span>
+                          </li>
+                          <li style="width: 20%">
+                            <label>年&nbsp;龄：</label>
+                            <span id="lblAge">
+                              <s:property value="pathology.patientAge"/>
+                            </span>
+                          </li>
+                          <li style="width: 30%">
+                            <label>送检时间：</label>
+                            <span id="lblDateOfDelivery">
+                              <s:date name="pathology.inspectionDate" format="yyyy-MM-dd HH:mm:ss"/>
+                            </span>
+                          </li>
+                          <li class="half">
+                            <label>送检单位：</label>
+                            <span id="lblHospitalOfDelivery">未处理</span>
+                          </li>
+                          <li style="width: 20%">
+                            <label>切片&amp;附件数：</label>
+                            <span id="lblRemark2">未处理</span>
+                          </li>
+                          <li style="width: 30%">
+                            <label>诊断时间：</label>
+                            <span id="lblDiagnosisTime">
+                              <s:date name="pathology.createTime" format="yyyy-MM-dd HH:mm:ss"/>
+                            </span>
+                          </li>
+                        </ul>
+                        <div class="clearleft">
+                        </div>
+                      </div>
                     </div>
-                    <%--<input name="btnCreateMeeting" type="button" id="btnCreateMeeting" class="massges_btn"
-                           style="width:130px; margin-left:10px;" value="创建视频会议" onclick="openMeeting()">--%>
-                    <input type="button" id="btnSaveMessage" class="massges_btn" value="发送留言"
-                           onclick="saveMessage();">
-                    <div class="clear">
+                    <div class="inbox_con_list">
+                      <div class="report_title">临床资料（手术所见、影像学、相关检验等）：</div>
+                      <div class="inbox_list border_bom">
+                        <p>
+                          <span id="lblClinicalData">
+                            <s:property value="pathology.clinicDiagnose"/>
+                          </span>
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <div id="divExpertList" class="choose_experts" style="display:none;">
-                    <input type="checkbox" name="chbExpert" value="1914"><span>袁主任</span>&nbsp;&nbsp;
-                  </div>
-                  <div id="divContentList" class="message_text">
+                    <div class="inbox_con_list">
+                      <div class="report_title">
+                        <span>材料部位：</span>
+                      </div>
+                      <div class="inbox_list border_bom">
+                        <p>
+                          <span id="lblAdoptedPart">
+                            <s:property value="pathology.specimenName"/>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="inbox_con_list">
+                      <div class="report_title">
+                        <span>大体所见：</span>
+                      </div>
+                      <div class="inbox_list border_bom" id="divGeneralObservation">
+                        <textarea id="generalSee" name="generalSee" cols="10" rows="1" class="ckeditor"><s:property value="pathology.generalSee"/></textarea>
+                      </div>
+                    </div>
+                    <div class="inbox_con_list">
+                      <div class="report_title">
+                        <span>免疫组化：</span>
+                      </div>
+                      <div class="inbox_list border_bom">
+                        <p>
+                          <span id="lblImmuneOrgan">
+                            <textarea id="immuneResult" name="immuneResult" cols="20" rows="2" style="height: 62px;width: 98%;"><s:property value="pathology.result"/></textarea>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="inbox_con_list">
+                      <div class="report_title">
+                        <span>初诊意见（或其他单位诊断意见）：</span>
+                      </div>
+                      <div class="inbox_list border_bom">
+                        <p>
+                          <textarea id="firstVisit" name="firstVisit" cols="20" rows="2" style="height: 62px;width: 98%;"><s:property value="pathology.diagnosed"/></textarea>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="inbox_con_list" style="display: none">
+                      <div class="report_title">
+                        <span>备注：</span>
+                      </div>
+                      <div class="inbox_list border_bom">
+                        <p>
+                          <span id="lblRemark"></span>
+                        </p>
+                      </div>
+                    </div>
+                    <div id="divConn" class="inbox_con_list">
+                      <div class="report_title">病理图像：</div>
+                      <div id="divCaseList" class="case_list border_bom">
+                        <s:iterator value="pathology.Images" id="image" status="11">
+                          <div class="show_img">
+                            <a class="go" href="PathologyAction!showDiagImage?caseId=<s:property value='#image.caseId'/>&file=<s:property value='#image.pathImage'/>" rel="gallery">
+                              <img alt="" src="PathologyAction!showDiagImage?caseId=<s:property value='#image.caseId'/>&file=<s:property value='#image.pathImage'/>"></a>
+                            <p></p>
+                          </div>
+                        </s:iterator>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                    <%--<div class="inbox_con_list">
+                      <div class="report_title">远程病理专家诊断意见：</div>
+                      <div class="inbox_list ">
+                        <p><span id="txtDiagnosisConclusion">未处理</span>
+                        </p>
+                      </div>
+                    </div>--%>
+                    <div class="inbox_con_list">
+                    </div>
+                    <div id="divFoot" class="inbox_list border_bom" style=" height:40px">
+                      <div style="float: left;"> 注：</div>
+                      <div style="float: left;">会诊资料局限，以上报告仅为所见切片的咨询意见，仅供原单位病理科参考。
+                        <br>如治疗，请结合原单位临床资料综合分析。
+                      </div>
+                    </div>
+                    <div class="inbox_con_list">
+                      <div class="inbox_title">
+                        <div class="left">本报告由
+                          <span id="lblUserHospital"></span>
+                          &nbsp;&nbsp;<s:property value="pathology.username"/>&nbsp;&nbsp;专家会诊
+                          <p></p></div>
+                        <div class="right">专家签字：<span id="lblUserName"><s:property value="pathology.username"/></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="inbox_con_list">
+                      <div class="message right">
+                        <input type="button" id="btnSaveContent" class="massges_btn" value="保存">
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+            <!--诊断报告结束-->
+            <div id="inbox_2" class="mpt80">
+              <div class="in_box_bl">
+                <div class="title">
+                  <span>附件&nbsp;&amp;&nbsp;切片</span>
+                </div>
+                <div class="inbox mlrAuto">
+                  <ul id="ulAppendix" class="inbox_ul">
+                    <div class="clearleft">
+                    </div>
+                  </ul>
+                  <ul id="ulSection" class="inbox_ul inbox_ul_check">
+                    <s:iterator value="pathology.Images" id="image" status="11">
+                    <li>
+                      <a style="cursor:pointer" href="test?caseId=<s:property value='#image.caseId'/>&SlideID=<s:property value='#image.pathImage'/>" target="_blank">
+                        <img src=""
+                             alt="" href="">
+                        <div class="inbox_ul_msg">
+                          <div class="mlrAuto inbox_span font14">切片：<span
+                              title="20161205135531603.kfb">20161205135531603...</span>
+                          </div>
+                          <div class="mlrAuto inbox_span font12">时间：<span>2017/3/31 13:29:31</span>
+                          </div>
+                          <div class="mlrAuto inbox_span font12">免疫组化：<span>否</span>
+                          </div>
+                        </div>
+                        <div style="display: none;" class="inbox_file_look undis">
+                          <div class="icon_down">
+                            <center>
+                              <img src="../img/icon_look.png" class="icon_look" alt="">
+                              <p>查看</p>
+                            </center>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                    </s:iterator>
+                    <div class="clearleft">
+                    </div>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </form>
+          <!--留言-->
+          <form id="messageForm" action="MessageAction!saveMessage" method="post">
+            <div class="mpt80" id="inbox_3">
+              <div class="in_box_bl">
+                <div class="title">
+                  <span>留言</span>
+                </div>
+                <div class="inbox">
+                  <div class="inbox_add mlrAuto">
+                    <div class="in_text comments">
+                      <input type="hidden" name="caseId" value="<s:property value="pathology.caseId"/>"/>
+                      <textarea id="messageContent" name="messageContent" class="leave_word" placeholder="输入文字信息留言"></textarea>
+                    </div>
+                    <div class="massges">
+                      <div id="divIsAllExpert" class="massges_div left">
+                        <input value="1" type="radio" name="readable" checked><span>所有专家可见</span>
+                        <input value="0" type="radio" name="readable"><span>部分专家可见</span>
+                      </div>
+                      <%--<input name="btnCreateMeeting" type="button" id="btnCreateMeeting" class="massges_btn"
+                             style="width:130px; margin-left:10px;" value="创建视频会议" onclick="openMeeting()">--%>
+                      <input type="button" id="btnSaveMessage" class="massges_btn" value="发送留言"/>
+                      <div class="clear">
+                      </div>
+                    </div>
+                    <div id="divExpertList" class="choose_experts" style="display:none;">
+                      <input type="checkbox" name="chbExpert" value="1914"><span>袁主任</span>&nbsp;&nbsp;
+                    </div>
+                    <div id="divContentList" class="message_text">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
         <div class="clear">
         </div>
@@ -457,6 +460,34 @@
         alert("初诊意见不能为空");
         return;
       }
+    }
+
+    /**
+     * 保存留言
+     */
+    $('#btnSaveMessage').click(function() {
+      if (validateMessage()) {
+        $('#messageForm').ajaxSubmit({
+          dataType: "json",
+          success: function (result) {
+            if (result && result.success) {
+              alert(result.success);
+              window.location.reload();
+            } else {
+              alert("保存失败");
+            }
+          }
+        })
+      }
+    });
+
+    function validateMessage() {
+      var content = $('#messagecontent').val();
+      if (content === '') {
+        alert("留言内容不能为空");
+        return false;
+      }
+      return true;
     }
 
     //设置标杆
