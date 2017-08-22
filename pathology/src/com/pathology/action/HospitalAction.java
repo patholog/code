@@ -165,12 +165,13 @@ public class HospitalAction extends BaseAction {
 	/**
 	 * 所有医院
 	 * @return
+	 * @throws Exception 
 	 */
-	public String allHostpital() {
-		try {
-
-			if (!SessionAgentManager.islogin())
-				return Constant.ERR;
+	public String allHostpital() throws Exception {
+//		try {
+//
+//			if (!SessionAgentManager.islogin())
+//				return Constant.ERR;
 
 			List<Hospital> list = hospitalservice.getAllHospital(
 					Hospital.class, "");
@@ -178,10 +179,10 @@ public class HospitalAction extends BaseAction {
 					.getSession();
 			session.setAttribute("hoslist", list);
 			return "regist";
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			return Constant.ERR;
-		}
+//		} catch (Exception e) {
+//			logger.error(e.getMessage());
+//			return Constant.ERR;
+//		}
 	}
 
 	public HttpServletRequest getRequest() {
