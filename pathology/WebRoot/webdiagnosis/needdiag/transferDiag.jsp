@@ -62,7 +62,7 @@
                   <select name="toDoctorId" id="toDoctorId" style="width: 120px;">
                     <option value="">请选择</option>
                     <c:forEach items="${usersList}" var="list" varStatus="status">
-                      <option value='${list.idUsers}'>${list.realname}</option>
+                      <option value='${list.idUsers}'>${list.username}</option>
                     </c:forEach>
                   </select>
                 </div>

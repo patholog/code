@@ -20,7 +20,6 @@
   <link rel="stylesheet" href="${path }/css/comc_left_nav_style.css?Version=5.5.1.1"/>
   <link rel="stylesheet" href="${path }/css/comc_register_style.css?Version=5.5.1.1"/>
   <link rel="stylesheet" href="${path }/css/datepicker.css"/>
-  <link rel="stylesheet" href="${path }/css/theme.css"/>
   <link rel="stylesheet" href="${path }/css/WdatePicker.css"/>
   <link rel="stylesheet" href="${path }/css/weebox.css"/>
   <link rel="stylesheet" href="${path }/assets/jqueryui/jquery-ui.min.css"/>
@@ -161,6 +160,16 @@
         // 影像学取值
         $('#microscopeSeeHidden').val(CKEDITOR.instances.microscopeSee.getData());
       }
+
+      $('.tick').click(function() {
+        if ($('#tick_box').val() === '0') {
+          $('#tick_box').val('1');
+          $('.tick').addClass('tick_on');
+        } else {
+          $('#tick_box').val('0');
+          $('.tick').removeClass('tick_on');
+        }
+      });
       /**
        * 检测手机号码和身份证号码
        */
@@ -274,6 +283,9 @@
       font-weight: bold;
       font-style: italic;
     }
+    input {
+      border: solid 1px;
+    }
   </style>
 </head>
 <body>
@@ -369,7 +381,7 @@
                   <div class="sex">
                     <span class="red_star">*</span>性别
                     <span style="width: 30px;">
-                      <select name="patientSex" id="patientSex" style="width: 30px;">
+                      <select name="patientSex" id="patientSex" style="width: 40px;">
                         <option value="男">男</option>
 	                      <option value="女">女</option>
                       </select>
@@ -425,7 +437,7 @@
               <li>
                 <div>
                   <ins class="half_words"></ins>系统分类
-                  <select name="specimenType" id="specimenType" style="width: 100px;">
+                  <select name="specimenType" id="specimenType" style="width: 150px;">
                     <option value="">请选择</option>
                     <c:forEach items="${specimenList}" var="list" varStatus="status">
                       <option value='${list.idSpecimen}'>${list.name}</option>
@@ -436,7 +448,7 @@
               <li>
                 <div>
                   <span class="red_star">*</span>送检单位
-                  <select id="hospitalCode" name="hospitalCode" style="width: 100px">
+                  <select id="hospitalCode" name="hospitalCode" style="width: 150px">
                     <option value="">请选择</option>
                     <c:forEach items="${hospitalList}" var="list" varStatus="status">
                       <option value='${list.hospitalcode}'>${list.name}</option>
@@ -448,7 +460,7 @@
               <li>
                 <div>
                   <ins class="half_words"></ins>送检医生
-                  <select name="toDoctorId" id="toDoctorId" style="width: 100px;">
+                  <select name="toDoctorId" id="toDoctorId" style="width: 150px;">
                     <option value="">请选择</option>
                   </select>
                 </div>

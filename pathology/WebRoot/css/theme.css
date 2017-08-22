@@ -196,7 +196,7 @@ input.calendar {color: #b9b9b9;background: #ffffff url("../img/calendar.jpg") no
 .information,.information2{border-top:2px solid #9ac0f9;background-color: #ffffff;color: #060606;}
 .information input,.information2 textarea{color: #a5a5a5;border:1px solid #dcdcdc;background-color: #ffffff;}
 .information .tick{border: 1px solid #dcdcdc;}
-.information .tick_on { background: url(../img/tick.jpg) no-repeat;}
+.information .tick_on { background: url(../images/tick.jpg) no-repeat;}
 .information .state_four li input.calendar {background: #ffffff url("../img/calendar.jpg") no-repeat 130px center;}
 .information2 {border-bottom:2px solid #9ac0f9;}
 .information2 .remarks{background-color: #e4e4e4;border: 1px solid #dcdcdc;}
