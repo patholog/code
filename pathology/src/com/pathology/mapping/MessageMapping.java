@@ -1,34 +1,33 @@
 package com.pathology.mapping;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-
+import com.pathology.dto.MessageDTO;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.pathology.dto.MessageDTO;
-import com.pathology.entity.Message;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 
 
+public class MessageMapping implements RowMapper {
+  private final Logger logger = Logger.getLogger(MessageMapping.class);
 
-public class MessageMapping  implements RowMapper {
-	private final Logger logger = Logger.getLogger(MessageMapping.class);
-	@Override
-	public MessageDTO mapRow(ResultSet rs, int arg1) {
-		
-		try{
-			SimpleDateFormat myFmt1=new SimpleDateFormat("yyyy/MM/dd HH:mm");
-			MessageDTO bean = new MessageDTO();
-			bean.setNum(rs.getRow());
-			bean.setMessageOrder(rs.getString("username"));
-			bean.setContent(rs.getString("content"));
-		    bean.setMemo("");
-		    bean.setUsername(rs.getString("username"));
-			bean.setPathologyNo(rs.getString("pathologyno"));
-			bean.setPatientname(rs.getString("patientname"));
-			bean.setCreateTime(myFmt1.format(rs.getTimestamp("createTime")));
-			/*bean.setId(rs.getInt("username"));
+  @Override
+  public MessageDTO mapRow(ResultSet rs, int arg1) {
+
+    try {
+      SimpleDateFormat myFmt1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+      MessageDTO bean = new MessageDTO();
+      bean.setNum(rs.getRow());
+      bean.setMessageOrder(rs.getString("messageOrder"));
+      bean.setContent(rs.getString("content"));
+      bean.setMemo("");
+      bean.setUsername(rs.getString("username"));
+      bean.setPathologyNo(rs.getString("pathologyno"));
+      bean.setPatientname(rs.getString("patientname"));
+      bean.setCreateTime(myFmt1.format(rs.getTimestamp("createTime")));
+      bean.setCaseId(rs.getString("caseId"));
+      bean.setIdMessage(rs.getInt("idMessage"));
+      /*bean.setId(rs.getInt("username"));
 			bean.setCure(rs.getString("content"));
 			bean.setCreate_time(rs.getString("create_time"));
 			bean.setDescription(rs.getString("patientname"));
@@ -53,11 +52,11 @@ public class MessageMapping  implements RowMapper {
 			bean.setHospital_id(rs.getInt("hospital_id"));
 			bean.setHospital_name(rs.getString("hospital_name"));
 			bean.setDomain(rs.getString("domain"));*/
-			return bean;
-		}catch(Exception e){
-			logger.error(e.getMessage());
-			 
-		}
-		return null;
-	}
+      return bean;
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+
+    }
+    return null;
+  }
 }

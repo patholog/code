@@ -38,9 +38,6 @@
         })
     }
 
-
-
-
     function cancelCase(id) {
 
         $.ajax({
@@ -62,6 +59,10 @@
 			window.location.href = '?action=delete&id=' + id;
 	}
 
+	function shareCase(caseId) {
+
+  }
+
 </script>
 </head>
 
@@ -82,37 +83,37 @@
                         <table class="table">
 							<tbody>
 								<tr>
-						          <th width="10%">病理号</th>
-						          <th width="10%">病人姓名</th>
-						          <th width="15%">材料部位</th>
-						          <th width="10%">病例状态</th>
-						          <th width="10%">系统分类</th>
-						          <th width="15%">送检单位</th>
-						          <th width="10%">申请时间</th>
-						          <th width="10%">诊断时间</th>
-						          <th width="10%">操作</th>
+                  <th width="10%">病理号</th>
+                  <th width="10%">病人姓名</th>
+                  <th width="15%">材料部位</th>
+                  <th width="10%">病例状态</th>
+                  <th width="10%">系统分类</th>
+                  <th width="15%">送检单位</th>
+                  <th width="10%">申请时间</th>
+                  <th width="10%">诊断时间</th>
+                  <th width="10%">操作</th>
 								</tr>
-								         <s:iterator value="pathologys" id="pathology" status="11">
-								         <tr>						         
-								         <td><s:property value="#pathology.pathologyNo"/></td>
-								         <td><s:property value="#pathology.patientname"/></td>
-								         <td><s:property value="#pathology.specimenname"/></td>
-								         <!-- todo 确定病例状态 -->
-								         <td><s:property value="#pathology.content"/></td>
-								         <!-- todo 系统分类需要获取 -->
-								         <td><s:property value="#pathology.username"/></td>
-								         <td><s:property value="#pathology.hospitalname"/></td>
-								         <td><s:property value="#pathology.inspectiondate"/></td>
-								         <td><s:property value="#pathology.diagtime"/></td>
-								          <td align="center"><a href="PathologyAction!getPathologyDto?diagStatus=7&id=${pathology.caseId}" target="_blank">查看</a>
-											  <c:if test="${pathology.collectionId ==null or pathology.collectionId=='undefined'}">
-											  <a id="${pathology.collectionId}" href="javascript:collectCase('${pathology.caseId}','${pathology.pathologyNo}')" target="_blank" >
-															收藏</a>
-											  </c:if>
-											  <c:if test="${pathology.collectionId !=null and pathology.collectionId!='undefined'}"> <a id="${pathology.caseId}" href="javascript:cancelCase('${pathology.collectionId}')" target="_blank">
-															  取消收藏</a></c:if>
-											  <a href="ShareAction">分享</a>
-										  </td>
+								<s:iterator value="pathologys" id="pathology" status="11">
+								  <tr>
+                   <td><s:property value="#pathology.pathologyNo"/></td>
+                   <td><s:property value="#pathology.patientname"/></td>
+                   <td><s:property value="#pathology.specimenname"/></td>
+                   <!-- todo 确定病例状态 -->
+                   <td><s:property value="#pathology.content"/></td>
+                   <!-- todo 系统分类需要获取 -->
+                   <td><s:property value="#pathology.username"/></td>
+                   <td><s:property value="#pathology.hospitalname"/></td>
+                   <td><s:property value="#pathology.inspectiondate"/></td>
+                   <td><s:property value="#pathology.diagtime"/></td>
+                    <td align="center"><a href="PathologyAction!getPathologyDto?diagStatus=7&id=${pathology.caseId}" target="_blank">查看</a>
+                  <c:if test="${pathology.collectionId ==null or pathology.collectionId=='undefined'}">
+                  <a id="${pathology.collectionId}" href="javascript:collectCase('${pathology.caseId}','${pathology.pathologyNo}')" target="_blank" >
+                        收藏</a>
+                  </c:if>
+                  <c:if test="${pathology.collectionId !=null and pathology.collectionId!='undefined'}"> <a id="${pathology.caseId}" href="javascript:cancelCase('${pathology.collectionId}')" target="_blank">
+                          取消收藏</a></c:if>
+                  <a href="shareCase(<s:property value="#pathology.pathologyNo"/>)">分享</a>
+                </td>
 								        </tr>
 								        </s:iterator>
 		

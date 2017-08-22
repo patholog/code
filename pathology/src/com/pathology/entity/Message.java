@@ -11,7 +11,7 @@ public class Message implements java.io.Serializable {
 
 	// Fields
 
-	private String idMessage;
+	private Integer idMessage;
 	private String fromDoctorId;
 	private String toDoctorId;
 	private String content;
@@ -40,12 +40,12 @@ public class Message implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Message(String idMessage) {
+	public Message(Integer idMessage) {
 		this.idMessage = idMessage;
 	}
 
 	/** full constructor */
-	public Message(String idMessage, String fromDoctorId, String toDoctorId,
+	public Message(Integer idMessage, String fromDoctorId, String toDoctorId,
 			String content, String caseId, String messageOrder,
 			String isReaded, Timestamp createTime, String memo, String sortNo,
 			String spellNo, String wubiNo, Integer updCnt, Timestamp crtTime,
@@ -77,11 +77,11 @@ public class Message implements java.io.Serializable {
 
 	// Property accessors
 
-	public String getIdMessage() {
+	public Integer getIdMessage() {
 		return this.idMessage;
 	}
 
-	public void setIdMessage(String idMessage) {
+	public void setIdMessage(Integer idMessage) {
 		this.idMessage = idMessage;
 	}
 
