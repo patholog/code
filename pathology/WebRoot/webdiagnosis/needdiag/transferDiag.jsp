@@ -127,7 +127,7 @@
               alert(result.success);
               window.location.reload();
             } else {
-              alert("新建病理失败");
+              alert("转诊失败");
             }
           }
         })

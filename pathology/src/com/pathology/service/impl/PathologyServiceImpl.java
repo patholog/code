@@ -160,18 +160,17 @@ public class PathologyServiceImpl implements IPathologyService {
       pathology.setDiagStatus("2"); // 病理初始状态
       pathology.setDoctorId(SessionAgentManager.getSessionAgentBean().getIdUsers()); // 创建人
       addPathology(pathology); // 新增病理信息
-      if ((paramMap.containsKey("generalSeeHidden") && !"".equals(paramMap.get("generalSeeHidden")[0]))
-          || (paramMap.containsKey("microscopeSeeHidden") && !"".equals(paramMap.get("microscopeSeeHidden")[0]))) {
-        // 大体所见等Result数据
-        Result result = new Result();
-        result.setCaseId(paramMap.get("caseId")[0]);
-        result.setIdResult(paramMap.get("caseId")[0]);
-        result.setGeneralSee(paramMap.get("generalSeeHidden")[0]); // 大体所见
-        result.setMicroscopeSee(paramMap.get("microscopeSeeHidden")[0]); // 影像检查
-        result.setDiagnosed(paramMap.get("firstVisit")[0]); // 初诊意见
-        result.setResult(paramMap.get("immuneResult")[0]); // 免疫组化结果
-        resultService.insert(result);
-      }
+
+      // 大体所见等Result数据
+      Result result = new Result();
+      result.setCaseId(paramMap.get("caseId")[0]);
+      result.setIdResult(paramMap.get("caseId")[0]);
+      result.setGeneralSee(paramMap.get("generalSeeHidden")[0]); // 大体所见
+      result.setMicroscopeSee(paramMap.get("microscopeSeeHidden")[0]); // 影像检查
+      result.setDiagnosed(paramMap.get("firstVisit")[0]); // 初诊意见
+      result.setResult(paramMap.get("immuneResult")[0]); // 免疫组化结果
+      resultService.insert(result);
+
       if (paramMap.containsKey("slideFilePath") && !"".equals(paramMap.get("slideFilePath")[0])) {
         Image image = new Image();
         image.setIdImage(paramMap.get("pathologyNo")[0]);
