@@ -346,7 +346,7 @@ public class PathologyAction extends BaseAction {
 		} catch (Exception e) {
 			return Constant.ERR;
 		}
-	  return "pathologysback";
+	  return "pathologysneed1";
   }
 
   public IPathologyService getPathologyService() {

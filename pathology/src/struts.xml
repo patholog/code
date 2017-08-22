@@ -126,6 +126,7 @@
     <!-- 病例表 -->
     <action name="PathologyAction" class="com.pathology.action.PathologyAction">
       <result name="err">/err.jsp</result>
+      <result name="pathologysneed1" type="redirectAction">PathologyAction!getPathologyListToNeed</result>
       <result name="pathologysneed">/webdiagnosis/needdiag/needdiag_list.jsp</result>
       <result name="pathologyshas">/webdiagnosis/hasdiag/hasdiag_list.jsp</result>
       <result name="pathologysback">/webdiagnosis/retreatdiag/retreatdiag_list.jsp</result>
