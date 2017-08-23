@@ -62,11 +62,11 @@ public class ShareServiceImpl implements IShareService {
 		String title = "";
 		int status = 1;
 		String sql = " select b.pathologyno ,b.patientname,c.username,a.memo,a.crt_Time,a.id_share,a.case_id,a.shareUrl,a.sharePsd,a.shareTerm from share a   "
-						+" left join pathology  b  on a.case_id = b.id_case "
+						+" inner join pathology  b  on a.case_id = b.id_case "
 						+" left join  users  c on a.doctorId = c.id_users";
 		
 		String sqlcount  = "select  count(*) from   collection  a"
-				+"  left join  pathology  b  on a.case_id = b.id_case"
+				+"  inner join  pathology  b  on a.case_id = b.id_case"
 				+"   left join  users  c on a.collectioner_Id = c.id_users";
 		
 		int totalNum = jdbcTemplate.queryForInt(sqlcount);
@@ -75,7 +75,7 @@ public class ShareServiceImpl implements IShareService {
 			request.setAttribute("page", page.getPageStr());
 		 
 		}
-		List<ShareDTO> ss= (List<ShareDTO>)jdbcTemplate.query(sql, new ShareMapping());
+		
 		return jdbcTemplate.query(sql, new ShareMapping());
 	 
 	}

@@ -10,7 +10,9 @@ import com.pathology.util.Pages;
 import com.pathology.dao.ICollectionDao;
 import com.pathology.entity.Collection;
 import com.pathology.dto.CollectionDTO;
+import com.pathology.dto.ShareDTO;
 import com.pathology.mapping.CollectionMapping;
+import com.pathology.mapping.ShareMapping;
 import com.pathology.service.ICollectionService;
  
 
@@ -62,12 +64,12 @@ public class CollectionServiceImpl implements ICollectionService {
 		String title = "";
 		int status = 1;
 		String sql = " select b.pathologyno ,b.patientname,c.username,a.memo,b.crt_Time,b.diag_time,a.id_collection,d.name as hospitalname,a.case_id from collection a   "
-						+" left join pathology  b  on a.case_id = b.id_case "
+						+" inner join pathology  b  on a.case_id = b.id_case "
 						+" left join  users  c on a.collectioner_Id = c.id_users"
 						+" left join  hospital  d on b.hospitalcode = d.id_hospital";
 		
 		String sqlcount  = "select  count(*) from   collection  a"
-				+"  left join  pathology  b  on a.case_id = b.id_case"
+				+"  inner join  pathology  b  on a.case_id = b.id_case"
 				+"   left join  users  c on a.collectioner_Id = c.id_users"
 				+" left join  hospital  d on b.hospitalcode = d.id_hospital";
 		
@@ -77,7 +79,7 @@ public class CollectionServiceImpl implements ICollectionService {
 			request.setAttribute("page", page.getPageStr());
 		 
 		}
-		
+		List<CollectionDTO> ss= (List<CollectionDTO>)jdbcTemplate.query(sql, new CollectionMapping());
 		return jdbcTemplate.query(sql, new CollectionMapping());
 	 
 	}
