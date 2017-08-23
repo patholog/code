@@ -20,6 +20,8 @@ public interface IShareService {
 
   Share getShare(Class clazz, Integer id) throws Exception;
 
+  Share selectBySid(String sid);
+
   void updateShare(Share em) throws Exception;
 
   void addShare(Share em) throws Exception;

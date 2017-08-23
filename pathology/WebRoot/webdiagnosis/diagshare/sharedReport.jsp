@@ -107,26 +107,6 @@
                 <div id="divTitle" class="top_title">
                   <div class="title">
                     <span class="left">诊断报告</span>
-                   <a id="A2"  href="#" onclick="confirmDelete('${pathology.caseId }')"  >
-                      <div class="share right">退回</div>
-                    </a>
-                    <a id="A3" href="javascript:retreatCase('${pathology.caseId}')"  >
-                      <div class="share right">测试</div>
-                    </a>
-                    <%-- <a id="A2" onclick="window.open('webdiagnosis/retreatdiag/retreat.jsp','','height=200, width=650, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no')">
-                      <div class="share right">退回</div>
-                    </a>--%>
-                    <%--<a id="A2" onclick="Share()">
-                      <div class="share right">分享</div>
-                    </a>
-                    <a id="Print" onclick="ShowReport()">
-                      <div class="stamp right">打印</div>
-                    </a>
-                    <input type="submit" name="btnExcel" value="导出" onclick="return GetHeigh();" id="btnExcel"
-                           class="export right">
-                    <a id="A1" onclick="ShowHistoryRmark()">
-                      <div class="showhistory right">病史备注</div>
-                    </a>--%>
                   </div>
                 </div>
                 <div id="divReport" class="inbox">
@@ -412,7 +392,7 @@
 </div>
 
 
-<div id="retreatModal" style="width: 400px; height: 200px;">
+<%--<div id="retreatModal" style="width: 400px; height: 200px;">
 
     <div id="open">
       <form id="openRetreatForm" action="PathologyAction!updateRetreatReason" method="post">
@@ -423,7 +403,7 @@
         <input id="submitbtn" type="submit" class="ui-button" value="确定"/>
       </form>
     </div>
-</div>
+</div>--%>
 
 
 </body>

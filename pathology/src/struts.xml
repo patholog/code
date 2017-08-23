@@ -120,8 +120,10 @@
     <action name="ShareAction" class="com.pathology.action.ShareAction">
       <result name="err">/err.jsp</result>
       <result name="shares">/webdiagnosis/diagshare/diagshare_list.jsp</result>
-       <result name="deletesuccess" type="redirectAction">ShareAction!getShareList</result>
-       <result name="success" type="redirectAction">ShareAction!getShareList</result>
+      <result name="deletesuccess" type="redirectAction">ShareAction!getShareList</result>
+      <result name="success" type="redirectAction">ShareAction!getShareList</result>
+      <result name="sharedReport">/webdiagnosis/diagshare/sharedReport.jsp</result>
+      <result name="sharedReportProtected">/webdiagnosis/diagshare/sharedReportProtected.jsp</result>
     </action>
     <!-- 病例表 -->
     <action name="PathologyAction" class="com.pathology.action.PathologyAction">

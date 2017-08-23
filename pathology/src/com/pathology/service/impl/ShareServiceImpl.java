@@ -1,24 +1,22 @@
 package com.pathology.service.impl;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import com.pathology.util.RandomNumbers;
-import com.pathology.util.SessionAgentManager;
-import org.apache.log4j.Logger;
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import com.pathology.dao.IShareDao;
 import com.pathology.dto.ShareDTO;
 import com.pathology.entity.Share;
 import com.pathology.mapping.ShareMapping;
 import com.pathology.service.IShareService;
 import com.pathology.util.Pages;
+import com.pathology.util.RandomNumbers;
+import com.pathology.util.SessionAgentManager;
+import org.apache.log4j.Logger;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import javax.servlet.http.HttpServletRequest;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 
 public class ShareServiceImpl implements IShareService {
@@ -105,6 +103,23 @@ public class ShareServiceImpl implements IShareService {
     }
     try {
       return (List<ShareDTO>) jdbcTemplate.query(sql, new ShareMapping());
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      return null;
+    }
+  }
+
+  /**
+   * 通过sid获取Share数据
+   *
+   * @param sid sid
+   * @return Share对象
+   */
+  @Override
+  public Share selectBySid(String sid) {
+    try {
+      List<Share> shareList = getAllShare(Share.class, " and sid = '" + sid + "'");
+      return shareList.get(0);
     } catch (Exception e) {
       logger.error(e.getMessage());
       return null;

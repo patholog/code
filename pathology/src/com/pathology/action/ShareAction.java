@@ -1,12 +1,16 @@
 package com.pathology.action;
 
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pathology.dto.PathologyDTO;
+import com.pathology.service.IPathologyService;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
@@ -17,11 +21,14 @@ import com.pathology.util.Constant;
 import com.pathology.util.SessionAgentManager;
 
 public class ShareAction extends BaseAction {
+
   private static final long serialVersionUID = 1L;
   private final Logger logger = Logger.getLogger(ShareAction.class);
   public IShareService shareService;
   private List<ShareDTO> shares;
   private ShareDTO share;
+  private PathologyDTO pathology;
+  private IPathologyService pathologyService;
 
   public String getShareList() {
     try {
@@ -78,9 +85,29 @@ public class ShareAction extends BaseAction {
    */
   public String shared() {
     HttpServletRequest request = ServletActionContext.getRequest();
-    String sid = request.getParameter("sid");
-
-    return null;
+    try {
+      String sid = request.getParameter("sid");
+      Share share = shareService.selectBySid(sid);
+      if (share != null) {
+        if ("0".equals(share.getType()) && share.getShareTime().before(new Timestamp(new Date().getTime()))) {
+          // 公开
+          pathology = pathologyService.getPathologyByIdAndDiagStatus(share.getCaseId());
+          return "sharedReport";
+        }
+        if ("1".equals(share.getType())) {
+          String pwd = request.getParameter("pwd");
+          if (pwd != null && pwd.equals(share.getSharePsd())) {
+            pathology = pathologyService.getPathologyByIdAndDiagStatus(share.getCaseId());
+            return "sharedReport";
+          }
+          return "sharedReportProtected";
+        }
+      }
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      return "sharedReportProtected";
+    }
+    return "sharedReportProtected";
   }
 
   public String deleteShare() {
@@ -131,5 +158,21 @@ public class ShareAction extends BaseAction {
 
   public void setShares(List<ShareDTO> shares) {
     this.shares = shares;
+  }
+
+  public PathologyDTO getPathology() {
+    return pathology;
+  }
+
+  public void setPathology(PathologyDTO pathology) {
+    this.pathology = pathology;
+  }
+
+  public IPathologyService getPathologyService() {
+    return pathologyService;
+  }
+
+  public void setPathologyService(IPathologyService pathologyService) {
+    this.pathologyService = pathologyService;
   }
 }

@@ -131,9 +131,9 @@
 		<property name="sharedao" ref="sharedao"></property>
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
-		<bean id="shareAction" class="com.pathology.action.ShareAction"
-		scope="prototype">
-		<property name="shareService" ref="shareService"></property>
+  <bean id="shareAction" class="com.pathology.action.ShareAction" scope="prototype">
+		<property name="shareService" ref="shareService"/>
+    <property name="pathologyService" ref="pathologyService"/>
 	</bean>
 		<!-- 病例表 -->
 	<bean id="pathologydao" class="com.pathology.dao.impl.PathologyDaoImpl" parent="pt" />
