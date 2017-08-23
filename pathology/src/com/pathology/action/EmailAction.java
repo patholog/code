@@ -11,6 +11,7 @@ import com.pathology.entity.Hospital;
 import com.pathology.entity.Users;
 import com.pathology.service.IHospitalService;
 import com.pathology.service.IUsersService;
+import com.pathology.util.DigestMD5;
 import com.pathology.util.Mail;
 
 public class EmailAction extends BaseAction {
@@ -154,7 +155,42 @@ public class EmailAction extends BaseAction {
         }  
         return val;  
     }  
-
+//登录校验
+	public String checkNamePsd(){
+		String name = this.p.get("username");
+		String hql1=" and s.username='"+name+"'";
+		String password = DigestMD5.getDigestPassWord(this.p.get("password"));
+		String hql=" and s.password='"+password+"'"+hql1;
+		List<Users> userT;
+		try {
+			userT = userservice.getAllUser(Users.class, hql);
+			if (userT!=null && userT.size()>0) {
+				return Action.SUCCESS;
+			} else {
+				return Action.ERROR;
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return Action.ERROR;
+		}
+	}
+	//校验用户是否审核通过
+		public String checkUserIsPass(){
+			String name = this.p.get("username");
+			String hql=" and s.username='"+name+"' and s.userstatus='1' ";
+			List<Users> userT;
+			try {
+				userT = userservice.getAllUser(Users.class, hql);
+				if (userT!=null && userT.size()>0) {
+					return Action.SUCCESS;
+				} else {
+					return Action.ERROR;
+				}
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+				return Action.ERROR;
+			}
+		}
 
 	public void setUserservice(IUsersService userservice) {
 		this.userservice = userservice;

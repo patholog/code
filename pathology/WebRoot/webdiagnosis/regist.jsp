@@ -179,8 +179,8 @@
 	function Check(){
 	if(emailfg && namefg && pswdfg && pswd2fg && spefg){
 		if(confirm('提交当前信息吗？')){
-	 	   return true;
 	 	   alert("请等待审核！");
+	 	   return true;
 		  }else{
 		    return false;
 		  }
