@@ -14,7 +14,7 @@ public class ShareDTO implements java.io.Serializable {
   private String type;
   private String typeName;
   private Integer shareId;
-  private Date shareTime;
+  private String shareTime;
   private Date endTime;
   private String shareUrl;
   private String sharePsd;
@@ -76,11 +76,11 @@ public class ShareDTO implements java.io.Serializable {
     this.shareId = shareId;
   }
 
-  public Date getShareTime() {
+  public String getShareTime() {
     return shareTime;
   }
 
-  public void setShareTime(Date shareTime) {
+  public void setShareTime(String shareTime) {
     this.shareTime = shareTime;
   }
 
