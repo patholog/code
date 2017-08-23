@@ -72,7 +72,7 @@
  <form id='fm1' action="login.action" method="post" onsubmit="return Check()">
   <h4> Login Information </h4>
   <input id="username" class="name" type="text" value="lizheng" name="user.username" placeholder="Enter Username"/>
-  <input id="password" class="pw" type="password" value="lizheng" name="user.password"   placeholder="Enter Password"/>
+  <input id="password" class="pw" type="password" value="1234567890" name="user.password"   placeholder="Enter Password"/>
   <li><a href="HospitalAction!allHostpital">注册</a></li>
   <input class="button" type="submit" value="Log in"/>
 </form>				
