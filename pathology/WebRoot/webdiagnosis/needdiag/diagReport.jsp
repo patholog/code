@@ -24,7 +24,8 @@
   <link rel="stylesheet" type="text/css" href="${path }/assets/jqueryui/jquery-ui.theme.min.css"/>
   <script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
   <script type="text/javascript" src="${path }/js/jquery.form.min.js"></script>
-  <script type="text/javascript" src="${path }/js/iviewer/jqueryui.js"></script>
+  <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui.min.js"></script>
+  <%--<script type="text/javascript" src="${path }/js/iviewer/jqueryui.js"></script>--%>
   <script type="text/javascript" src="${path }/js/iviewer/jquery.mousewheel.min.js"></script>
   <script type="text/javascript" src="${path }/js/iviewer/jquery.iviewer.js"></script>
   <script type="text/javascript" src="${path }/js/iviewer/main.js"></script>
@@ -34,7 +35,6 @@
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
   <script type="text/javascript" src="${path }/js/scrolllisten.js"></script>
-  <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui.min.js"></script>
   <script type="text/javascript">
 	function confirmDelete(id) {
 		if (confirm('确定退回吗？'))
@@ -124,9 +124,9 @@
                    <a id="A2"  href="#" onclick="confirmDelete('${pathology.caseId }')"  >
                       <div class="share right">退回</div>
                     </a>
-                  <%--  <a id="A3" href="javascript:retreatCase('${pathology.caseId}')"  >
+                    <a id="A3" href="javascript:retreatCase('${pathology.caseId}')"  >
                       <div class="share right">测试</div>
-                    </a>--%>
+                    </a>
                     <%-- <a id="A2" onclick="window.open('webdiagnosis/retreatdiag/retreat.jsp','','height=200, width=650, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no')">
                       <div class="share right">退回</div>
                     </a>--%>
@@ -431,7 +431,7 @@
     <div id="open">
       <form id="openRetreatForm" action="PathologyAction!updateRetreatReason" method="post">
         <div>
-       	  <input type="hidden" id="retreatCaseId" name="pathology。caseId"/>
+       	  <input type="hidden" id="retreatCaseId" name="caseId"/>
           <textarea id="reason" name="pathology.retreatReason" rows="3" readonly style="width: 100%;margin-top: 5px;"></textarea>
         </div>
         <input id="submitbtn" type="submit" class="ui-button" value="确定"/>
