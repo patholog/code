@@ -75,5 +75,8 @@
     <property name="type" type="java.lang.String">
       <column name="type" length="32"/>
     </property>
+    <property name="sid" type="java.lang.String">
+      <column name="sid" length="32"/>
+    </property>
   </class>
 </hibernate-mapping>

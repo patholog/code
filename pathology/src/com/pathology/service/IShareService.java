@@ -16,6 +16,8 @@ public interface IShareService {
 
   void deleteShare(Share em) throws Exception;
 
+  void deleteShare(Integer shareId);
+
   Share getShare(Class clazz, Integer id) throws Exception;
 
   void updateShare(Share em) throws Exception;

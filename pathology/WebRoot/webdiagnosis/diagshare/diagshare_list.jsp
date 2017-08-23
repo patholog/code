@@ -16,9 +16,13 @@
   <link rel="stylesheet" type="text/css" href="${path }/css/theme.css"/>
   <link rel="stylesheet" type="text/css" href="${path }/css/WdatePicker.css"/>
   <link rel="stylesheet" type="text/css" href="${path }/css/weebox.css"/>
+  <link rel="stylesheet" type="text/css" href="${path }/assets/jqueryui/jquery-ui.min.css"/>
+  <link rel="stylesheet" type="text/css" href="${path }/assets/jqueryui/jquery-ui.theme.min.css"/>
   <script type="text/javascript" src="${path }/js/treeView.js"></script>
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
+  <script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
+  <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui.min.js"></script>
 </head>
 
 <body>
@@ -59,7 +63,7 @@
               <td><s:property value="#share.endTime"/></td>
               <td><s:property value="#share.shareUrl"/></td>
               <td><s:property value="#share.sharePsd"/></td>
-              <td align="center"><a href="#" onclick="confirmDelete('${share.shareId }')">取消分享</a>
+              <td align="center"><a href="javascript:void(0)" onclick='delShare(${share.shareId})'>取消分享</a>
                 &nbsp; | &nbsp; <a href="PathologyAction!getPathologyDto?id=${share.caseId}" target="_blank">查看</a>
               </td>
             </tr>
@@ -80,13 +84,61 @@
     </div>
   </div>
 </div>
+<div id="myDialog">
+  <div align="center">
+    <label id="info"></label>
+  </div>
+</div>
 </body>
 <script>
-  $(function () {
-    function confirmDelete(id) {
-      if (confirm('确定取消分享？'))
-        window.location.href = 'ShareAction!deleteShare?share.shareId=' + id;
+  function delShare(id) {
+    $('#info').text('确定要取消分享吗？');
+    $('#myDialog').dialog({
+      title: '取消分享',
+      resizable: false,
+      modal: true,
+      buttons: [{
+          text: "确定",
+          icon: "ui-icon-heart",
+          click: function () {
+            $.ajax({
+              url: 'ShareAction!deleteShare?share.shareId=' + id,
+              dataType: "json",
+              success: function(result) {
+                if (result && result.succ) {
+                  delTip('取消成功');
+                  $(this).dialog('close');
+                } else {
+                  delTip('取消失败');
+                  $(this).dialog('close');
+                }
+              }
+            })
+          }
+        }, {
+          text: "取消",
+          icon: "ui-icon-heart",
+          click: function () {
+            $(this).dialog("close");
+          }
+        }]
+    });
+    function delTip(tips) {
+      $('#info').text(tips);
+      $('#myDialog').dialog({
+        title: '提示',
+        resizable: false,
+        modal: true,
+        buttons: [{
+          text: "确定",
+          icon: "ui-icon-heart",
+          click: function () {
+            window.location.reload();
+            $(this).dialog("close");
+          }
+        }]
+      });
     }
-  });
+  }
 </script>
 </html>

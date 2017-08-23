@@ -56,9 +56,27 @@ public class ShareServiceImpl implements IShareService {
   }
 
   public void deleteShare(Share em) throws Exception {
-    if (em != null)
+    if (em != null) {
       sharedao.deleteShare(em);
+    }
+  }
 
+  /**
+   * 删除分享（设置del_f为2）
+   *
+   * @param shareId share id
+   */
+  public void deleteShare(Integer shareId) {
+    if (shareId > 0) {
+      try {
+        Share share = getShare(Share.class, shareId);
+        share.setDelF(2);
+        updateShare(share);
+      } catch (Exception e) {
+        logger.error(e.getMessage());
+        throw new RuntimeException(e);
+      }
+    }
   }
 
 
@@ -69,14 +87,16 @@ public class ShareServiceImpl implements IShareService {
     int status = 1;
 
     String sql = " select a.case_Id case_id, a.id_share, b.patientname, a.DoctorId, c.username, a.type, a.shareTime,"
-        + " case a.type when '0' then '公开的' else '私有地' END type_name, a.end_time, a.shareUrl, a.sharePsd "
+        + " case a.type when '0' then '公开的' else '私有地' END type_name, a.end_time, a.shareUrl, a.sharePsd, a.sid "
         + " from share a "
         + " INNER join pathology b on a.case_id = b.id_case "
-        + " left join users c on a.doctorId = c.id_users ";
+        + " left join users c on a.doctorId = c.id_users "
+        + " where ifnull(a.del_f, 1) = 1";
 
     String sqlcount = " select count(1) from share a "
         + " INNER join pathology b on a.case_id = b.id_case "
-        + " left join users c on a.doctorId = c.id_users ";
+        + " left join users c on a.doctorId = c.id_users "
+        + " where ifnull(a.del_f, 1) = 1";
 
     int totalNum = jdbcTemplate.queryForInt(sqlcount);
     if (totalNum > 0) {
@@ -113,12 +133,16 @@ public class ShareServiceImpl implements IShareService {
       Share share = new Share();
       share.setCaseId(paramMap.get("caseId")[0]);
       share.setType(paramMap.get("type")[0]);
-      share.setShareUrl("http://localhost:8080/pathology/ShareAction!shared?sid=" + RandomNumbers.getEandomId(16));
+      String sid = RandomNumbers.getEandomId(16);
+      // TODO 添加校验sid是否已经存在
+      share.setSid(sid);
+      share.setShareUrl(paramMap.get("basePath")[0] + "/ShareAction!shared?sid=" + sid);
       if ("1".equals(paramMap.get("type")[0])) {
         share.setSharePsd(RandomNumbers.getEandomId(6));
       }
       share.setShareTime(new Timestamp(new Date().getTime()));
       share.setCrtUserId(SessionAgentManager.getSessionAgentBean().getIdUsers());
+      share.setDelF(1); // 正常状态
       return sharedao.addShare(share);
     } catch (Exception e) {
       logger.error(e.getMessage());

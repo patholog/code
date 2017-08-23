@@ -33,6 +33,7 @@ public class Share implements java.io.Serializable {
   private String sharePsd;
   private String shareTerm;
   private String type;
+  private String sid;
   // Constructors
 
   /**
@@ -256,5 +257,13 @@ public class Share implements java.io.Serializable {
 
   public void setType(String type) {
     this.type = type;
+  }
+
+  public String getSid() {
+    return sid;
+  }
+
+  public void setSid(String sid) {
+    this.sid = sid;
   }
 }

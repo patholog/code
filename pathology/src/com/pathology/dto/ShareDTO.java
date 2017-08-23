@@ -18,6 +18,7 @@ public class ShareDTO implements java.io.Serializable {
   private Date endTime;
   private String shareUrl;
   private String sharePsd;
+  private String sid;
 
   public int getNum() {
     return num;
@@ -113,6 +114,14 @@ public class ShareDTO implements java.io.Serializable {
 
   public void setTypeName(String typeName) {
     this.typeName = typeName;
+  }
+
+  public String getSid() {
+    return sid;
+  }
+
+  public void setSid(String sid) {
+    this.sid = sid;
   }
 }
 

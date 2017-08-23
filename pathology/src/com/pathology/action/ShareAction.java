@@ -50,6 +50,9 @@ public class ShareAction extends BaseAction {
     String result = "";
     String pwd = "";
     try {
+      String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+          + request.getContextPath();
+      paramMap.putIfAbsent("basePath", new String[]{basePath});
       Integer shareId = shareService.insert(paramMap);
       Share share = shareService.getShare(Share.class, shareId);
       pwd = share.getSharePsd() == null ? "" : share.getSharePsd();
@@ -70,18 +73,40 @@ public class ShareAction extends BaseAction {
     return null;
   }
 
+  /**
+   * @return
+   */
+  public String shared() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    String sid = request.getParameter("sid");
+
+    return null;
+  }
+
   public String deleteShare() {
+    HttpServletResponse response = ServletActionContext.getResponse();
+    response.setContentType("text/html;charset=UTF-8");
+    String result = "";
     try {
       if (!SessionAgentManager.islogin()) {
         return Constant.ERR;
       }
-      Share hos = shareService.getShare(Share.class, share.getShareId());
-      shareService.deleteShare(hos);
-      return "deletesuccess";
+      shareService.deleteShare(share.getShareId());
+      result = "取消成功";
     } catch (Exception e) {
       logger.error(e.getMessage());
-      return Constant.ERR;
     }
+    try {
+      PrintWriter out;
+      out = response.getWriter();
+      String jsonString = !"".equals(result) ? "{\"succ\":\"" + result + "\"}" : "{\"failure\":\"保存失败\"}";
+      out.println(jsonString);
+      out.flush();
+      out.close();
+    } catch (Exception e) {
+      logger.error(e);
+    }
+    return null;
   }
 
   public ShareDTO getShare() {
