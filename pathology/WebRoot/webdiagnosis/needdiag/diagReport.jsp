@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="${path }/css/WdatePicker.css"/>
   <link rel="stylesheet" href="${path }/css/weebox.css"/>
   <link rel="stylesheet" href="${path }/js/iviewer/jquery.iviewer.css"/>
+  <link rel="stylesheet" type="text/css" href="${path }/assets/jqueryui/jquery-ui.min.css"/>
+  <link rel="stylesheet" type="text/css" href="${path }/assets/jqueryui/jquery-ui.theme.min.css"/>
   <script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
   <script type="text/javascript" src="${path }/js/jquery.form.min.js"></script>
   <script type="text/javascript" src="${path }/js/iviewer/jqueryui.js"></script>
@@ -32,6 +34,7 @@
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
   <script type="text/javascript" src="${path }/js/scrolllisten.js"></script>
+  <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui.min.js"></script>
   <script type="text/javascript">
 	function confirmDelete(id) {
 		if (confirm('确定退回吗？'))
@@ -121,9 +124,12 @@
                    <a id="A2"  href="#" onclick="confirmDelete('${pathology.caseId }')"  >
                       <div class="share right">退回</div>
                     </a>
+                  <%--  <a id="A3" href="javascript:retreatCase('${pathology.caseId}')"  >
+                      <div class="share right">测试</div>
+                    </a>--%>
                     <%-- <a id="A2" onclick="window.open('webdiagnosis/retreatdiag/retreat.jsp','','height=200, width=650, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no')">
-                      <div class="share right">退回</div>--%>
-                    </a>
+                      <div class="share right">退回</div>
+                    </a>--%>
                     <%--<a id="A2" onclick="Share()">
                       <div class="share right">分享</div>
                     </a>
@@ -418,6 +424,22 @@
 </form>
 <div style="text-align:center;">
 </div>
+
+
+<div id="retreatModal" style="width: 400px; height: 200px;">
+
+    <div id="open">
+      <form id="openRetreatForm" action="PathologyAction!updateRetreatReason" method="post">
+        <div>
+       	  <input type="hidden" id="retreatCaseId" name="pathology。caseId"/>
+          <textarea id="reason" name="pathology.retreatReason" rows="3" readonly style="width: 100%;margin-top: 5px;"></textarea>
+        </div>
+        <input id="submitbtn" type="submit" class="ui-button" value="确定"/>
+      </form>
+    </div>
+</div>
+
+
 </body>
 </html>
 <script>
@@ -533,4 +555,15 @@
       $('body, html').animate({scrollTop: $('.fl_r li').eq(_i).offset().top - _line}, 500);
     });
   });
+  
+  
+   function retreatCase(caseId) {
+    $('#retreatCaseId').val(caseId);
+    $("#retreatModal").dialog({
+      title: '退回',
+      modal: true,
+      width: '400',
+      height: '200'
+    });
+  }
 </script>
