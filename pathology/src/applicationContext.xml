@@ -34,10 +34,10 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/pathology?useUnicode=true&amp;characterEncoding=UTF-8">
+		<property name="url" value="jdbc:mysql://123.206.28.85:3306/pathology?useUnicode=true&amp;characterEncoding=UTF-8">
 		</property>
 		<property name="username" value="root"/>
-		<property name="password" value="1234"/>
+		<property name="password" value="mysql"/>
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
