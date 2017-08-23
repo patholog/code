@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html;charset=utf-8"
-         pageEncoding="utf8" %>
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -20,12 +19,6 @@
   <script type="text/javascript" src="${path }/js/treeView.js"></script>
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
-  <script type="text/javascript">
-    function confirmDelete(id) {
-      if (confirm('确定取消分享？'))
-        window.location.href = 'ShareAction!deleteShare?share.shareId=' + id;
-    }
-  </script>
 </head>
 
 <body>
@@ -87,7 +80,13 @@
     </div>
   </div>
 </div>
-
 </body>
+<script>
+  $(function () {
+    function confirmDelete(id) {
+      if (confirm('确定取消分享？'))
+        window.location.href = 'ShareAction!deleteShare?share.shareId=' + id;
+    }
+  });
+</script>
 </html>
-s
