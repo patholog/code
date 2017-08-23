@@ -431,8 +431,8 @@
     <div id="open">
       <form id="openRetreatForm" action="PathologyAction!updateRetreatReason" method="post">
         <div>
-       	  <input type="hidden" id="retreatCaseId" name="caseId"/>
-          <textarea id="reason" name="pathology.retreatReason" rows="3" readonly style="width: 100%;margin-top: 5px;"></textarea>
+       	  <input type="hidden" id="retreatCaseId" name="pathology.caseId"/>
+          <textarea id="reason" name="pathology.retreatReason" rows="3"  style="width: 100%;margin-top: 5px;"></textarea>
         </div>
         <input id="submitbtn" type="submit" class="ui-button" value="确定"/>
       </form>
@@ -566,4 +566,17 @@
       height: '200'
     });
   }
+    $('#submitbtn').click(function () {
+        $('#openRetreatForm').ajaxSubmit({
+      dataType: 'json',
+      success: function (result) {
+        if (result && result.success) {
+          $('#openShareUrl').val(result.success);
+        } else {
+          $('#openShareUrl').val("分享失败");
+        }
+      }
+    })
+  });
+  
 </script>
