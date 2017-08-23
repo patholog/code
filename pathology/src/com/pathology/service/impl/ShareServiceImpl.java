@@ -1,10 +1,16 @@
 package com.pathology.service.impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.pathology.util.RandomNumbers;
+import com.pathology.util.SessionAgentManager;
+import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.pathology.dao.IShareDao;
@@ -13,100 +19,124 @@ import com.pathology.entity.Share;
 import com.pathology.mapping.ShareMapping;
 import com.pathology.service.IShareService;
 import com.pathology.util.Pages;
- 
+
 
 public class ShareServiceImpl implements IShareService {
 
-	private IShareDao sharedao;
-	
-	private JdbcTemplate  jdbcTemplate;
+  private Logger logger = Logger.getLogger(ShareServiceImpl.class);
 
-	public JdbcTemplate getJdbcTemplate() {
-		return jdbcTemplate;
-	}
+  private IShareDao sharedao;
 
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
+  private JdbcTemplate jdbcTemplate;
 
-	public IShareDao getSharedao() {
-		return sharedao;
-	}
+  public JdbcTemplate getJdbcTemplate() {
+    return jdbcTemplate;
+  }
 
-	public void setSharedao(IShareDao udao) {
-		this.sharedao = udao;
-	}
+  public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+    this.jdbcTemplate = jdbcTemplate;
+  }
 
-	public List<Share> getByPage(int index, Class clazz, String hql) throws Exception {
+  public IShareDao getSharedao() {
+    return sharedao;
+  }
 
-		List<Object> list = sharedao.getByPage(index, clazz, hql);
-		return this.obj2Empl(list);
-	}
+  public void setSharedao(IShareDao udao) {
+    this.sharedao = udao;
+  }
 
-	public List<Share> getAllShare(Class clazz, String hql) throws Exception {
-		return this.obj2Empl(sharedao.getAllShare(clazz, hql));
-	}
+  public List<Share> getByPage(int index, Class clazz, String hql) throws Exception {
 
-	public void deleteShare(Share em) throws Exception {
-		if(em!=null)
-			sharedao.deleteShare(em);
+    List<Object> list = sharedao.getByPage(index, clazz, hql);
+    return this.obj2Empl(list);
+  }
 
-	}
-	
-	
-	public List<ShareDTO>  getListShare(HttpServletRequest
-			 request,String name) throws Exception{
-		
-		String pageNum = request.getParameter("pageNum");
-		pageNum = pageNum != null?pageNum:"1";
-		String title = "";
-		int status = 1;
-		String sql = " select b.pathologyno ,b.patientname,c.username,a.memo,a.crt_Time,a.id_share,a.case_id,a.shareUrl,a.sharePsd,a.shareTerm from share a   "
-						+" inner join pathology  b  on a.case_id = b.id_case "
-						+" left join  users  c on a.doctorId = c.id_users";
-		
-		String sqlcount  = "select  count(*) from   collection  a"
-				+"  inner join  pathology  b  on a.case_id = b.id_case"
-				+"   left join  users  c on a.collectioner_Id = c.id_users";
-		
-		int totalNum = jdbcTemplate.queryForInt(sqlcount);
-		if(totalNum > 0){
-			Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
-			request.setAttribute("page", page.getPageStr());
-		 
-		}
-		
-		return jdbcTemplate.query(sql, new ShareMapping());
-	 
-	}
+  public List<Share> getAllShare(Class clazz, String hql) throws Exception {
+    return this.obj2Empl(sharedao.getAllShare(clazz, hql));
+  }
 
-	public Share getShare(Class clazz, String id) throws Exception {
-		
-		return sharedao.getShare(clazz, id);
-	}
+  public void deleteShare(Share em) throws Exception {
+    if (em != null)
+      sharedao.deleteShare(em);
 
-	public void updateShare(Share em) throws Exception {
+  }
 
-		sharedao.updateShare(em);
 
-	}
+  public List<ShareDTO> getListShare(HttpServletRequest request, String name) throws Exception {
+    String pageNum = request.getParameter("pageNum");
+    pageNum = pageNum != null ? pageNum : "1";
+    String title = "";
+    int status = 1;
 
-	public void addShare(Share em) throws Exception {
+    String sql = " select a.case_Id case_id, a.id_share, b.patientname, a.DoctorId, c.username, a.type, a.shareTime,"
+        + " case a.type when '0' then '公开的' else '私有地' END type_name, a.end_time, a.shareUrl, a.sharePsd "
+        + " from share a "
+        + " INNER join pathology b on a.case_id = b.id_case "
+        + " left join users c on a.doctorId = c.id_users ";
 
-		sharedao.addShare(em);
-	}
+    String sqlcount = " select count(1) from share a "
+        + " INNER join pathology b on a.case_id = b.id_case "
+        + " left join users c on a.doctorId = c.id_users ";
 
-	public List<Share> obj2Empl(List<Object> list) {
+    int totalNum = jdbcTemplate.queryForInt(sqlcount);
+    if (totalNum > 0) {
+      Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
+      request.setAttribute("page", page.getPageStr());
+    }
+    try {
+      return (List<ShareDTO>) jdbcTemplate.query(sql, new ShareMapping());
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      return null;
+    }
+  }
 
-		List<Share> elist = new ArrayList<Share>();
-		for (Object obj : list) {
+  @Override
+  public Share getShare(Class clazz, Integer id) throws Exception {
+    return sharedao.getShare(clazz, id);
+  }
 
-			Share em = (Share) obj;
-			elist.add(em);
-		}
+  public void updateShare(Share em) throws Exception {
 
-		return elist;
-	}
+    sharedao.updateShare(em);
 
- 
+  }
+
+  public void addShare(Share em) throws Exception {
+
+    sharedao.addShare(em);
+  }
+
+  @Override
+  public Integer insert(Map<String, String[]> paramMap) {
+    try {
+      Share share = new Share();
+      share.setCaseId(paramMap.get("caseId")[0]);
+      share.setType(paramMap.get("type")[0]);
+      share.setShareUrl("http://localhost:8080/pathology/ShareAction!shared?sid=" + RandomNumbers.getEandomId(16));
+      if ("1".equals(paramMap.get("type")[0])) {
+        share.setSharePsd(RandomNumbers.getEandomId(6));
+      }
+      share.setShareTime(new Timestamp(new Date().getTime()));
+      share.setCrtUserId(SessionAgentManager.getSessionAgentBean().getIdUsers());
+      return sharedao.addShare(share);
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      throw new RuntimeException(e);
+    }
+  }
+
+  public List<Share> obj2Empl(List<Object> list) {
+
+    List<Share> elist = new ArrayList<Share>();
+    for (Object obj : list) {
+
+      Share em = (Share) obj;
+      elist.add(em);
+    }
+
+    return elist;
+  }
+
+
 }

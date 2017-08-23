@@ -1,40 +1,36 @@
 package com.pathology.mapping;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-
+import com.pathology.dto.ShareDTO;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.pathology.dto.MessageDTO;
-import com.pathology.dto.ShareDTO;
-import com.pathology.entity.Message;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 
 
+public class ShareMapping implements RowMapper {
 
-public class ShareMapping  implements RowMapper {
-	private final Logger logger = Logger.getLogger(ShareMapping.class);
-	@Override
-	public ShareDTO mapRow(ResultSet rs, int arg1) {
-		SimpleDateFormat myFmt1=new SimpleDateFormat("yyyy/MM/dd HH:mm");
-		try{
-			ShareDTO bean = new ShareDTO();
-			bean.setNum(rs.getRow());
-			bean.setShareId(rs.getString("id_share"));
-			bean.setMessageOrder(rs.getString("username"));
-			bean.setContent(rs.getString("memo"));
-		    bean.setMemo("memo");
-		    bean.setUsername(rs.getString("username"));
-			bean.setPathologyNo(rs.getString("pathologyno"));
-			bean.setPatientname(rs.getString("patientname"));
-			bean.setCreateTime(myFmt1.format(rs.getTimestamp("crt_Time")));
-			bean.setCaseId(rs.getString("case_id"));
-			bean.setShareUrl(rs.getString("shareUrl"));
-			bean.setSharePsd(rs.getString("sharePsd"));
-			bean.setShareTerm(rs.getString("shareTerm"));
-			/*bean.setId(rs.getInt("username"));
-			bean.setCure(rs.getString("content"));
+  private final Logger logger = Logger.getLogger(ShareMapping.class);
+
+  @Override
+  public ShareDTO mapRow(ResultSet rs, int arg1) {
+    SimpleDateFormat myFmt1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+    try {
+      ShareDTO bean = new ShareDTO();
+      bean.setNum(rs.getRow());
+      bean.setCaseId(rs.getString("case_id"));
+      bean.setShareId(rs.getInt("id_share"));
+      bean.setPatientname(rs.getString("patientname"));
+      bean.setDoctorId(rs.getString("DoctorId"));
+      bean.setUsername(rs.getString("username"));
+      bean.setType(rs.getString("type"));
+      bean.setTypeName(rs.getString("type_name"));
+      bean.setShareTime(rs.getDate("shareTime"));
+      bean.setEndTime(rs.getDate("end_time"));
+      bean.setShareUrl(rs.getString("shareUrl"));
+      bean.setSharePsd(rs.getString("sharePsd"));
+      /*bean.setId(rs.getInt("username"));
+      bean.setCure(rs.getString("content"));
 			bean.setCreate_time(rs.getString("create_time"));
 			bean.setDescription(rs.getString("patientname"));
 			bean.setDoctor_id(rs.getInt("doctor_id"));
@@ -58,11 +54,10 @@ public class ShareMapping  implements RowMapper {
 			bean.setHospital_id(rs.getInt("hospital_id"));
 			bean.setHospital_name(rs.getString("hospital_name"));
 			bean.setDomain(rs.getString("domain"));*/
-			return bean;
-		}catch(Exception e){
-			logger.error(e.getMessage());
-			 
-		}
-		return null;
-	}
+      return bean;
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+    }
+    return null;
+  }
 }

@@ -24,6 +24,7 @@
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
   <script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
   <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="${path }/js/jquery.form.min.js"></script>
 </head>
 
 <body>
@@ -75,8 +76,7 @@
                 <c:if test="${pathology.collectionId !=null and pathology.collectionId!='undefined'}">
                   <a id="${pathology.caseId}" href="javascript:cancelCase('${pathology.collectionId}')" target="_blank">取消收藏</a>
                 </c:if>
-                <%--<a href="javascript:shareCase('${pathology.caseId}')">分享</a>--%>
-                <a href="#">分享</a>
+                <a href="javascript:shareCase('${pathology.caseId}')">分享</a>
               </td>
             </tr>
           </s:iterator>
@@ -101,18 +101,45 @@
       <li><a href="#protected">私密的</a></li>
     </ul>
     <div id="open">
-      <form action="">
-        <input type="hidden" name="type" value="open"/>
-        <input id="btnOpen" type="button" class="btn1" value="创建链接"/>
+      <form id="openShareForm" action="ShareAction!share" method="post">
+        <div>
+          <input type="hidden" name="type" value="0"/>
+          <input type="hidden" id="openCaseId" name="caseId"/>
+          <input id="btnOpen" type="button" class="ui-button" value="创建链接"/>
+        </div>
+        <div>
+          <textarea id="openShareUrl" rows="3" readonly style="width: 100%;margin-top: 5px;"></textarea>
+        </div>
       </form>
     </div>
     <div id="protected">
-      <div>
-      <input id="btnProtected" type="button" class="btn1" value="创建私密链接"/>
-      </div>
-      <div class="hidden">
-        <textarea name="protectedUrl" id="protectedUrl">123</textarea>
-      </div>
+      <form id="protectedShareForm" action="ShareAction!share" method="post">
+        <div>
+          <input type="hidden" name="type" value="1"/>
+          <input type="hidden" id="protectedCaseId" name="caseId"/>
+          <input id="btnProtected" type="button" class="ui-button" value="创建私密链接"/>
+        </div>
+        <div>
+          <table style="width: 100%">
+            <tr>
+              <td width="20%"><span>链接</span></td>
+              <td width="80%">
+                <textarea id="protectedShareUrl" rows="3" readonly style="width: 100%;margin-top: 5px;"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td><span>密码</span></td>
+              <td>
+                <textarea id="protectedSharePwd" rows="1" readonly style="width: 100%;margin-top: 5px;"></textarea>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div>
+
+
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -159,9 +186,12 @@
    * @param caseId
    */
   function shareCase(caseId) {
+    $('#openCaseId').val(caseId);
+    $('#protectedCaseId').val(caseId);
     $('#shareTabs').tabs({
       width: '360',
-      height: '250'
+      border: '0',
+      heightStyle: 'auto'
     });
     $("#shareModal").dialog({
       title: '分享',
@@ -172,20 +202,30 @@
   }
 
   $('#btnOpen').click(function () {
-
+    $('#openShareForm').ajaxSubmit({
+      dataType: 'json',
+      success: function (result) {
+        if (result && result.success) {
+          $('#openShareUrl').val(result.success);
+        } else {
+          $('#openShareUrl').val("分享失败");
+        }
+      }
+    })
   });
   
   $('#btnProtected').click(function () {
-    $.ajax({
-      url: '',
+    $('#protectedShareForm').ajaxSubmit({
+      dataType: 'json',
       success: function (result) {
-        if (result && result.success) {
-          $('#protectedUrl').val(result.success);
+        if (result && result.success && result.pwd) {
+          $('#protectedShareUrl').val(result.success);
+          $('#protectedSharePwd').val(result.pwd);
         } else {
-          alert('创建分享失败');
+          $('#protectedShareUrl').val("分享失败");
         }
       }
-    });
+    })
   })
 
 </script>

@@ -20,6 +20,7 @@
   <script type="text/javascript" src="${path }/js/treeView.js"></script>
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
+  <script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
   <script type="text/javascript">
     function confirmDelete(id) {
       if (confirm('你确定删除此产品？'))
@@ -77,6 +78,12 @@
     </div>
   </div>
 </div>
-
 </body>
+<script>
+$(function () {
+  function pagesubmit(formId, pageNum) {
+    window.location.href="MessageAction!getMessageList?pageNum=" + pageNum;
+  }
+})
+</script>
 </html>
