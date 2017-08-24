@@ -31,20 +31,20 @@
           <li><a href="RolesAction!rolesList">管理角色</a> </li>
         </ul>
       </div>
-            <div name="leftmenu" id="powermenu">
+          <%--  <div name="leftmenu" id="powermenu">
         <h3>权限</h3>
         <ul>
           <li><a href="${path}/manage/hospital/add_hospital.jsp">添加权限</a> </li>
           <li><a href="HospitalAction!hospitalList">管理权限</a> </li>
         </ul>
-      </div>
+      </div>--%>
                   <div name="leftmenu" id="powermenu">
         <h3>操作</h3>
 		<ul>
           <li><a href="${path}/webdiagnosis/hasdiag/hasdiag_list.jsp">返回业务界面</a> </li>
         </ul>
       </div>
-      <script>
+     <%-- <script>
 				leftMenuTreeView();
-			</script>
+			</script>--%>
 
