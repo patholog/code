@@ -98,47 +98,49 @@
       resizable: false,
       modal: true,
       buttons: [{
-          text: "确定",
-          icon: "ui-icon-heart",
-          click: function () {
-            $.ajax({
-              url: 'ShareAction!deleteShare?share.shareId=' + id,
-              dataType: "json",
-              success: function(result) {
-                if (result && result.succ) {
-                  delTip('取消成功');
-                  $(this).dialog('close');
-                } else {
-                  delTip('取消失败');
-                  $(this).dialog('close');
-                }
+        text: "确定",
+        icon: "ui-icon-heart",
+        click: function () {
+          $.ajax({
+            url: 'ShareAction!deleteShare?share.shareId=' + id,
+            dataType: "json",
+            success: function (result) {
+              if (result && result.succ) {
+                delTip('取消成功');
+                $(this).dialog('close');
+              } else {
+                delTip('取消失败');
+                $(this).dialog('close');
               }
-            })
-          }
-        }, {
-          text: "取消",
-          icon: "ui-icon-heart",
-          click: function () {
-            $(this).dialog("close");
-          }
-        }]
+            }
+          })
+        }
+      }, {
+        text: "取消",
+        icon: "ui-icon-heart",
+        click: function () {
+          $(this).dialog("close");
+        }
+      }]
     });
-    function delTip(tips) {
-      $('#info').text(tips);
-      $('#myDialog').dialog({
-        title: '提示',
-        resizable: false,
-        modal: true,
-        buttons: [{
-          text: "确定",
-          icon: "ui-icon-heart",
-          click: function () {
-            window.location.reload();
-            $(this).dialog("close");
-          }
-        }]
-      });
-    }
+
+  }
+
+  function delTip(tips) {
+    $('#info').text(tips);
+    $('#myDialog').dialog({
+      title: '提示',
+      resizable: false,
+      modal: true,
+      buttons: [{
+        text: "确定",
+        icon: "ui-icon-heart",
+        click: function () {
+          window.location.reload();
+          $(this).dialog("close");
+        }
+      }]
+    });
   }
 </script>
 </html>

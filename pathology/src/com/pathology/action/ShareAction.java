@@ -3,6 +3,7 @@ package com.pathology.action;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,13 +54,13 @@ public class ShareAction extends BaseAction {
     HttpServletRequest request = ServletActionContext.getRequest();
     HttpServletResponse response = ServletActionContext.getResponse();
     response.setContentType("text/html;charset=UTF-8");
-    Map<String, String[]> paramMap = request.getParameterMap();
+    Map<String, String[]> paramMap = new HashMap<>(request.getParameterMap());
     String result = "";
     String pwd = "";
     try {
       String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
           + request.getContextPath();
-      paramMap.putIfAbsent("basePath", new String[]{basePath});
+      paramMap.put("basePath", new String[]{basePath});
       Integer shareId = shareService.insert(paramMap);
       Share share = shareService.getShare(Share.class, shareId);
       pwd = share.getSharePsd() == null ? "" : share.getSharePsd();

@@ -423,7 +423,7 @@
 </div>
 
 
-<div id="retreatModal" style="width: 400px; height: 200px;">
+<div id="retreatModal" hidden style="width: 400px; height: 200px;">
 
     <div id="open">
       <form id="openRetreatForm" action="PathologyAction!updateRetreatReason" method="post">
@@ -556,6 +556,7 @@
   
    function retreatCase(caseId) {
     $('#retreatCaseId').val(caseId);
+     $('#retreatCaseId').attr("hidden", false);
     $("#retreatModal").dialog({
       title: '退回',
       modal: true,

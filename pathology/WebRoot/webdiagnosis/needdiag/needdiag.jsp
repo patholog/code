@@ -148,6 +148,11 @@
           flag = false;
           return;
         }
+        if ($('#patientAge').val() === "") {
+          showTips("年龄不能为空");
+          flag = false;
+          return;
+        }
         if ($('#hospitalCode').children('option:selected').val() === "") {
           showTips("送检单位不能为空");
           flag = false;
@@ -394,7 +399,7 @@
               </li>
               <li>
                 <div>
-                  <span class="red_star">*</span>取材部位
+                  <span class="red_star"></span>取材部位
                   <input name="specimenName" id="specimenName">
                 </div>
               </li>
