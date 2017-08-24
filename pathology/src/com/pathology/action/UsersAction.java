@@ -90,8 +90,8 @@ public class UsersAction extends BaseAction {
 					hql += " and email like " + user.getEmail();
 			}
 
-			List<Users> list = index != 0 ? userservice.getByPage(index,
-					Users.class, hql) : userservice.getByPage(1, Users.class,
+			List<Users> list = index != 0 ? userservice.getUsersByPage(index,
+					Users.class, hql) : userservice.getUsersByPage(1, Users.class,
 					hql);
 
 			HttpSession session = ServletActionContext.getRequest()

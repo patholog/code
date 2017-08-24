@@ -1,14 +1,18 @@
 package com.pathology.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.pathology.dao.IHospitalDao;
 import com.pathology.dao.IRolesDao;
 import com.pathology.dao.IUserDao;
+import com.pathology.entity.Hospital;
 import com.pathology.entity.Roles;
 import com.pathology.entity.Users;
 import com.pathology.service.IUsersService;
@@ -17,6 +21,8 @@ public class UsersServiceImpl implements IUsersService {
 
 	private IUserDao userdao;
 	private IRolesDao rolesdao;
+	private IHospitalDao hospitaldao;
+	private Map<String,Hospital> hospitalMap;
 
 	public IUserDao getUserdao() {
 		return userdao;
@@ -33,6 +39,14 @@ public class UsersServiceImpl implements IUsersService {
 
 	public void setRolesdao(IRolesDao rolesdao) {
 		this.rolesdao = rolesdao;
+	}
+	
+		public IHospitalDao getHospitaldao() {
+		return hospitaldao;
+	}
+
+	public void setHospitaldao(IHospitalDao hospitaldao) {
+		this.hospitaldao = hospitaldao;
 	}
 
 	public List<Users> getByPage(int index, Class clazz, String hql)  throws Exception{
@@ -100,5 +114,38 @@ public class UsersServiceImpl implements IUsersService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<Users> getUsersByPage(int index, Class clazz, String hql)
+			throws Exception {
+		List<Object> list = userdao.getByPage(index, clazz, hql);
+		Map<String,Hospital> hospitalMap=getHospitalMap();
+		for(Object obj:list){
+			Users user=(Users)obj;
+			String[] hosids=user.getBelonghospital().split(",");
+			StringBuffer hosnames=new StringBuffer();
+			for(String hosid:hosids){
+				if(hospitalMap.containsKey(hosid)){
+					hosnames.append(","+hospitalMap.get(hosid).getName());
+				}
+			}
+			user.setBelonghospital(hosnames.toString().substring(1));
+		}
+		return this.obj2Empl(list);
+	}
+	
+	private Map<String,Hospital> getHospitalMap() throws Exception{
+		if(hospitalMap==null){
+			hospitalMap=new HashMap<String,Hospital>();
+			List<Object> list = hospitaldao.getAllHospital(
+					Hospital.class, "");
+			if(list.size()==0)return null;
+			for(Object obj:list){
+				Hospital hos=(Hospital)obj;
+				hospitalMap.put(hos.getIdHospital(), hos);
+			}
+		}
+		return hospitalMap;
 	}
 }

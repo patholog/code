@@ -13,4 +13,5 @@ public interface IUsersService {
 	public void updateUser(Users em) throws Exception;
 	public void addUser(Users em) throws Exception;
 	public Boolean findUser (String id)throws Exception;
+	public List<Users> getUsersByPage(int index,Class clazz,String hql) throws Exception;
 }
