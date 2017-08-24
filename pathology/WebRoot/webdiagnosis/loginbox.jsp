@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<script src="${path}/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+<%--<script src="${path}/js/jquery-1.9.0.min.js" type="text/javascript"></script>--%>
 <script src="${path}/js/login.js" type="text/javascript"></script>
 
 <script type="text/javascript">

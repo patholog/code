@@ -94,7 +94,7 @@
     </div>
   </div>
 </div>
-<div id="shareModal" style="width: 300px; height: 200px;">
+<div id="shareModal" hidden style="width: 300px; height: 200px;">
   <div id="shareTabs">
     <ul>
       <li><a href="#open">公开的</a></li>
@@ -102,9 +102,13 @@
     </ul>
     <div id="open">
       <form id="openShareForm" action="ShareAction!share" method="post">
-        <div>
+        <div style="float: left;">
           <input type="hidden" name="type" value="0"/>
           <input type="hidden" id="openCaseId" name="caseId"/>
+          <label for="endTime">有效期</label>
+          <input id="endTime" name="endTime" style="border: solid 1px; width: 100px;"/>
+          <input id="forever" name="forever" type="radio"/>
+          <label for="forever">永久</label>
           <input id="btnOpen" type="button" class="ui-button" value="创建链接"/>
         </div>
         <div>
@@ -186,6 +190,7 @@
    * @param caseId
    */
   function shareCase(caseId) {
+    $('#shareModal').attr('hidden', false);
     $('#openCaseId').val(caseId);
     $('#protectedCaseId').val(caseId);
     $('#shareTabs').tabs({
