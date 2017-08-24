@@ -41,7 +41,7 @@
                   <div name="leftmenu" id="powermenu">
         <h3>操作</h3>
 		<ul>
-          <li><a href="${path}/webdiagnosis/hasdiag/hasdiag_list.jsp">返回业务界面</a> </li>
+          <li><a href="PathologyAction!getPathologyListToNeed">返回业务界面</a> </li>
         </ul>
       </div>
      <%-- <script>
