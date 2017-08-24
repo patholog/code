@@ -106,9 +106,11 @@
           <input type="hidden" name="type" value="0"/>
           <input type="hidden" id="openCaseId" name="caseId"/>
           <label for="endTime">有效期</label>
-          <input id="endTime" name="endTime" style="border: solid 1px; width: 100px;"/>
-          <input id="forever" name="forever" type="radio"/>
-          <label for="forever">永久</label>
+          <input id="endTime" name="endTime" style="border: solid 1px #8b8d8f; width: 100px;"/>
+          <span>
+            <input id="forever" name="forever" type="radio"/>
+            <label for="forever">永久</label>
+          </span>
           <input id="btnOpen" type="button" class="ui-button" value="创建链接"/>
         </div>
         <div>
@@ -138,10 +140,6 @@
               </td>
             </tr>
           </table>
-        </div>
-        <div>
-
-
         </div>
       </form>
     </div>
@@ -185,6 +183,23 @@
       window.location.href = '?action=delete&id=' + id;
   }
 
+  $('#endTime').datepicker({
+    defaultDate: $('#endTime').val(),
+    dateFormat: "yy-mm-dd"
+  });
+
+  $('#forever').click(function () {
+    if ($('#forever').attr("checked")) {
+      $('#forever').attr("checked", false);
+      $('#endTime').attr("disabled", false);
+      $('#endTime').val("");
+    } else {
+      $('#forever').attr("checked", true);
+      $('#endTime').attr("disabled", true);
+      $('#endTime').val("9999-12-31");
+    }
+  });
+
   /**
    * 分享
    * @param caseId
@@ -196,7 +211,7 @@
     $('#shareTabs').tabs({
       width: '360',
       border: '0',
-      heightStyle: 'auto'
+      height: '250'
     });
     $("#shareModal").dialog({
       title: '分享',
@@ -207,6 +222,11 @@
   }
 
   $('#btnOpen').click(function () {
+    if ($('#endTime').val() === "") {
+      $('#openShareUrl').val("有效期不能为空");
+      return;
+    }
+    $('#endTime').attr("disabled", false);
     $('#openShareForm').ajaxSubmit({
       dataType: 'json',
       success: function (result) {
@@ -216,7 +236,10 @@
           $('#openShareUrl').val("分享失败");
         }
       }
-    })
+    });
+    if ($('#forever').attr("checked")) {
+      $('#endTime').attr("disabled", true);
+    }
   });
   
   $('#btnProtected').click(function () {

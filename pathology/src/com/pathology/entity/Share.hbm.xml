@@ -78,5 +78,8 @@
     <property name="sid" type="java.lang.String">
       <column name="sid" length="32"/>
     </property>
+    <property name="endTime" type="java.sql.Timestamp">
+      <column name="end_time" length="0"/>
+    </property>
   </class>
 </hibernate-mapping>

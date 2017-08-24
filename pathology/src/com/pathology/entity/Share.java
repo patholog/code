@@ -15,6 +15,7 @@ public class Share implements java.io.Serializable {
   private String caseId;
   private String doctorId;
   private Timestamp shareTime;
+  private Timestamp endTime;
   private String hospitalId;
   private String memo;
   private String sortNo;
@@ -265,5 +266,13 @@ public class Share implements java.io.Serializable {
 
   public void setSid(String sid) {
     this.sid = sid;
+  }
+
+  public Timestamp getEndTime() {
+    return endTime;
+  }
+
+  public void setEndTime(Timestamp endTime) {
+    this.endTime = endTime;
   }
 }

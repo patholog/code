@@ -151,6 +151,10 @@ public class ShareServiceImpl implements IShareService {
       String sid = RandomNumbers.getEandomId(16);
       // TODO 添加校验sid是否已经存在
       share.setSid(sid);
+      // TODO 添加有效期格式校验
+      if (paramMap.containsKey("type") && "0".equals(paramMap.get("type")[0])) {
+        share.setEndTime(Timestamp.valueOf(paramMap.get("endTime")[0] + " 00:00:00"));
+      }
       share.setShareUrl(paramMap.get("basePath")[0] + "/ShareAction!shared?sid=" + sid);
       if ("1".equals(paramMap.get("type")[0])) {
         share.setSharePsd(RandomNumbers.getEandomId(6));
