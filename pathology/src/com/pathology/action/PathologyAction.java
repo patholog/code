@@ -86,15 +86,21 @@ public class PathologyAction extends BaseAction {
         is.close();
         paramMap.put("slideFilePath", new String[]{slideFileName});
       }
-      int count = 0;
+      int count;
+      String failure = "";
       try {
         count = pathologyService.addPathology(paramMap);
+      } catch (RuntimeException e) {
+        logger.error(e.getMessage());
+        count = 0;
+        failure = e.getMessage();
       } catch (Exception e) {
         logger.error(e.getMessage());
         count = 0;
+        failure = "出现未知错误，请联系管理员";
       }
       out = response.getWriter();
-      String jsonString = count > 0 ? "{\"success\":\"新建病理成功\"}" : "{\"failure\":\"新建病理失败\"}";
+      String jsonString = count > 0 ? "{\"success\":\"新建病理成功\"}" : "{\"failure\":\"" + failure + "\"}";
       out.println(jsonString);
       out.flush();
       out.close();

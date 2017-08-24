@@ -86,3 +86,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			return true;
 		      }
 	</script>
+
+<div id="tips">
+  <label id="tipInfo"></label>
+</div>
+<script>
+  function showTips(text) {
+    $('#tipInfo').text(text);
+    $('#tips').dialog({
+      title: '提示',
+      modal: true,
+      width: '400',
+      height: '200',
+      buttons: [{
+        text: "确定",
+        icon: "ui-icon-heart",
+        click: function () {
+          $(this).dialog("close");
+        }
+      }]
+    });
+  }
+</script>

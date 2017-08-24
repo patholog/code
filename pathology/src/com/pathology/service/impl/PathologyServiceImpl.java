@@ -14,6 +14,7 @@ import com.pathology.service.IResultService;
 import com.pathology.service.IUsersService;
 import com.pathology.util.Pages;
 import com.pathology.util.SessionAgentManager;
+import net.sf.jasperreports.engine.util.JRStyledText;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -136,8 +137,9 @@ public class PathologyServiceImpl implements IPathologyService {
    */
   @Override
   public int addPathology(Map<String, String[]> paramMap) {
+    Pathology pathology = new Pathology();
+    Result result = new Result();
     try {
-      Pathology pathology = new Pathology();
       pathology.setPatientname(paramMap.get("patientName")[0]); // 姓名
       pathology.setPathologyno(paramMap.get("pathologyNo")[0]); // 病理编号
       pathology.setIdCase(paramMap.get("caseId")[0]); // 会诊号（主键）
@@ -159,18 +161,37 @@ public class PathologyServiceImpl implements IPathologyService {
       pathology.setCrtUserId(SessionAgentManager.getSessionAgentBean().getIdUsers()); // 创建人
       pathology.setDiagStatus("2"); // 病理初始状态
       pathology.setDoctorId(SessionAgentManager.getSessionAgentBean().getIdUsers()); // 创建人
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      throw new RuntimeException("获取基本信息数据失败，请联系管理员");
+    }
+    try {
       addPathology(pathology); // 新增病理信息
-
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      throw new RuntimeException("新增病理数据失败，请联系管理员");
+    }
+    try {
       // 大体所见等Result数据
-      Result result = new Result();
       result.setCaseId(paramMap.get("caseId")[0]);
       result.setIdResult(paramMap.get("caseId")[0]);
       result.setGeneralSee(paramMap.get("generalSeeHidden")[0]); // 大体所见
       result.setMicroscopeSee(paramMap.get("microscopeSeeHidden")[0]); // 影像检查
       result.setDiagnosed(paramMap.get("firstVisit")[0]); // 初诊意见
       result.setResult(paramMap.get("immuneResult")[0]); // 免疫组化结果
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      throw new RuntimeException("获取结果数据失败！请联系管理员");
+    }
+    if (this.getPathology(Pathology.class, paramMap.get("caseId")[0]) != null) {
+      throw new RuntimeException("该会诊号已经存在");
+    }
+    try {
       resultService.insert(result);
-
+    } catch (Exception e) {
+      throw new RuntimeException("新增结果数据失败，请联系管理员");
+    }
+    try {
       if (paramMap.containsKey("slideFilePath") && !"".equals(paramMap.get("slideFilePath")[0])) {
         Image image = new Image();
         image.setIdImage(paramMap.get("pathologyNo")[0]);
@@ -178,11 +199,11 @@ public class PathologyServiceImpl implements IPathologyService {
         image.setPathImage(paramMap.get("slideFilePath")[0]);
         imageService.insertImage(image);
       }
-      return 1;
     } catch (Exception e) {
-      Logger.getLogger(PathologyServiceImpl.class).error(e.getMessage());
-      return 0;
+      logger.error(e.getMessage());
+      throw new RuntimeException("保存病理图片失败，请联系管理员");
     }
+    return 1;
   }
 
   @Override

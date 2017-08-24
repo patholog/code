@@ -118,15 +118,18 @@
             dataType: 'json',
             success: function (result) {
               if (result && result.success) {
-                alert(result.success);
+                $('#tipInfo').text(result.success);
                 window.location.href = "PathologyAction!getPathologyListToNeed";
+              } else if (result && result.failure) {
+                showTips(result.failure);
               } else {
-                alert("新建失败");
+                showTips('出现其他错误');
               }
             }
           });
         }
       });
+
       /**
        * 更改送检单位获取医院编号
        */
@@ -136,22 +139,22 @@
       function validate() {
         flag = true;
         if ($('#patientName').val() === "") {
-          alert("姓名不能为空");
+          showTips("姓名不能为空");
           flag = false;
           return;
         }
         if ($('#caseId').val() === "") {
-          alert("会诊号不能为空");
+          showTips("会诊号不能为空");
           flag = false;
           return;
         }
         if ($('#hospitalCode').children('option:selected').val() === "") {
-          alert("送检单位不能为空");
+          showTips("送检单位不能为空");
           flag = false;
           return;
         }
         if ($('#diagTime').val() === "") {
-          alert("送检时间不能为空");
+          showTips("送检时间不能为空");
           flag = false;
           return;
         }
