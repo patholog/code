@@ -57,7 +57,7 @@
               </tr>			  
               <tr>
                 <th>密码</th>
-                <td><input type="password" name="user.password" id="title" value="${sessionScope.edituser.password}" style="width:300px;" disabled/> </td>
+                <td><input type="password" name="user.password" id="title" value="${sessionScope.edituser.password}" style="width:300px;" /> </td>
               </tr>			  
               <tr>
                 <th>电子邮箱</th>
