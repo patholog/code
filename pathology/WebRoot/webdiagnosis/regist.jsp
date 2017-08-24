@@ -15,6 +15,28 @@
 <LINK rel="Shortcut icon" href="favicon.ico" />
 <link rel="stylesheet" type="text/css" href="${path }/css/settings.css" />
 <link rel="stylesheet" type="text/css" href="${path }/css/select.css" />
+  <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="${path }/js/jquery.form.min.js"></script>
+  <script>
+  function showTips(text) {
+    $('#tipInfo').text(text);
+    $('#tips').dialog({
+      title: '提示',
+      modal: true,
+      width: '400',
+      height: '200',
+      buttons: [{
+        text: "确定",
+        icon: "ui-icon-heart",
+        click: function () {
+          $(this).dialog("close");
+        }
+      }]
+    });
+  }
+</script>
+  <link rel="stylesheet" type="text/css" href="${path }/assets/jqueryui/jquery-ui.min.css"/>
+  <link rel="stylesheet" type="text/css" href="${path }/assets/jqueryui/jquery-ui.theme.min.css"/>
 <script src="${path }/js/regist.js" type="text/javascript"></script>
 <script type="text/javascript" src="${path }/js/passwordcheck.js"></script>
 <script src="${path }/js/jquery/jquery-1.4.4.min.js"
@@ -176,16 +198,16 @@
 
 	});
 	
-	function Check(){
+	function CheckU(){
 	if(emailfg && namefg && pswdfg && pswd2fg && spefg){
 		if(confirm('提交当前信息吗？')){
-	 	   alert("请等待审核！");
+	 	   showTips("请等待审核！");
 	 	   return true;
 		  }else{
 		    return false;
 		  }
 	}else{
-		alert("请修正错误信息！");
+		showTips("请修正错误信息！");
 		return false;
 		
 	}
@@ -196,7 +218,7 @@
 <body>
 	<div id="3" style="position: relative;  z-index: 3;">
 		<form id="f1" action="UserAction!registUser" method="post"
-			enctype="multipart/form-data" onsubmit="return Check()">
+			enctype="multipart/form-data" onsubmit="return CheckU()">
 			<table align="center" cellspacing="0" class="registtb">
 				<tr class="thead">
 					<td align="center">用户注册</td>
@@ -291,6 +313,8 @@
 		</form>
 	</div>
 	<%@include file="loginbox.jsp"%>
-
+<div id="tips">
+  <label id="tipInfo"></label>
+</div>	
 </body>
 </html>
