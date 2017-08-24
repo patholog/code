@@ -131,8 +131,7 @@
   var pswdfg=false;
   var pswd2fg=false;
   var spefg=true;
-  $(function() {
-    function showTips(text) {
+      function showTips(text) {
       $('#tipInfo').text(text);
       $('#tips').dialog({
         title: '提示',
@@ -148,6 +147,8 @@
         }]
       });
     }
+  $(function() {
+
 
     $("#email").blur(function() {
       var email = $("#email").val().trim();
@@ -301,13 +302,13 @@
   function CheckU() {
     if(emailfg && namefg && pswdfg && pswd2fg && spefg){
       if(confirm('提交当前信息吗？')){
-        alert("请等待审核！");
+        showTips("请等待审核！");
         return true;
       }else{
         return false;
       }
     }else{
-      alert("请修正错误信息！");
+      showTips("请修正错误信息！");
       return false;
     }
   }
