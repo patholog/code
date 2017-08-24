@@ -12,6 +12,27 @@
  <c:set var="path" value="${pageContext.request.contextPath }" />
 <script src="${path}/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <script src="${path}/js/login.js" type="text/javascript"></script>
+  <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui.min.js"></script>
+  <script>
+  function showTips(text) {
+    $('#tipInfo').text(text);
+    $('#tips').dialog({
+      title: '提示',
+      modal: true,
+      width: '400',
+      height: '200',
+      buttons: [{
+        text: "确定",
+        icon: "ui-icon-heart",
+        click: function () {
+          $(this).dialog("close");
+        }
+      }]
+    });
+  }
+</script>
+  <link rel="stylesheet" type="text/css" href="${path }/assets/jqueryui/jquery-ui.min.css"/>
+  <link rel="stylesheet" type="text/css" href="${path }/assets/jqueryui/jquery-ui.theme.min.css"/>
       <link rel="stylesheet" href="css/login1.css" style="text/css">
       <script type="text/javascript">
 	var flag = false;
@@ -22,10 +43,10 @@
 		var password = $("#password").val();
 
 		if (username == '') {
-			alert("用户名不能为空！");
+			showTips("用户名不能为空！");
 			return false;
 		} else if (password == '') {
-			alert("密码不能为空！");
+			showTips("密码不能为空！");
 			return false;
 		} else {
 			$.ajax({
@@ -55,12 +76,12 @@
 							document.getElementById('fm1').submit();
 						},
 						error : function(d) {
-							alert("用户没有审核通过");
+							showTips("用户没有审核通过");
 						}
 					});
 				},
 				error : function(d) {
-					alert("用户名或密码不对");
+					showTips("用户名或密码不对");
 				}
 			});
 			return false;
@@ -76,6 +97,8 @@
   <li><a href="HospitalAction!allHostpital">注册</a></li>
   <input class="button" type="submit" value="Log in"/>
 </form>				
-					
+<div id="tips">
+  <label id="tipInfo"></label>
+</div>			
   </body>
 </html>
