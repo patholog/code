@@ -99,13 +99,15 @@
 							<c:if test="${sessionScope.edituser.sex=='女'}">checked</c:if>
 							value="女" /> 女</td>
 					</tr>
-					<!-- <tr>
+					 <tr>
 						<th>所属医院</th>
 						<td><input type="text" name="user.belonghospital" id="title"
 							value="${sessionScope.edituser.belonghospital}"
 							style="width:300px;" /> <select id='select' multiple="multiple">
-								<option value='ff'>ff</option>
-								<option value='ff2'>ff2</option>
+							<c:forEach items="${sessionScope.allhaospitallist}" var="hospital">  
+                                  <option  value="${hospital.idHospital}" >${hospital.name}</option>  
+                            </c:forEach> 
+								
 
 						</select> <script type="text/javascript">
 							$(function() {
@@ -128,11 +130,7 @@
 											multiple : true,
 											position : {},
 											appendTo : "body",
-											menuWidth : null,
-											selectedText : function(numChecked,
-													numTotal, checkedItems) {
-												alert(checkedItems)
-											}
+											menuWidth : null
 										}).multiselectfilter();
 
 								var ss = '${sessionScope.edituser.belonghospital}';
@@ -151,7 +149,7 @@
 						</script>
 						</td>
 					</tr>
-					 -->
+					 
 					<tr>
 						<th>联系电话</th>
 						<td><input type="text" name="user.mobile" id="title"

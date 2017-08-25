@@ -2,6 +2,7 @@ package com.pathology.service;
 
 import java.util.List;
 
+import com.pathology.entity.Hospital;
 import com.pathology.entity.Users;
 
 public interface IUsersService {

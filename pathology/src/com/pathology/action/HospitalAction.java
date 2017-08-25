@@ -41,7 +41,7 @@ public class HospitalAction extends BaseAction {
 			hospital.setIdHospital(RandomNumbers.getRandomId());
 			hospital.setCode(RandomNumbers.getEandomId(16));
 			hospitalservice.addHospital(hospital);
-
+			clearHospitalSession();
 			return "updatesuccess";
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -134,6 +134,7 @@ public class HospitalAction extends BaseAction {
 			hospitalT.setTel(hospital.getTel());
 			hospitalT.setAddress(hospital.getAddress());
 			hospitalservice.updateHospital(hospitalT);
+			clearHospitalSession();
 			return "updatesuccess";
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -183,6 +184,13 @@ public class HospitalAction extends BaseAction {
 //			logger.error(e.getMessage());
 //			return Constant.ERR;
 //		}
+	}
+	private void clearHospitalSession(){
+		HttpSession session = ServletActionContext.getRequest()
+				.getSession();
+		if(session.getAttribute("allhaospitallist")!=null){
+			session.setAttribute("allhaospitallist", null);
+		}
 	}
 
 	public HttpServletRequest getRequest() {

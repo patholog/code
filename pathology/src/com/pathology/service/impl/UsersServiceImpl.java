@@ -40,8 +40,8 @@ public class UsersServiceImpl implements IUsersService {
 	public void setRolesdao(IRolesDao rolesdao) {
 		this.rolesdao = rolesdao;
 	}
-	
-		public IHospitalDao getHospitaldao() {
+
+	public IHospitalDao getHospitaldao() {
 		return hospitaldao;
 	}
 
@@ -110,6 +110,9 @@ public class UsersServiceImpl implements IUsersService {
 		}
 		session.setAttribute("rolelist",rollist);
 		session.setAttribute("edituser", userT);
+		if(session.getAttribute("allhaospitallist")==null){
+			session.setAttribute("allhaospitallist", getAllHospitalList());
+		}
 		if(userT!=null && rollist.size()>0){
 			return true;
 		}
@@ -135,11 +138,11 @@ public class UsersServiceImpl implements IUsersService {
 			}else{
 				user.setBelonghospital("");
 			}
-			
+
 		}
 		return this.obj2Empl(list);
 	}
-	
+
 	private Map<String,Hospital> getHospitalMap() throws Exception{
 		if(hospitalMap==null){
 			hospitalMap=new HashMap<String,Hospital>();
@@ -152,5 +155,18 @@ public class UsersServiceImpl implements IUsersService {
 			}
 		}
 		return hospitalMap;
+	}
+
+	private List<Hospital> getAllHospitalList() throws Exception {
+		HttpSession session = ServletActionContext.getRequest()
+				.getSession();
+		List<Object> list = hospitaldao.getAllHospital(
+				Hospital.class, "");
+		List<Hospital> hospitallist=new ArrayList();
+		for(Object obj:list){
+			Hospital hos=(Hospital)obj;
+			hospitallist.add(hos);
+		}
+		return hospitallist;
 	}
 }
