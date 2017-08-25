@@ -20,9 +20,13 @@
   <link rel="stylesheet" href="${path }/css/comc_register_style.css?Version=5.5.1.1"/>
   <link rel="stylesheet" type="text/css" href="${path }/css/WdatePicker.css"/>
   <link rel="stylesheet" type="text/css" href="${path }/css/weebox.css"/>
+  <link rel="stylesheet" href="${path }/assets/jqueryui/jquery-ui.min.css"/>
+  <link rel="stylesheet" href="${path }/assets/jqueryui/jquery-ui.theme.min.css"/>
+  <link rel="stylesheet" href="${path }/assets/jqueryui/jquery-ui.structure.min.css"/>
 
   <script type="text/javascript" src="${path }/js/jquery.min.js"></script>
   <script type="text/javascript" src="${path }/js/jquery.form.min.js"></script>
+  <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui.min.js"></script>
   <script type="text/javascript" src="${path }/js/treeView.js"></script>
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
@@ -88,13 +92,29 @@
             <th width="10%">转诊医生</th>
             <th width="20%">提交日期</th>
           </tr>
-          <c:forEach items="${descriptionAppList}" var="list" varStatus="status">
+          <c:forEach items="${descriptionAppList}" var="list">
             <tr>
               <td>${list.caseId}</td>
-              <td>${list.fromHospital.name}</td>
-              <td>${list.fromDoctor.username}</td>
-              <td>${list.toHospital.name}</td>
-              <td>${list.toDoctor.username}</td>
+              <td>
+                <c:if test="${list.fromHospital != null || list.fromHospital != ''}">
+                  ${list.fromHospital.name}
+                </c:if>
+              </td>
+              <td>
+                <c:if test="${list.fromDoctor.username != null}">
+                  ${list.fromDoctor.username}
+                </c:if>
+              </td>
+              <td>
+                <c:if test="${list.toHospital != null || list.toHospital != ''}">
+                  ${list.toHospital.name}
+                </c:if>
+              </td>
+              <td>
+                <c:if test="${list.toDoctor.username != null}">
+                  ${list.toDoctor.username}
+                </c:if>
+              </td>
               <td><fmt:formatDate value="${list.applyDateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             </tr>
           </c:forEach>
@@ -122,22 +142,23 @@
           dataType: 'json',
           success: function (result) {
             if (result && result.success) {
-              alert(result.success);
+              showTips(result.success);
               window.location.reload();
             } else {
-              alert("转诊失败");
+              showTips("转诊失败");
             }
           }
         })
       }
     });
+
     function validate() {
       if ($('#toHospitalId').val() === '') {
-        alert('转诊医院不能为空');
+        showTips('转诊医院不能为空');
         return false;
       }
       if ($('#toDoctorId').val() === '') {
-        alert('转诊医生不能为空');
+        showTips('转诊医生不能为空');
         return false;
       }
       return true;

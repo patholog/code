@@ -15,9 +15,9 @@
         <comment>病理编号</comment>
       </column>
     </property>
-    <many-to-one name="fromHospital" column="fromHospitalId" class="com.pathology.entity.Hospital"/>
+    <many-to-one name="fromHospital" column="fromHospitalId" class="com.pathology.entity.Hospital" not-found="ignore"/>
     <many-to-one name="fromDoctor" column="fromDoctorId" class="com.pathology.entity.Users"/>
-    <many-to-one name="toHospital" column="toHospitalId" class="com.pathology.entity.Hospital"/>
+    <many-to-one name="toHospital" column="toHospitalId" class="com.pathology.entity.Hospital" not-found="ignore"/>
     <many-to-one name="toDoctor" column="toDoctorId" class="com.pathology.entity.Users"/>
     <property name="applyDateTime" type="java.sql.Timestamp">
       <column name="applyDateTime" length="0"/>
