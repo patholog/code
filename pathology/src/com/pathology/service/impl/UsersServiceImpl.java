@@ -123,14 +123,19 @@ public class UsersServiceImpl implements IUsersService {
 		Map<String,Hospital> hospitalMap=getHospitalMap();
 		for(Object obj:list){
 			Users user=(Users)obj;
-			String[] hosids=user.getBelonghospital().split(",");
-			StringBuffer hosnames=new StringBuffer();
-			for(String hosid:hosids){
-				if(hospitalMap.containsKey(hosid)){
-					hosnames.append(","+hospitalMap.get(hosid).getName());
+			if(!"".equals(user.getBelonghospital())&&user.getBelonghospital()!=null){
+				String[] hosids=user.getBelonghospital().split(",");
+				StringBuffer hosnames=new StringBuffer();
+				for(String hosid:hosids){
+					if(hospitalMap.containsKey(hosid)){
+						hosnames.append(","+hospitalMap.get(hosid).getName());
+					}
 				}
+				user.setBelonghospital(hosnames.toString().substring(1));
+			}else{
+				user.setBelonghospital("");
 			}
-			user.setBelonghospital(hosnames.toString().substring(1));
+			
 		}
 		return this.obj2Empl(list);
 	}
