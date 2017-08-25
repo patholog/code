@@ -99,7 +99,7 @@
 							<c:if test="${sessionScope.edituser.sex=='女'}">checked</c:if>
 							value="女" /> 女</td>
 					</tr>
-					<tr>
+					<!--  <tr>
 						<th>所属医院</th>
 						<td><input type="text" name="user.belonghospital" id="title"
 							value="${sessionScope.edituser.belonghospital}"
@@ -158,7 +158,7 @@
 						</script>
 						</td>
 					</tr>
-
+-->
 					<tr>
 						<th>联系电话</th>
 						<td><input type="text" name="user.mobile" id="title"
