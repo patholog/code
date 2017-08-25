@@ -26,7 +26,7 @@
 <body>
 	<div id="3" style="position: relative;  z-index: 3;">
 		<form id="f1" action="UserAction!registUser" method="post"
-			enctype="multipart/form-data" onsubmit="CheckU()">
+			enctype="multipart/form-data" onsubmit="return CheckU()">
 			<table align="center" cellspacing="0" class="registtb">
 				<tr class="thead">
 					<td align="center">用户注册</td>
