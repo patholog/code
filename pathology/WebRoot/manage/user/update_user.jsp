@@ -99,57 +99,66 @@
 							<c:if test="${sessionScope.edituser.sex=='女'}">checked</c:if>
 							value="女" /> 女</td>
 					</tr>
-					 <tr>
+					<tr>
 						<th>所属医院</th>
 						<td><input type="text" name="user.belonghospital" id="title"
 							value="${sessionScope.edituser.belonghospital}"
 							style="width:300px;" /> <select id='select' multiple="multiple">
-							<c:forEach items="${sessionScope.allhaospitallist}" var="hospital">  
-                                  <option  value="${hospital.idHospital}" >${hospital.name}</option>  
-                            </c:forEach> 
-								
+								<c:forEach items="${sessionScope.allhaospitallist}"
+									var="hospital">
+									<option value="${hospital.idHospital}">${hospital.name}</option>
+								</c:forEach>
+
 
 						</select> <script type="text/javascript">
 							$(function() {
 
 								//以下为初始配置参数，用户可自行配置，同时，可配置事件参数
-								var el = $('#select').multiselect(
-										{
-											header : true,
-											height : 175,
-											minWidth : 225,
-											classes : '',
-											checkAllText : '选中全部',
-											uncheckAllText : '取消全选',
-											noneSelectedText : '请勾选',
-											selectedText : '# 选中',
-											selectedList : 5,
-											show : null,
-											hide : null,
-											autoOpen : false,
-											multiple : true,
-											position : {},
-											appendTo : "body",
-											menuWidth : null
-										}).multiselectfilter();
+								var el = $('#select').multiselect({
+									header : true,
+									height : 175,
+									minWidth : 225,
+									classes : '',
+									checkAllText : '选中全部',
+									uncheckAllText : '取消全选',
+									noneSelectedText : '请勾选',
+									selectedText : '# 选中',
+									selectedList : 5,
+									show : null,
+									hide : null,
+									autoOpen : false,
+									multiple : true,
+									position : {},
+									appendTo : "body",
+									menuWidth : null
+								}).multiselectfilter();
 
 								var ss = '${sessionScope.edituser.belonghospital}';
-								debugger;
+								var ay = ss.split(',');
+								$('#select option').each(function(i, content) {
+									for ( var i = 0; i < ay.length; i++) {
+										if ($(content).val() == ay[i])
+											this.selected = true;
+									}
+								});
+								/*
 								var ay = ss.split(',');
 								for ( var i = 0; i < ay.length; i++) {
-									var opt = $('<option />', {
-										value : ay[i],
-										text : ay[i]
-									});
-									opt.appendTo(el)
-								}
+								var opt = $('<option />', {
+								value : ay[i],
+								text : ay[i]
+								});
+								opt.appendTo(el)
+								opt.attr('selected', 'selected');
+
+								}*/
 								el.multiselect('refresh');
-								
+
 							});
 						</script>
 						</td>
 					</tr>
-					 
+
 					<tr>
 						<th>联系电话</th>
 						<td><input type="text" name="user.mobile" id="title"
