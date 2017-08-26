@@ -30,6 +30,8 @@ public interface IPathologyService {
 
   void addPathology(Pathology em);
 
+  List<PathologyDTO> getNewListPathology(HttpServletRequest request, String name);
+
   List<PathologyDTO> getListPathologyToNeed(HttpServletRequest request, String name);
 
   List<PathologyDTO> getListPathologyToHas(HttpServletRequest request, String name);

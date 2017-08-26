@@ -143,6 +143,7 @@
       <result name="saveTransferDiag"/>
       <result name="updateResult"/>
       <result name="showDiagImage"/>
+      <result name="newPathlogy">/webdiagnosis/newdiag/newdiag_list.jsp</result>
     </action>
     <action name="DiaReportAction" class="com.pathology.action.DiaReportAction">
       <result name="pathologyreport">/webdiagnosis/hasdiag/diagnosisreport.jsp</result>

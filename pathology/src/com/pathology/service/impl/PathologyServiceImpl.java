@@ -14,7 +14,6 @@ import com.pathology.service.IResultService;
 import com.pathology.service.IUsersService;
 import com.pathology.util.Pages;
 import com.pathology.util.SessionAgentManager;
-import net.sf.jasperreports.engine.util.JRStyledText;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -87,6 +86,36 @@ public class PathologyServiceImpl implements IPathologyService {
   public void deletePathology(Pathology em) {
     if (em != null)
       pathologydao.deletePathology(em);
+  }
+
+  /**
+   * 获取新建列表
+   *
+   * @param request 请求
+   * @param name 登录用户
+   * @return 列表
+   */
+  @Override
+  public List<PathologyDTO> getNewListPathology(HttpServletRequest request, String name) {
+    try {
+      String pageNum = request.getParameter("pageNum");
+      pageNum = pageNum != null ? pageNum : "1";
+      String title = "";
+      int status = 1;
+      String sql = basicSql + " WHERE a.diag_status='1' and a.id_doctor='" + name + "'";
+      String countSql = basicCountSql + " WHERE a.diag_status='1' and a.id_doctor='" + name + "'";
+
+      int totalNum = jdbcTemplate.queryForInt(countSql);
+      if (totalNum > 0) {
+        Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
+        request.setAttribute("page", page.getPageStr());
+      } else {
+        request.setAttribute("page", "暂无数据");
+      }
+      return jdbcTemplate.query(sql, new PathologyMapping());
+    } catch (Exception ex) {
+      throw new RuntimeException("查询出现错误");
+    }
   }
 
   /*

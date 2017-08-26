@@ -112,9 +112,25 @@ public class PathologyAction extends BaseAction {
   }
 
   /**
+   * 查看新建列表
+   *
+   * @return 列表数据
+   */
+  public String getNewPathologyList() {
+    try {
+      String userId = SessionAgentManager.getSessionAgentBean().getIdUsers();
+      HttpServletRequest request = ServletActionContext.getRequest();
+      pathologys = pathologyService.getNewListPathology(request, userId);
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+    }
+    return "newPathlogy";
+  }
+
+  /**
    * 待诊断
    *
-   * @return
+   * @return 列表数据
    */
   public String getPathologyListToNeed() {
     try {
