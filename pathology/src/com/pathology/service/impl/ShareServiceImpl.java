@@ -85,7 +85,7 @@ public class ShareServiceImpl implements IShareService {
     int status = 1;
 
     String sql = " select a.case_Id case_id, a.id_share, b.patientname, a.DoctorId, c.username, a.type, a.shareTime,"
-        + " case a.type when '0' then '公开的' else '私有地' END type_name, a.end_time, a.shareUrl, a.sharePsd, a.sid "
+        + " case a.type when '0' then '公开的' else '私有的' END type_name, a.end_time, a.shareUrl, a.sharePsd, a.sid "
         + " from share a "
         + " INNER join pathology b on a.case_id = b.id_case "
         + " left join users c on a.doctorId = c.id_users "

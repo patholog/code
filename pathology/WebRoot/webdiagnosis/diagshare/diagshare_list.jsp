@@ -42,7 +42,7 @@
         <table class="table">
           <tbody>
           <tr>
-            <th width="10%">病理号</th>
+            <th width="10%">会诊号</th>
             <th width="10%">病人姓名</th>
             <th width="15%">创建分享时间</th>
             <th width="10%">类型</th>
