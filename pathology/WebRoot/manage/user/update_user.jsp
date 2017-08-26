@@ -64,7 +64,7 @@
 			</table>
 
 			<form name="articles" id="articles" method="post"
-				action="UserAction!saveUser">
+				action="UserAction!saveUser" onsubmit='return hosset();'>
 				<table class="maintable form_top_thin">
 					<tr>
 						<th>用户名</th>
@@ -99,11 +99,13 @@
 							<c:if test="${sessionScope.edituser.sex=='女'}">checked</c:if>
 							value="女" /> 女</td>
 					</tr>
-					<!--  <tr>
+					<tr>
 						<th>所属医院</th>
-						<td><input type="text" name="user.belonghospital" id="title"
-							value="${sessionScope.edituser.belonghospital}"
-							style="width:300px;" /> <select id='select' multiple="multiple">
+						<td>
+						<input type="text" name="user.belonghospital"
+							id="hospitalIdIpt" type="hidden"
+							value="${sessionScope.edituser.belonghospital}" style="display:none" /> 
+						<select id='select' multiple="multiple" style="width:300px;">
 								<c:forEach items="${sessionScope.allhaospitallist}"
 									var="hospital">
 									<option value="${hospital.idHospital}">${hospital.name}</option>
@@ -141,24 +143,32 @@
 											this.selected = true;
 									}
 								});
-								/*
-								var ay = ss.split(',');
-								for ( var i = 0; i < ay.length; i++) {
-								var opt = $('<option />', {
-								value : ay[i],
-								text : ay[i]
-								});
-								opt.appendTo(el)
-								opt.attr('selected', 'selected');
-
-								}*/
 								el.multiselect('refresh');
 
 							});
+
+							function hosset() {
+								var hospitalIds = '';
+								$('#select option').each(function(i, content) {
+									if (this.selected) {
+										if (hospitalIds != '')
+											hospitalIds += ',';
+
+										hospitalIds += $(content).val();
+									}
+								});
+								if (hospitalIds == '') {
+									$('#hospitalIdIpt').val('');
+									return false;
+								} else {
+									$('#hospitalIdIpt').val(hospitalIds);
+									return true;
+								}
+							}
 						</script>
 						</td>
 					</tr>
--->
+
 					<tr>
 						<th>联系电话</th>
 						<td><input type="text" name="user.mobile" id="title"
@@ -184,7 +194,7 @@
 					<tr>
 						<td class="buttons"><input type="submit" name="Submit"
 							id="Submit" value="提交" /> <input type="button" name="Reset"
-							id="Reset" value="重置" onclick="resetForm()" /></td>
+							id="Reset" value="返回" onclick="javascript:history.back(-1)" /></td>
 					</tr>
 				</table>
 				<input type="hidden" name="id" value="" />

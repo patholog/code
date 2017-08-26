@@ -84,7 +84,7 @@
 					<tr>
 						<td class="buttons"><input type="submit" name="Submit"
 							id="Submit" value="提交" /> <input type="button" name="Reset"
-							id="Reset" value="重置" onclick="resetForm()" /></td>
+							id="Reset" value="返回" onclick="javascript:history.back(-1)" /></td>
 					</tr>
 				</table>
 				<input type="hidden" name="id" value="" />

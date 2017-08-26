@@ -173,6 +173,7 @@ public class UsersAction extends BaseAction {
 		try {
 			Users userT = userservice.getUser(Users.class, user.getIdUsers());
 			userT.setRealname(user.getRealname());
+			userT.setBelonghospital(user.getBelonghospital());
 			userT.setSex(user.getSex());
 			userT.setTel(user.getTel());
 			userT.setRoleId(user.getRoleId());

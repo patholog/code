@@ -805,8 +805,8 @@ body .ui-tooltip {
 	color: #333333;
 }
 .ui-widget-header {
-	border: 1px solid #e78f08;
-	background: #f6a828 url(images/ui-bg_gloss-wave_35_f6a828_500x100.png) 50% 50% repeat-x;
+	border: 1px solid #3399ff;
+	background: #3399ff url(images/ui-bg_gloss-wave_35_f6a828_500x100.png) 50% 50% repeat-x;
 	color: #ffffff;
 	font-weight: bold;
 }
@@ -819,10 +819,10 @@ body .ui-tooltip {
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
-	border: 1px solid #cccccc;
-	background: #f6f6f6 url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x;
+	border: 1px solid #888888;
+	background: #ffffff url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x;
 	font-weight: bold;
-	color: #1c94c4;
+	color: #888888;
 }
 .ui-state-default a,
 .ui-state-default a:link,
@@ -836,10 +836,10 @@ body .ui-tooltip {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-	border: 1px solid #fbcb09;
-	background: #fdf5ce url(images/ui-bg_glass_100_fdf5ce_1x400.png) 50% 50% repeat-x;
+	border: 1px solid #3399ff;
+	background: #ffffff url(images/ui-bg_glass_100_fdf5ce_1x400.png) 50% 50% repeat-x;
 	font-weight: bold;
-	color: #c77405;
+	color: #3399ff;
 }
 .ui-state-hover a,
 .ui-state-hover a:hover,
@@ -849,16 +849,16 @@ body .ui-tooltip {
 .ui-state-focus a:hover,
 .ui-state-focus a:link,
 .ui-state-focus a:visited {
-	color: #c77405;
+	color: #3399ff;
 	text-decoration: none;
 }
 .ui-state-active,
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
-	border: 1px solid #fbd850;
+	border: 1px solid #3399ff;
 	background: #ffffff url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x;
 	font-weight: bold;
-	color: #eb8f00;
+	color: #3399ff;
 }
 .ui-state-active a,
 .ui-state-active a:link,
@@ -874,12 +874,12 @@ body .ui-tooltip {
 .ui-widget-header .ui-state-highlight {
 	border: 1px solid #fed22f;
 	background: #ffe45c url(images/ui-bg_highlight-soft_75_ffe45c_1x100.png) 50% top repeat-x;
-	color: #363636;
+	color: #3399ff;
 }
 .ui-state-highlight a,
 .ui-widget-content .ui-state-highlight a,
 .ui-widget-header .ui-state-highlight a {
-	color: #363636;
+	color: #3399ff;
 }
 .ui-state-error,
 .ui-widget-content .ui-state-error,
