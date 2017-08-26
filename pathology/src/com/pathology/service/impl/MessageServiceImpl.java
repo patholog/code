@@ -91,28 +91,28 @@ public class MessageServiceImpl implements IMessageService {
     pageNum = pageNum != null ? pageNum : "1";
     String title = "";
     int status = 1;
-    String sql = " select a.id_message idMessage, b.pathologyno, a.case_id caseId, b.patientname, c.username,"
-        + " a.content, a.createTime, a.messageOrder"
-        + " from message a "
-        + " left join  pathology  b  on a.case_id = b.id_case "
-        + " left join  users  c on a.fromDoctorId = c.id_users";
-
     String sqlcount = "select  count(*) from   message  a"
         + "  left join  pathology  b  on   a.case_id = b.id_case "
         + "   left join  users  c on  a.fromDoctorId = c.id_users";
 
     int totalNum = jdbcTemplate.queryForInt(sqlcount);
     if (totalNum > 0) {
-      Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
-      //List<Message> messages = jdbcTemplate.query(sql +"  "+page.getPageLimit(), new MessageMapping());
+      Pages page = new Pages(totalNum, "MessageAction!getMessageList", Integer.parseInt(pageNum), 10);
+      String sql = " select a.id_message idMessage, b.pathologyno, a.case_id caseId, b.patientname, c.username,"
+          + " a.content, a.createTime, a.messageOrder"
+          + " from message a "
+          + " left join  pathology  b  on a.case_id = b.id_case "
+          + " left join  users  c on a.fromDoctorId = c.id_users"
+          + page.getPageLimit();
       request.setAttribute("page", page.getPageStr());
-      //request.setAttribute("list", messages);
-
-    }
-    try {
-      return jdbcTemplate.query(sql, new MessageMapping());
-    } catch (Exception e) {
-      logger.error(e.getMessage());
+      try {
+        return jdbcTemplate.query(sql, new MessageMapping());
+      } catch (Exception e) {
+        logger.error(e.getMessage());
+        return null;
+      }
+    } else {
+      request.setAttribute("page", "暂无数据");
       return null;
     }
   }

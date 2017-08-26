@@ -54,34 +54,43 @@ public class CollectionServiceImpl implements ICollectionService {
 			collectiondao.deleteCollection(em);
 
 	}
-	
-	
-	public List<CollectionDTO>  getListCollection(HttpServletRequest
-			 request,String name)  throws Exception{
-		
+
+	/**
+	 * 查看收藏病理列表
+   *
+	 * @param request 请求
+	 * @param name 当前登录用户id
+	 * @return 收藏病理列表
+	 * @throws Exception 查询异常
+	 */
+	public List<CollectionDTO>  getListCollection(HttpServletRequest request,String name)  throws Exception{
 		String pageNum = request.getParameter("pageNum");
 		pageNum = pageNum != null?pageNum:"1";
 		String title = "";
 		int status = 1;
-		String sql = " select b.pathologyno ,b.patientname,c.username,a.memo,b.crt_Time,b.diag_time,a.id_collection,d.name as hospitalname,a.case_id from collection a   "
-						+" inner join pathology  b  on a.case_id = b.id_case "
-						+" left join  users  c on a.collectioner_Id = c.id_users"
-						+" left join  hospital  d on b.hospitalcode = d.id_hospital";
-		
-		String sqlcount  = "select  count(*) from   collection  a"
-				+"  inner join  pathology  b  on a.case_id = b.id_case"
-				+"   left join  users  c on a.collectioner_Id = c.id_users"
-				+" left join  hospital  d on b.hospitalcode = d.id_hospital";
-		
+
+		String sqlcount  = " select count(1) from collection a"
+				+" inner join pathology b on a.case_id = b.id_case"
+				+" left join users c on a.collectioner_Id = c.id_users"
+				+" left join hospital d on b.hospitalcode = d.id_hospital";
+
 		int totalNum = jdbcTemplate.queryForInt(sqlcount);
+
 		if(totalNum > 0){
-			Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
+			Pages page = new Pages(totalNum, "CollectionAction!getCollectionList", Integer.parseInt(pageNum), 10);
+      String sql = " select b.pathologyno, b.patientname, c.username, a.memo, b.crt_Time, b.diag_time, a.id_collection,"
+          + " d.name hospitalname, a.case_id"
+          + " from collection a "
+          + " inner join pathology b on a.case_id = b.id_case"
+          + " left join users c on a.collectioner_Id = c.id_users"
+          + " left join hospital d on b.hospitalcode = d.id_hospital"
+          + page.getPageLimit();
 			request.setAttribute("page", page.getPageStr());
-		 
-		}
-		List<CollectionDTO> ss= (List<CollectionDTO>)jdbcTemplate.query(sql, new CollectionMapping());
-		return jdbcTemplate.query(sql, new CollectionMapping());
-	 
+      return jdbcTemplate.query(sql, new CollectionMapping());
+    } else {
+      request.setAttribute("page", "暂无数据");
+      return null;
+    }
 	}
 
 	public Collection getCollection(Class clazz, String id)  throws Exception{

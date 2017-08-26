@@ -83,26 +83,27 @@ public class ShareServiceImpl implements IShareService {
     pageNum = pageNum != null ? pageNum : "1";
     String title = "";
     int status = 1;
-
-    String sql = " select a.case_Id case_id, a.id_share, b.patientname, a.DoctorId, c.username, a.type, a.shareTime,"
-        + " case a.type when '0' then '公开的' else '私有的' END type_name, a.end_time, a.shareUrl, a.sharePsd, a.sid "
-        + " from share a "
-        + " INNER join pathology b on a.case_id = b.id_case "
-        + " left join users c on a.doctorId = c.id_users "
-        + " where ifnull(a.del_f, 1) = 1";
-
     String sqlcount = " select count(1) from share a "
         + " INNER join pathology b on a.case_id = b.id_case "
         + " left join users c on a.doctorId = c.id_users "
         + " where ifnull(a.del_f, 1) = 1";
-
-    int totalNum = jdbcTemplate.queryForInt(sqlcount);
-    if (totalNum > 0) {
-      Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
-      request.setAttribute("page", page.getPageStr());
-    }
     try {
-      return (List<ShareDTO>) jdbcTemplate.query(sql, new ShareMapping());
+      int totalNum = jdbcTemplate.queryForInt(sqlcount);
+      if (totalNum > 0) {
+        Pages page = new Pages(totalNum, "ShareAction!getShareList", Integer.parseInt(pageNum), 10);
+        String sql = " select a.case_Id case_id, a.id_share, b.patientname, a.DoctorId, c.username, a.type, a.shareTime,"
+            + " case a.type when '0' then '公开的' else '私有的' END type_name, a.end_time, a.shareUrl, a.sharePsd, a.sid "
+            + " from share a "
+            + " INNER join pathology b on a.case_id = b.id_case "
+            + " left join users c on a.doctorId = c.id_users "
+            + " where ifnull(a.del_f, 1) = 1"
+            + page.getPageLimit();
+        request.setAttribute("page", page.getPageStr());
+        return (List<ShareDTO>) jdbcTemplate.query(sql, new ShareMapping());
+      } else {
+        request.setAttribute("page", "暂无数据");
+        return null;
+      }
     } catch (Exception e) {
       logger.error(e.getMessage());
       return null;

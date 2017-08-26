@@ -107,4 +107,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       }]
     });
   }
+
+  /**
+   * 翻页
+   *
+   * @param actionName action名称!方法名称（后面可带参数）
+   * @param pageNum
+   */
+  function pagesubmit(actionName, pageNum) {
+    if (actionName.indexOf("?") !== -1) {
+      // 包含至少一个参数
+      window.location.href = actionName + "&pageNum=" + pageNum;
+    } else {
+      window.location.href = actionName + "?pageNum=" + pageNum;
+    }
+  }
 </script>

@@ -79,11 +79,4 @@
   </div>
 </div>
 </body>
-<script>
-$(function () {
-  function pagesubmit(formId, pageNum) {
-    window.location.href="MessageAction!getMessageList?pageNum=" + pageNum;
-  }
-})
-</script>
 </html>

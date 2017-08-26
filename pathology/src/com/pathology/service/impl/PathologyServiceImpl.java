@@ -102,23 +102,24 @@ public class PathologyServiceImpl implements IPathologyService {
       pageNum = pageNum != null ? pageNum : "1";
       String title = "";
       int status = 1;
-      String sql = basicSql + " WHERE a.diag_status='1' and a.id_doctor='" + name + "'";
       String countSql = basicCountSql + " WHERE a.diag_status='1' and a.id_doctor='" + name + "'";
 
       int totalNum = jdbcTemplate.queryForInt(countSql);
       if (totalNum > 0) {
-        Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
+        String sql = basicSql + " WHERE a.diag_status='1' and a.id_doctor='" + name + "'";
+        Pages page = new Pages(totalNum, "PathologyAction!getNewPathology", Integer.parseInt(pageNum), 10);
         request.setAttribute("page", page.getPageStr());
+        return jdbcTemplate.query(sql, new PathologyMapping());
       } else {
         request.setAttribute("page", "暂无数据");
+        return null;
       }
-      return jdbcTemplate.query(sql, new PathologyMapping());
     } catch (Exception ex) {
       throw new RuntimeException("查询出现错误");
     }
   }
 
-  /*
+  /**
    * 获取待诊断列表
    */
   public List<PathologyDTO> getListPathologyToNeed(HttpServletRequest request, String name) {
@@ -127,19 +128,22 @@ public class PathologyServiceImpl implements IPathologyService {
       pageNum = pageNum != null ? pageNum : "1";
       String title = "";
       int status = 1;
-      String sql = basicSql + " WHERE a.diag_status='2' and a.id_doctor='" + name + "'";
-      String countSql = basicCountSql + " WHERE a.diag_status='2' and a.id_doctor='" + name + "'";
+      String countSql = basicCountSql + " WHERE a.diag_status='2' and ifnull(a.id_doctor,'" + name + "')='" + name + "'";
 
       int totalNum = jdbcTemplate.queryForInt(countSql);
       if (totalNum > 0) {
-        Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
+        Pages page = new Pages(totalNum, "PathologyAction!getPathologyListToNeed", Integer.parseInt(pageNum), 10);
+        String sql = basicSql + " WHERE a.diag_status='2' and ifnull(a.id_doctor,'" + name + "')='" + name + "'"
+            + page.getPageLimit();
         request.setAttribute("page", page.getPageStr());
+        return jdbcTemplate.query(sql, new PathologyMapping());
+      } else {
+        request.setAttribute("page", "暂无数据");
       }
-      return jdbcTemplate.query(sql, new PathologyMapping());
+      return null;
     } catch (Exception ex) {
       throw new RuntimeException("查询出现错误");
     }
-
   }
 
   @Override
@@ -244,38 +248,64 @@ public class PathologyServiceImpl implements IPathologyService {
     }
   }
 
+  /**
+   * 已诊断列表
+   *
+   * @param request 请求
+   * @param name 当前登录用户id
+   * @return 已诊断列表
+   */
   public List<PathologyDTO> getListPathologyToHas(HttpServletRequest request, String name) {
-
     String pageNum = request.getParameter("pageNum");
     pageNum = pageNum != null ? pageNum : "1";
     String title = "";
     int status = 1;
-    String sql = basicSql + " WHERE a.diag_status='7' and a.id_doctor='" + name + "'";
     String countSql = basicCountSql + " WHERE a.diag_status='7' and a.id_doctor='" + name + "'";
-
-    int totalNum = jdbcTemplate.queryForInt(countSql);
-    if (totalNum > 0) {
-      Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
-      request.setAttribute("page", page.getPageStr());
+    try {
+      int totalNum = jdbcTemplate.queryForInt(countSql);
+      if (totalNum > 0) {
+        Pages page = new Pages(totalNum, "PathologyAction!getPathologyListToHas", Integer.parseInt(pageNum), 10);
+        String sql = basicSql + " WHERE a.diag_status='7' and a.id_doctor='" + name + "'" + page.getPageLimit();
+        request.setAttribute("page", page.getPageStr());
+        return jdbcTemplate.query(sql, new PathologyMapping());
+      } else {
+        request.setAttribute("page", "暂无数据");
+        return null;
+      }
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      return null;
     }
-    return jdbcTemplate.query(sql, new PathologyMapping());
-
   }
 
+  /**
+   * 查看退回病理列表
+   *
+   * @param request 请求
+   * @param name 当前登录用户id
+   * @return 退回病理列表
+   */
   public List<PathologyDTO> getListPathologyToBack(HttpServletRequest request, String name) {
     String pageNum = request.getParameter("pageNum");
     pageNum = pageNum != null ? pageNum : "1";
     String title = "";
     int status = 1;
-    String sql = basicSql + " WHERE a.diag_status='3'";
     String countSql = basicCountSql + " WHERE a.diag_status='3'";
-    int totalNum = jdbcTemplate.queryForInt(countSql);
-    if (totalNum > 0) {
-      Pages page = new Pages(totalNum, "listAskonlineForm", Integer.parseInt(pageNum), 10);
-      request.setAttribute("page", page.getPageStr());
+    try {
+      int totalNum = jdbcTemplate.queryForInt(countSql);
+      if (totalNum > 0) {
+        Pages page = new Pages(totalNum, "PathologyAction!getPathologyListToBack", Integer.parseInt(pageNum), 10);
+        String sql = basicSql + " WHERE a.diag_status='3'" + page.getPageLimit();
+        request.setAttribute("page", page.getPageStr());
+        return jdbcTemplate.query(sql, new PathologyMapping());
+      } else {
+        request.setAttribute("page", "暂无数据");
+        return null;
+      }
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      return null;
     }
-    List<PathologyDTO> ss = (List<PathologyDTO>) jdbcTemplate.query(sql, new PathologyMapping());
-    return jdbcTemplate.query(sql, new PathologyMapping());
   }
 
   /**
