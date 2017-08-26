@@ -173,7 +173,7 @@ public class PathologyAction extends BaseAction {
       caseId = id;
       descriptionAppList = descriptionAppService.selectForListByCaseId(id);
       hospitalList = hospitalservice.getAllHospital(Hospital.class, "");
-      usersList = pathologyService.selectDoctorList();
+      usersList = pathologyService.selectDoctorListNoMe();
     } catch (Exception e) {
       logger.error(e.getMessage());
     }
@@ -240,7 +240,7 @@ public class PathologyAction extends BaseAction {
     try {
       hospitalList = hospitalservice.getAllHospital(Hospital.class, "");
       specimenList = specimenService.selectList(Specimen.class, "");
-      usersList = pathologyService.selectDoctorList();
+      usersList = pathologyService.selectDoctorListNoMe();
     } catch (Exception e) {
       logger.error(e.getMessage());
     }

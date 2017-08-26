@@ -92,7 +92,7 @@ public class PathologyServiceImpl implements IPathologyService {
    * 获取新建列表
    *
    * @param request 请求
-   * @param name 登录用户
+   * @param name    登录用户
    * @return 列表
    */
   @Override
@@ -279,14 +279,15 @@ public class PathologyServiceImpl implements IPathologyService {
   }
 
   /**
-   * 获取医生信息列表
+   * 获取医生信息列表（不包含当前登录用户）
    *
    * @return 医生信息列表
    */
   @Override
-  public List<Users> selectDoctorList() {
+  public List<Users> selectDoctorListNoMe() {
     try {
-      return userService.getAllUser(Users.class, "");
+      return userService.getAllUser(Users.class, " and idUsers != '"
+          + SessionAgentManager.getSessionAgentBean().getIdUsers() + "'");
     } catch (Exception e) {
       logger.error("获取医生信息错误");
       return null;
