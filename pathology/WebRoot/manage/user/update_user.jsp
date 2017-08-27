@@ -175,7 +175,17 @@
 							value="${sessionScope.edituser.mobile}" style="width:300px;" />
 						</td>
 					</tr>
-
+					<!--  <tr>
+						<th>审核状态</th>
+						<td>
+							<input type="radio" name="user.userstatus"
+							<c:if test="${sessionScope.edituser.userstatus=='0'}">checked</c:if>
+							value="0" /> 待审核 &nbsp;&nbsp; <input type="radio" name="user.userstatus"
+							<c:if test="${sessionScope.edituser.userstatus=='1'}">checked</c:if>
+							value="1" /> 审核通过 &nbsp;&nbsp; <input type="radio" name="user.userstatus"
+							<c:if test="${sessionScope.edituser.userstatus=='2'}">checked</c:if>
+							value="2" /> 审核拒绝</td>
+					</tr>-->
 					<tr>
 						<th>角色</th>
 						<td><select name="user.roleId">

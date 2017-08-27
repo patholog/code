@@ -176,6 +176,7 @@ public class UsersAction extends BaseAction {
 			userT.setBelonghospital(user.getBelonghospital());
 			userT.setSex(user.getSex());
 			userT.setTel(user.getTel());
+			//userT.setUserstatus(user.getUserstatus());
 			userT.setRoleId(user.getRoleId());
 			userservice.updateUser(userT);
 			return "updatesuccess";
