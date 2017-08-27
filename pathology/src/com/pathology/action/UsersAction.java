@@ -228,17 +228,17 @@ public class UsersAction extends BaseAction {
 			if (photo != null) {
 				String realpath = ServletActionContext.getServletContext()
 						.getRealPath("upload/img/") + "\\";
-				System.out.println("11111" + realpath);
-				System.out.println(photoFileName);
+				//System.out.println("11111" + realpath);
+				//System.out.println(photoFileName);
 				String type = photoFileName.substring(
 						photoFileName.lastIndexOf(".") + 1,
 						photoFileName.length());
-				System.out.println("222" + type);
+				//System.out.println("222" + type);
 				String time = new SimpleDateFormat("yyMMddssSSS")
 						.format(new Date());
-				System.out.println(time);
+				//System.out.println(time);
 				String name = time + "." + type;
-				System.out.println(name);
+				//System.out.println(name);
 				File saveFile = new File(realpath, name);
 				if (saveFile.getParentFile().exists()) {
 					saveFile.getParentFile().mkdirs();

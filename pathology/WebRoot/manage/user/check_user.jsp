@@ -9,13 +9,23 @@
 <title></title>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" type="text/css" href="${path }/css/style.css" />
-<script type="text/javascript"
-	src="${path }/CKEditor/ckeditor/ckeditor.js"></script>
-<script type="text/javascript"
-	src="${path }/CKFinder/ckfinder/ckfinder.js"></script>
 <script type="text/javascript" src="${path }/js/treeView.js"></script>
 <script type="text/javascript" src="${path }/js/common-cn.js"></script>
 <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="${path }/css/jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css"
+	href="${path }/css/jquery.multiselect.filter.css" />
+<link rel="stylesheet" type="text/css"
+	href="${path }/js/multiselect/jquery-ui.css" />
+<script type="text/javascript" src="${path }/js/multiselect/jquery.js"></script>
+<script type="text/javascript"
+	src="${path }/js/multiselect/jquery-ui.js"></script>
+<script type="text/javascript"
+	src="${path }/js/multiselect/jquery.multiselect.min.js"></script>
+<script type="text/javascript"
+	src="${path }/js/multiselect/jquery.multiselect.filter.min.js"></script>
+<script type="text/javascript">
 <script type="text/javascript">
 	$(function() {
 		$(".ta tr").each(function(i) {
@@ -77,11 +87,7 @@
               <tr>
                 <th>联系电话</th>
                 <td><input type="text" name="user.mobile" id="title" disabled="true" value="${sessionScope.user.mobile}" style="width:300px;" /> </td>
-              </tr>			  
-              <tr>
-                <th>生日</th>
-                <td><input type="date" disabled="true" value="${sessionScope.user.birthday}"/></td>
-              </tr>			  
+              </tr>			  		  
               <tr>
                 <th>状态</th>
                 <td>
@@ -95,6 +101,75 @@
                 
                 </td>
               </tr>
+              <tr>
+						<th>所属医院</th>
+						<td>
+						<input type="text" name="user.belonghospital"
+							id="hospitalIdIpt" type="hidden"
+							value="${sessionScope.edituser.belonghospital}" style="display:none" /> 
+						<select id='select' multiple="multiple" style="width:300px;">
+								<c:forEach items="${sessionScope.allhaospitallist}"
+									var="hospital">
+									<option value="${hospital.idHospital}">${hospital.name}</option>
+								</c:forEach>
+
+
+						</select> <script type="text/javascript">
+							$(function() {
+
+								//以下为初始配置参数，用户可自行配置，同时，可配置事件参数
+								var el = $('#select').multiselect({
+									header : true,
+									height : 175,
+									minWidth : 225,
+									classes : '',
+									checkAllText : '选中全部',
+									uncheckAllText : '取消全选',
+									noneSelectedText : '请勾选',
+									selectedText : '# 选中',
+									selectedList : 5,
+									show : null,
+									hide : null,
+									autoOpen : false,
+									multiple : true,
+									position : {},
+									appendTo : "body",
+									menuWidth : null
+								}).multiselectfilter();
+
+								var ss = '${sessionScope.edituser.belonghospital}';
+								var ay = ss.split(',');
+								$('#select option').each(function(i, content) {
+									for ( var i = 0; i < ay.length; i++) {
+										if ($(content).val() == ay[i])
+											this.selected = true;
+									}
+								});
+								el.multiselect('refresh');
+
+							});
+
+							function hosset() {
+								var hospitalIds = '';
+								$('#select option').each(function(i, content) {
+									if (this.selected) {
+										if (hospitalIds != '')
+											hospitalIds += ',';
+
+										hospitalIds += $(content).val();
+									}
+								});
+								if (hospitalIds == '') {
+									$('#hospitalIdIpt').val('');
+									return false;
+								} else {
+									$('#hospitalIdIpt').val(hospitalIds);
+									return true;
+								}
+							}
+						</script>
+						</td>
+					</tr>
               <tr>
                 <th>医师资格</th>
                 <td><img id="img" name="user.mobile" src="${sessionScope.user.doctorctfsrc}" width="400" height="400" /> </td>

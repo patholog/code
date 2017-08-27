@@ -13,6 +13,12 @@
 <script type="text/javascript" src="${path }/js/treeView.js"></script>
 <script type="text/javascript" src="${path }/js/common-cn.js"></script>
 <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
+<script type="text/javascript">  
+function resetForm()  
+{  
+document.getElementById("articles").reset()  
+}  
+</script>
 <script type="text/javascript">
 $(document).ready(function() {
 

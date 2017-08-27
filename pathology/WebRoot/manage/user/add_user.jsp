@@ -153,6 +153,12 @@
 		}); //移除该行的class
 	});
 </script>
+<script type="text/javascript">  
+function resetForm()  
+{  
+document.getElementById("articles").reset()  
+}  
+</script>  
 </head>
 <div id="header">
 	<%@include file="/manage/managetop.jsp"%>
