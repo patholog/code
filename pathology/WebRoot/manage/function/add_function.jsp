@@ -6,7 +6,7 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <html>
 <head>
-<title></title>
+<title>新增功能</title>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" type="text/css" href="${path }/css/style.css" />
 <script src="${path }/js/jquery/jquery-1.4.4.min.js"></script>

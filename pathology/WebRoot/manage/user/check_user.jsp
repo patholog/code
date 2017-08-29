@@ -6,7 +6,7 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <html>
 <head>
-<title></title>
+<title>审核用户信息</title>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" type="text/css" href="${path }/css/style.css" />
 <script type="text/javascript" src="${path }/js/treeView.js"></script>
@@ -54,7 +54,7 @@
 	  
 		  <table id="pagehead" cellspacing="0" cellpadding="0" width="100%" border="0">
 			<tr>
-			  <td><h1>会员信息</h1></td>
+			  <td><h1>用户信息</h1></td>
 			</tr>
 		  </table>
 		  
