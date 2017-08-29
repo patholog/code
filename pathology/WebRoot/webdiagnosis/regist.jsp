@@ -71,13 +71,13 @@
 								</td>
 							</tr>
 							<tr>
-								<td align="right">所属医院：</td>
-								<td align="left">
-									<!--  <c:forEach var="hospital" items="${hoslist}">
-									<option value="${hospital.idHospital }">${hospital.name}</option>
-								</c:forEach>s --> <%@include file="CheckSelect.jsp"%>
-									<span id="hospital"></span>
-								</td>
+								<td align="right">医院：</td>
+								
+									<td align="left"><input type="text" name="user.registhospital"
+										placeholder="医院" id="registhospital" required /><span id="registhospitaltip"></span></span>
+									</td>
+									
+								
 							</tr>
 							<tr>
 								<td align="right">特长：</td>
@@ -105,7 +105,7 @@
 								<td align="center"><input type="button" value="已有账号"
 									id="back" onmousemove="changeBgColor('back')"
 									onmouseout="recoverBgColor('back');" class="submit"
-									onclick="javascrtpt:window.location.href='${path }/webdiagnosis/login.jsp'" />
+									onclick="javascrtpt:window.location.href='${path }/login.jsp'" />
 								</td>
 								<td align="center"><input type="submit" accesskey="enter"
 									value="注册" id="btn" onmousemove="changeBgColor('btn')"
@@ -130,6 +130,7 @@
   var namefg=false;
   var pswdfg=false;
   var pswd2fg=false;
+  var hosfg=false;
   var spefg=true;
       function showTips(text) {
       $('#tipInfo').text(text);
@@ -292,6 +293,25 @@
         $("#specialtytip").html("");
         //$("#btn").attr("disabled",false);
         spefg=true;
+        return true;
+      }
+    });
+      $("#registhospital").blur(function() {
+      var registhospital = $("#registhospital").val().trim();
+      if(registhospital==''){
+        $("#registhospitaltip").html("<a style='color:#2ca9cc;font-size:14px;'>医院不能为空！</a>");
+        //$("#btn").attr("disabled",true);
+        hosfg=false;
+        return false;
+      }else if(registhospital.length>200){
+        $("#registhospitaltip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
+        //$("#btn").attr("disabled",true);
+        hosfg=false;
+        return false;
+      }else{
+        $("#registhospitaltip").html("");
+        //$("#btn").attr("disabled",false);
+        hosfg=true;
         return true;
       }
     });

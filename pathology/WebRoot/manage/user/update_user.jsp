@@ -100,7 +100,13 @@
 							value="女" /> 女</td>
 					</tr>
 					<tr>
-						<th>所属医院</th>
+						<th>注册所填医院</th>
+						<td><input type="text" name="user.registhospital" id="title2"
+							value="${sessionScope.edituser.registhospital}"  disabled="true" style="width:300px;" />
+						</td>
+					</tr>
+					<tr>
+						<th>分配所属医院</th>
 						<td>
 						<input type="text" name="user.belonghospital"
 							id="hospitalIdIpt" type="hidden"
@@ -159,6 +165,7 @@
 								});
 								if (hospitalIds == '') {
 									$('#hospitalIdIpt').val('');
+									alert("分配医院不能为空！");
 									return false;
 								} else {
 									$('#hospitalIdIpt').val(hospitalIds);

@@ -39,6 +39,7 @@
 		}); //移除该行的class
 	});
 </script>
+
 </head>
 <div id="header">
 		<%@include file="/manage/managetop.jsp"%>
@@ -57,25 +58,25 @@
 			</tr>
 		  </table>
 		  
-		  <form name="articles" id="articles" method="post" action="UserAction!checkUserStatus">
+		  <form name="articles" id="articles" method="post" action="UserAction!checkUserStatus" onsubmit="return hosset();">
 		    <table class="maintable form_top_thin">
               <tr>
                 <th>用户名</th>
-                <td><input type="text" name="user.username" id="title" value="${sessionScope.user.username}" disabled="true" style="width:300px;" /> 
-                	<input type="hidden" name="user.idUsers" value="${sessionScope.user.idUsers}" />
+                <td><input type="text" name="user.username" id="title" value="${sessionScope.checkuser.username}" disabled="true" style="width:300px;" /> 
+                	<input type="hidden" name="user.idUsers" value="${sessionScope.checkuser.idUsers}" />
                 </td>
               </tr>			  
               <tr>
                 <th>密码</th>
-                <td><input type="password" name="user.password" id="title" value="${sessionScope.user.password}" disabled="true" style="width:300px;" /> </td>
+                <td><input type="password" name="user.password" id="title" value="${sessionScope.checkuser.password}" disabled="true" style="width:300px;" /> </td>
               </tr>			  
               <tr>
                 <th>电子邮箱</th>
-                <td><input type="text" name="user.email" id="title" value="${sessionScope.user.email}" disabled="true" style="width:300px;" /> </td>
+                <td><input type="text" name="user.email" id="title" value="${sessionScope.checkuser.email}" disabled="true" style="width:300px;" /> </td>
               </tr>			  
               <tr>
                 <th>真实姓名</th>
-                <td><input type="text" name="user.realname" id="title2" value="${sessionScope.user.realname}"  disabled="true" style="width:300px;" /></td>
+                <td><input type="text" name="user.realname" id="title2" value="${sessionScope.checkuser.realname}"  disabled="true" style="width:300px;" /></td>
               </tr>			  
               <tr>
                 <th>性别</th>
@@ -86,27 +87,31 @@
               </tr>			  
               <tr>
                 <th>联系电话</th>
-                <td><input type="text" name="user.mobile" id="title" disabled="true" value="${sessionScope.user.mobile}" style="width:300px;" /> </td>
+                <td><input type="text" name="user.mobile" id="title" disabled="true" value="${sessionScope.checkuser.mobile}" style="width:300px;" /> </td>
               </tr>			  		  
               <tr>
                 <th>状态</th>
                 <td>
                 <input type="text"  disabled="true" 
                 <c:choose>
-                <c:when test="${sessionScope.user.userstatus=='0'}"> value="待审核"</c:when>
-                <c:when test="${sessionScope.user.userstatus=='1'}"> value="审核通过"</c:when>
-                <c:when test="${sessionScope.user.userstatus=='2'}"> value="审核拒绝"</c:when>
+                <c:when test="${sessionScope.checkuser.userstatus=='0'}"> value="待审核"</c:when>
+                <c:when test="${sessionScope.checkuser.userstatus=='1'}"> value="审核通过"</c:when>
+                <c:when test="${sessionScope.checkuser.userstatus=='2'}"> value="审核拒绝"</c:when>
                 <c:otherwise>value="未知"</c:otherwise></c:choose>
                  />
                 
                 </td>
               </tr>
               <tr>
-						<th>所属医院</th>
+                <th>注册所填医院</th>
+                <td><input type="text" name="user.registhospital" id="registhospital" value="${sessionScope.checkuser.registhospital}"  disabled="true" style="width:300px;" /></td>
+              </tr>	
+              <tr>
+						<th>分配所属医院</th>
 						<td>
 						<input type="text" name="user.belonghospital"
 							id="hospitalIdIpt" type="hidden"
-							value="${sessionScope.edituser.belonghospital}" style="display:none" /> 
+							value="${sessionScope.checkuser.belonghospital}" style="display:none" /> 
 						<select id='select' multiple="multiple" style="width:300px;">
 								<c:forEach items="${sessionScope.allhaospitallist}"
 									var="hospital">
@@ -137,7 +142,7 @@
 									menuWidth : null
 								}).multiselectfilter();
 
-								var ss = '${sessionScope.edituser.belonghospital}';
+								var ss = '${sessionScope.checkuser.belonghospital}';
 								var ay = ss.split(',');
 								$('#select option').each(function(i, content) {
 									for ( var i = 0; i < ay.length; i++) {
@@ -161,25 +166,26 @@
 								});
 								if (hospitalIds == '') {
 									$('#hospitalIdIpt').val('');
+									alert("分配医院不能为空！");
 									return false;
 								} else {
 									$('#hospitalIdIpt').val(hospitalIds);
 									return true;
 								}
-							}
+							} 
 						</script>
 						</td>
 					</tr>
               <tr>
                 <th>医师资格</th>
-                <td><img id="img" name="user.mobile" src="${sessionScope.user.doctorctfsrc}" width="400" height="400" /> </td>
+                <td><img id="img" name="user.mobile" src="${sessionScope.checkuser.doctorctfsrc}" width="400" height="400" /> </td>
               </tr>	
             </table>
 		    <table width="60%" align="center" border="0">
 		  	<tr>
 				<td class="buttons">
-				<input type="submit" name="Submit" id="Submit" <c:if test="${sessionScope.user.userstatus=='1'}">disabled="true"</c:if>  value="审核通过" />
-				<input id="Refuse" type="button" <c:if test="${sessionScope.user.userstatus=='2'}">disabled="true"</c:if> name="Refuse"  onClick="window.location.href='UserAction!refuseCheck?idUsers=${sessionScope.user.idUsers}'" value="审核拒绝" />
+				<input type="submit" name="Submit" id="Submit" <c:if test="${sessionScope.checkuser.userstatus=='1'}">disabled="true"</c:if>  value="审核通过" />
+				<input id="Refuse" type="button" <c:if test="${sessionScope.checkuser.userstatus=='2'}">disabled="true"</c:if> name="Refuse"  onClick="window.location.href='UserAction!refuseCheck?idUsers=${sessionScope.user.idUsers}'" value="审核拒绝" />
 				</td>
 			</tr>
 		  </table>

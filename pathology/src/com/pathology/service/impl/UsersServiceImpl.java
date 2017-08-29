@@ -67,7 +67,11 @@ public class UsersServiceImpl implements IUsersService {
 	}
 
 	public Users getUser(Class clazz, String id) throws Exception {
-
+		HttpSession session = ServletActionContext.getRequest()
+				.getSession();
+		if(session.getAttribute("allhaospitallist")==null){
+			session.setAttribute("allhaospitallist", getAllHospitalList());
+		}
 		return userdao.getUser(clazz, id);
 	}
 

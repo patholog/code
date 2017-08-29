@@ -44,6 +44,7 @@ public class Users implements java.io.Serializable {
 	private String verification;
 	private String roleId;
 	private String roleName;
+	private String registhospital;
 
 	// Constructors
 
@@ -366,5 +367,15 @@ public class Users implements java.io.Serializable {
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
+
+	public String getRegisthospital() {
+		return registhospital;
+	}
+
+	public void setRegisthospital(String registhospital) {
+		this.registhospital = registhospital;
+	}
+
+
 
 }

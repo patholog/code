@@ -29,7 +29,7 @@
             <column name="password" />
         </property>
         <property name="belonghospital" type="java.lang.String">
-            <column name="belonghospital" length="32" />
+            <column name="belonghospital" length="255" />
         </property>
         <property name="signature" type="java.lang.String">
             <column name="signature" />
@@ -104,6 +104,9 @@
         </property>
         <property name="roleId" type="java.lang.String">
             <column name="role_id" length="32" />
+        </property>
+        <property name="registhospital" type="java.lang.String">
+            <column name="registhospital" length="255" />
         </property>
     </class>
 </hibernate-mapping>

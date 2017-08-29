@@ -88,6 +88,10 @@ public class UsersAction extends BaseAction {
 					hql += " and username like '%" + user.getUsername() + "%'";
 				if (user.getEmail() != null && !("".equals(user.getEmail())))
 					hql += " and email like " + user.getEmail();
+//				String hosname=user.getBelonghospital();
+//				String qryhos="'"+hosname.replace(",", "','")+"'";
+//				if (user.getBelonghospital() != null && !("".equals(user.getBelonghospital())))
+//					hql += " and belonghospital in (" + qryhos+")";
 			}
 
 			List<Users> list = index != 0 ? userservice.getUsersByPage(index,
@@ -137,10 +141,15 @@ public class UsersAction extends BaseAction {
 
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
+//			Boolean result=userservice.findUser(user.getIdUsers());
+//			if(result){
+//				return "check";
+//			}
+//			else{return "err";}
 			HttpSession session = ServletActionContext.getRequest()
 					.getSession();
 			Users userT = userservice.getUser(Users.class, user.getIdUsers());
-			session.setAttribute("user", userT);
+			session.setAttribute("checkuser", userT);
 			return "check";
 		} catch (Exception e) {
 			return "err";
@@ -282,6 +291,7 @@ public class UsersAction extends BaseAction {
 
 		try {
 			Users userT = userservice.getUser(Users.class, user.getIdUsers());
+			userT.setBelonghospital(user.getBelonghospital());
 			userT.setUserstatus("1");
 			userservice.updateUser(userT);
 			String[] content = new String[] { "您好：", "恭喜您的账号"+userT.getUsername()+"已经审核通过", "感谢您的使用" };

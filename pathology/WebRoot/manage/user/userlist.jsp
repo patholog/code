@@ -14,6 +14,20 @@
 <script type="text/javascript" src="${path}/js/treeView.js"></script>
 <script type="text/javascript" src="${path}/js/common-cn.js"></script>
 <script type="text/javascript" src="${path}/js/forbid-refresh.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="${path }/css/jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css"
+	href="${path }/css/jquery.multiselect.filter.css" />
+<link rel="stylesheet" type="text/css"
+	href="${path }/js/multiselect/jquery-ui.css" />
+<script type="text/javascript" src="${path }/js/multiselect/jquery.js"></script>
+<script type="text/javascript"
+	src="${path }/js/multiselect/jquery-ui.js"></script>
+<script type="text/javascript"
+	src="${path }/js/multiselect/jquery.multiselect.min.js"></script>
+<script type="text/javascript"
+	src="${path }/js/multiselect/jquery.multiselect.filter.min.js"></script>
+<script type="text/javascript">
 <script type="text/javascript">
 	function confirmDelete(id) {
 		if (confirm('确定删除吗？'))
@@ -42,8 +56,71 @@
 								<input type="text" name="user.username" id="hostpital_name"
 								value="" style="width:120px;" /> <label>邮箱：</label> <input type="text"
 								name="user.email" id="hostpital_user" value=""
-								style="width:120px;" /> <input name="searchButton"
-								id="searchButton" onclick="" type="submit"
+								style="width:120px;" /> <!--<label>医院：</label> <input type="text" name="user.belonghospital"
+							id="hospitalIdIpt" type="hidden"
+							value=""  /> <select id='select' multiple="multiple" style="width:300px;">
+								<c:forEach items="${sessionScope.allhaospitallist}"
+									var="hospital">
+									<option value="${hospital.idHospital}">${hospital.name}</option>
+								</c:forEach>
+
+
+						</select> <script type="text/javascript">
+							$(function() {
+
+								//以下为初始配置参数，用户可自行配置，同时，可配置事件参数
+								var el = $('#select').multiselect({
+									header : true,
+									height : 175,
+									minWidth : 150,
+									classes : '',
+									checkAllText : '选中全部',
+									uncheckAllText : '取消全选',
+									noneSelectedText : '请勾选',
+									selectedText : '# 选中',
+									selectedList : 5,
+									show : null,
+									hide : null,
+									autoOpen : false,
+									multiple : true,
+									position : {},
+									appendTo : "body",
+									menuWidth : null
+								}).multiselectfilter();
+
+								var ss = '${sessionScope.user.belonghospital}';
+								var ay = ss.split(',');
+								$('#select option').each(function(i, content) {
+									for ( var i = 0; i < ay.length; i++) {
+										if ($(content).val() == ay[i])
+											this.selected = true;
+									}
+								});
+								el.multiselect('refresh');
+
+							});
+
+							function hosset() {
+								var hospitalIds = '';
+								$('#select option').each(function(i, content) {
+									if (this.selected) {
+										if (hospitalIds != '')
+											hospitalIds += ',';
+
+										hospitalIds += $(content).val();
+									}
+								});
+								if (hospitalIds == '') {
+									$('#hospitalIdIpt').val('');
+									alert("分配医院不能为空！");
+									return false;
+								} else {
+									$('#hospitalIdIpt').val(hospitalIds);
+									return true;
+								}
+							}
+						</script>  --> <input name="searchButton"
+								id="searchButton" onclick="hosset()" type="submit"
 								style="width:80px;background:url(css/img-blue/search.gif) 8px top no-repeat;"
 								value="  搜索" /></td>
 						</tr>
