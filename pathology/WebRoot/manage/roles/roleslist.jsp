@@ -74,7 +74,8 @@
 
 
 						<tr class="lightrow">
-							<td colspan="8"><div id="pageDir">
+							<td colspan="8"><table class="pagetable">
+							<tr><td>
 									<c:set var="pageCount" value="${(sessionScope.count-1)/10+1 }" />
 									<fmt:formatNumber var="lastIndex" value="${pageCount}"
 										pattern="#" />
@@ -88,15 +89,14 @@
 										<a href="RolesAction!rolesList?index=${i } " target="mainFrame"><c:out
 												value="${i }" /> </a>
 									</c:forEach>
-									&nbsp;<a href="RolesAction?index=${lastIndex}" target="mainFrame">尾页</a>
-
+									&nbsp;<a href="RolesAction?index=${lastIndex}" target="mainFrame">尾页</a></td>
+							<td>
 									<s:form action="RolesAction!rolesList" theme="simple"
 										target="mainFrame">
 							第&nbsp;<s:textfield name="index" cssStyle="width:25px;height:20px;" />&nbsp;页&nbsp; &nbsp;
 							<s:submit value="Go" id="go" />
-									</s:form>
-
-								</div></td>
+									</s:form></td></tr>
+								</table></td>
 						</tr>
 
 					</tbody>
