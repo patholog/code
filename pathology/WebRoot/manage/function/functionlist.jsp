@@ -83,19 +83,18 @@
 										pattern="#" />
 
 									第${sessionScope.thisindex }/${lastIndex }页 &nbsp; &nbsp; <a
-										href="HospitalAction!hospitalList?index=1" target="mainFrame">首页</a>&nbsp; 
+										href="HospitalAction!hospitalList?index=1" >首页</a>&nbsp; 
 									<!-- 
 							<c:set var="pageCount" value="${fn:length(userList)%10==0?fn:length(userList)/10:fn:length(userList)/10+1 }"/>
 						-->
 									<c:forEach var="i" begin="1" step="1" end="${lastIndex }">
-										<a href="FunctionAction!functionList?index=${i } " target="mainFrame"><c:out
+										<a href="FunctionAction!functionList?index=${i } " ><c:out
 												value="${i }" /> </a>
 									</c:forEach>
-									&nbsp;<a href="FunctionAction?index=${lastIndex}" target="mainFrame">尾页</a></td>
+									&nbsp;<a href="FunctionAction!functionList?index=${lastIndex}" >尾页</a></td>
 							<td>
 
-									<s:form action="FunctionAction!functionList" theme="simple"
-										target="mainFrame">
+									<s:form action="FunctionAction!functionList" theme="simple">
 							第&nbsp;<s:textfield name="index" cssStyle="width:25px;height:20px;" />&nbsp;页&nbsp; &nbsp;
 							<s:submit value="Go" id="go" />
 									</s:form>
