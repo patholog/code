@@ -82,7 +82,7 @@
 							<td colspan="8">
 							<table class="pagetable">
 							<tr><td>
-									<c:set var="pageCount" value="${(sessionScope.count-1)/10+1 }" />
+									<c:set var="pageCount" value="${sessionScope.pageCount}" />
 									<fmt:formatNumber var="lastIndex" value="${pageCount}"
 										pattern="#" />
 

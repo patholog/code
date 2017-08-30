@@ -163,13 +163,12 @@
 						<tr class="lightrow">
 							<td colspan="8">
 							<table class="pagetable"><tr><td><c:set var="pageCount"
-									value="${(sessionScope.count-1)/10+1 }" /> <fmt:formatNumber
+									value="${sessionScope.pageCount}" /> <fmt:formatNumber
 									var="lastIndex" value="${pageCount}" pattern="#" />
 								第${sessionScope.thisindex }/${lastIndex }页 &nbsp; &nbsp; <a
 								href="UserAction!userList?index=1" >首页</a>&nbsp;
-								<!-- 
-							<c:set var="pageCount" value="${fn:length(userList)%10==0?fn:length(userList)/10:fn:length(userList)/10+1 }"/>
-						--> <c:forEach var="i" begin="1" step="1" end="${lastIndex }">
+						
+						<c:forEach var="i" begin="1" step="1" end="${lastIndex }">
 									<a href="UserAction!userList?index=${i } " >
 										<c:out value="${i }" /> </a>
 								</c:forEach> &nbsp;<a href="UserAction!userList?index=${lastIndex}" >尾页</a></td>

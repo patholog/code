@@ -84,9 +84,16 @@ public class HospitalAction extends BaseAction {
 					.getSession();
 			session.setAttribute("hoslist", list);
 			session.setAttribute("thisindex", index == 0 ? 1 : index);
+			int size=hospitalservice.getAllHospital(Hospital.class, hql).size();
+			session.setAttribute("count",size);
+			int pageCount = 0;
+			if (size % 10 > 0) {
+				pageCount = size / 10 + 1;
+			} else {
+				pageCount = size / 10;
+			}
 
-			session.setAttribute("count",
-					hospitalservice.getAllHospital(Hospital.class, hql).size());
+			session.setAttribute("pageCount", pageCount);
 			return SUCCESS;
 		} catch (Exception e) {
 			logger.error(e.getMessage());
