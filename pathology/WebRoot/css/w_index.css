@@ -19,7 +19,6 @@ a{
 	position:absolute;
 	left:270px;
 	top:118px;
-	height:500px;
 	width:850px;
 	color:#fff;
 	font-size:22px;
@@ -127,8 +126,8 @@ a{
 .w_center_icon3{
 	width:85px;
 	height:84px;
-	margin:20px auto 0 auto;
-	background:url(../images/index_icon/iicon_03.png) no-repeat 0 0;
+	margin:100px auto 0 auto;
+	background:url(../images/index_icon/iicon_04.png) no-repeat 0 0;
 	}
 .w_center_icon4{
 	width:85px;

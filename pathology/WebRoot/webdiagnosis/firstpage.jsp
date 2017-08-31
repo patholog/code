@@ -59,8 +59,8 @@
 		<div class="w_portal_box" >
 			<div>
 				<a href="PathologyAction!getPathologyListToNeed" class="one_block">
-		    	<div class="w_center_icon4"></div>
-		        <div class="w_center_title">待诊断</div>
+		    	<div class="w_center_icon3"></div>
+		        <div class="w_center_title">待诊断&nbsp;<%=request.getAttribute("needcount") != null ? request.getAttribute("needcount") : "" %>&nbsp;例</div>
 		    </a>
 		    </div>
 		    <div>
@@ -69,7 +69,7 @@
 		
 		    <a href="PathologyAction!getPathologyListToHas" class="two_block">
 		    	<div class="w_center_icon4"></div>
-		        <div class="w_center_title">已诊断</div>
+		        <div class="w_center_title">已诊断&nbsp;<%=request.getAttribute("hascount") != null ? request.getAttribute("hascount") : "" %>&nbsp;例</div>
 		    </a>
 		         </div>
 		          <div>
@@ -82,7 +82,7 @@
 		    <div>
 		    <a href="PathologyAction!getPathologyListToBack" class="four_block">
 		    	<div class="w_center_icon4"></div>
-		        <div class="w_center_title">我的退回</div>
+		        <div class="w_center_title">我的退回&nbsp;<%=request.getAttribute("backcount") != null ? request.getAttribute("backcount") : "" %>&nbsp;例</div>
 		    </a>
 		     </div>
 		    <div>

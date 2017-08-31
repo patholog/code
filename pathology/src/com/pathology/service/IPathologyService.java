@@ -39,4 +39,6 @@ public interface IPathologyService {
   List<PathologyDTO> getListPathologyToBack(HttpServletRequest request, String name);
 
   List<Users> selectDoctorListNoMe();
+  
+  void getFirstPage(HttpServletRequest request, String name);
 }

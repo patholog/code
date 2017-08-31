@@ -371,6 +371,24 @@ public class PathologyAction extends BaseAction {
 		}
 	  return "pathologysneed1";
   }
+  /**
+   * 首页需要显示的数据条数
+   *
+   */
+  public String getFirstPage() {
+	  String userId;
+	try {
+		userId = SessionAgentManager.getSessionAgentBean().getIdUsers();
+		HttpServletRequest request = ServletActionContext.getRequest();
+		  pathologyService.getFirstPage(request, userId);
+		  return "getFirstPage";
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return "err";
+	}
+      
+  }
 
   public IPathologyService getPathologyService() {
     return pathologyService;
