@@ -119,7 +119,7 @@
             success: function (result) {
               if (result && result.success) {
                 $('#tipInfo').text(result.success);
-                window.location.href = "PathologyAction!getPathologyListToNeed";
+                window.location.href = "PathologyAction!getNewPathologyList";
               } else if (result && result.failure) {
                 showTips(result.failure);
               } else {
