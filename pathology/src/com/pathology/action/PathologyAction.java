@@ -92,9 +92,11 @@ public class PathologyAction extends BaseAction {
       String rootPath = Property.getProperty("slideFilePath");
       if (slide != null) {
         InputStream is = new FileInputStream(getSlide()); //根据上传的文件得到输入流
-        if (!new File(rootPath + paramMap.get("slideFilePath")[0]).exists()) {
+        if (!new File(rootPath + paramMap.get("slideFilePath")[0] + "\\"
+            + paramMap.get("imageId")[0]).exists()) {
           try {
-            if (!new File(rootPath + paramMap.get("slideFilePath")[0]).mkdirs()) {
+            if (!new File(rootPath + paramMap.get("slideFilePath")[0] + "\\"
+                + paramMap.get("imageId")[0]).mkdirs()) {
               logger.error("error create dir");
             }
           } catch (Exception e) {
@@ -102,7 +104,7 @@ public class PathologyAction extends BaseAction {
           }
         }
         OutputStream os = new FileOutputStream(rootPath + paramMap.get("slideFilePath")[0] + "\\"
-            + paramMap.get("imageId")[0] + slideFileName); //指定输出流地址
+            + paramMap.get("imageId")[0] + "\\" + slideFileName); //指定输出流地址
         byte buffer[] = new byte[1024];
         int len;
         while ((len = is.read(buffer)) > 0) {
@@ -114,8 +116,9 @@ public class PathologyAction extends BaseAction {
       try {
         // 调用切图方法
         // imageService.cutSlide(paramMap.get("caseId")[0], paramMap.get("slideFilePath")[0], paramMap.get("slideFileName")[0]);
-        SlideUtil.processImageFile(new File(paramMap.get("slideFilePath")[0] + "\\"
-            + paramMap.get("imageId")[0] + slideFileName), new File(paramMap.get("slideFilePath")[0]));
+        SlideUtil.processImageFile(new File(rootPath + "\\"+ paramMap.get("slideFilePath")[0] + "\\"
+            +  paramMap.get("imageId")[0] + "\\" + slideFileName),
+            new File(rootPath + "\\" + paramMap.get("slideFilePath")[0] + "\\" + paramMap.get("imageId")[0]));
       } catch (Exception e) {
         logger.error(e.getMessage());
       }
@@ -437,23 +440,23 @@ public class PathologyAction extends BaseAction {
     }
     return "pathologysneed1";
   }
+
   /**
    * 首页需要显示的数据条数
-   *
    */
   public String getFirstPage() {
-	  String userId;
-	try {
-		userId = SessionAgentManager.getSessionAgentBean().getIdUsers();
-		HttpServletRequest request = ServletActionContext.getRequest();
-		  pathologyService.getFirstPage(request, userId);
-		  return "getFirstPage";
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		return "err";
-	}
-      
+    String userId;
+    try {
+      userId = SessionAgentManager.getSessionAgentBean().getIdUsers();
+      HttpServletRequest request = ServletActionContext.getRequest();
+      pathologyService.getFirstPage(request, userId);
+      return "getFirstPage";
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+      return "err";
+    }
+
   }
 
   public IPathologyService getPathologyService() {
