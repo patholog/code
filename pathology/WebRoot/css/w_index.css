@@ -14,9 +14,21 @@ a{
 .clear{
 	clear:both;
 	}
+.content_center{
+	position:fixed;
+	width:100%;
+	height:100%;
+	margin:95px 0px;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#000079',endColorStr='#468cf9',gradientType='0');
 
+background: -moz-linear-gradient(top, #000079, #468cf9);
+
+background: -o-linear-gradient(top,	#000079, #468cf9);
+
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#000079), to(#468cf9));
+}
 .w_portal_box{
-	position:absolute;
+	position:fixed;
 	left:270px;
 	top:118px;
 	width:850px;
