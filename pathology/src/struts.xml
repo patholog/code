@@ -48,7 +48,7 @@
     </action>
     <action name="login" class="com.pathology.action.LoginAction"
             method="login">
-      <result name="loginSuccess">/index.jsp</result>
+      <result name="loginSuccess">/webdiagnosis/firstpage.jsp</result>
     </action>
     <action name="test">
       <result>/webdiagnosis/viewpathologypic.jsp</result>
