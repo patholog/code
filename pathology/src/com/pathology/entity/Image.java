@@ -11,11 +11,12 @@ public class Image implements java.io.Serializable {
 
 	// Fields
 
-	private String idImage;
+	private Integer idImage;
 	private String caseId;
 	private Integer rowImage;
 	private Integer colImage;
 	private String pathImage;
+	private String path;
 	private String memo;
 	private String sortNo;
 	private String spellNo;
@@ -29,6 +30,10 @@ public class Image implements java.io.Serializable {
 	private String lastUpdUserId;
 	private Integer delF;
 	private String pathologyNo;
+	private String fileName;
+	private Integer width;
+	private Integer height;
+	private Integer preHandleFlag;
 
 	// Constructors
 
@@ -37,12 +42,12 @@ public class Image implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Image(String idImage) {
+	public Image(Integer idImage) {
 		this.idImage = idImage;
 	}
 
 	/** full constructor */
-	public Image(String idImage, String caseId, Integer rowImage,
+	public Image(Integer idImage, String caseId, Integer rowImage,
 			Integer colImage, String pathImage, String memo, String sortNo,
 			String spellNo, String wubiNo, Integer updCnt, Timestamp crtTime,
 			String crtUserId, String crtDeptCd, Date lastUpdTime,
@@ -70,11 +75,11 @@ public class Image implements java.io.Serializable {
 
 	// Property accessors
 
-	public String getIdImage() {
+	public Integer getIdImage() {
 		return this.idImage;
 	}
 
-	public void setIdImage(String idImage) {
+	public void setIdImage(Integer idImage) {
 		this.idImage = idImage;
 	}
 
@@ -214,4 +219,43 @@ public class Image implements java.io.Serializable {
 		this.pathologyNo = pathologyNo;
 	}
 
+  public String getFileName() {
+    return fileName;
+  }
+
+  public void setFileName(String fileName) {
+    this.fileName = fileName;
+  }
+
+  public Integer getWidth() {
+    return width;
+  }
+
+  public void setWidth(Integer width) {
+    this.width = width;
+  }
+
+  public Integer getHeight() {
+    return height;
+  }
+
+  public void setHeight(Integer height) {
+    this.height = height;
+  }
+
+  public Integer getPreHandleFlag() {
+    return preHandleFlag;
+  }
+
+  public void setPreHandleFlag(Integer preHandleFlag) {
+    this.preHandleFlag = preHandleFlag;
+  }
+
+  public String getPath() {
+    return path;
+  }
+
+  public void setPath(String path) {
+    this.path = path;
+  }
 }

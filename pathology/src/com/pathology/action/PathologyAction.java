@@ -14,6 +14,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,7 @@ public class PathologyAction extends BaseAction {
   private ISpecimenService specimenService;
   private String content;
   private IResultService resultService;
+  private IImageService imageService;
   @Nullable
   private File slide;
   private String slideFileName;
@@ -71,23 +73,11 @@ public class PathologyAction extends BaseAction {
     HttpServletResponse response = ServletActionContext.getResponse();
     response.setContentType("text/html;charset=utf-8");
     PrintWriter out;
-    Map<String, String[]> paramMap = request.getParameterMap();
+    Map<String, String[]> paramMap = new HashMap<>(request.getParameterMap());
     try {
-      String slideFilePath = Property.getProperty("slideFilePath");
-      if (slide != null) {
-        InputStream is = new FileInputStream(getSlide()); //根据上传的文件得到输入流
-        OutputStream os = new FileOutputStream(slideFilePath + "\\" + slideFileName); //指定输出流地址
-        byte buffer[] = new byte[1024];
-        int count;
-        while ((count = is.read(buffer)) > 0) {
-          os.write(buffer, 0, count); //把文件写到指定位置的文件中
-        }
-        os.close(); //关闭
-        is.close();
-        paramMap.put("slideFilePath", new String[]{slideFileName});
-      }
       int count;
       String failure = "";
+      paramMap.put("slideFileName", new String[]{slideFileName});
       try {
         count = pathologyService.addPathology(paramMap);
       } catch (RuntimeException e) {
@@ -98,6 +88,36 @@ public class PathologyAction extends BaseAction {
         logger.error(e.getMessage());
         count = 0;
         failure = "出现未知错误，请联系管理员";
+      }
+      String rootPath = Property.getProperty("slideFilePath");
+      if (slide != null) {
+        InputStream is = new FileInputStream(getSlide()); //根据上传的文件得到输入流
+        if (!new File(rootPath + paramMap.get("slideFilePath")[0]).exists()) {
+          try {
+            if (!new File(rootPath + paramMap.get("slideFilePath")[0]).mkdirs()) {
+              logger.error("error create dir");
+            }
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+        }
+        OutputStream os = new FileOutputStream(rootPath + paramMap.get("slideFilePath")[0] + "\\"
+            + paramMap.get("imageId")[0] + slideFileName); //指定输出流地址
+        byte buffer[] = new byte[1024];
+        int len;
+        while ((len = is.read(buffer)) > 0) {
+          os.write(buffer, 0, len); //把文件写到指定位置的文件中
+        }
+        os.close(); //关闭
+        is.close();
+      }
+      try {
+        // 调用切图方法
+        // imageService.cutSlide(paramMap.get("caseId")[0], paramMap.get("slideFilePath")[0], paramMap.get("slideFileName")[0]);
+        SlideUtil.processImageFile(new File(paramMap.get("slideFilePath")[0] + "\\"
+            + paramMap.get("imageId")[0] + slideFileName), new File(paramMap.get("slideFilePath")[0]));
+      } catch (Exception e) {
+        logger.error(e.getMessage());
       }
       out = response.getWriter();
       String jsonString = count > 0 ? "{\"success\":\"新建病理成功\"}" : "{\"failure\":\"" + failure + "\"}";
@@ -255,25 +275,70 @@ public class PathologyAction extends BaseAction {
    */
   public String OpenSlideHandler() throws IOException {
     HttpServletRequest request = ServletActionContext.getRequest();
-    String caseId = request.getParameter("caseId"); // 病理编号
-    String remotePath = Property.getProperty("remotePath"); // FTP远程文件路径
-    String filename = request.getParameter("SlideID"); // FTP远程文件名
-    // 下载图片
-    String imageSystemLocation = "localhost:8080/imagesystem";
-    String download = "http://" + imageSystemLocation + "/ftp/download.do?caseuid=" + caseId
-        + "&remotepath=" + remotePath + "&filename=" + filename;
-    String downloadResult = HttpUtil.sendGet(download, "");
+    String imageId = request.getParameter("caseId"); // 图片编号
+    // TODO 判断是否已经切片
     HttpServletResponse response = ServletActionContext.getResponse();
     response.setContentType("text/html;charset=utf-8");
     PrintWriter out = response.getWriter();
-    String url = "http://localhost:8080/imagesystem/show.do?filename=&id=" + caseId;
+    String url;
+    Image image = imageService.select(Integer.valueOf(imageId));
+    url = "http://" + Property.getProperty("slideImageSystem") + "/show.do?filename=&id=" + imageId;
     // 组装切片数据
-    SlideResult slideResult = new SlideResult("", "58112", "64000", "40", "256", "",
+    SlideResult slideResult = new SlideResult("", String.valueOf(image.getWidth()), String.valueOf(image.getHeight()),
+        "80", "256", "",
         "", "0", "P500B15001", url, "", "", "");
-    out.println(slideResult.toString() + "$" + slideResult.toString() + "#" + slideResult.toString());
+    out.println(slideResult.toString() + "$" + slideResult.toString());
     out.flush();
     out.close();
     return SUCCESS;
+  }
+
+  public void getSlideImage() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    HttpServletResponse response = ServletActionContext.getResponse();
+    String imageId = request.getParameter("id");
+    String[] position = request.getParameter("position").split("/");
+    int level = Integer.valueOf(position[0]);
+    try {
+      Image image = imageService.select(Integer.valueOf(imageId));
+      File file = new File(Property.getProperty("slideFilePath") + image.getPathImage() + "\\" + imageId + "\\" + level + "\\" + position[1]);
+
+      if (!file.exists()) return;
+      FileInputStream fis;
+      OutputStream out = response.getOutputStream();
+      fis = new FileInputStream(file);
+      byte[] b = new byte[fis.available()];
+      fis.read(b);
+      out.write(b);
+      out.flush();
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+    }
+  }
+
+  /**
+   * 获取缩略图切片
+   */
+  public void getThumbnailSlide() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    HttpServletResponse response = ServletActionContext.getResponse();
+    String imageId = request.getParameter("id");
+    try {
+      Image image = imageService.select(Integer.valueOf(imageId));
+      File file = new File(Property.getProperty("slideFilePath") + "\\"
+          + image.getPath().substring(0, image.getPath().lastIndexOf("\\") + 1) + String.valueOf(image.getIdImage())
+          + "\\" + "thumb_" + image.getFileName());
+      if (!file.exists()) return;
+      FileInputStream fis;
+      OutputStream out = response.getOutputStream();
+      fis = new FileInputStream(file);
+      byte[] b = new byte[fis.available()];
+      fis.read(b);
+      out.write(b);
+      out.flush();
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+    }
   }
 
   public String getPathologyListToBack() {
@@ -350,26 +415,27 @@ public class PathologyAction extends BaseAction {
     }
     return null;
   }
+
   /**
    * 病例退回
    *
    * @return 显示的界面
    */
   public String updateRetreatReason() {
-	  try {
-		  Pathology pathTodo= pathologyService.getPathology(Pathology.class, pathology.getCaseId());
-		  if(pathTodo==null){
-			  return Constant.ERR;
-		  }
-		  pathTodo.setDiagStatus("3");
-		  if(pathology.getRetreatReason()!=null){
-			  pathTodo.setRetreatReason(pathology.getRetreatReason());
-		  }
-		  pathologyService.updatePathology(pathTodo);
-		} catch (Exception e) {
-			return Constant.ERR;
-		}
-	  return "pathologysneed1";
+    try {
+      Pathology pathTodo = pathologyService.getPathology(Pathology.class, pathology.getCaseId());
+      if (pathTodo == null) {
+        return Constant.ERR;
+      }
+      pathTodo.setDiagStatus("3");
+      if (pathology.getRetreatReason() != null) {
+        pathTodo.setRetreatReason(pathology.getRetreatReason());
+      }
+      pathologyService.updatePathology(pathTodo);
+    } catch (Exception e) {
+      return Constant.ERR;
+    }
+    return "pathologysneed1";
   }
   /**
    * 首页需要显示的数据条数
@@ -496,5 +562,13 @@ public class PathologyAction extends BaseAction {
 
   public void setCaseId(String caseId) {
     this.caseId = caseId;
+  }
+
+  public IImageService getImageService() {
+    return imageService;
+  }
+
+  public void setImageService(IImageService imageService) {
+    this.imageService = imageService;
   }
 }

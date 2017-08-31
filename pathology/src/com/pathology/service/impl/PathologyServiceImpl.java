@@ -19,9 +19,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class PathologyServiceImpl implements IPathologyService {
@@ -172,6 +170,9 @@ public class PathologyServiceImpl implements IPathologyService {
   public int addPathology(Map<String, String[]> paramMap) {
     Pathology pathology = new Pathology();
     Result result = new Result();
+    if (this.getPathology(Pathology.class, paramMap.get("caseId")[0]) != null) {
+      throw new RuntimeException("该会诊号已经存在");
+    }
     try {
       pathology.setPatientname(paramMap.get("patientName")[0]); // 姓名
       pathology.setPathologyno(paramMap.get("pathologyNo")[0]); // 病理编号
@@ -216,21 +217,30 @@ public class PathologyServiceImpl implements IPathologyService {
       logger.error(e.getMessage());
       throw new RuntimeException("获取结果数据失败！请联系管理员");
     }
-    if (this.getPathology(Pathology.class, paramMap.get("caseId")[0]) != null) {
-      throw new RuntimeException("该会诊号已经存在");
-    }
     try {
       resultService.insert(result);
     } catch (Exception e) {
       throw new RuntimeException("新增结果数据失败，请联系管理员");
     }
+
     try {
-      if (paramMap.containsKey("slideFilePath") && !"".equals(paramMap.get("slideFilePath")[0])) {
+      // 病理图片信息
+      if (paramMap.containsKey("slideFileName") && !"".equals(paramMap.get("slideFileName")[0])) {
         Image image = new Image();
-        image.setIdImage(paramMap.get("pathologyNo")[0]);
-        image.setCaseId(paramMap.get("pathologyNo")[0]);
-        image.setPathImage(paramMap.get("slideFilePath")[0]);
-        imageService.insertImage(image);
+        // image.setIdImage(paramMap.get("pathologyNo")[0]); // 主键自增
+        image.setCaseId(paramMap.get("caseId")[0]);
+        Calendar cal = Calendar.getInstance();
+        String year = String.valueOf(cal.get(Calendar.YEAR));
+        String month = String.valueOf(cal.get(Calendar.MONTH) + 1);
+        month = month.length() == 1 ? "0" + month : month;
+        String day = String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
+        day = day.length() == 1 ? "0" + day : day;
+        String datePath = "\\" + year + "\\" + month + "\\" + day;
+        image.setPathImage(datePath); // 文件路径名（不包含文件名）
+        paramMap.put("slideFilePath", new String[]{datePath});
+        image.setFileName(paramMap.get("slideFileName")[0]); // 文件名
+        image.setCrtTime(new Timestamp(new Date().getTime()));
+        paramMap.put("imageId", new String[]{String.valueOf(imageService.insertImage(image))});
       }
     } catch (Exception e) {
       logger.error(e.getMessage());
