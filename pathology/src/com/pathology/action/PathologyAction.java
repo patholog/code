@@ -112,15 +112,15 @@ public class PathologyAction extends BaseAction {
         }
         os.close(); //关闭
         is.close();
-      }
-      try {
-        // 调用切图方法
-        // imageService.cutSlide(paramMap.get("caseId")[0], paramMap.get("slideFilePath")[0], paramMap.get("slideFileName")[0]);
-        SlideUtil.processImageFile(new File(rootPath + "\\"+ paramMap.get("slideFilePath")[0] + "\\"
-            +  paramMap.get("imageId")[0] + "\\" + slideFileName),
-            new File(rootPath + "\\" + paramMap.get("slideFilePath")[0] + "\\" + paramMap.get("imageId")[0]));
-      } catch (Exception e) {
-        logger.error(e.getMessage());
+        try {
+          // 调用切图方法
+          // imageService.cutSlide(paramMap.get("caseId")[0], paramMap.get("slideFilePath")[0], paramMap.get("slideFileName")[0]);
+          SlideUtil.processImageFile(new File(rootPath + "\\"+ paramMap.get("slideFilePath")[0] + "\\"
+              +  paramMap.get("imageId")[0] + "\\" + slideFileName),
+              new File(rootPath + "\\" + paramMap.get("slideFilePath")[0] + "\\" + paramMap.get("imageId")[0]));
+        } catch (Exception e) {
+          logger.error(e.getMessage());
+        }
       }
       out = response.getWriter();
       String jsonString = count > 0 ? "{\"success\":\"新建病理成功\"}" : "{\"failure\":\"" + failure + "\"}";

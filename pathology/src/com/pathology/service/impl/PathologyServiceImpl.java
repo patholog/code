@@ -104,8 +104,8 @@ public class PathologyServiceImpl implements IPathologyService {
 
       int totalNum = jdbcTemplate.queryForInt(countSql);
       if (totalNum > 0) {
-        String sql = basicSql + " WHERE a.diag_status='1' and a.id_doctor='" + name + "'";
         Pages page = new Pages(totalNum, "PathologyAction!getNewPathology", Integer.parseInt(pageNum), 10);
+        String sql = basicSql + " WHERE a.diag_status='1' and a.id_doctor='" + name + "' " + page.getPageLimit();
         request.setAttribute("page", page.getPageStr());
         return jdbcTemplate.query(sql, new PathologyMapping());
       } else {
@@ -193,7 +193,7 @@ public class PathologyServiceImpl implements IPathologyService {
       pathology.setClinicdiagnose(paramMap.get("clinicDiagnose")[0]); // 临床诊断
       pathology.setHistorysummary(paramMap.get("historySummary")[0]); // 病史
       pathology.setCrtUserId(SessionAgentManager.getSessionAgentBean().getIdUsers()); // 创建人
-      pathology.setDiagStatus("2"); // 病理初始状态
+      pathology.setDiagStatus("1"); // 病理初始状态
       pathology.setDoctorId(SessionAgentManager.getSessionAgentBean().getIdUsers()); // 创建人
     } catch (Exception e) {
       logger.error(e.getMessage());
