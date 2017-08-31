@@ -300,12 +300,12 @@ public class PathologyServiceImpl implements IPathologyService {
     pageNum = pageNum != null ? pageNum : "1";
     String title = "";
     int status = 1;
-    String countSql = basicCountSql + " WHERE a.diag_status='3'";
+    String countSql = basicCountSql + " WHERE a.diag_status='3' and a.LAST_UPD_USER_ID='" + name + "'";
     try {
       int totalNum = jdbcTemplate.queryForInt(countSql);
       if (totalNum > 0) {
         Pages page = new Pages(totalNum, "PathologyAction!getPathologyListToBack", Integer.parseInt(pageNum), 10);
-        String sql = basicSql + " WHERE a.diag_status='3'" + page.getPageLimit();
+        String sql = basicSql + " WHERE a.diag_status='3' and a.LAST_UPD_USER_ID='" + name + "'" + page.getPageLimit();
         request.setAttribute("page", page.getPageStr());
         return jdbcTemplate.query(sql, new PathologyMapping());
       } else {
@@ -340,8 +340,8 @@ public class PathologyServiceImpl implements IPathologyService {
 //	  int hascount=0;
 //	  int backcount=0;
       String needcountSql = basicCountSql + " WHERE a.diag_status='2' and ifnull(a.id_doctor,'" + name + "')='" + name + "'";
-      String hascountSql = basicCountSql + " WHERE a.diag_status='7' and ifnull(a.id_doctor,'" + name + "')='" + name + "'";
-      String callcountSql = basicCountSql + " WHERE a.diag_status='3' and ifnull(a.id_doctor,'" + name + "')='" + name + "'";
+      String hascountSql = basicCountSql + " WHERE a.diag_status='7' and a.id_doctor='" + name + "'";
+      String callcountSql = basicCountSql + " WHERE a.diag_status='3' and a.LAST_UPD_USER_ID='" + name + "'";
       int needcount = jdbcTemplate.queryForInt(needcountSql);
       int hascount = jdbcTemplate.queryForInt(hascountSql);
 	  int backcount = jdbcTemplate.queryForInt(callcountSql);

@@ -346,8 +346,9 @@ public class PathologyAction extends BaseAction {
 
   public String getPathologyListToBack() {
     try {
+      String userId = SessionAgentManager.getSessionAgentBean().getIdUsers();
       HttpServletRequest request = ServletActionContext.getRequest();
-      pathologys = pathologyService.getListPathologyToBack(request, "");
+      pathologys = pathologyService.getListPathologyToBack(request, userId);
       return "pathologysback";
     } catch (Exception e) {
       e.printStackTrace();
@@ -430,6 +431,8 @@ public class PathologyAction extends BaseAction {
       if (pathTodo == null) {
         return Constant.ERR;
       }
+      String userId = SessionAgentManager.getSessionAgentBean().getIdUsers();
+      pathTodo.setLastUpdUserId(userId);//更新退回人为当前登录用户
       pathTodo.setDiagStatus("3");
       if (pathology.getRetreatReason() != null) {
         pathTodo.setRetreatReason(pathology.getRetreatReason());

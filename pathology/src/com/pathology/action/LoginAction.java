@@ -144,8 +144,8 @@ public class LoginAction extends BaseAction {
 //			  int hascount=0;
 //			  int backcount=0;
 		      String needcountSql = basicCountSql + " WHERE a.diag_status='2' and ifnull(a.id_doctor,'" + name + "')='" + name + "'";
-		      String hascountSql = basicCountSql + " WHERE a.diag_status='7' and ifnull(a.id_doctor,'" + name + "')='" + name + "'";
-		      String callcountSql = basicCountSql + " WHERE a.diag_status='3' and ifnull(a.id_doctor,'" + name + "')='" + name + "'";
+		      String hascountSql = basicCountSql + " WHERE a.diag_status='7' and a.id_doctor='" + name + "'";
+		      String callcountSql = basicCountSql + " WHERE a.diag_status='3' and a.LAST_UPD_USER_ID='" + name +  "'";
 		      int needcount = jdbcTemplate.queryForInt(needcountSql);
 		      int hascount = jdbcTemplate.queryForInt(hascountSql);
 			  int backcount = jdbcTemplate.queryForInt(callcountSql);
