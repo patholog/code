@@ -1169,52 +1169,52 @@ function OpenSeadragon( options ){
             prefixUrl:              "/images/",
             navImages: {
                 zoomIn: {
-                    REST:   'zoomin_rest.png',
-                    GROUP:  'zoomin_grouphover.png',
-                    HOVER:  'zoomin_hover.png',
-                    DOWN:   'zoomin_pressed.png'
+                    REST:   './assets/Seadragon/images/zoomin_rest.png',
+                    GROUP:  './assets/Seadragon/images/zoomin_grouphover.png',
+                    HOVER:  './assets/Seadragon/images/zoomin_hover.png',
+                    DOWN:   './assets/Seadragon/images/zoomin_pressed.png'
                 },
                 zoomOut: {
-                    REST:   'zoomout_rest.png',
-                    GROUP:  'zoomout_grouphover.png',
-                    HOVER:  'zoomout_hover.png',
-                    DOWN:   'zoomout_pressed.png'
+                    REST:   './assets/Seadragon/images/zoomout_rest.png',
+                    GROUP:  './assets/Seadragon/images/zoomout_grouphover.png',
+                    HOVER:  './assets/Seadragon/images/zoomout_hover.png',
+                    DOWN:   './assets/Seadragon/images/zoomout_pressed.png'
                 },
                 home: {
-                    REST:   'home_rest.png',
-                    GROUP:  'home_grouphover.png',
-                    HOVER:  'home_hover.png',
-                    DOWN:   'home_pressed.png'
+                    REST:   './assets/Seadragon/images/home_rest.png',
+                    GROUP:  './assets/Seadragon/images/home_grouphover.png',
+                    HOVER:  './assets/Seadragon/images/home_hover.png',
+                    DOWN:   './assets/Seadragon/images/home_pressed.png'
                 },
                 fullpage: {
-                    REST:   'fullpage_rest.png',
-                    GROUP:  'fullpage_grouphover.png',
-                    HOVER:  'fullpage_hover.png',
-                    DOWN:   'fullpage_pressed.png'
+                    REST:   './assets/Seadragon/images/fullpage_rest.png',
+                    GROUP:  './assets/Seadragon/images/fullpage_grouphover.png',
+                    HOVER:  './assets/Seadragon/images/fullpage_hover.png',
+                    DOWN:   './assets/Seadragon/images/fullpage_pressed.png'
                 },
                 rotateleft: {
-                    REST:   'rotateleft_rest.png',
-                    GROUP:  'rotateleft_grouphover.png',
-                    HOVER:  'rotateleft_hover.png',
-                    DOWN:   'rotateleft_pressed.png'
+                    REST:   './assets/Seadragon/images/rotateleft_rest.png',
+                    GROUP:  './assets/Seadragon/images/rotateleft_grouphover.png',
+                    HOVER:  './assets/Seadragon/images/rotateleft_hover.png',
+                    DOWN:   './assets/Seadragon/images/rotateleft_pressed.png'
                 },
                 rotateright: {
-                    REST:   'rotateright_rest.png',
-                    GROUP:  'rotateright_grouphover.png',
-                    HOVER:  'rotateright_hover.png',
-                    DOWN:   'rotateright_pressed.png'
+                    REST:   './assets/Seadragon/images/rotateright_rest.png',
+                    GROUP:  './assets/Seadragon/images/rotateright_grouphover.png',
+                    HOVER:  './assets/Seadragon/images/rotateright_hover.png',
+                    DOWN:   './assets/Seadragon/images/rotateright_pressed.png'
                 },
                 previous: {
-                    REST:   'previous_rest.png',
-                    GROUP:  'previous_grouphover.png',
-                    HOVER:  'previous_hover.png',
-                    DOWN:   'previous_pressed.png'
+                    REST:   './assets/Seadragon/images/previous_rest.png',
+                    GROUP:  './assets/Seadragon/images/previous_grouphover.png',
+                    HOVER:  './assets/Seadragon/images/previous_hover.png',
+                    DOWN:   './assets/Seadragon/images/previous_pressed.png'
                 },
                 next: {
-                    REST:   'next_rest.png',
-                    GROUP:  'next_grouphover.png',
-                    HOVER:  'next_hover.png',
-                    DOWN:   'next_pressed.png'
+                    REST:   './assets/Seadragon/images/next_rest.png',
+                    GROUP:  './assets/Seadragon/images/next_grouphover.png',
+                    HOVER:  './assets/Seadragon/images/next_hover.png',
+                    DOWN:   './assets/Seadragon/images/next_pressed.png'
                 }
             },
 
