@@ -67,7 +67,7 @@
 						<c:forEach items="${sessionScope.hoslist }" var="hospital" varStatus="status">
 							<tr bgColor="${status.index%2==0?'#f9f9ff':'#ffffff' }">
 							<td>${hospital.name}</td>
-							<td>${hospital.code}</td>
+							<td>${hospital.hospitalcode}</td>
 							<td>${hospital.tel }</td>
 							<td>${hospital.address }</td>
 							<td>${hospital.memo }</td>
