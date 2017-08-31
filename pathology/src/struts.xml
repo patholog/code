@@ -51,7 +51,7 @@
       <result name="loginSuccess">/webdiagnosis/firstpage.jsp</result>
     </action>
     <action name="test">
-      <result>/webdiagnosis/viewpathologypic.jsp</result>
+      <result>/webdiagnosis/viewpathologypic_bak.jsp</result>
     </action>
 
     <!-- 后台管理部分 <action name="admin_*" method="{1}" class="com.flp.actions.UsersAction">
@@ -145,6 +145,8 @@
       <result name="showDiagImage"/>
       <result name="newPathlogy">/webdiagnosis/newdiag/newdiag_list.jsp</result>
       <result name="getFirstPage">/webdiagnosis/firstpage.jsp</result>
+      <result name="getThumbnailSlide"/>
+      <result name="getSlideImage"/>
     </action>
     <action name="DiaReportAction" class="com.pathology.action.DiaReportAction">
       <result name="pathologyreport">/webdiagnosis/hasdiag/diagnosisreport.jsp</result>

@@ -104,7 +104,7 @@
         border: 2px solid rgb(49, 157, 206);" onclick="qiepian(this)">
   <img src="${path }/assets/image/la_no.png" id="Img1"/>
 </div>
-<div id="Tag" style="bottom: 120px; width: 240px; height: 105px; position:fixed;
+<%--<div id="Tag" style="bottom: 120px; width: 240px; height: 105px; position:fixed;
         right: 22px; overflow: hidden; overflow-x: auto; -webkit-overflow-y: auto; -webkit-overflow-scrolling: touch;
         border: 2px solid rgb(49, 157, 206);">
   <ol>
@@ -151,7 +151,7 @@
       </div>
     </li>
   </ol>
-</div>
+</div>--%>
 <div style="bottom: 120px; position:fixed; right:0px ; background-color: white; display:none;
         border: 1px solid rgb(49, 157, 206);" onclick="list(this)">
   <img src="${path }/assets/image/la_no.png" id="Img2"/>
@@ -197,7 +197,8 @@
 <script>
   var mFirstLoad = 0;
   var loc = document.location.href;
-  var uabc = '/pathology';
+  var uabc = '';
+  uabc = loc.indexOf("/pathology") > 0 ? '/pathology' : '';
   var WebReLocation = '';
   var WebServerUrl = "http://" + window.location.host + uabc + "/PathologyAction!";
   var WebServerShotUrl = "http://" + window.location.host + uabc + "/PathologyAction!";
@@ -552,7 +553,7 @@
     }
     var SlideID = getQueryString("SlideID");
     var Case_No = getQueryString("caseId");
-    GetSlideList(Case_No, SlideID);
+    GetSlideList(Case_No, SlideID); // 加载左侧下方切片列表
     GotoSlide(SlideID);
     /*
     var slideId = 0; // parseID();

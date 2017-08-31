@@ -323,7 +323,7 @@
                   <ul id="ulSection" class="inbox_ul inbox_ul_check">
                     <s:iterator value="pathology.Images" id="image" status="11">
                     <li>
-                      <a style="cursor:pointer" href="test?caseId=<s:property value='#image.caseId'/>&SlideID=<s:property value='#image.pathImage'/>" target="_blank">
+                      <a style="cursor:pointer" href="test?caseId=<s:property value='#image.idImage'/>&SlideID=<s:property value='#image.pathImage'/>" target="_blank">
                         <img src="PathologyAction!showDiagImage?caseId=<s:property value='#image.caseId'/>&file=<s:property value='#image.pathImage'/>" alt="">
                         <div class="inbox_ul_msg">
                           <div class="mlrAuto inbox_span font14">切片：<span title="">20161205135531603</span>
