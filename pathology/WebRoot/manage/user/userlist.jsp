@@ -132,11 +132,12 @@
 						<tr>
 							<th width="10%">用户名称</th>
 							<th width="10%">性别</th>
+							<th width="10%">真实姓名</th>
 							<th width="15%">邮箱</th>
 							<th width="20%">所属医院</th>
 							<th width="10%">特长</th>
 							<th width="10%">手机</th>
-							<th width="10%">电话</th>
+							
 							<th width="15%">操作</th>
 						</tr>
 						<c:forEach items="${sessionScope.list }" var="user"
@@ -144,11 +145,12 @@
 							<tr bgColor="${status.index%2==0?'#f9f9ff':'#ffffff' }">
 								<td class="username">${user.username}</td>
 								<td>${user.sex}</td>
+								<td>${user.realname }</td>
 								<td>${user.email }</td>
 								<td>${user.belonghospital }</td>
 								<td>${user.specialty }</td>
 								<td>${user.mobile }</td>
-								<td>${user.tel }</td>
+								
 								<td class="action_collomn"><a
 									<c:choose>
 									<c:when test="${user.userstatus=='1'}"> class="enable" </c:when>
