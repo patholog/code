@@ -35,7 +35,7 @@
       alert("获取图片信息失败");
     }
     var viewer = OpenSeadragon({
-      debugMode: true,
+      // debugMode: true,
       id: "container",  //容器id
       prefixUrl: '',
       tileSources: {
