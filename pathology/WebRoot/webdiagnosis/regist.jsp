@@ -71,6 +71,12 @@
 								</td>
 							</tr>
 							<tr>
+								<td align="right">真实姓名：</td>
+								<td align="left"><input type="text" name="user.realname"
+									placeholder="真实姓名" id="realname" required /><span id="realnametip"></span>
+								</td>
+							</tr>
+							<tr>
 								<td align="right">医院：</td>
 								
 									<td align="left"><input type="text" name="user.registhospital"
@@ -132,6 +138,7 @@
   var pswd2fg=false;
   var hosfg=false;
   var spefg=true;
+  var realfg=false;
       function showTips(text) {
       $('#tipInfo').text(text);
       $('#tips').dialog({
@@ -315,7 +322,26 @@
         return true;
       }
     });
+ $("#realname").blur(function() {
+      var realname = $("#realname").val().trim();
+      if (realname == '') {
+        $("#realnametip").html("<a style='color:#2ca9cc;font-size:14px;'>真实姓名不能为空！</a>");
+        //$("#btn").attr("disabled",true);
+        realfg=false;
+        return false;
+      }else if(realname.length>50){
+        $("#realnametip").html("<a style='color:#2ca9cc;font-size:14px;'>真实姓名超长</a>");
+        //$("#btn").attr("disabled",true);
+        realfg=false;
+        return false;
+      }else{
+        $("#realnametip").html("");
+        //$("#btn").attr("disabled",false);
+        realfg=true;
+        return true;
+      }
 
+    });
 
   });
 
