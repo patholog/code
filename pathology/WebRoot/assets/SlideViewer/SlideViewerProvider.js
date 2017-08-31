@@ -300,6 +300,7 @@ var SlideViewerProvider;
     /**
      * 获取缩放图片
      * 被SeadragonLiYTileSource.js调用
+     * 此方法会被重复调用已以显示不同位置图片
      */
     this.getTileUrl = function (slideKey, level, PositionX, PositionY, FileNum, ID, TileSize, gamma, contrast, light, r, g, b, DigitalSlidePath) {
       var str0 = [DigitalSlidePath, "/TileGroup", group, "/", mlevel, "-", PositionX, "-", PositionY, ".jpg"].join("");
@@ -370,7 +371,20 @@ var SlideViewerProvider;
 
         url = url.toLowerCase().replace("decodetile.aspx", "getqiepianimg.aspx");
 
-        str0 = [url, "&zoom=01&PositionX=0&PositionY=0&type=", 2].join("");
+        // str0 = [url, "&zoom=01&PositionX=0&PositionY=0&type=", 2].join("");
+        var param = document.location.href.substr(document.location.href.indexOf("?"));
+        var params = param.split("&");
+        var caseId;
+        for (var i in params) {
+          if (params[i].indexOf("caseId") >= 0) {
+            caseId = params[i].substr(params[i].indexOf("=") + 1);
+          }
+        }
+        var projectName = '';
+        if (document.location.href.indexOf('pathology') >= 0) {
+          projectName = '/pathology';
+        }
+        str0 = ["http://", window.location.host, projectName, "/PathologyAction!getThumbnailSlide?id=", caseId].join("");
       } else {
         str0 = [url, "/TileGroup0/0-0-0.jpg"].join("");
       }

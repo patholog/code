@@ -1,5 +1,5 @@
 ﻿/**
- * 加载左侧切片列表
+ * 加载左侧下方切片列表
  * @param caseno
  * @param SlideId
  * @constructor
@@ -37,6 +37,11 @@ function GetSlideList(caseno, SlideId) {
   });
 }
 
+/**
+ * 解析返回结果
+ * @param result
+ * @constructor
+ */
 function ParseSlideInfo(result) {
   if (result === "") {
     alert("无数字切片");
@@ -115,7 +120,8 @@ function SlideBind(SeaViewer) {
         fileNames = fileN[1];
       }
       //
-      div = "<li class=\"dataItem-img\" style=\"position:relative;\"><a " + ClickourTouch + " title='" + fileNames + "(" + thumnailarr[0] + ")'><img id='slide" + thumnailarr[0] + "' alt='" + thumnailarr[1] + "' style=\"margin-top:5px;\" src=\"" + ThumnailUrl + "\"  />";
+      div = "<li class=\"dataItem-img\" style=\"position:relative;\"><a " + ClickourTouch + " title='" + fileNames + "(" + thumnailarr[0] + ")'>" +
+          "<img id='slide" + thumnailarr[0] + "' alt='" + thumnailarr[1] + "' style=\"margin-top:5px;\" src=\"" + ThumnailUrl + "\"  />";
       div += "<div style=\"position: absolute; background:rgba(0,0,0,0.3);width:67px;height:20px;left:0;bottom:6px;z-index:999\">";
       div += "<div style=\" text-align:center;line-height:20px; color:#fff;font-size:16px; display:block;font-weight:bold;\">" + (i + 1) + "/" + Slidelists.length + "</div>";
       div += "</div>";

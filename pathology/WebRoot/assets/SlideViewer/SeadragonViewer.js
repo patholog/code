@@ -1,5 +1,9 @@
 ﻿var SlideSeadragonViewer = function (n, t) {
   function lt(SlideId) {
+    /**
+     * 此方法会被重复调用已以显示不同位置图片
+     * @param n
+     */
     function rrBack(n) {
 
       OpenImage(n);
@@ -11,6 +15,11 @@
         i.provider.GetImageInfo(SlideId, rrBack);
   }
 
+  /**
+   * 此方法会被重复调用已以显示不同位置图片
+   * @param n
+   * @constructor
+   */
   function OpenImage(n) {
     var source = new SeadragonLiYTileSource(Number(n.Width), Number(n.Height), Number(n.TileSize), 0, ".jpg", n.Rate, n.FileNum, n.ID, i.provider, 1.5, 1, 0, 0, 0, 0, String(n.DigitalSlidePath));
     i.openTileSource(source)
@@ -427,7 +436,7 @@
       },
       this.openMds = function (n) {
         // ct = ot(n),
-        lt(n)
+        lt(n) // 此方法会被重复调用已以显示不同位置图片
       },
       this.zoomToObj = function (n) {
         var f = n / r.Rate * r.Width,    //该倍率下的切片宽度
