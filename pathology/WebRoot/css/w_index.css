@@ -1,0 +1,150 @@
+@charset "utf-8";
+/* CSS Document */
+img{
+	border:none;
+	}
+a{
+	
+	}
+	
+
+.left{
+	float:left;
+	}
+.clear{
+	clear:both;
+	}
+
+.w_portal_box{
+	position:absolute;
+	left:270px;
+	top:118px;
+	height:500px;
+	width:850px;
+	color:#fff;
+	font-size:22px;
+	font-family:"微软雅黑","宋体";
+
+	}
+.one_block{
+	width:460px;
+	height:350px;
+	background:#0f88a2;
+	display:block;
+	position:relative;
+	margin:0 10px 10px 0;
+	float:left;
+	}
+.two_block{
+	width:330px;
+	height:170px;
+	background:#079e9c;
+	display:block;
+	position:relative;
+	margin:0 10px 10px 0;
+	float:left;
+	}
+.three_block{
+	width:330px;
+	height:170px;
+	display:block;
+	position:relative;
+	margin:0 10px 10px 0;
+	float:left;
+	background:#2449a5;
+	}
+.four_block{
+	width:260px;
+	height:170px;
+	display:block;
+	position:relative;
+	margin:0 10px 10px 0;
+	float:left;
+	background:#137dcf;
+	margin:0 10px 10px 0;
+	}
+.five_block{
+	width:260px;
+	height:170px;
+	display:block;
+	position:relative;
+	margin:0 10px 10px 0;
+	float:left;
+	background:#df6808;
+	}
+.six_block{
+	width:260px;
+	height:170px;
+	display:block;
+	position:relative;
+	margin:0 10px 10px 0;
+	float:left;
+	background:#9608df;
+	}
+.seven_block{
+	background:#b61555;
+	margin-right:0;
+	}
+.eight_block{
+	background:#05a3e8;
+	}
+.nine_block{
+	background:#639028;
+	}
+.ten_block{
+	background:#079e9c;
+	}
+.eleven_block{
+	background:#103f63;
+	}
+.twelve_block{
+	background:#9a0d81;
+	margin-right:0;
+	}
+
+
+.w_center_title{
+	position:absolute;
+	left:10px;
+	bottom:10px;
+	color:#fff;
+	}
+
+
+
+.w_center_icon1{
+	width:85px;
+	height:284px;
+	background:url(../images/index_icon/iicon_01.png) no-repeat 0 0;
+	margin:20px auto 0 auto;
+	}
+.w_center_icon2{
+	width:85px;
+	height:84px;
+	margin:20px auto 0 auto;
+	background:url(../images/index_icon/iicon_02.png) no-repeat 0 0;
+	}
+.w_center_icon3{
+	width:85px;
+	height:84px;
+	margin:20px auto 0 auto;
+	background:url(../images/index_icon/iicon_03.png) no-repeat 0 0;
+	}
+.w_center_icon4{
+	width:85px;
+	height:84px;
+	margin:20px auto 0 auto;
+	background:url(../images/index_icon/iicon_04.png) no-repeat 0 0;
+	}
+.w_center_icon5{
+	width:85px;
+	height:84px;
+	margin:20px auto 0 auto;
+	background:url(../images/index_icon/iicon_05.png) no-repeat 0 0;
+	}
+.w_center_icon6{
+	width:85px;
+	height:84px;
+	margin:20px auto 0 auto;
+	background:url(../images/index_icon/iicon_06.png) no-repeat 0 0;
+	}

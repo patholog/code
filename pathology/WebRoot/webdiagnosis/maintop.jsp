@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<div class="nav mlrAuto">
 		<div class="logo left">
-			<a href="" id="t_left">数字病理会诊平台</a>
+			<a href="${path}/webdiagnosis/firstpage.jsp" id="t_left">数字病理会诊平台</a>
 			
 			<div class="clear"></div>
 		</div>
