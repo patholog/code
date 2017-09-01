@@ -10,6 +10,7 @@ import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
+import javax.print.DocFlavor;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -182,6 +183,39 @@ public class PathologyAction extends BaseAction {
     }
     pathology = pathologyService.getPathologyByIdAndDiagStatus(id);
     return "diagReport";
+  }
+
+  /**
+   * 打开更新病理界面
+   *
+   * @return page
+   */
+  public String openPathologyUpdate() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    String id = request.getParameter("id");
+    pathology = pathologyService.getPathologyByIdAndDiagStatus(id);
+    return "pathologyUpdate";
+  }
+
+  /**
+   * 更新病理信息
+   *
+   * @return 结果
+   */
+  public String updatePathology() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    HttpServletResponse response = ServletActionContext.getResponse();
+    Map<String, String[]> paramMap = new HashMap<>(request.getParameterMap());
+    String result = "";
+    try {
+      pathologyService.updatePathology(paramMap);
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      result = e.getMessage();
+    }
+    String jsonString = "" + result;
+    printJson(response, jsonString);
+    return null;
   }
 
   /**

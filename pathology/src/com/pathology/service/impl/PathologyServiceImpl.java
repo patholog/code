@@ -117,6 +117,28 @@ public class PathologyServiceImpl implements IPathologyService {
     }
   }
 
+  @Override
+  public void updatePathology(Map<String, String[]> paramMap) {
+    try {
+      updatePathology(assemblePathology(paramMap));
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      throw new RuntimeException(e);
+    }
+  }
+
+  /**
+   * 根据数据组装Pathology对象
+   *
+   * @param paramMap 数据
+   * @return 对象
+   */
+  private Pathology assemblePathology(Map<String, String[]> paramMap) {
+    Pathology pathology = new Pathology();
+    pathology.setIdCase(paramMap.get("caseId")[0]);
+    return pathology;
+  }
+
   /**
    * 获取待诊断列表
    */
@@ -262,7 +284,7 @@ public class PathologyServiceImpl implements IPathologyService {
    * 已诊断列表
    *
    * @param request 请求
-   * @param name 当前登录用户id
+   * @param name    当前登录用户id
    * @return 已诊断列表
    */
   public List<PathologyDTO> getListPathologyToHas(HttpServletRequest request, String name) {
@@ -292,7 +314,7 @@ public class PathologyServiceImpl implements IPathologyService {
    * 查看退回病理列表
    *
    * @param request 请求
-   * @param name 当前登录用户id
+   * @param name    当前登录用户id
    * @return 退回病理列表
    */
   public List<PathologyDTO> getListPathologyToBack(HttpServletRequest request, String name) {
@@ -333,22 +355,24 @@ public class PathologyServiceImpl implements IPathologyService {
       return null;
     }
   }
+
   @Override
   public void getFirstPage(HttpServletRequest request, String name) {
-  	// TODO Auto-generated method stub
-	 // int needcount=0;
+    // TODO Auto-generated method stub
+    // int needcount=0;
 //	  int hascount=0;
 //	  int backcount=0;
-      String needcountSql = basicCountSql + " WHERE a.diag_status='2' and ifnull(a.id_doctor,'" + name + "')='" + name + "'";
-      String hascountSql = basicCountSql + " WHERE a.diag_status='7' and a.id_doctor='" + name + "'";
-      String callcountSql = basicCountSql + " WHERE a.diag_status='3' and a.LAST_UPD_USER_ID='" + name + "'";
-      int needcount = jdbcTemplate.queryForInt(needcountSql);
-      int hascount = jdbcTemplate.queryForInt(hascountSql);
-	  int backcount = jdbcTemplate.queryForInt(callcountSql);
-	  request.setAttribute("needcount", needcount);
-	  request.setAttribute("hascount", hascount);
-	  request.setAttribute("backcount", backcount);
+    String needcountSql = basicCountSql + " WHERE a.diag_status='2' and ifnull(a.id_doctor,'" + name + "')='" + name + "'";
+    String hascountSql = basicCountSql + " WHERE a.diag_status='7' and a.id_doctor='" + name + "'";
+    String callcountSql = basicCountSql + " WHERE a.diag_status='3' and a.LAST_UPD_USER_ID='" + name + "'";
+    int needcount = jdbcTemplate.queryForInt(needcountSql);
+    int hascount = jdbcTemplate.queryForInt(hascountSql);
+    int backcount = jdbcTemplate.queryForInt(callcountSql);
+    request.setAttribute("needcount", needcount);
+    request.setAttribute("hascount", hascount);
+    request.setAttribute("backcount", backcount);
   }
+
   public Pathology getPathology(Class clazz, String id) {
     return pathologydao.getPathology(clazz, id);
   }

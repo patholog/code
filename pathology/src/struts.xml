@@ -147,6 +147,8 @@
       <result name="getFirstPage">/webdiagnosis/firstpage.jsp</result>
       <result name="getThumbnailSlide"/>
       <result name="getSlideImage"/>
+      <result name="pathologyUpdate">/webdiagnosis/newdiag/updatediag.jsp</result>
+      <result name="updatePathology"/>
     </action>
     <action name="DiaReportAction" class="com.pathology.action.DiaReportAction">
       <result name="pathologyreport">/webdiagnosis/hasdiag/diagnosisreport.jsp</result>

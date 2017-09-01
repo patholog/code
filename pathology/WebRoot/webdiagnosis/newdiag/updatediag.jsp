@@ -7,12 +7,8 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>病理远程会诊平台-新建</title>
+  <title>病理远程会诊平台-修改</title>
   <c:set var="path" value="${pageContext.request.contextPath }"/>
-  <%--<link rel="stylesheet" href="${path }/css/comc_diagnosis_wait_style.css"/>
-  <link rel="stylesheet" href="${path }/css/comc_head_style.css"/>
-  <link rel="stylesheet" href="${path }/css/comc_left_nav_style.css"/>
-  <link rel="stylesheet" href="${path }/css/comc_page_style.css"/>--%>
   <link rel="stylesheet" href="${path }/css/public_flat.css"/>
   <link rel="stylesheet" href="${path }/css/theme.css?Version=5.5.1.1"/>
   <link rel="stylesheet" href="${path }/css/comc_head_style.css?Version=5.5.1.1"/>
@@ -35,39 +31,6 @@
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
   <script type="text/javascript" src="${path }/js/CKEditor/ckeditor.js"></script>
   <script>
-    //cd 待诊断禁止编辑
-    $(document).ready(function masking() {
-      var sta = $("#sta").val();
-      if (sta === "2") {
-        $("#masking").css("display", "block");
-
-        var vHeight = $("#divAll").outerHeight() - $("#divCenter").outerHeight() - $("#divFoot").outerHeight();
-        var vHeight = vHeight + "px";
-
-        $("#masking").height(vHeight);
-
-        /*$("#txtClinicalData").attr("disabled", "disabled");
-        $("#txtFirstVisit").attr("disabled", "disabled");
-        $("#txtGeneralObservation").attr("disabled", "disabled");
-        $("#txtHistoryOfDisease").attr("disabled", "disabled");
-        $("#txtImmuneOrgan").attr("disabled", "disabled");
-        $("#txtRemark").attr("disabled", "disabled");*/
-      } else {
-        $("#masking").css("display", "none");
-      }
-
-      $("#txtHospitalOfDelivery").attr("title", $("#hosNaHidd").val()); //设置title属性的值
-
-      //检测此类长文本编辑框的加载字数 by flyer
-      CheckWords(document.getElementById("txtClinicalData"));
-      CheckWords(document.getElementById("txtFirstVisit"));
-      //CheckWords(document.getElementById("txtGeneralObservation"));
-      CheckWords(document.getElementById("txtHistoryOfDisease"));
-      CheckWords(document.getElementById("txtImmuneOrgan"));
-      CheckWords(document.getElementById("txtRemark"));
-
-    });
-
     //检测长文本编辑框的字数，是否超过，超过限定字数，则前景色改为红色  by flyer
     function CheckWords(txt) {
       /*var len = 0;
@@ -309,24 +272,6 @@
                   1<span>病例信息</span></div>
               </a>
             </li>
-            <%--<li>
-              <a href="">
-                <div class="step">
-                  2<span>上传切片&amp;附件</span></div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <div class="step">
-                  3<span>选择诊断专家</span></div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <div class="step">
-                  4<span>留言</span></div>
-              </a>
-            </li>--%>
           </ul>
           <div class="clear">
           </div>
