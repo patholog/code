@@ -319,14 +319,14 @@ public class PathologyServiceImpl implements IPathologyService {
   }
 
   /**
-   * 获取医生信息列表（不包含当前登录用户）
+   * 获取医生信息列表（不包含当前登录用户，不包含未审核用户）
    *
    * @return 医生信息列表
    */
   @Override
   public List<Users> selectDoctorListNoMe() {
     try {
-      return userService.getAllUser(Users.class, " and idUsers != '"
+      return userService.getAllUser(Users.class, " and userstatus = '1' and idUsers != '"
           + SessionAgentManager.getSessionAgentBean().getIdUsers() + "'");
     } catch (Exception e) {
       logger.error("获取医生信息错误");
