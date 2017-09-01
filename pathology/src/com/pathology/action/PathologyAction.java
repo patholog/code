@@ -220,16 +220,8 @@ public class PathologyAction extends BaseAction {
     } catch (Exception e) {
       logger.error(e.getMessage());
     }
-    try {
-      PrintWriter out;
-      out = response.getWriter();
-      String jsonString = !"".equals(result) ? "{\"success\":\"保存成功\"}" : "{\"failure\":\"保存失败\"}";
-      out.println(jsonString);
-      out.flush();
-      out.close();
-    } catch (Exception e) {
-      logger.error(e);
-    }
+    String jsonString = !"".equals(result) ? "{\"success\":\"保存成功\"}" : "{\"failure\":\"保存失败\"}";
+    printJson(response, jsonString);
     return "保存成功";
   }
 
@@ -374,16 +366,8 @@ public class PathologyAction extends BaseAction {
     } catch (Exception e) {
       logger.error(e.getMessage());
     }
-    try {
-      PrintWriter out;
-      out = response.getWriter();
-      String jsonString = !"".equals(result) ? "{\"success\":\"保存成功\"}" : "{\"failure\":\"保存失败\"}";
-      out.println(jsonString);
-      out.flush();
-      out.close();
-    } catch (Exception e) {
-      logger.error(e);
-    }
+    String jsonString = !"".equals(result) ? "{\"success\":\"保存成功\"}" : "{\"failure\":\"保存失败\"}";
+    printJson(response, jsonString);
     return "保存成功";
   }
 
@@ -395,18 +379,19 @@ public class PathologyAction extends BaseAction {
   public String showDiagImage() {
     HttpServletRequest request = ServletActionContext.getRequest();
     HttpServletResponse response = ServletActionContext.getResponse();
-    String caseId = request.getParameter("caseId");
-    String imageName = request.getParameter("file");
-    ServletOutputStream out = null;
-    FileInputStream ips = null;
+    String imageId = request.getParameter("imageId");
+    String filePath = request.getParameter("filePath");
+    String fileName = request.getParameter("name");
+    ServletOutputStream out;
+    FileInputStream ips;
     try {
       // 获取图片存放路径
-      String imgPath = Property.getProperty("slideFilePath") + "\\" + imageName;
+      String imgPath = Property.getProperty("slideFilePath") + filePath + "\\" + imageId + "\\thumb_" + fileName;
       ips = new FileInputStream(new File(imgPath));
       response.setContentType("multipart/form-data");
       out = response.getOutputStream();
       // 读取文件流
-      int len = 0;
+      int len;
       byte[] buffer = new byte[1024 * 10];
       while ((len = ips.read(buffer)) != -1) {
         out.write(buffer, 0, len);

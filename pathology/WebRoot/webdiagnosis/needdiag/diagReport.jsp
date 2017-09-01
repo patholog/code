@@ -267,8 +267,8 @@
                       <div id="divCaseList" class="case_list border_bom">
                         <s:iterator value="pathology.Images" id="image" status="11">
                           <div class="show_img">
-                            <a class="go" href="PathologyAction!showDiagImage?caseId=<s:property value='#image.caseId'/>&file=<s:property value='#image.pathImage'/>" rel="gallery">
-                              <img alt="" src="PathologyAction!showDiagImage?caseId=<s:property value='#image.caseId'/>&file=<s:property value='#image.pathImage'/>"></a>
+                            <a class="go" href="PathologyAction!showDiagImage?imageId=<s:property value='#image.idImage'/>&filePath=<s:property value='#image.pathImage'/>&name=<s:property value='#image.fileName'/>" rel="gallery">
+                              <img alt="" src="PathologyAction!showDiagImage?imageId=<s:property value='#image.idImage'/>&filePath=<s:property value='#image.pathImage'/>&name=<s:property value='#image.fileName'/>"></a>
                             <p></p>
                           </div>
                         </s:iterator>
@@ -323,10 +323,10 @@
                   <ul id="ulSection" class="inbox_ul inbox_ul_check">
                     <s:iterator value="pathology.Images" id="image" status="11">
                     <li>
-                      <a style="cursor:pointer" href="test?caseId=<s:property value='#image.idImage'/>&SlideID=<s:property value='#image.pathImage'/>" target="_blank">
-                        <img src="PathologyAction!showDiagImage?caseId=<s:property value='#image.caseId'/>&file=<s:property value='#image.pathImage'/>" alt="">
+                      <a style="cursor:pointer" href="test?caseId=<s:property value='#image.idImage'/>" target="_blank">
+                        <img src="PathologyAction!showDiagImage?imageId=<s:property value='#image.idImage'/>&filePath=<s:property value='#image.pathImage'/>&name=<s:property value='#image.fileName'/>" alt="">
                         <div class="inbox_ul_msg">
-                          <div class="mlrAuto inbox_span font14">切片：<span title="">20161205135531603</span>
+                          <div class="mlrAuto inbox_span font14">切片：<span><s:property value="#image.fileName"/></span>
                           </div>
                           <div class="mlrAuto inbox_span font12">时间：<span>${pathology.createTime}</span>
                           </div>

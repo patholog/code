@@ -28,7 +28,7 @@ public class SlideUtil {
 
   public static void main(String[] args) {
     try {
-      SlideUtil.processImageFile(new File("C:\\upload\\pptest\\2017\\8\\31\\tjqb.jpg"), new File("C:\\upload\\pptest\\2017\\8\\31"));
+      SlideUtil.processImageFile(new File("C:\\upload\\pptest\\2017\\09\\01\\122121240\\tjqb.jpg"), new File("C:\\upload\\pptest\\2017\\09\\01\\122121240"));
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -107,6 +107,7 @@ public class SlideUtil {
     }
 
     saveImageDescriptor(originalWidth, originalHeight, descriptor);
+    createMinThumbnail(loadImage(inFile), outputDir.getPath(), fileName);
   }
 
   private static void deleteFile(File file) throws IOException {
@@ -228,5 +229,45 @@ public class SlideUtil {
     } catch (IOException e) {
       throw new IOException("Unable to write to text file: " + file);
     }
+  }
+
+  /**
+   * create thumbnail
+   *
+   * @param image
+   * @param distDir
+   * @param fileName
+   */
+  private static void createMinThumbnail(BufferedImage image, String distDir, String fileName) {
+    try {
+      int width = image.getWidth();
+      int height = image.getHeight();
+      int thumWidth = 0;
+      int thumHeight = 0;
+      if (width / 256 > height / 256) {
+        thumWidth = 256;
+        thumHeight = (int) Math.ceil(height * 256 / width);
+      } else {
+        thumWidth = (int) Math.ceil(width * 256 / height);
+        thumHeight = 256;
+      }
+      BufferedImage tempImage = thumbnailImage(image, thumWidth, thumHeight);
+      ImageIO.write(tempImage, "JPEG", new File(distDir + "\\" + "thumb_" + fileName));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private static BufferedImage thumbnailImage(BufferedImage image, int width, int height) {
+    boolean flag1 = false;
+    try {
+      BufferedImage bfImage = new BufferedImage(width, height, 1);
+      flag1 = bfImage.getGraphics().drawImage(image.getScaledInstance(width, height, 4), 0, 0, null);
+
+      if (flag1) return bfImage;
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 }
