@@ -79,11 +79,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  </body>
    <script type="text/javascript">
 		function logout(){
-		    confirm("退出");
-		    document.getElementById("logoutFrom").submit();
+		if(confirm("确定退出退出？")){
+		document.getElementById("logoutFrom").submit();
 		     var url = '<%=basePath%>';
-		        
 			return true;
+		}else{
+			return false;
+		}
+		    
+		    
 		      }
 	</script>
 
