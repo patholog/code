@@ -163,6 +163,11 @@
           flag = false;
           return;
         }
+        if ($('#pathologyNo').val() === "") {
+          showTips("病理号不能为空");
+          flag = false;
+          return;
+        }
         // 大体所见取值
         $('#generalSeeHidden').val(CKEDITOR.instances.generalSee.getData());
         // 影像学取值
