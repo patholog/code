@@ -14,16 +14,43 @@
 <script type="text/javascript" src="${path }/js/treeView.js"></script>
 <script type="text/javascript" src="${path }/js/common-cn.js"></script>
 <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
+  <link rel="stylesheet" type="text/css" href="${path }/css/select.css" />
+  <link rel="stylesheet" type="text/css" href="${path }/assets/jqueryui/jquery-ui.min.css"/>
+  <link rel="stylesheet" type="text/css" href="${path }/assets/jqueryui/jquery-ui.theme.min.css"/>
+  <script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
+  <script type="text/javascript" src="${path }/js/jquery.form.min.js"></script>
+  <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui.min.js"></script>
 <script src="${path }/js/jquery/jquery-1.4.4.min.js"
 	type="text/javascript"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
+<script>
+  var emailfg=false;
+  var namefg=false;
+  var pswdfg=false;
+  var spefg=true;
+      function showTips(text) {
+      $('#tipInfo').text(text);
+      $('#tips').dialog({
+        title: '提示',
+        modal: true,
+        width: '400',
+        height: '200',
+        buttons: [{
+          text: "确定",
+          icon: "ui-icon-heart",
+          click: function () {
+            $(this).dialog("close");
+          }
+        }]
+      });
+    }
+	 $(function() {
 
 		$("#email").blur(function() {
 			var email = $("#email").val().trim();
 			if (email == '') {
 				$("#emailtip").html("<a style='color:#2ca9cc;font-size:14px;'>邮箱不能为空！</a>");
 				$("#btn").attr("disabled",true);
+				emailfg=false;
 				return false;
 			} else {
 				//login1为Action类命名空间名称；AjaxExecute为Action方法名称
@@ -41,10 +68,12 @@
 						$("#emailtip").html("");
 						$("#btn").attr("disabled",false);
 						//alert("邮箱没有被注册");
+						emailfg=true;
 					},
 					error : function(d) {
 						$("#emailtip").html("<a style='color:#2ca9cc;font-size:14px;'>邮箱已注册!</a>");
 						$("#btn").attr("disabled",true);
+						emailfg=false;
 					}
 				});
 			}
@@ -57,14 +86,17 @@
 			if (username == '') {
 				$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名不能为空！</a>");
 				$("#btn").attr("disabled",true);
+				namefg=false;
 				return false;
 			}else if(username.length<6){
 					$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名不能少于6位！</a>");
 					$("#btn").attr("disabled",true);
+					namefg=false;
 					return false;
 			}else if(username.length>20){
 					$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名不能超过20位！</a>");
 					$("#btn").attr("disabled",true);
+					namefg=false;
 					return false;
 			}
 			else {
@@ -74,6 +106,7 @@
 					$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>只能输入字母或数字!</a>");
 					$("#username").val("");
 					$("#btn").attr("disabled",true);
+					namefg=false;
 					return false;
 				}else{
 			//login1为Action类命名空间名称；AjaxExecute为Action方法名称
@@ -90,10 +123,12 @@
 						success : function(d) {
 							$("#nametip").html("");
 							$("#btn").attr("disabled",false);
+							namefg=true;
 						},
 						error : function(d) {
 							$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名已注册!</a>");
 							$("#btn").attr("disabled",true);
+							namefg=false;
 						}
 					});
 				}
@@ -108,19 +143,23 @@
 			if(pswd==''){
 					$("#pwsdtip").html("<a style='color:#2ca9cc;font-size:14px;'>密码不能为空！</a>");
 					$("#btn").attr("disabled",true);
+					pswdfg=false;
 					return false;
 			}
 			else if(pswd.length<6){
 					$("#pwsdtip").html("<a style='color:#2ca9cc;font-size:14px;'>密码不能少于6位！</a>");
 					$("#btn").attr("disabled",true);
+					pswdfg=false;
 					return false;
 			}else if(username.length>16){
 					$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>用户名不能超过16位！</a>");
 					$("#btn").attr("disabled",true);
+					pswdfg=false;
 					return false;
 			}else{
 				$("#pwsdtip").html("<div id='strength_H' class='pwdcheck'></div><div id='strength_M' class='pwdcheck'></div><div id='strength_L' class='pwdcheck'></div>");
 					$("#btn").attr("disabled",false);
+					pswdfg=true;
 					return true;
 			}
 		});
@@ -129,16 +168,32 @@
 			if(spe.length>200){
 				$("#specialtytip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
 				$("#btn").attr("disabled",true);
+				spefg=false;
 				return false;
 			}else{
 				$("#specialtytip").html("");
 				$("#btn").attr("disabled",false);
+				spefg=true;
 				return true;
 			}
 		});
 		
 
 	});
+  function CheckM() {
+
+    if(emailfg && namefg && pswdfg ){
+      if(confirm("提交当前信息吗？")){
+        
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      alert("请修正错误信息！");
+      return false;
+    }
+  }
 </script>
 <script type="text/javascript">
 	$(function() {
@@ -156,7 +211,7 @@
 <script type="text/javascript">  
 function resetForm()  
 {  
-document.getElementById("articles").reset()  
+document.getElementById("articles").reset() ; 
 }  
 </script>  
 </head>
@@ -179,7 +234,7 @@ document.getElementById("articles").reset()
 			</table>
 
 			<form name="articles" id="articles" method="post"
-				action="UserAction!registUser">
+				action="UserAction!addUser" onsubmit="return CheckM()">
 				<table class="maintable form_top_thin">
 					<tr>
 						<th>用户名</th>
@@ -190,7 +245,7 @@ document.getElementById("articles").reset()
 					<tr>
 						<th>密码</th>
 						<td><input type="password" name="user.password" id="password"
-							value="" style="width:300px;" required onKeyUp=pwStrength(this.value) onBlur=pwStrength(this.value)/> <span id="pwsdtip">
+							 style="width:300px;" required onKeyUp=pwStrength(this.value) onBlur=pwStrength(this.value)/> <span id="pwsdtip">
 								<div id="strength_H" class="pwdcheck"></div>
 								<div id="strength_M" class="pwdcheck"></div>
 								<div id="strength_L" class="pwdcheck"></div>
@@ -235,4 +290,7 @@ document.getElementById("articles").reset()
 			</form></td>
 	</tr>
 </table>
+<div id="tips">
+  <label id="tipInfo"></label>
+</div>
 </html>

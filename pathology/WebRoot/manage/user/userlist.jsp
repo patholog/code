@@ -28,7 +28,6 @@
 <script type="text/javascript"
 	src="${path }/js/multiselect/jquery.multiselect.filter.min.js"></script>
 <script type="text/javascript">
-<script type="text/javascript">
 	function confirmDelete(id) {
 		if (confirm('确定删除吗？'))
 			window.location.href = 'UserAction!deleteUser?user.idUsers=' + id;
