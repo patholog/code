@@ -16,7 +16,7 @@
 <script type="text/javascript">  
 function resetForm()  
 {  
-document.getElementById("articles").reset()  
+document.getElementById("articles").reset();  
 }  
 </script>
 <script type="text/javascript">
