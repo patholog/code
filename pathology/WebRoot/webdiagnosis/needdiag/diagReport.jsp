@@ -431,7 +431,7 @@
        	  <input type="hidden" id="retreatCaseId" name="pathology.caseId"/>
           <textarea id="reason" name="pathology.retreatReason" rows="3"  style="width: 100%;margin-top: 5px;"></textarea>
         </div>
-        <input id="submitbtn" type="submit" class="ui-button" value="确定"/>
+        <input id="submitbtn" type="submit" class="ui-button" value="确定" style="margin-left:302px; margin-top:15px"/>
       </form>
     </div>
 </div>
