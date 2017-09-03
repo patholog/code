@@ -27,7 +27,7 @@ public class EmailAction extends BaseAction {
 	public void setP(Map<String, String> p) {
 		this.p = p;
 	}
-
+//ajax调用 检验用户邮箱
 	public String checkEmail() {
 		String email = this.p.get("email");
 		String hql=" and s.email='"+email+"'";
@@ -45,7 +45,7 @@ public class EmailAction extends BaseAction {
 		}
 
 	}
-
+	//ajax调用 检验用户名称
 	public String checkUserName(){
 		String name = this.p.get("username");
 		String hql=" and s.username='"+name+"'";
@@ -62,6 +62,7 @@ public class EmailAction extends BaseAction {
 			return Action.ERROR;
 		}
 	}
+	//ajax调用 检验编码
 	public String checkCode(){
 		String code = this.p.get("hoscode");
 		String hql=" and s.hospitalcode='"+code+"'";
@@ -79,6 +80,7 @@ public class EmailAction extends BaseAction {
 		}
 
 	}
+	
 	public String checkVerification(){
 		String verification = this.p.get("verification");
 		String email = this.p.get("email");
@@ -103,6 +105,7 @@ public class EmailAction extends BaseAction {
 		}
 		
 	}
+	//找回密码所用
 	public String sendEmailForPassWord() {
 		
 		String randomStr=getStringRandom(6);

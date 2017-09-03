@@ -53,7 +53,7 @@ public class UsersAction extends BaseAction {
 
 	/**
 	 * 用户登录
-	 * 
+	 * 暂时不用
 	 * @return
 	 */
 	public String login() {
@@ -413,7 +413,7 @@ public class UsersAction extends BaseAction {
 		}
 		return val;
 	}
-
+//获取配置文件内容 此处是 取邮箱的想过配置信息
 	private Properties getProperties() {
 		InputStream in = UsersAction.class.getClassLoader()
 				.getResourceAsStream("properties.properties");

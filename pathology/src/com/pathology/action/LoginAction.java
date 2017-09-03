@@ -77,7 +77,7 @@ public class LoginAction extends BaseAction {
 	public void setUser(Users user) {
 		this.user = user;
 	}
-
+//登录调用方法
 	public String login() {
 		try {
 			Users u = SessionAgentManager.getSessionAgentBean();
@@ -109,7 +109,7 @@ public class LoginAction extends BaseAction {
 						functionlist);
 				SessionAgentManager.setSessionAgentBean(user, "admin");
 				HttpServletRequest request = ServletActionContext.getRequest();
-				getFirstPage(request,user.getIdUsers());
+				getFirstPage(request,user.getIdUsers());//将首页面的查询条数扔到前台
 				return "loginSuccess";
 			} else {
 				return "err";
