@@ -29,12 +29,16 @@ public class PathologyDTO implements java.io.Serializable {
   private String patientSex;
   private String patientAge;
   private String specimenName;
+  private String specimenType;
+  private String specimenTypeName;
   private String idCard;
   private String mobile;
   private String diagTime;
   private String collectionId;
   private List<Image> Images;
   private String retreatReason;
+  private String diagStatus;
+  private String diagStatusName;
   /**
    * 初步诊断
    */
@@ -43,23 +47,24 @@ public class PathologyDTO implements java.io.Serializable {
    * 免疫结果
    */
   private String result;
+
   public List<Image> getImages() {
-	return Images;
-}
+    return Images;
+  }
 
-public void setImages(List<Image> images) {
-	Images = images;
-}
+  public void setImages(List<Image> images) {
+    Images = images;
+  }
 
-public String getCollectionId() {
-	return collectionId;
-}
+  public String getCollectionId() {
+    return collectionId;
+  }
 
-public void setCollectionId(String collectionId) {
-	this.collectionId = collectionId;
-}
+  public void setCollectionId(String collectionId) {
+    this.collectionId = collectionId;
+  }
 
-/**
+  /**
    * 病史
    */
   private String historySummary;
@@ -313,12 +318,43 @@ public void setCollectionId(String collectionId) {
     this.result = result;
   }
 
-public String getRetreatReason() {
-	return retreatReason;
-}
+  public String getRetreatReason() {
+    return retreatReason;
+  }
 
-public void setRetreatReason(String retreatReason) {
-	this.retreatReason = retreatReason;
-}
-  
+  public void setRetreatReason(String retreatReason) {
+    this.retreatReason = retreatReason;
+  }
+
+  public String getDiagStatus() {
+    return diagStatus;
+  }
+
+  public void setDiagStatus(String diagStatus) {
+    this.diagStatus = diagStatus;
+  }
+
+  public String getDiagStatusName() {
+    return diagStatusName;
+  }
+
+  public void setDiagStatusName(String diagStatusName) {
+    this.diagStatusName = diagStatusName;
+  }
+
+  public String getSpecimenType() {
+    return specimenType;
+  }
+
+  public void setSpecimenType(String specimenType) {
+    this.specimenType = specimenType;
+  }
+
+  public String getSpecimenTypeName() {
+    return specimenTypeName;
+  }
+
+  public void setSpecimenTypeName(String specimenTypeName) {
+    this.specimenTypeName = specimenTypeName;
+  }
 }

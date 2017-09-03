@@ -44,7 +44,7 @@
         <li>
           <a href="PathologyAction!addPathology">
             <div class="step curr">
-              <span>新建病理</span>
+              <span>新建病例</span>
             </div>
           </a>
         </li>
@@ -57,7 +57,8 @@
         <table class="table">
           <tbody>
           <tr>
-            <th width="10%">病理号</th>
+            <th width="5%">会诊号</th>
+            <th width="5%">病理号</th>
             <th width="10%">病人姓名</th>
             <th width="15%">材料部位</th>
             <th width="10%">病例状态</th>
@@ -68,15 +69,16 @@
           </tr>
           <s:iterator value="pathologys" id="pathology" status="11">
             <tr>
+              <td><s:property value="#pathology.caseId"/></td>
               <td><s:property value="#pathology.pathologyNo"/></td>
               <td><s:property value="#pathology.patientname"/></td>
-              <td><s:property value="#pathology.patientname"/></td>
-              <td><s:property value="#pathology.username"/></td>
-              <td><s:property value="#pathology.content"/></td>
+              <td><s:property value="#pathology.specimenName"/></td>
+              <td><s:property value="#pathology.diagStatusName"/></td>
+              <td><s:property value="#pathology.specimenTypeName"/></td>
               <td><s:property value="#pathology.hospitalname"/></td>
-              <td><s:date name="#pathology.createTime" format="yyyy-MM-dd HH:mm:ss"/></td>
+              <td><s:property value="#pathology.createTime"/></td>
               <td align="center">
-                <a href="PathologyAction!openPathologyUpdate?diagStatus=1&id=<s:property value="#pathology.caseId"/>">编辑</a>
+                <a href="PathologyAction!openPathologyUpdate?diagStatus=1&id=<s:property value="#pathology.caseId"/>">修改</a>
                 <a href="PathologyAction!getPathologyDto?diagStatus=1&id=<s:property value="#pathology.caseId"/>" target="_blank">查看</a>
               </td>
             </tr>

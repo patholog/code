@@ -46,15 +46,19 @@ public class PathologyServiceImpl implements IPathologyService {
       + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
       + "a.specimenname specimenName, a.idcard idCard, a.mobile, a.diag_time,a.retreat_reason,"
       + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
-      + "c.generalSee, c.microscopeSee, c.result, c.diagnosed, a.memo,E.ID_COLLECTION"
+      + "c.generalSee, c.microscopeSee, c.result, c.diagnosed, a.memo,E.ID_COLLECTION, a.diag_status,"
+      + "case a.diag_status when '1' THEN '新建' WHEN '2' then '待诊断' when '7' then '已诊断' end diagStatusName,"
+      + "a.specimentype, s.name specimenTypeName "
       + " FROM pathology a "
       + " LEFT JOIN COLLECTION E ON E.CASE_ID=A.ID_CASE AND A.ID_DOCTOR=E.ID_DOCTOR"
       + " LEFT JOIN result  c ON a.id_case = c.case_id"
-      + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital";
+      + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
+      + " LEFT JOIN specimen s on a.specimentype = s.id_specimen";
   private String basicCountSql = "SELECT count(1) FROM pathology a "
       + " LEFT JOIN result  c ON a.id_case = c.case_id"
       + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
-      + " LEFT JOIN COLLECTION E ON A.ID_CASE=E.CASE_ID AND A.ID_DOCTOR=E.ID_DOCTOR";
+      + " LEFT JOIN COLLECTION E ON A.ID_CASE=E.CASE_ID AND A.ID_DOCTOR=E.ID_DOCTOR"
+      + " LEFT JOIN specimen s on a.specimentype = s.id_specimen";
 
   public JdbcTemplate getJdbcTemplate() {
     return jdbcTemplate;
@@ -101,12 +105,12 @@ public class PathologyServiceImpl implements IPathologyService {
       pageNum = pageNum != null ? pageNum : "1";
       String title = "";
       int status = 1;
-      String countSql = basicCountSql + " WHERE a.diag_status='1' and a.id_doctor='" + name + "'";
+      String countSql = basicCountSql + " WHERE a.diag_status='1' and a.crt_user_id='" + name + "'";
 
       int totalNum = jdbcTemplate.queryForInt(countSql);
       if (totalNum > 0) {
         Pages page = new Pages(totalNum, "PathologyAction!getNewPathology", Integer.parseInt(pageNum), 10);
-        String sql = basicSql + " WHERE a.diag_status='1' and a.id_doctor='" + name + "' " + page.getPageLimit();
+        String sql = basicSql + " WHERE a.diag_status='1' and a.crt_user_id='" + name + "' " + page.getPageLimit();
         request.setAttribute("page", page.getPageStr());
         return jdbcTemplate.query(sql, new PathologyMapping());
       } else {

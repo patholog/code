@@ -40,12 +40,15 @@ public class PathologyMapping implements RowMapper {
       bean.setGeneralSee(rs.getString("generalSee"));
       bean.setMicroscopeSee(rs.getString("microscopeSee"));
       bean.setMemo(rs.getString("memo"));
-      //TODO 系统分类
       bean.setContent("tt");
       bean.setCollectionId(rs.getString("id_collection"));
       bean.setDiagnosed(rs.getString("diagnosed"));
       bean.setResult(rs.getString("result"));
       bean.setRetreatReason(rs.getString("retreat_reason"));
+      bean.setDiagStatus(rs.getString("diag_status"));
+      bean.setDiagStatusName(rs.getString("diagStatusName"));
+      bean.setSpecimenType(rs.getString("specimentype"));
+      bean.setSpecimenTypeName(rs.getString("specimenTypeName"));
       /*bean.setId(rs.getInt("username"));
 			bean.setCure(rs.getString("content"));
 			bean.setCreate_time(rs.getString("create_time"));
