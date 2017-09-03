@@ -222,6 +222,8 @@ public class UsersAction extends BaseAction {
 	 */
 	public String addUser() throws IOException {
 		try {
+			user.setPassword(DigestMD5.getDigestPassWord(user.getPassword()));
+			user.setDoctorctfsrc(upImg());
 			user.setIdUsers(RandomNumbers.getRandomId());
 			user.setUserstatus("0");
 			userservice.addUser(user);
