@@ -77,7 +77,7 @@
               <td><s:date name="#pathology.createTime" format="yyyy-MM-dd HH:mm:ss"/></td>
               <td align="center">
                 <a href="PathologyAction!openPathologyUpdate?diagStatus=1&id=<s:property value="#pathology.caseId"/>">编辑</a>
-                <a href="PathologyAction!getPathologyDto?diagStatus=1&id=<s:property value="#pathology.caseId"/>">查看</a>
+                <a href="PathologyAction!getPathologyDto?diagStatus=1&id=<s:property value="#pathology.caseId"/>" target="_blank">查看</a>
               </td>
             </tr>
           </s:iterator>

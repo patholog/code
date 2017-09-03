@@ -129,8 +129,8 @@
           flag = false;
           return;
         }
-        if ($('#caseId').val() === "") {
-          showTips("会诊号不能为空");
+        if ($('#pathologyNo').val() === "") {
+          showTips("病理号不能为空");
           flag = false;
           return;
         }
@@ -146,11 +146,6 @@
         }
         if ($('#diagTime').val() === "") {
           showTips("送检时间不能为空");
-          flag = false;
-          return;
-        }
-        if ($('#pathologyNo').val() === "") {
-          showTips("病理号不能为空");
           flag = false;
           return;
         }
@@ -357,9 +352,8 @@
               </li>
               <li>
                 <div>
-                  <span class="red_star">*</span>会<ins class="half_words"></ins>诊<ins class="half_words"></ins>号
-                  <input name="caseId" id="caseId">
-                  <input type="hidden" name="caseIdHidden" id="caseIdHidden">
+                  <span class="red_star">*</span>病<ins class="half_words"></ins>理<ins class="half_words"></ins>号
+                  <input name="pathologyNo" id="pathologyNo" class="patient_name">
                 </div>
               </li>
               <li>
@@ -476,12 +470,6 @@
                   <div class="urgent">加急<span class="tick">
                     <input name="tick_box" type="hidden" id="tick_box" value="0"></span>
                   </div>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <span class="red_star">*</span>病<ins class="half_words"></ins>理<ins class="half_words"></ins>号
-                  <input name="pathologyNo" id="pathologyNo" class="patient_name">
                 </div>
               </li>
               <li>

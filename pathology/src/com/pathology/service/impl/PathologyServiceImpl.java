@@ -19,6 +19,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -135,8 +136,59 @@ public class PathologyServiceImpl implements IPathologyService {
    */
   private Pathology assemblePathology(Map<String, String[]> paramMap) {
     Pathology pathology = new Pathology();
-    pathology.setIdCase(paramMap.get("caseId")[0]);
+    try {
+      pathology.setIdCase(generateCaseId()); // 会诊号（主键）
+      pathology.setPatientname(paramMap.get("patientName")[0]); // 姓名
+      pathology.setPathologyno(paramMap.get("pathologyNo")[0]); // 病理编号
+      pathology.setPatientage(paramMap.get("patientAge")[0]); // 年龄
+      pathology.setAgeunit(paramMap.get("ageUnit")[0]); // 年龄单位
+      pathology.setPatientsex(paramMap.get("patientSex")[0]); // 性别（男/女）
+      pathology.setSpecimenname(paramMap.get("specimenName")[0]); // 取材部位
+      pathology.setSpecimentype(paramMap.get("specimenType")[0]); // 标本类型
+      pathology.setIdcard(paramMap.get("idCard")[0]); // 身份证号
+      pathology.setMobile(paramMap.get("mobile")[0]); // 手机号
+      pathology.setHospitalcode(paramMap.get("hospitalCodeHidden")[0]); // 送检单位编码
+      if (!"".equals(paramMap.get("diagTime")[0])) {
+        pathology.setDiagTime(Timestamp.valueOf(paramMap.get("diagTime")[0])); // 送检日期
+      }
+      pathology.setMemo(paramMap.get("memo")[0]); // 备注
+      pathology.setCrtTime(new Timestamp(System.currentTimeMillis())); // 创建日期
+      pathology.setClinicdiagnose(paramMap.get("clinicDiagnose")[0]); // 临床诊断
+      pathology.setHistorysummary(paramMap.get("historySummary")[0]); // 病史
+      pathology.setCrtUserId(SessionAgentManager.getSessionAgentBean().getIdUsers()); // 创建人
+      pathology.setDiagStatus("1"); // 病理初始状态
+      pathology.setDoctorId(SessionAgentManager.getSessionAgentBean().getIdUsers()); // 创建人
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      throw new RuntimeException("获取基本信息数据失败，请联系管理员");
+    }
     return pathology;
+  }
+
+  /**
+   * 生成病例表主键
+   *
+   * @return 主键
+   */
+  private String generateCaseId() {
+    String count = "select count(1) from pathology "
+        + " where DATE_FORMAT(crt_time,'%Y-%m-%d') = DATE_FORMAT('" + new java.sql.Date(new Date().getTime()) + "','%Y-%m-%d') ";
+    if (jdbcTemplate.queryForInt(count) > 0) {
+      String sql = "SELECT id_case "
+          + " from pathology "
+          + " where DATE_FORMAT(crt_time,'%Y-%m-%d') = DATE_FORMAT('" + new java.sql.Date(new Date().getTime()) + "','%Y-%m-%d') "
+          + " order BY crt_time DESC limit 1 ";
+      Map map = jdbcTemplate.queryForMap(sql);
+      if (map.containsKey("id_case") && map.get("id_case") != null) {
+        String next = String.valueOf(Integer.valueOf(((String) map.get("id_case")).substring(10)) + 1);
+        next = next.length() < 3 ? (next.length() == 2 ? "0" + next : "00" + next) : next;
+        return "BL" + new SimpleDateFormat("yyyyMMdd").format(new Date()) + next;
+      } else {
+        throw new RuntimeException("获取会诊号出现错误，请联系管理员");
+      }
+    } else {
+      return "BL" + new SimpleDateFormat("yyyyMMdd").format(new Date()) + "001";
+    }
   }
 
   /**
@@ -190,36 +242,10 @@ public class PathologyServiceImpl implements IPathologyService {
    */
   @Override
   public int addPathology(Map<String, String[]> paramMap) {
-    Pathology pathology = new Pathology();
     Result result = new Result();
-    if (this.getPathology(Pathology.class, paramMap.get("caseId")[0]) != null) {
+    Pathology pathology = assemblePathology(paramMap);
+    if (this.getPathology(Pathology.class, pathology.getIdCase()) != null) {
       throw new RuntimeException("该会诊号已经存在");
-    }
-    try {
-      pathology.setPatientname(paramMap.get("patientName")[0]); // 姓名
-      pathology.setPathologyno(paramMap.get("pathologyNo")[0]); // 病理编号
-      pathology.setIdCase(paramMap.get("caseId")[0]); // 会诊号（主键）
-      pathology.setPatientage(paramMap.get("patientAge")[0]); // 年龄
-      pathology.setAgeunit(paramMap.get("ageUnit")[0]); // 年龄单位
-      pathology.setPatientsex(paramMap.get("patientSex")[0]); // 性别（男/女）
-      pathology.setSpecimenname(paramMap.get("specimenName")[0]); // 取材部位
-      pathology.setSpecimentype(paramMap.get("specimenType")[0]); // 标本类型
-      pathology.setIdcard(paramMap.get("idCard")[0]); // 身份证号
-      pathology.setMobile(paramMap.get("mobile")[0]); // 手机号
-      pathology.setHospitalcode(paramMap.get("hospitalCodeHidden")[0]); // 送检单位编码
-      if (!"".equals(paramMap.get("diagTime")[0])) {
-        pathology.setDiagTime(Timestamp.valueOf(paramMap.get("diagTime")[0])); // 送检日期
-      }
-      pathology.setMemo(paramMap.get("memo")[0]); // 备注
-      pathology.setCrtTime(new Timestamp(System.currentTimeMillis())); // 创建日期
-      pathology.setClinicdiagnose(paramMap.get("clinicDiagnose")[0]); // 临床诊断
-      pathology.setHistorysummary(paramMap.get("historySummary")[0]); // 病史
-      pathology.setCrtUserId(SessionAgentManager.getSessionAgentBean().getIdUsers()); // 创建人
-      pathology.setDiagStatus("1"); // 病理初始状态
-      pathology.setDoctorId(SessionAgentManager.getSessionAgentBean().getIdUsers()); // 创建人
-    } catch (Exception e) {
-      logger.error(e.getMessage());
-      throw new RuntimeException("获取基本信息数据失败，请联系管理员");
     }
     try {
       addPathology(pathology); // 新增病理信息
@@ -229,8 +255,8 @@ public class PathologyServiceImpl implements IPathologyService {
     }
     try {
       // 大体所见等Result数据
-      result.setCaseId(paramMap.get("caseId")[0]);
-      result.setIdResult(paramMap.get("caseId")[0]);
+      result.setCaseId(pathology.getIdCase());
+      result.setIdResult(pathology.getIdCase());
       result.setGeneralSee(paramMap.get("generalSeeHidden")[0]); // 大体所见
       result.setMicroscopeSee(paramMap.get("microscopeSeeHidden")[0]); // 影像检查
       result.setDiagnosed(paramMap.get("firstVisit")[0]); // 初诊意见
@@ -250,7 +276,7 @@ public class PathologyServiceImpl implements IPathologyService {
       if (paramMap.containsKey("slideFileName") && !"".equals(paramMap.get("slideFileName")[0])) {
         Image image = new Image();
         // image.setIdImage(paramMap.get("pathologyNo")[0]); // 主键自增
-        image.setCaseId(paramMap.get("caseId")[0]);
+        image.setCaseId(pathology.getIdCase());
         Calendar cal = Calendar.getInstance();
         String year = String.valueOf(cal.get(Calendar.YEAR));
         String month = String.valueOf(cal.get(Calendar.MONTH) + 1);
