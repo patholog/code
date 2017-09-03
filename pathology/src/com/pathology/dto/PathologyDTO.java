@@ -28,6 +28,7 @@ public class PathologyDTO implements java.io.Serializable {
   private Date patientBirthday;
   private String patientSex;
   private String patientAge;
+  private String ageUnit;
   private String specimenName;
   private String specimenType;
   private String specimenTypeName;
@@ -356,5 +357,13 @@ public class PathologyDTO implements java.io.Serializable {
 
   public void setSpecimenTypeName(String specimenTypeName) {
     this.specimenTypeName = specimenTypeName;
+  }
+
+  public String getAgeUnit() {
+    return ageUnit;
+  }
+
+  public void setAgeUnit(String ageUnit) {
+    this.ageUnit = ageUnit;
   }
 }

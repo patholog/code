@@ -92,11 +92,6 @@
           flag = false;
           return;
         }
-        if ($('#caseId').val() === "") {
-          showTips("会诊号不能为空");
-          flag = false;
-          return;
-        }
         if ($('#patientAge').val() === "") {
           showTips("年龄不能为空");
           flag = false;
@@ -254,7 +249,7 @@
   <div class="header">
     <%@include file="/webdiagnosis/maintop.jsp" %>
   </div>
-  <form id="infoForm" method="post" action="PathologyAction!saveInfo" enctype="multipart/form-data">
+  <form id="infoForm" method="post" action="PathologyAction!updatePathology" enctype="multipart/form-data">
   <div id="whole" class="mlrAuto">
     <div class="menu_left">
       <ul id="Left1_MenuList">
@@ -269,7 +264,7 @@
             <li>
               <a href="">
                 <div class="step curr">
-                  1<span>病例信息</span></div>
+                  <span>病例信息</span></div>
               </a>
             </li>
           </ul>
@@ -292,33 +287,32 @@
             </p>
           </div>
           <div class="information" id="divHead">
-            <div id="masking" style="display: block; height: 375px;"></div>
             <ul class="state_six">
               <li>
                 <div>
                   <span class="red_star">*</span>病人姓名
-                  <input name="patientName" id="patientName" class="patient_name" maxlength="8">
+                  <input type="hidden" id="caseId" name="caseId" value="<s:property value="pathology.caseId"/>"/>
+                  <input name="patientName" id="patientName" class="patient_name" maxlength="8" value="<s:property value="pathology.patientname"/>">
                 </div>
               </li>
               <li>
                 <div>
-                  <span class="red_star">*</span>会<ins class="half_words"></ins>诊<ins class="half_words"></ins>号
-                  <input name="caseId" id="caseId">
-                  <input type="hidden" name="caseIdHidden" id="caseIdHidden">
+                  <span class="red_star">*</span>病<ins class="half_words"></ins>理<ins class="half_words"></ins>号
+                  <input name="pathologyNo" id="pathologyNo" class="patient_name" value="<s:property value="pathology.pathologyNo"/>">
                 </div>
               </li>
               <li>
                 <div>
                   <div class="age"><span class="red_star">*</span>年龄
-                    <input name="patientAge" id="patientAge" class="inf_age" maxlength="3"/>
+                    <input name="patientAge" id="patientAge" class="inf_age" maxlength="3" value="<s:property value="pathology.patientAge"/>"/>
                     <%--<input name="patientAge" id="patientAge" class="inf_age" maxlength="3" onblur="CheckValue('3')"
                            onkeyup="if(this.value.length===1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">--%>
                     <span style="width: 40px;">
                       <select name="ageUnit" id="ageUnit" style="width: 40px;">
-                        <option value="岁">岁</option>
-                        <option value="月">月</option>
-                        <option value="天">天</option>
-                        <option value="小时">小时</option>
+                        <option value="岁" <s:if test='"岁"== pathology.ageUnit'>selected</s:if>>岁</option>
+                        <option value="月" <s:if test='"月" == pathology.ageUnit'>selected</s:if>>月</option>
+                        <option value="天" <s:if test='"天" == pathology.ageUnit'>selected</s:if>>天</option>
+                        <option value="小时" <s:if test='"小时" == pathology.ageUnit'>selected</s:if>>小时</option>
                       </select>
                     </span>
                   </div>
@@ -326,8 +320,8 @@
                     <span class="red_star">*</span>性别
                     <span style="width: 30px;">
                       <select name="patientSex" id="patientSex" style="width: 40px;">
-                        <option value="男">男</option>
-	                      <option value="女">女</option>
+                        <option value="男" <s:if test='"男" == pathology.patientSex'>selected</s:if>>男</option>
+	                      <option value="女" <s:if test='"女" == pathology.patientSex'>selected</s:if>>女</option>
                       </select>
                     </span>
                   </div>
@@ -336,14 +330,15 @@
               <li>
                 <div>
                   <span class="red_star"></span>取材部位
-                  <input name="specimenName" id="specimenName">
+                  <input name="specimenName" id="specimenName" value="<s:property value="pathology.specimenName"/>">
                 </div>
               </li>
               <li>
                 <div>
                   <div class="pos_r">
                     <ins class="half_words"></ins>身份证号
-                    <input name="idCard" id="idCard" class="identity" maxlength="18" onblur="CheckValue('2')">
+                    <input name="idCard" id="idCard" class="identity" maxlength="18" onblur="CheckValue('2')"
+                           value="<s:property value="pathology.idCard"/>">
                     <div class="clear"></div>
                     <img src="../../img/sbm_success.png" class="success" id="imgIdentityS" style="display: none;
 	                                        right: 3px;">
@@ -356,8 +351,9 @@
                 <div class="pos_r">
                   <ins class="half_words"></ins>手<ins class="half_words"></ins>机<ins class="half_words"></ins>号
                   <input name="mobile" id="mobile" maxlength="11"
-                          onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
-                          onblur="CheckValue('1')">
+                         onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                         onblur="CheckValue('1')"
+                         value="<s:property value="pathology.mobile"/>">
                   <div class="clear"></div>
                   <img src="../../img/sbm_success.png" class="success" id="imgMobileS" style="display: none;
                                         right: 25px;">
@@ -369,13 +365,14 @@
                 <div>
                   <ins class="half_words"></ins>家属电话
                   <input name="txtRelativePhone" type="text" id="txtRelativePhone"
-                             onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                         onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                         value="<s:property value="pathology.mobile"/>">
                 </div>
               </li>
               <li>
                 <div>
                   <span class="red_star">*</span>送检时间
-                  <input id="diagTime" name="diagTime"/>
+                  <input id="diagTime" name="diagTime" value="<s:property value="pathology.diagTime"/>"/>
                 </div>
               </li>
               <li>
@@ -421,12 +418,6 @@
                   <div class="urgent">加急<span class="tick">
                     <input name="tick_box" type="hidden" id="tick_box" value="0"></span>
                   </div>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <span class="red_star">*</span>病<ins class="half_words"></ins>理<ins class="half_words"></ins>号
-                  <input name="pathologyNo" id="pathologyNo" class="patient_name">
                 </div>
               </li>
               <li>

@@ -43,7 +43,7 @@ public class PathologyServiceImpl implements IPathologyService {
 
   private JdbcTemplate jdbcTemplate;
   private String basicSql = "SELECT a.id_case caseId, a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
-      + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge,"
+      + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge, a.ageunit,"
       + "a.specimenname specimenName, a.idcard idCard, a.mobile, a.diag_time,a.retreat_reason,"
       + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
       + "c.generalSee, c.microscopeSee, c.result, c.diagnosed, a.memo,E.ID_COLLECTION, a.diag_status,"
@@ -122,10 +122,17 @@ public class PathologyServiceImpl implements IPathologyService {
     }
   }
 
+  /**
+   * 根据前台的数据更新病例信息
+   *
+   * @param paramMap 数据
+   */
   @Override
   public void updatePathology(Map<String, String[]> paramMap) {
     try {
-      updatePathology(assemblePathology(paramMap));
+      Pathology pathology = assemblePathology(paramMap);
+      pathology.setIdCase(paramMap.get("caseId")[0]);
+      updatePathology(pathology);
     } catch (Exception e) {
       logger.error(e.getMessage());
       throw new RuntimeException(e);

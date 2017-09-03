@@ -194,6 +194,13 @@ public class PathologyAction extends BaseAction {
     HttpServletRequest request = ServletActionContext.getRequest();
     String id = request.getParameter("id");
     pathology = pathologyService.getPathologyByIdAndDiagStatus(id);
+    try {
+      hospitalList = hospitalservice.getAllHospital(Hospital.class, "");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    specimenList = specimenService.selectList(Specimen.class, "");
+    usersList = pathologyService.selectDoctorListNoMe();
     return "pathologyUpdate";
   }
 
