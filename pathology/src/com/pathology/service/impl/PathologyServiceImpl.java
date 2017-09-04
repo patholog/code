@@ -48,7 +48,7 @@ public class PathologyServiceImpl implements IPathologyService {
       + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
       + "c.generalSee, c.microscopeSee, c.result, c.diagnosed, a.memo,E.ID_COLLECTION, a.diag_status,"
       + "case a.diag_status when '1' THEN '新建' WHEN '2' then '待诊断' when '7' then '已诊断' end diagStatusName,"
-      + "a.specimentype, s.name specimenTypeName "
+      + "a.specimentype, s.name specimenTypeName, a.hospitalcode, a.id_doctor "
       + " FROM pathology a "
       + " LEFT JOIN COLLECTION E ON E.CASE_ID=A.ID_CASE AND A.ID_DOCTOR=E.ID_DOCTOR"
       + " LEFT JOIN result  c ON a.id_case = c.case_id"
@@ -105,12 +105,12 @@ public class PathologyServiceImpl implements IPathologyService {
       pageNum = pageNum != null ? pageNum : "1";
       String title = "";
       int status = 1;
-      String countSql = basicCountSql + " WHERE a.diag_status='1' and a.crt_user_id='" + name + "'";
+      String countSql = basicCountSql + " WHERE a.crt_user_id='" + name + "'";
 
       int totalNum = jdbcTemplate.queryForInt(countSql);
       if (totalNum > 0) {
         Pages page = new Pages(totalNum, "PathologyAction!getNewPathology", Integer.parseInt(pageNum), 10);
-        String sql = basicSql + " WHERE a.diag_status='1' and a.crt_user_id='" + name + "' " + page.getPageLimit();
+        String sql = basicSql + " WHERE a.crt_user_id='" + name + "' " + page.getPageLimit();
         request.setAttribute("page", page.getPageStr());
         return jdbcTemplate.query(sql, new PathologyMapping());
       } else {
@@ -159,6 +159,7 @@ public class PathologyServiceImpl implements IPathologyService {
       pathology.setIdcard(paramMap.get("idCard")[0]); // 身份证号
       pathology.setMobile(paramMap.get("mobile")[0]); // 手机号
       pathology.setHospitalcode(paramMap.get("hospitalCodeHidden")[0]); // 送检单位编码
+      pathology.setDoctorId(paramMap.get("toDoctorId")[0]); // 送检医生
       if (!"".equals(paramMap.get("diagTime")[0])) {
         pathology.setDiagTime(Timestamp.valueOf(paramMap.get("diagTime")[0])); // 送检日期
       }
@@ -168,7 +169,6 @@ public class PathologyServiceImpl implements IPathologyService {
       pathology.setHistorysummary(paramMap.get("historySummary")[0]); // 病史
       pathology.setCrtUserId(SessionAgentManager.getSessionAgentBean().getIdUsers()); // 创建人
       pathology.setDiagStatus("1"); // 病理初始状态
-      pathology.setDoctorId(SessionAgentManager.getSessionAgentBean().getIdUsers()); // 创建人
     } catch (Exception e) {
       logger.error(e.getMessage());
       throw new RuntimeException("获取基本信息数据失败，请联系管理员");

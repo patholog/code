@@ -381,9 +381,12 @@
                   <ins class="half_words"></ins>系统分类
                   <select name="specimenType" id="specimenType" style="width: 150px;">
                     <option value="">请选择</option>
-                    <c:forEach items="${specimenList}" var="list" varStatus="status">
-                      <option value='${list.idSpecimen}'>${list.name}</option>
-                    </c:forEach>
+                    <s:iterator value="specimenList" id="specimen">
+                      <option value='#specimen.idSpecimen'
+                              <s:if test="idSpecimen == pathology.specimenType">selected</s:if>>
+                          ${specimen.name}
+                      </option>
+                    </s:iterator>
                   </select>
                 </div>
               </li>
@@ -392,9 +395,12 @@
                   <span class="red_star">*</span>送检单位
                   <select id="hospitalCode" name="hospitalCode" style="width: 150px">
                     <option value="">请选择</option>
-                    <c:forEach items="${hospitalList}" var="list" varStatus="status">
-                      <option value='${list.hospitalcode}'>${list.name}</option>
-                    </c:forEach>
+                    <s:iterator value="hospitalList" id="hospital">
+                      <option value='#hospital.hospitalcode}'
+                              <s:if test="hospitalcode == pathology.hospitalCode">selected</s:if>>
+                          ${hospital.name}
+                      </option>
+                    </s:iterator>
                   </select>
                   <input type="hidden" id="hospitalCodeHidden" name="hospitalCodeHidden">
                 </div>
@@ -404,9 +410,11 @@
                   <ins class="half_words"></ins>送检医生
                   <select name="toDoctorId" id="toDoctorId" style="width: 150px;">
                     <option value="">请选择</option>
-                    <c:forEach items="${usersList}" var="list" varStatus="status">
-                      <option value='${list.idUsers}'>${list.username}</option>
-                    </c:forEach>
+                    <s:iterator value="usersList" id="users">
+                      <option value='#users.idUsers' <s:if test="idUsers == pathology.doctorId">selected</s:if>>
+                          ${users.username}
+                      </option>
+                    </s:iterator>
                   </select>
                 </div>
               </li>

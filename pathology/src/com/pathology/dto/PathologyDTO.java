@@ -13,12 +13,17 @@ public class PathologyDTO implements java.io.Serializable {
   private int num;
   private String patientname;
   private String username;
+  private String hospitalCode;
   private String hospitalname;
   private String content;
   private String caseId;
   private String messageOrder;
   private String isReaded;
   private String createTime;
+  /**
+   * 送检医生
+   */
+  private String doctorId;
   private String memo;
   private Date lastUpdTime;
   private String lastUpdDeptCd;
@@ -365,5 +370,21 @@ public class PathologyDTO implements java.io.Serializable {
 
   public void setAgeUnit(String ageUnit) {
     this.ageUnit = ageUnit;
+  }
+
+  public String getHospitalCode() {
+    return hospitalCode;
+  }
+
+  public void setHospitalCode(String hospitalCode) {
+    this.hospitalCode = hospitalCode;
+  }
+
+  public String getDoctorId() {
+    return doctorId;
+  }
+
+  public void setDoctorId(String doctorId) {
+    this.doctorId = doctorId;
   }
 }
