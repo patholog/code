@@ -47,7 +47,7 @@ public class PathologyServiceImpl implements IPathologyService {
       + "a.specimenname specimenName, a.idcard idCard, a.mobile, a.diag_time,a.retreat_reason,"
       + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
       + "c.generalSee, c.microscopeSee, c.result, c.diagnosed, a.memo,E.ID_COLLECTION, a.diag_status,"
-      + "case a.diag_status when '1' THEN '新建' WHEN '2' then '待诊断' when '7' then '已诊断' end diagStatusName,"
+      + "case a.diag_status when '1' THEN '新建' WHEN '2' then '待诊断' WHEN '3' THEN '已退回' when '7' then '已诊断' end diagStatusName,"
       + "a.specimentype, s.name specimenTypeName, a.hospitalcode, a.id_doctor "
       + " FROM pathology a "
       + " LEFT JOIN COLLECTION E ON E.CASE_ID=A.ID_CASE AND A.ID_DOCTOR=E.ID_DOCTOR"
@@ -109,8 +109,8 @@ public class PathologyServiceImpl implements IPathologyService {
 
       int totalNum = jdbcTemplate.queryForInt(countSql);
       if (totalNum > 0) {
-        Pages page = new Pages(totalNum, "PathologyAction!getNewPathology", Integer.parseInt(pageNum), 10);
-        String sql = basicSql + " WHERE a.crt_user_id='" + name + "' " + page.getPageLimit();
+        Pages page = new Pages(totalNum, "PathologyAction!getNewPathologyList", Integer.parseInt(pageNum), 10);
+        String sql = basicSql + " WHERE a.crt_user_id='" + name + "' order by crt_time DESC " + page.getPageLimit();
         request.setAttribute("page", page.getPageStr());
         return jdbcTemplate.query(sql, new PathologyMapping());
       } else {
@@ -168,7 +168,7 @@ public class PathologyServiceImpl implements IPathologyService {
       pathology.setClinicdiagnose(paramMap.get("clinicDiagnose")[0]); // 临床诊断
       pathology.setHistorysummary(paramMap.get("historySummary")[0]); // 病史
       pathology.setCrtUserId(SessionAgentManager.getSessionAgentBean().getIdUsers()); // 创建人
-      pathology.setDiagStatus("1"); // 病理初始状态
+      // pathology.setDiagStatus("1"); // 病理初始状态
     } catch (Exception e) {
       logger.error(e.getMessage());
       throw new RuntimeException("获取基本信息数据失败，请联系管理员");
@@ -255,6 +255,7 @@ public class PathologyServiceImpl implements IPathologyService {
   public int addPathology(Map<String, String[]> paramMap) {
     Result result = new Result();
     Pathology pathology = assemblePathology(paramMap);
+    pathology.setDiagStatus("2"); // 默认新建为待诊断
     if (this.getPathology(Pathology.class, pathology.getIdCase()) != null) {
       throw new RuntimeException("该会诊号已经存在");
     }

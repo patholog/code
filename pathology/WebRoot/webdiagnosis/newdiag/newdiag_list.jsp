@@ -16,6 +16,13 @@
   <link rel="stylesheet" type="text/css" href="${path }/css/theme.css"/>
   <link rel="stylesheet" type="text/css" href="${path }/css/WdatePicker.css"/>
   <link rel="stylesheet" type="text/css" href="${path }/css/weebox.css"/>
+  <link rel="stylesheet" href="${path }/assets/jqueryui/jquery-ui.min.css"/>
+  <link rel="stylesheet" href="${path }/assets/jqueryui/jquery-ui-timepicker-addon.min.css"/>
+
+  <script type="text/javascript" src="${path }/js/jquery.min.js"></script>
+  <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui-timepicker-addon.min.js"></script>
+  <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui-timepicker-zh-CN.js"></script>
   <script type="text/javascript" src="${path }/js/treeView.js"></script>
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
@@ -78,8 +85,10 @@
               <td><s:property value="#pathology.hospitalname"/></td>
               <td><s:property value="#pathology.createTime"/></td>
               <td align="center">
-                <a href="PathologyAction!openPathologyUpdate?diagStatus=1&id=<s:property value="#pathology.caseId"/>">修改</a>
-                <a href="PathologyAction!getPathologyDto?diagStatus=1&id=<s:property value="#pathology.caseId"/>" target="_blank">查看</a>
+                <%--<a href="PathologyAction!openPathologyUpdate?diagStatus=2&id=<s:property value="#pathology.caseId"/>">修改</a>--%>
+                <a href="javascript:void(0)"
+                   onclick="updatePathology('<s:property value="#pathology.diagStatus"/>', '<s:property value="#pathology.caseId"/>')">修改</a>
+                <a href="PathologyAction!getPathologyDto?diagStatus=2&id=<s:property value="#pathology.caseId"/>" target="_blank">查看</a>
               </td>
             </tr>
           </s:iterator>
@@ -98,4 +107,13 @@
   </div>
 </div>
 </body>
+<script>
+    function updatePathology(diagStatus, id) {
+      if (diagStatus !== "2" && diagStatus !== "3") {
+        showTips("当前病例不能修改");
+        return false;
+      }
+      window.location.href = "PathologyAction!openPathologyUpdate?diagStatus=" + diagStatus + "&id=" + id;
+    }
+</script>
 </html>
