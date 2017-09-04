@@ -148,7 +148,7 @@ public class PathologyServiceImpl implements IPathologyService {
   private Pathology assemblePathology(Map<String, String[]> paramMap) {
     Pathology pathology = new Pathology();
     try {
-      pathology.setIdCase(generateCaseId()); // 会诊号（主键）
+      pathology.setIdCase(generateCaseId(5)); // 会诊号（主键）
       pathology.setPatientname(paramMap.get("patientName")[0]); // 姓名
       pathology.setPathologyno(paramMap.get("pathologyNo")[0]); // 病理编号
       pathology.setPatientage(paramMap.get("patientAge")[0]); // 年龄
@@ -179,9 +179,11 @@ public class PathologyServiceImpl implements IPathologyService {
   /**
    * 生成病例表主键
    *
+   * @param length 末尾自增部分的位数
    * @return 主键
    */
-  private String generateCaseId() {
+  private String generateCaseId(int length) {
+    length = length <= 0 ? 5 : length; // 默认为5位
     String count = "select count(1) from pathology "
         + " where DATE_FORMAT(crt_time,'%Y-%m-%d') = DATE_FORMAT('" + new java.sql.Date(new Date().getTime()) + "','%Y-%m-%d') ";
     if (jdbcTemplate.queryForInt(count) > 0) {
@@ -191,14 +193,20 @@ public class PathologyServiceImpl implements IPathologyService {
           + " order BY crt_time DESC limit 1 ";
       Map map = jdbcTemplate.queryForMap(sql);
       if (map.containsKey("id_case") && map.get("id_case") != null) {
-        String next = String.valueOf(Integer.valueOf(((String) map.get("id_case")).substring(10)) + 1);
-        next = next.length() < 3 ? (next.length() == 2 ? "0" + next : "00" + next) : next;
-        return "BL" + new SimpleDateFormat("yyyyMMdd").format(new Date()) + next;
+        String next = String.valueOf(Integer.valueOf(((String) map.get("id_case")).substring(8)) + 1);
+        for (int i = 0; i < length - next.length(); i++) {
+          next = "0" + next;
+        }
+        return new SimpleDateFormat("yyyyMMdd").format(new Date()) + next;
       } else {
         throw new RuntimeException("获取会诊号出现错误，请联系管理员");
       }
     } else {
-      return "BL" + new SimpleDateFormat("yyyyMMdd").format(new Date()) + "001";
+      String next = "1";
+      for (int i= 0; i < length; i++) {
+        next = "0" + next;
+      }
+      return new SimpleDateFormat("yyyyMMdd").format(new Date()) + next;
     }
   }
 

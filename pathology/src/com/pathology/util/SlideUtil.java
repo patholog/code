@@ -1,5 +1,7 @@
 package com.pathology.util;
 
+import org.apache.log4j.Logger;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,6 +15,8 @@ import java.nio.channels.FileChannel;
  * 切片工具类
  */
 public class SlideUtil {
+
+  private static Logger logger = Logger.getLogger(SlideUtil.class);
 
   private static final String xmlHeader = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
   private static final String schemaName = "http://schemas.microsoft.com/deepzoom/2009";
@@ -35,6 +39,7 @@ public class SlideUtil {
   }
 
   public static void processImageFile(File inFile, File outputDir) throws IOException {
+    logger.error("start to cut slide " + inFile.getName());
     if (verboseMode) {
       System.out.printf("Processing image file: %s\n", inFile);
     }
@@ -107,7 +112,9 @@ public class SlideUtil {
     }
 
     saveImageDescriptor(originalWidth, originalHeight, descriptor);
+    logger.error("start to create thumbnail");
     createMinThumbnail(loadImage(inFile), outputDir.getPath(), fileName);
+    logger.error("cut slide ended");
   }
 
   private static void deleteFile(File file) throws IOException {
@@ -139,11 +146,11 @@ public class SlideUtil {
   }
 
   private static BufferedImage loadImage(File file) throws IOException {
-    BufferedImage result = null;
+    BufferedImage result;
     try {
       result = ImageIO.read(file);
     } catch (Exception e) {
-      throw new IOException("Cannot read image file: " + file);
+      throw new IOException("不受支持的图片类型");
     }
     return result;
   }

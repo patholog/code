@@ -10,7 +10,6 @@ import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
-import javax.print.DocFlavor;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -121,6 +120,8 @@ public class PathologyAction extends BaseAction {
               new File(rootPath + "\\" + paramMap.get("slideFilePath")[0] + "\\" + paramMap.get("imageId")[0]));
         } catch (Exception e) {
           logger.error(e.getMessage());
+          count = 0;
+          failure = e.getMessage();
         }
       }
       out = response.getWriter();

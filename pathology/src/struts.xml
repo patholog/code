@@ -7,6 +7,7 @@
   <constant name="struts.custom.i18n.resources" value="messages"/>
   <constant name="struts.objectFactory" value="spring"/>
   <constant name="struts.action.excludePattern" value="/upload/img/.*?"/>
+  <constant name="struts.multipart.maxSize" value="1048576000"/>
   <package name="ajax" extends="json-default">
 
     <global-results>
