@@ -237,13 +237,13 @@ document.getElementById("articles").reset() ;
 				action="UserAction!addUser" onsubmit="return CheckM()">
 				<table class="maintable form_top_thin">
 					<tr>
-						<th>用户名</th>
+						<th>用户名*</th>
 						<td><input type="text" name="user.username" id="username"
 							value="" style="width:300px;" required /> <span id="nametip"></span>
 						</td>
 					</tr>
 					<tr>
-						<th>密码</th>
+						<th>密码*</th>
 						<td><input type="password" name="user.password" id="password"
 							 style="width:300px;" required onKeyUp=pwStrength(this.value) onBlur=pwStrength(this.value)/> <span id="pwsdtip">
 								<div id="strength_H" class="pwdcheck"></div>
@@ -252,7 +252,7 @@ document.getElementById("articles").reset() ;
 						</span></td>
 					</tr>
 					<tr>
-						<th>电子邮箱</th>
+						<th>电子邮箱*</th>
 						<td><input type="email" name="user.email" id="email" value=""
 							style="width:300px;" required /><span id="emailtip"></span></td>
 					</tr>

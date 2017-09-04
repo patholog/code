@@ -24,20 +24,28 @@ document.getElementById("articles").reset();
 }  
 </script>
 <script type="text/javascript">
+
+var codefg=false;
+var namefg=false;
+var memofg=true;
+var addfg=true;
 	$(document).ready(function() {
 		$("#hospitalcode").blur(function() {
 					var hospitalcode = $("#hospitalcode").val().trim();
 					if (hospitalcode == '') {
 						$("#hospitalcodetip").html("<a style='color:#2ca9cc;font-size:14px;'>编码不能为空！</a>");
 						$("#Submit").attr("disabled",true);
+						codefg=false;
 						return false;
 					}else if(hospitalcode.length<6){
 							$("#hospitalcodetip").html("<a style='color:#2ca9cc;font-size:14px;'>编码不能少于6位！</a>");
 							$("#Submit").attr("disabled",true);
+							codefg=false;
 							return false;
 					}else if(hospitalcode.length>20){
 							$("#hospitalcodetip").html("<a style='color:#2ca9cc;font-size:14px;'>编码不能超过20位！</a>");
 							$("#Submit").attr("disabled",true);
+							codefg=false;
 							return false;
 					}
 					else {
@@ -47,7 +55,13 @@ document.getElementById("articles").reset();
 							$("#hospitalcodetip").html("<a style='color:#2ca9cc;font-size:14px;'>只能输入字母或数字!</a>");
 							$("#hospitalcode").val("");
 							$("#Submit").attr("disabled",true);
+							codefg=false;
 							return false;
+						}else{
+							$("#hospitalcodetip").html("");
+							$("#Submit").attr("disabled",false);
+							codefg=true;
+							return true;
 						}
 			}
 		});	
@@ -57,11 +71,18 @@ document.getElementById("articles").reset();
 					if (name == '') {
 						$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>名称不能为空！</a>");
 						$("#Submit").attr("disabled",true);
+						namefg=false;
 						return false;
 					}else if(name.length>50){
 							$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>名称过长！</a>");
 							$("#Submit").attr("disabled",true);
+							namefg=false;
 							return false;
+					}else{
+							$("#nametip").html("");
+							$("#Submit").attr("disabled",false);
+							namefg=true;
+							return true;
 					}
 			
 		});	
@@ -71,10 +92,12 @@ document.getElementById("articles").reset();
 			if(spe.length>128){
 				$("#memotip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
 				$("#Submit").attr("disabled",true);
+				memofg=false;
 				return false;
 			}else{
 				$("#memotip").html("");
 				$("#Submit").attr("disabled",false);
+				memofg=true;
 				return true;
 			}
 		});
@@ -83,16 +106,28 @@ document.getElementById("articles").reset();
 			if(spe.length>128){
 				$("#addresstip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
 				$("#Submit").attr("disabled",true);
+				addfg=false;
 				return false;
 			}else{
 				$("#addresstip").html("");
 				$("#Submit").attr("disabled",false);
+				addfg=true;
 				return true;
 			}
 		});
 		
 
 	});
+	
+	
+	function CheckH() {
+    if(codefg && namefg && memofg && addfg){
+        return true;     
+    }else{
+      alert("请修正错误信息！");
+      return false;
+    }
+  }
 </script>
 <script type="text/javascript">
 	$(function() {
@@ -125,27 +160,27 @@ document.getElementById("articles").reset();
 			</tr>
 		  </table>
 		  
-		  <form name="articles" id="articles" method="post" action="HospitalAction!addHospital">
+		  <form name="articles" id="articles" method="post" action="HospitalAction!addHospital" onsubmit="return CheckH()">
 		    <table class="maintable form_top_thin">
               <tr>
-                <th>医院名称</th>
+                <th>医院名称*</th>
                 <td><input type="text" name="hospital.name" id="name" value="" style="width:300px;" required/> <span id="nametip"></span></td>
               </tr>			  
               <tr>
-                <th>医院编码</th>
+                <th>医院编码*</th>
                 <td><input type="text" name="hospital.hospitalcode" id="hospitalcode" value="" style="width:300px;" required/><span id="hospitalcodetip"></span> </td>
               </tr>			  
               <tr>
                 <th>电话</th>
-                <td><input type="text" name="hospital.tel" id="tel" value="" style="width:300px;" required/><span id="teltip"></span> </td>
+                <td><input type="text" name="hospital.tel" id="tel" value="" style="width:300px;" /><span id="teltip"></span> </td>
               </tr>			  
               <tr>
                 <th>地址</th>
-                <td><input type="text" name="hospital.address" id="address" value="" style="width:300px;" required/><span id="addresstip"></span></td>
+                <td><input type="text" name="hospital.address" id="address" value="" style="width:300px;" /><span id="addresstip"></span></td>
               </tr>	
               <tr>
                 <th>备注</th>
-                <td><input type="text" name="hospital.memo" id="memo" value="" style="width:300px;" required/><span id="memotip"></span></td>
+                <td><input type="text" name="hospital.memo" id="memo" value="" style="width:300px;" /><span id="memotip"></span></td>
               </tr>			  
               
             </table>

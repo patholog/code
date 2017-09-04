@@ -20,17 +20,29 @@ document.getElementById("articles").reset();
 }  
 </script>
 <script type="text/javascript">
+  var urlfg=false;
+  var namefg=false;
+  var shortfg=true;
+  var descfg=true;
+
 $(document).ready(function() {
 
 		$("#url").blur(function() {
 			var spe = $("#url").val().trim();
-			if(spe.length>128){
+			if(spe==''){
+				$("#urltip").html("<a style='color:#2ca9cc;font-size:14px;'>url不能为空!</a>");
+				$("#Submit").attr("disabled",true);
+				urlfg=false;
+				return false;
+			}else if(spe.length>128){
 				$("#urltip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
 				$("#Submit").attr("disabled",true);
+				urlfg=false;
 				return false;
 			}else{
 				$("#urltip").html("");
 				$("#Submit").attr("disabled",false);
+				urlfg=true;
 				return true;
 			}
 		});
@@ -39,10 +51,12 @@ $(document).ready(function() {
 			if(spe.length>128){
 				$("#shorttip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
 				$("#Submit").attr("disabled",true);
+				shortfg=false;
 				return false;
 			}else{
 				$("#shorttip").html("");
 				$("#Submit").attr("disabled",false);
+				shortfg=true;
 				return true;
 			}
 		});
@@ -52,23 +66,32 @@ $(document).ready(function() {
 			if(spe.length>128){
 				$("#descriptiontip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
 				$("#Submit").attr("disabled",true);
+				descfg=false;
 				return false;
 			}else{
 				$("#descriptiontip").html("");
 				$("#Submit").attr("disabled",false);
+				descfg=true;
 				return true;
 			}
 		});
 		
 		$("#name").blur(function() {
 			var spe = $("#name").val().trim();
-			if(spe.length>100){
+			if(spe==''){
+				$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>名称不能为空!</a>");
+				$("#btn").attr("disabled",true);
+				namefg=false;
+				return false;
+			}else if(spe.length>100){
 				$("#nametip").html("<a style='color:#2ca9cc;font-size:14px;'>录入超长!</a>");
 				$("#btn").attr("disabled",true);
+				namefg=false;
 				return false;
 			}else{
 				$("#nametip").html("");
 				$("#Submit").attr("disabled",false);
+				namefg=true;
 				return true;
 			}
 		}); 
@@ -85,6 +108,16 @@ $(document).ready(function() {
 		}); //移除该行的class
 	});
 	
+	
+	  function CheckF() {
+
+    if(urlfg && namefg && shortfg && descfg){
+        return true;     
+    }else{
+      alert("请修正错误信息！");
+      return false;
+    }
+  }
 </script>
 </head>
 <div id="header">
@@ -104,15 +137,15 @@ $(document).ready(function() {
 			</tr>
 		  </table>
 		  
-		  <form name="articles" id="articles" method="post" action="FunctionAction!addFunction">
+		  <form name="articles" id="articles" method="post" action="FunctionAction!addFunction" onsubmit="return CheckF()">
 		    <table class="maintable form_top_thin">
               <tr>
-                <th>功能名称</th>
-                <td><input type="text" name="function.name" id="name" value="" style="width:300px;" /><span id="nametip"></span> </td>
+                <th>功能名称*</th>
+                <td><input type="text" name="function.name" id="name" value="" style="width:300px;" required/><span id="nametip"></span> </td>
               </tr>			  
               <tr>
-                <th>URL</th>
-                <td><input type="text" name="function.url" id="url" value="" style="width:300px;" /> <span id="urltip"></span></td>
+                <th>URL*</th>
+                <td><input type="text" name="function.url" id="url" value="" style="width:300px;" required/> <span id="urltip"></span></td>
               </tr>			  
               <tr>
                 <th>简称</th>
