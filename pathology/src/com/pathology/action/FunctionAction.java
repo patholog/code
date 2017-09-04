@@ -59,13 +59,7 @@ public class FunctionAction extends BaseAction {
 				return Constant.ERR;
 			String hql = "";
 			if (function != null) {
-				String functionname = null;
-				try {
-					functionname = new String(
-							(function.getName().getBytes("ISO8859-1")), "UTF-8");
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				}
+				String functionname = function.getName();
 
 				if (functionname != null && !("".equals(functionname)))
 					hql += " and name like '%" + functionname + "%'";

@@ -90,7 +90,7 @@ public class UsersAction extends BaseAction {
 						&& !("".equals(user.getUsername())))
 					hql += " and username like '%" + user.getUsername() + "%'";
 				if (user.getEmail() != null && !("".equals(user.getEmail())))
-					hql += " and email like " + user.getEmail();
+					hql += " and email like '%" + user.getEmail()+ "%'";
 				// String hosname=user.getBelonghospital();
 				// String qryhos="'"+hosname.replace(",", "','")+"'";
 				// if (user.getBelonghospital() != null &&

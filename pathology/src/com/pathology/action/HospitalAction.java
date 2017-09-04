@@ -60,19 +60,14 @@ public class HospitalAction extends BaseAction {
 				return Constant.ERR;
 			String hql = "";
 			if (hospital != null) {
-				String hospitalname = null;
-				try {
-					hospitalname = new String(
-							(hospital.getName().getBytes("ISO8859-1")), "UTF-8");
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				}
+				String hospitalname = hospital.getName();
+
 
 				if (hospitalname != null && !("".equals(hospitalname)))
 					hql += " and name like '%" + hospitalname + "%'";
-				if (hospital.getCode() != null
+				if (hospital.getHospitalcode() != null
 						&& !("".equals(hospital.getCode())))
-					hql += " and code like '%" + hospital.getCode() + "%'";
+					hql += " and hospitalcode like '%" + hospital.getHospitalcode() + "%'";
 
 			}
 

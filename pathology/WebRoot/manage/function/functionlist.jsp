@@ -38,8 +38,7 @@
 					<tr>
 						<td><h1>功能管理</h1></td>
 					</tr>
-				</table> <s:form action="FunctionAction!functionList" theme="simple"
-					target="mainFrame">
+				</table> <s:form action="FunctionAction!functionList" theme="simple">
 					<table cellspacing="0" cellpadding="0" width="100%" border="0"
 						class="toolstable">
 						<tr>

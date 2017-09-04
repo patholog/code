@@ -69,13 +69,7 @@ public class RolesAction extends BaseAction {
 				return Constant.ERR;
 			String hql = "";
 			if (roles != null) {
-				String rolesname = null;
-				try {
-					rolesname = new String(
-							(roles.getName().getBytes("ISO8859-1")), "UTF-8");
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				}
+				String rolesname = roles.getName();
 
 				if (rolesname != null && !("".equals(rolesname)))
 					hql += " and name like '%" + rolesname + "%'";

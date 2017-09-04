@@ -38,8 +38,7 @@
 					<tr>
 						<td><h1>角色管理</h1></td>
 					</tr>
-				</table> <s:form action="RolesAction!rolesList" theme="simple"
-					target="mainFrame">
+				</table> <s:form action="RolesAction!rolesList" theme="simple">
 					<table cellspacing="0" cellpadding="0" width="100%" border="0"
 						class="toolstable">
 						<tr>

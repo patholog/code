@@ -47,7 +47,7 @@
 						<td><h1>用户管理</h1></td>
 					</tr>
 				</table> <s:form action="UserAction!userList" theme="simple"
-					target="mainFrame">
+					>
 					<table cellspacing="0" cellpadding="0" width="100%" border="0"
 						class="toolstable">
 						<tr>
@@ -119,7 +119,7 @@
 								}
 							}
 						</script>  --> <input name="searchButton"
-								id="searchButton" onclick="hosset()" type="submit"
+								id="searchButton" onclick="" type="submit"
 								style="width:80px;background:url(css/img-blue/search.gif) 8px top no-repeat;"
 								value="  搜索" /></td>
 						</tr>
