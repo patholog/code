@@ -14,7 +14,13 @@
 <link rel="stylesheet" type="text/css" href="${path }/css/theme.css"/>
 <script type="text/javascript" src="${path }/js/treeView.js"></script>
 <script type="text/javascript" src="${path }/js/common-cn.js"></script>
-
+<script language="javascript">
+        //防止页面后退
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    </script>
 </head>
 
 <body>
