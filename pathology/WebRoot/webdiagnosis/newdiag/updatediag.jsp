@@ -298,7 +298,8 @@
               <li>
                 <div>
                   <span class="red_star">*</span>病<ins class="half_words"></ins>理<ins class="half_words"></ins>号
-                  <input name="pathologyNo" id="pathologyNo" class="patient_name" value="<s:property value="pathology.pathologyNo"/>">
+                  <input name="pathologyNo" id="pathologyNo" class="patient_name" value="<s:property value="pathology.pathologyNo"/>"
+                         onkeyup="value=value.replace(/[^\w\/]/ig,'')">
                 </div>
               </li>
               <li>
@@ -538,7 +539,6 @@
             <input type="file" name="slide" id="slide">
           </div>
           <div class="information_btn" id="divFoot">
-            <input hidden type="submit" name="btnSaveInfo" value="保存" id="btnSaveInfo" class="inf_btn right">
             <input type="button" name="btnSave" value="保存" id="btnSave" class="inf_btn right">
             <div class="clear">
             </div>
