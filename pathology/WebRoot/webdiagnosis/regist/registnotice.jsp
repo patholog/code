@@ -18,7 +18,13 @@
 <script src="${path }/js/regist.js" type="text/javascript"></script>
 <script src="${path }/js/jquery/jquery-1.4.4.min.js"
 	type="text/javascript"></script>
-
+<script>
+        //防止页面后退
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    </script>
 </head>
 <body>
 	<div id="3" style="position: relative;  z-index: 3;">

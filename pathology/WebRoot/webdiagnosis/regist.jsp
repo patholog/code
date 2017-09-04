@@ -71,6 +71,12 @@
 								</td>
 							</tr>
 							<tr>
+								<td align="right">手机号码：</td>
+								<td align="left"><input type="text" name="user.tel"
+									placeholder="手机号码" id="tel" required /><span id="teltip"></span>
+								</td>
+							</tr>
+							<tr>
 								<td align="right">真实姓名：</td>
 								<td align="left"><input type="text" name="user.realname"
 									placeholder="真实姓名" id="realname" required /><span id="realnametip"></span>
@@ -139,6 +145,7 @@
   var hosfg=false;
   var spefg=true;
   var realfg=false;
+  var telfg=false;
       function showTips(text) {
       $('#tipInfo').text(text);
       $('#tips').dialog({
@@ -342,11 +349,32 @@
       }
 
     });
+    $("#tel").blur(function() {
+      var tel = $("#tel").val().trim();
+      var istel=/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
+      if (tel == '') {
+        $("#teltip").html("<a style='color:#2ca9cc;font-size:14px;'>手机号码不能为空！</a>");
+        //$("#btn").attr("disabled",true);
+        telfg=false;
+        return false;
+      }else if(!istel.test(tel)){
+        $("#teltip").html("<a style='color:#2ca9cc;font-size:14px;'>请输入正确的手机号码</a>");
+        //$("#btn").attr("disabled",true);
+        telfg=false;
+        return false;
+      }else{
+        $("#teltip").html("");
+        //$("#btn").attr("disabled",false);
+        telfg=true;
+        return true;
+      }
+
+    });
 
   });
 
   function CheckU() {
-    if(emailfg && namefg && pswdfg && pswd2fg && spefg){
+    if(emailfg && namefg && pswdfg && pswd2fg && spefg && telfg){
       if(confirm('提交当前信息吗？')){
         
         return true;

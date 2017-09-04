@@ -148,7 +148,7 @@
 								<td>${user.email }</td>
 								<td>${user.belonghospital }</td>
 								<td>${user.specialty }</td>
-								<td>${user.mobile }</td>
+								<td>${user.tel }</td>
 								
 								<td class="action_collomn"><a
 									<c:choose>
