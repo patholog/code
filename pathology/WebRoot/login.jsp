@@ -91,11 +91,11 @@
   </head>
   <body>			
  <form id='fm1' action="login!login" method="post" onsubmit="return Check()">
-  <h4> Login Information </h4>
+  <h4> 登    录 </h4>
   <input id="username" class="name" type="text" value="lizheng" name="user.username" placeholder="Enter Username"/>
   <input id="password" class="pw" type="password" value="1234567890" name="user.password"   placeholder="Enter Password"/>
   <li><a href="HospitalAction!allHostpital">注册</a></li>
-  <input class="button" type="submit" value="Log in"/>
+  <input class="button" type="submit" value="登录"/>
 </form>				
 <div id="tips">
   <label id="tipInfo"></label>
