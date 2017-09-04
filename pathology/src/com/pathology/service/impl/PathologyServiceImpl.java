@@ -130,8 +130,8 @@ public class PathologyServiceImpl implements IPathologyService {
   @Override
   public void updatePathology(Map<String, String[]> paramMap) {
     try {
-      Pathology pathology = assemblePathology(paramMap);
-      pathology.setIdCase(paramMap.get("caseId")[0]);
+      Pathology pathology = pathologydao.getPathology(Pathology.class, paramMap.get("caseId")[0]);
+      assemblePathology(pathology, paramMap);
       updatePathology(pathology);
     } catch (Exception e) {
       logger.error(e.getMessage());
@@ -145,10 +145,8 @@ public class PathologyServiceImpl implements IPathologyService {
    * @param paramMap 数据
    * @return 对象
    */
-  private Pathology assemblePathology(Map<String, String[]> paramMap) {
-    Pathology pathology = new Pathology();
+  private Pathology assemblePathology(Pathology pathology, Map<String, String[]> paramMap) {
     try {
-      pathology.setIdCase(generateCaseId(5)); // 会诊号（主键）
       pathology.setPatientname(paramMap.get("patientName")[0]); // 姓名
       pathology.setPathologyno(paramMap.get("pathologyNo")[0]); // 病理编号
       pathology.setPatientage(paramMap.get("patientAge")[0]); // 年龄
@@ -174,6 +172,27 @@ public class PathologyServiceImpl implements IPathologyService {
       throw new RuntimeException("获取基本信息数据失败，请联系管理员");
     }
     return pathology;
+  }
+
+  /**
+   * 根据前台数据更新Result数据
+   *
+   * @param result
+   * @param paramMap
+   * @return
+   */
+  private Result assembleResult(Result result, Map<String, String[]> paramMap) {
+    try {
+      // 大体所见等Result数据
+      result.setGeneralSee(paramMap.get("generalSeeHidden")[0]); // 大体所见
+      result.setMicroscopeSee(paramMap.get("microscopeSeeHidden")[0]); // 影像检查
+      result.setDiagnosed(paramMap.get("firstVisit")[0]); // 初诊意见
+      result.setResult(paramMap.get("immuneResult")[0]); // 免疫组化结果
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      throw new RuntimeException("获取结果数据失败！请联系管理员");
+    }
+    return result;
   }
 
   /**
@@ -262,7 +281,9 @@ public class PathologyServiceImpl implements IPathologyService {
   @Override
   public int addPathology(Map<String, String[]> paramMap) {
     Result result = new Result();
-    Pathology pathology = assemblePathology(paramMap);
+    Pathology pathology = new Pathology();
+    pathology.setIdCase(generateCaseId(5)); // 会诊号（主键）
+    assemblePathology(pathology, paramMap);
     pathology.setDiagStatus("2"); // 默认新建为待诊断
     if (this.getPathology(Pathology.class, pathology.getIdCase()) != null) {
       throw new RuntimeException("该会诊号已经存在");

@@ -465,7 +465,7 @@
                 <div class=" clear">
                 </div>
                 <textarea name="clinicDiagnose" id="clinicDiagnose" rows="3" cols="20" class="row2"
-                          onkeyup="CheckWords(this)"></textarea>
+                          onkeyup="CheckWords(this)"><s:property value="pathology.clinicDiagnose"/></textarea>
               </li>
               <li>
                 <div style="float: left"><span class="red_star"></span>初诊意见（请如实填写）：</div>
@@ -476,13 +476,14 @@
                 <div class=" clear">
                 </div>
                 <textarea name="firstVisit" id="firstVisit" rows="2" cols="20" class="row2"
-                          onkeyup="CheckWords(this)"
-                          placeholder="为确保诊断结果的准确，请如实填写初诊意见，冰冻切片请务必填写初诊考虑，或基本病变描写、疑问等。"></textarea>
+                          placeholder="为确保诊断结果的准确，请如实填写初诊意见，冰冻切片请务必填写初诊考虑，或基本病变描写、疑问等。"
+                          onkeyup="CheckWords(this)"><s:property value="pathology.firstVisit"/></textarea>
               </li>
               <li style="">
                 <div style="float: left"><span class="red_star"></span>大体所见：</div>
                 <div class="ckTxt">
-                  <textarea id="generalSee" name="generalSee" cols="10" rows="2" class="ckeditor"></textarea>
+                  <textarea id="generalSee" name="generalSee" cols="10" rows="2"
+                            class="ckeditor"><s:property value="pathology.generalSee"/></textarea>
                   <input type="hidden" id="generalSeeHidden" name="generalSeeHidden"/>
                 </div>
               </li>
@@ -494,7 +495,8 @@
                   <a class="aColor">已经输入</a>&nbsp;<a id="atxtRemark" style="color: rgb(165, 165, 165);">0</a>
                   <a class="aColor">/250&nbsp;个字</a>
                 </div>
-                <textarea name="memo" id="memo" rows="1" cols="20" class="row2" onkeyup="CheckWords(this)"></textarea>
+                <textarea name="memo" id="memo" rows="1" cols="20" class="row2"
+                          onkeyup="CheckWords(this)"><s:property value="pathology.memo"/></textarea>
               </li>
               <li class="remarks" style="margin-top:20px;">注：<span class="red">“*”</span>为必填内容，病史与备注中的内容不在诊断结果中显示</li>
             </ul>
@@ -510,7 +512,7 @@
                 <div class=" clear">
                 </div>
                 <textarea name="historySummary" id="historySummary" rows="2" cols="20" class="row2"
-                          onkeyup="CheckWords(this)"></textarea>
+                          onkeyup="CheckWords(this)"><s:property value="pathology.historySummary"/></textarea>
               </li>
               <li>
                 <div style="float: left">
@@ -523,14 +525,15 @@
                 <div class=" clear">
                 </div>
                 <textarea name="immuneResult" id="immuneResult" rows="2" cols="20" class="row2"
-                          onkeyup="CheckWords(this)"></textarea>
+                          onkeyup="CheckWords(this)"><s:property value="pathology.immuneResult"/></textarea>
               </li>
               <li style="">
                 <div style="float: left">
                   <ins class="half_words"></ins>影像学检查：
                 </div>
                 <div class="ckTxt">
-                  <textarea id="microscopeSee" name="microscopeSee" cols="10" rows="2" class="ckeditor"></textarea>
+                  <textarea id="microscopeSee" name="microscopeSee" cols="10" rows="2"
+                            class="ckeditor"><s:property value="pathology.microscopeSee"/></textarea>
                   <input type="hidden" name="microscopeSeeHidden" id="microscopeSeeHidden"/>
                 </div>
                 <div class=" clear">
