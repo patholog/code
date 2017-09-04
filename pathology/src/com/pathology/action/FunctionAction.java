@@ -62,7 +62,7 @@ public class FunctionAction extends BaseAction {
 				String functionname = function.getName();
 
 				if (functionname != null && !("".equals(functionname)))
-					hql += " and name like '%" + functionname + "%'";
+					hql += " and name like '%" + functionname + "%'  order by sort_no ";
 			}
 
 			List<Function> list = index != 0 ? functionservice.getByPage(index,
