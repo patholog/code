@@ -468,6 +468,7 @@ public class PathologyServiceImpl implements IPathologyService {
       this.deletePathology(getPathology(Pathology.class, id));
       resultService.deleteByCaseId(id);
       imageService.deleteByCaseId(id);
+      // TODO 要不要删除分享还有收藏什么的？
     } catch (Exception e) {
       logger.error(e.getMessage());
       throw new RuntimeException("删除出现错误，请联系管理员");

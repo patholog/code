@@ -364,7 +364,7 @@
                     <%--<input name="patientAge" id="patientAge" class="inf_age" maxlength="3" onblur="CheckValue('3')"
                            onkeyup="if(this.value.length===1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">--%>
                     <span style="width: 40px;">
-                      <select name="ageUnit" id="ageUnit" style="width: 40px;">
+                      <select name="ageUnit" id="ageUnit" class="select_box" style="width: 35px;margin: 0;">
                         <option value="岁">岁</option>
                         <option value="月">月</option>
                         <option value="天">天</option>
@@ -375,7 +375,7 @@
                   <div class="sex">
                     <span class="red_star">*</span>性别
                     <span style="width: 30px;">
-                      <select name="patientSex" id="patientSex" style="width: 40px;">
+                      <select name="patientSex" id="patientSex" class="select_box" style="width: 35px;margin: 0;">
                         <option value="男">男</option>
 	                      <option value="女">女</option>
                       </select>
@@ -431,7 +431,7 @@
               <li>
                 <div>
                   <ins class="half_words"></ins>系统分类
-                  <select name="specimenType" id="specimenType" style="width: 150px;">
+                  <select name="specimenType" id="specimenType" class="select_box">
                     <option value="">请选择</option>
                     <c:forEach items="${specimenList}" var="list" varStatus="status">
                       <option value='${list.idSpecimen}'>${list.name}</option>
@@ -442,7 +442,7 @@
               <li>
                 <div>
                   <span class="red_star">*</span>送检单位
-                  <select id="hospitalCode" name="hospitalCode" style="width: 150px">
+                  <select id="hospitalCode" name="hospitalCode" class="select_box">
                     <option value="">请选择</option>
                     <c:forEach items="${hospitalList}" var="list" varStatus="status">
                       <option value='${list.hospitalcode}'>${list.name}</option>
@@ -454,7 +454,7 @@
               <li>
                 <div>
                   <ins class="half_words"></ins>送检医生
-                  <select name="toDoctorId" id="toDoctorId" style="width: 150px;">
+                  <select name="toDoctorId" id="toDoctorId" class="select_box">
                     <option value="">请选择</option>
                     <c:forEach items="${usersList}" var="list" varStatus="status">
                       <option value='${list.idUsers}'>${list.username}</option>
