@@ -30,13 +30,7 @@ public class MessageAction extends BaseAction {
       HttpServletRequest request = ServletActionContext.getRequest();
 //		String hql =" from message ";
       messages = messageService.getListMessage(request, "");
-      Message me = new Message();
-      me.setContent("留言");
-      //me.setCreateTime(new Timestamp(0));
-      me.setMessageOrder("留言内容");
-      me.setFromDoctorId("ssss");
-      me.setToDoctorId("sss");
-      me.setMemo("说明");
+     
       return "messages";
     } catch (Exception e) {
 
