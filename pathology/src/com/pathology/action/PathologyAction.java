@@ -115,8 +115,8 @@ public class PathologyAction extends BaseAction {
         try {
           // 调用切图方法
           // imageService.cutSlide(paramMap.get("caseId")[0], paramMap.get("slideFilePath")[0], paramMap.get("slideFileName")[0]);
-          SlideUtil.processImageFile(new File(rootPath + "\\"+ paramMap.get("slideFilePath")[0] + "\\"
-              +  paramMap.get("imageId")[0] + "\\" + slideFileName),
+          SlideUtil.processImageFile(new File(rootPath + "\\" + paramMap.get("slideFilePath")[0] + "\\"
+                  + paramMap.get("imageId")[0] + "\\" + slideFileName),
               new File(rootPath + "\\" + paramMap.get("slideFilePath")[0] + "\\" + paramMap.get("imageId")[0]));
         } catch (Exception e) {
           logger.error(e.getMessage());
@@ -487,6 +487,25 @@ public class PathologyAction extends BaseAction {
       return "err";
     }
 
+  }
+
+  /**
+   * 删除病例信息
+   *
+   * @return 结果
+   */
+  public String deletePathology() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    HttpServletResponse response = ServletActionContext.getResponse();
+    String jsonString = "{\"success\":\"删除成功\"}";
+    try {
+      String id = request.getParameter("id");
+      pathologyService.delete(id);
+    } catch (Exception e) {
+      jsonString = "{\"failure\":\"" + e.getMessage() + "\"}";
+    }
+    printJson(response, jsonString);
+    return null;
   }
 
   public IPathologyService getPathologyService() {

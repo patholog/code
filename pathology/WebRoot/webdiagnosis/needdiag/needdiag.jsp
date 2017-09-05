@@ -347,7 +347,7 @@
               <li>
                 <div>
                   <span class="red_star">*</span>病人姓名
-                  <input name="patientName" id="patientName" class="patient_name" maxlength="8">
+                  <input name="patientName" id="patientName" class="patient_name" maxlength="32">
                 </div>
               </li>
               <li>

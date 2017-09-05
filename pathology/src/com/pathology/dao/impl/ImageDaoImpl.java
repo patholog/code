@@ -56,4 +56,9 @@ public class ImageDaoImpl extends SuperDao implements IImageDao {
   public Image select(Integer imageId) {
     return (Image) super.select(Image.class, imageId);
   }
+
+  @Override
+  public void delete(Image image) {
+    super.delete(image);
+  }
 }

@@ -141,6 +141,7 @@ public class PathologyServiceImpl implements IPathologyService {
 
   /**
    * 根据数据组装Pathology对象
+   * <p>注意：如果是组装新的Pathology对象，必须要在调用此方法后指定创建时间和创建人！</p>
    *
    * @param paramMap 数据
    * @return 对象
@@ -162,10 +163,8 @@ public class PathologyServiceImpl implements IPathologyService {
         pathology.setDiagTime(Timestamp.valueOf(paramMap.get("diagTime")[0])); // 送检日期
       }
       pathology.setMemo(paramMap.get("memo")[0]); // 备注
-      pathology.setCrtTime(new Timestamp(System.currentTimeMillis())); // 创建日期
       pathology.setClinicdiagnose(paramMap.get("clinicDiagnose")[0]); // 临床诊断
       pathology.setHistorysummary(paramMap.get("historySummary")[0]); // 病史
-      pathology.setCrtUserId(SessionAgentManager.getSessionAgentBean().getIdUsers()); // 创建人
       // pathology.setDiagStatus("1"); // 病理初始状态
     } catch (Exception e) {
       logger.error(e.getMessage());
@@ -222,7 +221,7 @@ public class PathologyServiceImpl implements IPathologyService {
       }
     } else {
       String next = "1";
-      for (int i= 0; i < length; i++) {
+      for (int i= 0; i < length - 1; i++) {
         next = "0" + next;
       }
       return new SimpleDateFormat("yyyyMMdd").format(new Date()) + next;
@@ -280,28 +279,26 @@ public class PathologyServiceImpl implements IPathologyService {
    */
   @Override
   public int addPathology(Map<String, String[]> paramMap) {
-    Result result = new Result();
+    // 新增病例信息
     Pathology pathology = new Pathology();
-    pathology.setIdCase(generateCaseId(5)); // 会诊号（主键）
-    assemblePathology(pathology, paramMap);
-    pathology.setDiagStatus("2"); // 默认新建为待诊断
-    if (this.getPathology(Pathology.class, pathology.getIdCase()) != null) {
-      throw new RuntimeException("该会诊号已经存在");
-    }
     try {
+      pathology.setIdCase(generateCaseId(5)); // 会诊号（主键）
+      assemblePathology(pathology, paramMap);
+      pathology.setDiagStatus("2"); // 默认新建为待诊断
+      pathology.setCrtTime(new Timestamp(System.currentTimeMillis())); // 创建日期
+      pathology.setCrtUserId(SessionAgentManager.getSessionAgentBean().getIdUsers()); // 创建人
       addPathology(pathology); // 新增病理信息
     } catch (Exception e) {
       logger.error(e.getMessage());
       throw new RuntimeException("新增病理数据失败，请联系管理员");
     }
+
+    // 新增大体所见等Result数据
+    Result result = new Result();
     try {
-      // 大体所见等Result数据
       result.setCaseId(pathology.getIdCase());
       result.setIdResult(pathology.getIdCase());
-      result.setGeneralSee(paramMap.get("generalSeeHidden")[0]); // 大体所见
-      result.setMicroscopeSee(paramMap.get("microscopeSeeHidden")[0]); // 影像检查
-      result.setDiagnosed(paramMap.get("firstVisit")[0]); // 初诊意见
-      result.setResult(paramMap.get("immuneResult")[0]); // 免疫组化结果
+      assembleResult(result, paramMap);
     } catch (Exception e) {
       logger.error(e.getMessage());
       throw new RuntimeException("获取结果数据失败！请联系管理员");
@@ -312,11 +309,10 @@ public class PathologyServiceImpl implements IPathologyService {
       throw new RuntimeException("新增结果数据失败，请联系管理员");
     }
 
+    // 新增病理图片信息
     try {
-      // 病理图片信息
       if (paramMap.containsKey("slideFileName") && !"".equals(paramMap.get("slideFileName")[0])) {
         Image image = new Image();
-        // image.setIdImage(paramMap.get("pathologyNo")[0]); // 主键自增
         image.setCaseId(pathology.getIdCase());
         Calendar cal = Calendar.getInstance();
         String year = String.valueOf(cal.get(Calendar.YEAR));
@@ -459,6 +455,23 @@ public class PathologyServiceImpl implements IPathologyService {
       elist.add(em);
     }
     return elist;
+  }
+
+  /**
+   * 根据caseId删除病例信息（同时删除结果和图像表数据）
+   *
+   * @param id caseId
+   */
+  @Override
+  public void delete(String id) {
+    try {
+      this.deletePathology(getPathology(Pathology.class, id));
+      resultService.deleteByCaseId(id);
+      imageService.deleteByCaseId(id);
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      throw new RuntimeException("删除出现错误，请联系管理员");
+    }
   }
 
   public IImageService getImageService() {

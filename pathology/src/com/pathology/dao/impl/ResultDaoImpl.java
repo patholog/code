@@ -44,6 +44,11 @@ public class ResultDaoImpl extends SuperDao implements IResultDao {
     }).get(0);
   }
 
+  @Override
+  public void delete(Result result) {
+    super.delete(result);
+  }
+
   public JdbcTemplate getJdbcTemplate() {
     return jdbcTemplate;
   }

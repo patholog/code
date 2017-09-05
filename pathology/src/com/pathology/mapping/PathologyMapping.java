@@ -1,14 +1,11 @@
 package com.pathology.mapping;
 
-import java.sql.ResultSet;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
+import com.pathology.dto.PathologyDTO;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.pathology.dto.PathologyDTO;
-import com.sun.jmx.snmp.Timestamp;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 
 
 public class PathologyMapping implements RowMapper {
@@ -17,9 +14,7 @@ public class PathologyMapping implements RowMapper {
   @Override
   public PathologyDTO mapRow(ResultSet rs, int arg1) {
     try {
-      DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-      Timestamp stamp=new Timestamp();
-      SimpleDateFormat myFmt1=new SimpleDateFormat("yyyy/MM/dd HH:mm"); 
+      SimpleDateFormat myFmt1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
       PathologyDTO bean = new PathologyDTO();
       bean.setNum(rs.getRow());
       bean.setPathologyNo(rs.getString("pathologyno"));
@@ -53,7 +48,7 @@ public class PathologyMapping implements RowMapper {
       bean.setSpecimenTypeName(rs.getString("specimenTypeName"));
       bean.setDoctorId(rs.getString("id_doctor"));
       /*bean.setId(rs.getInt("username"));
-			bean.setCure(rs.getString("content"));
+      bean.setCure(rs.getString("content"));
 			bean.setCreate_time(rs.getString("create_time"));
 			bean.setDescription(rs.getString("patientname"));
 			bean.setDoctor_id(rs.getInt("doctor_id"));

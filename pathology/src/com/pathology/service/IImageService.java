@@ -11,4 +11,8 @@ public interface IImageService {
   String cutSlide(String caseId, String filePath, String fileName);
 
   Image select(Integer imageId);
+
+  List<Image> selectListByCaseId(String caseId);
+
+  void deleteByCaseId(String caseId);
 }

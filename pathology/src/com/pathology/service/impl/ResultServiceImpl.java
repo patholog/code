@@ -46,6 +46,11 @@ public class ResultServiceImpl implements IResultService {
   }
 
   @Override
+  public void deleteByCaseId(String caseId) {
+    resultDao.delete(this.selectByCaseId(caseId));
+  }
+
+  @Override
   public Result selectByCaseId(String caseId) {
     return resultDao.selectByCaseId(caseId);
   }

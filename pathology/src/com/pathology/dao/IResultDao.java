@@ -9,4 +9,6 @@ public interface IResultDao {
   void updateResult(Result result);
 
   Result selectByCaseId(String caseId);
+
+  void delete(Result result);
 }

@@ -43,4 +43,6 @@ public interface IPathologyService {
   List<Users> selectDoctorListNoMe();
   
   void getFirstPage(HttpServletRequest request, String name);
+
+  void delete(String id);
 }

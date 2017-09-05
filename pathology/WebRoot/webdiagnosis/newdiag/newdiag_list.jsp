@@ -89,6 +89,8 @@
                 <a href="javascript:void(0)"
                    onclick="updatePathology('<s:property value="#pathology.diagStatus"/>', '<s:property value="#pathology.caseId"/>')">修改</a>
                 <a href="PathologyAction!getPathologyDto?diagStatus=2&id=<s:property value="#pathology.caseId"/>" target="_blank">查看</a>
+                <a href="javascript:void(0)"
+                   onclick="deletePathology('<s:property value="#pathology.diagStatus"/>', '<s:property value="#pathology.caseId"/>')">删除</a>
               </td>
             </tr>
           </s:iterator>
@@ -106,14 +108,64 @@
     </div>
   </div>
 </div>
+<div id="myDialog">
+  <div align="center">
+    <label id="info"></label>
+  </div>
+</div>
 </body>
 <script>
     function updatePathology(diagStatus, id) {
-      if (diagStatus !== "2" && diagStatus !== "3") {
+      if (diagStatus !== "1" && diagStatus !== "2" && diagStatus !== "3") {
         showTips("当前病例不能修改");
         return false;
       }
       window.location.href = "PathologyAction!openPathologyUpdate?diagStatus=" + diagStatus + "&id=" + id;
+    }
+
+    function deletePathology(diagStatus, id) {
+      if (diagStatus !== "1" && diagStatus !== "2") {
+        showTips("当前病例不能删除");
+        return false;
+      }
+      $('#info').text("确定要删除当前病例吗？");
+      $('#myDialog').dialog({
+        title: '删除',
+        resizable: false,
+        modal: true,
+        buttons: [{
+          text: "确定",
+          icon: "ui-icon-heart",
+          click: function () {
+            $.ajax({
+              url: 'PathologyAction!deletePathology?id=' + id,
+              dataType: "json",
+              success: function (result) {
+                if (result && result.success) {
+                  $('#myDialog').dialog('close');
+                  showCallbackTips(result.success, function() {
+                    window.location.reload();
+                  });
+                } else if (result && result.failure) {
+                  $('#myDialog').dialog('close');
+                  showTips(result.failure);
+                  return false
+                } else {
+                  $('#myDialog').dialog('close');
+                  showTips("发生错误，请联系管理员");
+                  return false;
+                }
+              }
+            })
+          }
+        }, {
+          text: "取消",
+          icon: "ui-icon-heart",
+          click: function () {
+            $(this).dialog("close");
+          }
+        }]
+      });
     }
 </script>
 </html>

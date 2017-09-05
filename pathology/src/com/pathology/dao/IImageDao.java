@@ -15,4 +15,6 @@ public interface IImageDao {
   Integer insertImage(Image image);
 
   Image select(Integer imageId);
+
+  void delete(Image image);
 }

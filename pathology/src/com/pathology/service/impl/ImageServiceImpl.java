@@ -7,6 +7,9 @@ import com.pathology.util.HttpUtil;
 import com.pathology.util.Property;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ImageServiceImpl implements IImageService {
 
   private Logger logger = Logger.getLogger(ImageServiceImpl.class);
@@ -48,6 +51,30 @@ public class ImageServiceImpl implements IImageService {
   @Override
   public Image select(Integer imageId) {
     return imageDao.select(imageId);
+  }
+
+  /**
+   * 根据caseId查询Image列表
+   *
+   * @param caseId 病理号
+   * @return Image列表
+   */
+  @Override
+  public List<Image> selectListByCaseId(String caseId) {
+    List<Object> objectList = imageDao.getAllImage(Image.class, " and caseId = '" + caseId + "'");
+    List<Image> imageList = new ArrayList<>();
+    for (Object object : objectList) {
+      imageList.add((Image) object);
+    }
+    return imageList;
+  }
+
+  @Override
+  public void deleteByCaseId(String caseId) {
+    List<Image> imageList = selectListByCaseId(caseId);
+    for (Image image : imageList) {
+      imageDao.delete(image);
+    }
   }
 
   public IImageDao getImageDao() {

@@ -150,6 +150,7 @@
       <result name="getSlideImage"/>
       <result name="pathologyUpdate">/webdiagnosis/newdiag/updatediag.jsp</result>
       <result name="updatePathology"/>
+      <result name="deletePathology"/>
     </action>
     <action name="DiaReportAction" class="com.pathology.action.DiaReportAction">
       <result name="pathologyreport">/webdiagnosis/hasdiag/diagnosisreport.jsp</result>

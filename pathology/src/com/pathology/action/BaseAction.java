@@ -19,6 +19,7 @@ public class BaseAction extends ActionSupport {
    */
   void printJson(HttpServletResponse response, String jsonString) {
     try {
+      response.setContentType("text/html;charset=UTF-8");
       PrintWriter out;
       out = response.getWriter();
       out.println(jsonString);

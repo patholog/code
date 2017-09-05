@@ -112,6 +112,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     });
   }
 
+  function showCallbackTips(text, callback) {
+    $('#tipInfo').text(text);
+    $('#tips').dialog({
+      title: '提示',
+      modal: true,
+      width: '400',
+      height: '200',
+      buttons: [{
+        text: "确定",
+        icon: "ui-icon-heart",
+        click: callback
+      }]
+    });
+  }
+
   /**
    * 翻页
    *

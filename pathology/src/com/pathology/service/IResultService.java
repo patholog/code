@@ -13,4 +13,6 @@ public interface IResultService {
   void updateResult(Map<String, String[]> paramMap);
 
   Result selectByCaseId(String caseId);
+
+  void deleteByCaseId(String caseId);
 }
