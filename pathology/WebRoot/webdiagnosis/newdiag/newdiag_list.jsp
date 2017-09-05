@@ -35,6 +35,7 @@
 </head>
 
 <body>
+  <form action="PathologyAction!getNewPathologyList?parameter=1" id="listMemberForm" method="post">
 <div class="header">
   <%@include file="/webdiagnosis/maintop.jsp" %>
 </div>
@@ -113,6 +114,7 @@
     <label id="info"></label>
   </div>
 </div>
+</form>
 </body>
 <script>
     function updatePathology(diagStatus, id) {

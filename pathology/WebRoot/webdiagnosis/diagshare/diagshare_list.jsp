@@ -26,6 +26,7 @@
 </head>
 
 <body>
+  <form action="ShareAction!getShareList?parameter=1" id="listMemberForm" method="post">
 <div class="header">
   <%@include file="/webdiagnosis/maintop.jsp" %>
 </div>
@@ -77,7 +78,7 @@
               </div>
             </td>
           </tr>
-
+           
           </tbody>
         </table>
       </div>
@@ -89,6 +90,7 @@
     <label id="info"></label>
   </div>
 </div>
+</form>
 </body>
 <script>
   function delShare(id) {

@@ -29,6 +29,7 @@
   </script>
 </head>
 <body>
+  <form action="MessageAction!getMessageList?parameter=1" id="listMemberForm" method="post">
 <div class="header">
   <%@include file="/webdiagnosis/maintop.jsp" %>
 </div>
@@ -78,5 +79,6 @@
     </div>
   </div>
 </div>
+</form>
 </body>
 </html>

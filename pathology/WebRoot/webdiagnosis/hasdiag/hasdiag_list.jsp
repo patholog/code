@@ -28,6 +28,7 @@
 </head>
 
 <body>
+
 <div class="header">
   <%@include file="/webdiagnosis/maintop.jsp" %>
 </div>
