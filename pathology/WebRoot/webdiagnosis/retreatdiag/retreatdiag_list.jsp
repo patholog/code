@@ -45,13 +45,13 @@
 			  <form action="PathologyAction!getPathologyListToBack" id="backSearch" method="post">
 					<ul>
 						<li class="title_li"><div class="title" id="title" style="display: none;">待诊断</div></li>        			
-						<li>退回时间：从<input name="backfromdate" type="date" id="backfromdate" class="time_s" style="width:140px;">到
-									<input name="backtodate" type="date" id="backtodate" class="time_s" style="width:140px;"></li>
+						<li>退回时间：从<input name="backfromdate" type="date" id="backfromdate" class="time_s" style="width:140px;" value="${requestScope.backfromdate}">到
+									<input name="backtodate" type="date" id="backtodate" class="time_s" style="width:140px;" value="${requestScope.backtodate}"></li>
 						<li>病人姓名：
-			                <input name="backpat" type="text" id="backpat" class="keyword" >
+			                <input name="backpat" type="text" id="backpat" class="keyword" value="${requestScope.backpat}">
 						</li>
 						<li>送检单位：
-			                <input name="backhospital" type="text" id="backhospital" class="keyword" >
+			                <input name="backhospital" type="text" id="backhospital" class="keyword" value="${requestScope.backhospital}">
 						</li>
 						<li>
 			                <input type="submit" name="btnSearch" value="搜索" id="btnSearch" class="index_search_btn">

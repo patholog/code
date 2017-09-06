@@ -44,13 +44,13 @@
 	  <form action="PathologyAction!getPathologyListToHas" id="hasSearch" method="post">
 			<ul>
 				<li class="title_li"><div class="title" id="title" style="display: none;">待诊断</div></li>        			
-				<li>诊断时间：从<input name="hasfromdate" type="date" id="hasfromdate" class="time_s" style="width:140px;">到
-							<input name="hastodate" type="date" id="hastodate" class="time_s" style="width:140px;"></li>
+				<li>诊断时间：从<input name="hasfromdate" type="date" id="hasfromdate" class="time_s" style="width:140px;"value="${requestScope.hasfromdate}">到
+							<input name="hastodate" type="date" id="hastodate" class="time_s" style="width:140px;"value="${requestScope.hastodate}"></li>
 				<li>病人姓名：
-	                <input name="haspat" type="text" id="haspat" class="keyword" >
+	                <input name="haspat" type="text" id="haspat" class="keyword" value="${requestScope.haspat}">
 				</li>
 				<li>送检单位：
-	                <input name="hashospital" type="text" id="hashospital" class="keyword" >
+	                <input name="hashospital" type="text" id="hashospital" class="keyword" value="${requestScope.hashospital}">
 				</li>
 				<li>
 	                <input type="submit" name="btnSearch" value="搜索" id="btnSearch" class="index_search_btn">

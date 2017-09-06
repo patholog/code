@@ -45,13 +45,13 @@
   <form action="PathologyAction!getPathologyListToNeed" id="needSearch" method="post">
 		<ul>
 			<li class="title_li"><div class="title" id="title" style="display: none;">待诊断</div></li>        			
-			<li>申请时间：从<input name="needfromdate" type="date" id="needfromdate" class="time_s" style="width:140px;">到
-						<input name="needtodate" type="date" id="needtodate" class="time_s" style="width:140px;"></li>
+			<li>申请时间：从<input name="needfromdate" type="date" id="needfromdate" class="time_s" style="width:140px;" value="${requestScope.needfromdate}">到
+						<input name="needtodate" type="date" id="needtodate" class="time_s" style="width:140px;" value="${requestScope.needtodate}"></li>
 			<li>病人姓名：
-                <input name="needpat" type="text" id="needpat" class="keyword" >
+                <input name="needpat" type="text" id="needpat" class="keyword" value="${requestScope.needpat}">
 			</li>
 			<li>送检单位：
-                <input name="needhospital" type="text" id="needhospital" class="keyword" >
+                <input name="needhospital" type="text" id="needhospital" class="keyword" value="${requestScope.needhospital}">
 			</li>
 			<li>
                 <input type="submit" name="btnSearch" value="搜索" id="btnSearch" class="index_search_btn">

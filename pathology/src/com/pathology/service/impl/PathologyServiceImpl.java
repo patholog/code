@@ -21,6 +21,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -44,10 +45,10 @@ public class PathologyServiceImpl implements IPathologyService {
   }
 
   private JdbcTemplate jdbcTemplate;
-  private String basicSql = "SELECT a.id_case caseId, a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
+  private String basicSql = "SELECT a.id_case caseId, a.pathologyno, a.patientname, a.crt_Time, a.last_upd_time last_upd_time,d.name hospitalname,"
       + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge, a.ageunit,"
       + "a.specimenname specimenName, a.idcard idCard, a.mobile, a.diag_time,a.retreat_reason,"
-      + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,a.LAST_UPD_TIME LAST_UPD_TIME,"
+      + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
       + "c.generalSee, c.microscopeSee, c.result, c.diagnosed, a.memo,E.ID_COLLECTION, a.diag_status,"
       + "case a.diag_status when '1' THEN '新建' WHEN '2' then '待诊断' WHEN '3' THEN '已退回' when '7' then '已诊断' end diagStatusName,"
       + "a.specimentype, s.name specimenTypeName, a.hospitalcode, a.id_doctor "
@@ -115,14 +116,19 @@ public class PathologyServiceImpl implements IPathologyService {
       String newtodate=request.getParameter("newtodate");
       if(StringUtil.isNotBlank(newpat)){
     	  whereStr+=" and a.patientname like'%"+newpat+"%' ";
+    	  request.setAttribute("newpat",newpat);
       }
       if(StringUtil.isNotBlank(newhospital)){
     	  whereStr+=" and d.name like'%"+newhospital+"%' ";
+    	  request.setAttribute("newhospital",newhospital);
       }
       if(StringUtil.isNotBlank(newfromdate)&&StringUtil.isNotBlank(newtodate)){
     	  newfromdate=newfromdate+" 00:00:01";
     	  newtodate=newtodate+" 23:59:59";
     	  whereStr+=" and a.crt_Time between'"+newfromdate+"' and '"+newtodate+"'";
+    	   
+    	  request.setAttribute("newfromdate",newfromdate);
+    	  request.setAttribute("newtodate",newtodate);
       }
       
       String countSql = basicCountSql + " WHERE a.crt_user_id='" + name + "'"+whereStr;
@@ -264,14 +270,18 @@ public class PathologyServiceImpl implements IPathologyService {
       String needtodate=request.getParameter("needtodate");
       if(StringUtil.isNotBlank(needpat)){
     	  whereStr+=" and a.patientname like'%"+needpat+"%' ";
+    	  request.setAttribute("needpat",needpat);
       }
       if(StringUtil.isNotBlank(needhospital)){
     	  whereStr+=" and d.name like'%"+needhospital+"%' ";
+    	  request.setAttribute("needhospital",needhospital);
       }
       if(StringUtil.isNotBlank(needfromdate)&&StringUtil.isNotBlank(needtodate)){
     	  needfromdate=needfromdate+" 00:00:01";
     	  needtodate=needtodate+" 23:59:59";
     	  whereStr+=" and a.crt_Time between'"+needfromdate+"' and '"+needtodate+"'";
+    	  request.setAttribute("needfromdate",needfromdate);
+    	  request.setAttribute("needtodate",needtodate);
       }
       
       String countSql = basicCountSql + " WHERE a.diag_status='2' and ifnull(a.id_doctor,'" + name + "')='" + name + "'"+whereStr;
@@ -400,14 +410,18 @@ public class PathologyServiceImpl implements IPathologyService {
     String hastodate=request.getParameter("hastodate");
     if(StringUtil.isNotBlank(haspat)){
   	  whereStr+=" and a.patientname like'%"+haspat+"%' ";
+  	request.setAttribute("haspat",haspat);
     }
     if(StringUtil.isNotBlank(hashospital)){
   	  whereStr+=" and d.name like'%"+hashospital+"%' ";
+  	request.setAttribute("hashospital",hashospital);
     }
     if(StringUtil.isNotBlank(hasfromdate)&&StringUtil.isNotBlank(hastodate)){
     	hasfromdate=hasfromdate+" 00:00:01";
     	hastodate=hastodate+" 23:59:59";
   	  whereStr+=" and a.diag_Time between'"+hasfromdate+"' and '"+hastodate+"'";
+  	request.setAttribute("hasfromdate",hasfromdate);
+  	request.setAttribute("hastodate",hastodate);
     }
     
     String countSql = basicCountSql + " WHERE a.diag_status='7' and a.id_doctor='" + name + "'"+whereStr;
@@ -448,15 +462,19 @@ public class PathologyServiceImpl implements IPathologyService {
     String backtodate=request.getParameter("backtodate");
     if(StringUtil.isNotBlank(backpat)){
   	  whereStr+=" and a.patientname like'%"+backpat+"%' ";
+  	request.setAttribute("backpat",backpat);
     }
     if(StringUtil.isNotBlank(backhospital)){
   	  whereStr+=" and d.name like'%"+backhospital+"%' ";
+  	request.setAttribute("backhospital",backhospital);
     }
     if(StringUtil.isNotBlank(backfromdate)&&StringUtil.isNotBlank(backtodate)){
     	backfromdate=backfromdate+" 00:00:01";
     	backtodate=backtodate+" 23:59:59";
   	  //whereStr+=" and a.LAST_UPD_TIME between'"+backfromdate+"' and '"+backtodate+"'";
   	whereStr+=" and a.crt_Time between'"+backfromdate+"' and '"+backtodate+"'";
+  	request.setAttribute("backfromdate",backfromdate);
+  	request.setAttribute("backtodate",backtodate);
     }
     
     String countSql = basicCountSql + " WHERE a.diag_status='3' and a.LAST_UPD_USER_ID='" + name + "'"+whereStr;

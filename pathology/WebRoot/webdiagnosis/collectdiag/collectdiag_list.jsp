@@ -62,13 +62,13 @@
 				  <form action="CollectionAction!getCollectionList" id="colSearch" method="post">
 						<ul>
 							<li class="title_li"><div class="title" id="title" style="display: none;">待诊断</div></li>        			
-							<li>申请时间：从<input name="colfromdate" type="date" id="colfromdate" class="time_s" style="width:140px;">到
-										<input name="coltodate" type="date" id="coltodate" class="time_s" style="width:140px;"></li>
+							<li>申请时间：从<input name="colfromdate" type="date" id="colfromdate" class="time_s" style="width:140px;" value="${requestScope.colfromdate}">到
+										<input name="coltodate" type="date" id="coltodate" class="time_s" style="width:140px;" value="${requestScope.coltodate}"></li>
 							<li>病人姓名：
-				                <input name="colpat" type="text" id="colpat" class="keyword" >
+				                <input name="colpat" type="text" id="colpat" class="keyword" value="${requestScope.colpat}">
 							</li>
 							<li>送检单位：
-				                <input name="colhospital" type="text" id="colhospital" class="keyword" >
+				                <input name="colhospital" type="text" id="colhospital" class="keyword" value="${requestScope.colhospital}">
 							</li>
 							<li>
 				                <input type="submit" name="btnSearch" value="搜索" id="btnSearch" class="index_search_btn">
