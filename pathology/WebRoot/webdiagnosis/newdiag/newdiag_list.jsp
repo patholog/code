@@ -141,7 +141,7 @@
         showTips("当前病例不能修改");
         return false;
       }
-      window.location.href = "PathologyAction!openPathologyUpdate?diagStatus=" + diagStatus + "&id=" + id;
+      window.location.href = "PathologyAction!addPathology?caseId=" + id + "&diagStatus=" + diagStatus;
     }
 
     function deletePathology(diagStatus, id) {

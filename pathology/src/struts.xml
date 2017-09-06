@@ -7,6 +7,10 @@
   <constant name="struts.custom.i18n.resources" value="messages"/>
   <constant name="struts.objectFactory" value="spring"/>
   <constant name="struts.action.excludePattern" value="/upload/img/.*?"/>
+  <bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest"
+        name="myRequestParser" class="com.pathology.bean.RequestParseWrapper"
+        scope="default" optional="true" />
+  <constant name="struts.multipart.handler" value="myRequestParser" />
   <constant name="struts.multipart.maxSize" value="1048576000"/>
   <package name="ajax" extends="json-default">
 
@@ -151,6 +155,8 @@
       <result name="pathologyUpdate">/webdiagnosis/newdiag/updatediag.jsp</result>
       <result name="updatePathology"/>
       <result name="deletePathology"/>
+      <result name="uploadSlide">/webdiagnosis/newdiag/uploadSlide.jsp</result>
+      <result name="saveUploadSlide"/>
     </action>
     <action name="DiaReportAction" class="com.pathology.action.DiaReportAction">
       <result name="pathologyreport">/webdiagnosis/hasdiag/diagnosisreport.jsp</result>

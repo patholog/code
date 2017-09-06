@@ -28,7 +28,7 @@ public interface IPathologyService {
 
   void finishPathology(String caseId);
 
-  int addPathology(Map<String, String[]> paramMap);
+  Pathology addPathology(Map<String, String[]> paramMap);
 
   void addPathology(Pathology em);
 

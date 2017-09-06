@@ -8,6 +8,8 @@ public interface IImageService {
 
   Integer insertImage(Image image);
 
+  void insertImage(String caseId, String filePath);
+
   String cutSlide(String caseId, String filePath, String fileName);
 
   Image select(Integer imageId);

@@ -315,7 +315,7 @@ public class PathologyServiceImpl implements IPathologyService {
    * @param paramMap 表单数据
    */
   @Override
-  public int addPathology(Map<String, String[]> paramMap) {
+  public Pathology addPathology(Map<String, String[]> paramMap) {
     // 新增病例信息
     Pathology pathology = new Pathology();
     try {
@@ -346,7 +346,7 @@ public class PathologyServiceImpl implements IPathologyService {
       throw new RuntimeException("新增结果数据失败，请联系管理员");
     }
 
-    // 新增病理图片信息
+    /*// 新增病理图片信息
     try {
       if (paramMap.containsKey("slideFileName") && !"".equals(paramMap.get("slideFileName")[0])) {
         Image image = new Image();
@@ -367,8 +367,8 @@ public class PathologyServiceImpl implements IPathologyService {
     } catch (Exception e) {
       logger.error(e.getMessage());
       throw new RuntimeException("保存病理图片失败，请联系管理员");
-    }
-    return 1;
+    }*/
+    return pathology;
   }
 
   @Override

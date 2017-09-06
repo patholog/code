@@ -97,7 +97,7 @@
       /**
        * 提交表单
        */
-      $('#btnSave').click(function() {
+      $('#btnNext').click(function() {
         validate();
         if (flag) {
           $('#infoForm').ajaxSubmit({
@@ -105,7 +105,7 @@
             success: function (result) {
               if (result && result.success) {
                 $('#tipInfo').text(result.success);
-                window.location.href = "PathologyAction!getNewPathologyList";
+                window.location.href = "PathologyAction!uploadSlide?caseId=" + result.caseId + "&diagStatus=" + result.diagStatus;
               } else if (result && result.failure) {
                 showTips(result.failure);
               } else {
@@ -286,7 +286,7 @@
   <div class="header">
     <%@include file="/webdiagnosis/maintop.jsp" %>
   </div>
-  <form id="infoForm" method="post" action="PathologyAction!saveInfo" enctype="multipart/form-data">
+  <form id="infoForm" method="post" action="PathologyAction!saveInfo">
   <div id="whole" class="mlrAuto">
     <div class="menu_left">
       <ul id="Left1_MenuList">
@@ -299,29 +299,17 @@
         <div class="new_step">
           <ul>
             <li>
-              <a href="">
+              <a href="PathologyAction!addPathology?caseId=<s:property value="pathology.caseId"/>&diagStatus=<s:property value="pathology.diagStatus"/>">
                 <div class="step curr">
                   1<span>病例信息</span></div>
               </a>
             </li>
-            <%--<li>
-              <a href="">
+            <li>
+              <a href="PathologyAction!uploadSlide?caseId=<s:property value="pathology.caseId"/>&diagStatus=<s:property value="pathology.diagStatus"/>">
                 <div class="step">
-                  2<span>上传切片&amp;附件</span></div>
+                  2<span>上传切片</span></div>
               </a>
             </li>
-            <li>
-              <a href="">
-                <div class="step">
-                  3<span>选择诊断专家</span></div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <div class="step">
-                  4<span>留言</span></div>
-              </a>
-            </li>--%>
           </ul>
           <div class="clear">
           </div>
@@ -347,13 +335,14 @@
               <li>
                 <div>
                   <span class="red_star">*</span>病人姓名
-                  <input name="patientName" id="patientName" class="patient_name" maxlength="32">
+                  <input type="hidden" id="caseId" name="caseId" value="<s:property value="pathology.caseId"/>">
+                  <input name="patientName" id="patientName" class="patient_name" maxlength="32" value="<s:property value="pathology.patientname"/>">
                 </div>
               </li>
               <li>
                 <div>
                   <span class="red_star">*</span>病<ins class="half_words"></ins>理<ins class="half_words"></ins>号
-                  <input name="pathologyNo" id="pathologyNo" class="patient_name"
+                  <input name="pathologyNo" id="pathologyNo" class="patient_name" value="<s:property value="pathology.pathologyNo"/>"
                          onkeyup="value=value.replace(/[^\w\/]/ig,'')">
                 </div>
               </li>
@@ -584,15 +573,16 @@
             <div class="clear">
             </div>
           </div>
-          <div class="information2">
+          <%--<div class="information2">
             <div style="float: left">
               <ins class="half_words"></ins>上传切片：
             </div>
             <input type="file" name="slide" id="slide">
-          </div>
+          </div>--%>
           <div class="information_btn" id="divFoot">
             <%--<input hidden type="submit" name="btnSaveInfo" value="保存" id="btnSaveInfo" class="inf_btn right">--%>
-            <input type="button" name="btnSave" value="保存" id="btnSave" class="inf_btn right">
+              <input type="button" name="btnNext" value="下一步" id="btnNext" class="inf_btn right">
+              <%--<input type="button" name="btnSave" value="保存" id="btnSave" class="inf_btn right">--%>
             <div class="clear">
             </div>
           </div>

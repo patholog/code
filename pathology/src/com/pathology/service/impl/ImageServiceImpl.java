@@ -5,9 +5,16 @@ import com.pathology.entity.Image;
 import com.pathology.service.IImageService;
 import com.pathology.util.HttpUtil;
 import com.pathology.util.Property;
+import com.pathology.util.SlideUtil;
 import org.apache.log4j.Logger;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ImageServiceImpl implements IImageService {
@@ -19,6 +26,33 @@ public class ImageServiceImpl implements IImageService {
   @Override
   public Integer insertImage(Image image) {
     return imageDao.insertImage(image);
+  }
+
+  @Override
+  public void insertImage(String caseId, String filePath) {
+    String rootPath = Property.getProperty("slideFilePath");
+    File file = new File(rootPath + filePath);
+    Image image = new Image();
+    image.setCaseId(caseId);
+    image.setPathImage(filePath);
+    image.setPath(filePath.substring(0, filePath.lastIndexOf("\\")));
+    image.setFileName(filePath.substring(filePath.lastIndexOf("\\") + 1));
+    image.setCrtTime(new Timestamp(new Date().getTime()));
+    try {
+      BufferedImage bufferedImage = SlideUtil.loadImage(file);
+      image.setWidth(bufferedImage.getWidth());
+      image.setHeight(bufferedImage.getHeight());
+    } catch (IOException e) {
+      logger.error(e.getMessage());
+    }
+    int imageId = insertImage(image);
+    String datePath = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
+    try {
+      SlideUtil.processImageFile(new File(rootPath + filePath), new File(Property.getProperty("slideFilePath") + "\\" + datePath + "\\"
+          + imageId));
+    } catch (IOException e) {
+      logger.error(e.getMessage());
+    }
   }
 
   /**
@@ -45,7 +79,7 @@ public class ImageServiceImpl implements IImageService {
   /**
    * 根据主键查询
    *
-   * @param imageId iamge id
+   * @param imageId image id
    * @return Image
    */
   @Override

@@ -4,9 +4,19 @@ import com.alibaba.fastjson.JSON;
 import com.pathology.dto.PathologyDTO;
 import com.pathology.entity.*;
 import com.pathology.service.*;
-import com.pathology.util.*;
+import com.pathology.util.Constant;
+import com.pathology.util.Property;
+import com.pathology.util.SessionAgentManager;
+import com.pathology.util.StringUtil;
 import com.sun.istack.internal.Nullable;
 import net.sf.json.JSONObject;
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileItemStream;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.util.Streams;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
@@ -15,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +57,7 @@ public class PathologyAction extends BaseAction {
   private List<DescriptionApp> descriptionAppList; // 转诊信息列表
   private List<Users> usersList;
   private String caseId;
+  private List<Image> imageList;
 
   /**
    * 保存病理
@@ -73,25 +85,22 @@ public class PathologyAction extends BaseAction {
   public String saveInfo() {
     HttpServletRequest request = ServletActionContext.getRequest();
     HttpServletResponse response = ServletActionContext.getResponse();
-    response.setContentType("text/html;charset=utf-8");
-    PrintWriter out;
     Map<String, String[]> paramMap = new HashMap<>(request.getParameterMap());
     try {
       int count;
       String failure = "";
       paramMap.put("slideFileName", new String[]{slideFileName});
+      Pathology newPathology = null;
       try {
-        count = pathologyService.addPathology(paramMap);
+        newPathology = pathologyService.addPathology(paramMap);
       } catch (RuntimeException e) {
         logger.error(e.getMessage());
-        count = 0;
         failure = e.getMessage();
       } catch (Exception e) {
         logger.error(e.getMessage());
-        count = 0;
         failure = "出现未知错误，请联系管理员";
       }
-      String rootPath = Property.getProperty("slideFilePath");
+      /*String rootPath = Property.getProperty("slideFilePath");
       if (slide != null) {
         InputStream is = new FileInputStream(getSlide()); //根据上传的文件得到输入流
         if (!new File(rootPath + paramMap.get("slideFilePath")[0] + "\\"
@@ -125,12 +134,11 @@ public class PathologyAction extends BaseAction {
           count = 0;
           failure = e.getMessage();
         }
-      }
-      out = response.getWriter();
-      String jsonString = count > 0 ? "{\"success\":\"新建病理成功\"}" : "{\"failure\":\"" + failure + "\"}";
-      out.println(jsonString);
-      out.flush();
-      out.close();
+      }*/
+      String jsonString = newPathology != null ? "{\"success\":\"新建病理成功\", \"caseId\":\"" + newPathology.getIdCase()
+          + "\", \"diagStatus\":\"" + newPathology.getDiagStatus() + "\"}"
+          : "{\"failure\":\"" + failure + "\"}";
+      printJson(response, jsonString);
     } catch (Exception e) {
       logger.error(e.getMessage());
       return null;
@@ -297,6 +305,12 @@ public class PathologyAction extends BaseAction {
   public String addPathology() {
     HttpServletRequest request = ServletActionContext.getRequest();
     try {
+      if (request.getParameterMap().containsKey("caseId")) {
+        String caseId = request.getParameter("caseId");
+        pathology = pathologyService.getPathologyByIdAndDiagStatus(caseId);
+      } else {
+        pathology = new PathologyDTO();
+      }
       hospitalList = hospitalservice.getAllHospital(Hospital.class, "");
       specimenList = specimenService.selectList(Specimen.class, "");
       usersList = pathologyService.selectDoctorListNoMe();
@@ -340,7 +354,9 @@ public class PathologyAction extends BaseAction {
     int level = Integer.valueOf(position[0]);
     try {
       Image image = imageService.select(Integer.valueOf(imageId));
-      File file = new File(Property.getProperty("slideFilePath") + image.getPathImage() + "\\" + imageId + "\\" + level + "\\" + position[1]);
+      File file = new File(Property.getProperty("slideFilePath")
+          + image.getPath().substring(0, image.getPath().lastIndexOf("\\")) + "\\" + imageId + "\\" + level
+          + "\\" + position[1]);
 
       if (!file.exists()) return;
       FileInputStream fis;
@@ -511,6 +527,124 @@ public class PathologyAction extends BaseAction {
     return null;
   }
 
+  /**
+   * 打开上传切片界面
+   *
+   * @return 上传切片界面
+   */
+  public String uploadSlide() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    String caseId = request.getParameter("caseId");
+    if (caseId == null || "".equals(caseId)) {
+      return "uploadSlide";
+    }
+    pathology = pathologyService.getPathologyByIdAndDiagStatus(caseId);
+    imageList = imageService.selectListByCaseId(caseId);
+    return "uploadSlide";
+  }
+
+  /**
+   * 保存切片图片
+   *
+   * @return
+   */
+  public String saveUploadSlide() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    HttpServletResponse response = ServletActionContext.getResponse();
+    String caseId = request.getParameter("caseId");
+    int chunk = 0;// 当前正在处理的文件分块序号
+    int chunks = 0;//分块上传总数
+    String tempFileName = null; // 临时文件名
+    String fileName = "";
+    String datePath = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
+    BufferedOutputStream outputStream = null;
+    if (ServletFileUpload.isMultipartContent(request)) {
+      try {
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        factory.setSizeThreshold(1024);
+        // factory.setRepository(new File(repositoryPath));// 设置临时目录
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        upload.setHeaderEncoding("UTF-8");
+        // upload.setSizeMax(5 * 1024 * 1024);// 设置附件大小，超过这个大小上传会不成功
+        FileItemIterator items = upload.getItemIterator(request);
+        while (items.hasNext()) {
+          FileItemStream item = items.next();
+          InputStream input = item.openStream();
+          if (item.isFormField()) {
+            if (item.getFieldName().equals("name")) {
+              tempFileName = Streams.asString(input, "UTF-8");
+            } else if (item.getFieldName().equals("chunk")) {
+              chunk = Integer.valueOf(Streams.asString(input));
+            } else if (item.getFieldName().equals("chunks")) {
+              chunks = Integer.valueOf(Streams.asString(input));
+            }
+          } else {
+            String chunkName = item.getName();
+            // fileName = item.getName(); // 真实文件名
+            fileName = tempFileName;
+            if (chunk >= 0) {
+              chunkName = chunk + "_" + tempFileName;
+            }
+            File dir = new File(Property.getProperty("slideFilePath") + "\\" + datePath + "\\" + caseId + "\\temp");
+            if (!dir.isDirectory() || !dir.exists()) {
+              dir.mkdirs();
+            }
+            //保存文件绝对路径
+            String fullPath = Property.getProperty("slideFilePath") + "\\" + datePath + "\\" + caseId + "\\temp"
+                + "\\" + chunkName;
+            OutputStream fos = new BufferedOutputStream(new FileOutputStream(new File(fullPath)));
+            byte[] b = new byte[1024];
+            while ((input.read(b)) != -1) {
+              fos.write(b);
+            }
+            fos.flush();
+            fos.close();
+          }
+        }
+        if (chunk >= 0 && chunk + 1 == chunks) {
+          outputStream = new BufferedOutputStream(
+              new FileOutputStream(new File(Property.getProperty("slideFilePath") + "\\" + datePath + "\\"
+                  + caseId, fileName)));
+          // 遍历文件合并
+          for (int i = 0; i < chunks; i++) {
+            File tempFile = new File(Property.getProperty("slideFilePath") + "\\" + datePath + "\\" + caseId
+                + "\\temp", i + "_" + tempFileName);
+            System.out.println("tempFileName:" + tempFileName);
+            byte[] bytes = FileUtils.readFileToByteArray(tempFile);
+            outputStream.write(bytes);
+            outputStream.flush();
+            tempFile.delete();
+          }
+          outputStream.flush();
+        }
+        imageService.insertImage(caseId, "\\" + datePath + "\\" + caseId + "\\" + fileName);
+        //System.out.println("newFileName:"+newFileName);
+        Map<String, Object> m = new HashMap<>();
+        /*System.out.println("newFileName:" + fileName);
+        m.put("status", true);*/
+        response.getWriter().write("success");
+      } catch (FileUploadException e) {
+        e.printStackTrace();
+        Map<String, Object> m = new HashMap<>();
+        m.put("status", false);
+        // printJson(JSONObject.fromObject(m).toString());
+      } catch (Exception e) {
+        e.printStackTrace();
+        Map<String, Object> m = new HashMap<>();
+        m.put("status", false);
+        // response.getWriter().write(JSONObject.fromObject(m).toString());
+      } finally {
+        try {
+          if (outputStream != null)
+            outputStream.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    return null;
+  }
+
   public IPathologyService getPathologyService() {
     return pathologyService;
   }
@@ -625,5 +759,13 @@ public class PathologyAction extends BaseAction {
 
   public void setImageService(IImageService imageService) {
     this.imageService = imageService;
+  }
+
+  public List<Image> getImageList() {
+    return imageList;
+  }
+
+  public void setImageList(List<Image> imageList) {
+    this.imageList = imageList;
   }
 }

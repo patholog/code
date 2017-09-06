@@ -1,0 +1,48 @@
+/**
+ * weebox.css
+ *
+/**
+ * weebox.css
+ *
+ * @category   javascript
+ * @package    jquery
+ * @author     Jack <xiejinci@gmail.com>
+ * @version    
+ */
+ 
+.dialog-loading {background:url(../images/common_loading.gif) no-repeat center; width:100%; height:100%}
+.dialog-mask{border:0px; background:#000; margin:0px; padding:0px; position:absolute; top:0px; left:0px;background:url(../images/dialog_bg.png); _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod="scale", src="/weebox/src/../images/dialog_bg.png"); _background:none;}
+.dialog-button{clear: both;}
+.dialog-button input{overflow:visible; overflow-y:hidden;}
+.dialog-btn1,.dialog-ok{ background:#5BA7B7;}
+.dialog-btn2,.dialog-cancel{background:#7F7F7F;color:#7f7f7f }
+.dialog-btn1,.dialog-btn2{margin-right:10px}
+.dialog-content{text-align:left; clear:both; overflow:auto;}
+
+.weedialog{width:300px; color:#444; border:10px solid #BFBFBF;border-radius:10px;  }
+.weedialog a:link,weedialog a:visited {color: #005EAC; text-decoration:none;}
+
+.weedialog .dialog-header{height:30px; position:relative; cursor:move; }
+.weedialog .dialog-tc{ width:auto; height:30px;font-weight:bold;}
+.weedialog .dialog-tc2{color:#fff;height:40px; line-height:40px; font-size:18px; width:100%; clear:both; background:#6196f3;text-align:left;}
+.dialog-title{float:left;padding-left:10px;}
+.weedialog .dialog-close{float:right;cursor:pointer;margin:12px 15px 0 0;height:18px; width:18px; background:url(../images/dialog_close1.png) no-repeat; }
+
+.weedialog .dialog-content{clear:both;background:#fff; text-align:left; overflow-y:auto; overflow-x:hidden;}
+.weedialog .dialog-button{clear:both; background:#fff;}
+.weedialog .dialog-cl{background:#fff; }
+.weedialog .dialog-cr{background:#fff; }
+.weedialog .dialog-button{text-align:right; font-size:12px; padding:10px;}
+.weedialog .dialog-ok{border:none;border-radius: 6px;color:#fff;cursor:pointer;text-align:center; padding: 5px 10px;margin-right:15px}
+.weedialog .dialog-cancel{border:none;border-radius: 6px;color:#fff;cursor:pointer;text-align:center; padding: 5px 10px;}
+.weedialog .dialog-button-disabled{overflow:visible; overflow-y:hidden; border:1px solid #999; background:url(../images/btn_cancel.gif) top; height:24px; line-height:24px; color:#666;cursor:pointer; padding:0 5px; margin:0px;}
+.weedialog .dialog-bot{clear:both; background:#fff; position:relative; font-size:0px;}
+
+.weealert .dialog-cancel{display:none;}
+.weebox_tips{font-size:16px;text-align:center;line-height:42px;}
+.weeselect li{float:left; width:120px;}
+.weeselect .wsearch{width:100%;text-align:right;}
+
+.weesuggest{width:160px;background:#ccc;}
+.weesuggest .dialog-content{padding:5px;}
+.weesuggest li{padding:0px;margin:0px;line-height:20px;cursor:pointer;border-bottom:1px dotted #bbb;}

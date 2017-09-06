@@ -145,7 +145,7 @@ public class SlideUtil {
     return result;
   }
 
-  private static BufferedImage loadImage(File file) throws IOException {
+  public static BufferedImage loadImage(File file) throws IOException {
     BufferedImage result;
     try {
       result = ImageIO.read(file);
