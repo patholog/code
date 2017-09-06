@@ -14,6 +14,8 @@ import com.pathology.service.IResultService;
 import com.pathology.service.IUsersService;
 import com.pathology.util.Pages;
 import com.pathology.util.SessionAgentManager;
+import com.pathology.util.StringUtil;
+
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -237,12 +239,27 @@ public class PathologyServiceImpl implements IPathologyService {
       pageNum = pageNum != null ? pageNum : "1";
       String title = "";
       int status = 1;
-      String countSql = basicCountSql + " WHERE a.diag_status='2' and ifnull(a.id_doctor,'" + name + "')='" + name + "'";
+      String whereStr="";
+      String needpat=request.getParameter("needpat");
+      String needhospital=request.getParameter("needhospital");
+      String needfromdate=request.getParameter("needfromdate");
+      String needtodate=request.getParameter("needtodate");
+      if(StringUtil.isNotBlank(needpat)){
+    	  whereStr+=" and a.patientname like'%"+needpat+"%' ";
+      }
+      if(StringUtil.isNotBlank(needhospital)){
+    	  whereStr+=" and d.name like'%"+needhospital+"%' ";
+      }
+//      if(StringUtil.isNotBlank(needfromdate)&&StringUtil.isNotBlank(needtodate)){
+//    	  whereStr+=" and d.name like'%"+needhospital+"%' ";
+//      }
+      
+      String countSql = basicCountSql + " WHERE a.diag_status='2' and ifnull(a.id_doctor,'" + name + "')='" + name + "'"+whereStr;
 
       int totalNum = jdbcTemplate.queryForInt(countSql);
       if (totalNum > 0) {
         Pages page = new Pages(totalNum, "PathologyAction!getPathologyListToNeed", Integer.parseInt(pageNum), 10);
-        String sql = basicSql + " WHERE a.diag_status='2' and ifnull(a.id_doctor,'" + name + "')='" + name + "'"
+        String sql = basicSql + " WHERE a.diag_status='2' and ifnull(a.id_doctor,'" + name + "')='" + name + "'"+whereStr
             + page.getPageLimit();
         request.setAttribute("page", page.getPageStr());
         return jdbcTemplate.query(sql, new PathologyMapping());
