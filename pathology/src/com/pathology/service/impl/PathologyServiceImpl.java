@@ -47,7 +47,7 @@ public class PathologyServiceImpl implements IPathologyService {
   private String basicSql = "SELECT a.id_case caseId, a.pathologyno, a.patientname, a.crt_Time, d.name hospitalname,"
       + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge, a.ageunit,"
       + "a.specimenname specimenName, a.idcard idCard, a.mobile, a.diag_time,a.retreat_reason,"
-      + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
+      + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,a.LAST_UPD_TIME LAST_UPD_TIME,"
       + "c.generalSee, c.microscopeSee, c.result, c.diagnosed, a.memo,E.ID_COLLECTION, a.diag_status,"
       + "case a.diag_status when '1' THEN '新建' WHEN '2' then '待诊断' WHEN '3' THEN '已退回' when '7' then '已诊断' end diagStatusName,"
       + "a.specimentype, s.name specimenTypeName, a.hospitalcode, a.id_doctor "
@@ -107,12 +107,30 @@ public class PathologyServiceImpl implements IPathologyService {
       pageNum = pageNum != null ? pageNum : "1";
       String title = "";
       int status = 1;
-      String countSql = basicCountSql + " WHERE a.crt_user_id='" + name + "'";
+      
+      String whereStr="";
+      String newpat=request.getParameter("newpat");
+      String newhospital=request.getParameter("newhospital");
+      String newfromdate=request.getParameter("newfromdate");
+      String newtodate=request.getParameter("newtodate");
+      if(StringUtil.isNotBlank(newpat)){
+    	  whereStr+=" and a.patientname like'%"+newpat+"%' ";
+      }
+      if(StringUtil.isNotBlank(newhospital)){
+    	  whereStr+=" and d.name like'%"+newhospital+"%' ";
+      }
+      if(StringUtil.isNotBlank(newfromdate)&&StringUtil.isNotBlank(newtodate)){
+    	  newfromdate=newfromdate+" 00:00:01";
+    	  newtodate=newtodate+" 23:59:59";
+    	  whereStr+=" and a.crt_Time between'"+newfromdate+"' and '"+newtodate+"'";
+      }
+      
+      String countSql = basicCountSql + " WHERE a.crt_user_id='" + name + "'"+whereStr;
 
       int totalNum = jdbcTemplate.queryForInt(countSql);
       if (totalNum > 0) {
         Pages page = new Pages(totalNum, "PathologyAction!getNewPathologyList", Integer.parseInt(pageNum), 10);
-        String sql = basicSql + " WHERE a.crt_user_id='" + name + "' order by crt_time DESC " + page.getPageLimit();
+        String sql = basicSql + " WHERE a.crt_user_id='" + name + "'"+whereStr+" order by crt_time DESC " + page.getPageLimit();
         request.setAttribute("page", page.getPageStr());
         return jdbcTemplate.query(sql, new PathologyMapping());
       } else {
@@ -250,9 +268,11 @@ public class PathologyServiceImpl implements IPathologyService {
       if(StringUtil.isNotBlank(needhospital)){
     	  whereStr+=" and d.name like'%"+needhospital+"%' ";
       }
-//      if(StringUtil.isNotBlank(needfromdate)&&StringUtil.isNotBlank(needtodate)){
-//    	  whereStr+=" and d.name like'%"+needhospital+"%' ";
-//      }
+      if(StringUtil.isNotBlank(needfromdate)&&StringUtil.isNotBlank(needtodate)){
+    	  needfromdate=needfromdate+" 00:00:01";
+    	  needtodate=needtodate+" 23:59:59";
+    	  whereStr+=" and a.crt_Time between'"+needfromdate+"' and '"+needtodate+"'";
+      }
       
       String countSql = basicCountSql + " WHERE a.diag_status='2' and ifnull(a.id_doctor,'" + name + "')='" + name + "'"+whereStr;
 
@@ -372,12 +392,30 @@ public class PathologyServiceImpl implements IPathologyService {
     pageNum = pageNum != null ? pageNum : "1";
     String title = "";
     int status = 1;
-    String countSql = basicCountSql + " WHERE a.diag_status='7' and a.id_doctor='" + name + "'";
+    
+    String whereStr="";
+    String haspat=request.getParameter("haspat");
+    String hashospital=request.getParameter("hashospital");
+    String hasfromdate=request.getParameter("hasfromdate");
+    String hastodate=request.getParameter("hastodate");
+    if(StringUtil.isNotBlank(haspat)){
+  	  whereStr+=" and a.patientname like'%"+haspat+"%' ";
+    }
+    if(StringUtil.isNotBlank(hashospital)){
+  	  whereStr+=" and d.name like'%"+hashospital+"%' ";
+    }
+    if(StringUtil.isNotBlank(hasfromdate)&&StringUtil.isNotBlank(hastodate)){
+    	hasfromdate=hasfromdate+" 00:00:01";
+    	hastodate=hastodate+" 23:59:59";
+  	  whereStr+=" and a.diag_Time between'"+hasfromdate+"' and '"+hastodate+"'";
+    }
+    
+    String countSql = basicCountSql + " WHERE a.diag_status='7' and a.id_doctor='" + name + "'"+whereStr;
     try {
       int totalNum = jdbcTemplate.queryForInt(countSql);
       if (totalNum > 0) {
         Pages page = new Pages(totalNum, "PathologyAction!getPathologyListToHas", Integer.parseInt(pageNum), 10);
-        String sql = basicSql + " WHERE a.diag_status='7' and a.id_doctor='" + name + "'" + page.getPageLimit();
+        String sql = basicSql + " WHERE a.diag_status='7' and a.id_doctor='" + name + "'"+whereStr + page.getPageLimit();
         request.setAttribute("page", page.getPageStr());
         return jdbcTemplate.query(sql, new PathologyMapping());
       } else {
@@ -402,12 +440,31 @@ public class PathologyServiceImpl implements IPathologyService {
     pageNum = pageNum != null ? pageNum : "1";
     String title = "";
     int status = 1;
-    String countSql = basicCountSql + " WHERE a.diag_status='3' and a.LAST_UPD_USER_ID='" + name + "'";
+    
+    String whereStr="";
+    String backpat=request.getParameter("backpat");
+    String backhospital=request.getParameter("backhospital");
+    String backfromdate=request.getParameter("backfromdate");
+    String backtodate=request.getParameter("backtodate");
+    if(StringUtil.isNotBlank(backpat)){
+  	  whereStr+=" and a.patientname like'%"+backpat+"%' ";
+    }
+    if(StringUtil.isNotBlank(backhospital)){
+  	  whereStr+=" and d.name like'%"+backhospital+"%' ";
+    }
+    if(StringUtil.isNotBlank(backfromdate)&&StringUtil.isNotBlank(backtodate)){
+    	backfromdate=backfromdate+" 00:00:01";
+    	backtodate=backtodate+" 23:59:59";
+  	  //whereStr+=" and a.LAST_UPD_TIME between'"+backfromdate+"' and '"+backtodate+"'";
+  	whereStr+=" and a.crt_Time between'"+backfromdate+"' and '"+backtodate+"'";
+    }
+    
+    String countSql = basicCountSql + " WHERE a.diag_status='3' and a.LAST_UPD_USER_ID='" + name + "'"+whereStr;
     try {
       int totalNum = jdbcTemplate.queryForInt(countSql);
       if (totalNum > 0) {
         Pages page = new Pages(totalNum, "PathologyAction!getPathologyListToBack", Integer.parseInt(pageNum), 10);
-        String sql = basicSql + " WHERE a.diag_status='3' and a.LAST_UPD_USER_ID='" + name + "'" + page.getPageLimit();
+        String sql = basicSql + " WHERE a.diag_status='3' and a.LAST_UPD_USER_ID='" + name + "'" +whereStr+ page.getPageLimit();
         request.setAttribute("page", page.getPageStr());
         return jdbcTemplate.query(sql, new PathologyMapping());
       } else {

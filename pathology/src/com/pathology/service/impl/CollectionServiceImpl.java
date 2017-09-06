@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.pathology.util.Pages;
+import com.pathology.util.StringUtil;
 import com.pathology.dao.ICollectionDao;
 import com.pathology.entity.Collection;
 import com.pathology.dto.CollectionDTO;
@@ -69,10 +70,28 @@ public class CollectionServiceImpl implements ICollectionService {
 		String title = "";
 		int status = 1;
 
+		String whereStr="";
+	    String colpat=request.getParameter("colpat");
+	    String colhospital=request.getParameter("colhospital");
+	    String colfromdate=request.getParameter("colfromdate");
+	    String coltodate=request.getParameter("coltodate");
+	    if(StringUtil.isNotBlank(colpat)){
+	  	  whereStr+=" and b.patientname like'%"+colpat+"%' ";
+	    }
+	    if(StringUtil.isNotBlank(colhospital)){
+	  	  whereStr+=" and d.name like'%"+colhospital+"%' ";
+	    }
+	    if(StringUtil.isNotBlank(colfromdate)&&StringUtil.isNotBlank(coltodate)){
+	    	colfromdate=colfromdate+" 00:00:01";
+	    	coltodate=coltodate+" 23:59:59";
+	  	  whereStr+=" and b.crt_Time between'"+colfromdate+"' and '"+coltodate+"'";
+	    }
+	    
+		
 		String sqlcount  = " select count(1) from collection a"
 				+" inner join pathology b on a.case_id = b.id_case"
 				+" left join users c on a.collectioner_Id = c.id_users"
-				+" left join hospital d on b.hospitalcode = d.id_hospital";
+				+" left join hospital d on b.hospitalcode = d.id_hospital"+whereStr;
 
 		int totalNum = jdbcTemplate.queryForInt(sqlcount);
 
@@ -83,7 +102,7 @@ public class CollectionServiceImpl implements ICollectionService {
           + " from collection a "
           + " inner join pathology b on a.case_id = b.id_case"
           + " left join users c on a.collectioner_Id = c.id_users"
-          + " left join hospital d on b.hospitalcode = d.id_hospital"
+          + " left join hospital d on b.hospitalcode = d.id_hospital"+whereStr
           + page.getPageLimit();
 			request.setAttribute("page", page.getPageStr());
       return jdbcTemplate.query(sql, new CollectionMapping());

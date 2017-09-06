@@ -58,6 +58,25 @@
 
 	<div class="content_right">
 		<div class="index_right" style="min-height: 494px;">
+			  <div class="index_search">
+				  <form action="CollectionAction!getCollectionList" id="colSearch" method="post">
+						<ul>
+							<li class="title_li"><div class="title" id="title" style="display: none;">待诊断</div></li>        			
+							<li>申请时间：从<input name="colfromdate" type="date" id="colfromdate" class="time_s" style="width:140px;">到
+										<input name="coltodate" type="date" id="coltodate" class="time_s" style="width:140px;"></li>
+							<li>病人姓名：
+				                <input name="colpat" type="text" id="colpat" class="keyword" >
+							</li>
+							<li>送检单位：
+				                <input name="colhospital" type="text" id="colhospital" class="keyword" >
+							</li>
+							<li>
+				                <input type="submit" name="btnSearch" value="搜索" id="btnSearch" class="index_search_btn">
+				            </li>
+						</ul>
+				        <div class="clear"></div>
+				   </form>
+				</div>
 			<div class="index_diagnosis_table">
                  <div class="diagnosis_table">
                         <table class="table">

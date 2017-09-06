@@ -25,7 +25,7 @@ public class PathologyDTO implements java.io.Serializable {
    */
   private String doctorId;
   private String memo;
-  private Date lastUpdTime;
+  private String lastUpdTime;
   private String lastUpdDeptCd;
   private String lastUpdUserId;
   private Integer delF;
@@ -172,15 +172,16 @@ public class PathologyDTO implements java.io.Serializable {
     this.memo = memo;
   }
 
-  public Date getLastUpdTime() {
-    return lastUpdTime;
-  }
 
-  public void setLastUpdTime(Date lastUpdTime) {
-    this.lastUpdTime = lastUpdTime;
-  }
+  public String getLastUpdTime() {
+	return lastUpdTime;
+}
 
-  public String getLastUpdDeptCd() {
+public void setLastUpdTime(String lastUpdTime) {
+	this.lastUpdTime = lastUpdTime;
+}
+
+public String getLastUpdDeptCd() {
     return lastUpdDeptCd;
   }
 

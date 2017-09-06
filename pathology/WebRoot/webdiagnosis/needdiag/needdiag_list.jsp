@@ -82,7 +82,7 @@
               <td><s:property value="#pathology.username"/></td>
               <td><s:property value="#pathology.content"/></td>
               <td><s:property value="#pathology.hospitalname"/></td>
-              <td><s:date name="#pathology.createTime" format="yyyy-MM-dd HH:mm:ss"/></td>
+              <td><s:property value="#pathology.createTime"/></td>
               <td align="center">
                 <a href="PathologyAction!getPathologyDto?diagStatus=2&id=<s:property value="#pathology.caseId"/>" target="_blank">查看</a>
                 <a href="PathologyAction!transferPathology?id=<s:property value="#pathology.caseId"/>">转诊</a>

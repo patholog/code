@@ -47,6 +47,25 @@
 
 <div class="content_right">
   <div class="index_right" style="min-height: 494px;">
+  <div class="index_search">
+	  <form action="PathologyAction!getNewPathologyList" id="newSearch" method="post">
+			<ul>
+				<li class="title_li"><div class="title" id="title" style="display: none;">待诊断</div></li>        			
+				<li>申请时间：从<input name="newfromdate" type="date" id="newfromdate" class="time_s" style="width:140px;">到
+							<input name="newtodate" type="date" id="newtodate" class="time_s" style="width:140px;"></li>
+				<li>病人姓名：
+	                <input name="newpat" type="text" id="newpat" class="keyword" >
+				</li>
+				<li>送检单位：
+	                <input name="newhospital" type="text" id="newhospital" class="keyword" >
+				</li>
+				<li>
+	                <input type="submit" name="btnSearch" value="搜索" id="btnSearch" class="index_search_btn">
+	            </li>
+			</ul>
+	        <div class="clear"></div>
+	   </form>
+		</div>
     <div class="new_step">
       <ul>
         <li>
