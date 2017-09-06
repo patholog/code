@@ -267,8 +267,8 @@
                       <div id="divCaseList" class="case_list border_bom">
                         <s:iterator value="pathology.Images" id="image" status="11">
                           <div class="show_img">
-                            <a class="go" href="PathologyAction!showDiagImage?imageId=<s:property value='#image.idImage'/>&filePath=<s:property value='#image.pathImage'/>&name=<s:property value='#image.fileName'/>" rel="gallery">
-                              <img alt="" src="PathologyAction!showDiagImage?imageId=<s:property value='#image.idImage'/>&filePath=<s:property value='#image.pathImage'/>&name=<s:property value='#image.fileName'/>"></a>
+                            <a class="go" href="PathologyAction!showDiagImage?imageId=<s:property value='#image.idImage'/>&filePath=<s:property value='#image.path'/>&name=<s:property value='#image.fileName'/>" rel="gallery">
+                              <img alt="" src="PathologyAction!showDiagImage?imageId=<s:property value='#image.idImage'/>&filePath=<s:property value='#image.path'/>&name=<s:property value='#image.fileName'/>"></a>
                             <p></p>
                           </div>
                         </s:iterator>

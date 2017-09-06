@@ -446,7 +446,8 @@ public class PathologyAction extends BaseAction {
     FileInputStream ips;
     try {
       // 获取图片存放路径
-      String imgPath = Property.getProperty("slideFilePath") + filePath + "\\" + imageId + "\\thumb_" + fileName;
+      String imgPath = Property.getProperty("slideFilePath") + filePath.substring(0, filePath.lastIndexOf("\\"))
+          + "\\" + imageId + "\\thumb_" + fileName;
       ips = new FileInputStream(new File(imgPath));
       response.setContentType("multipart/form-data");
       out = response.getOutputStream();
