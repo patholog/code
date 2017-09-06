@@ -198,7 +198,7 @@
 						<td><select name="user.roleId">
 								<c:forEach var="roles" items="${rolelist}">
 									<option
-										<c:if test="${sessionScope.edituser.sex=='女'}">selected="selected"</c:if>
+										<c:if test="${sessionScope.edituser.roleId==roles.idRoles}">selected="selected"</c:if>
 										value="${roles.idRoles}">${roles.name}</option>
 
 								</c:forEach>
