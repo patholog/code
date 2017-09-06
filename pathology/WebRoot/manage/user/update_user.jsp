@@ -178,8 +178,8 @@
 
 					<tr>
 						<th>联系电话</th>
-						<td><input type="text" name="user.mobile" id="title"
-							value="${sessionScope.edituser.mobile}" style="width:300px;" />
+						<td><input type="text" name="user.tel" id="title"
+							value="${sessionScope.edituser.tel}" style="width:300px;" />
 						</td>
 					</tr>
 					<!--  <tr>

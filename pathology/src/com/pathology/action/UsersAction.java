@@ -202,7 +202,9 @@ public class UsersAction extends BaseAction {
 			Users userT = userservice.getUser(Users.class, user.getIdUsers());
 			userT.setRealname(user.getRealname());
 			userT.setBelonghospital(user.getBelonghospital());
-			userT.setPassword(DigestMD5.getDigestPassWord(user.getPassword()));
+			if(!userT.getPassword().equals(user.getPassword())){
+				userT.setPassword(DigestMD5.getDigestPassWord(user.getPassword()));
+			}
 			userT.setSex(user.getSex());
 			userT.setTel(user.getTel());
 			// userT.setUserstatus(user.getUserstatus());
