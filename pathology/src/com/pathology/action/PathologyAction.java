@@ -14,6 +14,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -464,6 +466,7 @@ public class PathologyAction extends BaseAction {
       if (pathology.getRetreatReason() != null) {
         pathTodo.setRetreatReason(pathology.getRetreatReason());
       }
+      pathTodo.setLastUpdTime(new Timestamp(new Date().getTime()));//更新退回时间
       pathologyService.updatePathology(pathTodo);
     } catch (Exception e) {
       return Constant.ERR;
