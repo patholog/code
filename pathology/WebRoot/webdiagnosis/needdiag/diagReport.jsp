@@ -324,7 +324,7 @@
                     <s:iterator value="pathology.Images" id="image" status="11">
                     <li>
                       <a style="cursor:pointer" href="test?caseId=<s:property value='#image.idImage'/>" target="_blank">
-                        <img src="PathologyAction!showDiagImage?imageId=<s:property value='#image.idImage'/>&filePath=<s:property value='#image.pathImage'/>&name=<s:property value='#image.fileName'/>" alt="">
+                        <img src="PathologyAction!showDiagImage?imageId=<s:property value='#image.idImage'/>&filePath=<s:property value='#image.path'/>&name=<s:property value='#image.fileName'/>" alt="">
                         <div class="inbox_ul_msg">
                           <div class="mlrAuto inbox_span font14">切片：<span><s:property value="#image.fileName"/></span>
                           </div>

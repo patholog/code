@@ -35,7 +35,7 @@ public class ImageServiceImpl implements IImageService {
     Image image = new Image();
     image.setCaseId(caseId);
     image.setPathImage(filePath);
-    image.setPath(filePath.substring(0, filePath.lastIndexOf("\\")));
+    image.setPath(filePath.substring(0, filePath.lastIndexOf(caseId) - 1));
     image.setFileName(filePath.substring(filePath.lastIndexOf("\\") + 1));
     image.setCrtTime(new Timestamp(new Date().getTime()));
     try {

@@ -354,9 +354,8 @@ public class PathologyAction extends BaseAction {
     int level = Integer.valueOf(position[0]);
     try {
       Image image = imageService.select(Integer.valueOf(imageId));
-      File file = new File(Property.getProperty("slideFilePath")
-          + image.getPath().substring(0, image.getPath().lastIndexOf("\\")) + "\\" + imageId + "\\" + level
-          + "\\" + position[1]);
+      File file = new File(Property.getProperty("slideFilePath") + image.getPath() + "\\" + imageId + "\\"
+          + level + "\\" + position[1]);
 
       if (!file.exists()) return;
       FileInputStream fis;
@@ -446,8 +445,7 @@ public class PathologyAction extends BaseAction {
     FileInputStream ips;
     try {
       // 获取图片存放路径
-      String imgPath = Property.getProperty("slideFilePath") + filePath.substring(0, filePath.lastIndexOf("\\"))
-          + "\\" + imageId + "\\thumb_" + fileName;
+      String imgPath = Property.getProperty("slideFilePath") + filePath + "\\" + imageId + "\\thumb_" + fileName;
       ips = new FileInputStream(new File(imgPath));
       response.setContentType("multipart/form-data");
       out = response.getOutputStream();
