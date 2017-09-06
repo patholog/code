@@ -70,7 +70,7 @@ public class CollectionServiceImpl implements ICollectionService {
 		String title = "";
 		int status = 1;
 
-		String whereStr="";
+		String whereStr=" where 1=1 ";
 	    String colpat=request.getParameter("colpat");
 	    String colhospital=request.getParameter("colhospital");
 	    String colfromdate=request.getParameter("colfromdate");
