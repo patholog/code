@@ -72,6 +72,11 @@ body.login_page {background: #f1f5f7;}
 .menu_left .icon_index_9 i{background-position:-30px -150px;}
 .menu_left .icon_index_10 i{background-position:-60px -150px;}
 .menu_left .active a div,.menu_left li a:hover div{color: #ffffff; background-color:#5f98f6;}
+
+#li_selected {color: #ffffff; background-color:#5f98f6;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
 .menu_left .active .icon_index_0 i,.menu_left a:hover .icon_index_0 i{background-position:0 0;}
 .menu_left .active .icon_index_1 i,.menu_left a:hover .icon_index_1 i{background-position:-30px 0;}
 .menu_left .active .icon_index_2 i,.menu_left a:hover .icon_index_2 i{background-position:-60px 0;}
@@ -278,6 +283,7 @@ td.operate a {color: #5090f6;}
 .select_box select{color: #a5a5a5;}
 
 /*分页样式*/
+/*.page_num{background: #ececec;color: #666666;height:30px;}*/
 .page_num{background: #ececec;color: #666666;}
 .page_num .input1{border: 1px solid #0084D0;background-color: #ffffff;}
 .page_num a{color: #666666;}
@@ -286,7 +292,8 @@ td.operate a {color: #5090f6;}
 .page_num .next{color:#666666;}
 #pagerSection  table tbody  tr td{color:#666666;}
 #pagerAppendix table tbody  tr td{color:#666666;}
-.page_num  table tbody  tr td{color: #666666;}
+/*.page_num  table tbody  tr td{color: #666666;}*/
+.page_num  table tbody  tr td{color: #666666;font-size:15px;}
 
 /*新首页头部*/
 .index_header_left a{color:#00c59e;}
