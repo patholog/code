@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               %>
   <script type="text/javascript">
 	    	var url = '<%=basePath%>';
-	    	  alert('session 过期请登陆');
+	    	  alert('登录信息已过期，请重新登陆');
 	    	  window.parent.location=url+"login.jsp";
 		      </script>
       <%
@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  </body>
    <script type="text/javascript">
 		function logout(){
-		if(confirm("确定退出退出？")){
+		if(confirm("确定退出？")){
 		document.getElementById("logoutFrom").submit();
 		     var url = '<%=basePath%>';
 			return true;
