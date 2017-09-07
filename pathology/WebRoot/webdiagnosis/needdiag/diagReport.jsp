@@ -431,7 +431,7 @@
        	  <input type="hidden" id="retreatCaseId" name="pathology.caseId"/>
           <textarea id="reason" name="pathology.retreatReason" rows="3"  style="width: 100%;margin-top: 5px;"></textarea>
         </div>
-        <input id="submitbtn" type="submit" class="ui-button" value="确定" style="margin-left:302px; margin-top:15px"/>
+        <input id="submitbtn" type="submit" class="ui-button" value="确定" style="margin-left:330px; margin-top:15px"/>
       </form>
     </div>
 </div>
@@ -558,10 +558,10 @@
     $('#retreatCaseId').val(caseId);
      $('#retreatCaseId').attr("hidden", false);
     $("#retreatModal").dialog({
-      title: '退回',
+      title: '退回原因',
       modal: true,
-      width: '400',
-      height: '200'
+      width: '450',
+      height: '250'
     });
   }
 

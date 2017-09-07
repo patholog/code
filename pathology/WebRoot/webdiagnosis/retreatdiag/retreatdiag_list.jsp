@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="${path }/css/theme.css"/>
 <link rel="stylesheet" type="text/css" href="${path }/css/WdatePicker.css"/>
 <link rel="stylesheet" type="text/css" href="${path }/css/weebox.css"/>
-<script type="text/javascript" src="${path }/js/treeView.js"></script>
+<script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="${path }/js/common-cn.js"></script>
 <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
 <script type="text/javascript">
@@ -85,7 +85,7 @@
 						         <td><s:property value="#pathology.username"/></td>
 						         <td><s:property value="#pathology.hospitalname"/></td>
 						         <td><s:property value="#pathology.retreatReason"/></td>
-						         <td><s:property value="#pathology.createTime"/></td>
+						         <td><s:property value="#pathology.lastUpdTime"/></td>
 						         <td align="center"><a href="PathologyAction!getPathologyDto?diagStatus=3&id=<s:property value="#pathology.caseId"/>" target="_blank">查看</a></td>
 						        </tr>
 						 </s:iterator>

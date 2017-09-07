@@ -23,7 +23,6 @@
   <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui.min.js"></script>
   <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui-timepicker-addon.min.js"></script>
   <script type="text/javascript" src="${path }/assets/jqueryui/jquery-ui-timepicker-zh-CN.js"></script>
-  <script type="text/javascript" src="${path }/js/treeView.js"></script>
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
   <script type="text/javascript">

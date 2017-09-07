@@ -18,7 +18,6 @@
   <link rel="stylesheet" type="text/css" href="${path }/css/weebox.css"/>
   <link rel="stylesheet" type="text/css" href="${path }/assets/jqueryui/jquery-ui.min.css"/>
   <link rel="stylesheet" type="text/css" href="${path }/assets/jqueryui/jquery-ui.theme.min.css"/>
-  <script type="text/javascript" src="${path }/js/treeView.js"></script>
   <script type="text/javascript" src="${path }/js/common-cn.js"></script>
   <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
   <script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
