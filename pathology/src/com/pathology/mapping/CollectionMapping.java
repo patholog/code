@@ -26,8 +26,12 @@ public class CollectionMapping  implements RowMapper {
 		    bean.setHospitalname(rs.getString("hospitalname"));
 			bean.setPathologyNo(rs.getString("pathologyno"));
 			bean.setPatientname(rs.getString("patientname"));
-			bean.setCreateTime(myFmt1.format(rs.getTimestamp("crt_Time")));
-			bean.setDiagtime(myFmt1.format(rs.getTimestamp("diag_Time")));
+			if(rs.getTimestamp("crt_Time")!=null){
+				bean.setCreateTime(myFmt1.format(rs.getTimestamp("crt_Time")));
+			}
+			if(rs.getTimestamp("diag_Time")!=null){
+				bean.setDiagtime(myFmt1.format(rs.getTimestamp("diag_Time")));
+			}
 			bean.setCaseId(rs.getString("case_id"));
 			/*bean.setId(rs.getInt("username"));
 			bean.setCure(rs.getString("content"));

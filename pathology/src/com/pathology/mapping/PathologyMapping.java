@@ -21,7 +21,9 @@ public class PathologyMapping implements RowMapper {
       bean.setPatientname(rs.getString("patientname"));
       bean.setHospitalCode(rs.getString("hospitalcode"));
       bean.setHospitalname(rs.getString("hospitalname"));
-      bean.setCreateTime(myFmt1.format(rs.getTimestamp("crt_Time")));
+      if(rs.getTimestamp("crt_Time")!=null){
+    	  bean.setCreateTime(myFmt1.format(rs.getTimestamp("crt_Time"))); 
+      }
       bean.setPatientBirthday(rs.getDate("patientBirthday"));
       bean.setPatientSex(rs.getString("patientSex"));
       bean.setPatientAge(rs.getString("patientAge"));
@@ -30,7 +32,9 @@ public class PathologyMapping implements RowMapper {
       bean.setIdCard(rs.getString("idCard"));
       bean.setCaseId(rs.getString("caseId"));
       bean.setMobile(rs.getString("mobile"));
-      bean.setDiagTime(myFmt1.format(rs.getTimestamp("diag_time")));
+      if(rs.getTimestamp("diag_time")!=null){
+    	  bean.setDiagTime(myFmt1.format(rs.getTimestamp("diag_time")));
+      }
       bean.setHistorySummary(rs.getString("historysummary"));
       bean.setClinicDiagnose(rs.getString("clinicdiagnose"));
       bean.setInspectionDate(rs.getDate("inspectionDate"));
@@ -47,7 +51,10 @@ public class PathologyMapping implements RowMapper {
       bean.setSpecimenType(rs.getString("specimentype"));
       bean.setSpecimenTypeName(rs.getString("specimenTypeName"));
       bean.setDoctorId(rs.getString("id_doctor"));
-      //bean.setLastUpdTime(myFmt1.format(rs.getTimestamp("LAST_UPD_TIME")));
+      if(rs.getTimestamp("last_upd_time")!=null){
+    	  bean.setLastUpdTime(myFmt1.format(rs.getTimestamp("last_upd_time"))); 
+      }
+      
       /*bean.setId(rs.getInt("username"));
       bean.setCure(rs.getString("content"));
 			bean.setCreate_time(rs.getString("create_time"));
