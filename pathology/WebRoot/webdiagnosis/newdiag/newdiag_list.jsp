@@ -51,8 +51,8 @@
 	  <form action="PathologyAction!getNewPathologyList" id="newSearch" method="post">
 			<ul>
 				<li class="title_li"><div class="title" id="title" style="display: none;">待诊断</div></li>        			
-				<li>申请时间：从<input name="newfromdate" type="date" id="newfromdate" class="time_s" style="width:140px;" value="${requestScope.needhospital}">到
-							<input name="newtodate" type="date" id="newtodate" class="time_s" style="width:140px;" value="${requestScope.needhospital}"></li>
+				<li>申请时间：从<input name="newfromdate" type="date" id="newfromdate" class="time_s" style="width:140px;" value="${requestScope.newfromdate}">到
+							<input name="newtodate" type="date" id="newtodate" class="time_s" style="width:140px;" value="${requestScope.newtodate}"></li>
 				<li>病人姓名：
 	                <input name="newpat" type="text" id="newpat" class="keyword" value="${requestScope.newpat}">
 				</li>

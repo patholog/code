@@ -84,11 +84,12 @@ public class CollectionServiceImpl implements ICollectionService {
 	  	request.setAttribute("colhospital",colhospital);
 	    }
 	    if(StringUtil.isNotBlank(colfromdate)&&StringUtil.isNotBlank(coltodate)){
+		  	request.setAttribute("colfromdate",colfromdate);
+		  	request.setAttribute("coltodate",coltodate);
 	    	colfromdate=colfromdate+" 00:00:01";
 	    	coltodate=coltodate+" 23:59:59";
-	  	  whereStr+=" and b.crt_Time between'"+colfromdate+"' and '"+coltodate+"'";
-	  	request.setAttribute("colfromdate",colfromdate);
-	  	request.setAttribute("coltodate",coltodate);
+	    	whereStr+=" and b.crt_Time between'"+colfromdate+"' and '"+coltodate+"'";
+
 	    }
 	    
 		
