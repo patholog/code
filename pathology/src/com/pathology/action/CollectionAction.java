@@ -34,9 +34,9 @@ public class CollectionAction extends BaseAction {
 
       if (!SessionAgentManager.islogin())
         return Constant.ERR;
+      String userId = SessionAgentManager.getSessionAgentBean().getIdUsers();
       HttpServletRequest request = ServletActionContext.getRequest();
-
-      collections = collectionService.getListCollection(request, "");
+      collections = collectionService.getListCollection(request, userId);
 
       return "collections";
     } catch (Exception e) {

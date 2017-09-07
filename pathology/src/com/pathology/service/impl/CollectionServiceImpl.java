@@ -70,7 +70,7 @@ public class CollectionServiceImpl implements ICollectionService {
 		String title = "";
 		int status = 1;
 
-		String whereStr=" where 1=1 ";
+		String whereStr="";
 	    String colpat=request.getParameter("colpat");
 	    String colhospital=request.getParameter("colhospital");
 	    String colfromdate=request.getParameter("colfromdate");
@@ -107,7 +107,7 @@ public class CollectionServiceImpl implements ICollectionService {
           + " from collection a "
           + " inner join pathology b on a.case_id = b.id_case"
           + " left join users c on a.collectioner_Id = c.id_users"
-          + " left join hospital d on b.hospitalcode = d.id_hospital"+whereStr
+          + " left join hospital d on b.hospitalcode = d.id_hospital where a.collectioner_Id='"+name+"' "+whereStr
           + page.getPageLimit();
 			request.setAttribute("page", page.getPageStr());
       return jdbcTemplate.query(sql, new CollectionMapping());
