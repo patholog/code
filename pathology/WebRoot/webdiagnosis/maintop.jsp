@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div class="user_msg right">
 			<div class="msg_box right">
-			<span class="t_left"><a onclick="logout();" href="javascript:void(0)"><font color="#FFFFF4">退出</font></a></span>
+			<span class="t_left"><a  id="loginout" href="javascript:void(0)"><font color="#FFFFF4">退出</font></a></span>
 				<div class="user_box right">
 					<span>
                         <span id="Head_lblUserName"><%= username%></span>
@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="user_inbox">
 							<ul>
 								<li class="noborder">
-									<a onclick="logout();" href="javascript:void(0)">退出登录</a>
+									<a  id="loginout" href="javascript:void(0)">退出登录</a>
 								</li>
 							</ul>
 						</div>
@@ -65,31 +65,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="clear"></div>
 	</div>
 
-
-
-
-
-
-
-
 	
  <body>
   <form action="loginout" method ="post" id ="logoutFrom">
   </form>
  </body>
-   <script type="text/javascript">
-		function logout(){
-		if(confirm("确定退出？")){
-		document.getElementById("logoutFrom").submit();
-		     var url = '<%=basePath%>';
-			return true;
-		}else{
-			return false;
+ <script type="text/javascript">
+	$(document).ready(function(){
+	  document.getElementById("loginout").onclick=function(){
+	  if(confirm("确定退出？")){
+					//document.getElementById("lgf").submit();
+				     var url = '<%=basePath%>';
+				window.location.href = url + 'loginout';
+				return true;
+			} else {
+				return false;
+			}
 		}
-		    
-		    
-		      }
-	</script>
+
+	});
+</script>
 
 <div id="tips">
   <label id="tipInfo"></label>
