@@ -52,8 +52,8 @@ public class UsersAction extends BaseAction {
 	private Map<String, String> result;
 
 	/**
-	 * 用户登录
-	 * 暂时不用
+	 * 用户登录 暂时不用
+	 * 
 	 * @return
 	 */
 	public String login() {
@@ -84,19 +84,26 @@ public class UsersAction extends BaseAction {
 
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String manageusername = request.getParameter("manageusername");
+			String manageemail = request.getParameter("manageemail");
 			String hql = "";
-			if (user != null) {
-				if (user.getUsername() != null
-						&& !("".equals(user.getUsername())))
-					hql += " and username like '%" + user.getUsername() + "%'";
-				if (user.getEmail() != null && !("".equals(user.getEmail())))
-					hql += " and email like '%" + user.getEmail()+ "%'";
-				// String hosname=user.getBelonghospital();
-				// String qryhos="'"+hosname.replace(",", "','")+"'";
-				// if (user.getBelonghospital() != null &&
-				// !("".equals(user.getBelonghospital())))
-				// hql += " and belonghospital in (" + qryhos+")";
+
+			if (manageusername != null) {
+				hql += " and username like '%" + manageusername + "%'";
+				request.setAttribute("manageusername", manageusername);
 			}
+
+			if (manageemail != null) {
+				hql += " and email like '%" + manageemail + "%'";
+				request.setAttribute("manageemail", manageemail);
+			}
+
+			// String hosname=user.getBelonghospital();
+			// String qryhos="'"+hosname.replace(",", "','")+"'";
+			// if (user.getBelonghospital() != null &&
+			// !("".equals(user.getBelonghospital())))
+			// hql += " and belonghospital in (" + qryhos+")";
 
 			List<Users> list = index != 0 ? userservice.getUsersByPage(index,
 					Users.class, hql) : userservice.getUsersByPage(1,
@@ -202,8 +209,9 @@ public class UsersAction extends BaseAction {
 			Users userT = userservice.getUser(Users.class, user.getIdUsers());
 			userT.setRealname(user.getRealname());
 			userT.setBelonghospital(user.getBelonghospital());
-			if(!userT.getPassword().equals(user.getPassword())){
-				userT.setPassword(DigestMD5.getDigestPassWord(user.getPassword()));
+			if (!userT.getPassword().equals(user.getPassword())) {
+				userT.setPassword(DigestMD5.getDigestPassWord(user
+						.getPassword()));
 			}
 			userT.setSex(user.getSex());
 			userT.setTel(user.getTel());
@@ -417,7 +425,8 @@ public class UsersAction extends BaseAction {
 		}
 		return val;
 	}
-//获取配置文件内容 此处是 取邮箱的想过配置信息
+
+	// 获取配置文件内容 此处是 取邮箱的想过配置信息
 	private Properties getProperties() {
 		InputStream in = UsersAction.class.getClassLoader()
 				.getResourceAsStream("properties.properties");

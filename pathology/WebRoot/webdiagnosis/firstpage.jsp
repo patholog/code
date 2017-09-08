@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="${path }/css/comc_head_style.css"/>
 <link rel="stylesheet" type="text/css" href="${path }/css/public_flat.css"/>
 <link rel="stylesheet" type="text/css" href="${path }/css/theme.css"/>
-<script type="text/javascript" src="${path }/js/treeView.js"></script>
+<script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="${path }/js/common-cn.js"></script>
 <script language="javascript">
         //防止页面后退

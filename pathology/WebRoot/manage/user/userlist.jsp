@@ -11,27 +11,29 @@
 <title>用户列表</title>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" type="text/css" href="${path}/css/style.css" />
+<link rel="stylesheet" type="text/css" href="${path }/css/jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css" href="${path }/css/jquery.multiselect.filter.css" />
+<link rel="stylesheet" type="text/css" href="${path }/js/multiselect/jquery-ui.css" />
+<script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="${path}/js/treeView.js"></script>
 <script type="text/javascript" src="${path}/js/common-cn.js"></script>
 <script type="text/javascript" src="${path}/js/forbid-refresh.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="${path }/css/jquery.multiselect.css" />
-<link rel="stylesheet" type="text/css"
-	href="${path }/css/jquery.multiselect.filter.css" />
-<link rel="stylesheet" type="text/css"
-	href="${path }/js/multiselect/jquery-ui.css" />
 <script type="text/javascript" src="${path }/js/multiselect/jquery.js"></script>
-<script type="text/javascript"
-	src="${path }/js/multiselect/jquery-ui.js"></script>
-<script type="text/javascript"
-	src="${path }/js/multiselect/jquery.multiselect.min.js"></script>
-<script type="text/javascript"
-	src="${path }/js/multiselect/jquery.multiselect.filter.min.js"></script>
+<script type="text/javascript" src="${path }/js/multiselect/jquery-ui.js"></script>
+<script type="text/javascript" src="${path }/js/multiselect/jquery.multiselect.min.js"></script>
+<script type="text/javascript" src="${path }/js/multiselect/jquery.multiselect.filter.min.js"></script>
 <script type="text/javascript">
 	function confirmDelete(id) {
 		if (confirm('确定删除吗？'))
 			window.location.href = 'UserAction!deleteUser?user.idUsers=' + id;
 	}
+</script>
+<script type="text/javascript">  
+	function resetSearch()  
+	{
+		$("#manageusername").val("");
+		$("#manageemail").val("");
+	}  
 </script>
 </head>
 <body>
@@ -46,15 +48,17 @@
 					<tr>
 						<td><h1>用户管理</h1></td>
 					</tr>
-				</table> <s:form action="UserAction!userList" theme="simple"
+				</table> <s:form action="UserAction!userList" theme="simple" id="searchform"
 					>
 					<table cellspacing="0" cellpadding="0" width="100%" border="0"
 						class="toolstable">
 						<tr>
-							<td width="86%" style="text-align:left;"><label>用户名：</label>
-								<input type="text" name="user.username" id="hostpital_name"
-								value="" style="width:120px;" /> <label>邮箱：</label> <input type="text"
-								name="user.email" id="hostpital_user" value=""
+						<td width="86%" style="text-align:left;">
+								<label>用户名：</label>
+								<input type="text" name="manageusername" id="manageusername"
+								value="${requestScope.manageusername}" style="width:120px;" /> 
+								<label>邮箱：</label> <input type="text"
+								name="manageemail" id="manageemail" value="${requestScope.manageemail}"
 								style="width:120px;" /> <!--<label>医院：</label> <input type="text" name="user.belonghospital"
 							id="hospitalIdIpt" type="hidden"
 							value=""  /> <select id='select' multiple="multiple" style="width:300px;">
@@ -118,10 +122,16 @@
 									return true;
 								}
 							}
-						</script>  --> <input name="searchButton"
+						</script>  --> 
+								<input name="searchButton"
 								id="searchButton" onclick="" type="submit"
 								style="width:80px;background:url(css/img-blue/search.gif) 8px top no-repeat;"
-								value="  搜索" /></td>
+								value="  搜索" />
+								<input name="resetButton"
+								id="resetButton" onclick="resetSearch()" type="button"
+								style="width:80px;background: 8px top no-repeat;"
+								value="  重置查询" />
+						 </td>
 						</tr>
 					</table>
 				</s:form>

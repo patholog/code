@@ -30,6 +30,7 @@ public class FunctionAction extends BaseAction {
 
 	/**
 	 * 新增功能
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
@@ -50,6 +51,7 @@ public class FunctionAction extends BaseAction {
 
 	/**
 	 * 获取所有功能
+	 * 
 	 * @return
 	 */
 	public String functionList() {
@@ -57,12 +59,16 @@ public class FunctionAction extends BaseAction {
 
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
-			String hql = "";
-			if (function != null) {
-				String functionname = function.getName();
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String managefunctionname = request
+					.getParameter("managefunctionname");
 
-				if (functionname != null && !("".equals(functionname)))
-					hql += " and name like '%" + functionname + "%'  order by sort_no ";
+			String hql = "";
+
+			if (managefunctionname != null) {
+				hql += " and name like '%" + managefunctionname
+						+ "%'  order by sort_no ";
+				request.setAttribute("managefunctionname", managefunctionname);
 			}
 
 			List<Function> list = index != 0 ? functionservice.getByPage(index,
@@ -73,8 +79,9 @@ public class FunctionAction extends BaseAction {
 					.getSession();
 			session.setAttribute("functionlist", list);
 			session.setAttribute("thisindex", index == 0 ? 1 : index);
-			int size=functionservice.getAllFunction(Function.class, hql).size();
-			session.setAttribute("count",size);
+			int size = functionservice.getAllFunction(Function.class, hql)
+					.size();
+			session.setAttribute("count", size);
 			int pageCount = 0;
 			if (size % 10 > 0) {
 				pageCount = size / 10 + 1;
@@ -92,6 +99,7 @@ public class FunctionAction extends BaseAction {
 
 	/**
 	 * 编辑功能
+	 * 
 	 * @return
 	 * @throws IOException
 	 */
@@ -114,6 +122,7 @@ public class FunctionAction extends BaseAction {
 
 	/**
 	 * 编辑保存
+	 * 
 	 * @return
 	 * @throws IOException
 	 */
@@ -122,7 +131,8 @@ public class FunctionAction extends BaseAction {
 
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
-			Function functionT =functionservice.getFunction(Function.class, function.getIdFunction());
+			Function functionT = functionservice.getFunction(Function.class,
+					function.getIdFunction());
 			functionT.setName(function.getName());
 			functionT.setUrl(function.getUrl());
 			functionT.setDescription(function.getDescription());
@@ -136,6 +146,7 @@ public class FunctionAction extends BaseAction {
 
 	/**
 	 * 删除功能
+	 * 
 	 * @return
 	 */
 	public String deleteFunction() {
@@ -156,6 +167,7 @@ public class FunctionAction extends BaseAction {
 
 	/**
 	 * 获取功能
+	 * 
 	 * @return
 	 */
 	public String allFunction() {

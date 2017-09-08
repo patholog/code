@@ -9,10 +9,7 @@
 <title>医院列表</title>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" type="text/css" href="${path }/css/style.css" />
-<script type="text/javascript"
-	src="${path }/CKEditor/ckeditor/ckeditor.js"></script>
-<script type="text/javascript"
-	src="${path }/CKFinder/ckfinder/ckfinder.js"></script>
+<script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="${path }/js/treeView.js"></script>
 <script type="text/javascript" src="${path }/js/common-cn.js"></script>
 <script type="text/javascript" src="${path }/js/forbid-refresh.js"></script>
@@ -21,6 +18,13 @@
 		if (confirm('确定删除吗？'))
 			window.location.href = 'HospitalAction!deleteHospital?hospital.idHospital=' + id;
 	}
+</script>
+<script type="text/javascript">  
+	function resetSearch()  
+	{
+		$("#managehospitalname").val("");
+		$("#managehospitalcode").val("");
+	}  
 </script>
 </head>
 
@@ -43,10 +47,14 @@
 						class="toolstable">
 						<tr>
 							<td width="86%" style="text-align:left;"><label>医院名称：</label>
-								<input type="text" name="hospital.name" id="hostpital_name" value="" style="width:120px;" /> <label>编码：</label> 
-								<input type="text" name="hospital.hospitalcode" id="hostpital_code" value="" style="width:120px;" /> 
+								<input type="text" name="managehospitalname" id="managehospitalname" value="${requestScope.managehospitalname}" style="width:120px;" /> <label>编码：</label> 
+								<input type="text" name="managehospitalcode" id="managehospitalcode" value="${requestScope.managehospitalcode}" style="width:120px;" /> 
 								<input name="searchButton" id="searchButton" onclick="" type="submit" style="width:80px;background:url(css/img-blue/search.gif) 8px top no-repeat;"
 									value="  搜索" />
+								<input name="resetButton"
+								id="resetButton" onclick="resetSearch()" type="button"
+								style="width:80px;background: 8px top no-repeat;"
+								value="  重置查询" />
 							</td>
 				
 						</tr>

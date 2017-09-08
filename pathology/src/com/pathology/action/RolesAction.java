@@ -28,7 +28,6 @@ public class RolesAction extends BaseAction {
 	private int index;
 	private String function;
 
-	
 	public String getFunction() {
 		return function;
 	}
@@ -39,6 +38,7 @@ public class RolesAction extends BaseAction {
 
 	/**
 	 * 新增角色
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
@@ -47,9 +47,9 @@ public class RolesAction extends BaseAction {
 
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
-			
+
 			roles.setIdRoles(RandomNumbers.getRandomId());
-			rolesservice.addRoles(roles,function);
+			rolesservice.addRoles(roles, function);
 
 			return "updatesuccess";
 		} catch (Exception e) {
@@ -60,6 +60,7 @@ public class RolesAction extends BaseAction {
 
 	/**
 	 * 获取所有角色
+	 * 
 	 * @return
 	 */
 	public String rolesList() {
@@ -67,15 +68,15 @@ public class RolesAction extends BaseAction {
 
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String managerolesname = request.getParameter("managerolesname");
 			String hql = "";
-			if (roles != null) {
-				String rolesname = roles.getName();
 
-				if (rolesname != null && !("".equals(rolesname)))
-					hql += " and name like '%" + rolesname + "%'";
-
+			if (managerolesname != null){
+				hql += " and name like '%" + managerolesname + "%'";
+				request.setAttribute("managerolesname",managerolesname);
 			}
-
+			
 			List<Roles> list = index != 0 ? rolesservice.getByPage(index,
 					Roles.class, hql) : rolesservice.getByPage(1, Roles.class,
 					hql);
@@ -84,9 +85,9 @@ public class RolesAction extends BaseAction {
 					.getSession();
 			session.setAttribute("roleslist", list);
 			session.setAttribute("thisindex", index == 0 ? 1 : index);
-			int size= rolesservice.getAllRoles(Roles.class, hql).size();
-			session.setAttribute("count",size);
-			
+			int size = rolesservice.getAllRoles(Roles.class, hql).size();
+			session.setAttribute("count", size);
+
 			int pageCount = 0;
 			if (size % 10 > 0) {
 				pageCount = size / 10 + 1;
@@ -104,6 +105,7 @@ public class RolesAction extends BaseAction {
 
 	/**
 	 * 编辑角色
+	 * 
 	 * @return
 	 * @throws IOException
 	 */
@@ -112,11 +114,10 @@ public class RolesAction extends BaseAction {
 
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
-			Boolean result=rolesservice.findRoles(roles.getIdRoles());
-			if(result){
-			return "edit";
-			}
-			else{
+			Boolean result = rolesservice.findRoles(roles.getIdRoles());
+			if (result) {
+				return "edit";
+			} else {
 				return Constant.ERR;
 			}
 		} catch (Exception e) {
@@ -127,6 +128,7 @@ public class RolesAction extends BaseAction {
 
 	/**
 	 * 编辑保存
+	 * 
 	 * @return
 	 * @throws IOException
 	 */
@@ -135,11 +137,12 @@ public class RolesAction extends BaseAction {
 
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
-			Roles rolesT =rolesservice.getRoles(Roles.class, roles.getIdRoles());
+			Roles rolesT = rolesservice.getRoles(Roles.class,
+					roles.getIdRoles());
 			rolesT.setName(roles.getName());
 			rolesT.setDescription(roles.getDescription());
 			rolesT.setMemo(roles.getMemo());
-			rolesservice.updateRoles(rolesT,function);
+			rolesservice.updateRoles(rolesT, function);
 			return "updatesuccess";
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -149,6 +152,7 @@ public class RolesAction extends BaseAction {
 
 	/**
 	 * 删除角色
+	 * 
 	 * @return
 	 */
 	public String deleteRoles() {
@@ -168,6 +172,7 @@ public class RolesAction extends BaseAction {
 
 	/**
 	 * 所有角色
+	 * 
 	 * @return
 	 */
 	public String allRoles() {

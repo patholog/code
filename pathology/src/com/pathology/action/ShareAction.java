@@ -36,8 +36,9 @@ public class ShareAction extends BaseAction {
       if (!SessionAgentManager.islogin()) {
         return Constant.ERR;
       }
+      String userId = SessionAgentManager.getSessionAgentBean().getIdUsers();
       HttpServletRequest request = ServletActionContext.getRequest();
-      shares = shareService.getListShare(request, "");
+      shares = shareService.getListShare(request, userId);
       return "shares";
     } catch (Exception e) {
       logger.error(e.getMessage());

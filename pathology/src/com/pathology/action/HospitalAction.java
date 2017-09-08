@@ -30,6 +30,7 @@ public class HospitalAction extends BaseAction {
 
 	/**
 	 * 新增医院
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
@@ -51,6 +52,7 @@ public class HospitalAction extends BaseAction {
 
 	/**
 	 * 获取所有医院
+	 * 
 	 * @return
 	 */
 	public String hospitalList() {
@@ -58,17 +60,18 @@ public class HospitalAction extends BaseAction {
 
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String managehospitalname=request.getParameter("managehospitalname");
+			String managehospitalcode=request.getParameter("managehospitalcode");
 			String hql = "";
-			if (hospital != null) {
-				String hospitalname = hospital.getName();
+			if (managehospitalname != null) {
+				hql += " and name like '%" + managehospitalname + "%'";
+				request.setAttribute("managehospitalname",managehospitalname);
+			}
 
-
-				if (hospitalname != null && !("".equals(hospitalname)))
-					hql += " and name like '%" + hospitalname + "%'";
-				if (hospital.getHospitalcode() != null
-						&& !("".equals(hospital.getCode())))
-					hql += " and hospitalcode like '%" + hospital.getHospitalcode() + "%'";
-
+			if (managehospitalcode != null) {
+				hql += " and hospitalcode like '%" + managehospitalcode + "%'";
+				request.setAttribute("managehospitalcode",managehospitalcode);
 			}
 
 			List<Hospital> list = index != 0 ? hospitalservice.getByPage(index,
@@ -79,8 +82,9 @@ public class HospitalAction extends BaseAction {
 					.getSession();
 			session.setAttribute("hoslist", list);
 			session.setAttribute("thisindex", index == 0 ? 1 : index);
-			int size=hospitalservice.getAllHospital(Hospital.class, hql).size();
-			session.setAttribute("count",size);
+			int size = hospitalservice.getAllHospital(Hospital.class, hql)
+					.size();
+			session.setAttribute("count", size);
 			int pageCount = 0;
 			if (size % 10 > 0) {
 				pageCount = size / 10 + 1;
@@ -98,6 +102,7 @@ public class HospitalAction extends BaseAction {
 
 	/**
 	 * 编辑医院
+	 * 
 	 * @return
 	 * @throws IOException
 	 */
@@ -121,6 +126,7 @@ public class HospitalAction extends BaseAction {
 
 	/**
 	 * 编辑保存
+	 * 
 	 * @return
 	 * @throws IOException
 	 */
@@ -129,7 +135,8 @@ public class HospitalAction extends BaseAction {
 
 			if (!SessionAgentManager.islogin())
 				return Constant.ERR;
-			Hospital hospitalT =hospitalservice.getHospital(Hospital.class, hospital.getIdHospital());
+			Hospital hospitalT = hospitalservice.getHospital(Hospital.class,
+					hospital.getIdHospital());
 			hospitalT.setName(hospital.getName());
 			hospitalT.setHospitalcode(hospital.getHospitalcode());
 			hospitalT.setMemo(hospital.getMemo());
@@ -146,6 +153,7 @@ public class HospitalAction extends BaseAction {
 
 	/**
 	 * 删除医院
+	 * 
 	 * @return
 	 */
 	public String deleteHospital() {
@@ -167,30 +175,30 @@ public class HospitalAction extends BaseAction {
 
 	/**
 	 * 所有医院
+	 * 
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public String allHostpital() throws Exception {
-//		try {
-//
-//			if (!SessionAgentManager.islogin())
-//				return Constant.ERR;
+		// try {
+		//
+		// if (!SessionAgentManager.islogin())
+		// return Constant.ERR;
 
-			List<Hospital> list = hospitalservice.getAllHospital(
-					Hospital.class, "");
-			HttpSession session = ServletActionContext.getRequest()
-					.getSession();
-			session.setAttribute("hoslist", list);
-			return "regist";
-//		} catch (Exception e) {
-//			logger.error(e.getMessage());
-//			return Constant.ERR;
-//		}
+		List<Hospital> list = hospitalservice
+				.getAllHospital(Hospital.class, "");
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		session.setAttribute("hoslist", list);
+		return "regist";
+		// } catch (Exception e) {
+		// logger.error(e.getMessage());
+		// return Constant.ERR;
+		// }
 	}
-	private void clearHospitalSession(){
-		HttpSession session = ServletActionContext.getRequest()
-				.getSession();
-		if(session.getAttribute("allhaospitallist")!=null){
+
+	private void clearHospitalSession() {
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		if (session.getAttribute("allhaospitallist") != null) {
 			session.setAttribute("allhaospitallist", null);
 		}
 	}

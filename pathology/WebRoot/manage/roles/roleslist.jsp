@@ -9,6 +9,7 @@
 <title>角色列表</title>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" type="text/css" href="${path }/css/style.css" />
+<script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript"
 	src="${path }/CKEditor/ckeditor/ckeditor.js"></script>
 <script type="text/javascript"
@@ -21,6 +22,12 @@
 		if (confirm('确定删除吗？'))
 			window.location.href = 'RolesAction!deleteRoles?roles.idRoles=' + id;
 	}
+</script>
+<script type="text/javascript">  
+	function resetSearch()  
+	{
+		$("#managerolesname").val("");
+	}  
 </script>
 </head>
 
@@ -43,9 +50,13 @@
 						class="toolstable">
 						<tr>
 							<td width="86%" style="text-align:left;"><label> 角色名称：</label>
-								<input type="text" name="roles.name" id="hostpital_name" value="" style="width:120px;" /> 
+								<input type="text" name="managerolesname" id="managerolesname" value="${requestScope.managerolesname}" style="width:120px;" /> 
 								<input name="searchButton" id="searchButton" onclick="" type="submit" style="width:80px;background:url(css/img-blue/search.gif) 8px top no-repeat;"
 									value="  搜索" />
+								<input name="resetButton"
+								id="resetButton" onclick="resetSearch()" type="button"
+								style="width:80px;background: 8px top no-repeat;"
+								value="  重置查询" />
 							</td>
 				
 						</tr>
