@@ -58,6 +58,7 @@ public class PathologyAction extends BaseAction {
   private List<Users> usersList;
   private String caseId;
   private List<Image> imageList;
+  private Image image;
 
   /**
    * 保存病理
@@ -614,6 +615,22 @@ public class PathologyAction extends BaseAction {
     return null;
   }
 
+  /**
+   * 查看切图
+   *
+   * @return
+   */
+  public String viewSlide() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    String imageId = request.getParameter("caseId");
+    if (imageId != null && !"".equals(imageId)) {
+      image = imageService.select(Integer.valueOf(imageId));
+    } else {
+      image = new Image();
+    }
+    return "viewSlide";
+  }
+
   public IPathologyService getPathologyService() {
     return pathologyService;
   }
@@ -736,5 +753,13 @@ public class PathologyAction extends BaseAction {
 
   public void setImageList(List<Image> imageList) {
     this.imageList = imageList;
+  }
+
+  public Image getImage() {
+    return image;
+  }
+
+  public void setImage(Image image) {
+    this.image = image;
   }
 }

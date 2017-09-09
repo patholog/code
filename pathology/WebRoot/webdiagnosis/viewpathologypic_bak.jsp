@@ -46,8 +46,8 @@
           Overlap: "1",
           TileSize: "256",
           Size: {
-            Height: "6988",
-            Width: "9798"
+            Height: "${image.height}",
+            Width: "${image.width}"
           }
         }
       },
