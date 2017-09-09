@@ -191,8 +191,9 @@
             </div>
           </div>
           <div class="pagination_btn">
-            <%--<input type="submit" name="btnNext" value="保存" onclick="return CheckSave();" id="btnNext" class="inf_btn right">--%>
-            <a href="PathologyAction!addPathology?caseId=<s:property value="pathology.caseId"/>&amp;diagStatus=<s:property value="pathology.diagStatus"/>" class="inf_btn right">上一步</a>
+            <a href="PathologyAction!getNewPathologyList" class="inf_btn right">返回新建列表</a>
+            <input type="button" name="btnComplete" value="保存" id="btnComplete" class="inf_btn right">
+            <%--<a href="PathologyAction!addPathology?caseId=<s:property value="pathology.caseId"/>&amp;diagStatus=<s:property value="pathology.diagStatus"/>" class="inf_btn right">上一步</a>--%>
             <div class="clear">
             </div>
           </div>
@@ -376,5 +377,8 @@
       }
     });
   }
+  $('#btnComplete').click(function() {
+    showTips("保存成功");
+  })
 </script>
 </html>
