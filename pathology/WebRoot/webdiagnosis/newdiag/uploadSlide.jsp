@@ -178,8 +178,8 @@
           <div class="new_step" style="background-color: white; float: right;border: none;">
             <ul>
               <li>
-                <div class="step">
-                  <span id="btnUploadSec">上传数字切片</span>
+                <div class="step" id="btnUploadSec">
+                  <span>上传数字切片</span>
                 </div>
               </li>
             </ul>
@@ -193,13 +193,13 @@
         <div class="new_step" style="position:relative;background-color: white; float: right;border: none;">
           <ul>
             <li>
-              <div class="step">
-                <span id="btnComplete">保&nbsp;&nbsp;&nbsp;存</span>
+              <div class="step" id="btnComplete">
+                <span>保&nbsp;&nbsp;&nbsp;存</span>
               </div>
             </li>
             <li>
-              <div class="step">
-                <span id="returnNewList">返回新建列表</span>
+              <div class="step" id="returnNewList">
+                <span>返回新建列表</span>
               </div>
             </li>
           </ul>
