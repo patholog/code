@@ -19,11 +19,22 @@ public class ResultServiceImpl implements IResultService {
   }
 
   @Override
+  public void insert(Map<String, String[]> paramMap) {
+    Result result = new Result();
+    result.setIdResult(paramMap.get("caseId")[0]);
+    result.setCaseId(paramMap.get("caseId")[0]);
+    assembleResult(result, paramMap);
+    try {
+      insert(result);
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      throw new RuntimeException("新建结果失败");
+    }
+  }
+
+  @Override
   public void updateResult(Result result) {
     try {
-      String generalSee = result.getGeneralSee();
-      result = selectByCaseId(result.getCaseId());
-      result.setGeneralSee(generalSee);
       resultDao.updateResult(result);
     } catch (Exception e) {
       logger.error(e.getMessage());
@@ -31,18 +42,37 @@ public class ResultServiceImpl implements IResultService {
   }
 
   @Override
-  public void updateResult(Map<String, String[]> paramMap) {
+  public void update(Map<String, String[]> paramMap) {
     try {
       Result result = selectByCaseId(paramMap.get("caseId")[0]);
-      result.setCaseId(paramMap.get("caseId")[0]);
-      result.setGeneralSee(paramMap.get("generalSee")[0]);
-      result.setResult(paramMap.get("immuneResult")[0]);
-      result.setDiagnosed(paramMap.get("firstVisit")[0]);
+      assembleResult(result, paramMap);
       resultDao.updateResult(result);
     } catch (Exception e) {
       logger.error(e.getMessage());
       throw new RuntimeException(e);
     }
+  }
+
+
+  /**
+   * 根据前台数据更新Result数据
+   *
+   * @param result
+   * @param paramMap
+   * @return
+   */
+  private Result assembleResult(Result result, Map<String, String[]> paramMap) {
+    try {
+      // 大体所见等Result数据
+      result.setGeneralSee(paramMap.get("generalSeeHidden")[0]); // 大体所见
+      result.setMicroscopeSee(paramMap.get("microscopeSeeHidden")[0]); // 影像检查
+      result.setDiagnosed(paramMap.get("diagnosed")[0]); // 初诊意见
+      result.setResult(paramMap.get("immuneResult")[0]); // 免疫组化结果
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      throw new RuntimeException("获取结果数据失败！请联系管理员");
+    }
+    return result;
   }
 
   @Override

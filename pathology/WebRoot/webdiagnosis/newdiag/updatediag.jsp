@@ -382,7 +382,7 @@
                   <select name="specimenType" id="specimenType" style="width: 150px;">
                     <option value="">请选择</option>
                     <s:iterator value="specimenList" id="specimen">
-                      <option value='#specimen.idSpecimen'
+                      <option value='${specimen.idSpecimen}'
                               <s:if test="idSpecimen == pathology.specimenType">selected</s:if>>
                           ${specimen.name}
                       </option>
@@ -396,7 +396,7 @@
                   <select id="hospitalCode" name="hospitalCode" style="width: 150px">
                     <option value="">请选择</option>
                     <s:iterator value="hospitalList" id="hospital">
-                      <option value='#hospital.hospitalcode}'
+                      <option value='#hospital.hospitalcode'
                               <s:if test="hospitalcode == pathology.hospitalCode">selected</s:if>>
                           ${hospital.name}
                       </option>

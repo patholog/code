@@ -8,9 +8,11 @@ public interface IResultService {
 
   void insert(Result result);
 
+  void insert(Map<String, String[]> paramMap);
+
   void updateResult(Result result);
 
-  void updateResult(Map<String, String[]> paramMap);
+  void update(Map<String, String[]> paramMap);
 
   Result selectByCaseId(String caseId);
 

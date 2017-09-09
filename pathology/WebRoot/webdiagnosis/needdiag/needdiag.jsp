@@ -349,15 +349,15 @@
               <li>
                 <div>
                   <div class="age"><span class="red_star">*</span>年龄
-                    <input name="patientAge" id="patientAge" class="inf_age" maxlength="3"/>
+                    <input name="patientAge" id="patientAge" class="inf_age" maxlength="3" value="<s:property value="pathology.patientAge"/>"/>
                     <%--<input name="patientAge" id="patientAge" class="inf_age" maxlength="3" onblur="CheckValue('3')"
                            onkeyup="if(this.value.length===1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">--%>
                     <span style="width: 40px;">
                       <select name="ageUnit" id="ageUnit" class="select_box" style="width: 35px;margin: 0;">
-                        <option value="岁">岁</option>
-                        <option value="月">月</option>
-                        <option value="天">天</option>
-                        <option value="小时">小时</option>
+                        <option value="岁" <s:if test='"岁"== pathology.ageUnit'>selected</s:if>>岁</option>
+                        <option value="月" <s:if test='"月" == pathology.ageUnit'>selected</s:if>>月</option>
+                        <option value="天" <s:if test='"天" == pathology.ageUnit'>selected</s:if>>天</option>
+                        <option value="小时" <s:if test='"小时" == pathology.ageUnit'>selected</s:if>>小时</option>
                       </select>
                     </span>
                   </div>
@@ -365,8 +365,8 @@
                     <span class="red_star">*</span>性别
                     <span style="width: 30px;">
                       <select name="patientSex" id="patientSex" class="select_box" style="width: 35px;margin: 0;">
-                        <option value="男">男</option>
-	                      <option value="女">女</option>
+                        <option value="男" <s:if test='"男" == pathology.patientSex'>selected</s:if>>男</option>
+	                      <option value="女" <s:if test='"女" == pathology.patientSex'>selected</s:if>>女</option>
                       </select>
                     </span>
                   </div>
@@ -375,14 +375,15 @@
               <li>
                 <div>
                   <span class="red_star"></span>取材部位
-                  <input name="specimenName" id="specimenName">
+                  <input name="specimenName" id="specimenName" value="<s:property value="pathology.specimenName"/>">
                 </div>
               </li>
               <li>
                 <div>
                   <div class="pos_r">
                     <ins class="half_words"></ins>身份证号
-                    <input name="idCard" id="idCard" class="identity" maxlength="18" onblur="CheckValue('2')">
+                    <input name="idCard" id="idCard" class="identity" maxlength="18" onblur="CheckValue('2')"
+                           value="<s:property value="pathology.idCard"/>">
                     <div class="clear"></div>
                     <img src="../../img/sbm_success.png" class="success" id="imgIdentityS" style="display: none;
 	                                        right: 3px;">
@@ -396,7 +397,8 @@
                   <ins class="half_words"></ins>手<ins class="half_words"></ins>机<ins class="half_words"></ins>号
                   <input name="mobile" id="mobile" maxlength="11"
                           onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
-                          onblur="CheckValue('1')">
+                          onblur="CheckValue('1')"
+                         value="<s:property value="pathology.mobile"/>">
                   <div class="clear"></div>
                   <img src="../../img/sbm_success.png" class="success" id="imgMobileS" style="display: none;
                                         right: 25px;">
@@ -408,13 +410,14 @@
                 <div>
                   <ins class="half_words"></ins>家属电话
                   <input name="txtRelativePhone" type="text" id="txtRelativePhone"
-                             onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                             onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                         value="<s:property value="pathology.mobile"/>">
                 </div>
               </li>
               <li>
                 <div>
                   <span class="red_star">*</span>送检时间
-                  <input id="diagTime" name="diagTime"/>
+                  <input id="diagTime" name="diagTime" value="<s:property value="pathology.diagTime"/>"/>
                 </div>
               </li>
               <li>
@@ -422,9 +425,12 @@
                   <ins class="half_words"></ins>系统分类
                   <select name="specimenType" id="specimenType" class="select_box">
                     <option value="">请选择</option>
-                    <c:forEach items="${specimenList}" var="list" varStatus="status">
-                      <option value='${list.idSpecimen}'>${list.name}</option>
-                    </c:forEach>
+                    <s:iterator value="specimenList" id="specimen">
+                      <option value="${specimen.idSpecimen}"
+                              <s:if test="idSpecimen == pathology.specimenType">selected</s:if>>
+                          ${specimen.name}
+                      </option>
+                    </s:iterator>
                   </select>
                 </div>
               </li>
@@ -433,9 +439,12 @@
                   <span class="red_star">*</span>送检单位
                   <select id="hospitalCode" name="hospitalCode" class="select_box">
                     <option value="">请选择</option>
-                    <c:forEach items="${hospitalList}" var="list" varStatus="status">
-                      <option value='${list.hospitalcode}'>${list.name}</option>
-                    </c:forEach>
+                    <s:iterator value="hospitalList" id="hospital">
+                      <option value="${hospital.hospitalcode}"
+                              <s:if test="hospitalcode == pathology.hospitalCode">selected</s:if>>
+                          ${hospital.name}
+                      </option>
+                    </s:iterator>
                   </select>
                   <input type="hidden" id="hospitalCodeHidden" name="hospitalCodeHidden">
                 </div>
@@ -445,9 +454,11 @@
                   <ins class="half_words"></ins>送检医生
                   <select name="toDoctorId" id="toDoctorId" class="select_box">
                     <option value="">请选择</option>
-                    <c:forEach items="${usersList}" var="list" varStatus="status">
-                      <option value='${list.idUsers}'>${list.username}</option>
-                    </c:forEach>
+                    <s:iterator value="usersList" id="users">
+                      <option value="${users.idUsers}" <s:if test="idUsers == pathology.doctorId">selected</s:if>>
+                          ${users.username}
+                      </option>
+                    </s:iterator>
                   </select>
                 </div>
               </li>
@@ -498,7 +509,7 @@
                 <div class=" clear">
                 </div>
                 <textarea name="clinicDiagnose" id="clinicDiagnose" rows="3" cols="20" class="row2"
-                          onkeyup="CheckWords(this)"></textarea>
+                          onkeyup="CheckWords(this)"><s:property value="pathology.clinicDiagnose"/></textarea>
               </li>
               <li>
                 <div style="float: left"><span class="red_star"></span>初诊意见（请如实填写）：</div>
@@ -508,14 +519,15 @@
                 </div>
                 <div class=" clear">
                 </div>
-                <textarea name="firstVisit" id="firstVisit" rows="2" cols="20" class="row2"
-                          onkeyup="CheckWords(this)"
-                          placeholder="为确保诊断结果的准确，请如实填写初诊意见，冰冻切片请务必填写初诊考虑，或基本病变描写、疑问等。"></textarea>
+                <textarea name="diagnosed" id="diagnosed" rows="2" cols="20" class="row2"
+                          placeholder="为确保诊断结果的准确，请如实填写初诊意见，冰冻切片请务必填写初诊考虑，或基本病变描写、疑问等。"
+                          onkeyup="CheckWords(this)"><s:property value="pathology.diagnosed"/></textarea>
               </li>
               <li style="">
                 <div style="float: left"><span class="red_star"></span>大体所见：</div>
                 <div class="ckTxt">
-                  <textarea id="generalSee" name="generalSee" cols="10" rows="2" class="ckeditor"></textarea>
+                  <textarea id="generalSee" name="generalSee" cols="10" rows="2"
+                            class="ckeditor"><s:property value="pathology.generalSee"/></textarea>
                   <input type="hidden" id="generalSeeHidden" name="generalSeeHidden"/>
                 </div>
               </li>
@@ -527,7 +539,8 @@
                   <a class="aColor">已经输入</a>&nbsp;<a id="atxtRemark" style="color: rgb(165, 165, 165);">0</a>
                   <a class="aColor">/250&nbsp;个字</a>
                 </div>
-                <textarea name="memo" id="memo" rows="1" cols="20" class="row2" onkeyup="CheckWords(this)"></textarea>
+                <textarea name="memo" id="memo" rows="1" cols="20" class="row2"
+                          onkeyup="CheckWords(this)"><s:property value="pathology.memo"/></textarea>
               </li>
               <li class="remarks" style="margin-top:20px;">注：<span class="red">“*”</span>为必填内容，病史与备注中的内容不在诊断结果中显示</li>
             </ul>
@@ -543,7 +556,7 @@
                 <div class=" clear">
                 </div>
                 <textarea name="historySummary" id="historySummary" rows="2" cols="20" class="row2"
-                          onkeyup="CheckWords(this)"></textarea>
+                          onkeyup="CheckWords(this)"><s:property value="pathology.historySummary"/></textarea>
               </li>
               <li>
                 <div style="float: left">
@@ -556,14 +569,15 @@
                 <div class=" clear">
                 </div>
                 <textarea name="immuneResult" id="immuneResult" rows="2" cols="20" class="row2"
-                          onkeyup="CheckWords(this)"></textarea>
+                          onkeyup="CheckWords(this)"><s:property value="pathology.result"/></textarea>
               </li>
               <li style="">
                 <div style="float: left">
                   <ins class="half_words"></ins>影像学检查：
                 </div>
                 <div class="ckTxt">
-                  <textarea id="microscopeSee" name="microscopeSee" cols="10" rows="2" class="ckeditor"></textarea>
+                  <textarea id="microscopeSee" name="microscopeSee" cols="10" rows="2"
+                            class="ckeditor"><s:property value="pathology.microscopeSee"/></textarea>
                   <input type="hidden" name="microscopeSeeHidden" id="microscopeSeeHidden"/>
                 </div>
                 <div class=" clear">

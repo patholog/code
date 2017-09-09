@@ -79,6 +79,7 @@ public class PathologyAction extends BaseAction {
 
   /**
    * 保存病理信息
+   * <p>如果caseId不存在,则新建病理信息,如果存在则更新</p>
    *
    * @return 病理编号
    */
@@ -92,7 +93,11 @@ public class PathologyAction extends BaseAction {
       paramMap.put("slideFileName", new String[]{slideFileName});
       Pathology newPathology = null;
       try {
-        newPathology = pathologyService.addPathology(paramMap);
+        if (StringUtil.isNotBlank(paramMap.get("caseId")[0])) {
+          newPathology = pathologyService.updatePathology(paramMap);
+        } else {
+          newPathology = pathologyService.addPathology(paramMap);
+        }
       } catch (RuntimeException e) {
         logger.error(e.getMessage());
         failure = e.getMessage();
@@ -100,41 +105,6 @@ public class PathologyAction extends BaseAction {
         logger.error(e.getMessage());
         failure = "出现未知错误，请联系管理员";
       }
-      /*String rootPath = Property.getProperty("slideFilePath");
-      if (slide != null) {
-        InputStream is = new FileInputStream(getSlide()); //根据上传的文件得到输入流
-        if (!new File(rootPath + paramMap.get("slideFilePath")[0] + "\\"
-            + paramMap.get("imageId")[0]).exists()) {
-          try {
-            if (!new File(rootPath + paramMap.get("slideFilePath")[0] + "\\"
-                + paramMap.get("imageId")[0]).mkdirs()) {
-              logger.error("error create dir");
-            }
-          } catch (Exception e) {
-            e.printStackTrace();
-          }
-        }
-        OutputStream os = new FileOutputStream(rootPath + paramMap.get("slideFilePath")[0] + "\\"
-            + paramMap.get("imageId")[0] + "\\" + slideFileName); //指定输出流地址
-        byte buffer[] = new byte[1024];
-        int len;
-        while ((len = is.read(buffer)) > 0) {
-          os.write(buffer, 0, len); //把文件写到指定位置的文件中
-        }
-        os.close(); //关闭
-        is.close();
-        try {
-          // 调用切图方法
-          // imageService.cutSlide(paramMap.get("caseId")[0], paramMap.get("slideFilePath")[0], paramMap.get("slideFileName")[0]);
-          SlideUtil.processImageFile(new File(rootPath + "\\" + paramMap.get("slideFilePath")[0] + "\\"
-                  + paramMap.get("imageId")[0] + "\\" + slideFileName),
-              new File(rootPath + "\\" + paramMap.get("slideFilePath")[0] + "\\" + paramMap.get("imageId")[0]));
-        } catch (Exception e) {
-          logger.error(e.getMessage());
-          count = 0;
-          failure = e.getMessage();
-        }
-      }*/
       String jsonString = newPathology != null ? "{\"success\":\"新建病理成功\", \"caseId\":\"" + newPathology.getIdCase()
           + "\", \"diagStatus\":\"" + newPathology.getDiagStatus() + "\"}"
           : "{\"failure\":\"" + failure + "\"}";
@@ -419,7 +389,7 @@ public class PathologyAction extends BaseAction {
     Map<String, String[]> paramMap = request.getParameterMap();
     String result = "";
     try {
-      resultService.updateResult(paramMap);
+      resultService.update(paramMap);
       pathologyService.finishPathology(paramMap.get("caseId")[0]);
       result = "保存成功";
     } catch (Exception e) {
