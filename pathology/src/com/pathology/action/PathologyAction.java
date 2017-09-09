@@ -579,15 +579,14 @@ public class PathologyAction extends BaseAction {
           for (int i = 0; i < chunks; i++) {
             File tempFile = new File(Property.getProperty("slideFilePath") + "\\" + datePath + "\\" + caseId
                 + "\\temp", i + "_" + tempFileName);
-            System.out.println("tempFileName:" + tempFileName);
             byte[] bytes = FileUtils.readFileToByteArray(tempFile);
             outputStream.write(bytes);
-            outputStream.flush();
+            // outputStream.flush();
             tempFile.delete();
           }
           outputStream.flush();
+          imageService.insertImage(caseId, "\\" + datePath + "\\" + caseId + "\\" + fileName);
         }
-        imageService.insertImage(caseId, "\\" + datePath + "\\" + caseId + "\\" + fileName);
         //System.out.println("newFileName:"+newFileName);
         Map<String, Object> m = new HashMap<>();
         /*System.out.println("newFileName:" + fileName);
@@ -629,6 +628,19 @@ public class PathologyAction extends BaseAction {
       image = new Image();
     }
     return "viewSlide";
+  }
+
+  public String deleteImage() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    HttpServletResponse response = ServletActionContext.getResponse();
+    String imageId = request.getParameter("imageId");
+    if (imageId != null && !"".equals(imageId)) {
+      imageService.delete(Integer.valueOf(imageId));
+      printJson(response, "{\"success\":\"删除成功\"}");
+    } else {
+      printJson(response, "{\"failure\":\"获取图片信息错误，请刷新重试\"}");
+    }
+    return null;
   }
 
   public IPathologyService getPathologyService() {

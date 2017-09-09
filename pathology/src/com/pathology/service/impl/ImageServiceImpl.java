@@ -111,6 +111,11 @@ public class ImageServiceImpl implements IImageService {
     }
   }
 
+  @Override
+  public void delete(Integer imageId) {
+    imageDao.delete(select(imageId));
+  }
+
   public IImageDao getImageDao() {
     return imageDao;
   }

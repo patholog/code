@@ -17,4 +17,6 @@ public interface IImageService {
   List<Image> selectListByCaseId(String caseId);
 
   void deleteByCaseId(String caseId);
+
+  void delete(Integer imageId);
 }

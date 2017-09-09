@@ -9,13 +9,15 @@
   <meta charset="UTF-8">
   <title>病理远程会诊平台-上传切片</title>
   <c:set var="path" value="${pageContext.request.contextPath }"/>
-  <link rel="stylesheet" href="${path }/css/public_flat.css"/>
-  <link rel="stylesheet" href="${path }/css/theme.css?Version=5.5.1.1"/>
-  <link rel="stylesheet" href="${path }/css/comc_head_style.css?Version=5.5.1.1"/>
-  <link rel="stylesheet" href="${path }/css/comc_diagnosis_new_style.css?Version=5.5.1.1"/>
-  <link rel="stylesheet" href="${path }/css/comc_left_nav_style.css?Version=5.5.1.1"/>
-  <link rel="stylesheet" href="${path }/css/comc_register_style.css?Version=5.5.1.1"/>
-  <link rel="stylesheet" href="${path }/assets/weebox/css/weebox.css"/>
+  <link rel="stylesheet" type="text/css" href="${path }/css/comc_diagnosis_wait_style.css"/>
+  <link rel="stylesheet" type="text/css" href="${path }/css/comc_head_style.css"/>
+  <link rel="stylesheet" type="text/css" href="${path }/css/comc_left_nav_style.css"/>
+  <link rel="stylesheet" type="text/css" href="${path }/css/comc_page_style.css"/>
+  <link rel="stylesheet" type="text/css" href="${path }/css/datepicker.css"/>
+  <link rel="stylesheet" type="text/css" href="${path }/css/public_flat.css"/>
+  <link rel="stylesheet" type="text/css" href="${path }/css/theme.css"/>
+  <link rel="stylesheet" type="text/css" href="${path }/css/WdatePicker.css"/>
+  <link rel="stylesheet" type="text/css" href="${path }/css/weebox.css"/>
   <link rel="stylesheet" href="${path }/assets/jqueryui/jquery-ui.min.css"/>
   <link rel="stylesheet" href="${path }/assets/plupload/jquery.ui.plupload/css/jquery.ui.plupload.css">
 
@@ -96,112 +98,116 @@
 <div class="header">
   <%@include file="/webdiagnosis/maintop.jsp" %>
 </div>
-<form id="infoForm" method="post" action="PathologyAction!saveInfo" enctype="multipart/form-data">
-  <div id="whole" class="mlrAuto">
-    <div class="menu_left">
-      <ul id="Left1_MenuList">
-        <%@include file="/webdiagnosis/mainleft.jsp" %>
+<div id="whole" class="mlrAuto">
+  <div class="menu_left">
+    <ul id="Left1_MenuList">
+      <%@include file="/webdiagnosis/mainleft.jsp" %>
+    </ul>
+  </div>
+</div>
+<div class="content_right">
+  <div class="index_right" id="divAll" style="">
+    <!--步骤指示条-->
+    <div class="new_step">
+      <ul>
+        <li>
+          <a href="PathologyAction!addPathology?caseId=<s:property value="pathology.caseId"/>&diagStatus=<s:property value="pathology.diagStatus"/>">
+            <div class="step">
+              1<span>病例信息</span></div>
+          </a>
+        </li>
+        <li>
+          <a href=""PathologyAction!uploadSlide?caseId=<s:property value="pathology.caseId"/>&diagStatus=<s:property value="pathology.diagStatus"/>"">
+            <div class="step curr">
+              2<span>上传切片</span></div>
+          </a>
+        </li>
       </ul>
     </div>
-    <div class="content_right" style="">
-      <div class="index_right" id="divAll" style="">
-        <!--步骤指示条-->
-        <div class="new_step">
+    <!--相关内容块-->
+    <div class="index_diagnosis_table">
+      <div class="diagnosis_table">
+        <div class="clear"></div>
+        <input type="hidden" id="caseId" name="caseId" value="<s:property value="pathology.caseId"/>">
+        <table class="table">
+          <tbody>
+          <tr>
+            <th>
+              <div class="first">序号</div>
+            </th><%--
+            <th>
+              <div>状态</div>
+            </th>--%>
+            <th>
+              <div>切片名称</div>
+            </th>
+            <th>
+              <div>上传时间</div>
+            </th><%--
+            <th>
+              <div>物镜倍数</div>
+            </th>
+            <th>
+              <div>切片大小</div>
+            </th>
+            <th>
+              <div>免疫组化</div>
+            </th>--%>
+            <th>
+              <div>操作</div>
+            </th>
+          </tr>
+          <s:iterator value="imageList" id="image">
+            <tr>
+              <td>${image.idImage}</td>
+              <%--<td>${image.preHandleFlag}</td>--%>
+              <td>${image.fileName}</td>
+              <td><fmt:formatDate value="${image.crtTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+              <td>
+                <a href="javascript:void(0)" id="delBtn" onclick="delImage(${image.idImage})">删除</a>
+              </td>
+            </tr>
+          </s:iterator>
+          </tbody>
+        </table>
+        <!--分页块-->
+        <span id="pagerSection"></span>
+        <div class="clear"></div>
+        <div class="um_btn_bg" style="width:100%;min-height:68px;">
+          <input name="hidMID" type="hidden" id="hidMID" value="14816">
+          <div class="new_step" style="background-color: white; float: right;border: none;">
+            <ul>
+              <li>
+                <div class="step">
+                  <span id="btnUploadSec">上传数字切片</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+      <div class="pagination_btn">
+        <div class="new_step" style="position:relative;background-color: white; float: right;border: none;">
           <ul>
             <li>
-              <a href="PathologyAction!addPathology?caseId=<s:property value="pathology.caseId"/>&diagStatus=<s:property value="pathology.diagStatus"/>">
-                <div class="step">
-                  1<span>病例信息</span></div>
-              </a>
+              <div class="step">
+                <span id="btnComplete">保&nbsp;&nbsp;&nbsp;存</span>
+              </div>
             </li>
             <li>
-              <a href=""PathologyAction!uploadSlide?caseId=<s:property value="pathology.caseId"/>&diagStatus=<s:property value="pathology.diagStatus"/>"">
-                <div class="step curr">
-                  2<span>上传切片</span></div>
-              </a>
+              <div class="step">
+                <span id="returnNewList">返回新建列表</span>
+              </div>
             </li>
           </ul>
-        </div>
-        <!--相关内容块-->
-        <div class="step2_upload_module">
-          <!--上传切片-->
-          <div class="upload_module">
-            <div class="title left">上传切片</div>
-            <div class="fill_des right"></div>
-            <div class="clear"></div>
-            <input type="hidden" id="caseId" name="caseId" value="<s:property value="pathology.caseId"/>">
-            <table class="table">
-              <colgroup>
-                <col width="5%">
-                <col width="8%">
-                <col width="24%">
-                <col width="12%">
-                <%--<col width="7%">--%>
-                <col width="7%">
-                <col width="8%">
-                <col width="14%">
-              </colgroup>
-              <tbody>
-              <tr>
-                <th>
-                  <div class="first">序号</div>
-                </th>
-                <th>
-                  <div>状态</div>
-                </th>
-                <th>
-                  <div>切片名称</div>
-                </th>
-                <th>
-                  <div>上传时间</div>
-                </th><%--
-                <th>
-                  <div>物镜倍数</div>
-                </th>
-                <th>
-                  <div>切片大小</div>
-                </th>
-                <th>
-                  <div>免疫组化</div>
-                </th>--%>
-                <th>
-                  <div>操作</div>
-                </th>
-              </tr>
-              <s:iterator value="imageList" id="image">
-                <tr>
-                  <td>${image.idImage}</td>
-                  <td>${image.preHandleFlag}</td>
-                  <td>${image.fileName}</td>
-                  <td><fmt:formatDate value="${image.crtTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                  <td></td>
-                </tr>
-              </s:iterator>
-              </tbody>
-            </table>
-            <!--分页块-->
-            <span id="pagerSection"></span>
-            <div class="um_btn_bg" style="position:relative;width:100%;min-height:68px;">
-              <input name="hidMID" type="hidden" id="hidMID" value="14816">
-              <input name="btnUploadSec" type="button" id="btnUploadSec" class="inf_btn right inf_btn2"
-                     value="上传数字切片" title="上传数字切片可以让专家更稳定浏览切片！">
-              <div>
-                <div class="clear"></div>
-              </div>
-            </div>
-          </div>
-          <div class="pagination_btn">
-            <a href="PathologyAction!getNewPathologyList" class="inf_btn right">返回新建列表</a>
-            <input type="button" name="btnComplete" value="保存" id="btnComplete" class="inf_btn right">
-            <%--<a href="PathologyAction!addPathology?caseId=<s:property value="pathology.caseId"/>&amp;diagStatus=<s:property value="pathology.diagStatus"/>" class="inf_btn right">上一步</a>--%>
-            <div class="clear">
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </div>
-</form>
+</div>
 <div id="uploaderDialog" hidden>
   <form id="uploadForm" action="PathologyAction!saveUploadSlide" enctype="multipart/form-data">
     <input name="caseId" type="hidden" value="<s:property value="pathology.caseId"/>">
@@ -214,6 +220,11 @@
   <form id="uploadForm1" action="PathologyAction!saveUploadSlide" enctype="multipart/form-data">
     <input id="fileupload" type="file" name="files[]" data-url="PathologyAction!saveUploadSlide" multiple>
   </form>
+</div>
+<div id="myDialog" hidden>
+  <div align="center">
+    <label id="info"></label>
+  </div>
 </div>
 </body>
 <script>
@@ -379,6 +390,43 @@
   }
   $('#btnComplete').click(function() {
     showTips("保存成功");
+  });
+  function delImage(id) {
+    $('#info').text('确定要删除该切图吗？');
+    $('#myDialog').dialog({
+      title: '删除切图',
+      resizable: false,
+      modal: true,
+      buttons: [{
+        text: "确定",
+        icon: "ui-icon-heart",
+        click: function () {
+          $.ajax({
+            url: 'PathologyAction!deleteImage?imageId=' + id,
+            dataType: "json",
+            success: function (result) {
+              if (result && result.success) {
+                showCallbackTips(result.success, function () {
+                  window.location.reload();
+                });
+              } else if (result && result.failure) {
+                showTips(result.failure);
+                window.location.reload();
+              }
+            }
+          })
+        }
+      }, {
+        text: "取消",
+        icon: "ui-icon-heart",
+        click: function () {
+          $(this).dialog("close");
+        }
+      }]
+    });
+  }
+  $('#returnNewList').click(function() {
+    window.location.href = "PathologyAction!getNewPathologyList";
   })
 </script>
 </html>
