@@ -10,13 +10,6 @@ import com.pathology.util.SessionAgentManager;
 import com.pathology.util.StringUtil;
 import com.sun.istack.internal.Nullable;
 import net.sf.json.JSONObject;
-import org.apache.commons.fileupload.FileItemIterator;
-import org.apache.commons.fileupload.FileItemStream;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.fileupload.util.Streams;
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
@@ -522,92 +515,42 @@ public class PathologyAction extends BaseAction {
     HttpServletRequest request = ServletActionContext.getRequest();
     HttpServletResponse response = ServletActionContext.getResponse();
     String caseId = request.getParameter("caseId");
-    int chunk = 0;// 当前正在处理的文件分块序号
-    int chunks = 0;//分块上传总数
-    String tempFileName = null; // 临时文件名
-    String fileName = "";
     String datePath = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
-    BufferedOutputStream outputStream = null;
-    if (ServletFileUpload.isMultipartContent(request)) {
+
+    String rootPath = Property.getProperty("slideFilePath");
+    if (slide != null) {
+      InputStream is = null;
+      OutputStream os = null;
       try {
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        factory.setSizeThreshold(1024);
-        // factory.setRepository(new File(repositoryPath));// 设置临时目录
-        ServletFileUpload upload = new ServletFileUpload(factory);
-        upload.setHeaderEncoding("UTF-8");
-        // upload.setSizeMax(5 * 1024 * 1024);// 设置附件大小，超过这个大小上传会不成功
-        FileItemIterator items = upload.getItemIterator(request);
-        while (items.hasNext()) {
-          FileItemStream item = items.next();
-          InputStream input = item.openStream();
-          if (item.isFormField()) {
-            if (item.getFieldName().equals("name")) {
-              tempFileName = Streams.asString(input, "UTF-8");
-            } else if (item.getFieldName().equals("chunk")) {
-              chunk = Integer.valueOf(Streams.asString(input));
-            } else if (item.getFieldName().equals("chunks")) {
-              chunks = Integer.valueOf(Streams.asString(input));
-            }
-          } else {
-            String chunkName = item.getName();
-            // fileName = item.getName(); // 真实文件名
-            fileName = tempFileName;
-            if (chunk >= 0) {
-              chunkName = chunk + "_" + tempFileName;
-            }
-            File dir = new File(Property.getProperty("slideFilePath") + "\\" + datePath + "\\" + caseId + "\\temp");
-            if (!dir.isDirectory() || !dir.exists()) {
-              dir.mkdirs();
-            }
-            //保存文件绝对路径
-            String fullPath = Property.getProperty("slideFilePath") + "\\" + datePath + "\\" + caseId + "\\temp"
-                + "\\" + chunkName;
-            OutputStream fos = new BufferedOutputStream(new FileOutputStream(new File(fullPath)));
-            byte[] b = new byte[1024];
-            while ((input.read(b)) != -1) {
-              fos.write(b);
-            }
-            fos.flush();
-            fos.close();
+        is = new FileInputStream(getSlide()); //根据上传的文件得到输入流
+        File dir = new File(rootPath + "\\" + datePath + "\\" + caseId);
+        if (!dir.isDirectory() || !dir.exists()) {
+          if (dir.mkdirs()) {
+            logger.debug("创建目录" + dir.getName() + "成功");
           }
         }
-        if (chunk >= 0 && chunk + 1 == chunks) {
-          outputStream = new BufferedOutputStream(
-              new FileOutputStream(new File(Property.getProperty("slideFilePath") + "\\" + datePath + "\\"
-                  + caseId, fileName)));
-          // 遍历文件合并
-          for (int i = 0; i < chunks; i++) {
-            File tempFile = new File(Property.getProperty("slideFilePath") + "\\" + datePath + "\\" + caseId
-                + "\\temp", i + "_" + tempFileName);
-            byte[] bytes = FileUtils.readFileToByteArray(tempFile);
-            outputStream.write(bytes);
-            // outputStream.flush();
-            tempFile.delete();
-          }
-          outputStream.flush();
-          imageService.insertImage(caseId, "\\" + datePath + "\\" + caseId + "\\" + fileName);
+        os = new FileOutputStream(rootPath + "\\" + datePath + "\\" + caseId + "\\"
+            + slideFileName); //指定输出流地址
+        byte buffer[] = new byte[1024];
+        int len;
+        while ((len = is.read(buffer)) > 0) {
+          os.write(buffer, 0, len); //把文件写到指定位置的文件中
         }
-        //System.out.println("newFileName:"+newFileName);
-        Map<String, Object> m = new HashMap<>();
-        /*System.out.println("newFileName:" + fileName);
-        m.put("status", true);*/
-        response.getWriter().write("success");
-      } catch (FileUploadException e) {
-        e.printStackTrace();
-        Map<String, Object> m = new HashMap<>();
-        m.put("status", false);
-        // printJson(JSONObject.fromObject(m).toString());
+        imageService.insertImage(caseId, "\\" + datePath + "\\" + caseId + "\\" + slideFileName);
+        printJson(response, "{\"success\":\"上传成功\"}");
       } catch (Exception e) {
-        e.printStackTrace();
-        Map<String, Object> m = new HashMap<>();
-        m.put("status", false);
-        // response.getWriter().write(JSONObject.fromObject(m).toString());
+        logger.error(e.getMessage());
+        printJson(response, "{\"failure\":\"上传失败，请重试\"}");
       } finally {
         try {
-          if (outputStream != null)
-            outputStream.close();
+          if (is != null) {
+            is.close();
+          }
+          if (os != null) {
+            os.close();
+          }
         } catch (IOException e) {
-          e.printStackTrace();
+          logger.error(e.getMessage());
         }
       }
     }

@@ -209,16 +209,26 @@
   </div>
 </div>
 <div id="uploaderDialog" hidden>
-  <form id="uploadForm" action="PathologyAction!saveUploadSlide" enctype="multipart/form-data">
+  <form id="uploadForm" action="PathologyAction!saveUploadSlide?caseId=<s:property value="pathology.caseId"/>"
+        method="post" enctype="multipart/form-data">
     <input name="caseId" type="hidden" value="<s:property value="pathology.caseId"/>">
-    <div id="uploader">
-      <p>对不起，您的浏览器不支持Flash，Silverlight或HTML5，请使用更新的浏览器！</p>
+    <div id="uploader" style="height: 100px; padding-top: 20px;">
+      <input id="slide" type="file" name="slide">
+    </div>
+    <div class="new_step curr" style="background-color: white; float: left;border: none;">
+      <ul>
+        <li>
+          <div class="step curr" id="uploadBtn">
+            <span>开始上传</span>
+          </div>
+        </li>
+      </ul>
     </div>
   </form>
 </div>
 <div id="uploaderDialog1" hidden>
   <form id="uploadForm1" action="PathologyAction!saveUploadSlide" enctype="multipart/form-data">
-    <input id="fileupload" type="file" name="files[]" data-url="PathologyAction!saveUploadSlide" multiple>
+    <input id="fileupload1" type="file" name="files[]" data-url="PathologyAction!saveUploadSlide" multiple>
   </form>
 </div>
 <div id="myDialog" hidden>
@@ -257,137 +267,32 @@
     $('#uploaderDialog').dialog({
       title: '文件上传',
       modal: true,
-      width: '600',
-      height: '380'
+      width: '400',
+      height: '250'
     });
-    startUploader();
   });
 
-  /*function uploadFile() {
-    console.log("1");
-    $('#fileupload').fileupload({
-      dataType: 'json',
-      done: function (e, data) {
-        $.each(data.result.files, function (index, file) {
-          $('<p/>').text(file.name).appendTo(document.body);
-        });
-      }
-    });
-    console.log("2");
-  }
-  $("#uploader").plupload({
-    // General settings
-    runtimes : 'gears,flash,silverlight,browserplus,html5,html4',
-    url : 'PathologyAction!saveUploadSlide',
-    max_file_size : '10mb',
-    unique_names : true,
-    multiple_queues : true,
-    chunk_size: '2mb',
-    // Specify what files to browse for
-    filters : [
-      {title : "jpg, jpg", extensions : "jpg,jpeg"}
-    ],
-
-    // Flash settings
-    flash_swf_url : 'plupload/js/plupload.flash.swf',
-    // Silverlight settings
-    silverlight_xap_url : 'plupload/js/plupload.silverlight.xap'
-  });
-  $('#uploadForm').submit(function(e) {
-    var uploader = $('#uploader').pluploadQueue();
-    if (uploader.files.length > 0) {
-      // When all files are uploaded submit form
-      uploader.bind('StateChanged', function() {
-        if (uploader.files.length === (uploader.total.uploaded + uploader.total.failed)) {
-          $('#uploadForm')[0].submit();
-        }
-      });
-      uploader.start();
+  $('#uploadBtn').click(function () {
+    if ($('#slide').val() === '') {
+      showTips("请先选择图片");
     } else {
-      alert('请先上传数据文件.');
-    }
-    return false;
-  });*/
-  function startUploader() {
-    var caseId = $("#caseId").val();
-    var type = $("#hidType").val();
-    var typeUrl = "PathologyAction!saveUploadSlide";
-    var filtersExtensions = "xls,txt,docx,zip,pdf,gif,jpg,png,rar,dbf,pptx,ppt,doc,xlsx";
-    if (type === "1") {
-      typeUrl = "SectionUploadManage.ashx";
-      filtersExtensions = "dmetrix,kfb,tmap,ndpi,zip,rar,tdr,svs,mds,tiff,tif";
-    }
-    var flag = "";
-    var errorMsg = "";
-    $("#uploader").plupload({
-      runtimes: 'html5,flash,silverlight,html4', // 这里是说用什么技术引擎
-      url: typeUrl + '?caseId=' + caseId,   // 服务端上传路径
-      maltipart: true,
-      max_file_size: '50000mb', // 文件上传最大限制。
-      max_file_count: 20,     //指示用户可以同时上传文件的最大数量
-      chunk_size: '5mb', // 上传分块每块的大小，这个值小于服务器最大上传限制的值即可。
-      max_retries: 100, //上传网络错误时的重试次数，为0时表示不重试
-      // 是否生成缩略图（仅对图片文件有效）
-      resize: {
-        crop: false
-      },
-
-      //  这个数组是选择器，就是上传文件时限制的上传文件类型
-      filters: [
-        {title: "Sec files", extensions: filtersExtensions}
-      ],
-      rename: true, // 是否重命名文件
-      sortable: true, // Sort files
-      dragdrop: false, //启用文件到小部件能够拖放(操作)(目前唯一HTML5支持)
-
-      // Views to activate
-      views: {
-        list: true,
-        thumbs: false, // Show thumbs
-        active: 'list'
-      },
-
-      // plupload.flash.swf 的所在路径
-      flash_swf_url: '\\${path }/assets/plupload/Moxie.swf',
-      // silverlight所在路径
-      silverlight_xap_url: '\\${path }/assets/plupload/Moxie.xap',
-
-      init: {
-        FilesAdded: function (up, files) {
-          if (type !== "1" && files.length > 0 && files[files.length - 1].size > 50000000) {
-            var fileName = files[files.length - 1].name.toLowerCase();
-            if (fileName.endWith('.rar') || fileName.endWith('.zip')) {
-              showTips("本次上传的是附件，不可在线浏览，如果需要上传切片，请使用切片上传的相关功能。");
-            }
-          }
-        },
-        UploadComplete: function () {
-          //window.close(); window.opener.location.reload();
-          if (flag === "") {
-            showCallbackTips(flag + "上传成功！", function () {
-              parent.window.location.href = parent.window.location.href;
-              parent.dialog("close");
+      $('#uploadForm').ajaxSubmit({
+        dataType: 'json',
+        success: function (result) {
+          if (result && result.success) {
+            showCallbackTips("图片上传成功", function () {
+              window.location.reload();
             });
+          } else if (result && result.failure) {
+            showTips(result.failure);
           } else {
-            flag = flag.substring(0, flag.length - 1);
-            showCallbackTips(flag + "上传失败！" + errorMsg, function () {
-              parent.window.location.href = parent.window.location.href;
-              parent.dialog("close");
-            });
-          }
-        },
-        Error: function (up, err) {
-          showTips(err.message);
-        },
-        FileUploaded: function (up, file, result) {
-          if ($.trim(result.response) !== "success") {
-            flag += file.name + "、";
-            errorMsg += result.response + "、";
+            showTips('出现其他错误');
           }
         }
-      }
-    });
-  }
+      })
+    }
+  });
+
   $('#btnComplete').click(function() {
     showTips("保存成功");
   });
