@@ -14,11 +14,20 @@
 </head>
 <body>
 <!-- openseadragon 容器 -->
-<div id="container" style="width: 100%; height: 600px;"></div>
+<div id="container" style="width: 100%; height: 600px;position: absolute;"></div>
+<div class="color" style="float:right;position:absolute;padding-top: 100px;">
+  R<input id="colorR" type="range" name="points" min="0" max="255" value="255"><br>
+  G<input id="colorG" type="range" name="points" min="0" max="255" value="255"><br>
+  B<input id="colorB" type="range" name="points" min="0" max="255" value="255">
+</div>
 </body>
+<script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
 <script src="${path}/assets/Seadragon/openseadragon.js" type="text/javascript"></script>
 <script>
   (function (win) {
+    var _colorR = $('#colorR').val();
+    var _colorG = $('#colorG').val();
+    var _colorB = $('#colorB').val();
     var imageId;
     var address = document.location.href;
     var contextPath = 'http://' + window.location.host;
@@ -53,9 +62,37 @@
       },
       showNavigator: true,  //是否显示控制按钮
       minZoomLevel: 0.1,  //最小允许放大倍数
-      maxZoomLevel: 80 //最大允许放大倍数
+      maxZoomLevel: 16 //最大允许放大倍数
     });
-    console.log(viewer);
+//    viewer.addHandler("tile-drawing",function () {
+//      console.log(arguments);
+//    });
+    viewer.addHandler("tile-drawn", function () {
+      viewer.removeAllHandlers();
+      viewer.addHandler("tile-drawn", function (obj) {
+        var context2D = obj.eventSource.drawer.context;
+        var pos = obj.tile.position;
+        var size = obj.tile.size;
+        var imgData = context2D.getImageData(Math.ceil(pos.x), Math.ceil(pos.y), Math.ceil(size.x), Math.ceil(size.y));
+
+        var data = imgData.data;
+        for (var i = 0; i < data.length; i += 4) {
+          // red
+          data[i] = _colorR - (255 - data[i]);
+          // green
+          data[i + 1] = _colorG - (255 - data[i + 1]);
+          // blue
+          data[i + 2] = _colorB - (255 -data[i + 2]);
+        }
+        context2D.putImageData(imgData, Math.ceil(pos.x), Math.ceil(pos.y));
+      });
+    });
+
+    $('.color').on('change','input',function(){
+      _colorR = $('#colorR').val();
+      _colorG = $('#colorG').val();
+      _colorB = $('#colorB').val();
+    });
   })(window);
 </script>
 
