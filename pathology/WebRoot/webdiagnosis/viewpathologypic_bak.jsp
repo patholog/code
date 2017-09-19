@@ -20,6 +20,9 @@
   G<input id="colorG" type="range" name="points" min="0" max="255" value="255"><br>
   B<input id="colorB" type="range" name="points" min="0" max="255" value="255">
 </div>
+<div class="rotate" style="float:right;position:absolute;padding-top: 180px;">
+	角度<input id="rotateSlider" type="range" name="rotate" min="0" max="360" value="0"/>
+</div>
 </body>
 <script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
 <script src="${path}/assets/Seadragon/openseadragon.js" type="text/javascript"></script>
@@ -47,6 +50,11 @@
       // debugMode: true,
       id: "container",  //容器id
       prefixUrl: '',
+      degrees:0,
+      showRotationControl:true,
+      gestrueSettingsTouch:{
+    	  pinchRotate:true
+      },
       tileSources: {
         Image: {
           xmlns: "http://schemas.microsoft.com/deepzoom/2008",
@@ -69,6 +77,9 @@
 //    });
     viewer.addHandler("tile-drawn", function () {
       viewer.removeAllHandlers();
+      viewer.addHandler("rotate",function(){
+
+      });
       viewer.addHandler("tile-drawn", function (obj) {
         var context2D = obj.eventSource.drawer.context;
         var pos = obj.tile.position;
@@ -92,6 +103,11 @@
       _colorR = $('#colorR').val();
       _colorG = $('#colorG').val();
       _colorB = $('#colorB').val();
+    });
+    
+    $('.rotate').on('change','input',function()
+   	{
+    	viewer.viewport.setRotation($('#rotateSlider').val());
     });
   })(window);
 </script>
