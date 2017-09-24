@@ -25,7 +25,7 @@
 <div id="container" style="position:absolute;top:150px;width:100%;height:700px;"></div>
 </body>
 <script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
-<script src="${path}/assets/Seadragon/openseadragon.js" type="text/javascript"></script>
+<script src="${path}/assets/Seadragon/openseadragon.min.js" type="text/javascript"></script>
 <script src="${path}/assets/Seadragon/openseadragonselection.js" type="text/javascript"></script>
 <script src="${path}/assets/Seadragon/openseadragonimagefilter.js" type="text/javascript"></script>
 <script>
@@ -136,7 +136,23 @@
         startRotatedHeight:      0.1, // only used if startRotated=true; value is relative to image height
         restrictToImage:         true, // true = do not allow any part of the selection to be outside the image
         onSelection:             function(rect) {
-        		alert("图片剪切")
+          var context2D = rect.eventSource.drawer.context;
+          var imgData = context2D.getImageData(Math.ceil(rect.x), Math.ceil(rect.y), Math.ceil(rect.width), Math.ceil(rect.height));
+        	//创建一个画布canvas
+          var canvas = document.createElement("canvas");
+          // document.body.appendChild(canvas);
+          var contextNew = canvas.getContext("2d");
+          canvas.width = rect.width;
+          canvas.height = rect.height;
+          // canvas.style.width = rect.width + "px";
+          // canvas.style.height = rect.height + "px";
+          // var image=new Image(rect.width,rect.height);
+          // contextNew.drawImage(image,0,0,rect.width,rect.height);
+          contextNew.putImageData(imgData,rect.width,rect.height);
+          var rawImageData = canvas.toDataURL("image/png;");
+          rawImageData = rawImageData.replace("image/png", "image/octet-stream");
+          document.location.href = rawImageData;
+          // alert("图片剪切")
         	}, // callback
         prefixUrl:               null, // overwrites OpenSeadragon's option
         navImages:               { // overwrites OpenSeadragon's options
