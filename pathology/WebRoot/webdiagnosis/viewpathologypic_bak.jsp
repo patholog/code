@@ -142,10 +142,10 @@
           var canvas = document.createElement("canvas");
           // document.body.appendChild(canvas);
           var contextNew = canvas.getContext("2d");
-          canvas.width = rect.width;
-          canvas.height = rect.height;
-          // canvas.style.width = rect.width + "px";
-          // canvas.style.height = rect.height + "px";
+          canvas.width = rect.width+10;
+          canvas.height = rect.height+10;
+          canvas.style.width = rect.width + "px";
+          canvas.style.height = rect.height + "px";
           // var image=new Image(rect.width,rect.height);
           // contextNew.drawImage(image,0,0,rect.width,rect.height);
           contextNew.putImageData(imgData,0,0);
