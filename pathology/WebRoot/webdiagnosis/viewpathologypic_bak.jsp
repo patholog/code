@@ -148,7 +148,7 @@
           // canvas.style.height = rect.height + "px";
           // var image=new Image(rect.width,rect.height);
           // contextNew.drawImage(image,0,0,rect.width,rect.height);
-          contextNew.putImageData(imgData,rect.width,rect.height);
+          contextNew.putImageData(imgData,0,0);
           var rawImageData = canvas.toDataURL("image/png;");
           rawImageData = rawImageData.replace("image/png", "image/octet-stream");
           document.location.href = rawImageData;
