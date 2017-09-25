@@ -27,7 +27,7 @@ public class LoginAction extends BaseAction {
 	  private String basicCountSql = "SELECT count(1) FROM pathology a "
 		      + " LEFT JOIN result  c ON a.id_case = c.case_id"
 		      + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
-		      + " LEFT JOIN COLLECTION E ON A.ID_CASE=E.CASE_ID AND A.ID_DOCTOR=E.ID_DOCTOR";
+		      + " LEFT JOIN collection e ON a.id_case=e.case_id AND a.id_doctor=e.id_doctor";
 	public Users user;
 	private JdbcTemplate jdbcTemplate;
 	public IUsersService userservice;
@@ -145,7 +145,7 @@ public class LoginAction extends BaseAction {
 //			  int backcount=0;
 		      String needcountSql = basicCountSql + " WHERE a.diag_status='2' and ifnull(a.id_doctor,'" + name + "')='" + name + "'";
 		      String hascountSql = basicCountSql + " WHERE a.diag_status='7' and a.id_doctor='" + name + "'";
-		      String callcountSql = basicCountSql + " WHERE a.diag_status='3' and a.LAST_UPD_USER_ID='" + name +  "'";
+		      String callcountSql = basicCountSql + " WHERE a.diag_status='3' and a.last_upd_user_id='" + name +  "'";
 		      int needcount = jdbcTemplate.queryForInt(needcountSql);
 		      int hascount = jdbcTemplate.queryForInt(hascountSql);
 			  int backcount = jdbcTemplate.queryForInt(callcountSql);

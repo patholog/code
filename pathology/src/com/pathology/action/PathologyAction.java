@@ -80,7 +80,7 @@ public class PathologyAction extends BaseAction {
   public String saveInfo() {
     HttpServletRequest request = ServletActionContext.getRequest();
     HttpServletResponse response = ServletActionContext.getResponse();
-    Map<String, String[]> paramMap = new HashMap<>(request.getParameterMap());
+    Map<String, String[]> paramMap = new HashMap<String, String[]>(request.getParameterMap());
     try {
       int count;
       String failure = "";
@@ -187,7 +187,7 @@ public class PathologyAction extends BaseAction {
   public String updatePathology() {
     HttpServletRequest request = ServletActionContext.getRequest();
     HttpServletResponse response = ServletActionContext.getResponse();
-    Map<String, String[]> paramMap = new HashMap<>(request.getParameterMap());
+    Map<String, String[]> paramMap = new HashMap<String, String[]>(request.getParameterMap());
     String result = "";
     try {
       pathologyService.updatePathology(paramMap);
@@ -318,8 +318,8 @@ public class PathologyAction extends BaseAction {
     int level = Integer.valueOf(position[0]);
     try {
       Image image = imageService.select(Integer.valueOf(imageId));
-      File file = new File(Property.getProperty("slideFilePath") + image.getPath() + "\\" + imageId + "\\"
-          + level + "\\" + position[1]);
+      File file = new File(Property.getProperty("slideFilePath") + image.getPath() + "/" + imageId + "/"
+          + level + "/" + position[1]);
 
       if (!file.exists()) return;
       FileInputStream fis;
@@ -343,9 +343,9 @@ public class PathologyAction extends BaseAction {
     String imageId = request.getParameter("id");
     try {
       Image image = imageService.select(Integer.valueOf(imageId));
-      File file = new File(Property.getProperty("slideFilePath") + "\\"
-          + image.getPath().substring(0, image.getPath().lastIndexOf("\\") + 1) + String.valueOf(image.getIdImage())
-          + "\\" + "thumb_" + image.getFileName());
+      File file = new File(Property.getProperty("slideFilePath") + "/"
+          + image.getPath().substring(0, image.getPath().lastIndexOf("/") + 1) + String.valueOf(image.getIdImage())
+          + "/" + "thumb_" + image.getFileName());
       if (!file.exists()) return;
       FileInputStream fis;
       OutputStream out = response.getOutputStream();
@@ -409,7 +409,7 @@ public class PathologyAction extends BaseAction {
     FileInputStream ips;
     try {
       // 获取图片存放路径
-      String imgPath = Property.getProperty("slideFilePath") + filePath + "\\" + imageId + "\\thumb_" + fileName;
+      String imgPath = Property.getProperty("slideFilePath") + filePath + "/" + imageId + "/thumb_" + fileName;
       ips = new FileInputStream(new File(imgPath));
       response.setContentType("multipart/form-data");
       out = response.getOutputStream();
@@ -523,20 +523,20 @@ public class PathologyAction extends BaseAction {
       OutputStream os = null;
       try {
         is = new FileInputStream(getSlide()); //根据上传的文件得到输入流
-        File dir = new File(rootPath + "\\" + datePath + "\\" + caseId);
+        File dir = new File(rootPath + "/" + datePath + "/" + caseId);
         if (!dir.isDirectory() || !dir.exists()) {
           if (dir.mkdirs()) {
             logger.debug("创建目录" + dir.getName() + "成功");
           }
         }
-        os = new FileOutputStream(rootPath + "\\" + datePath + "\\" + caseId + "\\"
+        os = new FileOutputStream(rootPath + "/" + datePath + "/" + caseId + "/"
             + slideFileName); //指定输出流地址
         byte buffer[] = new byte[1024];
         int len;
         while ((len = is.read(buffer)) > 0) {
           os.write(buffer, 0, len); //把文件写到指定位置的文件中
         }
-        imageService.insertImage(caseId, "\\" + datePath + "\\" + caseId + "\\" + slideFileName);
+        imageService.insertImage(caseId, "/" + datePath + "/" + caseId + "/" + slideFileName);
         printJson(response, "{\"success\":\"上传成功\"}");
       } catch (Exception e) {
         logger.error(e.getMessage());
