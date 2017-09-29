@@ -73,7 +73,7 @@
       },
       showNavigator: true,  //是否显示小导航图（地图）
       minZoomLevel: 0.1,  //最小允许放大倍数
-      maxZoomLevel: 16 //最大允许放大倍数
+      maxZoomLevel: 8 //最大允许放大倍数
     });
     viewer.imagefilters(
     		{
@@ -212,6 +212,7 @@
       _colorR = $('#colorR').val();
       _colorG = $('#colorG').val();
       _colorB = $('#colorB').val();
+      viewer.forceRedraw();
       // var context=viewer.drawer.context;
       // var pos = viewer.tile.position;
       //   var size = viewer.tile.size;
