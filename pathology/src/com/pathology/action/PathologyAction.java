@@ -3,6 +3,7 @@ package com.pathology.action;
 import com.alibaba.fastjson.JSON;
 import com.pathology.dto.PathologyDTO;
 import com.pathology.entity.*;
+import com.pathology.entity.Image;
 import com.pathology.service.*;
 import com.pathology.util.Constant;
 import com.pathology.util.Property;
@@ -13,9 +14,13 @@ import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -310,6 +315,9 @@ public class PathologyAction extends BaseAction {
     return SUCCESS;
   }
 
+  /**
+   * 动态加载切片图片
+   */
   public void getSlideImage() {
     HttpServletRequest request = ServletActionContext.getRequest();
     HttpServletResponse response = ServletActionContext.getResponse();
@@ -322,13 +330,16 @@ public class PathologyAction extends BaseAction {
           + level + "/" + position[1]);
 
       if (!file.exists()) return;
-      FileInputStream fis;
       OutputStream out = response.getOutputStream();
-      fis = new FileInputStream(file);
-      byte[] b = new byte[fis.available()];
-      fis.read(b);
-      out.write(b);
-      out.flush();
+      DataOutputStream dop = new DataOutputStream(out);
+      BufferedImage bufferedImage = ImageIO.read(file);
+      if (bufferedImage != null) {
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage, "jpg", os);
+        byte[] b = os.toByteArray();
+        dop.write(b);
+        dop.flush();
+      }
     } catch (Exception e) {
       logger.error(e.getMessage());
     }

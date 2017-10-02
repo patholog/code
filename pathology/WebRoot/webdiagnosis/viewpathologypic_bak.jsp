@@ -59,17 +59,32 @@
       },
       toolbar:"toolBar",
       tileSources: {
-        Image: {
+        height: 256 * ${image.height},
+        width:  256 * ${image.width},
+        tileSize: 256,
+        minLevel: 6,
+        getTileUrl: function( level, x, y ) {
+          function getColor() {
+            _colorR = $('#colorR').val();
+            _colorG = $('#colorG').val();
+            _colorB = $('#colorB').val();
+            return "&r=" + _colorR + "&g=" + _colorG + "&b=" + _colorB;
+          }
+          return contextPath + "/PathologyAction!getSlideImage?id=" + imageId + getColor() + "&position="
+              + level + "/" + x + "_" + y + ".jpg";
+        }
+        /*Image: {
           xmlns: "http://schemas.microsoft.com/deepzoom/2008",
-          Url: contextPath + "/PathologyAction!getSlideImage?id=" + imageId + "&position=",
+          Url: contextPath + "/PathologyAction!getSlideImage?id=" + imageId + "&r=" + _colorR + "&g=" + _colorG + "&b="
+              + _colorB + "&position=",
           Format: "jpg",
           Overlap: "1",
           TileSize: "256",
           Size: {
-            Height: "${image.height}",
-            Width: "${image.width}"
+            Height: "{image.height}",
+            Width: "{image.width}"
           }
-        }
+        }*/
       },
       showNavigator: true,  //是否显示小导航图（地图）
       minZoomLevel: 0.1,  //最小允许放大倍数
@@ -186,7 +201,8 @@
         var context2D = obj.eventSource.drawer.context;
         var pos = obj.tile.position;
         var size = obj.tile.size;
-        var imgData = context2D.getImageData(Math.ceil(pos.x), Math.ceil(pos.y), Math.ceil(size.x), Math.ceil(size.y));
+        // var imgData = context2D.getImageData(Math.ceil(pos.x), Math.ceil(pos.y), Math.floor(size.x), Math.floor(size.y));
+        var imgData = context2D.getImageData(pos.x, pos.y, size.x, size.y);
 
         var data = imgData.data;
         for (var i = 0; i < data.length; i += 4) {
@@ -198,14 +214,15 @@
           data[i + 2] = _colorB - (255 -data[i + 2]);
         }
         context2D.putImageData(imgData, Math.ceil(pos.x), Math.ceil(pos.y));
+        viewer.forceRedraw();
       });
     // });
 
 
     
-    $('.rotate').on('change','input',function()
-   	{
+    $('.rotate').on('change','input',function() {
     	viewer.viewport.setRotation($('#rotateSlider').val());
+      viewer.forceRedraw();
     });
 
     $('.color').on('change','input',function(){
@@ -213,21 +230,6 @@
       _colorG = $('#colorG').val();
       _colorB = $('#colorB').val();
       viewer.forceRedraw();
-      // var context=viewer.drawer.context;
-      // var pos = viewer.tile.position;
-      //   var size = viewer.tile.size;
-      //   var imgData = context.getImageData(Math.ceil(pos.x), Math.ceil(pos.y), Math.ceil(size.x), Math.ceil(size.y));
-
-      //   var data = imgData.data;
-      //   for (var i = 0; i < data.length; i += 4) {
-      //     // red
-      //     data[i] = _colorR - (255 - data[i]);
-      //     // green
-      //     data[i + 1] = _colorG - (255 - data[i + 1]);
-      //     // blue
-      //     data[i + 2] = _colorB - (255 -data[i + 2]);
-      //   }
-      //   context.putImageData(imgData, Math.ceil(pos.x), Math.ceil(pos.y));
     });
   })(window);
 </script>
