@@ -50,18 +50,18 @@ public class PathologyServiceImpl implements IPathologyService {
       + "a.patientbirthday patientBirthday, a.patientsex patientSex, a.patientage patientAge, a.ageunit,"
       + "a.specimenname specimenName, a.idcard idCard, a.mobile, a.diag_time,a.retreat_reason,"
       + "a.historysummary historySummary, a.clinicdiagnose clinicDiagnose, a.inspectiondate inspectionDate,"
-      + "c.generalSee, c.microscopeSee, c.result, c.diagnosed, a.memo,E.ID_COLLECTION, a.diag_status,"
+      + "c.generalSee, c.microscopeSee, c.result, c.diagnosed, a.memo,e.id_collection, a.diag_status,"
       + "case a.diag_status when '1' THEN '新建' WHEN '2' then '待诊断' WHEN '3' THEN '已退回' when '7' then '已诊断' end diagStatusName,"
       + "a.specimentype, s.name specimenTypeName, a.hospitalcode, a.id_doctor "
       + " FROM pathology a "
-      + " LEFT JOIN collection E ON E.CASE_ID=A.ID_CASE AND A.ID_DOCTOR=E.ID_DOCTOR"
+      + " LEFT JOIN collection e ON e.case_id=a.id_case AND a.id_doctor=e.id_doctor"
       + " LEFT JOIN result  c ON a.id_case = c.case_id"
       + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
       + " LEFT JOIN specimen s on a.specimentype = s.id_specimen";
   private String basicCountSql = "SELECT count(1) FROM pathology a "
       + " LEFT JOIN result  c ON a.id_case = c.case_id"
       + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
-      + " LEFT JOIN collection E ON A.ID_CASE=E.CASE_ID AND A.ID_DOCTOR=E.ID_DOCTOR"
+      + " LEFT JOIN collection e ON a.id_case=e.case_id AND a.id_doctor=e.id_doctor"
       + " LEFT JOIN specimen s on a.specimentype = s.id_specimen";
 
   public JdbcTemplate getJdbcTemplate() {
