@@ -54,14 +54,14 @@ public class PathologyServiceImpl implements IPathologyService {
       + "case a.diag_status when '1' THEN '新建' WHEN '2' then '待诊断' WHEN '3' THEN '已退回' when '7' then '已诊断' end diagStatusName,"
       + "a.specimentype, s.name specimenTypeName, a.hospitalcode, a.id_doctor "
       + " FROM pathology a "
-      + " LEFT JOIN COLLECTION E ON E.CASE_ID=A.ID_CASE AND A.ID_DOCTOR=E.ID_DOCTOR"
+      + " LEFT JOIN collection E ON E.CASE_ID=A.ID_CASE AND A.ID_DOCTOR=E.ID_DOCTOR"
       + " LEFT JOIN result  c ON a.id_case = c.case_id"
       + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
       + " LEFT JOIN specimen s on a.specimentype = s.id_specimen";
   private String basicCountSql = "SELECT count(1) FROM pathology a "
       + " LEFT JOIN result  c ON a.id_case = c.case_id"
       + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
-      + " LEFT JOIN COLLECTION E ON A.ID_CASE=E.CASE_ID AND A.ID_DOCTOR=E.ID_DOCTOR"
+      + " LEFT JOIN collection E ON A.ID_CASE=E.CASE_ID AND A.ID_DOCTOR=E.ID_DOCTOR"
       + " LEFT JOIN specimen s on a.specimentype = s.id_specimen";
 
   public JdbcTemplate getJdbcTemplate() {
