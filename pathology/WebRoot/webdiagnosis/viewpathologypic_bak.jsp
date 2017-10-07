@@ -151,16 +151,20 @@
         startRotatedHeight:      0.1, // only used if startRotated=true; value is relative to image height
         restrictToImage:         true, // true = do not allow any part of the selection to be outside the image
         onSelection:             function(rect) {
+          var rectX=rect.x/256;
+          var rectY=rect.y/256;
+          var rectWidth=rect.width/256;
+          var rectHeight=rect.height/256;
           var context2D = rect.eventSource.drawer.context;
-          var imgData = context2D.getImageData(Math.ceil(rect.x), Math.ceil(rect.y), Math.ceil(rect.width), Math.ceil(rect.height));
+          var imgData = context2D.getImageData(Math.ceil(rectX), Math.ceil(rectY), Math.ceil(rectWidth), Math.ceil(rect.height/256));
         	//创建一个画布canvas
           var canvas = document.createElement("canvas");
           // document.body.appendChild(canvas);
           var contextNew = canvas.getContext("2d");
-          canvas.width = rect.width+10;
-          canvas.height = rect.height+10;
-          canvas.style.width = rect.width + "px";
-          canvas.style.height = rect.height + "px";
+          canvas.width =rectWidth+10;
+          canvas.height = rectHeight+10;
+          canvas.style.width = rectWidth + "px";
+          canvas.style.height = rectHeight + "px";
           // var image=new Image(rect.width,rect.height);
           // contextNew.drawImage(image,0,0,rect.width,rect.height);
           contextNew.putImageData(imgData,0,0);
