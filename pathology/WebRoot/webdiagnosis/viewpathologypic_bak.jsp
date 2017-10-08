@@ -286,8 +286,8 @@
         dragHandler: drag_handler,
         dragEndHandler: dragEnd_handler
     }).setTracking(true);
-    
-
+    //TODO 触发绘制图层
+    paint_circles();
   })(window);
 </script>
 
