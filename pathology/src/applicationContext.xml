@@ -34,10 +34,10 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
-		<property name="url" value="jdbc:mysql://123.206.28.85:3306/pathology?useUnicode=true&amp;characterEncoding=UTF-8">
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/pathology?useUnicode=true&amp;characterEncoding=UTF-8">
 		</property>
 		<property name="username" value="root"/>
-		<property name="password" value="mysql"/>
+		<property name="password" value="1234"/>
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
@@ -159,6 +159,7 @@
 		<property name="hospitalservice" ref="hospitalservice"/>
     <property name="specimenService" ref="specimenService"/>
 		<property name="descriptionAppService" ref="descriptionAppService"/>
+		<property name="imageService" ref="imageService"/>
 	</bean>
 
 	<bean id="resultDao" class="com.pathology.dao.impl.ResultDaoImpl" parent="pt">
