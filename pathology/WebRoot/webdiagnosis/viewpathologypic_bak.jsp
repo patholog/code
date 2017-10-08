@@ -22,15 +22,18 @@
 <div class="rotate" style="position:absolute;height:20px;top:120px">
 	rotate<input id="rotateSlider" type="range" name="rotate" min="0" max="360" value="0"/>
 </div>
-<!-- <div id="container" style="position:absolute;top:150px;width:100%;height:700px;background-color:red"></div> -->
-<div id="container" style="position:absolute;top:150px;width:100%;height:700px;"></div>
-</body>
+<img id="right-arrow-overlay-no-rotate"
+     src="http://upload.wikimedia.org/wikipedia/commons/7/7a/Red_Arrow_Right.svg"
+     alt="Right arrow"
+     width="20">
+<div id="container" style="position:absolute;top:150px;width:100%;height:700px;">
+</div>
 <script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
 <script src="${path}/assets/Seadragon/openseadragon.min.js" type="text/javascript"></script>
 <script src="${path}/assets/Seadragon/openseadragonselection.js" type="text/javascript"></script>
 <script src="${path}/assets/Seadragon/openseadragonimagefilter.js" type="text/javascript"></script>
 <script src="${path}/assets/Seadragon/openseadragon-paperjs-overlay.js" type="text/javascript"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.25/paper-full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.25/paper-full.min.js"></script>
 <script>
   (function (win) {
     var _colorR = $('#colorR').val();
@@ -52,7 +55,7 @@
       alert("获取图片信息失败");
     }
     var viewer = OpenSeadragon({
-      debugMode: false,
+      debugMode: true,
       id: "container",  //容器id
       prefixUrl: '',
       degrees:0,
@@ -79,7 +82,14 @@
       },
       showNavigator: true,  //是否显示小导航图（地图）
       minZoomLevel: 0.1,  //最小允许放大倍数
-      maxZoomLevel: 8 //最大允许放大倍数
+      maxZoomLevel: 8, //最大允许放大倍数
+      overlays: [{
+        id: 'right-arrow-overlay-no-rotate', // Arrow pointing to the tip of the hair
+        x: 0.592,
+        y: 0.496,
+        placement: OpenSeadragon.Placement.RIGHT,
+        rotationMode: OpenSeadragon.OverlayRotationMode.NO_ROTATION
+      }]
     });
     viewer.imagefilters(
     		{
@@ -279,7 +289,7 @@
         overlay.resize();
         overlay.resizecanvas();
     }.bind(null, overlay);
-    
+
     new OpenSeadragon.MouseTracker({
         element: viewer.canvas,
         pressHandler: press_handler,
