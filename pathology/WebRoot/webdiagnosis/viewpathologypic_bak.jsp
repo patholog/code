@@ -29,6 +29,8 @@
 <script src="${path}/assets/Seadragon/openseadragon.min.js" type="text/javascript"></script>
 <script src="${path}/assets/Seadragon/openseadragonselection.js" type="text/javascript"></script>
 <script src="${path}/assets/Seadragon/openseadragonimagefilter.js" type="text/javascript"></script>
+<script src="${path}/assets/Seadragon/openseadragon-paperjs-overlay.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.25/paper-full.min.js"></script>
 <script>
   (function (win) {
     var _colorR = $('#colorR').val();
@@ -74,18 +76,6 @@
           return contextPath + "/PathologyAction!getSlideImage?id=" + imageId + getColor() + "&position="
               + level + "/" + x + "_" + y + ".jpg";
         }
-        /*Image: {
-          xmlns: "http://schemas.microsoft.com/deepzoom/2008",
-          Url: contextPath + "/PathologyAction!getSlideImage?id=" + imageId + "&r=" + _colorR + "&g=" + _colorG + "&b="
-              + _colorB + "&position=",
-          Format: "jpg",
-          Overlap: "1",
-          TileSize: "256",
-          Size: {
-            Height: "{image.height}",
-            Width: "{image.width}"
-          }
-        }*/
       },
       showNavigator: true,  //是否显示小导航图（地图）
       minZoomLevel: 0.1,  //最小允许放大倍数
@@ -222,9 +212,6 @@
         viewer.forceRedraw();
       });
     // });
-
-
-    
     $('.rotate').on('change','input',function() {
     	viewer.viewport.setRotation($('#rotateSlider').val());
       viewer.forceRedraw();
@@ -236,6 +223,71 @@
       _colorB = $('#colorB').val();
       viewer.forceRedraw();
     });
+    var circles = [];
+    var paintCircles = function(jsondata, overlay) {
+    };
+    var hit_item = null;
+    var drag_handler = function(event) {
+    if (hit_item) {
+        var transformed_point1 = paper.view.viewToProject(new paper.Point(0,0));
+        var transformed_point2 = paper.view.viewToProject(new paper.Point(event.delta.x, event.delta.y));
+        hit_item.position = hit_item.position.add(transformed_point2.subtract(transformed_point1));
+        window.viewer.setMouseNavEnabled(false);
+        paper.view.draw();
+      }
+    };
+    var dragEnd_handler = function(event) {
+    if (hit_item) {
+        window.viewer.setMouseNavEnabled(true);
+    }
+    hit_item = null;
+    };
+    var press_handler = function(event) {
+      hit_item = null;
+      var transformed_point = paper.view.viewToProject(new paper.Point(event.position.x, event.position.y));
+      var hit_test_result = paper.project.hitTest(transformed_point);
+      if (hit_test_result) {
+          hit_item = hit_test_result.item;
+      }
+    };
+
+    var overlay=viewer.paperjsOverlay();
+    var paint_circles = function(overlay, event) {
+        var circles = [
+            {
+                "pixel_x": 4000,
+                "pixel_y": 4000,
+                "radius": 400
+            },
+            {
+                "pixel_x": 5000,
+                "pixel_y": 5000,
+                "radius": 400
+            }
+        ];
+        var num_circles = circles.length;
+        for (var i = 0; i < num_circles; i++) {
+            var circle = circles[i];
+            var circle = new paper.Path.Circle(new paper.Point(circle.pixel_x, circle.pixel_y), circle.radius);
+            circle.fillColor = 'red';
+            circle.visible = true;
+            circles.push(circle);
+            circle.onMouseDown = function (event) {
+                console.log("circle.onMouseDown" , "event.point.x = ", event.point.x , "event.point.y = ", event.point.y);
+            };
+        }
+        overlay.resize();
+        overlay.resizecanvas();
+    }.bind(null, overlay);
+    
+    new OpenSeadragon.MouseTracker({
+        element: viewer.canvas,
+        pressHandler: press_handler,
+        dragHandler: drag_handler,
+        dragEndHandler: dragEnd_handler
+    }).setTracking(true);
+    
+
   })(window);
 </script>
 
