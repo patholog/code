@@ -10,6 +10,25 @@
   <meta name="viewport" content="width=640, initial-scale=0.5, user-scalable=no"/>
   <title>slide</title>
   <c:set var="path" value="${pageContext.request.contextPath }"/>
+  <link href="${path}/assets/jqueryui/jquery-ui.min.css" rel="stylesheet"/>
+  <style type="text/css">
+    .skin {
+      width : 100px;
+      border : 1px solid gray;
+      padding : 2px;
+      visibility : hidden;
+      position : absolute;
+    }
+    div.menuitems {
+      margin : 1px 0;
+    }
+    div.menuitems a {
+      text-decoration : none;
+    }
+    div.menuitems:hover {
+      background-color : #c0c0c0;
+    }
+  </style>
 </head>
 <body>
 <!-- openseadragon 容器 -->
@@ -22,23 +41,41 @@
 <div class="rotate" style="position:absolute;height:20px;top:120px">
 	rotate<input id="rotateSlider" type="range" name="rotate" min="0" max="360" value="0"/>
 </div>
-<img id="right-arrow-overlay-no-rotate"
-     src="http://upload.wikimedia.org/wikipedia/commons/7/7a/Red_Arrow_Right.svg"
-     alt="Right arrow"
-     width="20">
+<div id="imgSource">
+</div>
 <div id="container" style="position:absolute;top:150px;width:100%;height:700px;">
 </div>
+<ul style="width:100px;display:none;position:absolute;" id="menu">
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3
+    <ul>
+      <li>Item 3-1</li>
+      <li>Item 3-2</li>
+      <li>Item 3-3</li>
+      <li>Item 3-4</li>
+      <li>Item 3-5</li>
+    </ul>
+  </li>
+  <li>Item 4</li>
+  <li>Item 5</li>
+</ul>
+</body>
 <script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
 <script src="${path}/assets/Seadragon/openseadragon.min.js" type="text/javascript"></script>
 <script src="${path}/assets/Seadragon/openseadragonselection.js" type="text/javascript"></script>
 <script src="${path}/assets/Seadragon/openseadragonimagefilter.js" type="text/javascript"></script>
 <script src="${path}/assets/Seadragon/openseadragon-paperjs-overlay.js" type="text/javascript"></script>
+<script src="${path}/assets/js/event-0.6.js" type="text/javascript"></script>
+<script src="${path}/assets/jqueryui/jquery-ui.min.js"
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.25/paper-full.min.js"></script>
 <script>
   (function (win) {
     var _colorR = $('#colorR').val();
     var _colorG = $('#colorG').val();
     var _colorB = $('#colorB').val();
+    var container = document.getElementById('container');
+    var menu = document.getElementById('menu');
     var imageId;
     var address = document.location.href;
     var contextPath = 'http://' + window.location.host;
@@ -82,14 +119,14 @@
       },
       showNavigator: true,  //是否显示小导航图（地图）
       minZoomLevel: 0.1,  //最小允许放大倍数
-      maxZoomLevel: 8, //最大允许放大倍数
-      overlays: [{
+      maxZoomLevel: 8 //最大允许放大倍数
+      /*overlays: [{
         id: 'right-arrow-overlay-no-rotate', // Arrow pointing to the tip of the hair
         x: 0.592,
         y: 0.496,
         placement: OpenSeadragon.Placement.RIGHT,
         rotationMode: OpenSeadragon.OverlayRotationMode.NO_ROTATION
-      }]
+      }]*/
     });
     viewer.imagefilters(
     		{
@@ -193,7 +230,7 @@
                 GROUP:  'selection_cancel_grouphover.png',
                 HOVER:  'selection_cancel_hover.png',
                 DOWN:   'selection_cancel_pressed.png'
-            },
+            }
         }
     });
     selection.disable();
@@ -233,6 +270,7 @@
       _colorB = $('#colorB').val();
       viewer.forceRedraw();
     });
+    /*
     var circles = [];
     var paintCircles = function(jsondata, overlay) {
     };
@@ -297,7 +335,26 @@
         dragEndHandler: dragEnd_handler
     }).setTracking(true);
     //TODO 触发绘制图层
-    paint_circles();
+    paint_circles();*/
+
+    // 双击添加标注
+    var press_handler = function(event) {
+      event.preventDefaultAction = true;
+      var imgSource = $('#imgSource');
+      var nowPos = 'pos_' + event.position.x + '_' + event.position.y;
+      imgSource.html(imgSource.html() + '<img id="' + nowPos
+          + '" src="http://upload.wikimedia.org/wikipedia/commons/7/7a/Red_Arrow_Right.svg" '
+          + ' width="20">');
+      viewer.addOverlay(nowPos, viewer.viewport.viewerElementToViewportCoordinates(event.position), OpenSeadragon.Placement.RIGHT, null);
+    };
+    new OpenSeadragon.MouseTracker({
+      element: viewer.canvas,
+      dblClickHandler: press_handler
+    }).setTracking(true);
+    viewer.addHandler("canvas-click", function(event) {
+      event.preventDefaultAction = true;
+      return false;
+    })
   })(window);
 </script>
 
