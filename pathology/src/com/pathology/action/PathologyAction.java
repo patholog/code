@@ -46,6 +46,8 @@ public class PathologyAction extends BaseAction {
   private String content;
   private IResultService resultService;
   private IImageService imageService;
+  private AnnotationService annotationService;
+
   @Nullable
   private File slide;
   private String slideFileName;
@@ -57,6 +59,7 @@ public class PathologyAction extends BaseAction {
   private String caseId;
   private List<Image> imageList;
   private Image image;
+  private List<Annotation> annotationList;
 
   /**
    * 保存病理
@@ -578,6 +581,7 @@ public class PathologyAction extends BaseAction {
     String imageId = request.getParameter("caseId");
     if (imageId != null && !"".equals(imageId)) {
       image = imageService.select(Integer.valueOf(imageId));
+      annotationList = annotationService.selectListByImageId(Integer.valueOf(imageId));
     } else {
       image = new Image();
     }
@@ -593,6 +597,29 @@ public class PathologyAction extends BaseAction {
       printJson(response, "{\"success\":\"删除成功\"}");
     } else {
       printJson(response, "{\"failure\":\"获取图片信息错误，请刷新重试\"}");
+    }
+    return null;
+  }
+
+  /**
+   * 添加标注
+   *
+   * @return 结果
+   */
+  public String insertAnnotation() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    HttpServletResponse response = ServletActionContext.getResponse();
+    String imageId = request.getParameter("imageId");
+    String name = request.getParameter("name");
+    String postionX = request.getParameter("positionX");
+    String positionY = request.getParameter("positionY");
+    if (imageId != null && !"".equals(imageId) && !StringUtil.isEmpty(name) && !StringUtil.isEmpty(postionX)
+        && !StringUtil.isEmpty(positionY)) {
+      annotationService.insert(new Annotation(Integer.valueOf(imageId), name, Integer.valueOf(postionX),
+          Integer.valueOf(positionY)));
+      printJson(response, "{\"success\":\"添加成功\"}");
+    } else {
+      printJson(response, "{\"failure\":\"获取标注信息错误，请刷新重试\"}");
     }
     return null;
   }
@@ -727,5 +754,21 @@ public class PathologyAction extends BaseAction {
 
   public void setImage(Image image) {
     this.image = image;
+  }
+
+  public List<Annotation> getAnnotationList() {
+    return annotationList;
+  }
+
+  public void setAnnotationList(List<Annotation> annotationList) {
+    this.annotationList = annotationList;
+  }
+
+  public AnnotationService getAnnotationService() {
+    return annotationService;
+  }
+
+  public void setAnnotationService(AnnotationService annotationService) {
+    this.annotationService = annotationService;
   }
 }

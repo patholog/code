@@ -154,12 +154,18 @@
     <property name="specimenDao" ref="specimenDao"/>
   </bean>
   <bean id="specimenDao" class="com.pathology.dao.impl.SpecimenDaoImpl" parent="ht"/>
+  <!--标注-->
+  <bean id="annotationDao" class="com.pathology.dao.impl.AnnotationDaoImpl" parent="pt"/>
+  <bean id="annotationService" class="com.pathology.service.impl.AnnotationServiceImpl">
+    <property name="annotationDao" ref="annotationDao"/>
+  </bean>
 	<bean id="pathologyAction" class="com.pathology.action.PathologyAction" scope="prototype">
 		<property name="pathologyService" ref="pathologyService"/>
 		<property name="hospitalservice" ref="hospitalservice"/>
     <property name="specimenService" ref="specimenService"/>
 		<property name="descriptionAppService" ref="descriptionAppService"/>
 		<property name="imageService" ref="imageService"/>
+		<property name="annotationService" ref="annotationService"/>
 	</bean>
 
 	<bean id="resultDao" class="com.pathology.dao.impl.ResultDaoImpl" parent="pt">

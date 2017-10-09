@@ -42,6 +42,13 @@
 	rotate<input id="rotateSlider" type="range" name="rotate" min="0" max="360" value="0"/>
 </div>
 <div id="imgSource">
+  <s:iterator value="annotationList" id="annotation">
+    <img class="my-overlay" id="<s:property value='#annotation.name'/>"
+         src="http://upload.wikimedia.org/wikipedia/commons/7/7a/Red_Arrow_Right.svg"
+         width="20"
+         positionx="<s:property value='#annotation.positionX'/>"
+         positiony="<s:property value='#annotation.positionY'/>">
+  </s:iterator>
 </div>
 <div id="container" style="position:absolute;top:150px;width:100%;height:700px;">
 </div>
@@ -75,7 +82,7 @@
     var _colorG = $('#colorG').val();
     var _colorB = $('#colorB').val();
     var container = document.getElementById('container');
-    var menu = document.getElementById('menu');
+    var imgSource = $('#imgSource');
     var imageId;
     var address = document.location.href;
     var contextPath = 'http://' + window.location.host;
@@ -128,6 +135,8 @@
         rotationMode: OpenSeadragon.OverlayRotationMode.NO_ROTATION
       }]*/
     });
+    // 初始化标注
+    initAnnotation();
     viewer.imagefilters(
     		{
     		    showControl: true, //show button or not
@@ -337,15 +346,35 @@
     //TODO 触发绘制图层
     paint_circles();*/
 
+    // 加载标注
+    function initAnnotation() {
+      $(".my-overlay").each(function(){
+        viewer.addOverlay($(this).attr('id'),
+            viewer.viewport.viewerElementToViewportCoordinates(new OpenSeadragon.Point(parseInt($(this).attr('positionx')), parseInt($(this).attr('positiony')))),
+            OpenSeadragon.Placement.RIGHT,
+            null);
+      });
+    }
     // 双击添加标注
     var press_handler = function(event) {
       event.preventDefaultAction = true;
-      var imgSource = $('#imgSource');
       var nowPos = 'pos_' + event.position.x + '_' + event.position.y;
-      imgSource.html(imgSource.html() + '<img id="' + nowPos
-          + '" src="http://upload.wikimedia.org/wikipedia/commons/7/7a/Red_Arrow_Right.svg" '
-          + ' width="20">');
-      viewer.addOverlay(nowPos, viewer.viewport.viewerElementToViewportCoordinates(event.position), OpenSeadragon.Placement.RIGHT, null);
+      $.ajax({
+        url: 'PathologyAction!insertAnnotation?imageId=' + ${image.idImage} + '&name=' + nowPos + '&positionX='
+          + event.position.x + '&positionY=' + event.position.y,
+        dataType: "json",
+        success: function(result) {
+          if (result && result.success) {
+            imgSource.html(imgSource.html() + '<img id="' + nowPos
+                + '" src="http://upload.wikimedia.org/wikipedia/commons/7/7a/Red_Arrow_Right.svg" '
+                + ' width="20">');
+            viewer.addOverlay(nowPos, viewer.viewport.viewerElementToViewportCoordinates(event.position), OpenSeadragon.Placement.RIGHT, null);
+          } else {
+            // alert("出现错误，请重试");
+          }
+        }
+      });
+
     };
     new OpenSeadragon.MouseTracker({
       element: viewer.canvas,
