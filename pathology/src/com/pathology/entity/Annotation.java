@@ -9,14 +9,14 @@ public class Annotation implements java.io.Serializable {
 
   private Integer imageId;
   private String name;
-  private Integer positionX;
-  private Integer positionY;
+  private Double positionX;
+  private Double positionY;
   private Date crtTime;
 
   public Annotation() {
   }
 
-  public Annotation(Integer imageId, String name, Integer positionX, Integer positionY) {
+  public Annotation(Integer imageId, String name, Double positionX, Double positionY) {
     this.imageId = imageId;
     this.name = name;
     this.positionX = positionX;
@@ -39,19 +39,19 @@ public class Annotation implements java.io.Serializable {
     this.name = name;
   }
 
-  public Integer getPositionX() {
+  public Double getPositionX() {
     return positionX;
   }
 
-  public void setPositionX(Integer positionX) {
+  public void setPositionX(Double positionX) {
     this.positionX = positionX;
   }
 
-  public Integer getPositionY() {
+  public Double getPositionY() {
     return positionY;
   }
 
-  public void setPositionY(Integer positionY) {
+  public void setPositionY(Double positionY) {
     this.positionY = positionY;
   }
 

@@ -11,10 +11,10 @@
         <column name="name"/>
       </key-property>
     </composite-id>
-    <property name="positionX" type="java.lang.Integer">
+    <property name="positionX" type="java.lang.Double">
       <column name="position_x"/>
     </property>
-    <property name="positionY" type="java.lang.Integer">
+    <property name="positionY" type="java.lang.Double">
       <column name="position_y"/>
     </property>
     <property name="crtTime" type="java.util.Date">

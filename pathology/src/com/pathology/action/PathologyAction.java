@@ -615,8 +615,8 @@ public class PathologyAction extends BaseAction {
     String positionY = request.getParameter("positionY");
     if (imageId != null && !"".equals(imageId) && !StringUtil.isEmpty(name) && !StringUtil.isEmpty(postionX)
         && !StringUtil.isEmpty(positionY)) {
-      annotationService.insert(new Annotation(Integer.valueOf(imageId), name, Integer.valueOf(postionX),
-          Integer.valueOf(positionY)));
+      annotationService.insert(new Annotation(Integer.valueOf(imageId), name, Double.valueOf(postionX),
+          Double.valueOf(positionY)));
       printJson(response, "{\"success\":\"添加成功\"}");
     } else {
       printJson(response, "{\"failure\":\"获取标注信息错误，请刷新重试\"}");

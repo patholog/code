@@ -349,26 +349,27 @@
     // 加载标注
     function initAnnotation() {
       $(".my-overlay").each(function(){
-        viewer.addOverlay($(this).attr('id'),
-            viewer.viewport.viewerElementToViewportCoordinates(new OpenSeadragon.Point(parseInt($(this).attr('positionx')), parseInt($(this).attr('positiony')))),
-            OpenSeadragon.Placement.RIGHT,
-            null);
+        var viewportPos = new OpenSeadragon.Point();
+        viewportPos.x = ($(this).attr('positionx') * 1);
+        viewportPos.y = $(this).attr('positiony') * 1;
+        viewer.addOverlay($(this).attr('id'), viewportPos, OpenSeadragon.Placement.RIGHT, null);
       });
     }
     // 双击添加标注
     var press_handler = function(event) {
       event.preventDefaultAction = true;
-      var nowPos = 'pos_' + event.position.x + '_' + event.position.y;
+      var viewportPos = viewer.viewport.viewerElementToViewportCoordinates(event.position);
+      var nowPos = 'pos_' + viewportPos.x + '_' + viewportPos.y;
       $.ajax({
         url: 'PathologyAction!insertAnnotation?imageId=' + ${image.idImage} + '&name=' + nowPos + '&positionX='
-          + event.position.x + '&positionY=' + event.position.y,
+          + viewportPos.x + '&positionY=' + viewportPos.y,
         dataType: "json",
         success: function(result) {
           if (result && result.success) {
             imgSource.html(imgSource.html() + '<img id="' + nowPos
                 + '" src="http://upload.wikimedia.org/wikipedia/commons/7/7a/Red_Arrow_Right.svg" '
-                + ' width="20">');
-            viewer.addOverlay(nowPos, viewer.viewport.viewerElementToViewportCoordinates(event.position), OpenSeadragon.Placement.RIGHT, null);
+                + ' width="20" alt="haha">');
+            viewer.addOverlay(nowPos, viewportPos, OpenSeadragon.Placement.RIGHT, null);
           } else {
             // alert("出现错误，请重试");
           }
