@@ -36,7 +36,7 @@ public class ImageServiceImpl implements IImageService {
     image.setCaseId(caseId);
     image.setPathImage(filePath);
     image.setPath(filePath.substring(0, filePath.lastIndexOf(caseId) - 1));
-    image.setFileName(filePath.substring(filePath.lastIndexOf("\\") + 1));
+    image.setFileName(filePath.substring(filePath.lastIndexOf("/") + 1));
     image.setCrtTime(new Timestamp(new Date().getTime()));
     try {
       BufferedImage bufferedImage = SlideUtil.loadImage(file);
@@ -48,7 +48,7 @@ public class ImageServiceImpl implements IImageService {
     int imageId = insertImage(image);
     String datePath = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
     try {
-      SlideUtil.processImageFile(new File(rootPath + filePath), new File(Property.getProperty("slideFilePath") + "\\" + datePath + "\\"
+      SlideUtil.processImageFile(new File(rootPath + filePath), new File(Property.getProperty("slideFilePath") + "/" + datePath + "/"
           + imageId));
     } catch (IOException e) {
       logger.error(e.getMessage());

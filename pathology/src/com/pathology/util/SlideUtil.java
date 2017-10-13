@@ -259,7 +259,7 @@ public class SlideUtil {
         thumHeight = 256;
       }
       BufferedImage tempImage = thumbnailImage(image, thumWidth, thumHeight);
-      ImageIO.write(tempImage, "JPEG", new File(distDir + "\\" + "thumb_" + fileName));
+      ImageIO.write(tempImage, "JPEG", new File(distDir + "/" + "thumb_" + fileName));
     } catch (Exception e) {
       e.printStackTrace();
     }

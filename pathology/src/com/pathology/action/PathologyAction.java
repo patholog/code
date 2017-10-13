@@ -424,6 +424,7 @@ public class PathologyAction extends BaseAction {
     try {
       // 获取图片存放路径
       String imgPath = Property.getProperty("slideFilePath") + filePath + "/" + imageId + "/thumb_" + fileName;
+      logger.error("获取的图片路径为" + imgPath);
       ips = new FileInputStream(new File(imgPath));
       response.setContentType("multipart/form-data");
       out = response.getOutputStream();
@@ -437,7 +438,7 @@ public class PathologyAction extends BaseAction {
       out.close();
       ips.close();
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error("获取切片图片错误" + e.getMessage());
     }
     return null;
   }
@@ -540,7 +541,7 @@ public class PathologyAction extends BaseAction {
         File dir = new File(rootPath + "/" + datePath + "/" + caseId);
         if (!dir.isDirectory() || !dir.exists()) {
           if (dir.mkdirs()) {
-            logger.debug("创建目录" + dir.getName() + "成功");
+            logger.error("创建目录" + dir.getName() + "成功");
           }
         }
         os = new FileOutputStream(rootPath + "/" + datePath + "/" + caseId + "/"
@@ -580,7 +581,9 @@ public class PathologyAction extends BaseAction {
     HttpServletRequest request = ServletActionContext.getRequest();
     String imageId = request.getParameter("caseId");
     if (imageId != null && !"".equals(imageId)) {
+      logger.error("imageId=" + imageId);
       image = imageService.select(Integer.valueOf(imageId));
+      logger.error("get image " + image);
       annotationList = annotationService.selectListByImageId(Integer.valueOf(imageId));
     } else {
       image = new Image();
