@@ -44,8 +44,8 @@
 <div id="imgSource">
   <s:iterator value="annotationList" id="annotation">
     <img class="my-overlay" id="<s:property value='#annotation.name'/>"
-         src="http://upload.wikimedia.org/wikipedia/commons/7/7a/Red_Arrow_Right.svg"
-         width="20"
+         src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Cercle_rouge_100%25.svg"
+         width="38"
          positionx="<s:property value='#annotation.positionX'/>"
          positiony="<s:property value='#annotation.positionY'/>">
   </s:iterator>
@@ -352,7 +352,7 @@
         var viewportPos = new OpenSeadragon.Point();
         viewportPos.x = ($(this).attr('positionx') * 1);
         viewportPos.y = $(this).attr('positiony') * 1;
-        viewer.addOverlay($(this).attr('id'), viewportPos, OpenSeadragon.Placement.RIGHT, null);
+        viewer.addOverlay($(this).attr('id'), viewportPos, OpenSeadragon.Placement.CENTER, null);
       });
     }
     // 双击添加标注
@@ -367,9 +367,9 @@
         success: function(result) {
           if (result && result.success) {
             imgSource.html(imgSource.html() + '<img id="' + nowPos
-                + '" src="http://upload.wikimedia.org/wikipedia/commons/7/7a/Red_Arrow_Right.svg" '
-                + ' width="20" alt="haha">');
-            viewer.addOverlay(nowPos, viewportPos, OpenSeadragon.Placement.RIGHT, null);
+                + '" src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Cercle_rouge_100%25.svg" '
+                + ' width="38">');
+            viewer.addOverlay(nowPos, viewportPos, OpenSeadragon.Placement.CENTER, null);
           } else {
             // alert("出现错误，请重试");
           }
