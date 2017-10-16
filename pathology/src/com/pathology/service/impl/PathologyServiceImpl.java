@@ -57,13 +57,14 @@ public class PathologyServiceImpl implements IPathologyService {
       + " LEFT JOIN collection e ON e.case_id=a.id_case AND a.id_doctor=e.id_doctor"
       + " LEFT JOIN result  c ON a.id_case = c.case_id"
       + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
-      + " LEFT JOIN specimen s on a.specimentype = s.id_specimen";
+      + " LEFT JOIN specimen s on a.specimentype = s.id_specimen"
+  	  + " LEFT JOIN description_app desapp on a.id_case=desapp.case_id and a.id_doctor=desapp.todoctorid";
   private String basicCountSql = "SELECT count(1) FROM pathology a "
       + " LEFT JOIN result  c ON a.id_case = c.case_id"
       + " LEFT JOIN hospital  d ON a.hospitalcode = d.id_hospital"
       + " LEFT JOIN collection e ON a.id_case=e.case_id AND a.id_doctor=e.id_doctor"
-      + " LEFT JOIN specimen s on a.specimentype = s.id_specimen";
-
+      + " LEFT JOIN specimen s on a.specimentype = s.id_specimen"
+	  + " LEFT JOIN description_app desapp on a.id_case=desapp.case_id and a.id_doctor=desapp.todoctorid";
   public JdbcTemplate getJdbcTemplate() {
     return jdbcTemplate;
   }
