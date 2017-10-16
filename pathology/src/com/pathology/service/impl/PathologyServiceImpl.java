@@ -319,6 +319,7 @@ public class PathologyServiceImpl implements IPathologyService {
       pathology.setDiagStatus("2"); // 默认新建为待诊断
       pathology.setCrtTime(new Timestamp(System.currentTimeMillis())); // 创建日期
       pathology.setCrtUserId(SessionAgentManager.getSessionAgentBean().getIdUsers()); // 创建人
+      pathology.setDoctorId(SessionAgentManager.getSessionAgentBean().getIdUsers());
       addPathology(pathology); // 新增病理信息
     } catch (Exception e) {
       logger.error(e.getMessage());
