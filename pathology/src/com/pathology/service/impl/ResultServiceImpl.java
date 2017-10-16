@@ -64,9 +64,9 @@ public class ResultServiceImpl implements IResultService {
   private Result assembleResult(Result result, Map<String, String[]> paramMap) {
     try {
       // 大体所见等Result数据
-      result.setGeneralSee(paramMap.get("generalSeeHidden")[0]); // 大体所见
-      result.setMicroscopeSee(paramMap.get("microscopeSeeHidden")[0]); // 影像检查
-      result.setDiagnosed(paramMap.get("diagnosed")[0]); // 初诊意见
+      result.setGeneralSee(paramMap.get("generalSee")[0]); // 大体所见
+      // result.setMicroscopeSee(paramMap.get("microscopeSee")[0]); // 影像检查
+      result.setDiagnosed(paramMap.get("firstVisit")[0]); // 初诊意见
       result.setResult(paramMap.get("immuneResult")[0]); // 免疫组化结果
     } catch (Exception e) {
       logger.error(e.getMessage());
