@@ -93,9 +93,9 @@
 						         <tr>
 						         <td><s:property value="#collection.pathologyNo"/><input type="hidden" value="#collection.collectionId"></td>
 						         <td><s:property value="#collection.patientname"/></td>
-						         <td><s:property value="#collection.pathologyNo"/></td>
-						         <td><s:property value="#collection.patientname"/></td>
-						         <td><s:property value="#collection.username"/></td>
+						         <td><s:property value="#collection.specimanName"/></td>
+						         <td><s:property value="#collection.diagStatus"/></td>
+						         <td><s:property value="#collection.speciSys"/></td>
 						         <td><s:property value="#collection.hospitalname"/></td>
 						         <td><s:property value="#collection.createTime"/></td>
 						         <td><s:property value="#collection.diagtime"/></td>
