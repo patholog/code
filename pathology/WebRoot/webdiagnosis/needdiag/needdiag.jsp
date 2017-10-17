@@ -65,6 +65,15 @@
       CheckWords(document.getElementById("txtHistoryOfDisease"));
       CheckWords(document.getElementById("txtImmuneOrgan"));
       CheckWords(document.getElementById("txtRemark"));
+      
+      //送检单位关联送检医生
+      $("#hospitalCode").change(function(){selectedchange();});
+      
+      function selectedchange()
+      {
+    	  //获取到选中的医院编码
+    	  var selectedValue=$("#hospitalCode").val();
+      }
 
     });
 
