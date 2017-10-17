@@ -77,11 +77,11 @@
             <tr>
               <td><s:property value="#pathology.pathologyNo"/></td>
               <td><s:property value="#pathology.patientname"/></td>
-              <td><s:property value="#pathology.specimenname"/></td>
+              <td><s:property value="#pathology.specimenName"/></td>
               <!-- todo 确定病例状态 -->
-              <td><s:property value="#pathology.content"/></td>
+              <td><s:property value="#pathology.diagStatusName"/></td>
               <!-- todo 系统分类需要获取 -->
-              <td><s:property value="#pathology.username"/></td>
+              <td><s:property value="#pathology.specimenTypeName"/></td>
               <td><s:property value="#pathology.hospitalname"/></td>
               <td><s:property value="#pathology.createTime"/></td>
               <td><s:property value="#pathology.diagTime"/></td>
