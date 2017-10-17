@@ -78,9 +78,9 @@
             <tr>
               <td><s:property value="#pathology.pathologyNo"/></td>
               <td><s:property value="#pathology.patientname"/></td>
-              <td><s:property value="#pathology.patientname"/></td>
-              <td><s:property value="#pathology.username"/></td>
-              <td><s:property value="#pathology.content"/></td>
+              <td><s:property value="#pathology.specimenName"/></td>
+              <td><s:property value="#pathology.diagStatusName"/></td>
+              <td><s:property value="#pathology.specimenTypeName"/></td>
               <td><s:property value="#pathology.hospitalname"/></td>
               <td><s:property value="#pathology.createTime"/></td>
               <td align="center">
