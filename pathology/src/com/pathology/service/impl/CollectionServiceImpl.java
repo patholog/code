@@ -95,6 +95,7 @@ public class CollectionServiceImpl implements ICollectionService {
 		
 		String sqlcount  = " select count(1) from collection a"
 				+" inner join pathology b on a.case_id = b.id_case"
+		        +" left join specimen e on b.specimentype=e.id_specimen"
 				+" left join users c on a.collectioner_Id = c.id_users"
 				+" left join hospital d on b.hospitalcode = d.id_hospital"+whereStr;
 
@@ -103,9 +104,11 @@ public class CollectionServiceImpl implements ICollectionService {
 		if(totalNum > 0){
 			Pages page = new Pages(totalNum, "CollectionAction!getCollectionList", Integer.parseInt(pageNum), 10);
       String sql = " select b.pathologyno, b.patientname, c.username, a.memo, b.crt_Time, b.diag_time, a.id_collection,"
-          + " d.name hospitalname, a.case_id"
+          + " d.name hospitalname, a.case_id,b.specimenname,e.name as specimenSys,"
+          +" case b.diag_status when '1' THEN '新建' WHEN '2' then '待诊断' WHEN '3' THEN '已退回' when '7' then '已诊断' end diagStatusName"
           + " from collection a "
           + " inner join pathology b on a.case_id = b.id_case"
+          + " left join specimen e on b.specimentype=e.id_specimen"
           + " left join users c on a.collectioner_Id = c.id_users"
           + " left join hospital d on b.hospitalcode = d.id_hospital where a.collectioner_Id='"+name+"' "+whereStr
           + page.getPageLimit();
