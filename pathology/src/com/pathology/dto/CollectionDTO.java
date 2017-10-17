@@ -26,7 +26,31 @@ public class CollectionDTO implements java.io.Serializable {
 	private Integer delF;
 	private String pathologyNo;
 	private String diagtime;
+	//取材部位
+	private String specimanName;
+	//系统分类
+	private String speciSys;
+	//诊断状态
+	private String diagStatus;
 	
+	public String getSpeciSys() {
+		return speciSys;
+	}
+	public void setSpeciSys(String speciSys) {
+		this.speciSys = speciSys;
+	}
+	public String getSpecimanName() {
+		return specimanName;
+	}
+	public void setSpecimanName(String specimanName) {
+		this.specimanName = specimanName;
+	}
+	public String getDiagStatus() {
+		return diagStatus;
+	}
+	public void setDiagStatus(String diagStatus) {
+		this.diagStatus = diagStatus;
+	}
 	public String getCollectionId() {
 		return collectionId;
 	}
