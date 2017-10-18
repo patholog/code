@@ -19,14 +19,16 @@
       visibility : hidden;
       position : absolute;
     }
-    div.menuitems {
-      margin : 1px 0;
+    .my-overlay {
+      opacity: 0.4;
+      filter: alpha(opacity=40);
+      outline: 12px auto #0A7EbE;
+      background-color: white;
     }
-    div.menuitems a {
-      text-decoration : none;
-    }
-    div.menuitems:hover {
-      background-color : #c0c0c0;
+    .my-overlay:hover, .my-overlay:focus {
+      filter: alpha(opacity=70);
+      opacity: 0.7;
+      background-color: transparent;
     }
   </style>
 </head>
@@ -80,6 +82,7 @@
     var _colorG = $('#colorG').val();
     var _colorB = $('#colorB').val();
     var container = document.getElementById('container');
+    var nowOverlay = "";
     var imgSource = $('#imgSource');
     var imageId;
     var address = document.location.href;
@@ -140,13 +143,17 @@
       },
       showNavigator: true,  //是否显示小导航图（地图）
       minZoomLevel: 0.1,  //最小允许放大倍数
-      maxZoomLevel: 8 //最大允许放大倍数
-      /*overlays: [{
+      maxZoomLevel: 8, //最大允许放大倍数
+      onPageChange: function() {
+        setTimeout(bindRemove, 100);
+      }/*,
+      overlays: [{
         id: 'right-arrow-overlay-no-rotate', // Arrow pointing to the tip of the hair
         x: 0.592,
         y: 0.496,
         placement: OpenSeadragon.Placement.RIGHT,
-        rotationMode: OpenSeadragon.OverlayRotationMode.NO_ROTATION
+        rotationMode: OpenSeadragon.OverlayRotationMode.NO_ROTATION,
+        className: 'my-overlay'
       }]*/
     });
     // 初始化标注
@@ -372,46 +379,50 @@
     // 双击添加标注
     var press_handler = function(event) {
       event.preventDefaultAction = true;
-      var viewportPos = viewer.viewport.viewerElementToViewportCoordinates(event.position);
-      var nowPos = 'pos_' + viewportPos.x + '_' + viewportPos.y;
-      var tips = "";
-      $('#textTips').val("");
-      $('#tipsModal').attr('hidden', false);
-      $("#tipsModal").dialog({
-        title: '标注内容',
-        modal: true,
-        width: '300',
-        height: '200',
-        buttons: [{
-          text: "确定",
-          icon: "ui-icon-heart",
-          click: function () {
-            $(this).dialog("close");
-            tips = $('#textTips').val();
-            $.ajax({
-              url: 'PathologyAction!insertAnnotation?imageId=' + ${image.idImage} + '&name=' + nowPos + '&positionX='
-              + viewportPos.x + '&positionY=' + viewportPos.y + '&textTips=' + tips,
-              dataType: "json",
-              success: function(result) {
-                if (result && result.success) {
-                  imgSource.html(imgSource.html() + '<div id="' + nowPos + '"><span>' + tips + '</span><br><img '
-                      + ' src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Cercle_rouge_100%25.svg" '
-                      + ' width="38"></div>');
-                  viewer.addOverlay(nowPos, viewportPos, OpenSeadragon.Placement.CENTER, null);
-                } else {
-                  // alert("出现错误，请重试");
+      if (nowOverlay && nowOverlay !== "") {
+        viewer.removeOverlay(nowOverlay);
+      } else {
+        var viewportPos = viewer.viewport.viewerElementToViewportCoordinates(event.position);
+        var nowPos = 'pos_' + viewportPos.x + '_' + viewportPos.y;
+        var tips = "";
+        $('#textTips').val("");
+        $('#tipsModal').attr('hidden', false);
+        $("#tipsModal").dialog({
+          title: '标注内容',
+          modal: true,
+          width: '300',
+          height: '200',
+          buttons: [{
+            text: "确定",
+            icon: "ui-icon-heart",
+            click: function () {
+              $(this).dialog("close");
+              tips = $('#textTips').val();
+              $.ajax({
+                url: 'PathologyAction!insertAnnotation?imageId=' + ${image.idImage} + '&name=' + nowPos + '&positionX='
+                + viewportPos.x + '&positionY=' + viewportPos.y + '&textTips=' + tips,
+                dataType: "json",
+                success: function(result) {
+                  if (result && result.success) {
+                    imgSource.html(imgSource.html() + '<div id="' + nowPos + '" class="my-overlay"><span>' + tips + '</span><br><img '
+                        + ' src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Cercle_rouge_100%25.svg" '
+                        + ' width="38"></div>');
+                    viewer.addOverlay(nowPos, viewportPos, OpenSeadragon.Placement.CENTER, null);
+                  } else {
+                    // alert("出现错误，请重试");
+                  }
                 }
-              }
-            });
-          }
-        }, {
-          text: "取消",
-          icon: "ui-icon-heart",
-          click: function () {
-            $(this).dialog("close");
-          }
-        }]
-      });
+              });
+            }
+          }, {
+            text: "取消",
+            icon: "ui-icon-heart",
+            click: function () {
+              $(this).dialog("close");
+            }
+          }]
+        });
+      }
     };
     new OpenSeadragon.MouseTracker({
       element: viewer.canvas,
@@ -420,7 +431,18 @@
     viewer.addHandler("canvas-click", function(event) {
       event.preventDefaultAction = true;
       return false;
-    })
+    });
+    jQuery(function () {
+      setTimeout(bindRemove, 2000);
+    });
+    function bindRemove() {
+      jQuery('.my-overlay').mouseenter(function (e) {
+        nowOverlay = $(this).attr('id');
+      });
+      jQuery('.my-overlay').mouseleave(function () {
+        nowOverlay = "";
+      });
+    }
   })(window);
 </script>
 
