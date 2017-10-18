@@ -20,14 +20,14 @@
       position : absolute;
     }
     .my-overlay {
-      opacity: 0.4;
-      filter: alpha(opacity=40);
-      outline: 12px auto #0A7EbE;
-      background-color: white;
+      opacity: 0.6;
+      filter: alpha(opacity=50);
+      outline: 0 auto #0A7EbE;
+      background-color: transparent;
     }
     .my-overlay:hover, .my-overlay:focus {
       filter: alpha(opacity=70);
-      opacity: 0.7;
+      opacity: 0.9;
       background-color: transparent;
     }
   </style>
