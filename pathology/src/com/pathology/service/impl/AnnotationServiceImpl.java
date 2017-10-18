@@ -35,6 +35,14 @@ public class AnnotationServiceImpl implements AnnotationService {
     return annotationList;
   }
 
+  @Override
+  public void delete(Integer imageId, String name) {
+    Annotation annotation = new Annotation();
+    annotation.setImageId(imageId);
+    annotation.setName(name);
+    annotationDao.delete(annotation);
+  }
+
   public AnnotationDao getAnnotationDao() {
     return annotationDao;
   }

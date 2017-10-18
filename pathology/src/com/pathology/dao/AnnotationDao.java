@@ -9,4 +9,6 @@ public interface AnnotationDao {
   Integer insert(Annotation annotation);
 
   List<Object> selectListByImageId(Integer imageId);
+
+  void delete(Annotation annotation);
 }

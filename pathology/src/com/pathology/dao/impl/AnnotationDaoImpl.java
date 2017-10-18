@@ -20,4 +20,9 @@ public class AnnotationDaoImpl extends SuperDao implements AnnotationDao {
     paramMap.put("imageId", imageId);
     return findByClz(Annotation.class, paramMap);
   }
+
+  @Override
+  public void delete(Annotation annotation) {
+    super.delete(annotation);
+  }
 }

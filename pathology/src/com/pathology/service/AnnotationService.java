@@ -9,4 +9,6 @@ public interface AnnotationService {
   Integer insert(Annotation annotation);
 
   List<Annotation> selectListByImageId(Integer imageId);
+
+  void delete(Integer imageId, String name);
 }

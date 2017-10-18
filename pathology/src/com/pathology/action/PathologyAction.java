@@ -628,6 +628,20 @@ public class PathologyAction extends BaseAction {
     return null;
   }
 
+  public String deleteAnnotation() {
+    HttpServletRequest request = ServletActionContext.getRequest();
+    HttpServletResponse response = ServletActionContext.getResponse();
+    String imageId = request.getParameter("imageId");
+    String name = request.getParameter("name");
+    if (imageId != null && !"".equals(imageId) && !StringUtil.isEmpty(name)) {
+      annotationService.delete(Integer.valueOf(imageId), name);
+      printJson(response, "{\"success\":\"删除成功\"}");
+    } else {
+      printJson(response, "{\"failure\":\"删除错误，请刷新重试\"}");
+    }
+    return null;
+  }
+
   public IPathologyService getPathologyService() {
     return pathologyService;
   }

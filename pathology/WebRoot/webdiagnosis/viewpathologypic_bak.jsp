@@ -64,7 +64,7 @@
     </div>
   </form>
 </div>
-<div id="tips">
+<div id="tips" hidden>
   <label id="tipInfo"></label>
 </div>
 </body>
@@ -380,7 +380,57 @@
     var press_handler = function(event) {
       event.preventDefaultAction = true;
       if (nowOverlay && nowOverlay !== "") {
-        viewer.removeOverlay(nowOverlay);
+        /*$('#tips').attr('hidden', false);
+        $('#info').text("确定要删除当前病例吗？");
+        $('#tips').dialog({
+          title: '删除',
+          resizable: false,
+          modal: true,
+          buttons: [{
+            text: "确定",
+            icon: "ui-icon-heart",
+            click: function () {
+              $.ajax({
+                url: 'PathologyAction!deleteAnnotation?imageId=' + imageId + '&name=' + nowOverlay,
+                dataType: "json",
+                success: function (result) {
+                  if (result && result.success) {
+                    $('#tips').dialog('close');
+                    /!*showCallbackTips(result.success, function() {
+                      window.location.reload();
+                    });*!/
+                    viewer.removeOverlay(nowOverlay);
+                  } else {
+                    $(this).dialog("close");
+                    alert("发生错误，请联系管理员");
+                    return false;
+                  }
+                }
+              })
+            }
+          }, {
+            text: "取消",
+            icon: "ui-icon-heart",
+            click: function () {
+              $(this).dialog("close");
+            }
+          }]
+        });*/
+        $.ajax({
+          url: 'PathologyAction!deleteAnnotation?imageId=' + imageId + '&name=' + nowOverlay,
+          dataType: "json",
+          success: function (result) {
+            if (result && result.success) {
+              /*showCallbackTips(result.success, function() {
+                window.location.reload();
+              });*/
+              viewer.removeOverlay(nowOverlay);
+            } else {
+              alert("发生错误，请联系管理员");
+              return false;
+            }
+          }
+        })
       } else {
         var viewportPos = viewer.viewport.viewerElementToViewportCoordinates(event.position);
         var nowPos = 'pos_' + viewportPos.x + '_' + viewportPos.y;
@@ -404,7 +454,9 @@
                 dataType: "json",
                 success: function(result) {
                   if (result && result.success) {
-                    imgSource.html(imgSource.html() + '<div id="' + nowPos + '" class="my-overlay"><span>' + tips + '</span><br><img '
+                    imgSource.html(imgSource.html() + '<div id="' + nowPos
+                        + '" class="my-overlay" onmouseover="mouseEnter()" onmouseout="mouseLeave()"><span>'
+                        + tips + '</span><br><img '
                         + ' src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Cercle_rouge_100%25.svg" '
                         + ' width="38"></div>');
                     viewer.addOverlay(nowPos, viewportPos, OpenSeadragon.Placement.CENTER, null);
@@ -436,12 +488,18 @@
       setTimeout(bindRemove, 2000);
     });
     function bindRemove() {
-      jQuery('.my-overlay').mouseenter(function (e) {
-        nowOverlay = $(this).attr('id');
-      });
-      jQuery('.my-overlay').mouseleave(function () {
-        nowOverlay = "";
-      });
+      jQuery('.my-overlay').on("mouseenter", mouseEnter);
+      jQuery('.my-overlay').on("mouseleave", mouseLeave);
+    }
+
+    function mouseEnter() {
+      nowOverlay = $(this).attr('id');
+      console.info(">>>" + nowOverlay);
+    }
+
+    function mouseLeave() {
+      nowOverlay = "";
+      console.info(">>>" + nowOverlay);
     }
   })(window);
 </script>
