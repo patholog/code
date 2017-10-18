@@ -375,6 +375,7 @@
       var viewportPos = viewer.viewport.viewerElementToViewportCoordinates(event.position);
       var nowPos = 'pos_' + viewportPos.x + '_' + viewportPos.y;
       var tips = "";
+      $('#textTips').val("");
       $('#tipsModal').attr('hidden', false);
       $("#tipsModal").dialog({
         title: '标注内容',
