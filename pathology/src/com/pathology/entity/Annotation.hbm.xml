@@ -20,5 +20,8 @@
     <property name="crtTime" type="java.util.Date">
       <column name="crt_time" length="0"/>
     </property>
+    <property name="textTips" type="java.lang.String">
+      <column name="text_tips" length="0"/>
+    </property>
   </class>
 </hibernate-mapping>

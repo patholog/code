@@ -43,30 +43,28 @@
 </div>
 <div id="imgSource">
   <s:iterator value="annotationList" id="annotation">
-    <img class="my-overlay" id="<s:property value='#annotation.name'/>"
-         src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Cercle_rouge_100%25.svg"
-         width="38"
+    <div id="<s:property value='#annotation.name'/>" class="my-overlay"
          positionx="<s:property value='#annotation.positionX'/>"
          positiony="<s:property value='#annotation.positionY'/>">
+      <span><s:property value='#annotation.textTips'/></span>
+      <br>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Cercle_rouge_100%25.svg" width="38">
+    </div>
   </s:iterator>
 </div>
 <div id="container" style="position:absolute;top:150px;width:100%;height:700px;">
 </div>
-<ul style="width:100px;display:none;position:absolute;" id="menu">
-  <li>Item 1</li>
-  <li>Item 2</li>
-  <li>Item 3
-    <ul>
-      <li>Item 3-1</li>
-      <li>Item 3-2</li>
-      <li>Item 3-3</li>
-      <li>Item 3-4</li>
-      <li>Item 3-5</li>
-    </ul>
-  </li>
-  <li>Item 4</li>
-  <li>Item 5</li>
-</ul>
+<div id="tipsModal" hidden>
+  <form id="tipsForm" action="ShareAction!share" method="post">
+    <div style="float: left;">
+      <label for="textTips">标注内容</label>
+      <input id="textTips" name="textTips" style="border: solid 1px #8b8d8f; width: 100px;"/>
+    </div>
+  </form>
+</div>
+<div id="tips">
+  <label id="tipInfo"></label>
+</div>
 </body>
 <script type="text/javascript" src="${path }/js/jquery-1.9.0.min.js"></script>
 <script src="${path}/assets/Seadragon/openseadragon.min.js" type="text/javascript"></script>
@@ -98,8 +96,24 @@
     if (imageId === '') {
       alert("获取图片信息失败");
     }
+
+    function showCallbackTips(text, callback) {
+      $('#tipInfo').text(text);
+      $('#tips').dialog({
+        title: '提示',
+        modal: true,
+        width: '400',
+        height: '200',
+        buttons: [{
+          text: "确定",
+          icon: "ui-icon-heart",
+          click: callback
+        }]
+      });
+    }
+
     var viewer = OpenSeadragon({
-      debugMode: true,
+      debugMode: false,
       id: "container",  //容器id
       prefixUrl: '',
       degrees:0,
@@ -360,22 +374,43 @@
       event.preventDefaultAction = true;
       var viewportPos = viewer.viewport.viewerElementToViewportCoordinates(event.position);
       var nowPos = 'pos_' + viewportPos.x + '_' + viewportPos.y;
-      $.ajax({
-        url: 'PathologyAction!insertAnnotation?imageId=' + ${image.idImage} + '&name=' + nowPos + '&positionX='
-          + viewportPos.x + '&positionY=' + viewportPos.y,
-        dataType: "json",
-        success: function(result) {
-          if (result && result.success) {
-            imgSource.html(imgSource.html() + '<img id="' + nowPos
-                + '" src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Cercle_rouge_100%25.svg" '
-                + ' width="38">');
-            viewer.addOverlay(nowPos, viewportPos, OpenSeadragon.Placement.CENTER, null);
-          } else {
-            // alert("出现错误，请重试");
+      var tips = "";
+      $('#tipsModal').attr('hidden', false);
+      $("#tipsModal").dialog({
+        title: '标注内容',
+        modal: true,
+        width: '300',
+        height: '200',
+        buttons: [{
+          text: "确定",
+          icon: "ui-icon-heart",
+          click: function () {
+            $(this).dialog("close");
+            tips = $('#textTips').val();
+            $.ajax({
+              url: 'PathologyAction!insertAnnotation?imageId=' + ${image.idImage} + '&name=' + nowPos + '&positionX='
+              + viewportPos.x + '&positionY=' + viewportPos.y + '&textTips=' + tips,
+              dataType: "json",
+              success: function(result) {
+                if (result && result.success) {
+                  imgSource.html(imgSource.html() + '<div id="' + nowPos + '"><span>' + tips + '</span><br><img '
+                      + ' src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Cercle_rouge_100%25.svg" '
+                      + ' width="38"></div>');
+                  viewer.addOverlay(nowPos, viewportPos, OpenSeadragon.Placement.CENTER, null);
+                } else {
+                  // alert("出现错误，请重试");
+                }
+              }
+            });
           }
-        }
+        }, {
+          text: "取消",
+          icon: "ui-icon-heart",
+          click: function () {
+            $(this).dialog("close");
+          }
+        }]
       });
-
     };
     new OpenSeadragon.MouseTracker({
       element: viewer.canvas,
