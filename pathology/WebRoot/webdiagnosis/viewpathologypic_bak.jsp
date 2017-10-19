@@ -57,12 +57,12 @@
 <div id="container" style="position:absolute;top:150px;width:100%;height:700px;">
 </div>
 <div id="tipsModal" hidden>
-  <form id="tipsForm" action="ShareAction!share" method="post">
+  <div id="tipsForm">
     <div style="float: left;">
       <label for="textTips">标注内容</label>
       <input id="textTips" name="textTips" style="border: solid 1px #8b8d8f; width: 100px;"/>
     </div>
-  </form>
+  </div>
 </div>
 <div id="tips" hidden>
   <label id="tipInfo"></label>
@@ -380,8 +380,9 @@
     var press_handler = function(event) {
       event.preventDefaultAction = true;
       if (nowOverlay && nowOverlay !== "") {
-        /*$('#tips').attr('hidden', false);
-        $('#info').text("确定要删除当前病例吗？");
+        var tempOverlay = nowOverlay;
+        $('#tips').attr('hidden', false);
+        $('#tipInfo').text("确定要删除当前标注吗？");
         $('#tips').dialog({
           title: '删除',
           resizable: false,
@@ -391,15 +392,15 @@
             icon: "ui-icon-heart",
             click: function () {
               $.ajax({
-                url: 'PathologyAction!deleteAnnotation?imageId=' + imageId + '&name=' + nowOverlay,
+                url: 'PathologyAction!deleteAnnotation?imageId=' + imageId + '&name=' + tempOverlay,
                 dataType: "json",
                 success: function (result) {
                   if (result && result.success) {
                     $('#tips').dialog('close');
-                    /!*showCallbackTips(result.success, function() {
+                    /*showCallbackTips(result.success, function() {
                       window.location.reload();
-                    });*!/
-                    viewer.removeOverlay(nowOverlay);
+                    });*/
+                    viewer.removeOverlay(tempOverlay);
                   } else {
                     $(this).dialog("close");
                     alert("发生错误，请联系管理员");
@@ -415,22 +416,7 @@
               $(this).dialog("close");
             }
           }]
-        });*/
-        $.ajax({
-          url: 'PathologyAction!deleteAnnotation?imageId=' + imageId + '&name=' + nowOverlay,
-          dataType: "json",
-          success: function (result) {
-            if (result && result.success) {
-              /*showCallbackTips(result.success, function() {
-                window.location.reload();
-              });*/
-              viewer.removeOverlay(nowOverlay);
-            } else {
-              alert("发生错误，请联系管理员");
-              return false;
-            }
-          }
-        })
+        });
       } else {
         var viewportPos = viewer.viewport.viewerElementToViewportCoordinates(event.position);
         var nowPos = 'pos_' + viewportPos.x + '_' + viewportPos.y;
@@ -454,12 +440,22 @@
                 dataType: "json",
                 success: function(result) {
                   if (result && result.success) {
+                    jQuery('.my-overlay').off("mouseenter");
+                    jQuery('.my-overlay').off("mouseleave");
                     imgSource.html(imgSource.html() + '<div id="' + nowPos
-                        + '" class="my-overlay" onmouseover="mouseEnter()" onmouseout="mouseLeave()"><span>'
+                        + '" class="my-overlay"><span>'
                         + tips + '</span><br><img '
                         + ' src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Cercle_rouge_100%25.svg" '
                         + ' width="38"></div>');
                     viewer.addOverlay(nowPos, viewportPos, OpenSeadragon.Placement.CENTER, null);
+                    jQuery('.my-overlay').on("mouseenter", function () {
+                      nowOverlay = $(this).attr('id');
+                      console.info(">>>" + nowOverlay);
+                    });
+                    jQuery('.my-overlay').on("mouseleave", function () {
+                      nowOverlay = "";
+                      console.info(">>>" + nowOverlay);
+                    });
                   } else {
                     // alert("出现错误，请重试");
                   }
@@ -485,21 +481,17 @@
       return false;
     });
     jQuery(function () {
-      setTimeout(bindRemove, 2000);
+      setTimeout(bindRemove, 200);
     });
     function bindRemove() {
-      jQuery('.my-overlay').on("mouseenter", mouseEnter);
-      jQuery('.my-overlay').on("mouseleave", mouseLeave);
-    }
-
-    function mouseEnter() {
-      nowOverlay = $(this).attr('id');
-      console.info(">>>" + nowOverlay);
-    }
-
-    function mouseLeave() {
-      nowOverlay = "";
-      console.info(">>>" + nowOverlay);
+      jQuery('.my-overlay').on("mouseenter", function () {
+        nowOverlay = $(this).attr('id');
+        console.info(">>>" + nowOverlay);
+      });
+      jQuery('.my-overlay').on("mouseleave", function () {
+        nowOverlay = "";
+        console.info(">>>" + nowOverlay);
+      });
     }
   })(window);
 </script>

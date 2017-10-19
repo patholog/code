@@ -40,7 +40,11 @@ public class AnnotationServiceImpl implements AnnotationService {
     Annotation annotation = new Annotation();
     annotation.setImageId(imageId);
     annotation.setName(name);
-    annotationDao.delete(annotation);
+    try {
+      annotationDao.delete(annotation);
+    } catch (Exception e) {
+      logger.error(e);
+    }
   }
 
   public AnnotationDao getAnnotationDao() {
